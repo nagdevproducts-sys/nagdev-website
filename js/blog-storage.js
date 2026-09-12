@@ -358,6 +358,19 @@
         ${post.tags.map(t => `<span class="blog-tag-pill">${escapeHtml(t)}</span>`).join('')}
       </div>` : ''}
 
+      ${post.relatedLink && post.relatedLink.url ? `
+      <!-- Related Website / Product Link Card (Selected by Admin) -->
+      <div class="blog-related-link-card">
+        <div class="related-link-content">
+          <span class="related-link-eyebrow">Explore Related Solution</span>
+          <h4 class="related-link-title">${escapeHtml(post.relatedLink.title || 'Related Page')}</h4>
+          <p class="related-link-text">Access detailed technical datasheets (TDS), specifications, bulk packaging, and formulation guidance.</p>
+        </div>
+        <a href="${post.relatedLink.url.startsWith('http') ? post.relatedLink.url : '../' + post.relatedLink.url.replace(/^(\.\.\/)+/, '')}" class="btn btn-primary btn-sm related-link-btn">
+          Explore ${escapeHtml(post.relatedLink.title || 'Page')} →
+        </a>
+      </div>` : ''}
+
       <!-- Formulator CTA Box -->
       <div class="blog-cta-box">
         <h3>Formulating with Castor Derivatives?</h3>

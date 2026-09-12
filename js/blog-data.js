@@ -16,6 +16,7 @@ window.NAGDEV_BLOG_POSTS = [
     seoDescription: "Explore how bio-based castor oil derivatives replace petroleum petrochemicals across lubricants, polymers, and coatings with zero food-chain conflict.",
     coverImage: "images/blog/sustainable-castor-oil-derivatives.jpg",
     tags: ["Castor Oil Derivatives", "Green Chemistry", "Oleochemicals", "Bio-Polyols", "Sustainability"],
+    relatedLink: { url: "products/bio-polyurethane-polyols.html", title: "Bio-Polyurethane Polyols" },
     featured: true,
     content: `
       <p class="lead-paragraph">As global regulatory mandates tighten around fossil fuel dependence and volatile organic compound (VOC) emissions, industrial formulators are actively replacing petrochemical feedstocks with renewable oleochemical alternatives. Among all plant-derived triglycerides, <strong>Castor Oil (Ricinus communis)</strong> occupies a uniquely privileged position in green chemistry.</p>
@@ -85,6 +86,7 @@ window.NAGDEV_BLOG_POSTS = [
     seoDescription: "Technical comparison of Castor Wax (HCO) and 12-HSA as thickeners in lithium and lithium complex greases. Dropping points, shear stability, and bleed rates.",
     coverImage: "images/blog/hco-vs-12-hsa-greases.jpg",
     tags: ["Hydrogenated Castor Oil", "12-HSA", "Lithium Grease", "Lubricants", "Castor Wax"],
+    relatedLink: { url: "products/12-hydroxystearic-acid.html", title: "12-Hydroxystearic Acid (12-HSA)" },
     featured: false,
     content: `
       <p class="lead-paragraph">Lithium-based greases account for more than 70% of the world's lubricating greases. While simple lithium soaps utilize fatty acids, high-performance industrial and automotive greases rely on two critical castor derivatives: <strong>Hydrogenated Castor Oil (HCO / Castor Wax)</strong> and <strong>12-Hydroxystearic Acid (12-HSA)</strong>. Understanding their structural differences is vital for grease formulators seeking optimum dropping points, mechanical shear stability, and oil separation resistance.</p>
@@ -155,6 +157,7 @@ window.NAGDEV_BLOG_POSTS = [
     seoDescription: "Discover why conjugated double bonds in Dehydrated Castor Oil (DCO) and DCO-FA deliver superior non-yellowing, rapid drying, and chemical resistance in coatings.",
     coverImage: "images/blog/dco-coatings-alkyd-resins.jpg",
     tags: ["Dehydrated Castor Oil", "DCO", "Alkyd Resins", "Industrial Coatings", "DCO Fatty Acid"],
+    relatedLink: { url: "products/dehydrated-castor-oil.html", title: "Dehydrated Castor Oil (DCO)" },
     featured: false,
     content: `
       <p class="lead-paragraph">In the coatings and printing ink sectors, the drying capability of an oil is determined by its unsaturation profile and the presence of conjugated double bonds. <strong>Dehydrated Castor Oil (DCO)</strong> stands out among all natural and modified vegetable oils as a premier non-yellowing, rapid-drying film former.</p>
@@ -193,6 +196,7 @@ window.NAGDEV_BLOG_POSTS = [
     seoDescription: "Comprehensive guide to castor-derived biopolyols for rigid and flexible PU foams, CASE applications, lower carbon footprint, and superior hydrolytic stability.",
     coverImage: "images/blog/biopolyols-polyurethanes.jpg",
     tags: ["Bio-Polyols", "Castor Polyols", "Polyurethane", "Rigid Foam", "CASE Applications"],
+    relatedLink: { url: "products/bio-polyurethane-polyols.html", title: "Bio-Polyurethane Polyols" },
     featured: false,
     content: `
       <p class="lead-paragraph">Polyurethanes represent one of the most versatile polymer classes globally, spanning automotive seating, thermal building insulation, wind turbine coatings, and sports footwear. Traditionally dependent on petroleum polyether and polyester polyols, the polyurethane industry is shifting rapidly toward bio-based polyols derived from pure castor oil.</p>

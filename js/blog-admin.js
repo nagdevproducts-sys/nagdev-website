@@ -38,6 +38,7 @@
   const postFeaturedCheck = document.getElementById('post-featured');
   const postSeoDescInput = document.getElementById('post-seo-desc');
   const postCoverBase64 = document.getElementById('post-cover-base64');
+  const postLinkSelect = document.getElementById('post-link-select');
   const editorContent = document.getElementById('wysiwyg-editor');
   const modeLabel = document.getElementById('form-mode-label');
 
@@ -373,42 +374,98 @@
     const seoDesc = postSeoDescInput.value.trim();
     const coverImage = postCoverBase64.value || previewImg.src;
     const content = editorContent.innerHTML.trim();
+    let category = postCategorySelect.value;
+    if (category === 'Custom') {
+      category = postCustomCatInput.value.trim();
+    }
+    const author = postAuthorInput.value.trim();
+    const date = postDateInput.value;
+    const tagsStr = postTagsInput.value.trim();
+    const linkVal = postLinkSelect ? postLinkSelect.value : '';
 
-    if (!title || !slug) {
-      alert('Please provide an article title and URL slug.');
+    // Strict validation: ALL fields are mandatory
+    if (!title) {
+      alert('Mandatory Field Missing: Please enter an Article Title.');
+      postTitleInput.focus();
+      return;
+    }
+
+    if (!slug) {
+      alert('Mandatory Field Missing: Please enter a valid URL Slug.');
+      postSlugInput.focus();
+      return;
+    }
+
+    if (!category) {
+      alert('Mandatory Field Missing: Please select or enter a Category / Topic.');
+      postCategorySelect.focus();
+      return;
+    }
+
+    if (!author) {
+      alert('Mandatory Field Missing: Please provide an Author Name / Byline.');
+      postAuthorInput.focus();
+      return;
+    }
+
+    if (!date) {
+      alert('Mandatory Field Missing: Please select a Publication Date.');
+      postDateInput.focus();
+      return;
+    }
+
+    if (!tagsStr) {
+      alert('Mandatory Field Missing: Please enter SEO Keywords / Tags (comma-separated).');
+      postTagsInput.focus();
       return;
     }
 
     if (!coverImage) {
-      alert('Please upload and crop a cover photo (fixed 1200 × 630 px).');
+      alert('Mandatory Field Missing: Please choose and crop a Featured Cover Photo (fixed 1200 × 630 px).');
+      dropZone.scrollIntoView({ behavior: 'smooth' });
       return;
     }
 
-    if (!content || content === '<p></p>' || content === '<br>') {
-      alert('Please write the full article description in the editor.');
+    if (!seoDesc) {
+      alert('Mandatory Field Missing: Please enter an SEO Short Description (Meta Description).');
+      postSeoDescInput.focus();
       return;
     }
 
-    let category = postCategorySelect.value;
-    if (category === 'Custom') {
-      category = postCustomCatInput.value.trim() || 'General';
+    if (!content || content === '<p></p>' || content === '<br>' || content === '<p><br></p>') {
+      alert('Mandatory Field Missing: Please write the Full Article Description in the rich text editor.');
+      editorContent.focus();
+      return;
     }
 
-    const tags = postTagsInput.value
+    if (!linkVal) {
+      alert('Mandatory Field Missing: Please select a Related Website Link (Bottom CTA) from the dropdown.');
+      postLinkSelect.focus();
+      return;
+    }
+
+    const tags = tagsStr
       .split(',')
       .map(t => t.trim())
       .filter(Boolean);
+
+    const linkParts = linkVal.split('|');
+    const relatedLink = {
+      url: linkParts[0],
+      title: linkParts[1] || linkParts[0]
+    };
 
     const postData = {
       id: postIdInput.value || ('post-' + Date.now()),
       title: title,
       slug: slug,
       category: category,
-      author: postAuthorInput.value.trim() || 'Nagdev Technical Editorial Team',
-      date: postDateInput.value || new Date().toISOString().split('T')[0],
+      author: author,
+      date: date,
       seoDescription: seoDesc,
       coverImage: coverImage,
       tags: tags,
+      relatedLink: relatedLink,
       featured: postFeaturedCheck.checked,
       content: content
     };
@@ -438,14 +495,22 @@
     const slug = postSlugInput.value.trim();
     const coverImage = postCoverBase64.value || previewImg.src;
     const content = editorContent.innerHTML.trim();
+    const seoDesc = postSeoDescInput.value.trim();
+    const linkVal = postLinkSelect ? postLinkSelect.value : '';
 
-    if (!title || !slug || !content) {
-      alert('Please fill out the article before exporting static HTML.');
+    if (!title || !slug || !content || !coverImage || !seoDesc || !linkVal) {
+      alert('Please fill out all mandatory fields (including cover photo, description, and website link) before exporting static HTML.');
       return;
     }
 
     let category = postCategorySelect.value;
     if (category === 'Custom') category = postCustomCatInput.value.trim();
+
+    const linkParts = linkVal.split('|');
+    const relatedLink = {
+      url: linkParts[0],
+      title: linkParts[1] || linkParts[0]
+    };
 
     const postObj = {
       title,
@@ -453,9 +518,10 @@
       category,
       author: postAuthorInput.value.trim() || 'Nagdev Products',
       date: postDateInput.value || new Date().toISOString().split('T')[0],
-      seoDescription: postSeoDescInput.value.trim(),
+      seoDescription: seoDesc,
       coverImage: coverImage || 'images/og-share.jpg',
       tags: postTagsInput.value.split(',').map(t => t.trim()).filter(Boolean),
+      relatedLink: relatedLink,
       content
     };
 
@@ -484,6 +550,7 @@
     postAuthorInput.value = 'Nagdev Technical Editorial Team';
     postCategorySelect.value = 'Green Chemistry & Sustainability';
     postCustomCatInput.style.display = 'none';
+    if (postLinkSelect) postLinkSelect.value = '';
 
     titleCharCount.textContent = '0 chars';
     seoDescCounter.textContent = '0 / 160';
@@ -599,6 +666,18 @@
     postFeaturedCheck.checked = !!post.featured;
     postSeoDescInput.value = post.seoDescription || '';
     editorContent.innerHTML = post.content || '';
+
+    if (postLinkSelect && post.relatedLink && post.relatedLink.url) {
+      for (let i = 0; i < postLinkSelect.options.length; i++) {
+        const val = postLinkSelect.options[i].value;
+        if (val.startsWith(post.relatedLink.url)) {
+          postLinkSelect.selectedIndex = i;
+          break;
+        }
+      }
+    } else if (postLinkSelect) {
+      postLinkSelect.value = '';
+    }
 
     if (post.coverImage) {
       postCoverBase64.value = post.coverImage;

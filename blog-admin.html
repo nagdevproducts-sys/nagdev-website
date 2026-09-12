@@ -208,7 +208,7 @@
             <!-- Cover Photo with Fixed Dimensions & Cropping Tool -->
             <div class="admin-card">
               <div class="admin-card-title">
-                <span>Featured Cover Photo</span>
+                <span>Featured Cover Photo <span class="required">*</span></span>
                 <span style="font-size:0.75rem;background:#0B3D1E;color:#fff;padding:2px 6px;border-radius:4px;">1200 × 630 Fixed</span>
               </div>
 
@@ -219,7 +219,7 @@
               <!-- Drop Zone -->
               <div class="upload-drop-zone" id="cover-drop-zone">
                 <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <div style="font-weight:600;font-size:0.95rem;color:var(--admin-forest);margin-bottom:0.25rem;">Choose Cover Photo</div>
+                <div style="font-weight:600;font-size:0.95rem;color:var(--admin-forest);margin-bottom:0.25rem;">Choose Cover Photo <span class="required">*</span></div>
                 <div style="font-size:0.8rem;color:var(--admin-muted);">Click to browse from your device or drag &amp; drop</div>
                 <input type="file" id="cover-file-input" accept="image/*" style="display:none;">
               </div>
@@ -247,8 +247,8 @@
 
               <!-- Category -->
               <div class="form-group">
-                <label class="form-label" for="post-category">Category / Topic</label>
-                <select id="post-category" class="form-select">
+                <label class="form-label" for="post-category">Category / Topic <span class="required">*</span></label>
+                <select id="post-category" class="form-select" required>
                   <option value="Green Chemistry & Sustainability">Green Chemistry &amp; Sustainability</option>
                   <option value="Lubricants & Greases">Lubricants &amp; Greases</option>
                   <option value="Paints & High-Performance Coatings">Paints &amp; High-Performance Coatings</option>
@@ -261,21 +261,70 @@
 
               <!-- Author -->
               <div class="form-group">
-                <label class="form-label" for="post-author">Author / Byline</label>
-                <input type="text" id="post-author" class="form-input" value="Nagdev Technical Editorial Team">
+                <label class="form-label" for="post-author">Author / Byline <span class="required">*</span></label>
+                <input type="text" id="post-author" class="form-input" value="Nagdev Technical Editorial Team" required>
               </div>
 
               <!-- Publication Date -->
               <div class="form-group">
-                <label class="form-label" for="post-date">Publish Date</label>
-                <input type="date" id="post-date" class="form-input">
+                <label class="form-label" for="post-date">Publish Date <span class="required">*</span></label>
+                <input type="date" id="post-date" class="form-input" required>
               </div>
 
               <!-- Keywords / Tags -->
               <div class="form-group">
-                <label class="form-label" for="post-tags">SEO Keywords / Tags</label>
-                <input type="text" id="post-tags" class="form-input" placeholder="e.g. 12-HSA, Castor Wax, Lubricants">
-                <div class="form-hint">Separate keywords with commas</div>
+                <label class="form-label" for="post-tags">SEO Keywords / Tags <span class="required">*</span></label>
+                <input type="text" id="post-tags" class="form-input" placeholder="e.g. 12-HSA, Castor Wax, Lubricants" required>
+                <div class="form-hint">Separate keywords with commas (Mandatory)</div>
+              </div>
+
+              <!-- Related Website Link (Mandatory Dropdown) -->
+              <div class="form-group">
+                <label class="form-label" for="post-link-select">
+                  Related Website Link (Bottom CTA) <span class="required">*</span>
+                </label>
+                <select id="post-link-select" class="form-select" required>
+                  <option value="" disabled selected>-- Select Website / Product Page --</option>
+                  <optgroup label="Main Website Pages">
+                    <option value="index.html|Home">Home</option>
+                    <option value="products.html|Products">Products (All 20)</option>
+                    <option value="chemistry-tree.html|Chemistry Tree">Chemistry Tree</option>
+                    <option value="about.html|About Us">About Us</option>
+                    <option value="plant.html|Our Plant">Our Plant</option>
+                    <option value="infrastructure.html|Infrastructure">Infrastructure &amp; Quality</option>
+                    <option value="quality.html|Quality & Lab">Quality &amp; Lab Standards</option>
+                    <option value="markets.html|Markets">Global Markets</option>
+                    <option value="contact.html|Contact Us">Contact Us / RFQ</option>
+                  </optgroup>
+                  <optgroup label="Product Categories">
+                    <option value="castor-oils.html|Castor Oils">Castor Oils (Base Grades)</option>
+                    <option value="castor-oil-derivatives.html|Castor Derivatives">Castor Derivatives</option>
+                    <option value="products.html?filter=by-product|By-Products">By-Products (Fertilizer &amp; Glycerin)</option>
+                  </optgroup>
+                  <optgroup label="Specific Products">
+                    <option value="products/commercial-castor-oil.html|Commercial Castor Oil">Commercial Castor Oil</option>
+                    <option value="products/first-special-grade-castor-oil.html|First Special Grade (FSG)">First Special Grade (FSG)</option>
+                    <option value="products/hydrogenated-castor-oil.html|Hydrogenated Castor Oil">Hydrogenated Castor Oil (HCO)</option>
+                    <option value="products/12-hydroxystearic-acid.html|12-Hydroxystearic Acid">12-Hydroxystearic Acid (12-HSA)</option>
+                    <option value="products/sebacic-acid.html|Sebacic Acid">Sebacic Acid</option>
+                    <option value="products/ricinoleic-acid.html|Ricinoleic Acid">Ricinoleic Acid</option>
+                    <option value="products/dehydrated-castor-oil.html|Dehydrated Castor Oil">Dehydrated Castor Oil (DCO)</option>
+                    <option value="products/dco-fatty-acid.html|DCO Fatty Acid">DCO Fatty Acid</option>
+                    <option value="products/blown-oxidized-castor-oil.html|Blown Castor Oil">Blown Castor Oil</option>
+                    <option value="products/bio-polyurethane-polyols.html|Bio-Polyurethane Polyols">Bio-Polyurethane Polyols</option>
+                    <option value="products/methyl-12-hydroxystearate.html|Methyl 12-Hydroxystearate">Methyl 12-Hydroxystearate</option>
+                    <option value="products/methyl-ricinoleate.html|Methyl Ricinoleate">Methyl Ricinoleate</option>
+                    <option value="products/dibutyl-sebacate.html|Dibutyl Sebacate">Dibutyl Sebacate (DBS)</option>
+                    <option value="products/dioctyl-sebacate.html|Dioctyl Sebacate">Dioctyl Sebacate (DOS)</option>
+                    <option value="products/lithium-12-hydroxystearate.html|Lithium 12-Hydroxystearate">Lithium 12-Hydroxystearate</option>
+                    <option value="products/calcium-12-hydroxystearate.html|Calcium 12-Hydroxystearate">Calcium 12-Hydroxystearate</option>
+                    <option value="products/zinc-ricinoleate.html|Zinc Ricinoleate">Zinc Ricinoleate</option>
+                    <option value="products/zinc-undecylenate.html|Zinc Undecylenate">Zinc Undecylenate</option>
+                    <option value="products/castor-cake-fertilizer.html|Castor Cake Fertilizer">Castor Cake Fertilizer</option>
+                    <option value="products/refined-glycerin.html|Refined Glycerin">Refined Glycerin 99.5%</option>
+                  </optgroup>
+                </select>
+                <div class="form-hint">Links directly to this page at the bottom of the article (Mandatory)</div>
               </div>
 
               <!-- Featured Checkbox -->

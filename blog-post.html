@@ -127,6 +127,18 @@
         <div id="article-tags" style="display:inline-flex;gap:0.5rem;flex-wrap:wrap;"></div>
       </div>
 
+      <!-- Selected Related Website Link Card -->
+      <div id="article-related-link-card" class="blog-related-link-card" style="display:none;">
+        <div class="related-link-content">
+          <span class="related-link-eyebrow">Explore Related Solution</span>
+          <h4 class="related-link-title" id="related-link-title">Related Page</h4>
+          <p class="related-link-text">Access detailed technical datasheets (TDS), specifications, bulk packaging, and formulation guidance.</p>
+        </div>
+        <a id="related-link-btn" href="#" class="btn btn-primary btn-sm related-link-btn">
+          Explore Page →
+        </a>
+      </div>
+
       <!-- Formulator CTA Box -->
       <div class="blog-cta-box">
         <h3>Formulating with Castor Derivatives?</h3>
@@ -262,6 +274,18 @@
     const tagsList = document.getElementById('article-tags');
     tagsContainer.style.display = 'flex';
     tagsList.innerHTML = post.tags.map(t => `<span class="blog-tag-pill">${t}</span>`).join('');
+  }
+
+  if (post.relatedLink && post.relatedLink.url) {
+    const cardEl = document.getElementById('article-related-link-card');
+    const titleEl = document.getElementById('related-link-title');
+    const btnEl = document.getElementById('related-link-btn');
+    if (cardEl && titleEl && btnEl) {
+      cardEl.style.display = 'flex';
+      titleEl.textContent = post.relatedLink.title || 'Related Page';
+      btnEl.textContent = `Explore ${post.relatedLink.title || 'Page'} →`;
+      btnEl.href = post.relatedLink.url.replace(/^(\.\.\/)+/, '');
+    }
   }
 
   loadingEl.style.display = 'none';
