@@ -1,8 +1,8 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
 
-# Disallow scratch/dev files
+# Disallow scratch/dev folders
 Disallow: /scratch/
 Disallow: /scripts/
 
-Sitemap: https://nagdevproducts.com/sitemap.xml
+Sitemap: https://www.nagdevproducts.com/sitemap.xml
