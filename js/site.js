@@ -211,11 +211,11 @@
   }
 })();
 
-// ── Secret 5-Click Logo Admin Panel Trigger ─────────────────────────────────
+// ── Secret 5-Click Logo Symbol Admin Panel Trigger ──────────────────────────
 (function () {
   let logoClickCount = 0;
-  let lastClickTime = 0;
-  const CLICK_WINDOW_MS = 2500;
+  let resetTimer = null;
+  const RESET_TIMEOUT_MS = 3500;
   const REQUIRED_CLICKS = 5;
   const AUTH_KEY = 'nagdev_admin_auth';
   const VALID_ID = 'admin';
@@ -224,6 +224,34 @@
   function getAdminUrl() {
     const isSubdir = window.location.pathname.includes('/products/') || window.location.pathname.includes('/blog/');
     return isSubdir ? '../blog-admin.html' : 'blog-admin.html';
+  }
+
+  function showBadge(anchorEl, count) {
+    let badge = anchorEl.querySelector('.admin-click-badge');
+    if (!badge) {
+      badge = document.createElement('div');
+      badge.className = 'admin-click-badge';
+      anchorEl.appendChild(badge);
+    }
+    badge.style.opacity = '1';
+    badge.style.transform = 'translateY(0)';
+    if (count >= REQUIRED_CLICKS) {
+      badge.className = 'admin-click-badge success';
+      badge.textContent = '✓ Unlocking Admin Studio…';
+    } else {
+      badge.className = 'admin-click-badge';
+      badge.textContent = `Admin Studio: ${count} / ${REQUIRED_CLICKS} clicks`;
+    }
+  }
+
+  function hideBadge(anchorEl) {
+    if (!anchorEl) return;
+    const badge = anchorEl.querySelector('.admin-click-badge');
+    if (badge) {
+      badge.style.opacity = '0';
+      badge.style.transform = 'translateY(-4px)';
+      setTimeout(() => { if (badge && badge.parentNode) badge.remove(); }, 300);
+    }
   }
 
   function showAdminModal() {
@@ -290,44 +318,133 @@
     if (pinInput) pinInput.value = '';
   }
 
-  function handleLogoClick(e) {
-    const now = Date.now();
-    if (now - lastClickTime > CLICK_WINDOW_MS) {
-      logoClickCount = 1;
-    } else {
-      logoClickCount++;
-    }
-    lastClickTime = now;
-
-    if (logoClickCount === REQUIRED_CLICKS) {
+  function handleSymbolClick(e, anchorEl, hotspotEl) {
+    if (e) {
       e.preventDefault();
       e.stopPropagation();
+    }
+
+    if (resetTimer) clearTimeout(resetTimer);
+
+    logoClickCount++;
+
+    if (hotspotEl) {
+      hotspotEl.classList.remove('pulse');
+      void hotspotEl.offsetWidth; // trigger reflow
+      hotspotEl.classList.add('pulse');
+    }
+
+    showBadge(anchorEl, logoClickCount);
+
+    if (logoClickCount >= REQUIRED_CLICKS) {
       logoClickCount = 0;
+      setTimeout(() => { hideBadge(anchorEl); }, 1200);
 
       // Check if already authenticated
       if (sessionStorage.getItem(AUTH_KEY) === 'true') {
         if (window.showToast) window.showToast('Opening Admin Studio…');
         setTimeout(() => {
           window.location.href = getAdminUrl();
-        }, 200);
+        }, 250);
       } else {
-        showAdminModal();
+        setTimeout(showAdminModal, 300);
       }
+    } else {
+      resetTimer = setTimeout(() => {
+        logoClickCount = 0;
+        hideBadge(anchorEl);
+      }, RESET_TIMEOUT_MS);
     }
   }
 
-  function attachListeners() {
-    const logos = document.querySelectorAll('.header-logo, .mobile-drawer-header img, [data-admin-trigger]');
-    logos.forEach(logo => {
-      logo.removeEventListener('click', handleLogoClick);
-      logo.addEventListener('click', handleLogoClick);
+  function setupLogoTriggers() {
+    // 1. Desktop / Header logo
+    const headerLogos = document.querySelectorAll('.header-logo');
+    headerLogos.forEach(logo => {
+      logo.style.position = 'relative';
+
+      let hotspot = logo.querySelector('.logo-symbol-hotspot');
+      if (!hotspot) {
+        hotspot = document.createElement('span');
+        hotspot.className = 'logo-symbol-hotspot';
+        hotspot.setAttribute('title', 'Admin Studio (Click 5 times)');
+        hotspot.setAttribute('role', 'button');
+        hotspot.setAttribute('aria-label', 'Admin Studio Trigger');
+        logo.appendChild(hotspot);
+      }
+
+      hotspot.addEventListener('click', (e) => {
+        handleSymbolClick(e, logo, hotspot);
+      });
+
+      // Coordinate detection fallback on the <a> link itself
+      logo.addEventListener('click', (e) => {
+        if (e.target !== hotspot) {
+          const img = logo.querySelector('img') || logo;
+          const rect = img.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          const ratio = clickX / rect.width;
+
+          // The symbol is located in the left 33% of the logo
+          if (ratio <= 0.33) {
+            e.preventDefault();
+            e.stopPropagation();
+            handleSymbolClick(e, logo, hotspot);
+            return;
+          }
+          // If clicked outside the symbol (on the text), allow standard navigation to home!
+        }
+      });
+    });
+
+    // 2. Mobile drawer header logo
+    const drawerHeaders = document.querySelectorAll('.mobile-drawer-header');
+    drawerHeaders.forEach(header => {
+      const img = header.querySelector('img');
+      if (!img) return;
+
+      let wrapper = header.querySelector('.mobile-logo-wrapper');
+      if (!wrapper) {
+        wrapper = document.createElement('div');
+        wrapper.className = 'mobile-logo-wrapper';
+        wrapper.style.position = 'relative';
+        wrapper.style.display = 'inline-flex';
+        wrapper.style.alignItems = 'center';
+        img.parentNode.insertBefore(wrapper, img);
+        wrapper.appendChild(img);
+
+        const hotspot = document.createElement('span');
+        hotspot.className = 'logo-symbol-hotspot';
+        hotspot.style.width = '35px';
+        hotspot.style.height = '36px';
+        hotspot.setAttribute('title', 'Admin Studio (Click 5 times)');
+        hotspot.setAttribute('role', 'button');
+        hotspot.setAttribute('aria-label', 'Admin Studio Trigger');
+        wrapper.appendChild(hotspot);
+
+        hotspot.addEventListener('click', (e) => {
+          handleSymbolClick(e, wrapper, hotspot);
+        });
+
+        wrapper.addEventListener('click', (e) => {
+          if (e.target !== hotspot) {
+            const rect = img.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            if (clickX / rect.width <= 0.33) {
+              e.preventDefault();
+              e.stopPropagation();
+              handleSymbolClick(e, wrapper, hotspot);
+            }
+          }
+        });
+      }
     });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', attachListeners);
+    document.addEventListener('DOMContentLoaded', setupLogoTriggers);
   } else {
-    attachListeners();
+    setupLogoTriggers();
   }
 })();
 
