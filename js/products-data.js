@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NAGDEV PRODUCTS — OFFICIAL PRODUCT DATABASE (BRAND ARCHITECTURE OPTION 3)
+   NAGDEV PRODUCTS — OFFICIAL PRODUCT DATABASE (BRAND ARCHITECTURE OPTION B - NDEV)
    Proprietary Brand Line Names & Full Analytical Technical Specifications
    Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura,
    Post – Ravel, Taluka – Deodar, Dist. Banaskantha - 385330, Gujarat, India
@@ -111,8 +111,8 @@ const PRODUCTS_DATABASE = [
         "AOCS Ca 6a-40"
       ]
     ],
-    "brandName": "NAGOLEO™ COMM",
-    "brandCode": "NAGOLEO-COMM"
+    "brandName": "NDEVOLEO™ COMM",
+    "brandCode": "NDEVOLEO-COMM"
   },
   {
     "id": "first-special-grade-castor-oil",
@@ -220,8 +220,8 @@ const PRODUCTS_DATABASE = [
         "AOCS Ca 6a-40"
       ]
     ],
-    "brandName": "NAGOLEO™ FSG",
-    "brandCode": "NAGOLEO-FSG"
+    "brandName": "NDEVOLEO™ FSG",
+    "brandCode": "NDEVOLEO-FSG"
   },
   {
     "id": "castor-cake-fertilizer",
@@ -320,8 +320,8 @@ const PRODUCTS_DATABASE = [
         "Visual / Standard Laboratory Method"
       ]
     ],
-    "brandName": "NAGRO™ CAKE",
-    "brandCode": "NAGRO-CAKE"
+    "brandName": "NDEVAGRO™ CAKE",
+    "brandCode": "NDEVAGRO-CAKE"
   },
   {
     "id": "hydrogenated-castor-oil",
@@ -453,8 +453,8 @@ const PRODUCTS_DATABASE = [
       ]
     ],
     "tableType": "multigrade",
-    "brandName": "NAGWAX™ HCO",
-    "brandCode": "NAGWAX-HCO"
+    "brandName": "NDEVWAX™ HCO",
+    "brandCode": "NDEVWAX-HCO"
   },
   {
     "id": "12-hydroxystearic-acid",
@@ -560,8 +560,8 @@ const PRODUCTS_DATABASE = [
         "AAS"
       ]
     ],
-    "brandName": "NAGACID™ 12-HSA",
-    "brandCode": "NAGACID-12HSA"
+    "brandName": "NDEVACID™ 12-HSA",
+    "brandCode": "NDEVACID-12HSA"
   },
   {
     "id": "ricinoleic-acid",
@@ -663,8 +663,8 @@ const PRODUCTS_DATABASE = [
         "ASTM D1218"
       ]
     ],
-    "brandName": "NAGACID™ RIC",
-    "brandCode": "NAGACID-RIC"
+    "brandName": "NDEVACID™ RIC",
+    "brandCode": "NDEVACID-RIC"
   },
   {
     "id": "refined-glycerin",
@@ -776,8 +776,8 @@ const PRODUCTS_DATABASE = [
         "USP / IP"
       ]
     ],
-    "brandName": "NAGLY™ 995",
-    "brandCode": "NAGLY-995"
+    "brandName": "NDEVGLY™ 995",
+    "brandCode": "NDEVGLY-995"
   },
   {
     "id": "methyl-ricinoleate",
@@ -884,8 +884,8 @@ const PRODUCTS_DATABASE = [
         "GC"
       ]
     ],
-    "brandName": "NAGESTER™ MR",
-    "brandCode": "NAGESTER-MR"
+    "brandName": "NDEVEST™ MR",
+    "brandCode": "NDEVEST-MR"
   },
   {
     "id": "methyl-12-hydroxystearate",
@@ -991,8 +991,8 @@ const PRODUCTS_DATABASE = [
         "Sieve Test"
       ]
     ],
-    "brandName": "NAGESTER™ M12H",
-    "brandCode": "NAGESTER-M12H"
+    "brandName": "NDEVEST™ M12H",
+    "brandCode": "NDEVEST-M12H"
   },
   {
     "id": "sebacic-acid",
@@ -1099,8 +1099,8 @@ const PRODUCTS_DATABASE = [
         "Sieve Test"
       ]
     ],
-    "brandName": "NAGACID™ SEB",
-    "brandCode": "NAGACID-SEB"
+    "brandName": "NDEVACID™ SEB",
+    "brandCode": "NDEVACID-SEB"
   },
   {
     "id": "dioctyl-sebacate",
@@ -1200,8 +1200,8 @@ const PRODUCTS_DATABASE = [
         "Standard Laboratory Method"
       ]
     ],
-    "brandName": "NAGESTER™ DOS",
-    "brandCode": "NAGESTER-DOS"
+    "brandName": "NDEVEST™ DOS",
+    "brandCode": "NDEVEST-DOS"
   },
   {
     "id": "dibutyl-sebacate",
@@ -1301,8 +1301,8 @@ const PRODUCTS_DATABASE = [
         "Standard Laboratory Method"
       ]
     ],
-    "brandName": "NAGESTER™ DBS",
-    "brandCode": "NAGESTER-DBS"
+    "brandName": "NDEVEST™ DBS",
+    "brandCode": "NDEVEST-DBS"
   },
   {
     "id": "bio-polyurethane-polyols",
@@ -1408,8 +1408,8 @@ const PRODUCTS_DATABASE = [
         "ASTM D4274"
       ]
     ],
-    "brandName": "NAGPOL™ BIO",
-    "brandCode": "NAGPOL-BIO"
+    "brandName": "NDEVPOL™ BIO",
+    "brandCode": "NDEVPOL-BIO"
   },
   {
     "id": "dehydrated-castor-oil",
@@ -1509,8 +1509,8 @@ const PRODUCTS_DATABASE = [
         "UV Spectrophotometric / GC"
       ]
     ],
-    "brandName": "NAGPOL™ DCO",
-    "brandCode": "NAGPOL-DCO"
+    "brandName": "NDEVPOL™ DCO",
+    "brandCode": "NDEVPOL-DCO"
   },
   {
     "id": "blown-oxidized-castor-oil",
@@ -1610,8 +1610,8 @@ const PRODUCTS_DATABASE = [
         "Standard Laboratory Method"
       ]
     ],
-    "brandName": "NAGPOL™ BLOW",
-    "brandCode": "NAGPOL-BLOW"
+    "brandName": "NDEVOX™ BLO",
+    "brandCode": "NDEVOX-BLO"
   },
   {
     "id": "dco-fatty-acid",
@@ -1717,8 +1717,8 @@ const PRODUCTS_DATABASE = [
         "AOCS Ca 5a-40"
       ]
     ],
-    "brandName": "NAGACID™ DCO-FA",
-    "brandCode": "NAGACID-DCOFA"
+    "brandName": "NDEVACID™ DCO",
+    "brandCode": "NDEVACID-DCO"
   },
   {
     "id": "lithium-12-hydroxystearate",
@@ -1823,8 +1823,8 @@ const PRODUCTS_DATABASE = [
         "ASTM D217"
       ]
     ],
-    "brandName": "NAGSOAP™ LI-12",
-    "brandCode": "NAGSOAP-LI12"
+    "brandName": "NDEVSOAP™ LI12",
+    "brandCode": "NDEVSOAP-LI12"
   },
   {
     "id": "calcium-12-hydroxystearate",
@@ -1930,8 +1930,8 @@ const PRODUCTS_DATABASE = [
         "ASTM D217"
       ]
     ],
-    "brandName": "NAGSOAP™ CA-12",
-    "brandCode": "NAGSOAP-CA12"
+    "brandName": "NDEVSOAP™ CA12",
+    "brandCode": "NDEVSOAP-CA12"
   },
   {
     "id": "zinc-ricinoleate",
@@ -2031,8 +2031,8 @@ const PRODUCTS_DATABASE = [
         "Sieve Test"
       ]
     ],
-    "brandName": "NAGZINC™ RIC",
-    "brandCode": "NAGZINC-RIC"
+    "brandName": "NDEVSOAP™ ZNR",
+    "brandCode": "NDEVSOAP-ZNR"
   },
   {
     "id": "zinc-undecylenate",
@@ -2132,14 +2132,10 @@ const PRODUCTS_DATABASE = [
         "Sieve Test"
       ]
     ],
-    "brandName": "NAGZINC™ UND",
-    "brandCode": "NAGZINC-UND"
+    "brandName": "NDEVSOAP™ ZNU",
+    "brandCode": "NDEVSOAP-ZNU"
   }
 ];
-
-if (typeof window !== "undefined") {
-  window.PRODUCTS_DATABASE = PRODUCTS_DATABASE;
-}
 
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { PRODUCTS_DATABASE };
