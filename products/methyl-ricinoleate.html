@@ -315,9 +315,32 @@
       <div class="header-cta">
         <a href="../contact.html?product=methyl-ricinoleate" class="btn btn-primary btn-sm">Request a Quote →</a>
       </div>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
+
+<!-- Mobile Drawer -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Navigation menu">
+  <div class="mobile-drawer-header">
+    <img src="../images/logo.png" alt="Nagdev Products" height="36" style="width:auto;">
+    <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="mobile-nav-list" role="list">
+    <li><a href="../index.html" class="mobile-nav-link">Home</a></li>
+    <li><a href="../products.html" class="mobile-nav-link active">Products (All 20)</a></li>
+    <li><a href="../chemistry-tree.html" class="mobile-nav-link" style="color:var(--forest);font-weight:600;">🌿 Chemistry Tree</a></li>
+    <li><a href="../about.html" class="mobile-nav-link">About</a></li>
+    <li><a href="../plant.html" class="mobile-nav-link">Our Plant</a></li>
+    <li><a href="../quality.html" class="mobile-nav-link">Quality</a></li>
+    <li><a href="../markets.html" class="mobile-nav-link">Markets</a></li>
+    <li><a href="../contact.html" class="mobile-nav-link">Contact</a></li>
+  </ul>
+  <a href="../contact.html?product=methyl-ricinoleate" class="btn btn-primary" style="width:100%;justify-content:center;">Request a Quote →</a>
+</div>
 
 <!-- BREADCRUMB STRIP -->
 <div style="background:var(--ivory);border-bottom:1px solid var(--border-light);padding:0.85rem 0;">
@@ -389,7 +412,9 @@
     <div style="margin-bottom:2rem;">
       <span class="section-eyebrow">Analytical Quality Parameters</span>
       <h2 class="section-lead-title">Verified Technical Specifications: Methyl Ricinoleate</h2>
-      <p style="color:var(--text-muted);font-size:0.95rem;">Tested and certified in our laboratory according to official AOCS, ISO, ASTM, BP, USP, and EP compendial methods.</p>
+    <div class="table-swipe-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/><polyline points="15 18 21 12 15 6"/></svg>
+      <span>Swipe table horizontally to view full test limits &amp; compendial methods</span>
     </div>
 
     <div class="spec-table-wrap">

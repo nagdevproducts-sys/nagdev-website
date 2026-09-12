@@ -633,10 +633,16 @@ input, textarea, select { font-family: var(--font-body); }
 .mobile-toggle {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
+  width: 44px;
+  height: 44px;
   padding: 8px;
   cursor: pointer;
   border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
 }
 .mobile-toggle span {
   display: block;
@@ -2012,6 +2018,26 @@ input, textarea, select { font-family: var(--font-body); }
 }
 .modal-footer-shelf strong { color: var(--charcoal); font-weight: 500; }
 .modal-footer-actions { display: flex; gap: 0.75rem; align-items: center; }
+@media (max-width: 600px) {
+  .modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+  }
+  .modal-footer .modal-btn-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+  .modal-footer .modal-btn-group .btn,
+  .modal-footer .modal-btn-group button,
+  .modal-footer .modal-btn-group a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
 
 /* ==========================================================================
    24. ABOUT PAGE
@@ -2520,6 +2546,189 @@ input, textarea, select { font-family: var(--font-body); }
   .final-cta-inner { padding: 3rem 0; }
   .final-cta-actions { flex-direction: column; align-items: stretch; }
   .final-cta-actions .btn { justify-content: center; }
+}
+
+/* ==========================================================================
+   32b. MOBILE PHONE OPTIMIZATIONS (≤ 540px)
+   ========================================================================== */
+
+@media (max-width: 540px) {
+  :root { --header-h: 64px; }
+
+  /* 1-column layout for product catalog cards on mobile phones */
+  .products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .product-card {
+    max-width: 100%;
+  }
+
+  /* Full single-column for process and step cards */
+  .quality-steps,
+  .quality-process-full,
+  .about-products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  /* Trust strip on mobile */
+  .trust-strip-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  .trust-item {
+    padding: 1rem 0.5rem;
+  }
+  .trust-item-value {
+    font-size: 1.5rem;
+  }
+  .trust-item-label {
+    font-size: 0.75rem;
+  }
+
+  /* Catalog filter tabs touch scrolling */
+  .catalog-tabs {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+  }
+  .catalog-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .catalog-tab {
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-height: 40px;
+    padding: 0.45rem 0.95rem;
+    font-size: 0.825rem;
+  }
+
+  /* Industry filter row on mobile */
+  .industry-filter-row {
+    padding-bottom: 0.6rem;
+  }
+  .ind-chip {
+    min-height: 38px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.78rem;
+  }
+
+  /* Product detail hero and actions */
+  .product-detail-media {
+    padding: 1.5rem 1rem !important;
+  }
+  .product-detail-media img {
+    height: 280px !important;
+  }
+  .product-action-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
+  }
+  .product-action-bar .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .product-quick-props {
+    grid-template-columns: 1fr !important;
+    padding: 1.25rem !important;
+    gap: 0.85rem !important;
+  }
+
+  /* Modal on mobile */
+  .modal-dialog {
+    width: 95% !important;
+    margin: 1rem auto !important;
+    max-height: 92vh !important;
+  }
+  .modal-actions-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
+  }
+  .modal-actions-bar .modal-btn-group,
+  .modal-actions-bar .btn,
+  .btn-tds,
+  .btn-sample {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* ==========================================================================
+   32c. MOBILE FORM & TOUCH ACCESSIBILITY (≤ 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Prevent iOS Safari automatic zoom on inputs */
+  input, select, textarea, .form-input, .form-select, .form-textarea, .catalog-search {
+    font-size: 16px !important;
+  }
+
+  /* Enhanced touch targets */
+  .btn, .nav-link, .mobile-nav-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Table horizontal swipe indicator */
+  .table-swipe-hint {
+    display: flex !important;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--forest);
+    background: var(--forest-subtle);
+    border: 1px solid rgba(11, 61, 30, 0.15);
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius-xs);
+    margin-bottom: 0.85rem;
+    width: fit-content;
+  }
+  .table-swipe-hint svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    animation: swipeHintAnim 2s ease-in-out infinite;
+  }
+  @keyframes swipeHintAnim {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+
+  /* Ensure smooth momentum scrolling for all table wraps */
+  .spec-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+  }
+
+  /* Ensure footer links have generous tap targets */
+  .footer-links li a {
+    padding: 0.35rem 0;
+    display: inline-block;
+  }
+
+  /* Safe area insets for mobile gesture bars */
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/* Touch & Mobile UX Enhancements */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+button, a, input, select, textarea {
+  touch-action: manipulation;
 }
 
 /* ==========================================================================

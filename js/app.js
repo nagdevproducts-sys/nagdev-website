@@ -24,6 +24,7 @@
     if (!drawer) return;
     drawer.classList.add('active');
     backdrop.classList.add('active');
+    document.body.classList.add('drawer-open');
     document.body.style.overflow = 'hidden';
   }
 
@@ -31,6 +32,7 @@
     if (!drawer) return;
     drawer.classList.remove('active');
     backdrop.classList.remove('active');
+    document.body.classList.remove('drawer-open');
     document.body.style.overflow = '';
   }
 
