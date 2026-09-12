@@ -53,7 +53,11 @@ class SpecModalController {
     // Print / Save TDS Button
     if (this.modalPrintBtn) {
       this.modalPrintBtn.addEventListener('click', () => {
-        window.print();
+        if (this.currentProductId && typeof downloadProductTDS === 'function') {
+          downloadProductTDS(this.currentProductId);
+        } else {
+          window.print();
+        }
       });
     }
 
