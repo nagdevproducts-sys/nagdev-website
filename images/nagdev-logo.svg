@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="none">
+  <defs>
+    <linearGradient id="nagdevGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="60%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="nagdevNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0b2545"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Logo Mark Emblem -->
+  <g transform="translate(10, 8)">
+    <!-- Hexagonal Shield / Crystal Outline -->
+    <polygon points="32,4 58,18 58,46 32,60 6,46 6,18" fill="url(#nagdevNavyGrad)" stroke="#1e3a8a" stroke-width="1.5" />
+    <polygon points="32,8 54,20 54,44 32,56 10,44 10,20" fill="#0b2545" stroke="rgba(251, 191, 36, 0.3)" stroke-width="1" />
+    
+    <!-- Castor Seed / Golden Oil Droplet -->
+    <path d="M32 14 C32 14 20 28 20 37 C20 44 25.5 49 32 49 C38.5 49 44 44 44 37 C44 28 32 14 32 14 Z" fill="url(#nagdevGoldGrad)" />
+    
+    <!-- Stylized 'N' Geometry in Droplet Core -->
+    <path d="M28 42 L28 26 L36 38 L36 26" stroke="#0b2545" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+    
+    <!-- Droplet Shine -->
+    <ellipse cx="27" cy="32" rx="2" ry="4" transform="rotate(-20 27 32)" fill="#ffffff" opacity="0.6"/>
+  </g>
+
+  <!-- Logo Typography -->
+  <g transform="translate(82, 38)">
+    <text x="0" y="0" font-family="'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-size="25" fill="#0b2545" letter-spacing="0.04em">NAGDEV</text>
+    <text x="122" y="0" font-family="'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="600" font-size="25" fill="#d97706" letter-spacing="0.04em">PRODUCTS</text>
+    <text x="2" y="19" font-family="'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" font-weight="700" font-size="9.5" fill="#64748b" letter-spacing="0.16em">PRIVATE LIMITED • GUJARAT, INDIA</text>
+  </g>
+</svg>

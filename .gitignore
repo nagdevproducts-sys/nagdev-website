@@ -1,0 +1,18 @@
+﻿# Backups & Large Archives
+*.zip
+*.tar.gz
+*.bak
+*.tmp
+
+# Scratch & Internal Dev Scripts
+scratch/
+scripts/
+PUBLIC_URL.txt
+before_after_report.md
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
