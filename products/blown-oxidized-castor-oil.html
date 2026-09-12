@@ -197,21 +197,17 @@
     }
     .prod-img-wrap {
       height: 220px;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      border-bottom: 1px solid var(--border-light);
+      background: var(--ivory-dark);
+      overflow: hidden;
     }
     .prod-img-wrap img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       transition: transform 0.3s ease;
     }
     .prod-card:hover .prod-img-wrap img {
-      transform: scale(1.04);
+      transform: scale(1.06);
     }
     .prod-body {
       padding: 1.5rem;
