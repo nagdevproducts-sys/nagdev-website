@@ -1700,11 +1700,15 @@ input, textarea, select { font-family: var(--font-body); }
   display: flex;
   flex-direction: column;
   position: relative;
+  text-decoration: none;
+  color: inherit;
 }
 .product-card:hover {
   z-index: 1;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
   transform: translateY(-3px);
+  text-decoration: none;
+  color: inherit;
 }
 
 .product-card-img-wrap {

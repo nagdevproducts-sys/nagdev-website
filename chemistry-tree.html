@@ -117,13 +117,13 @@
                   </div>
                   <ul class="mega-prod-list">
                     <li>
-                      <a href="products.html#commercial-castor-oil" class="mega-prod-link">
+                      <a href="products/commercial-castor-oil.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGOLEO™ COMM</span>
                         <span class="mega-prod-name">Commercial Castor Oil</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#first-special-grade-castor-oil" class="mega-prod-link">
+                      <a href="products/first-special-grade-castor-oil.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGOLEO™ FSG</span>
                         <span class="mega-prod-name">First Special Grade (FSG)</span>
                       </a>
@@ -144,31 +144,31 @@
                   </div>
                   <ul class="mega-prod-list">
                     <li>
-                      <a href="products.html#hydrogenated-castor-oil" class="mega-prod-link">
+                      <a href="products/hydrogenated-castor-oil.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGWAX™ HCO</span>
                         <span class="mega-prod-name">Hydrogenated Castor Wax</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#12-hydroxystearic-acid" class="mega-prod-link">
+                      <a href="products/12-hydroxystearic-acid.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGACID™ 12-HSA</span>
                         <span class="mega-prod-name">12-Hydroxystearic Acid</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#sebacic-acid" class="mega-prod-link">
+                      <a href="products/sebacic-acid.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGACID™ SEB</span>
                         <span class="mega-prod-name">Sebacic Acid Flakes (C10)</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#bio-polyurethane-polyols" class="mega-prod-link">
+                      <a href="products/bio-polyurethane-polyols.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGPOL™ BIO</span>
                         <span class="mega-prod-name">Bio-PU Polyols</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#dehydrated-castor-oil" class="mega-prod-link">
+                      <a href="products/dehydrated-castor-oil.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGPOL™ DCO</span>
                         <span class="mega-prod-name">Dehydrated Castor Oil</span>
                       </a>
@@ -185,13 +185,13 @@
                   </div>
                   <ul class="mega-prod-list">
                     <li>
-                      <a href="products.html#castor-cake-fertilizer" class="mega-prod-link">
+                      <a href="products/castor-cake-fertilizer.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGRO™ CAKE</span>
                         <span class="mega-prod-name">Castor Cake Fertilizer</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#refined-glycerin" class="mega-prod-link">
+                      <a href="products/refined-glycerin.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGLY™ 995</span>
                         <span class="mega-prod-name">Refined Glycerin (USP 99.5%)</span>
                       </a>
@@ -936,40 +936,7 @@
   };
 
   window.openModal = function(productId) {
-    const p = window.getProductById(productId);
-    if (!p) return;
-    currentProductId = productId;
-
-    document.getElementById('modal-num').textContent  = p.brandName || '';
-    document.getElementById('modal-name').textContent = p.name;
-    document.getElementById('modal-cat-chip').textContent = categoryLabelShort[p.category] || p.categoryLabel;
-
-    document.getElementById('modal-img').src    = p.image;
-    document.getElementById('modal-img').alt    = p.name;
-    document.getElementById('modal-meta-category').textContent = p.categoryLabel;
-    document.getElementById('modal-meta-cas').textContent      = p.casNumber || 'Not assigned';
-    document.getElementById('modal-meta-form').textContent     = p.physicalForm;
-    document.getElementById('modal-meta-colour').textContent   = p.typicalColour;
-    document.getElementById('modal-meta-raw').textContent      = p.rawMaterial;
-
-    document.getElementById('modal-spec-section').innerHTML = renderSpecTable(p);
-    document.getElementById('modal-app-text').textContent   = p.application;
-
-    const packItems = p.packing.split(/\s*[•·]\s*/).filter(s => s.trim());
-    document.getElementById('modal-packing-text').innerHTML = packItems.map(s =>
-      `<span class="packing-chip">${s.trim()}</span>`
-    ).join('');
-
-    document.getElementById('modal-shelf-text').textContent = p.shelfLife;
-
-    const enquireBtn = document.getElementById('modal-enquire-btn');
-    if (enquireBtn) {
-      enquireBtn.href = `contact.html?type=quote&product=${encodeURIComponent(p.name)}`;
-    }
-
-    document.getElementById('product-modal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('modal-close-btn').focus();
+    window.location.href = 'products/' + productId + '.html';
   };
 
   function closeModal() {

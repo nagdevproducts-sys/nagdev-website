@@ -73,13 +73,13 @@
                   </div>
                   <ul class="mega-prod-list">
                     <li>
-                      <a href="products.html#commercial-castor-oil" class="mega-prod-link" onclick="if(window.openModal)openModal('commercial-castor-oil')">
+                      <a href="products/commercial-castor-oil.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGOLEO™ COMM</span>
                         <span class="mega-prod-name">Commercial Castor Oil</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#first-special-grade-castor-oil" class="mega-prod-link" onclick="if(window.openModal)openModal('first-special-grade-castor-oil')">
+                      <a href="products/first-special-grade-castor-oil.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGOLEO™ FSG</span>
                         <span class="mega-prod-name">First Special Grade (FSG)</span>
                       </a>
@@ -100,31 +100,31 @@
                   </div>
                   <ul class="mega-prod-list">
                     <li>
-                      <a href="products.html#hydrogenated-castor-oil" class="mega-prod-link" onclick="if(window.openModal)openModal('hydrogenated-castor-oil')">
+                      <a href="products/hydrogenated-castor-oil.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGWAX™ HCO</span>
                         <span class="mega-prod-name">Hydrogenated Castor Wax</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#12-hydroxystearic-acid" class="mega-prod-link" onclick="if(window.openModal)openModal('12-hydroxystearic-acid')">
+                      <a href="products/12-hydroxystearic-acid.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGACID™ 12-HSA</span>
                         <span class="mega-prod-name">12-Hydroxystearic Acid</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#sebacic-acid" class="mega-prod-link" onclick="if(window.openModal)openModal('sebacic-acid')">
+                      <a href="products/sebacic-acid.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGACID™ SEB</span>
                         <span class="mega-prod-name">Sebacic Acid Flakes (C10)</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#bio-polyurethane-polyols" class="mega-prod-link" onclick="if(window.openModal)openModal('bio-polyurethane-polyols')">
+                      <a href="products/bio-polyurethane-polyols.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGPOL™ BIO</span>
                         <span class="mega-prod-name">Bio-PU Polyols</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#dehydrated-castor-oil" class="mega-prod-link" onclick="if(window.openModal)openModal('dehydrated-castor-oil')">
+                      <a href="products/dehydrated-castor-oil.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGPOL™ DCO</span>
                         <span class="mega-prod-name">Dehydrated Castor Oil</span>
                       </a>
@@ -141,13 +141,13 @@
                   </div>
                   <ul class="mega-prod-list">
                     <li>
-                      <a href="products.html#castor-cake-fertilizer" class="mega-prod-link" onclick="if(window.openModal)openModal('castor-cake-fertilizer')">
+                      <a href="products/castor-cake-fertilizer.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGRO™ CAKE</span>
                         <span class="mega-prod-name">Castor Cake Fertilizer</span>
                       </a>
                     </li>
                     <li>
-                      <a href="products.html#refined-glycerin" class="mega-prod-link" onclick="if(window.openModal)openModal('refined-glycerin')">
+                      <a href="products/refined-glycerin.html" class="mega-prod-link">
                         <span class="mega-prod-brand">NAGLY™ 995</span>
                         <span class="mega-prod-name">Refined Glycerin (USP 99.5%)</span>
                       </a>
@@ -611,10 +611,8 @@
     noRes.style.display = 'none';
 
     grid.innerHTML = items.map(p => `
-      <div class="product-card" id="card-${p.id}" role="listitem"
-           onclick="openModal('${p.id}')" tabindex="0"
-           onkeydown="if(event.key==='Enter'||event.key===' ')openModal('${p.id}')"
-           aria-label="View details for ${p.name}">
+      <a href="products/${p.id}.html" class="product-card" id="card-${p.id}" role="listitem"
+         aria-label="View specifications for ${p.name}">
         <div class="product-card-img-wrap">
           <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.opacity='0.3'">
         </div>
@@ -624,15 +622,12 @@
           <div class="product-card-cat">${p.categoryLabel}${p.casNumber ? ' · CAS ' + p.casNumber : ''}</div>
           <div class="product-card-footer">
             <div class="product-card-link">
-              Quick View
+              View Specifications &amp; TDS
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </div>
-            <a href="products/${p.id}.html" onclick="event.stopPropagation();" class="product-card-page-btn" style="font-size:0.75rem;color:var(--forest);font-weight:600;text-decoration:none;padding:0.25rem 0.6rem;border-radius:4px;background:var(--forest-subtle);display:inline-flex;align-items:center;gap:0.2rem;" title="Dedicated Page for ${p.name}">
-              Page ↗
-            </a>
           </div>
         </div>
-      </div>
+      </a>
     `).join('');
   }
 
