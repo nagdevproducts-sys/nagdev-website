@@ -211,4 +211,124 @@
   }
 })();
 
+// ── Secret 5-Click Logo Admin Panel Trigger ─────────────────────────────────
+(function () {
+  let logoClickCount = 0;
+  let lastClickTime = 0;
+  const CLICK_WINDOW_MS = 2500;
+  const REQUIRED_CLICKS = 5;
+  const AUTH_KEY = 'nagdev_admin_auth';
+  const VALID_ID = 'admin';
+  const VALID_PIN = '230893';
+
+  function getAdminUrl() {
+    const isSubdir = window.location.pathname.includes('/products/') || window.location.pathname.includes('/blog/');
+    return isSubdir ? '../blog-admin.html' : 'blog-admin.html';
+  }
+
+  function showAdminModal() {
+    let modal = document.getElementById('nagdev-admin-trigger-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'nagdev-admin-trigger-modal';
+      modal.innerHTML = `
+        <div style="position:fixed;inset:0;background:rgba(7,40,20,0.85);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:99999;padding:1rem;">
+          <div style="background:#ffffff;border-radius:14px;max-width:400px;width:100%;padding:2rem;box-shadow:0 25px 50px rgba(0,0,0,0.4);border:2px solid #B8841A;text-align:center;position:relative;font-family:'Inter',-apple-system,sans-serif;">
+            <button id="admin-trigger-close" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.4rem;color:#888;cursor:pointer;line-height:1;" aria-label="Close">✕</button>
+            <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:600;color:#0B3D1E;margin-bottom:0.25rem;">Admin Studio</div>
+            <p style="font-size:0.85rem;color:#666;margin-bottom:1.5rem;">Enter administrative credentials to open Editorial Studio</p>
+            <form id="admin-trigger-form" autocomplete="off" style="text-align:left;">
+              <div style="margin-bottom:1rem;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#222;margin-bottom:0.3rem;">Login ID</label>
+                <input type="text" id="trigger-login-id" style="width:100%;padding:0.7rem 0.85rem;border-radius:6px;border:1px solid #ddd;font-size:0.95rem;box-sizing:border-box;outline:none;" placeholder="Enter ID (Admin)" required autocomplete="username">
+              </div>
+              <div style="margin-bottom:1.25rem;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#222;margin-bottom:0.3rem;">PIN Code</label>
+                <input type="password" id="trigger-login-pin" maxlength="10" style="width:100%;padding:0.7rem 0.85rem;border-radius:6px;border:1px solid #ddd;font-size:0.95rem;box-sizing:border-box;outline:none;" placeholder="Enter 6-digit PIN" required autocomplete="current-password">
+              </div>
+              <div id="trigger-error" style="display:none;color:#c0392b;font-size:0.825rem;font-weight:600;margin-bottom:1rem;padding:0.4rem 0.6rem;background:#fee;border-radius:4px;border:1px solid #fcc;">
+                Invalid Login ID or PIN.
+              </div>
+              <button type="submit" style="width:100%;padding:0.75rem;border-radius:6px;background:#0B3D1E;color:#fff;border:none;font-weight:600;font-size:0.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                Unlock Studio →
+              </button>
+            </form>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const closeBtn = modal.querySelector('#admin-trigger-close');
+      closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+
+      const form = modal.querySelector('#admin-trigger-form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const idVal = (modal.querySelector('#trigger-login-id').value || '').trim().toLowerCase();
+        const pinVal = (modal.querySelector('#trigger-login-pin').value || '').trim();
+        const errEl = modal.querySelector('#trigger-error');
+
+        if (idVal === VALID_ID && pinVal === VALID_PIN) {
+          sessionStorage.setItem(AUTH_KEY, 'true');
+          errEl.style.display = 'none';
+          if (window.showToast) window.showToast('Credentials verified. Redirecting to Blog Studio…');
+          setTimeout(() => {
+            window.location.href = getAdminUrl();
+          }, 350);
+        } else {
+          errEl.style.display = 'block';
+        }
+      });
+    }
+
+    modal.style.display = 'block';
+    const idInput = modal.querySelector('#trigger-login-id');
+    const pinInput = modal.querySelector('#trigger-login-pin');
+    const errEl = modal.querySelector('#trigger-error');
+    if (errEl) errEl.style.display = 'none';
+    if (idInput) { idInput.value = ''; idInput.focus(); }
+    if (pinInput) pinInput.value = '';
+  }
+
+  function handleLogoClick(e) {
+    const now = Date.now();
+    if (now - lastClickTime > CLICK_WINDOW_MS) {
+      logoClickCount = 1;
+    } else {
+      logoClickCount++;
+    }
+    lastClickTime = now;
+
+    if (logoClickCount === REQUIRED_CLICKS) {
+      e.preventDefault();
+      e.stopPropagation();
+      logoClickCount = 0;
+
+      // Check if already authenticated
+      if (sessionStorage.getItem(AUTH_KEY) === 'true') {
+        if (window.showToast) window.showToast('Opening Admin Studio…');
+        setTimeout(() => {
+          window.location.href = getAdminUrl();
+        }, 200);
+      } else {
+        showAdminModal();
+      }
+    }
+  }
+
+  function attachListeners() {
+    const logos = document.querySelectorAll('.header-logo, .mobile-drawer-header img, [data-admin-trigger]');
+    logos.forEach(logo => {
+      logo.removeEventListener('click', handleLogoClick);
+      logo.addEventListener('click', handleLogoClick);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachListeners);
+  } else {
+    attachListeners();
+  }
+})();
+
 })();

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Administration Studio | Nagdev Products</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/blog-admin.css">
+
+  <!-- Cropper.js CDN for professional cropping -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+</head>
+<body class="admin-body">
+
+<!-- ═══════════════════════════════════════ LOGIN GATE OVERLAY ════════ -->
+<div id="login-gate" class="modal-backdrop" style="display: flex;">
+  <div class="login-gate-card" id="login-card">
+    <img src="images/logo.png" alt="Nagdev Products" height="46" style="width:auto;margin-bottom:0.5rem;">
+    <h2>Editorial Studio Access</h2>
+    <p>Please enter your authorized administrative credentials to manage, compose, and publish blog articles.</p>
+
+    <form id="admin-login-form" autocomplete="off">
+      <div class="form-group" style="text-align:left;">
+        <label class="form-label" for="login-id">Login ID</label>
+        <input type="text" id="login-id" class="form-input" placeholder="Enter Login ID (e.g. Admin)" required autofocus autocomplete="username">
+      </div>
+
+      <div class="form-group" style="text-align:left;">
+        <label class="form-label" for="login-pin">PIN Code</label>
+        <input type="password" id="login-pin" class="form-input" placeholder="Enter 6-digit PIN" maxlength="10" required autocomplete="current-password">
+      </div>
+
+      <div id="login-error" style="display:none; color:#c0392b; font-size:0.875rem; font-weight:600; margin-bottom:1rem; padding:0.5rem; background:#fde8e8; border-radius:6px; border:1px solid #f8b4b4;">
+        Invalid Login ID or PIN. Please try again.
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:0.85rem;">
+        Authenticate &amp; Open Studio →
+      </button>
+    </form>
+
+    <div style="margin-top:1.5rem; font-size:0.8rem; color:var(--admin-muted);">
+      Nagdev Products Private Limited · Banaskantha, Gujarat
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ ADMIN STUDIO APP ══════════ -->
+<div id="admin-app" style="display: none;">
+  <!-- Top Bar -->
+  <header class="admin-topbar">
+    <div class="admin-topbar-left">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Nagdev Products" class="admin-logo">
+      </a>
+      <span class="admin-badge">✦ Blog CMS Studio</span>
+    </div>
+
+    <div class="admin-topbar-right">
+      <a href="blog.html" target="_blank" class="btn-admin-nav outline">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View Live Blog
+      </a>
+      <button id="admin-logout-btn" class="btn-admin-nav danger">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <main class="admin-container">
+    <!-- Tabs Header -->
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" data-tab="tab-editor">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Compose / Edit Article
+      </button>
+      <button class="admin-tab-btn" data-tab="tab-manage">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        Published Articles (<span id="articles-count-badge">0</span>)
+      </button>
+      <button class="admin-tab-btn" data-tab="tab-export">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Static Export &amp; Backup
+      </button>
+    </div>
+
+    <!-- TAB 1: COMPOSE / EDIT -->
+    <section id="tab-editor" class="admin-tab-content active">
+      <form id="post-editor-form">
+        <input type="hidden" id="post-id" value="">
+        <input type="hidden" id="post-cover-base64" value="">
+
+        <div class="editor-layout-grid">
+          <!-- Left Main Column -->
+          <div>
+            <!-- Article Essentials -->
+            <div class="admin-card">
+              <div class="admin-card-title">
+                <span>Article Content</span>
+                <span style="font-size:0.8rem;font-family:var(--font-body);color:var(--admin-muted);" id="form-mode-label">New Post</span>
+              </div>
+
+              <!-- Title -->
+              <div class="form-group">
+                <label class="form-label" for="post-title">
+                  Article Title <span class="required">*</span>
+                </label>
+                <input type="text" id="post-title" class="form-input" placeholder="e.g. Performance of 12-Hydroxystearic Acid in Heavy-Duty Greases" required>
+                <div class="form-hint">
+                  <span>Aim for 50–65 characters for optimal Google title display</span>
+                  <span id="title-char-count">0 chars</span>
+                </div>
+              </div>
+
+              <!-- URL Slug -->
+              <div class="form-group">
+                <label class="form-label" for="post-slug">
+                  URL Slug (Auto-generated from title) <span class="required">*</span>
+                </label>
+                <div style="display:flex;align-items:center;background:#f7f5f0;border:1px solid var(--admin-border);border-radius:6px;overflow:hidden;">
+                  <span style="padding:0.75rem 0.85rem;font-size:0.85rem;color:var(--admin-muted);background:#eee;border-right:1px solid var(--admin-border);">https://www.nagdevproducts.com/blog/</span>
+                  <input type="text" id="post-slug" style="flex:1;border:none;background:transparent;padding:0.75rem 0.85rem;font-size:0.9rem;outline:none;" placeholder="article-url-slug" required>
+                  <span style="padding:0.75rem;font-size:0.85rem;color:var(--admin-muted);">.html</span>
+                </div>
+              </div>
+
+              <!-- Rich Text Full Description with Unlimited Content -->
+              <div class="form-group">
+                <label class="form-label">
+                  Full Article Description (Unlimited Content) <span class="required">*</span>
+                </label>
+                <div class="wysiwyg-wrapper">
+                  <!-- Custom Accessible Toolbar -->
+                  <div class="wysiwyg-toolbar" role="toolbar" aria-label="Text formatting">
+                    <button type="button" class="tb-btn" data-command="formatBlock" data-val="h2" title="Heading 2">H2</button>
+                    <button type="button" class="tb-btn" data-command="formatBlock" data-val="h3" title="Heading 3">H3</button>
+                    <button type="button" class="tb-btn" data-command="formatBlock" data-val="p" title="Paragraph">P</button>
+                    <div class="tb-sep"></div>
+                    <button type="button" class="tb-btn" data-command="bold" title="Bold (Ctrl+B)"><strong>B</strong></button>
+                    <button type="button" class="tb-btn" data-command="italic" title="Italic (Ctrl+I)"><em>I</em></button>
+                    <button type="button" class="tb-btn" data-command="underline" title="Underline (Ctrl+U)"><u>U</u></button>
+                    <button type="button" class="tb-btn" data-command="strikeThrough" title="Strikethrough"><s>S</s></button>
+                    <div class="tb-sep"></div>
+                    <button type="button" class="tb-btn" data-command="insertUnorderedList" title="Bullet List">• List</button>
+                    <button type="button" class="tb-btn" data-command="insertOrderedList" title="Numbered List">1. List</button>
+                    <button type="button" class="tb-btn" data-command="formatBlock" data-val="blockquote" title="Quote">Quote</button>
+                    <div class="tb-sep"></div>
+                    <button type="button" class="tb-btn" id="tb-link-btn" title="Insert Link">🔗 Link</button>
+                    <button type="button" class="tb-btn" id="tb-table-btn" title="Insert Table">⊞ Table</button>
+                    <button type="button" class="tb-btn" data-command="removeFormat" title="Clear Formatting">✕ Clear</button>
+                  </div>
+
+                  <!-- Editable Canvas -->
+                  <div id="wysiwyg-editor" class="wysiwyg-content" contenteditable="true" role="textbox" aria-multiline="true" placeholder="Compose your full rich article here with unlimited paragraphs, headings, bullet lists, and technical data..."></div>
+                </div>
+                <div class="form-hint">
+                  <span>Supports headings, formatted paragraphs, blockquotes, tables, and hyperlinks.</span>
+                  <span id="content-word-count">0 words</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- SEO Short Description & SERP Preview -->
+            <div class="admin-card">
+              <div class="admin-card-title">
+                <span>Search Engine Optimization (SEO)</span>
+                <span class="admin-badge">Google Verified</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="post-seo-desc">
+                  SEO Short Description (Meta Description) <span class="required">*</span>
+                </label>
+                <textarea id="post-seo-desc" class="form-textarea" placeholder="Provide a concise 140–160 character summary of the article targeting relevant industrial search keywords..." required maxlength="250"></textarea>
+                <div class="form-hint">
+                  <span id="seo-desc-status" style="color:var(--admin-forest);font-weight:600;">Recommended: 140–160 characters</span>
+                  <span id="seo-desc-counter">0 / 160</span>
+                </div>
+              </div>
+
+              <!-- Google Search Preview -->
+              <div class="form-group">
+                <label class="form-label">Google Search Result Preview</label>
+                <div class="serp-preview-card">
+                  <div class="serp-url-box">
+                    <img src="images/logo-cropped.png" alt="" width="16" height="16" style="border-radius:2px;">
+                    <span class="serp-site-name">Nagdev Products</span>
+                    <span class="serp-path" id="serp-path-preview">https://www.nagdevproducts.com › blog › ...</span>
+                  </div>
+                  <a href="#" class="serp-title" id="serp-title-preview" onclick="return false;">Article Title Here | Nagdev Products</a>
+                  <div class="serp-snippet" id="serp-snippet-preview">
+                    Your SEO short description will appear here in Google search engine results pages...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Sidebar Column -->
+          <div>
+            <!-- Cover Photo with Fixed Dimensions & Cropping Tool -->
+            <div class="admin-card">
+              <div class="admin-card-title">
+                <span>Featured Cover Photo</span>
+                <span style="font-size:0.75rem;background:#0B3D1E;color:#fff;padding:2px 6px;border-radius:4px;">1200 × 630 Fixed</span>
+              </div>
+
+              <p style="font-size:0.85rem;color:var(--admin-muted);margin-bottom:1rem;">
+                Uploaded directly on website. Interactive cropping strictly ensures exact <strong>1200 × 630 px</strong> aspect ratio for Google Discover and social preview.
+              </p>
+
+              <!-- Drop Zone -->
+              <div class="upload-drop-zone" id="cover-drop-zone">
+                <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <div style="font-weight:600;font-size:0.95rem;color:var(--admin-forest);margin-bottom:0.25rem;">Choose Cover Photo</div>
+                <div style="font-size:0.8rem;color:var(--admin-muted);">Click to browse from your device or drag &amp; drop</div>
+                <input type="file" id="cover-file-input" accept="image/*" style="display:none;">
+              </div>
+
+              <!-- Crop Preview Container -->
+              <div id="crop-preview-wrap" style="display:none;">
+                <div class="crop-preview-box">
+                  <img id="cover-preview-img" src="" alt="Cropped Cover">
+                  <span class="crop-dim-badge">Fixed: 1200 × 630 px ✓</span>
+                </div>
+                <div class="crop-actions-bar">
+                  <button type="button" class="btn btn-outline btn-sm" id="recrop-btn" style="flex:1;">
+                    ✂ Re-crop Image
+                  </button>
+                  <button type="button" class="btn btn-outline btn-sm" id="remove-img-btn" style="color:#c0392b;border-color:#e0a0a0;">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Publishing Meta -->
+            <div class="admin-card">
+              <div class="admin-card-title">Publishing Settings</div>
+
+              <!-- Category -->
+              <div class="form-group">
+                <label class="form-label" for="post-category">Category / Topic</label>
+                <select id="post-category" class="form-select">
+                  <option value="Green Chemistry & Sustainability">Green Chemistry &amp; Sustainability</option>
+                  <option value="Lubricants & Greases">Lubricants &amp; Greases</option>
+                  <option value="Paints & High-Performance Coatings">Paints &amp; High-Performance Coatings</option>
+                  <option value="Polyurethanes & Polymers">Polyurethanes &amp; Polymers</option>
+                  <option value="Industry & Global Market">Industry &amp; Global Market</option>
+                  <option value="Custom">Custom Topic...</option>
+                </select>
+                <input type="text" id="post-custom-category" class="form-input" style="display:none;margin-top:0.5rem;" placeholder="Enter custom category name">
+              </div>
+
+              <!-- Author -->
+              <div class="form-group">
+                <label class="form-label" for="post-author">Author / Byline</label>
+                <input type="text" id="post-author" class="form-input" value="Nagdev Technical Editorial Team">
+              </div>
+
+              <!-- Publication Date -->
+              <div class="form-group">
+                <label class="form-label" for="post-date">Publish Date</label>
+                <input type="date" id="post-date" class="form-input">
+              </div>
+
+              <!-- Keywords / Tags -->
+              <div class="form-group">
+                <label class="form-label" for="post-tags">SEO Keywords / Tags</label>
+                <input type="text" id="post-tags" class="form-input" placeholder="e.g. 12-HSA, Castor Wax, Lubricants">
+                <div class="form-hint">Separate keywords with commas</div>
+              </div>
+
+              <!-- Featured Checkbox -->
+              <div class="form-group" style="display:flex;align-items:center;gap:0.6rem;">
+                <input type="checkbox" id="post-featured" style="width:18px;height:18px;accent-color:var(--admin-forest);">
+                <label for="post-featured" style="font-size:0.9rem;font-weight:600;cursor:pointer;">Feature on Blog Home Banner</label>
+              </div>
+
+              <!-- Actions -->
+              <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--admin-border);">
+                <button type="submit" class="btn btn-primary" style="justify-content:center;padding:0.85rem;" id="publish-btn">
+                  Publish Article to Website →
+                </button>
+                <button type="button" class="btn btn-secondary" style="justify-content:center;" id="export-html-btn">
+                  Download Pre-rendered Static HTML
+                </button>
+                <button type="button" class="btn btn-outline" style="justify-content:center;" id="reset-form-btn">
+                  Clear / New Article
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- TAB 2: MANAGE ALL POSTS -->
+    <section id="tab-manage" class="admin-tab-content">
+      <div class="admin-card">
+        <div class="admin-card-title">
+          <span>All Published Articles</span>
+          <button class="btn btn-primary btn-sm" id="btn-new-article-shortcut">+ Create New Article</button>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width:100px;">Cover</th>
+                <th>Title &amp; URL</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th style="width:200px;text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="articles-table-body">
+              <!-- Injected by blog-admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: EXPORT & BACKUP -->
+    <section id="tab-export" class="admin-tab-content">
+      <div class="admin-card">
+        <div class="admin-card-title">Repository Version Control &amp; Static Export</div>
+        <p style="color:var(--admin-text);line-height:1.6;margin-bottom:1.5rem;">
+          To permanently store all custom articles in your GitHub repository and ensure 100% crawlability by search engines on Vercel:
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:1.5rem;">
+          <div style="padding:1.5rem;background:#fbf9f4;border-radius:8px;border:1px solid var(--admin-border);">
+            <h3 style="font-family:var(--font-display);font-size:1.4rem;color:var(--admin-forest);margin-bottom:0.5rem;">Export blog-data.js</h3>
+            <p style="font-size:0.875rem;color:var(--admin-muted);margin-bottom:1.25rem;">
+              Download the complete master JavaScript file containing all seed and newly created articles. Replace <code>js/blog-data.js</code> and git push.
+            </p>
+            <button class="btn btn-primary btn-sm" id="download-blog-data-btn">Download blog-data.js ↓</button>
+          </div>
+
+          <div style="padding:1.5rem;background:#fbf9f4;border-radius:8px;border:1px solid var(--admin-border);">
+            <h3 style="font-family:var(--font-display);font-size:1.4rem;color:var(--admin-forest);margin-bottom:0.5rem;">Export All Static HTMLs</h3>
+            <p style="font-size:0.875rem;color:var(--admin-muted);margin-bottom:1.25rem;">
+              Download individual pre-rendered <code>.html</code> files for all posts to place in the <code>blog/</code> directory.
+            </p>
+            <button class="btn btn-secondary btn-sm" id="download-all-htmls-btn">Export All HTML Articles ↓</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════════ INTERACTIVE CROPPER MODAL ══ -->
+<div id="cropper-modal" class="modal-backdrop" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 class="modal-title">Fixed Dimension Photo Cropper (1200 × 630 px)</h3>
+      <button type="button" id="cropper-close-btn" style="color:#fff;font-size:1.5rem;line-height:1;background:none;border:none;cursor:pointer;">✕</button>
+    </div>
+    <div class="modal-body" style="text-align:center;">
+      <div style="max-height:480px;overflow:hidden;background:#111;border-radius:8px;">
+        <img id="cropper-source-img" style="max-width:100%;display:block;margin:0 auto;" src="" alt="Source to crop">
+      </div>
+      <div style="display:flex;justify-content:center;gap:0.5rem;margin-top:1rem;flex-wrap:wrap;">
+        <button type="button" class="btn btn-outline btn-sm" id="crop-zoom-in">+ Zoom In</button>
+        <button type="button" class="btn btn-outline btn-sm" id="crop-zoom-out">- Zoom Out</button>
+        <button type="button" class="btn btn-outline btn-sm" id="crop-rotate-left">⟲ Rotate Left</button>
+        <button type="button" class="btn btn-outline btn-sm" id="crop-rotate-right">⟳ Rotate Right</button>
+        <button type="button" class="btn btn-outline btn-sm" id="crop-reset">Reset</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" id="crop-cancel-btn">Cancel</button>
+      <button type="button" class="btn btn-primary" id="crop-apply-btn">Apply &amp; Render 1200 × 630 px ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container"></div>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<script src="js/site.js"></script>
+<script src="js/blog-data.js"></script>
+<script src="js/blog-storage.js"></script>
+<script src="js/blog-admin.js"></script>
+</body>
+</html>

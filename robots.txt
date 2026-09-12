@@ -4,5 +4,6 @@ Allow: /
 # Disallow scratch/dev folders
 Disallow: /scratch/
 Disallow: /scripts/
+Disallow: /blog-admin.html
 
 Sitemap: https://www.nagdevproducts.com/sitemap.xml
