@@ -211,7 +211,7 @@
   }
 })();
 
-// ── Secret 5-Click Logo Symbol Admin Panel Trigger ──────────────────────────
+// ── Secret 5-Click Logo Symbol Admin Panel Trigger (100% Invisible) ─────────
 (function () {
   let logoClickCount = 0;
   let resetTimer = null;
@@ -224,34 +224,6 @@
   function getAdminUrl() {
     const isSubdir = window.location.pathname.includes('/products/') || window.location.pathname.includes('/blog/');
     return isSubdir ? '../blog-admin.html' : 'blog-admin.html';
-  }
-
-  function showBadge(anchorEl, count) {
-    let badge = anchorEl.querySelector('.admin-click-badge');
-    if (!badge) {
-      badge = document.createElement('div');
-      badge.className = 'admin-click-badge';
-      anchorEl.appendChild(badge);
-    }
-    badge.style.opacity = '1';
-    badge.style.transform = 'translateY(0)';
-    if (count >= REQUIRED_CLICKS) {
-      badge.className = 'admin-click-badge success';
-      badge.textContent = '✓ Unlocking Admin Studio…';
-    } else {
-      badge.className = 'admin-click-badge';
-      badge.textContent = `Admin Studio: ${count} / ${REQUIRED_CLICKS} clicks`;
-    }
-  }
-
-  function hideBadge(anchorEl) {
-    if (!anchorEl) return;
-    const badge = anchorEl.querySelector('.admin-click-badge');
-    if (badge) {
-      badge.style.opacity = '0';
-      badge.style.transform = 'translateY(-4px)';
-      setTimeout(() => { if (badge && badge.parentNode) badge.remove(); }, 300);
-    }
   }
 
   function showAdminModal() {
@@ -318,7 +290,7 @@
     if (pinInput) pinInput.value = '';
   }
 
-  function handleSymbolClick(e, anchorEl, hotspotEl) {
+  function handleSymbolClick(e) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -328,31 +300,21 @@
 
     logoClickCount++;
 
-    if (hotspotEl) {
-      hotspotEl.classList.remove('pulse');
-      void hotspotEl.offsetWidth; // trigger reflow
-      hotspotEl.classList.add('pulse');
-    }
-
-    showBadge(anchorEl, logoClickCount);
-
     if (logoClickCount >= REQUIRED_CLICKS) {
       logoClickCount = 0;
-      setTimeout(() => { hideBadge(anchorEl); }, 1200);
 
       // Check if already authenticated
       if (sessionStorage.getItem(AUTH_KEY) === 'true') {
         if (window.showToast) window.showToast('Opening Admin Studio…');
         setTimeout(() => {
           window.location.href = getAdminUrl();
-        }, 250);
+        }, 200);
       } else {
-        setTimeout(showAdminModal, 300);
+        showAdminModal();
       }
     } else {
       resetTimer = setTimeout(() => {
         logoClickCount = 0;
-        hideBadge(anchorEl);
       }, RESET_TIMEOUT_MS);
     }
   }
@@ -367,14 +329,12 @@
       if (!hotspot) {
         hotspot = document.createElement('span');
         hotspot.className = 'logo-symbol-hotspot';
-        hotspot.setAttribute('title', 'Admin Studio (Click 5 times)');
-        hotspot.setAttribute('role', 'button');
-        hotspot.setAttribute('aria-label', 'Admin Studio Trigger');
+        hotspot.setAttribute('aria-hidden', 'true');
         logo.appendChild(hotspot);
       }
 
       hotspot.addEventListener('click', (e) => {
-        handleSymbolClick(e, logo, hotspot);
+        handleSymbolClick(e);
       });
 
       // Coordinate detection fallback on the <a> link itself
@@ -389,7 +349,7 @@
           if (ratio <= 0.33) {
             e.preventDefault();
             e.stopPropagation();
-            handleSymbolClick(e, logo, hotspot);
+            handleSymbolClick(e);
             return;
           }
           // If clicked outside the symbol (on the text), allow standard navigation to home!
@@ -417,13 +377,11 @@
         hotspot.className = 'logo-symbol-hotspot';
         hotspot.style.width = '35px';
         hotspot.style.height = '36px';
-        hotspot.setAttribute('title', 'Admin Studio (Click 5 times)');
-        hotspot.setAttribute('role', 'button');
-        hotspot.setAttribute('aria-label', 'Admin Studio Trigger');
+        hotspot.setAttribute('aria-hidden', 'true');
         wrapper.appendChild(hotspot);
 
         hotspot.addEventListener('click', (e) => {
-          handleSymbolClick(e, wrapper, hotspot);
+          handleSymbolClick(e);
         });
 
         wrapper.addEventListener('click', (e) => {
@@ -433,7 +391,7 @@
             if (clickX / rect.width <= 0.33) {
               e.preventDefault();
               e.stopPropagation();
-              handleSymbolClick(e, wrapper, hotspot);
+              handleSymbolClick(e);
             }
           }
         });
