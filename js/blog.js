@@ -40,10 +40,22 @@
       .replace(/'/g, '&#039;');
   }
 
+  // Known pre-rendered static HTML files in /blog/
+  const PRE_RENDERED_SLUGS = [
+    'sustainable-castor-oil-derivatives-green-chemistry',
+    'hydrogenated-castor-oil-12-hsa-lithium-greases',
+    'dehydrated-castor-oil-alkyd-resins-coatings',
+    'bio-based-polyurethane-polyols-castor-oil'
+  ];
+
   // Get article link (pre-rendered static file if exists, or fallback to blog-post.html)
   function getPostLink(post) {
-    // Both direct static link and query param reader are supported
-    return `blog/${post.slug}.html`;
+    if (!post) return 'blog.html';
+    if (post.slug && PRE_RENDERED_SLUGS.includes(post.slug)) {
+      return `blog/${post.slug}.html`;
+    }
+    // Dynamic or browser-authored post:
+    return `blog-post.html?slug=${encodeURIComponent(post.slug)}`;
   }
 
   // Render featured post
@@ -141,11 +153,10 @@
       if (featuredSection) featuredSection.style.display = 'none';
       renderGrid(filtered);
     } else {
-      // Normal state: pick featured post, rest in grid
+      // Normal state: pick featured post and render all publications in grid (newest first)
       const featured = filtered.find(p => p.featured) || filtered[0];
-      const gridPosts = filtered.filter(p => p.id !== (featured ? featured.id : ''));
       renderFeatured(featured);
-      renderGrid(gridPosts);
+      renderGrid(filtered);
     }
   }
 

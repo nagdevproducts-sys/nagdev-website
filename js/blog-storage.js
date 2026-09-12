@@ -97,8 +97,14 @@
 
     // Get single post by slug or id
     async getPostBySlug(slug) {
+      if (!slug) return null;
+      const cleanSlug = decodeURIComponent(slug).trim().toLowerCase().replace(/\/$/, '').replace(/\.html$/, '');
       const all = await this.getAllPosts();
-      return all.find(p => p.slug === slug || p.id === slug) || null;
+      return all.find(p => {
+        const pSlug = (p.slug || '').toLowerCase().trim();
+        const pId = (p.id || '').toLowerCase().trim();
+        return pSlug === cleanSlug || pId === cleanSlug;
+      }) || null;
     },
 
     // Save a post (create or update)

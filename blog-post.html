@@ -219,7 +219,25 @@
 <script>
 (async function () {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug') || params.get('id');
+  let slug = params.get('slug') || params.get('id');
+
+  // If no query parameter, extract slug from pathname (e.g. /blog/post-slug or /blog/post-slug.html)
+  if (!slug) {
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const blogIdx = pathParts.indexOf('blog');
+    if (blogIdx !== -1 && pathParts[blogIdx + 1]) {
+      slug = pathParts[blogIdx + 1].replace(/\.html$/, '');
+    } else if (pathParts.length > 0) {
+      const last = pathParts[pathParts.length - 1].replace(/\.html$/, '');
+      if (last && last !== 'blog' && last !== 'blog-post') {
+        slug = last;
+      }
+    }
+  }
+
+  if (slug) {
+    slug = decodeURIComponent(slug).trim().replace(/\/$/, '').replace(/\.html$/, '');
+  }
 
   const loadingEl = document.getElementById('loading-state');
   const errorEl = document.getElementById('error-state');

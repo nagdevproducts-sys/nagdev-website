@@ -589,7 +589,7 @@
           <td>${post.date || '—'}</td>
           <td>
             <div class="table-actions" style="justify-content:flex-end;">
-              <a href="blog/${post.slug}.html" target="_blank" class="btn btn-outline btn-sm" title="View Page">
+              <a href="${post.slug && ['sustainable-castor-oil-derivatives-green-chemistry','hydrogenated-castor-oil-12-hsa-lithium-greases','dehydrated-castor-oil-alkyd-resins-coatings','bio-based-polyurethane-polyols-castor-oil'].includes(post.slug) ? `blog/${post.slug}.html` : `blog-post.html?slug=${encodeURIComponent(post.slug)}`}" target="_blank" class="btn btn-outline btn-sm" title="View Page">
                 View
               </a>
               <button type="button" class="btn btn-outline btn-sm btn-edit-post" data-id="${post.id}" title="Edit in Studio">
