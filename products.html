@@ -435,6 +435,9 @@
         <button class="btn-sample" id="modal-sds-btn" title="Request Safety Data Sheet" style="background:rgba(11,61,30,0.08);color:var(--forest);">
           📋 Request SDS
         </button>
+        <a href="#" class="btn btn-outline btn-sm" id="modal-page-btn" style="border:1px solid var(--border-medium);color:var(--forest);font-weight:600;padding:0.4rem 0.85rem;font-size:0.8rem;border-radius:var(--radius-sm);text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem;">
+          <span>Dedicated Page ↗</span>
+        </a>
         <a href="contact.html" class="btn btn-primary btn-sm" id="modal-enquire-btn">Enquire →</a>
       </div>
     </div>
@@ -621,9 +624,12 @@
           <div class="product-card-cat">${p.categoryLabel}${p.casNumber ? ' · CAS ' + p.casNumber : ''}</div>
           <div class="product-card-footer">
             <div class="product-card-link">
-              View Details
+              Quick View
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </div>
+            <a href="products/${p.id}.html" onclick="event.stopPropagation();" class="product-card-page-btn" style="font-size:0.75rem;color:var(--forest);font-weight:600;text-decoration:none;padding:0.25rem 0.6rem;border-radius:4px;background:var(--forest-subtle);display:inline-flex;align-items:center;gap:0.2rem;" title="Dedicated Page for ${p.name}">
+              Page ↗
+            </a>
           </div>
         </div>
       </div>
@@ -657,6 +663,12 @@
     ).join('');
 
     document.getElementById('modal-shelf-text').textContent = p.shelfLife;
+
+    // Update dedicated page link
+    const pageBtn = document.getElementById('modal-page-btn');
+    if (pageBtn) {
+      pageBtn.href = `products/${p.id}.html`;
+    }
 
     // Update enquiry link with product pre-selection
     const enquireBtn = document.getElementById('modal-enquire-btn');
