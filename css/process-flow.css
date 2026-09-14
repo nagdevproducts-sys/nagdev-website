@@ -1,0 +1,220 @@
+/* ==========================================================================
+   NAGDEV PRODUCTS — MANUFACTURING PROCESS FLOW STYLING
+   ========================================================================== */
+
+.process-hero {
+  padding: 4.5rem 0 3.5rem;
+  background: linear-gradient(135deg, #072613 0%, #0B3D1E 60%, #155e30 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.process-hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(212, 165, 55, 0.15), transparent 50%);
+  pointer-events: none;
+}
+
+.process-hero-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 2.85rem;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0.5rem 0 1rem;
+}
+
+.process-hero-desc {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 780px;
+  line-height: 1.7;
+}
+
+.process-nav-strip {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-light, #e2e8f0);
+  position: sticky;
+  top: 60px;
+  z-index: 40;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.process-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  overflow-x: auto;
+}
+
+.process-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: 9999px;
+  border: 1.5px solid transparent;
+  background: var(--ivory, #fbf9f5);
+  color: var(--charcoal, #1f2937);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.process-tab-btn:hover {
+  background: rgba(11, 61, 30, 0.08);
+  color: #0B3D1E;
+}
+
+.process-tab-btn.active {
+  background: #0B3D1E;
+  color: #ffffff;
+  border-color: #0B3D1E;
+  box-shadow: 0 4px 12px rgba(11, 61, 30, 0.25);
+}
+
+.process-section {
+  padding: 4rem 0 5rem;
+  display: none;
+}
+
+.process-section.active {
+  display: block;
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.flow-header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.flow-eyebrow {
+  display: inline-block;
+  color: #b8841a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.flow-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 2.35rem;
+  color: #0B3D1E;
+  margin: 0 0 0.75rem;
+}
+
+.flow-subtitle {
+  font-size: 1.05rem;
+  color: #4b5563;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* SVG Flow Canvas Card */
+.flow-diagram-card {
+  background: #ffffff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 2.5rem 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  margin-bottom: 3.5rem;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.flow-svg {
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Step-by-Step Breakdown Cards */
+.flow-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.flow-step-card {
+  background: var(--ivory, #fbf9f5);
+  border: 1px solid rgba(11, 61, 30, 0.12);
+  border-radius: 10px;
+  padding: 1.75rem;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.flow-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+  border-color: #b8841a;
+}
+
+.flow-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #0B3D1E;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.flow-step-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.35rem;
+  color: #0B3D1E;
+  margin: 0 0 0.5rem;
+}
+
+.flow-step-desc {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.65;
+  margin: 0 0 1rem;
+}
+
+.flow-step-param {
+  font-size: 0.775rem;
+  background: rgba(184, 132, 26, 0.1);
+  color: #854d0e;
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+/* Linked Product Chip in Flow */
+.flow-prod-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0B3D1E;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-top: 0.5rem;
+}
+
+.flow-prod-link:hover {
+  color: #b8841a;
+}

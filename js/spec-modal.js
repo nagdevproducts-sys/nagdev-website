@@ -133,6 +133,37 @@ class SpecModalController {
   }
 
   buildTableHTML(product) {
+    if (!product || !product.specs || !product.specs.length) {
+      return '<p style="padding:20px;text-align:center;color:#666;">Detailed specification parameters available upon technical inquiry.</p>';
+    }
+
+    // Modern Array of Arrays format (Standard across PRODUCTS_DATABASE)
+    if (Array.isArray(product.specs[0])) {
+      const headers = product.headers || ["Sr No", "Test Parameter", "Specification"];
+      const rows = product.specs.map((row, rIdx) => `
+        <tr style="background:${rIdx % 2 === 0 ? 'rgba(250,247,242,0.65)' : 'rgba(255,255,255,0.7)'};">
+          ${row.map((col, cIdx) => `
+            <td class="${cIdx === 0 ? 'text-center font-bold' : (cIdx === 1 ? 'spec-param-name' : 'spec-val')}" style="${cIdx === 0 ? 'text-align:center;font-weight:700;width:55px;' : ''}">
+              ${cIdx === row.length - 1 && (col.startsWith('AOCS') || col.startsWith('ASTM') || col.startsWith('IS') || col.includes('Method') || col.includes('Oven') || col.includes('Bomb') || col.includes('Kjeldahl') || col.includes('Flame')) ? `<span class="modal-method-tag">${col}</span>` : col}
+            </td>
+          `).join('')}
+        </tr>
+      `).join('');
+
+      return `
+        <table class="modal-spec-table" style="width:100%;border-collapse:collapse;">
+          <thead>
+            <tr>
+              ${headers.map(h => `<th>${h}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            ${rows}
+          </tbody>
+        </table>
+      `;
+    }
+
     if (product.tableType === 'single') {
       const rows = product.specs.map(row => `
         <tr>

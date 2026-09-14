@@ -45,6 +45,23 @@
     }
   }
   </script>
+<style>
+  .product-card.is-under-dev { border-color: rgba(217, 119, 6, 0.25); background: linear-gradient(180deg, #fff 0%, #fffbf2 100%); }
+  .dev-badge-pill {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(217, 119, 6, 0.92);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-to-content">Skip to main content</a>
@@ -66,119 +83,81 @@
             </a>
             <div class="mega-menu" role="region" aria-label="Products Navigation Menu">
               <div class="mega-menu-grid">
-                <!-- Col 1: Castor Oils -->
+                <!-- Col 1: Castor Oil -->
                 <div class="mega-col">
                   <div class="mega-col-header">
-                    <span class="mega-col-title">Castor Oils</span>
-                    <span class="mega-col-badge">Base Oils</span>
+                    <span class="mega-col-title">Castor Oil</span>
+                    <span class="mega-col-badge">6 Grades</span>
                   </div>
                   <ul class="mega-prod-list">
-                    <li>
-                      <a href="products/commercial-castor-oil.html" class="mega-prod-link">
-                        <span class="mega-prod-brand">NDEVOLEO™ COMM</span>
-                        <span class="mega-prod-name">Commercial Castor Oil</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="products/first-special-grade-castor-oil.html" class="mega-prod-link">
-                        <span class="mega-prod-brand">NDEVOLEO™ FSG</span>
-                        <span class="mega-prod-name">First Special Grade (FSG)</span>
-                      </a>
-                    </li>
+                    <li><a href="products/first-special-grade-castor-oil.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVOLEO™ FSG</span><span class="mega-prod-name">First Special Grade (FSG)</span></a></li>
+                    <li><a href="products/commercial-castor-oil.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVOLEO™ COMM</span><span class="mega-prod-name">Commercial Castor Oil</span></a></li>
+                    <li><a href="products/cold-pressed-castor-oil.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVOLEO™ CP</span><span class="mega-prod-name">Cold Pressed Castor Oil</span></a></li>
+                    <li><a href="products/castor-oil-bp93.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVOLEO™ BP93</span><span class="mega-prod-name">Castor Oil BP 93 / Pharma</span></a></li>
+                    <li><a href="products/ppg-castor-oil.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVOLEO™ PPG</span><span class="mega-prod-name">Pale Pressed Grade (PPG)</span></a></li>
+                    <li><a href="products/fpd-castor-oil.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVOLEO™ FPD</span><span class="mega-prod-name">FPD Castor Oil</span></a></li>
+                  </ul>
+                  <a href="products.html?filter=castor-oil" class="mega-view-all">All Castor Oils (6) →</a>
+                </div>
+
+                <!-- Col 2: De Oiled Cake & By-Products -->
+                <div class="mega-col">
+                  <div class="mega-col-header">
+                    <span class="mega-col-title">Meal &amp; By-Products</span>
+                    <span class="mega-col-badge">4 Grades</span>
+                  </div>
+                  <ul class="mega-prod-list">
+                    <li><a href="products/de-oiled-cake-castor-meal.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVAGRO™ DOC</span><span class="mega-prod-name">De Oiled Cake (Castor Meal)</span></a></li>
+                    <li><a href="products/high-protein-castor-meal.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVAGRO™ HPRO</span><span class="mega-prod-name">High Protein Castor Meal</span></a></li>
+                    <li><a href="products/crude-glycerin.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVGLY™ CRUDE</span><span class="mega-prod-name">Crude Glycerin (80% Min)</span></a></li>
+                    <li><a href="products/sodium-sulphate-anhydrous.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVCHEM™ NA2SO4</span><span class="mega-prod-name">Sodium Sulphate Anhydrous</span></a></li>
                   </ul>
                   <div class="mega-feature-tip">
                     <span class="tip-dot">✦</span>
-                    <span>Direct expeller pressed &amp; bleached triglycerides for pharma &amp; resins.</span>
+                    <span>High-nitrogen organic fertilizer meals &amp; industrial salts from continuous refining.</span>
                   </div>
-                  <a href="products.html?filter=castor-oil" class="mega-view-all">All Castor Oils →</a>
+                  <a href="products.html?filter=de-oiled-cake" class="mega-view-all">View Meals &amp; Co-Products →</a>
                 </div>
 
-                <!-- Col 2: Specialty Derivatives -->
+                <!-- Col 3: Derivatives & Under Development -->
                 <div class="mega-col">
                   <div class="mega-col-header">
-                    <span class="mega-col-title">Castor Derivatives</span>
-                    <span class="mega-col-badge">16 Products</span>
+                    <span class="mega-col-title">Derivatives &amp; R&amp;D</span>
+                    <span class="mega-col-badge">Commercial &amp; Dev</span>
                   </div>
                   <ul class="mega-prod-list">
-                    <li>
-                      <a href="products/hydrogenated-castor-oil.html" class="mega-prod-link">
-                        <span class="mega-prod-brand">NDEVWAX™ HCO</span>
-                        <span class="mega-prod-name">Hydrogenated Castor Wax</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="products/12-hydroxystearic-acid.html" class="mega-prod-link">
-                        <span class="mega-prod-brand">NDEVACID™ 12-HSA</span>
-                        <span class="mega-prod-name">12-Hydroxystearic Acid</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="products/sebacic-acid.html" class="mega-prod-link">
-                        <span class="mega-prod-brand">NDEVACID™ SEB</span>
-                        <span class="mega-prod-name">Sebacic Acid Flakes (C10)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="products/bio-polyurethane-polyols.html" class="mega-prod-link">
-                        <span class="mega-prod-brand">NDEVPOL™ BIO</span>
-                        <span class="mega-prod-name">Bio-PU Polyols</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="products/dehydrated-castor-oil.html" class="mega-prod-link">
-                        <span class="mega-prod-brand">NDEVPOL™ DCO</span>
-                        <span class="mega-prod-name">Dehydrated Castor Oil</span>
-                      </a>
-                    </li>
+                    <li><a href="products/hydrogenated-castor-oil.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVWAX™ HCO</span><span class="mega-prod-name">Hydrogenated Castor Oil (Wax)</span></a></li>
+                    <li><a href="products/12-hydroxystearic-acid.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVACID™ 12-HSA</span><span class="mega-prod-name">12-Hydroxystearic Acid</span></a></li>
+                    <li><a href="products/ricinoleic-acid.html" class="mega-prod-link"><span class="mega-prod-brand">NDEVACID™ RIC</span><span class="mega-prod-name">Ricinoleic Acid (Purity 85%+)</span></a></li>
                   </ul>
-                  <a href="products.html?filter=derivative" class="mega-view-all">View All 16 Derivatives →</a>
-                </div>
-
-                <!-- Col 3: By-Products & Co-Products -->
-                <div class="mega-col">
-                  <div class="mega-col-header">
-                    <span class="mega-col-title">By-Products</span>
-                    <span class="mega-col-badge">Agro &amp; Co-Products</span>
+                  <div style="margin-top:0.75rem;padding-top:0.6rem;border-top:1px dashed var(--border-light);">
+                    <div style="font-size:0.72rem;font-weight:700;color:#B45309;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.35rem;">⚡ Under Development (14 Grades)</div>
+                    <ul class="mega-prod-list" style="margin-bottom:0.4rem;">
+                      <li><a href="products/sebacic-acid.html" class="mega-prod-link" style="padding:0.2rem 0;"><span class="mega-prod-name" style="font-size:0.78rem;">Sebacic Acid · Bio-PU Polyols</span></a></li>
+                      <li><a href="products/dehydrated-castor-oil.html" class="mega-prod-link" style="padding:0.2rem 0;"><span class="mega-prod-name" style="font-size:0.78rem;">DCO · DCO-FA · Metal Soaps</span></a></li>
+                    </ul>
                   </div>
-                  <ul class="mega-prod-list">
-                    <li>
-                      <a href="products/castor-cake-fertilizer.html" class="mega-prod-link">
-                        <span class="mega-prod-brand">NDEVAGRO™ CAKE</span>
-                        <span class="mega-prod-name">Castor Cake Fertilizer</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="products/refined-glycerin.html" class="mega-prod-link">
-                        <span class="mega-prod-brand">NDEVGLY™ 995</span>
-                        <span class="mega-prod-name">Refined Glycerin (USP 99.5%)</span>
-                      </a>
-                    </li>
-                  </ul>
-                  <div class="mega-feature-tip">
-                    <span class="tip-dot">✦</span>
-                    <span>Integrated resource utilization — castor cake (NPK fertilizer) &amp; refined glycerin as co-products.</span>
-                  </div>
-                  <a href="products.html?filter=by-product" class="mega-view-all">All By-Products →</a>
+                  <a href="products.html?filter=under-development" class="mega-view-all" style="color:#B45309;">Explore Under Development (14) →</a>
                 </div>
               </div>
 
-              <!-- Mega Menu Bottom Bar (Chemistry Tree Callout) -->
+              <!-- Mega Menu Bottom Bar (Process Flow Callout) -->
               <div class="mega-menu-bottom">
-                <a href="chemistry-tree.html" class="mega-tree-callout">
-                  <div class="mega-tree-icon-box">🌿</div>
+                <a href="process-flow.html" class="mega-tree-callout">
+                  <div class="mega-tree-icon-box">⚙️</div>
                   <div>
-                    <div class="mega-tree-title">The Castor Chemistry Tree <span class="mega-tree-arrow">→</span></div>
-                    <div class="mega-tree-sub">Interactive 4-stage value chain &amp; 6 catalytic synthesis pathways</div>
+                    <div class="mega-tree-title">Industrial Process Flow <span class="mega-tree-arrow">→</span></div>
+                    <div class="mega-tree-sub">Interactive 3-stage process flowcharts &amp; quantitative mass balances</div>
                   </div>
                 </a>
                 <a href="products.html" class="mega-catalog-btn">
-                  <span>Full 20-Product Catalog &amp; TDS</span>
+                  <span>Full 27-Product Catalog &amp; TDS</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </div>
             </div>
           </li>
-          <li><a href="chemistry-tree.html" class="nav-link nav-link-tree">Chemistry Tree</a></li>
+          <li><a href="process-flow.html" class="nav-link nav-link-tree">Process Flow</a></li>
           <li><a href="about.html"    class="nav-link">About</a></li>
           <li><a href="plant.html"    class="nav-link">Our Plant</a></li>
           <li><a href="quality.html"  class="nav-link">Quality</a></li>
@@ -205,8 +184,8 @@
   </div>
   <ul class="mobile-nav-list">
     <li><a href="index.html"    class="mobile-nav-link">Home</a></li>
-    <li><a href="products.html" class="mobile-nav-link">Products (All 20)</a></li>
-    <li><a href="chemistry-tree.html" class="mobile-nav-link" style="color:var(--forest);font-weight:600;">🌿 Chemistry Tree</a></li>
+    <li><a href="products.html" class="mobile-nav-link">Products (All 27)</a></li>
+    <li><a href="process-flow.html" class="mobile-nav-link" style="color:var(--forest);font-weight:600;">⚙️ Process Flow</a></li>
     <li><a href="about.html"    class="mobile-nav-link">About</a></li>
     <li><a href="plant.html"    class="mobile-nav-link">Our Plant</a></li>
     <li><a href="quality.html"  class="mobile-nav-link">Quality</a></li>
@@ -226,9 +205,9 @@
           <span>Home</span> <span>/</span> <span>Products Catalog</span>
         </div>
         <h1 class="page-header-seamless-title">Castor Products for Industrial Applications</h1>
-        <p class="page-header-seamless-sub">Explore our complete portfolio of 20 refined castor oils, specialty derivatives and bio-based products.</p>
+        <p class="page-header-seamless-sub">Explore our complete portfolio of 27 refined castor oils, high-protein meals, oleochemical derivatives, and active pilot-scale products.</p>
       </div>
-      <div class="page-header-badge-pill">20 Grades · Banaskantha, Gujarat</div>
+      <div class="page-header-badge-pill">27 Grades · Banaskantha, Gujarat</div>
     </div>
   </div>
 </div>
@@ -238,10 +217,12 @@
   <div class="container">
     <div class="catalog-controls-inner">
       <div class="filter-tabs" role="group" aria-label="Filter by category">
-        <button class="filter-tab active" data-filter="all" id="filter-all">All Products</button>
-        <button class="filter-tab" data-filter="castor-oil"  id="filter-oils">Castor Oils</button>
-        <button class="filter-tab" data-filter="derivative"  id="filter-deriv">Derivatives</button>
-        <button class="filter-tab" data-filter="by-product"  id="filter-byp">By-Products</button>
+        <button class="filter-tab active" data-filter="all" id="filter-all">All Products (27)</button>
+        <button class="filter-tab" data-filter="castor-oil" id="filter-oils">Castor Oil (6)</button>
+        <button class="filter-tab" data-filter="de-oiled-cake" id="filter-doc">De Oiled Cake (2)</button>
+        <button class="filter-tab" data-filter="derivatives" id="filter-deriv">Derivatives (3)</button>
+        <button class="filter-tab" data-filter="by-products" id="filter-byp">By-Products (2)</button>
+        <button class="filter-tab" data-filter="under-development" id="filter-dev" style="color:#B45309;font-weight:600;">⚡ Under Development (14)</button>
       </div>
       <div style="display:flex;align-items:center;gap:1rem;margin-left:auto;">
         <span class="catalog-count" id="catalog-count">Showing 20 products</span>
@@ -277,19 +258,19 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════ CASTOR CHEMISTRY TREE TEASER ══════ -->
+<!-- ═══════════════════════════════════ INDUSTRIAL PROCESS FLOW TEASER ══════ -->
 <section class="chem-tree-teaser-strip" aria-labelledby="chem-teaser-heading">
   <div class="container">
     <div class="chem-teaser-inner fade-up">
       <div class="chem-teaser-content">
-        <span class="chem-teaser-eyebrow">🌿 Integrated Oleochemical Synthesis</span>
-        <h2 class="chem-teaser-title" id="chem-teaser-heading">The Castor Chemistry Tree</h2>
+        <span class="chem-teaser-eyebrow">⚙️ Engineering &amp; Mass Balance</span>
+        <h2 class="chem-teaser-title" id="chem-teaser-heading">Industrial Process Flow</h2>
         <p class="chem-teaser-desc">
-          Explore our dedicated 4-stage value chain and 6 catalytic synthesis pathways — mapping our continuous transformation from raw Banaskantha seed pressing to bio-polymers, cleaved sebacates, high-melting waxes, and metal soaps.
+          Explore our end-to-end industrial flowcharts and quantitative mass balances copied from high-capacity crushing &amp; refining standards — mapping seed cleaning, expelling, hexane solvent extraction, high-vacuum earth bleaching, and catalytic hydrogenation &amp; saponification.
         </p>
       </div>
       <div>
-        <a href="chemistry-tree.html" class="btn btn-gold btn-lg">Explore Chemistry Tree &amp; Pathways →</a>
+        <a href="process-flow.html" class="btn btn-gold btn-lg">Explore Process Flow &amp; Mass Balance →</a>
       </div>
     </div>
   </div>
@@ -473,7 +454,7 @@
         <ul class="footer-links">
           <li><a href="index.html"    class="footer-link">Home</a></li>
           <li><a href="products.html" class="footer-link">Products</a></li>
-          <li><a href="chemistry-tree.html" class="footer-link">Chemistry Tree</a></li>
+          <li><a href="process-flow.html" class="footer-link">Process Flow</a></li>
           <li><a href="about.html"    class="footer-link">About</a></li>
           <li><a href="plant.html"    class="footer-link">Our Plant</a></li>
           <li><a href="quality.html"  class="footer-link">Quality</a></li>
@@ -485,9 +466,11 @@
       <div>
         <div class="footer-col-title">Products</div>
         <ul class="footer-links">
-          <li><a href="products.html?filter=castor-oil" class="footer-link">Castor Oils</a></li>
-          <li><a href="products.html?filter=derivative"  class="footer-link">Derivatives</a></li>
-          <li><a href="products.html?filter=by-product"  class="footer-link">By-Products</a></li>
+          <li><a href="products.html?filter=castor-oil" class="footer-link">Castor Oil (6)</a></li>
+          <li><a href="products.html?filter=de-oiled-cake" class="footer-link">De Oiled Cake (2)</a></li>
+          <li><a href="products.html?filter=derivatives" class="footer-link">Derivatives (3)</a></li>
+          <li><a href="products.html?filter=by-products" class="footer-link">By-Products (2)</a></li>
+          <li><a href="products.html?filter=under-development" class="footer-link" style="color:#D97706;">Under Development (14)</a></li>
         </ul>
       </div>
       <div>
@@ -536,12 +519,24 @@
   let activeIndustry = 'all';
   let currentProductId = null;
 
-  // Check URL params
+  // Normalization map for URL filter / cat parameters
+  function normalizeCategory(cat) {
+    if (!cat) return 'all';
+    const c = cat.toLowerCase().trim();
+    if (c === 'derivative') return 'derivatives';
+    if (c === 'by-product' || c === 'byproduct') return 'by-products';
+    if (c === 'doc' || c === 'cake' || c === 'de-oiled' || c === 'deoiled-cake') return 'de-oiled-cake';
+    if (c === 'oil' || c === 'oils' || c === 'castor-oils') return 'castor-oil';
+    if (c === 'dev' || c === 'development' || c === 'under_development') return 'under-development';
+    return c;
+  }
+
+  // Check URL params (?filter= or ?cat=)
   (function () {
     const params = new URLSearchParams(window.location.search);
-    const f = params.get('filter');
+    const f = params.get('filter') || params.get('cat');
     const ind = params.get('ind');
-    if (f) activeFilter = f;
+    if (f) activeFilter = normalizeCategory(f);
     if (ind) activeIndustry = ind;
   })();
 
@@ -552,15 +547,23 @@
 
   const categoryBadgeMap = {
     'castor-oil': 'badge-oil',
-    'derivative':  'badge-derivative',
-    'byproduct':   'badge-byproduct',
-    'by-product':  'badge-byproduct'
+    'de-oiled-cake': 'badge-doc',
+    'derivatives':  'badge-derivative',
+    'derivative':   'badge-derivative',
+    'by-products':  'badge-byproduct',
+    'byproduct':    'badge-byproduct',
+    'by-product':   'badge-byproduct',
+    'under-development': 'badge-under-dev'
   };
   const categoryLabelShort = {
     'castor-oil': 'Castor Oil',
-    'derivative':  'Derivative',
-    'byproduct':   'By-product',
-    'by-product':  'By-product'
+    'de-oiled-cake': 'De Oiled Cake',
+    'derivatives':  'Derivatives',
+    'derivative':   'Derivatives',
+    'by-products':  'By-Products',
+    'byproduct':    'By-Products',
+    'by-product':   'By-Products',
+    'under-development': 'Under Development'
   };
 
   function renderSpecTable(p) {
@@ -616,15 +619,19 @@
     noRes.style.display = 'none';
 
     grid.innerHTML = items.map(p => `
-      <a href="products/${p.id}.html" class="product-card" id="card-${p.id}" role="listitem"
+      <a href="products/${p.id}.html" class="product-card${p.isUnderDevelopment ? ' is-under-dev' : ''}" id="card-${p.id}" role="listitem"
          aria-label="View specifications for ${p.name}">
         <div class="product-card-img-wrap">
           <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.opacity='0.3'">
+          ${p.isUnderDevelopment ? '<span class="dev-badge-pill">⚡ Under Development</span>' : ''}
         </div>
         <div class="product-card-body">
           <div class="product-card-num">${p.brandName || ''}</div>
           <div class="product-card-name">${p.name}</div>
-          <div class="product-card-cat">${p.categoryLabel}${p.casNumber ? ' · CAS ' + p.casNumber : ''}</div>
+          <div class="product-card-cat">
+            ${p.categoryLabel}
+            ${p.isUnderDevelopment ? ' · <strong style="color:#B45309;">Pilot Scale</strong>' : (p.casNumber ? ' · CAS ' + p.casNumber : '')}
+          </div>
           <div class="product-card-footer">
             <div class="product-card-link">
               View Specifications &amp; TDS
