@@ -1006,7 +1006,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Crystalline Fine Powder",
     "typicalColour": "Brilliant White",
     "rawMaterial": "Castor Acidulation Effluent Neutralization",
-    "image": "images/products/12-hsa-flakes.jpg",
+    "image": "images/products/sodium-sulphate-anhydrous.png",
     "packing": "50 kg HDPE / PP Bags with LDPE liner • 1000 kg Jumbo Bags • Moisture-proof palletized packaging",
     "shelfLife": "24 months in tightly sealed moisture-proof bags",
     "application": "High-purity crystalline anhydrous sodium sulphate recovered during the acidulation of saponified castor oil. Widely used as a prime filler and builder in synthetic laundry detergents, fining agent in glass manufacturing, textile direct dyeing leveling agent, and paper pulp processing.",
