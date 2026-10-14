@@ -357,7 +357,7 @@
           <div class="footer-box">
             <div class="footer-left">
               <strong>Nagdev Products Private Limited</strong> · Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Banaskantha, Gujarat – 385330, India<br>
-              Email: info@nagdevproducts.com | Phone: +91 63520 98306 | Web: www.nagdevproducts.com<br>
+              Email: nagdevproducts@gmail.com | Phone: +91 63520 98306 | Web: www.nagdevproducts.com<br>
               <em>Disclaimer: The parameters stated in this document are typical values based on standardized ASTM/AOCS testing. Specifications are subject to customary manufacturing tolerances.</em>
             </div>
             <div class="footer-stamp">

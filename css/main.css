@@ -2422,6 +2422,10 @@ input, textarea, select { font-family: var(--font-body); }
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
 
 /* ==========================================================================
    30. SCROLL ANIMATIONS

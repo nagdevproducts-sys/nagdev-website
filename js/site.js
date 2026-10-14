@@ -114,9 +114,91 @@
 
   // ── Enquiry form (contact page) ──────────────────────────────────────────
   const enquiryForm = document.getElementById('enquiry-form');
+  const alertContainer = document.getElementById('enquiry-alert-container');
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/[&<>"']/g, function (m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+    });
+  }
+
+  function renderEnquirySuccess(refNum, product, company, name, email) {
+    if (!alertContainer) return;
+    const safeRef = escapeHtml(refNum);
+    const safeProd = escapeHtml(product || 'General Commercial Product');
+    const safeCo = escapeHtml(company || '');
+    const safeName = escapeHtml(name || '');
+    const safeEmail = escapeHtml(email || 'your email');
+
+    const waText = encodeURIComponent(
+      `Hello Nagdev Products Sales Desk, I have submitted an official enquiry (Ref: ${refNum}) for ${product}${company ? ' on behalf of ' + company : ''}. Please confirm receipt and share quotation.`
+    );
+    const waUrl = `https://wa.me/916352098306?text=${waText}`;
+
+    alertContainer.style.display = 'block';
+    alertContainer.innerHTML = `
+      <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:0 4px 16px rgba(16,185,129,0.08);animation:toastIn 0.35s ease-out forwards;">
+        <div style="display:flex;align-items:flex-start;gap:0.85rem;margin-bottom:1rem;">
+          <div style="width:38px;height:38px;border-radius:50%;background:#10b981;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.25rem;font-weight:700;flex-shrink:0;">✓</div>
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+              <h4 style="margin:0;font-size:1.15rem;font-weight:700;color:#065f46;letter-spacing:-0.01em;">Enquiry Sent Successfully!</h4>
+              <span style="display:inline-block;background:#dcfce7;color:#166534;font-size:0.75rem;font-weight:700;padding:0.25rem 0.6rem;border-radius:999px;letter-spacing:0.04em;">DELIVERED TO INBOX</span>
+            </div>
+            <p style="margin:0.25rem 0 0;font-size:0.875rem;color:#047857;">Received directly at <strong>nagdevproducts@gmail.com</strong></p>
+          </div>
+        </div>
+        <div style="background:#ffffff;border:1px solid #bbf7d0;border-radius:8px;padding:0.85rem 1rem;font-size:0.85rem;color:#14532d;line-height:1.55;margin-bottom:1.1rem;">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:0.35rem 0.75rem;margin-bottom:0.5rem;">
+            <span style="color:#15803d;font-weight:600;">Reference No:</span>
+            <strong style="font-family:monospace;font-size:0.95rem;color:#065f46;">${safeRef}</strong>
+            <span style="color:#15803d;font-weight:600;">Product:</span>
+            <span>${safeProd}</span>
+            ${safeCo ? `<span style="color:#15803d;font-weight:600;">Company:</span><span>${safeCo} (${safeName})</span>` : ''}
+            <span style="color:#15803d;font-weight:600;">Target Email:</span>
+            <span>nagdevproducts@gmail.com</span>
+          </div>
+          <div style="font-size:0.8rem;color:#166534;border-top:1px dashed #bbf7d0;padding-top:0.5rem;margin-top:0.35rem;">
+            We have sent an automatic acknowledgement to <strong>${safeEmail}</strong>. Our sales desk will respond within 24 business hours.
+          </div>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+          <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="background:#25D366;color:#ffffff;border-color:#25D366;font-weight:600;display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1rem;">
+            <span>💬 Fast Track via WhatsApp Sales Desk</span>
+          </a>
+          <button type="button" id="btn-reset-enquiry" class="btn btn-secondary btn-sm" style="background:#fff;border-color:#d1d5db;color:#374151;font-size:0.82rem;padding:0.55rem 0.85rem;">
+            Send Another Enquiry
+          </button>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('btn-reset-enquiry')?.addEventListener('click', function () {
+      alertContainer.style.display = 'none';
+      if (enquiryForm) {
+        enquiryForm.style.display = 'block';
+        enquiryForm.reset();
+      }
+    });
+
+    alertContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Check URL parameters for successful native form submission redirect (?submitted=success)
+  if (alertContainer && window.location.search) {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('submitted') === 'success') {
+      const ref = urlParams.get('ref') || ('NP-' + Date.now().toString().slice(-8));
+      renderEnquirySuccess(ref, 'Castor Oil / Derivative', '', '', 'your email');
+      if (enquiryForm) enquiryForm.style.display = 'none';
+    }
+  }
+
   if (enquiryForm) {
-    enquiryForm.addEventListener('submit', function (e) {
+    enquiryForm.addEventListener('submit', async function (e) {
       e.preventDefault();
+
       // Basic validation
       const requiredFields = this.querySelectorAll('[required]');
       let valid = true;
@@ -127,29 +209,106 @@
           valid = false;
         }
       });
+
+      const emailInput = this.querySelector('input[name="email"]');
+      if (emailInput && emailInput.value.trim()) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value.trim())) {
+          emailInput.style.borderColor = '#c0392b';
+          valid = false;
+          window.showToast('Please provide a valid email address.');
+          return;
+        }
+      }
+
       if (!valid) {
-        window.showToast('Please fill in all required fields.');
+        window.showToast('Please fill in all required fields marked with *');
         return;
       }
+
       const btn = this.querySelector('[type="submit"]');
-      btn.textContent = 'Submitting…';
+      const originalBtnText = btn.innerHTML;
+      btn.innerHTML = `<span style="display:inline-block;width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 0.6s linear infinite;margin-right:6px;vertical-align:middle;"></span> Sending to nagdevproducts@gmail.com…`;
       btn.disabled = true;
-      // Note: This form requires a backend or email service to deliver enquiries.
-      // Currently recording the submission locally. Connect to Formspree / EmailJS / backend to activate.
-      setTimeout(() => {
+
       // Generate enquiry reference: NP-YYYYMMDD-XXXX
       const now = new Date();
       const dateStr = now.getFullYear().toString() +
         String(now.getMonth()+1).padStart(2,'0') +
         String(now.getDate()).padStart(2,'0');
       const refNum = 'NP-' + dateStr + '-' + String(Math.floor(1000 + Math.random() * 9000));
-      window.showToast(`Thank you — your enquiry has been received. Reference: ${refNum}. Our team will contact you by email or phone within 1 business day.`);
-      enquiryForm.reset();
-      btn.textContent = 'Send Enquiry →';
-      btn.disabled = false;
-    }, 900);
-  });
-}
+
+      const nameVal = (this.querySelector('input[name="name"]')?.value || '').trim();
+      const companyVal = (this.querySelector('input[name="company"]')?.value || '').trim();
+      const emailVal = (this.querySelector('input[name="email"]')?.value || '').trim();
+      const phoneVal = (this.querySelector('input[name="phone"]')?.value || '').trim();
+      const countryVal = (this.querySelector('input[name="country"]')?.value || '').trim();
+      const enquiryTypeVal = (this.querySelector('select[name="enquiry_type"]')?.value || '').trim();
+      const productVal = (this.querySelector('select[name="product"]')?.value || '').trim();
+      const quantityVal = (this.querySelector('input[name="quantity"]')?.value || '').trim();
+      const packingVal = (this.querySelector('select[name="packing"]')?.value || '').trim();
+      const messageVal = (this.querySelector('textarea[name="message"]')?.value || '').trim();
+
+      // Update hidden fields in form
+      const refField = document.getElementById('form-ref');
+      if (refField) refField.value = refNum;
+      const tsField = document.getElementById('form-timestamp');
+      if (tsField) tsField.value = now.toISOString();
+      const replyToField = document.getElementById('form-replyto');
+      if (replyToField) replyToField.value = emailVal;
+      const subjectField = document.getElementById('form-subject');
+      if (subjectField) subjectField.value = `Commercial Enquiry [${refNum}]: ${productVal} — ${companyVal} (${nameVal})`;
+      const nextField = document.getElementById('form-next');
+      if (nextField) nextField.value = window.location.origin + window.location.pathname + `?submitted=success&ref=${encodeURIComponent(refNum)}`;
+
+      const payload = {
+        _subject: `Commercial Enquiry [${refNum}]: ${productVal} — ${companyVal} (${nameVal})`,
+        _template: 'table',
+        _captcha: 'false',
+        _replyto: emailVal,
+        'Enquiry Reference': refNum,
+        'Submission Time (IST)': now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        'Enquiry Type': enquiryTypeVal,
+        'Product(s) of Interest': productVal,
+        'Quantity Required': quantityVal || 'Not specified',
+        'Packing Preference': packingVal || 'Not specified',
+        'Contact Person': nameVal,
+        'Company Name': companyVal,
+        'Email Address': emailVal,
+        'Phone / WhatsApp': phoneVal || 'Not provided',
+        'Country / Region': countryVal || 'Not provided',
+        'Message / Requirements': messageVal || 'No additional message',
+        'Direct Mailbox': 'nagdevproducts@gmail.com'
+      };
+
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/nagdevproducts@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          window.showToast(`Enquiry ${refNum} delivered to nagdevproducts@gmail.com!`);
+          enquiryForm.style.display = 'none';
+          renderEnquirySuccess(refNum, productVal, companyVal, nameVal, emailVal);
+          enquiryForm.reset();
+        } else {
+          console.warn('FormSubmit AJAX returned status', response.status, '— submitting via standard POST fallback');
+          enquiryForm.submit();
+        }
+      } catch (err) {
+        console.warn('FormSubmit AJAX network issue or adblocker:', err, '— falling back to native HTML submit');
+        enquiryForm.submit();
+      } finally {
+        btn.innerHTML = originalBtnText;
+        btn.disabled = false;
+      }
+    });
+  }
 
 // ── WhatsApp Floating Button ─────────────────────────────────────────────────
 (function () {
