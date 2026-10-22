@@ -31,7 +31,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600&display=swap"></noscript>
-  <link rel="preload" as="image" href="/images/castor-field-640w.webp" imagesrcset="/images/castor-field-640w.webp 640w, /images/castor-field-1024w.webp 1024w" imagesizes="(max-width: 640px) 480px, (max-width: 1024px) 50vw, 540px" fetchpriority="high">
+  <link rel="preload" as="image" href="/images/castor-field-640w.webp" media="(max-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/images/castor-field-1024w.webp" media="(min-width: 769px)" fetchpriority="high">
   <link rel="stylesheet" href="/css/main.min.css">
 
   <script type="application/ld+json">
@@ -96,7 +97,7 @@
   <div class="container-wide">
     <div class="header-inner">
       <a href="/" class="header-logo" aria-label="Nagdev Products Home">
-        <img src="/images/logo.png" alt="Nagdev Products Private Limited" width="180" height="53">
+        <img src="/images/logo.webp" alt="Nagdev Products Private Limited" width="180" height="53">
       </a>
 
       <nav class="header-nav" aria-label="Main navigation">
@@ -260,12 +261,14 @@
   </div>
 
   <div class="hero-image">
-    <img src="/images/castor-field.webp"
-         srcset="/images/castor-field-640w.webp 640w, /images/castor-field-1024w.webp 1024w, /images/castor-field.webp 1254w"
-         sizes="(max-width: 640px) 480px, (max-width: 1024px) 50vw, 540px"
-         alt="Castor crop cultivation in Gujarat's castor belt, source feedstock for Nagdev Products"
-         width="1200" height="800"
-         loading="eager" fetchpriority="high" decoding="async">
+    <picture>
+      <source media="(max-width: 768px)" srcset="/images/castor-field-640w.webp">
+      <source media="(max-width: 1200px)" srcset="/images/castor-field-1024w.webp">
+      <img src="/images/castor-field.webp"
+           alt="Castor crop cultivation in Gujarat's castor belt, source feedstock for Nagdev Products"
+           width="1200" height="800"
+           loading="eager" fetchpriority="high" decoding="async">
+    </picture>
     <div class="hero-image-overlay"></div>
   </div>
 
