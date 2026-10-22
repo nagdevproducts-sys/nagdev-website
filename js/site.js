@@ -48,18 +48,19 @@
   });
 
   // ── Active nav link ──────────────────────────────────────────────────────
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  const rawPath = window.location.pathname.replace(/\/$/, '').split('/').pop() || '';
+  const currentPath = (rawPath === '' || rawPath === 'index.html') ? '' : rawPath.replace(/\.html$/, '');
   const currentHash = window.location.hash;
   document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
     const rawHref = link.getAttribute('href') || '';
-    const hrefPath = rawHref.split('#')[0].split('/').pop();
+    const hrefClean = (rawHref.split('#')[0].replace(/\/$/, '').split('/').pop() || '').replace(/\.html$/, '');
     const hrefHash = rawHref.includes('#') ? '#' + rawHref.split('#')[1] : '';
 
     if (hrefHash) {
       if (currentHash && hrefHash === currentHash) {
         link.classList.add('active');
       }
-    } else if (hrefPath === currentPath || (currentPath === '' && hrefPath === 'index.html')) {
+    } else if (hrefClean === currentPath || (currentPath === '' && (rawHref === '/' || hrefClean === ''))) {
       link.classList.add('active');
     }
   });

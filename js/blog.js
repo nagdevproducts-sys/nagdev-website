@@ -48,14 +48,14 @@
     'bio-based-polyurethane-polyols-castor-oil'
   ];
 
-  // Get article link (pre-rendered static file if exists, or fallback to blog-post.html)
+  // Get article link (clean URL)
   function getPostLink(post) {
-    if (!post) return 'blog.html';
+    if (!post) return '/blog';
     if (post.slug && PRE_RENDERED_SLUGS.includes(post.slug)) {
-      return `blog/${post.slug}.html`;
+      return `/blog/${post.slug}`;
     }
     // Dynamic or browser-authored post:
-    return `blog-post.html?slug=${encodeURIComponent(post.slug)}`;
+    return `/blog-post?slug=${encodeURIComponent(post.slug)}`;
   }
 
   // Render featured post

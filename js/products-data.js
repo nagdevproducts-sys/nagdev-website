@@ -2,7 +2,7 @@
    NAGDEV PRODUCTS PRIVATE LIMITED — OFFICIAL PRODUCT DATABASE
    Restructured to align with N.K. Industries Ltd catalog & process flows.
    Active Categories: Castor Oil | De Oiled Cake (D.O.C) | Derivatives | By-Products
-   Specialty Pipeline: Under Development (Pilot Scale / R&D)
+   Specialty Range: Available on Enquiry (13 Industrial Grades)
    Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura,
    Post – Ravel, Taluka – Deodar, Dist. Banaskantha - 385330, Gujarat, India
    ========================================================================== */
@@ -25,7 +25,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Liquid",
     "typicalColour": "Pale Yellow to Yellow",
     "rawMaterial": "Castor Seed (Ricinus communis)",
-    "image": "images/products/01-commercial-castor-oil.png",
+    "image": "images/products/commercial-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank / Bulk in Vessel • 200 / 225 kg MS Drums / HDPE Drums • 950 kg IBC • Or as specified by client",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
     "application": "Standard industrial unrefined castor oil used widely as a versatile raw material in lubricants, greases, coatings, alkyd resins, polyurethane foams, plasticizers, and textile auxiliaries.",
@@ -114,7 +114,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Liquid",
     "typicalColour": "Pale Yellow to Golden",
     "rawMaterial": "Selected Castor Seed (Ricinus communis)",
-    "image": "images/products/commercial-castor-oil.jpg",
+    "image": "images/products/fpd-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank • 200 / 225 kg MS / HDPE Drums • 950 kg IBC • Custom packaging on request",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
     "application": "Produced from the first hydraulic pressing of premium castor seeds followed by water degumming to remove phospholipids and colloidal gums. Ideal for high-end lubricant bases, hydraulic fluids, and chemical synthesis.",
@@ -174,7 +174,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Viscous Transparent Liquid",
     "typicalColour": "Yellow / Pale Straw",
     "rawMaterial": "Castor Seed (Ricinus communis)",
-    "image": "images/products/02-first-special-grade-castor-oil.png",
+    "image": "images/products/first-special-grade-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank / Vessel • 200 / 225 kg MS Drums / HDPE Drums • 950 kg IBC • Customized drum lines",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
     "application": "High-purity refined, neutralized and bleached castor oil manufactured to British Standard Specifications (B.S.S). Premier grade for manufacturing HCO, 12-HSA, clear coatings, urethanes, cosmetic formulations, and premium specialty lubricants.",
@@ -268,7 +268,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Liquid",
     "typicalColour": "Extra Pale / Nearly Water White",
     "rawMaterial": "Premium Castor Seed (Ricinus communis)",
-    "image": "images/products/pale-pressed-bleached.jpg",
+    "image": "images/products/ppg-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexitank • 200 / 225 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
     "application": "Extra-refined, highly bleached, low-color grade obtained by precision hydraulic cold expelling followed by advanced carbon and bentonite adsorption. Used in personal care, lipsticks, specialty varnishes, inks, and clear polyurethanes.",
@@ -382,7 +382,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Viscous Pure Liquid",
     "typicalColour": "Pale Yellow / Golden Yellow",
     "rawMaterial": "Organic / Premium Castor Seed (Ricinus communis)",
-    "image": "images/products/cold-pressed-castor-oil.jpg",
+    "image": "images/products/cold-pressed-castor-oil.webp",
     "packing": "200 kg HDPE Drums • 50 kg Carboys • 25 kg Cans • 950 kg IBC • Flexi-Tanks on request",
     "shelfLife": "24 months from date of manufacture, stored in cool dark ambient conditions",
     "application": "Obtained by virgin mechanical cold-pressing without chemical solvents or elevated thermal treatments, preserving natural antioxidants and essential fatty acid bio-integrity. Used widely in hair care, brow & lash serums, dermatology, and cosmetic bases.",
@@ -481,7 +481,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Clear Viscous Liquid",
     "typicalColour": "Pale Yellow / Light Straw",
     "rawMaterial": "Pure Castor Seed (Ricinus communis)",
-    "image": "images/products/bp-castor-oil.jpg",
+    "image": "images/products/castor-oil-bp93.webp",
     "packing": "200 kg Epicoat-lined MS Drums / Food-Grade HDPE Drums • 950 kg IBC • Sealed Pharma containers",
     "shelfLife": "24 months from date of manufacture under GMP storage",
     "application": "Complies fully with the British Pharmacopoeia (BP 93) monograph. Formulated under stringent cGMP standards for pharmaceutical laxatives, topical skin ointments, drug delivery vehicles, eye drops, and parenteral emulsification systems.",
@@ -555,7 +555,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Granular / Flakes / Meal",
     "typicalColour": "Light Brown to Dark Brown",
     "rawMaterial": "Castor Seed Cake",
-    "image": "images/products/03-castor-cake-fertilizer.png",
+    "image": "images/products/de-oiled-cake-castor-meal.webp",
     "packing": "50 kg HDPE / PP Bags with inner liner • 1000 kg Jumbo Bags • Bulk loose in containers",
     "shelfLife": "12 months from date of manufacture in dry, covered storage",
     "application": "High-value organic fertilizer rich in slow-release Nitrogen, Phosphorus, and Potash (N-P-K). Naturally contains ricin and secondary metabolites that repel soil nematodes, termites, and subterranean pests while increasing soil humus.",
@@ -627,7 +627,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Fine Powder / Micro-Granules",
     "typicalColour": "Light Brownish Grey",
     "rawMaterial": "De-hulled Castor Seed Meal",
-    "image": "images/products/03-castor-cake-fertilizer.png",
+    "image": "images/products/high-protein-castor-meal.webp",
     "packing": "25 kg / 50 kg Laminated HDPE Bags • 1000 kg Jumbo Bags with moisture-barrier liner",
     "shelfLife": "12 months from date of manufacture in cool, dry warehouse",
     "application": "Advanced high-nitrogen organic bio-nutrient enriched through seed de-hulling and proprietary fine-fraction separation. Formulated in N8 (50% Protein) and N10 (60% Protein) variants for high-yield cash crops, sugarcane, tea, and greenhouse floriculture.",
@@ -700,7 +700,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Creamish Flakes / Free Flowing Powder",
     "typicalColour": "Creamish White to Light Off-White",
     "rawMaterial": "Hydrogenated Castor Oil (HCO)",
-    "image": "images/products/05-12-hydroxystearic-acid.png",
+    "image": "images/products/hydrogenated-12-hydroxystearic-acid.webp",
     "packing": "25 kg Multiwall Paper Bags / HDPE Laminated Bags with poly liner • 500 kg / 1000 kg Jumbo Bags • Palletized & shrink-wrapped",
     "shelfLife": "24 months from date of manufacture in original sealed bags",
     "application": "Primary thickener for premium multi-purpose Lithium, Calcium and Complex greases. Imparts excellent mechanical shear stability, thermal reversibility, high dropping point (>190°C), and water-washout resistance. Also widely used in rubber compounding, plastics, acrylic polymers, and cosmetics.",
@@ -766,7 +766,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "White Flakes / Micronized Powder",
     "typicalColour": "Pure White",
     "rawMaterial": "Refined Castor Oil (FSG)",
-    "image": "images/products/04-hydrogenated-castor-oil.png",
+    "image": "images/products/hydrogenated-castor-oil-flakes.webp",
     "packing": "25 kg Multiwall Paper Bags with inner poly liner • 500 kg / 1000 kg Jumbo Bags • Palletized and shrink-wrapped",
     "shelfLife": "24 months from date of manufacture, stored dry at ambient temperature",
     "application": "Manufactured by high-pressure catalytic hydrogenation of refined castor oil. Functions as an efficient rheology modifier, thixotropic agent in epoxy/polyurethane coatings, internal lubricant in PVC, cosmetics stick binder, and raw material for 12-HSA synthesis.",
@@ -851,7 +851,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Viscous Clear Liquid",
     "typicalColour": "Light Amber to Golden",
     "rawMaterial": "Refined Castor Oil (FSG)",
-    "image": "images/products/06-ricinoleic-acid.png",
+    "image": "images/products/ricinoleic-acid.webp",
     "packing": "Bulk in ISO Tank / Flexitank • 190 / 200 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC",
     "shelfLife": "12 months from date of manufacture, in tightly sealed original drums",
     "application": "12-hydroxy-9-cis-octadecenoic acid obtained by saponification and acidulation of castor oil. Essential intermediate for Turkey Red Oil (sulfated castor oil), cutting fluids, clear soaps, polyurethanes, alkyd resins, and esterification synthesis.",
@@ -931,7 +931,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Viscous Dark Liquid",
     "typicalColour": "Brown to Dark Amber",
     "rawMaterial": "Castor Oil Saponification Aqueous Phase",
-    "image": "images/products/07-refined-glycerin.png",
+    "image": "images/products/crude-glycerin.webp",
     "packing": "Bulk in ISO Tankers / Flexi-Tanks • 250 kg MS Drums / HDPE Drums • 1000 kg IBC",
     "shelfLife": "12 months from date of manufacture under ambient conditions",
     "application": "By-product generated during the splitting and saponification of castor oil. Feedstock for glycerin refining plants to produce technical, USP, and pharmaceutical glycerin, as well as anaerobic bio-digesters, animal feed energy supplements, and industrial anti-freeze.",
@@ -1006,7 +1006,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Crystalline Fine Powder",
     "typicalColour": "Brilliant White",
     "rawMaterial": "Castor Acidulation Effluent Neutralization",
-    "image": "images/products/sodium-sulphate-anhydrous.png",
+    "image": "images/products/sodium-sulphate-anhydrous.webp",
     "packing": "50 kg HDPE / PP Bags with LDPE liner • 1000 kg Jumbo Bags • Moisture-proof palletized packaging",
     "shelfLife": "24 months in tightly sealed moisture-proof bags",
     "application": "High-purity crystalline anhydrous sodium sulphate recovered during the acidulation of saponified castor oil. Widely used as a prime filler and builder in synthetic laundry detergents, fining agent in glass manufacturing, textile direct dyeing leveling agent, and paper pulp processing.",
@@ -1089,8 +1089,8 @@ const PRODUCTS_DATABASE = [
     "id": "dehydrated-castor-oil",
     "number": "14",
     "name": "Dehydrated Castor Oil (DCO)",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "64147-40-6",
     "industries": [
       "coatings",
@@ -1099,7 +1099,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Liquid",
     "typicalColour": "Pale Yellow to Amber",
     "rawMaterial": "Refined Castor Oil",
-    "image": "images/products/14-dehydrated-castor-oil.png",
+    "image": "images/products/dehydrated-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank    •    200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in Vessel for large-volume shipments (20-22 MT)    •    Or as recommended / specified by client",
     "shelfLife": "18-24 months",
     "application": "Used as a semi-drying/drying oil in paints, varnishes, alkyd resins, printing inks, primers, caulks, sealants and protective coatings. Its increased unsaturation (largely conjugated diene) enables oxidative drying and film formation.",
@@ -1185,14 +1185,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVPOL™ DCO",
     "brandCode": "NDEVPOL-DCO",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "dco-fatty-acid",
     "number": "15",
     "name": "Dehydrated Castor Oil Fatty Acid (DCO-FA)",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "61789-45-5",
     "industries": [
       "coatings",
@@ -1201,7 +1201,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Liquid",
     "typicalColour": "Water White to Pale Yellow",
     "rawMaterial": "Dehydrated Castor Oil (DCO)",
-    "image": "images/products/16-dco-fatty-acid.png",
+    "image": "images/products/dco-fatty-acid.webp",
     "packing": "Bulk in Tanker    •    Bulk in ISO Tank    •    Flexi Tank    •    190 kg Net Stainless Steel / MS Drums    •    200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Or as recommended / specified by client",
     "shelfLife": "12-18 months",
     "application": "Used primarily in the manufacture of fast-drying alkyd resins, paints, surface coatings, printing inks, primers, varnishes and polyamide resins. Typical (informational) fatty-acid composition: saturated acids ≤4.5%, unsaturated acids ≥90%, of which conjugated (diene) fatty acids typically ≥60% by UV/GC — reported for information, not as a numeric release specification.",
@@ -1293,14 +1293,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVACID™ DCO",
     "brandCode": "NDEVACID-DCO",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "blown-oxidized-castor-oil",
     "number": "16",
     "name": "Blown / Oxidized Castor Oil",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "68187-84-8",
     "industries": [
       "coatings",
@@ -1309,7 +1309,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Viscous Liquid",
     "typicalColour": "Pale Yellow to Amber",
     "rawMaterial": "Refined Castor Oil",
-    "image": "images/products/15-blown-oxidized-castor-oil.png",
+    "image": "images/products/blown-oxidized-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank    •    200 / 225 kg MS Drums / HDPE Drums    •    950 / 1,000 kg IBC    •    Bulk in Vessel for large-volume shipments    •    Or as recommended / specified by client",
     "shelfLife": "18-24 months",
     "application": "Used in paints, varnishes, coatings, printing inks, lubricants, adhesives, sealants and specialty chemical formulations where increased viscosity ('body'), tack and film-forming properties are required. Grade is selected by target viscosity.",
@@ -1395,14 +1395,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVOX™ BLO",
     "brandCode": "NDEVOX-BLO",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "bio-polyurethane-polyols",
     "number": "17",
     "name": "Bio-Polyurethane Polyols (Castor-Oil-Based Polyols)",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "68441-60-1",
     "industries": [
       "polyurethane",
@@ -1411,7 +1411,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Viscous Liquid",
     "typicalColour": "Pale Yellow to Amber",
     "rawMaterial": "Castor Oil / Castor-Oil-Derived Feedstock",
-    "image": "images/products/13-bio-polyurethane-polyols.png",
+    "image": "images/products/bio-polyurethane-polyols.webp",
     "packing": "200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in ISO Tank / Flexi Tank for large-volume supply    •    Or as recommended / specified by client",
     "shelfLife": "12-18 months",
     "application": "Used as a renewable, bio-based polyol component in polyurethane coatings, adhesives, sealants and elastomers. A separate higher-hydroxyl-value grade should be quoted for flexible/rigid foam customers rather than using this coating-grade specification.",
@@ -1503,14 +1503,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVPOL™ BIO",
     "brandCode": "NDEVPOL-BIO",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "sebacic-acid",
     "number": "18",
     "name": "Sebacic Acid",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "111-20-6",
     "industries": [
       "plastics",
@@ -1520,7 +1520,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "White Flakes / Powder / Granules",
     "typicalColour": "White to Off-White",
     "rawMaterial": "Castor Oil",
-    "image": "images/products/10-sebacic-acid.png",
+    "image": "images/products/sebacic-acid.webp",
     "packing": "25 kg PP / Paper / HDPE-Lined Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Bulk packing for large-volume industrial supply    •    Or as recommended / specified by client",
     "shelfLife": "36 months",
     "application": "Used in manufacture of plasticizers (DOS, DBS), nylon 6,10 and other polyamides, polyester and alkyd resins, lubricants, coatings, adhesives and other specialty chemicals. It is a major downstream derivative obtained from castor-oil-based processing.",
@@ -1612,14 +1612,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVACID™ SEB",
     "brandCode": "NDEVACID-SEB",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "methyl-ricinoleate",
     "number": "19",
     "name": "Methyl Ricinoleate",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "141-24-2",
     "industries": [
       "lubricants",
@@ -1629,7 +1629,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Liquid",
     "typicalColour": "Colourless to Pale Yellow",
     "rawMaterial": "Ricinoleic Acid / Castor Oil",
-    "image": "images/products/08-methyl-ricinoleate.png",
+    "image": "images/products/methyl-ricinoleate.webp",
     "packing": "200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in ISO Tank / Flexi Tank    •    Bulk Tanker for large-volume supply    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed original packaging.",
     "application": "Used as a castor-oil-derived methyl ester in biodegradable lubricants, specialty solvents, plasticizers, coatings, personal-care formulations and as a chemical intermediate.",
@@ -1721,14 +1721,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVEST™ MR",
     "brandCode": "NDEVEST-MR",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "methyl-12-hydroxystearate",
     "number": "20",
     "name": "Methyl 12-Hydroxystearate (Methyl 12-HSA)",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "141-23-1",
     "industries": [
       "lubricants",
@@ -1737,7 +1737,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Flakes / Powder",
     "typicalColour": "White to Off-White",
     "rawMaterial": "12-Hydroxystearic Acid / Hydrogenated Castor Oil",
-    "image": "images/products/09-methyl-12-hydroxystearate.png",
+    "image": "images/products/methyl-12-hydroxystearate.webp",
     "packing": "25 kg / 50 lb PE-Laminated HDPE / PP Bags    •    500 kg HDPE Jumbo Bags    •    650 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    1,200 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed original packaging.",
     "application": "Used in specialty lubricants and greases, coatings, plastics, cosmetics, personal-care products and as a castor-oil-derived chemical intermediate.",
@@ -1829,14 +1829,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVEST™ M12H",
     "brandCode": "NDEVEST-M12H",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "dioctyl-sebacate",
     "number": "21",
     "name": "Dioctyl Sebacate (DOS / DEHS)",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "122-62-3",
     "industries": [
       "plastics",
@@ -1845,7 +1845,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Liquid",
     "typicalColour": "Colourless to Pale Yellow / Clear Pale Straw",
     "rawMaterial": "Sebacic Acid + 2-Ethylhexanol; Sebacic Acid is produced from Castor Oil",
-    "image": "images/products/11-dioctyl-sebacate.png",
+    "image": "images/products/dioctyl-sebacate.webp",
     "packing": "200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in ISO Tank / Flexi Tank    •    Bulk Tanker for large-volume supply    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed original packaging.",
     "application": "Used primarily as a plasticizer and low-temperature plasticizer for PVC, synthetic rubber and other polymer systems. Also used in lubricants, greases, coatings and specialty formulations where low-temperature flexibility is required.",
@@ -1931,14 +1931,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVEST™ DOS",
     "brandCode": "NDEVEST-DOS",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "dibutyl-sebacate",
     "number": "22",
     "name": "Dibutyl Sebacate (DBS)",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "109-43-3",
     "industries": [
       "plastics",
@@ -1947,7 +1947,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Liquid",
     "typicalColour": "Colourless to Pale Yellow, Clear Liquid",
     "rawMaterial": "Sebacic Acid + n-Butanol; Sebacic Acid is derived from Castor Oil",
-    "image": "images/products/12-dibutyl-sebacate.png",
+    "image": "images/products/dibutyl-sebacate.webp",
     "packing": "200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in ISO Tank / Flexi Tank    •    Bulk Tanker for large-volume supply    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed original packaging.",
     "application": "Used as a plasticizer for PVC, cellulosics and synthetic rubber, in coatings and adhesives, and as a fixative/solvent in cosmetic and fragrance formulations.",
@@ -2033,14 +2033,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVEST™ DBS",
     "brandCode": "NDEVEST-DBS",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "lithium-12-hydroxystearate",
     "number": "23",
     "name": "Lithium 12-Hydroxystearate (Lithium 12-HSA)",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "7620-77-1",
     "industries": [
       "lubricants"
@@ -2048,7 +2048,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Fine Powder / Flakes",
     "typicalColour": "White to Off-White",
     "rawMaterial": "12-Hydroxystearic Acid (12-HSA), derived from Castor Oil",
-    "image": "images/products/17-lithium-12-hydroxystearate.png",
+    "image": "images/products/lithium-12-hydroxystearate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, moisture-protected packaging.",
     "application": "Lithium 12-Hydroxystearate is primarily used as a thickener / lubricating soap for lithium-based greases. It provides good mechanical stability, water resistance and high-temperature performance and is used in automotive, industrial, bearing and general-purpose lubricating grease formulations.",
@@ -2140,14 +2140,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVSOAP™ LI12",
     "brandCode": "NDEVSOAP-LI12",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "calcium-12-hydroxystearate",
     "number": "24",
     "name": "Calcium 12-Hydroxystearate (Calcium 12-HSA)",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "3159-62-4",
     "industries": [
       "lubricants",
@@ -2156,7 +2156,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Fine Powder / Flakes",
     "typicalColour": "White to Off-White",
     "rawMaterial": "12-Hydroxystearic Acid (12-HSA), derived from Castor Oil",
-    "image": "images/products/18-calcium-12-hydroxystearate.png",
+    "image": "images/products/calcium-12-hydroxystearate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, moisture-protected packaging.",
     "application": "Primarily used as a calcium soap thickener for lubricating greases, including automotive and industrial grease formulations, and as a lubricant/stabilizer component in some PVC processing systems. Provides water resistance and good lubricating properties.",
@@ -2248,14 +2248,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVSOAP™ CA12",
     "brandCode": "NDEVSOAP-CA12",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "zinc-ricinoleate",
     "number": "25",
     "name": "Zinc Ricinoleate",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "13040-19-2",
     "industries": [
       "cosmetics",
@@ -2264,7 +2264,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Fine Powder",
     "typicalColour": "White to Off-White",
     "rawMaterial": "Ricinoleic Acid derived from Castor Oil + Zinc Source",
-    "image": "images/products/19-zinc-ricinoleate.png",
+    "image": "images/products/zinc-ricinoleate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, dry packaging.",
     "application": "Primarily used as an odour-absorbing active in deodorants, antiperspirants, cosmetics, personal-care products and odour-control formulations. Valued for its ability to bind and neutralize unpleasant odour molecules.",
@@ -2350,14 +2350,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVSOAP™ ZNR",
     "brandCode": "NDEVSOAP-ZNR",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "zinc-undecylenate",
     "number": "26",
     "name": "Zinc Undecylenate",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "specialty-range",
+    "categoryLabel": "Specialty Range",
     "casNumber": "557-08-4",
     "industries": [
       "cosmetics",
@@ -2366,7 +2366,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Fine Powder",
     "typicalColour": "White to Off-White",
     "rawMaterial": "Undecylenic Acid derived from Castor Oil + Zinc Source",
-    "image": "images/products/20-zinc-undecylenate.png",
+    "image": "images/products/zinc-undecylenate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, dry packaging, protected from light.",
     "application": "Used in topical antifungal and pharmaceutical formulations (subject to applicable pharmacopeial/regulatory drug-product requirements), and as a cosmetic-grade ingredient in foot-care and personal-care products where those regulatory requirements do not apply.",
@@ -2452,14 +2452,14 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVSOAP™ ZNU",
     "brandCode": "NDEVSOAP-ZNU",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": true
   },
   {
     "id": "refined-glycerin",
     "number": "27",
     "name": "Refined Glycerin (Available to USP/IP Spec.)",
-    "category": "under-development",
-    "categoryLabel": "Under Development",
+    "category": "by-products",
+    "categoryLabel": "By-Products",
     "casNumber": "56-81-5",
     "industries": [
       "cosmetics",
@@ -2468,7 +2468,7 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Clear, Colourless, Viscous Liquid",
     "typicalColour": "Colourless",
     "rawMaterial": "Castor Oil / Castor Oil Fat Splitting",
-    "image": "images/products/07-refined-glycerin.png",
+    "image": "images/products/refined-glycerin.webp",
     "packing": "250 kg HM-HDPE Carboys / Drums    •    250 kg MS / HDPE Drums    •    1,000 kg IBC    •    Bulk Tanker / ISO Tank for large-volume supply    •    Or as recommended / specified by client",
     "shelfLife": "24 months in tightly closed original packaging; glycerin is hygroscopic and should be protected from moisture pick-up.",
     "application": "Used in pharmaceutical formulations, cosmetics and personal-care products, food applications, soaps, creams, lotions, specialty chemicals and industrial formulations. Available to USP/IP specification — supply is subject to batch COA testing to the current pharmacopeial monograph, including DEG/EG limit testing.",
@@ -2566,7 +2566,7 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVGLY™ 995",
     "brandCode": "NDEVGLY-995",
-    "isUnderDevelopment": true
+    "isSpecialtyRange": false
   }
 ];
 

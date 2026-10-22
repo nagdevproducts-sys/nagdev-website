@@ -3,75 +3,666 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting to Process Flow | Nagdev Products Private Limited</title>
-  <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="https://www.nagdevproducts.com/process-flow.html">
-  <meta http-equiv="refresh" content="0; url=process-flow.html">
-  <script>
-    window.location.replace("process-flow.html");
-  </script>
-  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>Castor Chemistry Tree & Value Chain | Nagdev Products</title>
+  <meta name="description" content="Explore the castor chemistry tree by Nagdev Products in Gujarat, India. An integrated oleochemical value chain converting castor oil into bio-based derivatives.">
+  <link rel="canonical" href="https://www.nagdevproducts.com/chemistry-tree">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nagdevproducts.com/chemistry-tree">
+  <meta property="og:site_name" content="Nagdev Products Private Limited">
+  <meta property="og:title" content="Castor Chemistry Tree & Value Chain | Nagdev Products">
+  <meta property="og:description" content="Explore the castor chemistry tree by Nagdev Products in Gujarat, India. An integrated oleochemical value chain converting castor oil into bio-based derivatives.">
+  <meta property="og:image" content="https://www.nagdevproducts.com/images/og-share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:image:alt" content="Nagdev Products Private Limited — Castor Oil & Derivatives Manufacturer">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.nagdevproducts.com/chemistry-tree">
+  <meta name="twitter:title" content="Castor Chemistry Tree & Value Chain | Nagdev Products">
+  <meta name="twitter:description" content="Explore the castor chemistry tree by Nagdev Products in Gujarat, India. An integrated oleochemical value chain converting castor oil into bio-based derivatives.">
+  <meta name="twitter:image" content="https://www.nagdevproducts.com/images/og-share.jpg">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0b3d1e">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.min.css">
+  <script src="/js/site-config.min.js" defer></script>
   <style>
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background: #0B3D1E;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      text-align: center;
-      padding: 1.5rem;
+    .chem-page-hero {
+      padding: 8.5rem 0 3.5rem 0;
+      background: #08120b;
+      background-image: 
+        radial-gradient(circle at 80% 20%, rgba(212, 165, 55, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(11, 61, 30, 0.5) 0%, transparent 60%),
+        linear-gradient(180deg, #050d07 0%, #0d1a13 100%);
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(212, 165, 55, 0.2);
     }
-    .redirect-card {
-      max-width: 540px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(212, 165, 55, 0.35);
-      border-radius: 12px;
-      padding: 2.5rem 2rem;
+    .chem-page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(rgba(212, 165, 55, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+    .chem-hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.75rem;
+    }
+    @media (max-width: 991px) {
+      .chem-hero-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 575px) {
+      .chem-hero-stats { grid-template-columns: 1fr; }
+    }
+    .chem-stat-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 165, 55, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
       backdrop-filter: blur(8px);
     }
-    .redirect-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    h1 {
-      font-family: 'Cormorant Garamond', serif;
+    .chem-stat-num {
+      font-family: var(--font-display);
       font-size: 2rem;
-      color: #D4A537;
-      margin-bottom: 0.75rem;
-    }
-    p {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-    a.btn-redirect {
-      display: inline-block;
-      background: #D4A537;
-      color: #0B3D1E;
       font-weight: 700;
-      padding: 0.75rem 1.75rem;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: background 0.2s ease;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 0.35rem;
     }
-    a.btn-redirect:hover {
-      background: #e5b94f;
+    .chem-stat-lbl {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
-  <div class="redirect-card">
-    <div class="redirect-icon">⚙️</div>
-    <h1>Process Flow &amp; Engineering</h1>
-    <p>Our Chemistry Tree has been updated and expanded into the comprehensive <strong>Industrial Process Flow &amp; Engineering Mass Balance</strong>.</p>
-    <a href="process-flow.html" class="btn-redirect">Continue to Process Flow →</a>
+<a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+
+
+<!-- DEDICATED PAGE HERO -->
+<section class="chem-page-hero">
+  <div class="container" style="position:relative;z-index:2;">
+    <div id="main-content" class="section-eyebrow light" style="margin-bottom:1rem;">Chemical Taxonomy &amp; Molecular Pathways</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(2.75rem,5.5vw,4.5rem);font-weight:600;color:#fff;line-height:1.08;max-width:880px;margin-bottom:1.25rem;">The Castor Chemistry Tree: <em style="color:var(--gold-light);font-style:normal;">Integrated Oleochemical Value Chain</em></h1>
+    <p style="font-size:1.15rem;color:rgba(255,255,255,0.78);line-height:1.7;max-width:720px;">
+      A comprehensive visual architecture mapping our continuous manufacturing journey — from direct farm-gate seed pressing to high-purity refined oils, catalytic hydrogenated waxes, cleaved dicarboxylic acids, bio-esters, polyols, and specialty metal soaps.
+    </p>
+
+    <div class="chem-hero-stats">
+      <div class="chem-stat-box">
+        <div class="chem-stat-num">C18</div>
+        <div class="chem-stat-lbl">Hydroxy Fatty Acid Backbone</div>
+      </div>
+      <div class="chem-stat-box">
+        <div class="chem-stat-num">4-Stage</div>
+        <div class="chem-stat-lbl">Value Chain Pipeline</div>
+      </div>
+      <div class="chem-stat-box">
+        <div class="chem-stat-num">6 Families</div>
+        <div class="chem-stat-lbl">Catalytic Reaction Units</div>
+      </div>
+      <div class="chem-stat-box">
+        <div class="chem-stat-num">20 Lines</div>
+        <div class="chem-stat-lbl">Engineered Derivatives</div>
+      </div>
+    </div>
   </div>
+</section>
+
+<!-- MAIN INTERACTIVE CHEMISTRY TREE SECTION -->
+<section class="chem-tree-section" style="border-top:none;padding-top:3.5rem;">
+  <div class="container chem-tree-container">
+
+    <!-- 4-STAGE VALUE CHAIN PROGRESSION STRIP -->
+    <div class="chem-value-chain-bar fade-up" style="margin-top:0;">
+      <div class="chem-stage-card">
+        <div class="chem-stage-header">
+          <span class="chem-stage-num">Stage 01</span>
+          <span class="chem-stage-icon">🌱</span>
+        </div>
+        <div class="chem-stage-title">Seed Feedstock</div>
+        <div class="chem-stage-desc">Direct Banaskantha seed sourcing with 48–52% oil content and high ricinoleic purity.</div>
+      </div>
+
+      <div class="chem-stage-card">
+        <div class="chem-stage-header">
+          <span class="chem-stage-num">Stage 02</span>
+          <span class="chem-stage-icon">⚙️</span>
+        </div>
+        <div class="chem-stage-title">Primary Expelling</div>
+        <div class="chem-stage-desc">Mechanical screw pressing yielding crude castor oil and high-nitrogen <strong>NDEVAGRO™ CAKE</strong>.</div>
+      </div>
+
+      <div class="chem-stage-card">
+        <div class="chem-stage-header">
+          <span class="chem-stage-num">Stage 03</span>
+          <span class="chem-stage-icon">🧪</span>
+        </div>
+        <div class="chem-stage-title">Refining &amp; Bleaching</div>
+        <div class="chem-stage-desc">Degumming, alkali neutralization and vacuum bleaching into <strong>NDEVOLEO™ FSG &amp; COMM</strong>.</div>
+      </div>
+
+      <div class="chem-stage-card">
+        <div class="chem-stage-header">
+          <span class="chem-stage-num">Stage 04</span>
+          <span class="chem-stage-icon">⚡</span>
+        </div>
+        <div class="chem-stage-title">Downstream Derivatives</div>
+        <div class="chem-stage-desc">5 catalytic synthesis pathways converting castor backbone into 17+ specialty industrial derivatives.</div>
+      </div>
+    </div>
+
+    <!-- PATHWAY INTERACTIVE FILTER TABS -->
+    <div class="chem-pathway-nav fade-up">
+      <button class="chem-tab-btn active" onclick="filterChemTree('all', this)" type="button">
+        <span>🌟 All Synthesis Pathways (20 Products)</span>
+      </button>
+      <button class="chem-tab-btn" onclick="filterChemTree('oil', this)" type="button">
+        <span>💧 Pure Castor Oils</span>
+      </button>
+      <button class="chem-tab-btn" onclick="filterChemTree('wax', this)" type="button">
+        <span>⚡ Hydrogenated Waxes &amp; Soaps</span>
+      </button>
+      <button class="chem-tab-btn" onclick="filterChemTree('acid', this)" type="button">
+        <span>🧪 Fatty Acids &amp; Esters</span>
+      </button>
+      <button class="chem-tab-btn" onclick="filterChemTree('sebacic', this)" type="button">
+        <span>🔬 Pyrolysis &amp; Sebacates</span>
+      </button>
+      <button class="chem-tab-btn" onclick="filterChemTree('dco', this)" type="button">
+        <span>🔥 Dehydration &amp; Drying Oils</span>
+      </button>
+      <button class="chem-tab-btn" onclick="filterChemTree('poly', this)" type="button">
+        <span>🌱 Bio-Polyols &amp; Upcycling</span>
+      </button>
+    </div>
+
+    <!-- CHEMISTRY PATHWAY GRID -->
+    <div class="chem-tree-grid fade-up" id="chem-tree-grid">
+
+      <!-- Branch 1: Refined Oils -->
+      <div class="chem-tree-branch branch-theme-oil" data-category="oil">
+        <div class="branch-top-meta">
+          <div class="branch-title-group">
+            <div class="branch-icon">💧</div>
+            <div>
+              <div class="branch-title">Pure Castor Oils</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:2px;">Primary Extraction &amp; Vacuum Bleaching</div>
+            </div>
+          </div>
+          <span class="branch-category-tag">Base Feedstock</span>
+        </div>
+
+
+        <div class="branch-products-list">
+          <div class="chem-prod-card" onclick="openModal('commercial-castor-oil')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('commercial-castor-oil')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVOLEO™ COMM</span>
+              <span class="chem-prod-cas">CAS 8001-79-4</span>
+            </div>
+            <div class="chem-prod-name">Commercial Castor Oil</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Lubricants, Hydraulic Fluids, Inks &amp; Polyurethanes</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('first-special-grade-castor-oil')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('first-special-grade-castor-oil')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVOLEO™ FSG</span>
+              <span class="chem-prod-cas">CAS 8001-79-4</span>
+            </div>
+            <div class="chem-prod-name">First Special Grade (FSG) / Refined Castor Oil</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Pharma Synthesis, Premium Cosmetics, High-Grade Resins</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 2: Hydrogenation -->
+      <div class="chem-tree-branch branch-theme-wax" data-category="wax">
+        <div class="branch-top-meta">
+          <div class="branch-title-group">
+            <div class="branch-icon">⚡</div>
+            <div>
+              <div class="branch-title">Hydrogenated Waxes &amp; Metal Soaps</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:2px;">Catalytic Hydrogenation &amp; Saponification</div>
+            </div>
+          </div>
+          <span class="branch-category-tag">High-Melting Waxes</span>
+        </div>
+
+
+        <div class="branch-products-list">
+          <div class="chem-prod-card" onclick="openModal('hydrogenated-castor-oil')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('hydrogenated-castor-oil')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVWAX™ HCO</span>
+              <span class="chem-prod-cas">CAS 8001-78-3</span>
+            </div>
+            <div class="chem-prod-name">Hydrogenated Castor Oil (Castor Wax Flakes)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Lithium Greases, Paper Coating, Rubber Processing</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('12-hydroxystearic-acid')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('12-hydroxystearic-acid')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVACID™ 12-HSA</span>
+              <span class="chem-prod-cas">CAS 106-14-9</span>
+            </div>
+            <div class="chem-prod-name">12-Hydroxystearic Acid (12-HSA Flakes / Powder)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Premium Multipurpose Grease Thickener, Cosmetics</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('lithium-12-hydroxystearate')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('lithium-12-hydroxystearate')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVSOAP™ LI12</span>
+              <span class="chem-prod-cas">CAS 7620-77-1</span>
+            </div>
+            <div class="chem-prod-name">Lithium 12-Hydroxystearate Soap</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 High-Temperature Automotive &amp; Heavy Machinery Greases</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('calcium-12-hydroxystearate')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('calcium-12-hydroxystearate')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVSOAP™ CA12</span>
+              <span class="chem-prod-cas">CAS 3159-62-4</span>
+            </div>
+            <div class="chem-prod-name">Calcium 12-Hydroxystearate Soap</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Marine Water-Resistant Lubricants, PVC Heat Stabilizers</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 3: Fatty Acids & Esters -->
+      <div class="chem-tree-branch branch-theme-acid" data-category="acid">
+        <div class="branch-top-meta">
+          <div class="branch-title-group">
+            <div class="branch-icon">🧪</div>
+            <div>
+              <div class="branch-title">Fatty Acids &amp; Specialty Esters</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:2px;">Continuous Splitting &amp; Transesterification</div>
+            </div>
+          </div>
+          <span class="branch-category-tag">Fatty Acids &amp; Esters</span>
+        </div>
+
+
+        <div class="branch-products-list">
+          <div class="chem-prod-card" onclick="openModal('ricinoleic-acid')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('ricinoleic-acid')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVACID™ RIC</span>
+              <span class="chem-prod-cas">CAS 141-22-0</span>
+            </div>
+            <div class="chem-prod-name">Ricinoleic Acid (90% Min)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Cutting Fluids, Surfactants, Leather &amp; Textile Chemicals</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('refined-glycerin')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('refined-glycerin')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVGLY™ 995</span>
+              <span class="chem-prod-cas">CAS 56-81-5</span>
+            </div>
+            <div class="chem-prod-name">Refined Glycerin (Available to USP/IP Spec.)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Personal Care, Pharmaceuticals, Alkyd Paint Resins</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('methyl-ricinoleate')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('methyl-ricinoleate')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVEST™ MR</span>
+              <span class="chem-prod-cas">CAS 141-24-2</span>
+            </div>
+            <div class="chem-prod-name">Methyl Ricinoleate</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Bio-Plasticizers, High-Speed Inks, Secondary Esters</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('methyl-12-hydroxystearate')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('methyl-12-hydroxystearate')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVEST™ M12H</span>
+              <span class="chem-prod-cas">CAS 141-23-1</span>
+            </div>
+            <div class="chem-prod-name">Methyl 12-Hydroxystearate</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Synthetic Waxes, Lubricant Additives, Cosmetics</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('zinc-ricinoleate')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('zinc-ricinoleate')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVSOAP™ ZNR</span>
+              <span class="chem-prod-cas">CAS 13040-19-2</span>
+            </div>
+            <div class="chem-prod-name">Zinc Ricinoleate</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Industrial &amp; Cosmetic Odor Absorbers, PVC Stabilization</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 4: Sebacic Acid & Esters -->
+      <div class="chem-tree-branch branch-theme-sebacic" data-category="sebacic">
+        <div class="branch-top-meta">
+          <div class="branch-title-group">
+            <div class="branch-icon">🔬</div>
+            <div>
+              <div class="branch-title">Thermal Pyrolysis &amp; Sebacates</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:2px;">Alkaline Cleavage &amp; Diesterification</div>
+            </div>
+          </div>
+          <span class="branch-category-tag">High-Performance Polymers</span>
+        </div>
+
+
+        <div class="branch-products-list">
+          <div class="chem-prod-card" onclick="openModal('sebacic-acid')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('sebacic-acid')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVACID™ SEB</span>
+              <span class="chem-prod-cas">CAS 111-20-6</span>
+            </div>
+            <div class="chem-prod-name">Sebacic Acid (Pure C10H18O4 Flakes)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Polyamides (Nylon 610/410), Bio-Plastics, Aerospace Fluids</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('dioctyl-sebacate')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('dioctyl-sebacate')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVEST™ DOS</span>
+              <span class="chem-prod-cas">CAS 122-62-3</span>
+            </div>
+            <div class="chem-prod-name">Dioctyl Sebacate (DOS Plasticizer)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Extreme Cold-Climate Cables, Aviation Rubbers, PVC</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('dibutyl-sebacate')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('dibutyl-sebacate')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVEST™ DBS</span>
+              <span class="chem-prod-cas">CAS 109-43-3</span>
+            </div>
+            <div class="chem-prod-name">Dibutyl Sebacate (DBS Plasticizer)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Food Packaging Films, Pharma Coatings, Specialty Rubbers</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('zinc-undecylenate')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('zinc-undecylenate')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVSOAP™ ZNU</span>
+              <span class="chem-prod-cas">CAS 557-08-4</span>
+            </div>
+            <div class="chem-prod-name">Zinc Undecylenate (USP / EP)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Pharmaceutical Antifungal API, Therapeutic Foot Powders</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 5: Dehydration -->
+      <div class="chem-tree-branch branch-theme-dco" data-category="dco">
+        <div class="branch-top-meta">
+          <div class="branch-title-group">
+            <div class="branch-icon">🔥</div>
+            <div>
+              <div class="branch-title">Dehydration &amp; Conjugated Drying Oils</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:2px;">Catalytic Dehydration &amp; Oxygen Blowing</div>
+            </div>
+          </div>
+          <span class="branch-category-tag">Paints &amp; Resins</span>
+        </div>
+
+
+        <div class="branch-products-list">
+          <div class="chem-prod-card" onclick="openModal('dehydrated-castor-oil')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('dehydrated-castor-oil')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVPOL™ DCO</span>
+              <span class="chem-prod-cas">CAS 64147-40-6</span>
+            </div>
+            <div class="chem-prod-name">Dehydrated Castor Oil (DCO)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Non-Yellowing Alkyd Resins, Marine Varnishes, Stoving Enamels</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('blown-oxidized-castor-oil')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('blown-oxidized-castor-oil')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVOX™ BLO</span>
+              <span class="chem-prod-cas">CAS 68187-84-8</span>
+            </div>
+            <div class="chem-prod-name">Blown / Oxidized Castor Oil</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 High-Viscosity Cable Compounds, Rubber Plasticizer, Adhesives</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('dco-fatty-acid')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('dco-fatty-acid')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVACID™ DCO</span>
+              <span class="chem-prod-cas">CAS 61789-45-5</span>
+            </div>
+            <div class="chem-prod-name">Dehydrated Castor Oil Fatty Acid (DCO-FA)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 High-Solid Epoxy Finishes, Air-Drying Alkyds, Printing Inks</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 6: Polyols & Co-Products -->
+      <div class="chem-tree-branch branch-theme-poly" data-category="poly">
+        <div class="branch-top-meta">
+          <div class="branch-title-group">
+            <div class="branch-icon">🌱</div>
+            <div>
+              <div class="branch-title">Bio-Polyols &amp; Circular Co-Products</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:2px;">Functionalization &amp; Circular Economy</div>
+            </div>
+          </div>
+          <span class="branch-category-tag">Bio-Polymers &amp; Agro</span>
+        </div>
+
+
+        <div class="branch-products-list">
+          <div class="chem-prod-card" onclick="openModal('bio-polyurethane-polyols')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('bio-polyurethane-polyols')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVPOL™ BIO</span>
+              <span class="chem-prod-cas">CAS 68441-60-1</span>
+            </div>
+            <div class="chem-prod-name">Bio-Polyurethane Polyols (CASE System)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Rigid &amp; Flexible Foams, Automotive Sound-Damping, Sealants</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+
+          <div class="chem-prod-card" onclick="openModal('castor-cake-fertilizer')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('castor-cake-fertilizer')">
+            <div class="chem-prod-top">
+              <span class="chem-prod-brand">NDEVAGRO™ CAKE</span>
+              <span class="chem-prod-cas">IS 6092 Certified</span>
+            </div>
+            <div class="chem-prod-name">Castor Cake Organic Fertilizer (4-1-1 NPK)</div>
+            <div class="chem-prod-footer">
+              <span class="chem-prod-app">🎯 Natural Soil Enrichment, Organic Farming, Termite/Nematode Control</span>
+              <span class="chem-prod-action">View Specs →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CHEMISTRY VALUE CHAIN FOOTER -->
+    <div class="chem-tree-footer fade-up">
+      <div class="chem-tree-footer-info">
+        <div><strong>Molecular Backbone:</strong> C18 Hydroxy Fatty Acid (Ricinoleic Acid)</div>
+        <div><strong>Quality Accreditations:</strong> AOCS · ASTM · IS 6092 · IP/USP</div>
+        <div><strong>Origin:</strong> Banaskantha, Gujarat, India</div>
+      </div>
+      <a href="/products" class="btn btn-gold" style="font-size:0.875rem;">
+        Explore All 20 Products in Commercial Catalog →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div style="background:var(--forest);padding:3.5rem 0;">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+      <div>
+        <div style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.25rem);font-weight:600;color:#fff;line-height:1.2;margin-bottom:0.5rem;">Need Custom Oleochemical Synthesis or Specific Derivative?</div>
+        <p style="font-size:0.9375rem;color:rgba(255,255,255,0.7);">Our technical team works with global industrial clients to deliver tailored specifications and custom purity grades.</p>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="/products" class="btn btn-outline" style="border-color:rgba(255,255,255,0.4);color:#fff;">View All 20 Products</a>
+        <a href="/contact" class="btn btn-gold">Contact Technical Sales →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container-wide">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" aria-label="Nagdev Products Home">
+          <img src="/images/logo-dark.png" alt="Nagdev Products Private Limited" height="42" width="180" style="width:auto;">
+        </a>
+        <p class="footer-tagline">
+          Integrated castor oil and derivatives manufacturer from Gujarat's castor belt. Now booking 2027 supply contracts.
+        </p>
+        <p class="footer-quality-line" style="font-size:0.825rem;color:var(--gold);line-height:1.5;margin-top:0.25rem;">
+          Quality systems aligned to ISO 9001 · REACH-ready export documentation
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <nav aria-label="Footer navigation">
+          <ul class="footer-links">
+            <li><a href="/" class="footer-link">Home</a></li>
+            <li><a href="/products" class="footer-link">Products</a></li>
+            <li><a href="/process-flow" class="footer-link">Process Flow</a></li>
+            <li><a href="/about" class="footer-link">About</a></li>
+            <li><a href="/plant" class="footer-link">Our Plant</a></li>
+            <li><a href="/infrastructure" class="footer-link">Infrastructure</a></li>
+            <li><a href="/quality" class="footer-link">Quality</a></li>
+            <li><a href="/markets" class="footer-link">Markets</a></li>
+            <li><a href="/blog" class="footer-link">Blog</a></li>
+            <li><a href="/contact" class="footer-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Products</div>
+        <ul class="footer-links">
+          <li><a href="/products?filter=castor-oil" class="footer-link">Castor Oil (6 Grades)</a></li>
+          <li><a href="/products?filter=de-oiled-cake" class="footer-link">De Oiled Cake &amp; Meals (2 Grades)</a></li>
+          <li><a href="/products?filter=derivatives" class="footer-link">Castor Derivatives (3 Grades)</a></li>
+          <li><a href="/products?filter=by-products" class="footer-link">Co-Products &amp; Salts (3 Grades)</a></li>
+          <li><a href="/products?filter=specialty-range" class="footer-link" style="color:var(--gold);">Specialty Range (13 Grades)</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Contact &amp; Plant</div>
+        <address style="font-style:normal;">
+          <div class="footer-contact">
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar, District – Vav-Tharad, Gujarat – 385330, India</span>
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg>
+              <a href="https://maps.app.goo.gl/4eETjMFpRmRxWcf6A" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline;">View on Google Maps ↗</a>
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.08 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.21 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+              <a href="tel:+916352098306">+91 63520 98306</a>
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:nagdevproducts@gmail.com">nagdevproducts@gmail.com</a>
+            </div>
+          </div>
+        </address>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copyright">
+        &copy; <span id="footer-year">2026</span> Nagdev Products Private Limited. All rights reserved.
+      </p>
+      <div class="footer-bottom-links">
+        <a href="/products" class="footer-bottom-link">Products (27)</a>
+        <a href="/process-flow" class="footer-bottom-link">Process Flow</a>
+        <a href="/contact" class="footer-bottom-link">Enquiries</a>
+        <a href="/sitemap.xml" class="footer-bottom-link">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/products-data.min.js" defer></script>
+<script src="/js/site.min.js" defer></script>
 </body>
 </html>
