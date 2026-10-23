@@ -13,14 +13,14 @@ const SITE_CONFIG = {
     website: "https://www.nagdevproducts.com",
     tagline: "Integrated castor oil and derivatives manufacturer from Gujarat's castor belt.",
     positioning: "Integrated Castor Oil & Derivatives Plant · North Gujarat | Head Office: Gandhinagar",
-    heroBadge: "Manufacturer & Exporter · Commissioning 2027 · Now Booking Supply Contracts",
+    heroBadge: "Manufacturer & Exporter · Operational Plant · North Gujarat",
     qualityStatement: "Quality systems aligned to ISO 9001 · REACH-ready export documentation",
     inspectionPolicy: "Every consignment ships with a Certificate of Analysis; third-party inspection (SGS / Bureau Veritas) on request.",
     laboratory: "our in-house QC laboratory",
-    ctaPrimary: "Book 2027 supply contracts — request samples & pricing",
+    ctaPrimary: "Request a Quote — request samples & pricing",
     crushingCapacity: "50 MT/day",
-    commissioningYear: "2027",
-    status: "Commissioning 2027 · Now Booking Supply Contracts"
+    plantStatus: "Operational",
+    status: "Operational Plant · Supplying Commercial Volumes Now"
   },
   social: {
     linkedin: "https://www.linkedin.com/company/nagdevproducts",
@@ -31,7 +31,7 @@ const SITE_CONFIG = {
     phone: "+91 63520 98306",
     phoneTel: "+916352098306",
     whatsapp: "+91 63520 98306",
-    whatsappLink: "https://wa.me/916352098306?text=Hello%20Nagdev%20Products%2C%20I%20would%20like%20to%20enquire%20about%202027%20supply%20contracts%20and%20product%20specifications.",
+    whatsappLink: "https://wa.me/916352098306?text=Hello%20Nagdev%20Products%2C%20I%20would%20like%20to%20enquire%20about%20product%20specifications%20and%20commercial%20supply.",
     email: "nagdevproducts@gmail.com",
     headOffice: {
       label: "Head Office",
