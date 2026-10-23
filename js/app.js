@@ -10,7 +10,9 @@
   var header = document.getElementById('site-header');
   if (header) {
     window.addEventListener('scroll', function() {
-      header.classList.toggle('scrolled', window.scrollY > 30);
+      var topBar = document.querySelector('.top-bar');
+      var topBarH = (topBar && window.getComputedStyle(topBar).display !== 'none') ? topBar.offsetHeight : 0;
+      header.classList.toggle('scrolled', window.scrollY > (topBarH || 35));
     }, { passive: true });
   }
 

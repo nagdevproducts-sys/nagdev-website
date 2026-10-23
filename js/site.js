@@ -10,10 +10,16 @@
   const header = document.getElementById('site-header');
   if (header) {
     const onScroll = () => {
-      header.classList.toggle('scrolled', window.scrollY > 40);
+      const topBar = document.querySelector('.top-bar');
+      const topBarH = (topBar && window.getComputedStyle(topBar).display !== 'none') ? topBar.offsetHeight : 0;
+      header.classList.toggle('scrolled', window.scrollY > (topBarH || 35));
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    if (window.scrollY > 0) {
+      onScroll();
+    } else {
+      header.classList.remove('scrolled');
+    }
   }
 
   // ── Mobile drawer ────────────────────────────────────────────────────────

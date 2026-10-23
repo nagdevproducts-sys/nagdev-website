@@ -158,7 +158,7 @@ const PRODUCTS_DATABASE = [
       ]
     ],
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "first-special-grade-castor-oil",
@@ -371,7 +371,7 @@ const PRODUCTS_DATABASE = [
       ]
     ],
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "cold-pressed-castor-oil",
@@ -472,7 +472,7 @@ const PRODUCTS_DATABASE = [
       ]
     ],
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "castor-oil-bp93",
@@ -548,15 +548,15 @@ const PRODUCTS_DATABASE = [
         "Passes BP Test"
       ]
     ],
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "de-oiled-cake-castor-meal",
     "number": "07",
-    "name": "De Oiled Cake (D.O.C) - Castor Meal",
-    "brandName": "NDEV-DOC",
-    "category": "de-oiled-cake",
-    "categoryLabel": "De Oiled Cake (D.O.C)",
+    "name": "Castor Cake (Expeller Cake) — Organic Manure",
+    "brandName": "NDEVAGRO™ CAKE",
+    "category": "castor-cake",
+    "categoryLabel": "Castor Cake (Expeller Cake)",
     "casNumber": "68424-10-2",
     "industries": [
       "agriculture",
@@ -570,10 +570,10 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/de-oiled-cake-castor-meal.webp",
     "packing": "50 kg HDPE / PP Bags with inner liner • 1000 kg Jumbo Bags • Bulk loose in containers",
     "shelfLife": "12 months from date of manufacture in dry, covered storage",
-    "application": "High-value organic fertilizer rich in slow-release Nitrogen, Phosphorus, and Potash (N-P-K). Naturally contains ricin and secondary metabolites that repel soil nematodes, termites, and subterranean pests while increasing soil humus.",
+    "application": "Natural organic fertilizer and high-nutrient soil conditioner rich in slow-release Nitrogen, Phosphorus, and Potash (N-P-K). Produced directly from high-pressure mechanical seed expelling, providing ~8–10% residual oil and typical 4.0–4.5% organic nitrogen that naturally deters soil nematodes, termites, and pests while conditioning soil humus.",
     "headers": [
       "SR NO",
-      "CHARATERISTICS",
+      "TEST PARAMETER",
       "SPECIFICATIONS",
       "TEST METHOD"
     ],
@@ -581,43 +581,43 @@ const PRODUCTS_DATABASE = [
       [
         "1",
         "Residual Oil Content",
-        "0.5% to 1.0%",
+        "8.0% to 10.0% (typical)",
         "IS 3448"
       ],
       [
         "2",
         "Bulk Density",
-        "0.55 to 0.60 g/cc",
+        "0.55 to 0.65 g/cc",
         "IS 3448"
       ],
       [
         "3",
         "Gross Calorific Value",
-        "4000 – 4200 Kcal/kg",
+        "4200 – 4400 Kcal/kg",
         "Bomb Calorimeter"
       ],
       [
         "4",
         "Nitrogen (N)",
-        "4.5% to 5.0%",
+        "4.0% to 4.5% (typical)",
         "Kjeldahl Method"
       ],
       [
         "5",
         "Phosphorous (P₂O₅)",
-        "2.0%",
+        "1.0% to 1.5% (typical)",
         "IS 3448"
       ],
       [
         "6",
         "Potash (K₂O)",
-        "1.0%",
+        "1.0% to 1.5% (typical)",
         "Flame Photometer"
       ],
       [
         "7",
-        "Moisture",
-        "9.0% to 12.0%",
+        "Moisture and Volatile Matter",
+        "8.0% to 10.0% Max",
         "Oven Drying Method"
       ]
     ],
@@ -629,8 +629,8 @@ const PRODUCTS_DATABASE = [
     "number": "08",
     "name": "High Protein Castor Meal (N8/N10)",
     "brandName": "NDEV-HPC",
-    "category": "de-oiled-cake",
-    "categoryLabel": "De Oiled Cake (D.O.C)",
+    "category": "specialty-derivatives",
+    "categoryLabel": "Specialty Range (Available on Enquiry)",
     "casNumber": "68424-10-2",
     "isSpecialtyRange": true,
     "industries": [
@@ -645,7 +645,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/high-protein-castor-meal.webp",
     "packing": "25 kg / 50 kg Laminated HDPE Bags • 1000 kg Jumbo Bags with moisture-barrier liner",
     "shelfLife": "12 months from date of manufacture in cool, dry warehouse",
-    "application": "Advanced high-nitrogen organic bio-nutrient enriched through seed de-hulling and proprietary fine-fraction separation. Formulated in N8 (50% Protein) and N10 (60% Protein) variants for high-yield cash crops, sugarcane, tea, and greenhouse floriculture.",
+    "application": "Specialty high-nitrogen organic plant nutrient and soil conditioner offered under our Specialty Range — Available on Enquiry for precision organic horticulture and customized fertilizer blending formulations.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -696,7 +696,7 @@ const PRODUCTS_DATABASE = [
         "8.0% Max"
       ]
     ],
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "12-hydroxystearic-acid",
@@ -1010,7 +1010,7 @@ const PRODUCTS_DATABASE = [
         "5.0% Max"
       ]
     ],
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "sodium-sulphate-anhydrous",
@@ -1109,7 +1109,7 @@ const PRODUCTS_DATABASE = [
       ]
     ],
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "dehydrated-castor-oil",
@@ -1212,7 +1212,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVPOL™ DCO",
     "brandCode": "NDEVPOL-DCO",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "dco-fatty-acid",
@@ -1321,7 +1321,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVACID™ DCO",
     "brandCode": "NDEVACID-DCO",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "blown-oxidized-castor-oil",
@@ -1424,7 +1424,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVOX™ BLO",
     "brandCode": "NDEVOX-BLO",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "bio-polyurethane-polyols",
@@ -1533,7 +1533,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVPOL™ BIO",
     "brandCode": "NDEVPOL-BIO",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "sebacic-acid",
@@ -1643,7 +1643,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVACID™ SEB",
     "brandCode": "NDEVACID-SEB",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "methyl-ricinoleate",
@@ -1753,7 +1753,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVEST™ MR",
     "brandCode": "NDEVEST-MR",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "methyl-12-hydroxystearate",
@@ -1862,7 +1862,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVEST™ M12H",
     "brandCode": "NDEVEST-M12H",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "dioctyl-sebacate",
@@ -1965,7 +1965,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVEST™ DOS",
     "brandCode": "NDEVEST-DOS",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "dibutyl-sebacate",
@@ -2068,7 +2068,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVEST™ DBS",
     "brandCode": "NDEVEST-DBS",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "lithium-12-hydroxystearate",
@@ -2176,7 +2176,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVSOAP™ LI12",
     "brandCode": "NDEVSOAP-LI12",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "calcium-12-hydroxystearate",
@@ -2285,7 +2285,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVSOAP™ CA12",
     "brandCode": "NDEVSOAP-CA12",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "zinc-ricinoleate",
@@ -2388,7 +2388,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVSOAP™ ZNR",
     "brandCode": "NDEVSOAP-ZNR",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "zinc-undecylenate",
@@ -2491,7 +2491,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVSOAP™ ZNU",
     "brandCode": "NDEVSOAP-ZNU",
     "isSpecialtyRange": true,
-    "productGroup": "specialty-range"
+    "productGroup": "specialty"
   },
   {
     "id": "refined-glycerin",
