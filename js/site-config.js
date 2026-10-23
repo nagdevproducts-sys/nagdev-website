@@ -18,7 +18,7 @@ const SITE_CONFIG = {
     inspectionPolicy: "Third-party inspection (SGS / Bureau Veritas / Intertek) arranged at buyer's request and cost.",
     laboratory: "our in-house QC laboratory",
     ctaPrimary: "Request a Quote — request samples & pricing",
-    crushingCapacity: "Available on request",
+    crushingCapacity: "Seed crushing capacity: 50 TPD",
     plantStatus: "Operational",
     status: "Operational Plant · Supplying Commercial Volumes Now"
   },
