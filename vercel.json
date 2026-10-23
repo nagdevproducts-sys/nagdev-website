@@ -18,6 +18,26 @@
       "permanent": true
     },
     {
+      "source": "/castor-oils",
+      "destination": "/products?filter=castor-oil",
+      "permanent": true
+    },
+    {
+      "source": "/castor-oils.html",
+      "destination": "/products?filter=castor-oil",
+      "permanent": true
+    },
+    {
+      "source": "/castor-oil-derivatives",
+      "destination": "/products?filter=derivatives",
+      "permanent": true
+    },
+    {
+      "source": "/castor-oil-derivatives.html",
+      "destination": "/products?filter=derivatives",
+      "permanent": true
+    },
+    {
       "source": "/products/castor-cake-fertilizer",
       "destination": "/products/castor-cake",
       "permanent": true
