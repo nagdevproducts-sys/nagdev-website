@@ -1319,7 +1319,7 @@
       <a href="/products/${p.id}" class="product-card${p.isSpecialtyRange ? ' is-specialty' : ''}" id="card-${p.id}" role="listitem"
          aria-label="View specifications for ${p.name}">
         <div class="product-card-img-wrap">
-          <img src="/${p.image.replace(/^\\//, '')}" alt="${p.name} manufactured in Gujarat, India" width="400" height="300" loading="lazy" onerror="this.style.opacity='0.3'">
+          <img src="/${p.image.replace(/^\//, '')}" alt="${p.name} manufactured in Gujarat, India" width="400" height="300" loading="lazy" onerror="this.style.opacity='0.3'">
           ${
             REGULAR_SUPPLY_IDS.includes(p.id)
               ? '<span class="dev-badge-pill" style="background:#EBF2ED;color:#0B3D1E;border:1px solid #C4D9CA;font-weight:700;">Regular Supply</span>'
