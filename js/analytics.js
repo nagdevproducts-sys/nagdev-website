@@ -476,19 +476,54 @@
     return 'other';
   }
 
+  // Event Name & Parameter Sanitization (snake_case <= 40 chars, values <= 100 chars)
+  function sanitizeEventName(name) {
+    if (!name || typeof name !== 'string') return 'custom_event';
+    return name.toLowerCase()
+      .replace(/[^a-z0-9_]+/g, '_')
+      .replace(/^_+|_+$/g, '')
+      .slice(0, 40);
+  }
+
+  function sanitizeParamValue(val) {
+    if (typeof val === 'string') {
+      return val.slice(0, 100);
+    }
+    if (typeof val === 'number' || typeof val === 'boolean') {
+      return val;
+    }
+    if (val !== null && val !== undefined) {
+      return String(val).slice(0, 100);
+    }
+    return val;
+  }
+
+  function sanitizeParams(params) {
+    const sanitized = {};
+    if (!params || typeof params !== 'object') return sanitized;
+    for (const k in params) {
+      if (Object.prototype.hasOwnProperty.call(params, k)) {
+        sanitized[k] = sanitizeParamValue(params[k]);
+      }
+    }
+    return sanitized;
+  }
+
   function trackEvent(eventName, params) {
     if (!shouldTrack()) return;
+    const sanitizedName = sanitizeEventName(eventName);
     const defaultParams = {
-      page_path: window.location.pathname,
+      page_path: (window.location.pathname || '').slice(0, 100),
       product_slug: getProductSlug()
     };
-    const finalParams = Object.assign(defaultParams, params);
-    if (finalParams.product_slug) {
-      finalParams.product_slug = normalizeProductSlug(finalParams.product_slug);
+    const merged = Object.assign(defaultParams, params);
+    if (merged.product_slug) {
+      merged.product_slug = normalizeProductSlug(merged.product_slug);
     } else {
-      finalParams.product_slug = 'other';
+      merged.product_slug = 'other';
     }
-    gtagCall('event', eventName, finalParams);
+    const finalParams = sanitizeParams(merged);
+    gtagCall('event', sanitizedName, finalParams);
   }
 
   // 6. Delegated Event Listeners
@@ -555,7 +590,7 @@
     // Quote / Inquire CTA Click (links to /contact)
     const cleanHref = href.split('?')[0].split('#')[0];
     if (cleanHref === '/contact' || cleanHref === 'contact.html' || cleanHref.endsWith('/contact.html')) {
-      const ctaText = (anchor.textContent || '').trim().replace(/\s+/g, ' ');
+      const ctaText = (anchor.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 100);
       trackEvent('quote_cta_click', {
         cta_text: ctaText,
         link_location: getLinkLocation(anchor)
