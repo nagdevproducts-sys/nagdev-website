@@ -167,6 +167,40 @@
   ]
 }
   </script>
+  <!-- Google Analytics 4 & Consent Mode v2 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'region': ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'IS', 'LI', 'NO', 'GB', 'CH'],
+      'wait_for_update': 500
+    });
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'granted'
+    });
+    try {
+      var _c = localStorage.getItem('nagdev_consent');
+      if (_c) {
+        var _p = JSON.parse(_c);
+        if (_p && _p.timestamp && (Date.now() - _p.timestamp < 31536000000)) {
+          gtag('consent', 'update', {
+            'analytics_storage': _p.choice === 'granted' ? 'granted' : 'denied'
+          });
+        } else {
+          localStorage.removeItem('nagdev_consent');
+        }
+      }
+    } catch(e){}
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HL3JQ3ZQKF"></script>
+  <script defer src="/js/analytics.js"></script>
 </head>
 <body>
 <a href="#main-content" class="skip-to-content">Skip to main content</a>
@@ -922,6 +956,8 @@
         <a href="/products" class="footer-bottom-link">Products (27)</a>
         <a href="/process-flow" class="footer-bottom-link">Process Flow</a>
         <a href="/contact" class="footer-bottom-link">Enquiries</a>
+        <a href="/privacy" class="footer-bottom-link">Privacy Policy</a>
+        <button type="button" id="cookie-settings-btn" class="footer-bottom-link cookie-settings-trigger" style="background:none;border:none;padding:0;font:inherit;color:inherit;cursor:pointer;">Cookie Settings</button>
         <a href="/sitemap.xml" class="footer-bottom-link">Sitemap</a>
       </div>
     </div>
