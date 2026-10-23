@@ -303,8 +303,12 @@
       allow_ad_personalization_signals: false
     };
 
+    // CRITICAL REQUIREMENT: Production must never send debug_mode.
+    // Make sure debug_mode is set ONLY on non-production hosts with ?ga_debug=1.
     if (!isProduction() && isDebug()) {
       configOptions.debug_mode = true;
+    } else {
+      delete configOptions.debug_mode;
     }
 
     gtagCall('config', GA_MEASUREMENT_ID, configOptions);
