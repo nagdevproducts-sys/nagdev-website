@@ -95,7 +95,9 @@ const PRODUCTS_DATABASE = [
         "Refractive Index @ 40°C",
         "1.477 – 1.481"
       ]
-    ]
+    ],
+    "isSpecialtyRange": false,
+    "productGroup": "core"
   },
   {
     "id": "fpd-castor-oil",
@@ -154,7 +156,9 @@ const PRODUCTS_DATABASE = [
         "Moisture and Volatiles",
         "0.5% Max"
       ]
-    ]
+    ],
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "first-special-grade-castor-oil",
@@ -249,7 +253,9 @@ const PRODUCTS_DATABASE = [
         "Moisture",
         "0.25% Max"
       ]
-    ]
+    ],
+    "isSpecialtyRange": false,
+    "productGroup": "core"
   },
   {
     "id": "ppg-castor-oil",
@@ -363,7 +369,9 @@ const PRODUCTS_DATABASE = [
         "Ricinoleic Acid Content",
         "85% Min"
       ]
-    ]
+    ],
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "cold-pressed-castor-oil",
@@ -462,7 +470,9 @@ const PRODUCTS_DATABASE = [
         "Ricinoleic Acid Content",
         "85% Min"
       ]
-    ]
+    ],
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "castor-oil-bp93",
@@ -472,6 +482,7 @@ const PRODUCTS_DATABASE = [
     "category": "castor-oil",
     "categoryLabel": "Castor Oil",
     "casNumber": "8001-79-4",
+    "isSpecialtyRange": true,
     "industries": [
       "pharmaceuticals",
       "cosmetics",
@@ -536,7 +547,8 @@ const PRODUCTS_DATABASE = [
         "Distinction from other fixed oils",
         "Passes BP Test"
       ]
-    ]
+    ],
+    "productGroup": "specialty-range"
   },
   {
     "id": "de-oiled-cake-castor-meal",
@@ -608,7 +620,9 @@ const PRODUCTS_DATABASE = [
         "9.0% to 12.0%",
         "Oven Drying Method"
       ]
-    ]
+    ],
+    "isSpecialtyRange": false,
+    "productGroup": "core"
   },
   {
     "id": "high-protein-castor-meal",
@@ -618,6 +632,7 @@ const PRODUCTS_DATABASE = [
     "category": "de-oiled-cake",
     "categoryLabel": "De Oiled Cake (D.O.C)",
     "casNumber": "68424-10-2",
+    "isSpecialtyRange": true,
     "industries": [
       "agriculture",
       "bio-fertilizers",
@@ -680,7 +695,8 @@ const PRODUCTS_DATABASE = [
         "8.0% Max",
         "8.0% Max"
       ]
-    ]
+    ],
+    "productGroup": "specialty-range"
   },
   {
     "id": "12-hydroxystearic-acid",
@@ -745,7 +761,9 @@ const PRODUCTS_DATABASE = [
         "Colour Gardner",
         "3 – 4 Max"
       ]
-    ]
+    ],
+    "isSpecialtyRange": false,
+    "productGroup": "core"
   },
   {
     "id": "hydrogenated-castor-oil",
@@ -831,7 +849,9 @@ const PRODUCTS_DATABASE = [
         "—",
         "99% Passing through 16 Mesh"
       ]
-    ]
+    ],
+    "isSpecialtyRange": false,
+    "productGroup": "core"
   },
   {
     "id": "ricinoleic-acid",
@@ -911,7 +931,9 @@ const PRODUCTS_DATABASE = [
         "Ricinoleic Acid % by GC",
         "85% Min"
       ]
-    ]
+    ],
+    "isSpecialtyRange": false,
+    "productGroup": "core"
   },
   {
     "id": "crude-glycerin",
@@ -921,6 +943,7 @@ const PRODUCTS_DATABASE = [
     "category": "by-products",
     "categoryLabel": "By-Products",
     "casNumber": "56-81-5",
+    "isSpecialtyRange": true,
     "industries": [
       "refineries",
       "bio-fuels",
@@ -986,7 +1009,8 @@ const PRODUCTS_DATABASE = [
         "Salt (as NaCl / Na₂SO₄)",
         "5.0% Max"
       ]
-    ]
+    ],
+    "productGroup": "specialty-range"
   },
   {
     "id": "sodium-sulphate-anhydrous",
@@ -1083,7 +1107,9 @@ const PRODUCTS_DATABASE = [
         "—",
         "Passes 100%"
       ]
-    ]
+    ],
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "dehydrated-castor-oil",
@@ -1185,7 +1211,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVPOL™ DCO",
     "brandCode": "NDEVPOL-DCO",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "dco-fatty-acid",
@@ -1293,7 +1320,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVACID™ DCO",
     "brandCode": "NDEVACID-DCO",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "blown-oxidized-castor-oil",
@@ -1395,7 +1423,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVOX™ BLO",
     "brandCode": "NDEVOX-BLO",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "bio-polyurethane-polyols",
@@ -1503,7 +1532,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVPOL™ BIO",
     "brandCode": "NDEVPOL-BIO",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "sebacic-acid",
@@ -1612,7 +1642,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVACID™ SEB",
     "brandCode": "NDEVACID-SEB",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "methyl-ricinoleate",
@@ -1721,7 +1752,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVEST™ MR",
     "brandCode": "NDEVEST-MR",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "methyl-12-hydroxystearate",
@@ -1829,7 +1861,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVEST™ M12H",
     "brandCode": "NDEVEST-M12H",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "dioctyl-sebacate",
@@ -1931,7 +1964,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVEST™ DOS",
     "brandCode": "NDEVEST-DOS",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "dibutyl-sebacate",
@@ -2033,7 +2067,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVEST™ DBS",
     "brandCode": "NDEVEST-DBS",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "lithium-12-hydroxystearate",
@@ -2140,7 +2175,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVSOAP™ LI12",
     "brandCode": "NDEVSOAP-LI12",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "calcium-12-hydroxystearate",
@@ -2248,7 +2284,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVSOAP™ CA12",
     "brandCode": "NDEVSOAP-CA12",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "zinc-ricinoleate",
@@ -2350,7 +2387,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVSOAP™ ZNR",
     "brandCode": "NDEVSOAP-ZNR",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "zinc-undecylenate",
@@ -2452,7 +2490,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVSOAP™ ZNU",
     "brandCode": "NDEVSOAP-ZNU",
-    "isSpecialtyRange": true
+    "isSpecialtyRange": true,
+    "productGroup": "specialty-range"
   },
   {
     "id": "refined-glycerin",
@@ -2566,7 +2605,8 @@ const PRODUCTS_DATABASE = [
     ],
     "brandName": "NDEVGLY™ 995",
     "brandCode": "NDEVGLY-995",
-    "isSpecialtyRange": false
+    "isSpecialtyRange": false,
+    "productGroup": "core"
   }
 ];
 
