@@ -420,8 +420,8 @@
       <div>
         <div class="footer-col-title">Products</div>
         <ul class="footer-links">
-          <li><a href="../castor-oils.html" class="footer-link">Castor Oils</a></li>
-          <li><a href="../castor-oil-derivatives.html" class="footer-link">Castor Derivatives</a></li>
+          <li><a href="../products.html?filter=castor-oil" class="footer-link">Castor Oils</a></li>
+          <li><a href="../products.html?filter=derivatives" class="footer-link">Castor Derivatives</a></li>
           <li><a href="../products.html" class="footer-link">All 27 Products →</a></li>
         </ul>
       </div>
