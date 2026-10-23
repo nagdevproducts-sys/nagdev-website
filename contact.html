@@ -35,31 +35,70 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Contact Nagdev Products Private Limited",
-    "url": "https://www.nagdevproducts.com/contact.html",
-    "mainEntity": {
-      "@type": "Organization",
-      "name": "Nagdev Products Private Limited",
-      "url": "https://www.nagdevproducts.com",
-      "logo": "https://www.nagdevproducts.com/images/logo.png",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+91-63520-98306",
-        "contactType": "sales",
+    "@graph": [
+      {
+        "@type": ["Organization", "LocalBusiness"],
+        "@id": "https://www.nagdevproducts.com/#organization",
+        "name": "Nagdev Products",
+        "legalName": "Nagdev Products Private Limited",
+        "url": "https://www.nagdevproducts.com",
+        "logo": "https://www.nagdevproducts.com/images/logo.png",
+        "image": "https://www.nagdevproducts.com/images/og-share.jpg",
+        "telephone": "+916352098306",
         "email": "nagdevproducts@gmail.com",
-        "areaServed": "Worldwide",
-        "availableLanguage": ["English", "Hindi", "Gujarati"]
+        "hasMap": "https://maps.app.goo.gl/4eETjMFpRmRxWcf6A",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "[ENTER]",
+          "longitude": "[ENTER]"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar",
+          "addressLocality": "Deodar",
+          "addressRegion": "Gujarat",
+          "postalCode": "385330",
+          "addressCountry": "IN"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+916352098306",
+          "contactType": "sales",
+          "email": "nagdevproducts@gmail.com",
+          "availableLanguage": ["English", "Hindi", "Gujarati"]
+        },
+        "sameAs": [
+          "[TO CONFIRM: LinkedIn]",
+          "[TO CONFIRM: IndiaMART]",
+          "[TO CONFIRM: Google Business Profile]"
+        ]
       },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel",
-        "addressLocality": "Banaskantha",
-        "addressRegion": "Gujarat",
-        "postalCode": "385330",
-        "addressCountry": "IN"
+      {
+        "@type": "WebSite",
+        "@id": "https://www.nagdevproducts.com/#website",
+        "url": "https://www.nagdevproducts.com",
+        "name": "Nagdev Products",
+        "publisher": {"@id": "https://www.nagdevproducts.com/#organization"}
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.nagdevproducts.com/contact#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.nagdevproducts.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Contact",
+            "item": "https://www.nagdevproducts.com/contact"
+          }
+        ]
       }
-    }
+    ]
   }
   </script>
   <meta name="theme-color" content="#0b3d1e">
