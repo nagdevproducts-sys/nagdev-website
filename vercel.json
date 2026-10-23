@@ -19,12 +19,12 @@
     },
     {
       "source": "/products/castor-cake-fertilizer",
-      "destination": "/products/de-oiled-cake-castor-meal",
+      "destination": "/products/castor-cake",
       "permanent": true
     },
     {
       "source": "/products/castor-cake-fertilizer.html",
-      "destination": "/products/de-oiled-cake-castor-meal",
+      "destination": "/products/castor-cake",
       "permanent": true
     },
     {
@@ -45,6 +45,16 @@
     {
       "source": "/guides/castor-oil-export-packing-incoterms",
       "destination": "/guides/castor-oil-packaging-and-storage",
+      "permanent": true
+    },
+    {
+      "source": "/products/de-oiled-cake-castor-meal",
+      "destination": "/products/castor-cake",
+      "permanent": true
+    },
+    {
+      "source": "/products/de-oiled-cake-castor-meal.html",
+      "destination": "/products/castor-cake",
       "permanent": true
     }
   ],

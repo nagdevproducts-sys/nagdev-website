@@ -551,13 +551,13 @@ const PRODUCTS_DATABASE = [
     "productGroup": "specialty"
   },
   {
-    "id": "de-oiled-cake-castor-meal",
+    "id": "castor-cake",
     "number": "07",
     "name": "Castor Cake (Expeller Cake) — Organic Manure",
     "brandName": "NDEVAGRO™ CAKE",
-    "category": "castor-cake",
-    "categoryLabel": "Castor Cake (Expeller Cake)",
-    "casNumber": "68424-10-2",
+    "category": "organic-manure",
+    "categoryLabel": "Organic Manure",
+    "casNumber": "",
     "industries": [
       "agriculture",
       "organic-fertilizers",
@@ -567,10 +567,10 @@ const PRODUCTS_DATABASE = [
     "physicalForm": "Granular / Flakes / Meal",
     "typicalColour": "Light Brown to Dark Brown",
     "rawMaterial": "Castor Seed Cake",
-    "image": "images/products/de-oiled-cake-castor-meal.webp",
-    "packing": "50 kg HDPE / PP Bags with inner liner • 1000 kg Jumbo Bags • Bulk loose in containers",
+    "image": "images/products/castor-cake.webp",
+    "packing": "50 kg HDPE woven bags with inner poly liner • 1,000 kg PP jumbo bulk bags with bottom discharge spout",
     "shelfLife": "12 months from date of manufacture in dry, covered storage",
-    "application": "Natural organic fertilizer and high-nutrient soil conditioner rich in slow-release Nitrogen, Phosphorus, and Potash (N-P-K). Produced directly from high-pressure mechanical seed expelling, providing ~8–10% residual oil and typical 4.0–4.5% organic nitrogen that naturally deters soil nematodes, termites, and pests while conditioning soil humus.",
+    "application": "Premier 100% natural organic manure with slow-release Nitrogen, Phosphorus, and Potash (N-P-K ~ 4-1-1). Natural ricin and alkaloid content acts as an organic deterrent against soil nematodes and termites while improving soil humus.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
