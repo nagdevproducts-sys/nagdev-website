@@ -1,6 +1,6 @@
 # Nagdev Products Private Limited
 
-> Integrated castor oil and chemical derivatives manufacturer situated in North Gujarat's prolific castor belt (Banaskantha–Vav-Tharad region). With an integrated 50 MT/day castor seed crushing capacity, continuous chemical refining, and downstream derivatives processing, Nagdev Products manufactures technical-grade castor oils, de-oiled cake organic fertilizers, hydrogenated castor wax (HCO), and 12-hydroxystearic acid (12-HSA). Our integrated plant in North Gujarat is operational, with 50 TPD mechanical seed pressing, 20 TPD semi-continuous refining and batch pressure reactors for derivatives. Nagdev Products is actively supplying commercial volumes and providing technical samples and specifications for domestic and international B2B buyers.
+> Integrated castor oil and chemical derivatives manufacturer situated in North Gujarat's prolific castor belt (Banaskantha–Vav-Tharad region). With integrated castor seed crushing operations, continuous chemical refining, and downstream derivatives processing, Nagdev Products manufactures technical-grade castor oils, de-oiled cake organic fertilizers, hydrogenated castor wax (HCO), and 12-hydroxystearic acid (12-HSA). Our integrated plant in North Gujarat is operational, with mechanical seed pressing, semi-continuous refining and batch pressure reactors for derivatives. Nagdev Products is actively supplying commercial volumes and providing technical samples and specifications for domestic and international B2B buyers.
 
 ## Company Facts & Verification
 - **Legal Entity:** Nagdev Products Private Limited
@@ -10,13 +10,13 @@
 - **Manufacturing Plant:** Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar, District – Vav-Tharad, Gujarat – 385330, India
 - **Geo Coordinates:** Latitude 24.183805, Longitude 71.736510
 - **Regional Geography:** Banaskantha–Vav-Tharad castor belt, North Gujarat, India
-- **Crushing Capacity:** 50 MT/day seed processing
+- **Crushing Operations:** Integrated mechanical seed expelling
 - **Plant Status:** Operational (Supplying commercial volumes now)
 - **Phone / WhatsApp:** +91 63520 98306
 - **Email:** nagdevproducts@gmail.com
 - **Official Website:** https://www.nagdevproducts.com
 - **Google Maps Location:** https://maps.app.goo.gl/4eETjMFpRmRxWcf6A
-- **Quality System:** Quality management systems aligned to ISO 9001 with REACH-ready technical documentation and lot-traceable Certificates of Analysis (COA).
+- **Quality System:** Structured quality management with lot-traceable Certificates of Analysis (COA), TDS, and SDS for buyer qualification.
 
 ---
 
@@ -64,8 +64,8 @@
 - **Resources Hub:** https://www.nagdevproducts.com/resources (Technical application guides, buyer references, HS tariff classifications, comparison matrices, and chemical flowcharts).
 - **Industrial Process Flow:** https://www.nagdevproducts.com/process-flow (Interactive 3-stage process flowcharts: mechanical seed pressing, semi-continuous refining, and derivatives synthesis).
 - **Castor Chemistry Tree:** https://www.nagdevproducts.com/chemistry-tree (Interactive reaction map of 27 commercial oleochemicals).
-- **Our Plant in Operation:** https://www.nagdevproducts.com/plant-progress (Operational facility with 50 TPD mechanical seed pressing, 20 TPD semi-continuous refining, and batch pressure reactors for derivatives).
-- **Infrastructure:** https://www.nagdevproducts.com/infrastructure (Integrated 50 TPD mechanical pressing, 20 TPD semi-continuous refining, batch pressure reactors, in-house QC laboratory, and storage facilities).
+- **Our Plant in Operation:** https://www.nagdevproducts.com/plant-progress (Operational facility with mechanical seed pressing, semi-continuous refining, and batch pressure reactors for derivatives).
+- **Infrastructure:** https://www.nagdevproducts.com/infrastructure (Integrated mechanical pressing, semi-continuous refining, batch pressure reactors, in-house QC laboratory, and storage facilities).
 - **Quality Assurance:** https://www.nagdevproducts.com/quality (Standard oil parameters: acid value, hydroxyl value, iodine value, moisture, colour).
 - **Sustainability:** https://www.nagdevproducts.com/sustainability (Renewable bio-based feedstock, non-food oilseed crop suited to semi-arid regions, circular seed utilization).
 - **Comprehensive FAQ:** https://www.nagdevproducts.com/faq (25 buyer answers covering specs, MOQs, testing, shipping, and commercial orders).
