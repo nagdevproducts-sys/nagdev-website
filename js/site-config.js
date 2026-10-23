@@ -7,9 +7,12 @@ const SITE_CONFIG = {
   company: {
     legalName: "Nagdev Products Private Limited",
     brandName: "Nagdev Products",
+    cin: "U15400GJ2019PTC110518",
+    foundingYear: "2019",
+    incorporationText: "Incorporated in 2019 (Gujarat, India)",
     website: "https://www.nagdevproducts.com",
     tagline: "Integrated castor oil and derivatives manufacturer from Gujarat's castor belt.",
-    positioning: "Integrated Castor Oil & Derivatives Plant · North Gujarat",
+    positioning: "Integrated Castor Oil & Derivatives Plant · North Gujarat | Head Office: Gandhinagar",
     heroBadge: "Manufacturer & Exporter · Commissioning 2027 · Now Booking Supply Contracts",
     qualityStatement: "Quality systems aligned to ISO 9001 · REACH-ready export documentation",
     inspectionPolicy: "Every consignment ships with a Certificate of Analysis; third-party inspection (SGS / Bureau Veritas) on request.",
@@ -19,13 +22,32 @@ const SITE_CONFIG = {
     commissioningYear: "2027",
     status: "Commissioning 2027 · Now Booking Supply Contracts"
   },
+  social: {
+    linkedin: "https://www.linkedin.com/company/nagdevproducts",
+    instagram: "https://www.instagram.com/nagdev.products",
+    googleBusinessProfile: "https://share.google/IvP1DfrOoygwPKLI6"
+  },
   contact: {
     phone: "+91 63520 98306",
     phoneTel: "+916352098306",
     whatsapp: "+91 63520 98306",
     whatsappLink: "https://wa.me/916352098306?text=Hello%20Nagdev%20Products%2C%20I%20would%20like%20to%20enquire%20about%202027%20supply%20contracts%20and%20product%20specifications.",
     email: "nagdevproducts@gmail.com",
-    address: {
+    headOffice: {
+      label: "Head Office",
+      city: "Gandhinagar",
+      street: "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal",
+      locality: "Gandhinagar",
+      state: "Gujarat",
+      postalCode: "382421",
+      country: "India",
+      countryCode: "IN",
+      fullText: "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal, Gandhinagar – 382421, Gujarat, India",
+      googleMapsSearchUrl: "https://www.google.com/maps/search/?api=1&query=612+6th+Floor+Sharan+Circle+Hub+SP+Ring+Road+Zundal+Circle+Gandhinagar+382421+Gujarat+India"
+    },
+    plant: {
+      label: "Plant (Manufacturing Unit)",
+      city: "Deodar (North Gujarat)",
       street: "Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel",
       taluka: "Taluka – Deodar",
       district: "District – Vav-Tharad",
@@ -34,12 +56,12 @@ const SITE_CONFIG = {
       country: "India",
       countryCode: "IN",
       fullText: "Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar, District – Vav-Tharad, Gujarat – 385330, India",
-      marketingRegion: "Banaskantha–Vav-Tharad castor belt, North Gujarat"
-    },
-    googleMapsUrl: "https://maps.app.goo.gl/4eETjMFpRmRxWcf6A",
-    coordinates: {
-      latitude: "24.183805",
-      longitude: "71.736510"
+      marketingRegion: "Banaskantha–Vav-Tharad castor belt, North Gujarat",
+      googleMapsUrl: "https://maps.app.goo.gl/4eETjMFpRmRxWcf6A",
+      coordinates: {
+        latitude: "24.183805",
+        longitude: "71.736510"
+      }
     }
   },
   catalog: {

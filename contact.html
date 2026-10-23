@@ -33,73 +33,132 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600&display=swap"></noscript>
   <link rel="stylesheet" href="/css/main.min.css">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": ["Organization", "LocalBusiness"],
-        "@id": "https://www.nagdevproducts.com/#organization",
-        "name": "Nagdev Products",
-        "legalName": "Nagdev Products Private Limited",
-        "url": "https://www.nagdevproducts.com",
-        "logo": "https://www.nagdevproducts.com/images/logo.png",
-        "image": "https://www.nagdevproducts.com/images/og-share.jpg",
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.nagdevproducts.com/#organization",
+      "name": "Nagdev Products",
+      "legalName": "Nagdev Products Private Limited",
+      "url": "https://www.nagdevproducts.com",
+      "logo": "https://www.nagdevproducts.com/images/logo.png",
+      "image": "https://www.nagdevproducts.com/images/og-share.jpg",
+      "telephone": "+916352098306",
+      "email": "nagdevproducts@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal",
+        "addressLocality": "Gandhinagar",
+        "addressRegion": "Gujarat",
+        "postalCode": "382421",
+        "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
         "telephone": "+916352098306",
+        "contactType": "sales",
         "email": "nagdevproducts@gmail.com",
-        "hasMap": "https://maps.app.goo.gl/4eETjMFpRmRxWcf6A",
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "24.183805",
-          "longitude": "71.736510"
-        },
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar",
-          "addressLocality": "Deodar",
-          "addressRegion": "Gujarat",
-          "postalCode": "385330",
-          "addressCountry": "IN"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+916352098306",
-          "contactType": "sales",
-          "email": "nagdevproducts@gmail.com",
-          "availableLanguage": ["English", "Hindi", "Gujarati"]
-        },
-        "sameAs": [
-          "[TO CONFIRM: LinkedIn]",
-          "[TO CONFIRM: IndiaMART]",
-          "[TO CONFIRM: Google Business Profile]"
+        "availableLanguage": [
+          "English",
+          "Hindi",
+          "Gujarati"
         ]
       },
-      {
-        "@type": "WebSite",
-        "@id": "https://www.nagdevproducts.com/#website",
-        "url": "https://www.nagdevproducts.com",
-        "name": "Nagdev Products",
-        "publisher": {"@id": "https://www.nagdevproducts.com/#organization"}
+      "sameAs": [
+        "https://www.linkedin.com/company/nagdevproducts",
+        "https://www.instagram.com/nagdev.products",
+        "https://share.google/IvP1DfrOoygwPKLI6"
+      ],
+      "foundingDate": "2019",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "CIN",
+        "value": "U15400GJ2019PTC110518"
       },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://www.nagdevproducts.com/contact#breadcrumb",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.nagdevproducts.com/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Contact",
-            "item": "https://www.nagdevproducts.com/contact"
-          }
-        ]
+      "location": [
+        {
+          "@id": "https://www.nagdevproducts.com/#head-office"
+        },
+        {
+          "@id": "https://www.nagdevproducts.com/#plant"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.nagdevproducts.com/#website",
+      "url": "https://www.nagdevproducts.com",
+      "name": "Nagdev Products",
+      "publisher": {
+        "@id": "https://www.nagdevproducts.com/#organization"
       }
-    ]
-  }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.nagdevproducts.com/contact#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.nagdevproducts.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://www.nagdevproducts.com/contact"
+        }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.nagdevproducts.com/#head-office",
+      "name": "Nagdev Products Private Limited — Head Office",
+      "url": "https://www.nagdevproducts.com",
+      "telephone": "+916352098306",
+      "email": "nagdevproducts@gmail.com",
+      "hasMap": "https://www.google.com/maps/search/?api=1&query=612+6th+Floor+Sharan+Circle+Hub+SP+Ring+Road+Zundal+Circle+Gandhinagar+382421+Gujarat+India",
+      "parentOrganization": {
+        "@id": "https://www.nagdevproducts.com/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal",
+        "addressLocality": "Gandhinagar",
+        "addressRegion": "Gujarat",
+        "postalCode": "382421",
+        "addressCountry": "IN"
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.nagdevproducts.com/#plant",
+      "name": "Nagdev Products Private Limited — Manufacturing Plant",
+      "url": "https://www.nagdevproducts.com",
+      "telephone": "+916352098306",
+      "email": "nagdevproducts@gmail.com",
+      "hasMap": "https://maps.app.goo.gl/4eETjMFpRmRxWcf6A",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "24.183805",
+        "longitude": "71.736510"
+      },
+      "parentOrganization": {
+        "@id": "https://www.nagdevproducts.com/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar",
+        "addressLocality": "Deodar",
+        "addressRegion": "Gujarat",
+        "postalCode": "385330",
+        "addressCountry": "IN"
+      }
+    }
+  ]
+}
   </script>
   <meta name="theme-color" content="#0b3d1e">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -256,61 +315,80 @@
 
       <!-- LEFT: Contact Info -->
       <div class="contact-info fade-up">
-        <div id="main-content" class="section-eyebrow">Our Office</div>
+        <div id="main-content" class="section-eyebrow">Enterprise Contact</div>
         <h2 class="contact-info-title">Nagdev Products<br>Private Limited</h2>
+        <p style="font-size:0.85rem;color:var(--text-mid);margin-top:-0.5rem;margin-bottom:1.5rem;">
+          Incorporated in 2019 (Gujarat, India)<br>
+          <strong style="color:var(--forest);">CIN:</strong> <span style="font-family:monospace;font-weight:600;">U15400GJ2019PTC110518</span>
+        </p>
 
+        <!-- Head Office Detail -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 11h2M6 15h2M10 11h2M10 15h2M14 11h2M14 15h2M18 11h2M18 15h2M9 3l3-2 3 2v4H9V3z"/></svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Head Office (Gandhinagar)</div>
+            <address style="font-style:normal;">
+              <p>612, 6th Floor, Sharan Circle Hub<br>
+              SP Ring Road, Zundal Circle, Zundal<br>
+              Gandhinagar – 382421, Gujarat, India</p>
+            </address>
+            <a href="https://www.google.com/maps/search/?api=1&query=612+6th+Floor+Sharan+Circle+Hub+SP+Ring+Road+Zundal+Circle+Gandhinagar+382421+Gujarat+India" target="_blank" rel="noopener" class="contact-link" style="font-size:0.825rem;color:var(--forest);font-weight:600;">Open Head Office Map ↗</a>
+          </div>
+        </div>
+
+        <!-- Plant Detail -->
         <div class="contact-detail">
           <div class="contact-detail-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
           <div>
-            <div class="contact-detail-label">Address</div>
+            <div class="contact-detail-label">Plant (Manufacturing Unit)</div>
             <address style="font-style:normal;">
               <p>Survey No. 301 P-2, Jada-Kotarwada Road<br>
               Village – Sardarpura, Post – Ravel<br>
-              Banaskantha, Gujarat – 385330<br>
-              India</p>
+              Taluka – Deodar, Dist. Vav-Tharad<br>
+              Gujarat – 385330, India</p>
             </address>
+            <a href="https://maps.app.goo.gl/4eETjMFpRmRxWcf6A" target="_blank" rel="noopener" class="contact-link" style="font-size:0.825rem;color:var(--forest);font-weight:600;">Open Plant Map ↗</a>
           </div>
         </div>
 
+        <!-- Phone & WhatsApp -->
         <div class="contact-detail">
           <div class="contact-detail-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.08 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.21 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
           </div>
           <div>
-            <div class="contact-detail-label">Phone</div>
+            <div class="contact-detail-label">Phone &amp; WhatsApp</div>
             <a href="tel:+916352098306" class="contact-link">+91 63520 98306</a>
           </div>
         </div>
 
+        <!-- Email -->
         <div class="contact-detail">
           <div class="contact-detail-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
           <div>
-            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-label">Official Email</div>
             <a href="mailto:nagdevproducts@gmail.com" class="contact-link">nagdevproducts@gmail.com</a>
           </div>
         </div>
 
+        <!-- Social & Verification -->
         <div class="contact-detail">
           <div class="contact-detail-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div>
-            <div class="contact-detail-label">Instagram</div>
-            <a href="https://www.instagram.com/nagdevproducts/" target="_blank" rel="noopener" class="contact-link">@nagdevproducts</a>
-          </div>
-        </div>
-
-        <div class="contact-detail">
-          <div class="contact-detail-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div class="contact-detail-label">Plant Location (Unit 1)</div>
-            <a href="https://maps.google.com/?q=24.183804795616343,71.73651029111288" target="_blank" rel="noopener" class="contact-link">View Unit 1 on Google Maps →</a>
+            <div class="contact-detail-label">Connect &amp; Verify</div>
+            <div style="display:flex;flex-direction:column;gap:0.35rem;margin-top:0.25rem;">
+              <a href="https://www.linkedin.com/company/nagdevproducts" target="_blank" rel="noopener" class="contact-link" style="font-size:0.85rem;">LinkedIn: /company/nagdevproducts ↗</a>
+              <a href="https://www.instagram.com/nagdev.products" target="_blank" rel="noopener" class="contact-link" style="font-size:0.85rem;">Instagram: @nagdev.products ↗</a>
+              <a href="https://share.google/IvP1DfrOoygwPKLI6" target="_blank" rel="noopener" class="contact-link" style="font-size:0.85rem;color:var(--forest);font-weight:600;">Google Business Profile ↗</a>
+            </div>
           </div>
         </div>
 
@@ -471,30 +549,96 @@
   </div>
 </section>
 
-<!-- PLANT UNIT 1 GOOGLE MAP -->
-<div style="background:var(--ivory);border-top:1px solid var(--border-light);">
-  <div class="container" style="padding-top:3rem;padding-bottom:3rem;">
-    <div class="section-header fade-up" style="margin-bottom:1.5rem;">
-      <div class="section-eyebrow">Plant Location (Unit 1)</div>
-      <h3 style="font-family:var(--font-display);font-size:1.75rem;font-weight:600;color:var(--charcoal);">Find Plant Unit 1 in Banaskantha, Gujarat.</h3>
+<!-- DUAL LOCATIONS SECTION WITH EMBEDDED MAPS -->
+<section style="background:var(--ivory);border-top:1px solid var(--border-light);padding:4rem 0;">
+  <div class="container">
+    <div class="section-header fade-up" style="margin-bottom:2.5rem;text-align:center;">
+      <div class="section-eyebrow">Our Locations</div>
+      <h2 style="font-family:var(--font-display);font-size:2.15rem;font-weight:600;color:var(--charcoal);">Visit Our Offices &amp; Manufacturing Facility</h2>
+      <p style="color:var(--text-mid);max-width:680px;margin:0.5rem auto 0;font-size:0.95rem;">
+        Commercial sales and export coordination managed from Gandhinagar; continuous crushing, refining, and technical derivative manufacturing based in North Gujarat's castor belt.
+      </p>
     </div>
-    <!-- Embedded Google Map -->
-    <div style="border-radius:var(--radius-md);overflow:hidden;aspect-ratio:16/5;background:var(--ivory-dark);display:flex;align-items:center;justify-content:center;border:1px solid var(--border-light);" class="fade-up">
-      <iframe
-        title="Nagdev Products Plant Unit 1 Location — Banaskantha Gujarat"
-        src="https://maps.google.com/maps?q=24.183804795616343,71.73651029111288&amp;hl=en&amp;z=15&amp;output=embed"
-        width="100%" height="100%"
-        style="border:0;display:block;min-height:340px;"
-        allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-    <div style="margin-top:0.75rem;font-size:0.85rem;color:var(--charcoal-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
-      <span><strong>Unit 1 Address:</strong> Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar, Dist. Banaskantha – 385330</span>
-      <span><strong>GPS Coordinates:</strong> <a href="https://maps.google.com/?q=24.183804795616343,71.73651029111288" target="_blank" rel="noopener" style="color:var(--forest);font-weight:600;">24.183805° N, 71.736510° E ↗</a></span>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:2.25rem;" class="fade-up">
+
+      <!-- Card 1: Head Office — Gandhinagar -->
+      <div style="background:#ffffff;border:1px solid var(--border-light);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;">
+        <div style="padding:1.5rem 1.75rem;border-bottom:1px solid var(--border-light);background:var(--bg-surface);">
+          <div style="display:inline-block;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;color:var(--forest);text-transform:uppercase;background:var(--forest-subtle);padding:0.25rem 0.65rem;border-radius:4px;margin-bottom:0.5rem;">Corporate Headquarters</div>
+          <h3 style="font-family:var(--font-display);font-size:1.5rem;color:var(--forest);margin-bottom:0.35rem;">Head Office — Gandhinagar</h3>
+          <p style="font-size:0.875rem;color:var(--text-mid);margin:0;">Commercial Sales, Export Desk &amp; Documentation</p>
+        </div>
+        <div style="aspect-ratio:16/9;background:var(--ivory-dark);position:relative;">
+          <iframe
+            title="Nagdev Products Head Office — Gandhinagar Gujarat"
+            src="https://maps.google.com/maps?q=612%206th%20Floor%20Sharan%20Circle%20Hub%20SP%20Ring%20Road%20Zundal%20Circle%20Gandhinagar%20382421%20Gujarat%20India&amp;hl=en&amp;z=15&amp;output=embed"
+            width="100%" height="100%"
+            style="border:0;display:block;width:100%;height:100%;min-height:260px;"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div style="padding:1.5rem 1.75rem;flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:1.25rem;">
+          <div>
+            <div style="font-size:0.9rem;color:var(--charcoal);line-height:1.6;margin-bottom:0.75rem;">
+              <strong>Address:</strong><br>
+              612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal, Gandhinagar – 382421, Gujarat, India
+            </div>
+            <div style="font-size:0.85rem;color:var(--text-mid);line-height:1.6;">
+              <div><strong>Phone &amp; WhatsApp:</strong> <a href="tel:+916352098306" style="color:var(--forest);font-weight:600;">+91 63520 98306</a></div>
+              <div><strong>Official Email:</strong> <a href="mailto:nagdevproducts@gmail.com" style="color:var(--forest);font-weight:600;">nagdevproducts@gmail.com</a></div>
+              <div><strong>Corporate CIN:</strong> <span style="font-family:monospace;color:var(--forest);font-weight:600;">U15400GJ2019PTC110518</span></div>
+            </div>
+          </div>
+          <div style="border-top:1px solid var(--border-light);padding-top:0.85rem;">
+            <a href="https://www.google.com/maps/search/?api=1&query=612+6th+Floor+Sharan+Circle+Hub+SP+Ring+Road+Zundal+Circle+Gandhinagar+382421+Gujarat+India" target="_blank" rel="noopener" style="font-size:0.875rem;color:var(--forest);font-weight:600;display:inline-flex;align-items:center;gap:0.35rem;">
+              Search Head Office on Google Maps ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Manufacturing Plant — North Gujarat -->
+      <div style="background:#ffffff;border:1px solid var(--border-light);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;">
+        <div style="padding:1.5rem 1.75rem;border-bottom:1px solid var(--border-light);background:var(--bg-surface);">
+          <div style="display:inline-block;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;color:var(--gold-dark,#92400e);text-transform:uppercase;background:#FEF3C7;padding:0.25rem 0.65rem;border-radius:4px;margin-bottom:0.5rem;">Integrated Production Unit</div>
+          <h3 style="font-family:var(--font-display);font-size:1.5rem;color:var(--forest);margin-bottom:0.35rem;">Manufacturing Plant — North Gujarat</h3>
+          <p style="font-size:0.875rem;color:var(--text-mid);margin:0;">50 MT/Day Crushing, Refining, Technical Derivatives &amp; QC</p>
+        </div>
+        <div style="aspect-ratio:16/9;background:var(--ivory-dark);position:relative;">
+          <iframe
+            title="Nagdev Products Manufacturing Plant — Banaskantha / Vav-Tharad Gujarat"
+            src="https://maps.google.com/maps?q=24.183804795616343,71.73651029111288&amp;hl=en&amp;z=15&amp;output=embed"
+            width="100%" height="100%"
+            style="border:0;display:block;width:100%;height:100%;min-height:260px;"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div style="padding:1.5rem 1.75rem;flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:1.25rem;">
+          <div>
+            <div style="font-size:0.9rem;color:var(--charcoal);line-height:1.6;margin-bottom:0.75rem;">
+              <strong>Address:</strong><br>
+              Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar, District – Vav-Tharad, Gujarat – 385330, India
+            </div>
+            <div style="font-size:0.85rem;color:var(--text-mid);line-height:1.6;">
+              <div><strong>GPS Coordinates:</strong> <span style="font-family:monospace;font-weight:600;color:var(--forest);">24.183805° N, 71.736510° E</span></div>
+              <div><strong>Port Distance:</strong> Kandla Port (210 km) · Mundra Port (280 km)</div>
+              <div><strong>Highway Access:</strong> Direct arterial state highway connectivity</div>
+            </div>
+          </div>
+          <div style="border-top:1px solid var(--border-light);padding-top:0.85rem;">
+            <a href="https://maps.app.goo.gl/4eETjMFpRmRxWcf6A" target="_blank" rel="noopener" style="font-size:0.875rem;color:var(--forest);font-weight:600;display:inline-flex;align-items:center;gap:0.35rem;">
+              Open Plant on Google Maps ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
+</section>
 
 <!-- FOOTER -->
 <!-- ══════════════════════════════════════════ FOOTER ══════════════ -->
@@ -545,25 +689,51 @@
         </ul>
       </div>
 
-      <div>
-        <div class="footer-col-title">Contact &amp; Plant</div>
+            <div>
+        <div class="footer-col-title">Locations &amp; Contact</div>
         <address style="font-style:normal;">
           <div class="footer-contact">
-            <div class="footer-contact-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar, District – Vav-Tharad, Gujarat – 385330, India</span>
+            <div style="margin-bottom:0.85rem;">
+              <div style="font-size:0.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Head Office</div>
+              <div class="footer-contact-item" style="align-items:flex-start;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14" style="flex-shrink:0;margin-top:0.2rem;"><path d="M3 21h18M3 7v14M21 7v14M6 11h2M6 15h2M10 11h2M10 15h2M14 11h2M14 15h2M18 11h2M18 15h2M9 3l3-2 3 2v4H9V3z"/></svg>
+                <span>612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal, Gandhinagar – 382421, Gujarat, India</span>
+              </div>
             </div>
-            <div class="footer-contact-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg>
-              <a href="https://maps.app.goo.gl/4eETjMFpRmRxWcf6A" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline;">View on Google Maps ↗</a>
+
+            <div style="margin-bottom:0.85rem;">
+              <div style="font-size:0.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Plant (Manufacturing Unit)</div>
+              <div class="footer-contact-item" style="align-items:flex-start;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14" style="flex-shrink:0;margin-top:0.2rem;"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar, District – Vav-Tharad, Gujarat – 385330, India</span>
+              </div>
+              <div class="footer-contact-item" style="margin-top:0.25rem;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg>
+                <a href="https://maps.app.goo.gl/4eETjMFpRmRxWcf6A" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline;">Plant on Google Maps ↗</a>
+              </div>
             </div>
-            <div class="footer-contact-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.08 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.21 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
-              <a href="tel:+916352098306">+91 63520 98306</a>
+
+            <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:0.65rem;margin-top:0.35rem;">
+              <div class="footer-contact-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.08 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.21 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+                <a href="tel:+916352098306">+91 63520 98306</a>
+              </div>
+              <div class="footer-contact-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <a href="mailto:nagdevproducts@gmail.com">nagdevproducts@gmail.com</a>
+              </div>
             </div>
-            <div class="footer-contact-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <a href="mailto:nagdevproducts@gmail.com">nagdevproducts@gmail.com</a>
+
+            <div class="footer-social-wrap" style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;padding-top:0.4rem;">
+              <a href="https://www.linkedin.com/company/nagdevproducts" target="_blank" rel="noopener" aria-label="LinkedIn" class="footer-social-icon" style="color:rgba(255,255,255,0.7);display:inline-flex;align-items:center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="https://www.instagram.com/nagdev.products" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-icon" style="color:rgba(255,255,255,0.7);display:inline-flex;align-items:center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+              <a href="https://share.google/IvP1DfrOoygwPKLI6" target="_blank" rel="noopener" class="footer-google-btn" style="color:var(--gold);font-size:0.775rem;text-decoration:underline;display:inline-flex;align-items:center;gap:0.3rem;">
+                Find us on Google ↗
+              </a>
             </div>
           </div>
         </address>
@@ -572,8 +742,8 @@
     </div>
 
     <div class="footer-bottom">
-      <p class="footer-copyright">
-        &copy; <span id="footer-year">2026</span> Nagdev Products Private Limited. All rights reserved.
+            <p class="footer-copyright">
+        &copy; <span id="footer-year">2026</span> Nagdev Products Private Limited. All rights reserved. <span style="display:inline-block;margin-left:0.5rem;color:rgba(255,255,255,0.55);font-size:0.775rem;">CIN: U15400GJ2019PTC110518</span>
       </p>
       <div class="footer-bottom-links">
         <a href="/products" class="footer-bottom-link">Products (27)</a>
