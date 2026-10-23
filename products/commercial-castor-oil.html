@@ -379,7 +379,8 @@
 </head>
 <body>
 
-<!-- TOP BAR -->
+<!-- TOP INFO BAR -->
+<!-- TOP INFO BAR -->
 <div class="top-bar">
   <div class="container top-bar-inner">
     <div class="top-bar-left">
@@ -388,8 +389,8 @@
     </div>
     <div class="top-bar-right">
       <a href="tel:+916352098306" class="top-bar-link">📞 +91 63520 98306</a>
-      <a href="mailto:nagdevproducts@gmail.com" class="top-bar-link">✉️ nagdevproducts@gmail.com</a>
-      <a href="https://wa.me/916352098306?text=Hello%20Nagdev%20Products%2C%20I%20would%20like%20to%20enquire%20about%202027%20supply%20contracts%20and%20product%20specifications." class="top-bar-link" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a href="mailto:nagdevproducts@gmail.com" class="top-bar-link top-bar-email">✉️ nagdevproducts@gmail.com</a>
+      <a href="https://wa.me/916352098306?text=Hello%20Nagdev%20Products%2C%20I%20would%20like%20to%20enquire%20about%202027%20supply%20contracts%20and%20product%20specifications." class="top-bar-link top-bar-wa" target="_blank" rel="noopener">💬 WhatsApp</a>
     </div>
   </div>
 </div>
@@ -402,8 +403,8 @@
         <img src="/images/logo.png" alt="Nagdev Products Private Limited" width="180" height="53">
       </a>
       <nav class="header-nav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="/" class="nav-link">Home</a></li>
+        <ul class="nav-list" role="list">
+          <li><a href="/" class="nav-link ">Home</a></li>
           <li class="nav-item-has-dropdown">
             <a href="/products" class="nav-link nav-link-dropdown active" aria-haspopup="true" aria-expanded="false">
               Products
@@ -466,7 +467,7 @@
                 </div>
               </div>
 
-              <!-- Mega Menu Bottom Bar (Process Flow Callout) -->
+              <!-- Mega Menu Bottom Bar -->
               <div class="mega-menu-bottom">
                 <a href="/process-flow" class="mega-tree-callout">
                   <div class="mega-tree-icon-box">⚙️</div>
@@ -482,44 +483,50 @@
               </div>
             </div>
           </li>
-          <li><a href="/process-flow" class="nav-link nav-link-tree">Process Flow</a></li>
-          <li><a href="/about"    class="nav-link">About</a></li>
-          <li><a href="/plant"    class="nav-link">Our Plant</a></li>
-          <li><a href="/quality"  class="nav-link">Quality</a></li>
-          <li><a href="/markets"  class="nav-link">Markets</a></li>
-          <li><a href="/blog" class="nav-link">Blog</a></li>
-          <li><a href="/contact"  class="nav-link">Contact</a></li>
+          <li><a href="/process-flow" class="nav-link ">Process Flow</a></li>
+          <li><a href="/about" class="nav-link ">About</a></li>
+          <li><a href="/plant" class="nav-link ">Our Plant</a></li>
+          <li><a href="/quality" class="nav-link ">Quality</a></li>
+          <li><a href="/markets" class="nav-link ">Markets</a></li>
+          <li><a href="/resources" class="nav-link ">Resources</a></li>
+          <li><a href="/blog" class="nav-link ">Blog</a></li>
+          <li><a href="/contact" class="nav-link ">Contact</a></li>
         </ul>
       </nav>
       <div class="header-cta">
-        <a href="/contact?product=commercial-castor-oil" class="btn btn-primary btn-sm">Request a Quote →</a>
+        <a href="/contact" class="btn btn-primary btn-sm">Request a Quote →</a>
       </div>
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open navigation" aria-expanded="false">
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<div class="mobile-backdrop" id="mobile-backdrop"></div>
-<div class="mobile-drawer" id="mobile-drawer">
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Navigation menu">
   <div class="mobile-drawer-header">
-    <img src="/images/logo.png" alt="Nagdev Products" width="122" height="36" style="width:auto;">
-    <button class="mobile-drawer-close" id="mobile-drawer-close">✕</button>
+    <img src="/images/logo.png" alt="Nagdev Products" width="122" height="36" style="width:auto;height:36px;">
+    <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">✕</button>
   </div>
-  <ul class="mobile-nav-list">
-    <li><a href="/"    class="mobile-nav-link">Home</a></li>
+  <ul class="mobile-nav-list" role="list">
+    <li><a href="/" class="mobile-nav-link ">Home</a></li>
     <li><a href="/products" class="mobile-nav-link active">Products (All 27)</a></li>
-    <li><a href="/process-flow" class="mobile-nav-link" style="color:var(--forest);font-weight:600;">⚙️ Process Flow</a></li>
-    <li><a href="/about"    class="mobile-nav-link">About</a></li>
-    <li><a href="/plant"    class="mobile-nav-link">Our Plant</a></li>
-    <li><a href="/quality"  class="mobile-nav-link">Quality</a></li>
-    <li><a href="/markets"  class="mobile-nav-link">Markets</a></li>
-    <li><a href="/blog" class="mobile-nav-link">Blog &amp; Insights</a></li>
-    <li><a href="/contact"  class="mobile-nav-link">Contact</a></li>
+    <li><a href="/process-flow" class="mobile-nav-link " style="font-weight:600;">⚙️ Process Flow</a></li>
+    <li><a href="/about" class="mobile-nav-link ">About</a></li>
+    <li><a href="/plant" class="mobile-nav-link ">Our Plant</a></li>
+    <li><a href="/quality" class="mobile-nav-link ">Quality</a></li>
+    <li><a href="/markets" class="mobile-nav-link ">Markets</a></li>
+    <li><a href="/resources" class="mobile-nav-link ">Resources</a></li>
+    <li><a href="/blog" class="mobile-nav-link ">Blog</a></li>
+    <li><a href="/contact" class="mobile-nav-link ">Contact</a></li>
   </ul>
-  <a href="/contact?product=commercial-castor-oil" class="btn btn-primary" style="width:100%;justify-content:center;">Request a Quote →</a>
+  <div style="margin-top:auto;padding-top:1.5rem;">
+    <a href="/contact" class="btn btn-primary" style="width:100%;justify-content:center;">Request a Quote →</a>
+  </div>
 </div>
+  
 
 <!-- BREADCRUMB STRIP -->
 <div id="main-content" style="background:var(--ivory);border-bottom:1px solid var(--border-light);padding:0.85rem 0;">
@@ -543,7 +550,7 @@
       <!-- Media Col -->
       <div class="product-detail-media">
         <div style="margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;">
-          <span class="product-meta-pill">#01 · NDEV-COMM</span>
+          <span class="product-meta-pill">NDEV-COMM</span>
           <span style="font-size:0.75rem;font-family:monospace;background:#f1f5f9;padding:0.25rem 0.5rem;border-radius:4px;color:#475569;">CAS: 8001-79-4</span>
         </div>
         <img src="/images/products/commercial-castor-oil.webp" alt="Commercial Grade Castor Oil — Nagdev Products" width="400" height="380" onerror="this.onerror=null;this.src='/images/products/01-commercial-castor-oil.webp';">
@@ -559,7 +566,7 @@
         <h1 style="font-size:2.25rem;font-family:var(--font-heading);color:var(--charcoal);margin:0.35rem 0 0.5rem;line-height:1.2;">Commercial Grade Castor Oil</h1>
         <p style="font-size:1.05rem;color:var(--gold);font-weight:600;margin-bottom:1.25rem;">Proprietary Brand: NDEV-COMM</p>
         
-        <p style='font-size:1rem; color:var(--charcoal); line-height:1.75; margin-bottom:1rem;'><strong>Commercial Grade Castor Oil (proprietary brand NDEV-COMM, CAS #8001-79-4) is a high-purity industrial chemical grade manufactured from natural Castor Seed (Ricinus communis) at our processing facility in North Gujarat's castor belt. It delivers consistent physico-chemical performance across high-stress industrial applications requiring thermal stability, hydrolytic endurance, and uniform molecular integrity.</strong></p><p style='font-size:0.95rem; color:var(--charcoal-soft); line-height:1.75; margin-bottom:1.5rem;'>Produced under strict continuous process controls, Commercial Grade Castor Oil features optimized chemical parameters with tightly controlled acid value, moisture, and impurity profiles. Its unique molecular architecture makes it an essential raw material and intermediate for domestic chemical processors and international industrial importers demanding lot-to-lot consistency.</p>
+        <p style='font-size:1rem; color:var(--charcoal); line-height:1.75; margin-bottom:1rem;'><strong>Commercial Grade Castor Oil (proprietary brand NDEV-COMM, CAS #8001-79-4) is a high-purity industrial chemical grade will be manufactured from natural Castor Seed (Ricinus communis) at our North Gujarat plant. It delivers consistent physico-chemical performance across high-stress industrial applications requiring thermal stability, hydrolytic endurance, and uniform molecular integrity.</strong></p><p style='font-size:0.95rem; color:var(--charcoal-soft); line-height:1.75; margin-bottom:1.5rem;'>To be produced under controlled process conditions, Commercial Grade Castor Oil features optimized chemical parameters with tightly controlled acid value, moisture, and impurity profiles. Its unique molecular architecture makes it an essential raw material and intermediate for domestic chemical processors and international industrial importers demanding lot-to-lot consistency.</p>
 
         <div class="product-quick-props">
           <div class="prop-item"><span class="lbl">Physical Form:</span><span class="val">Liquid</span></div>
@@ -601,7 +608,7 @@
   <div class="container">
     <div style="margin-bottom:2rem;">
       <span class="section-eyebrow">Analytical Quality Parameters</span>
-      <h2 class="section-lead-title" style="font-size:clamp(1.75rem,2.8vw,2.25rem); font-family:var(--font-heading); color:var(--forest);">Verified Technical Specifications: Commercial Grade Castor Oil</h2>
+      <h2 class="section-lead-title" style="font-size:clamp(1.75rem,2.8vw,2.25rem); font-family:var(--font-heading); color:var(--forest);">Typical Technical Specifications: Commercial Grade Castor Oil</h2>
       <p style="font-size:0.95rem; color:var(--charcoal-soft); margin-top:0.5rem;">
         Analytical parameters tested according to compendial ASTM, AOCS, and BIS standards in our in-house QC laboratory.
       </p>
@@ -869,37 +876,46 @@
   <div class="container-wide">
     <div class="footer-top">
 
+      <!-- Column 1: Brand & Socials -->
       <div class="footer-brand">
         <a href="/" class="footer-logo" aria-label="Nagdev Products Home">
           <img src="/images/logo-dark.png" alt="Nagdev Products Private Limited" height="42" width="180" style="width:auto;">
         </a>
         <p class="footer-tagline">
-          Integrated castor oil and derivatives manufacturer from Gujarat's castor belt. Now booking 2027 supply contracts.
+          Integrated castor oil and derivatives plant in North Gujarat's castor belt. Now booking 2027 commercial supply contracts.
         </p>
         <p class="footer-quality-line" style="font-size:0.825rem;color:var(--gold);line-height:1.5;margin-top:0.25rem;">
           Quality systems aligned to ISO 9001 · REACH-ready export documentation
         </p>
+        <div class="footer-social-wrap" style="display:flex;align-items:center;gap:0.75rem;margin-top:0.5rem;">
+          <a href="https://www.linkedin.com/company/nagdevproducts" target="_blank" rel="noopener" aria-label="LinkedIn" class="footer-social-icon" style="color:rgba(255,255,255,0.7);display:inline-flex;align-items:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/nagdev.products" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-icon" style="color:rgba(255,255,255,0.7);display:inline-flex;align-items:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://share.google/IvP1DfrOoygwPKLI6" target="_blank" rel="noopener" class="footer-google-btn" style="color:var(--gold);font-size:0.775rem;text-decoration:underline;display:inline-flex;align-items:center;gap:0.3rem;">
+            Find us on Google ↗
+          </a>
+        </div>
       </div>
 
+      <!-- Column 2: Company -->
       <div>
-        <div class="footer-col-title">Navigation</div>
-        <nav aria-label="Footer navigation">
-          <ul class="footer-links">
-            <li><a href="/" class="footer-link">Home</a></li>
-            <li><a href="/products" class="footer-link">Products</a></li>
-            <li><a href="/process-flow" class="footer-link">Process Flow</a></li>
-            <li><a href="/about" class="footer-link">About</a></li>
-            <li><a href="/plant" class="footer-link">Our Plant</a></li>
-            <li><a href="/infrastructure" class="footer-link">Infrastructure</a></li>
-            <li><a href="/quality" class="footer-link">Quality</a></li>
-            <li><a href="/markets" class="footer-link">Markets</a></li>
-            <li><a href="/blog" class="footer-link">Blog</a></li>
-            <li><a href="/contact" class="footer-link">Contact</a></li>
-          </ul>
-        </nav>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="/" class="footer-link">Home</a></li>
+          <li><a href="/about" class="footer-link">About Us</a></li>
+          <li><a href="/plant" class="footer-link">Our Plant</a></li>
+          <li><a href="/infrastructure" class="footer-link">Infrastructure</a></li>
+          <li><a href="/quality" class="footer-link">Quality Assurance</a></li>
+          <li><a href="/markets" class="footer-link">Global Markets</a></li>
+          <li><a href="/farmers" class="footer-link" style="color:var(--gold);">Farmers &amp; Sourcing (ગુજરાતી)</a></li>
+        </ul>
       </div>
 
-            <div>
+      <!-- Column 3: Products -->
+      <div>
         <div class="footer-col-title">Products</div>
         <ul class="footer-links">
           <li><a href="/products?filter=core" class="footer-link">Core Products (7 Grades)</a></li>
@@ -910,23 +926,37 @@
         </ul>
       </div>
 
-            <div>
-        <div class="footer-col-title">Locations &amp; Contact</div>
+      <!-- Column 4: Resources -->
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <ul class="footer-links">
+          <li><a href="/resources" class="footer-link">Resources Hub</a></li>
+          <li><a href="/guides/how-to-import-castor-oil-from-india" class="footer-link">Buyer Import Guide</a></li>
+          <li><a href="/guides/castor-oil-grades-explained" class="footer-link">Grades Explained</a></li>
+          <li><a href="/compare/fsg-vs-commercial-castor-oil" class="footer-link">FSG vs Commercial</a></li>
+          <li><a href="/blog" class="footer-link">Blog &amp; Market Insights</a></li>
+          <li><a href="/faq" class="footer-link">Frequently Asked Questions</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 5: Contact -->
+      <div>
+        <div class="footer-col-title">Contact &amp; Plant</div>
         <address style="font-style:normal;">
           <div class="footer-contact">
-            <div style="margin-bottom:0.85rem;">
+            <div style="margin-bottom:0.65rem;">
               <div style="font-size:0.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Head Office</div>
               <div class="footer-contact-item" style="align-items:flex-start;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14" style="flex-shrink:0;margin-top:0.2rem;"><path d="M3 21h18M3 7v14M21 7v14M6 11h2M6 15h2M10 11h2M10 15h2M14 11h2M14 15h2M18 11h2M18 15h2M9 3l3-2 3 2v4H9V3z"/></svg>
-                <span>612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal, Gandhinagar – 382421, Gujarat, India</span>
+                <span>612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal, Gandhinagar – 382421, Gujarat</span>
               </div>
             </div>
 
-            <div style="margin-bottom:0.85rem;">
-              <div style="font-size:0.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Plant (Manufacturing Unit)</div>
+            <div style="margin-bottom:0.65rem;">
+              <div style="font-size:0.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Plant Unit</div>
               <div class="footer-contact-item" style="align-items:flex-start;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14" style="flex-shrink:0;margin-top:0.2rem;"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar, District – Vav-Tharad, Gujarat – 385330, India</span>
+                <span>Survey No. 301 P-2, Sardarpura, Taluka – Deodar, Dist. Vav-Tharad, Gujarat – 385330</span>
               </div>
               <div class="footer-contact-item" style="margin-top:0.25rem;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg>
@@ -934,7 +964,7 @@
               </div>
             </div>
 
-            <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:0.65rem;margin-top:0.35rem;">
+            <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:0.5rem;margin-top:0.25rem;">
               <div class="footer-contact-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.08 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.21 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
                 <a href="tel:+916352098306">+91 63520 98306</a>
@@ -944,18 +974,6 @@
                 <a href="mailto:nagdevproducts@gmail.com">nagdevproducts@gmail.com</a>
               </div>
             </div>
-
-            <div class="footer-social-wrap" style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;padding-top:0.4rem;">
-              <a href="https://www.linkedin.com/company/nagdevproducts" target="_blank" rel="noopener" aria-label="LinkedIn" class="footer-social-icon" style="color:rgba(255,255,255,0.7);display:inline-flex;align-items:center;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-              </a>
-              <a href="https://www.instagram.com/nagdev.products" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-icon" style="color:rgba(255,255,255,0.7);display:inline-flex;align-items:center;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              </a>
-              <a href="https://share.google/IvP1DfrOoygwPKLI6" target="_blank" rel="noopener" class="footer-google-btn" style="color:var(--gold);font-size:0.775rem;text-decoration:underline;display:inline-flex;align-items:center;gap:0.3rem;">
-                Find us on Google ↗
-              </a>
-            </div>
           </div>
         </address>
       </div>
@@ -963,7 +981,7 @@
     </div>
 
     <div class="footer-bottom">
-            <p class="footer-copyright">
+      <p class="footer-copyright">
         &copy; <span id="footer-year">2026</span> Nagdev Products Private Limited. All rights reserved. <span style="display:inline-block;margin-left:0.5rem;color:rgba(255,255,255,0.55);font-size:0.775rem;">CIN: U15400GJ2019PTC110518</span>
       </p>
       <div class="footer-bottom-links">

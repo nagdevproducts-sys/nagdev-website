@@ -115,7 +115,7 @@
   background: #ffffff;
   border-bottom: 1px solid #E2E8F0;
   position: sticky;
-  top: 70px;
+  top: var(--header-h, 72px);
   z-index: 40;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 }
@@ -126,6 +126,38 @@
   padding: 0.85rem 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.process-tabs::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 900px) {
+  .process-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    overflow-x: visible;
+  }
+  .process-tab-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+.process-tabs::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 900px) {
+  .process-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    overflow-x: visible;
+  }
+  .process-tab-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .process-tab-btn {
