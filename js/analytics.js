@@ -12,6 +12,77 @@
   const GA_MEASUREMENT_ID = 'G-HL3JQ3ZQKF';
   const STORAGE_KEY = 'nagdev_consent';
   const EXPIRY_DAYS = 365;
+  const FIRED_STORAGE_KEY = 'nagdev_leads_fired';
+  const MAX_FIRED_REFS = 50;
+
+  // Lead Reference De-duplication Helpers
+  function getFiredRefs() {
+    const refs = [];
+    try {
+      const s = sessionStorage.getItem(FIRED_STORAGE_KEY);
+      if (s) {
+        const parsed = JSON.parse(s);
+        if (Array.isArray(parsed)) {
+          for (let i = 0; i < parsed.length; i++) {
+            if (refs.indexOf(parsed[i]) === -1) refs.push(parsed[i]);
+          }
+        }
+      }
+    } catch (e) {}
+    try {
+      const l = localStorage.getItem(FIRED_STORAGE_KEY);
+      if (l) {
+        const parsed = JSON.parse(l);
+        if (Array.isArray(parsed)) {
+          for (let i = 0; i < parsed.length; i++) {
+            if (refs.indexOf(parsed[i]) === -1) refs.push(parsed[i]);
+          }
+        }
+      }
+    } catch (e) {}
+    return refs;
+  }
+
+  function markRefFired(ref) {
+    if (!ref) return;
+    try {
+      let sRefs = [];
+      try {
+        const raw = sessionStorage.getItem(FIRED_STORAGE_KEY);
+        if (raw) sRefs = JSON.parse(raw) || [];
+      } catch (e) {}
+      if (!Array.isArray(sRefs)) sRefs = [];
+      if (sRefs.indexOf(ref) === -1) {
+        sRefs.push(ref);
+        if (sRefs.length > MAX_FIRED_REFS) sRefs = sRefs.slice(-MAX_FIRED_REFS);
+        sessionStorage.setItem(FIRED_STORAGE_KEY, JSON.stringify(sRefs));
+      }
+    } catch (e) {}
+
+    try {
+      let lRefs = [];
+      try {
+        const raw = localStorage.getItem(FIRED_STORAGE_KEY);
+        if (raw) lRefs = JSON.parse(raw) || [];
+      } catch (e) {}
+      if (!Array.isArray(lRefs)) lRefs = [];
+      if (lRefs.indexOf(ref) === -1) {
+        lRefs.push(ref);
+        if (lRefs.length > MAX_FIRED_REFS) lRefs = lRefs.slice(-MAX_FIRED_REFS);
+        localStorage.setItem(FIRED_STORAGE_KEY, JSON.stringify(lRefs));
+      }
+    } catch (e) {}
+  }
+
+  function isRefFired(ref) {
+    if (!ref) return false;
+    const fired = getFiredRefs();
+    return fired.indexOf(ref) !== -1;
+  }
+
+  function isValidRef(ref) {
+    return typeof ref === 'string' && /^NP-\d{8}-[A-Za-z0-9]+$/i.test(ref.trim());
+  }
 
   // 1. Host & Debug Verification
   function isProduction() {
@@ -346,9 +417,22 @@
   });
 
   // 7. Confirmed Lead & Sample Request Tracking
-  // Listen for the custom nagdev_lead_success event dispatched by site.js on verified submission
+  let ajaxLeadFired = false;
+
+  // Listen for the custom nagdev_lead_success event dispatched by site.js on verified AJAX submission
   window.addEventListener('nagdev_lead_success', function (e) {
     const detail = e.detail || {};
+    const ref = detail.ref;
+    if (ref) {
+      if (!isValidRef(ref) || isRefFired(ref)) {
+        return;
+      }
+      markRefFired(ref);
+    } else {
+      if (ajaxLeadFired) return;
+      ajaxLeadFired = true;
+    }
+
     const formType = detail.form_type || 'quote';
     let prodSlug = getProductSlug();
     if (!prodSlug && detail.product_slug) {
@@ -373,22 +457,54 @@
     }
   });
 
-  // Check if page loaded with ?submitted=success on /contact
-  if (window.location.pathname.includes('/contact')) {
+  // Handle ?submitted=success on /contact with de-duplication and address bar cleanup
+  function handleSubmittedSuccess() {
+    if (!window.location.pathname.includes('/contact')) return;
     try {
-      const params = new URLSearchParams(window.location.search);
+      const url = new URL(window.location.href);
+      const params = url.searchParams;
       if (params.get('submitted') === 'success') {
+        const ref = (params.get('ref') || '').trim();
         const formType = (params.get('type') || 'quote').toLowerCase();
-        const leadParams = {
-          form_type: formType,
-          link_location: 'body'
-        };
-        trackEvent('generate_lead', leadParams);
-        if (formType === 'sample') {
-          trackEvent('sample_request', leadParams);
+        const prodParam = params.get('product') || '';
+
+        // Clean address bar: remove submitted and ref, keeping any other parameters
+        params.delete('submitted');
+        params.delete('ref');
+        const newSearch = params.toString();
+        const newUrl = url.pathname + (newSearch ? '?' + newSearch : '') + url.hash;
+        window.history.replaceState(null, '', newUrl);
+
+        // Require valid ref format NP-YYYYMMDD-XXXX
+        if (isValidRef(ref)) {
+          if (!isRefFired(ref)) {
+            markRefFired(ref);
+            let prodSlug = getProductSlug();
+            if (!prodSlug && prodParam) {
+              prodSlug = prodParam.toLowerCase()
+                .replace(/^[a-z0-9™\s]+—\s*/i, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-|-$/g, '');
+            }
+            const leadParams = {
+              form_type: formType.includes('sample') ? 'sample' : (formType.includes('sds') ? 'sds' : 'quote'),
+              product_slug: prodSlug || '',
+              link_location: 'body'
+            };
+            trackEvent('generate_lead', leadParams);
+            if (leadParams.form_type === 'sample') {
+              trackEvent('sample_request', leadParams);
+            }
+          }
         }
       }
     } catch (e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleSubmittedSuccess);
+  } else {
+    handleSubmittedSuccess();
   }
 
   window.nagdevShowConsent = showConsentBanner;

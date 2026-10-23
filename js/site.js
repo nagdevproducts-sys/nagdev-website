@@ -199,15 +199,7 @@
       const ref = urlParams.get('ref') || ('NP-' + Date.now().toString().slice(-8));
       renderEnquirySuccess(ref, 'Castor Oil / Derivative', '', '', 'your email');
       if (enquiryForm) enquiryForm.style.display = 'none';
-
-      const typeParam = (urlParams.get('type') || 'quote').toLowerCase();
-      window.dispatchEvent(new CustomEvent('nagdev_lead_success', {
-        detail: {
-          form_type: typeParam.includes('sample') ? 'sample' : (typeParam.includes('sds') ? 'sds' : 'quote'),
-          product_slug: urlParams.get('product') || '',
-          country: ''
-        }
-      }));
+      // Note: Lead event tracking is handled by analytics.js with de-duplication
     }
   }
 
@@ -320,6 +312,7 @@
 
           window.dispatchEvent(new CustomEvent('nagdev_lead_success', {
             detail: {
+              ref: refNum,
               form_type: formType,
               product_slug: productVal,
               country: countryVal
