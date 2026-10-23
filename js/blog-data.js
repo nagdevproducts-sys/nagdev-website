@@ -22,7 +22,7 @@ window.NAGDEV_BLOG_POSTS = [
       <p class="lead-paragraph">As global regulatory mandates tighten around fossil fuel dependence and volatile organic compound (VOC) emissions, industrial formulators are actively replacing petrochemical feedstocks with renewable oleochemical alternatives. Among all plant-derived triglycerides, <strong>Castor Oil (Ricinus communis)</strong> occupies a uniquely privileged position in green chemistry.</p>
       
       <h2>1. The Non-Edible Bio-Advantage</h2>
-      <p>Unlike soybean, palm, or corn oils, castor oil is fundamentally non-edible due to the presence of ricin in the unprocessed seed pulp (which is completely deactivated during thermal processing and pressing). Cultivating castor beans on arid and marginal land across Gujarat and Rajasthan ensures zero competition with global human food security.</p>
+      <p>Unlike soybean, palm, or corn oils, castor oil is fundamentally non-edible due to the presence of toxic non-edible proteins in the unprocessed seed pulp (which is completely deactivated during thermal processing and pressing). Cultivating castor beans on arid and marginal land across Gujarat and Rajasthan ensures zero competition with global human food security.</p>
       <p>Furthermore, castor seeds boast an oil content of 45% to 50%, requiring significantly less irrigation water, synthetic fertilizers, and arable topsoil than other commercial oil crops.</p>
 
       <h2>2. Structural Uniqueness: The Ricinoleic Acid Backbone</h2>

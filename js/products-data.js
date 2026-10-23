@@ -562,7 +562,7 @@ const PRODUCTS_DATABASE = [
       "agriculture",
       "organic-fertilizers",
       "soil-enrichment",
-      "bio-pesticides"
+      "soil-conditioning"
     ],
     "physicalForm": "Granular / Flakes / Meal",
     "typicalColour": "Light Brown to Dark Brown",
@@ -570,7 +570,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/castor-cake.webp",
     "packing": "50 kg HDPE woven bags with inner poly liner • 1,000 kg PP jumbo bulk bags with bottom discharge spout",
     "shelfLife": "12 months from date of manufacture in dry, covered storage",
-    "application": "Premier 100% natural organic manure with slow-release Nitrogen, Phosphorus, and Potash (N-P-K ~ 4-1-1). Natural ricin and alkaloid content acts as an organic deterrent against soil nematodes and termites while improving soil humus.",
+    "application": "Premier 100% natural organic manure with slow-release Nitrogen, Phosphorus, and Potash (N-P-K ~ 4-1-1). Castor cake has traditionally been used by farmers as an organic soil amendment.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
