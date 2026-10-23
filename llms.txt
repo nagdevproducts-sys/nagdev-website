@@ -4,23 +4,18 @@
 
 ## Company Facts & Verification
 - **Legal Entity:** Nagdev Products Private Limited
+- **CIN:** U15400GJ2019PTC110518 (Incorporated in 2019)
 - **Brand Name:** Nagdev Products
-- **Corporate Identity Number (CIN):** U15400GJ2019PTC110518
-- **Incorporated:** 2019 (Gujarat, India)
 - **Head Office:** 612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal, Gandhinagar – 382421, Gujarat, India
-- **Plant (Manufacturing Unit):** Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar, District – Vav-Tharad, Gujarat – 385330, India
-- **Geo Coordinates (Plant):** Latitude 24.183805, Longitude 71.736510
+- **Manufacturing Plant:** Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura, Post – Ravel, Taluka – Deodar, District – Vav-Tharad, Gujarat – 385330, India
+- **Geo Coordinates:** Latitude 24.183805, Longitude 71.736510
 - **Regional Geography:** Banaskantha–Vav-Tharad castor belt, North Gujarat, India
 - **Crushing Capacity:** 50 MT/day seed processing
 - **Commercial Commissioning:** 2027 (Now booking 2027 forward supply contracts)
-- **Primary Sales Contact:** +91 63520 98306 (Voice & WhatsApp)
-- **Official Inquiries Email:** nagdevproducts@gmail.com
+- **Phone / WhatsApp:** +91 63520 98306
+- **Email:** nagdevproducts@gmail.com
 - **Official Website:** https://www.nagdevproducts.com
-- **LinkedIn:** https://www.linkedin.com/company/nagdevproducts
-- **Instagram:** https://www.instagram.com/nagdev.products
-- **Google Business Profile:** https://share.google/IvP1DfrOoygwPKLI6
-- **Google Maps (Plant):** https://maps.app.goo.gl/4eETjMFpRmRxWcf6A
-- **Google Maps (Head Office):** https://www.google.com/maps/search/?api=1&query=612+6th+Floor+Sharan+Circle+Hub+SP+Ring+Road+Zundal+Circle+Gandhinagar+382421+Gujarat+India
+- **Google Maps Location:** https://maps.app.goo.gl/4eETjMFpRmRxWcf6A
 - **Quality System:** Quality management systems aligned to ISO 9001 with REACH-ready technical documentation and lot-traceable Certificates of Analysis (COA).
 
 ---
@@ -49,16 +44,16 @@
 15. [Dehydrated Castor Oil (DCO)](https://www.nagdevproducts.com/products/dehydrated-castor-oil): Conjugated drying oil (CAS #64147-40-6, HS 1518.00) for alkyd resins, printing inks, and protective varnishes.
 16. [Dehydrated Castor Oil Fatty Acid (DCO-FA)](https://www.nagdevproducts.com/products/dco-fatty-acid): High diene fatty acid (CAS #61789-45-5, HS 1518.00) for non-yellowing stoving enamels, epoxy esters, and polyamides.
 17. [Blown / Oxidized Castor Oil](https://www.nagdevproducts.com/products/blown-oxidized-castor-oil): High-viscosity polymerized castor oil (CAS #68187-84-8, HS 1518.00) for plasticizers, lubricants, and hydraulic fluids.
-18. [Bio-Polyurethane Polyols](https://www.nagdevproducts.com/products/bio-polyurethane-polyols): Renewable bio-based polyols derived from ricinoleic chemistry (HS [TO CONFIRM]) for rigid and flexible foams, sealants, and CASE systems.
+18. [Bio-Polyurethane Polyols](https://www.nagdevproducts.com/products/bio-polyurethane-polyols): Renewable bio-based polyols derived from ricinoleic chemistry (HS: Available on request) for rigid and flexible foams, sealants, and CASE systems.
 19. [Sebacic Acid](https://www.nagdevproducts.com/products/sebacic-acid): C10 dicarboxylic acid (CAS #111-20-6, HS 2917.13) for nylon 6,10, polyamides, bio-lubricants, and plasticizers.
-20. [Methyl Ricinoleate](https://www.nagdevproducts.com/products/methyl-ricinoleate): Low-viscosity ricinoleic methyl ester (CAS #141-24-2, HS [TO CONFIRM]) for plasticizers, surfactant synthesis, and cutting fluids.
-21. [Methyl 12-Hydroxystearate](https://www.nagdevproducts.com/products/methyl-12-hydroxystearate): Ester derivative (CAS #141-23-1, HS [TO CONFIRM]) for specialty greases, waxes, and cosmetics formulations.
-22. [Dioctyl Sebacate (DOS / DEHS)](https://www.nagdevproducts.com/products/dioctyl-sebacate): Low-temperature high-performance plasticizer (CAS #122-62-3 / 2432-87-3, HS [TO CONFIRM]) for aerospace, PVC, and synthetic rubber.
-23. [Dibutyl Sebacate (DBS)](https://www.nagdevproducts.com/products/dibutyl-sebacate): High-efficiency plasticizer (CAS #109-43-3, HS [TO CONFIRM]) for food-contact films, specialized coatings, and polymers.
-24. [Lithium 12-Hydroxystearate](https://www.nagdevproducts.com/products/lithium-12-hydroxystearate): Pre-reacted soap thickener (CAS #7620-77-1, HS [TO CONFIRM]) for high-temperature multi-purpose NLGI automotive and industrial greases.
-25. [Calcium 12-Hydroxystearate](https://www.nagdevproducts.com/products/calcium-12-hydroxystearate): Non-toxic metallic soap (CAS #3159-62-4, HS [TO CONFIRM]) for water-resistant lubricating greases and plastics processing.
-26. [Zinc Ricinoleate](https://www.nagdevproducts.com/products/zinc-ricinoleate): Highly effective natural odor-neutralizing salt (CAS #13040-19-2, HS [TO CONFIRM]) for cosmetics, detergents, and industrial deodorization.
-27. [Zinc Undecylenate](https://www.nagdevproducts.com/products/zinc-undecylenate): Antifungal salt (CAS #557-08-4, HS [TO CONFIRM]) for pharmaceutical powders, ointments, and personal care products.
+20. [Methyl Ricinoleate](https://www.nagdevproducts.com/products/methyl-ricinoleate): Low-viscosity ricinoleic methyl ester (CAS #141-24-2, HS: Available on request) for plasticizers, surfactant synthesis, and cutting fluids.
+21. [Methyl 12-Hydroxystearate](https://www.nagdevproducts.com/products/methyl-12-hydroxystearate): Ester derivative (CAS #141-23-1, HS: Available on request) for specialty greases, waxes, and cosmetics formulations.
+22. [Dioctyl Sebacate (DOS / DEHS)](https://www.nagdevproducts.com/products/dioctyl-sebacate): Low-temperature high-performance plasticizer (CAS #122-62-3 / 2432-87-3, HS 2917.13) for aerospace, PVC, and synthetic rubber.
+23. [Dibutyl Sebacate (DBS)](https://www.nagdevproducts.com/products/dibutyl-sebacate): High-efficiency plasticizer (CAS #109-43-3, HS 2917.13) for food-contact films, specialized coatings, and polymers.
+24. [Lithium 12-Hydroxystearate](https://www.nagdevproducts.com/products/lithium-12-hydroxystearate): Pre-reacted soap thickener (CAS #7620-77-1, HS: Available on request) for high-temperature multi-purpose NLGI automotive and industrial greases.
+25. [Calcium 12-Hydroxystearate](https://www.nagdevproducts.com/products/calcium-12-hydroxystearate): Non-toxic metallic soap (CAS #3159-62-4, HS: Available on request) for water-resistant lubricating greases and plastics processing.
+26. [Zinc Ricinoleate](https://www.nagdevproducts.com/products/zinc-ricinoleate): Highly effective natural odor-neutralizing salt (CAS #13040-19-2, HS: Available on request) for cosmetics, detergents, and industrial deodorization.
+27. [Zinc Undecylenate](https://www.nagdevproducts.com/products/zinc-undecylenate): Antifungal salt (CAS #557-08-4, HS 2916.19) for pharmaceutical powders, ointments, and personal care products.
 
 *Note on HS Tariff Classifications: Indicative classification; final HS code confirmed at the time of export.*
 
@@ -72,9 +67,7 @@
 - **Plant Progress & Commissioning:** https://www.nagdevproducts.com/plant-progress (Dated timeline of construction milestones leading to 2027 commercial commissioning).
 - **Infrastructure:** https://www.nagdevproducts.com/infrastructure (Laboratory instrumentation, storage tank farms, steam generation, and QC systems).
 - **Quality Assurance:** https://www.nagdevproducts.com/quality (Compendial test methods: ASTM, AOCS, BIS, and ISO standards).
-- **Standards & Certifications Roadmap:** https://www.nagdevproducts.com/certifications (Transparent certification status: ISO 9001 alignment, REACH-readiness, and planned audits).
 - **Sustainability:** https://www.nagdevproducts.com/sustainability (Zero-waste seed utilization, circular fertilizer return, and biogenic carbon footprint).
-- **Leadership Team:** https://www.nagdevproducts.com/team (Promoter profiles in agriculture and chemical engineering).
 - **Comprehensive FAQ:** https://www.nagdevproducts.com/faq (25 buyer answers covering specs, MOQs, testing, shipping, and 2027 contracts).
 - **Farmer Portal (Gujarati):** https://www.nagdevproducts.com/farmers (કૃષિ સંબંધો અને ખરીદી કેન્દ્ર).
 - **Farmer Portal (English):** https://www.nagdevproducts.com/farmers-en (Castor seed procurement, APMC mandis, and farmer outreach).
@@ -96,7 +89,7 @@
 
 - [Castor Oil Grades Explained](https://www.nagdevproducts.com/guides/castor-oil-grades-explained): Comparison matrix of FSG, Commercial, BSS, PPG, Cold Pressed, and BP 93.
 - [Castor Products HS Tariff Codes](https://www.nagdevproducts.com/guides/castor-products-hs-codes): WCO Harmonized System tariff codes for global customs classification.
-- [Castor Oil Export Packing & Incoterms](https://www.nagdevproducts.com/guides/castor-oil-export-packing-incoterms): Steel drums, IBC totes, flexitanks, bags, and FOB/CFR/CIF trade terms.
+- [Castor Oil Packaging, Storage & Export Terms](https://www.nagdevproducts.com/guides/castor-oil-packaging-and-storage): Steel drums, IBC totes, flexitanks, bags, warehousing best practices, and Incoterms 2020 (FOB/CFR/CIF).
 - [How to Read a Castor Oil COA](https://www.nagdevproducts.com/guides/how-to-read-a-castor-oil-coa): Decoding acid values, hydroxyl values, iodine values, and Lovibond color.
 - [North Gujarat Castor Belt](https://www.nagdevproducts.com/guides/north-gujarat-castor-belt): Agronomic sourcing advantages in Banaskantha and Vav-Tharad.
 - [How to Import from India](https://www.nagdevproducts.com/guides/how-to-import-castor-oil-from-india): Mundra and Kandla port logistics, documentation, and transit times.
