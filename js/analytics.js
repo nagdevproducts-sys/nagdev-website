@@ -310,7 +310,143 @@
     gtagCall('config', GA_MEASUREMENT_ID, configOptions);
   }
 
-  // 5. Conversion Tracking Helpers
+  // 5. Product Slug Normalization Map
+  const PRODUCT_SLUG_MAP = {
+    '12-hydroxystearic-acid': '12-hydroxystearic-acid',
+    'bio-polyurethane-polyols': 'bio-polyurethane-polyols',
+    'blown-oxidized-castor-oil': 'blown-oxidized-castor-oil',
+    'calcium-12-hydroxystearate': 'calcium-12-hydroxystearate',
+    'castor-cake': 'castor-cake',
+    'castor-cake-fertilizer': 'castor-cake',
+    'castor-oil-bp93': 'castor-oil-bp93',
+    'cold-pressed-castor-oil': 'cold-pressed-castor-oil',
+    'commercial-castor-oil': 'commercial-castor-oil',
+    'crude-glycerin': 'crude-glycerin',
+    'dco-fatty-acid': 'dco-fatty-acid',
+    'de-oiled-cake-castor-meal': 'castor-cake',
+    'dehydrated-castor-oil': 'dehydrated-castor-oil',
+    'dibutyl-sebacate': 'dibutyl-sebacate',
+    'dioctyl-sebacate': 'dioctyl-sebacate',
+    'first-special-grade-castor-oil': 'first-special-grade-castor-oil',
+    'first-special-grade-fsg-castor-oil': 'first-special-grade-castor-oil',
+    'fpd-castor-oil': 'fpd-castor-oil',
+    'high-protein-castor-meal': 'high-protein-castor-meal',
+    'hydrogenated-castor-oil': 'hydrogenated-castor-oil',
+    'lithium-12-hydroxystearate': 'lithium-12-hydroxystearate',
+    'methyl-12-hydroxystearate': 'methyl-12-hydroxystearate',
+    'methyl-ricinoleate': 'methyl-ricinoleate',
+    'ppg-castor-oil': 'ppg-castor-oil',
+    'refined-glycerin': 'refined-glycerin',
+    'ricinoleic-acid': 'ricinoleic-acid',
+    'sebacic-acid': 'sebacic-acid',
+    'sodium-sulphate-anhydrous': 'sodium-sulphate-anhydrous',
+    'zinc-ricinoleate': 'zinc-ricinoleate',
+    'zinc-undecylenate': 'zinc-undecylenate',
+    'ndevoleo comm — commercial castor oil': 'commercial-castor-oil',
+    'ndevoleo comm - commercial castor oil': 'commercial-castor-oil',
+    'commercial castor oil': 'commercial-castor-oil',
+    'ndevoleo fsg — first special grade (fsg) castor oil': 'first-special-grade-castor-oil',
+    'ndevoleo fsg - first special grade (fsg) castor oil': 'first-special-grade-castor-oil',
+    'first special grade (fsg) castor oil': 'first-special-grade-castor-oil',
+    'first special grade castor oil': 'first-special-grade-castor-oil',
+    'fsg castor oil': 'first-special-grade-castor-oil',
+    'ndevwax hco — hydrogenated castor oil (castor wax)': 'hydrogenated-castor-oil',
+    'ndevwax hco - hydrogenated castor oil (castor wax)': 'hydrogenated-castor-oil',
+    'hydrogenated castor oil (castor wax)': 'hydrogenated-castor-oil',
+    'hydrogenated castor oil': 'hydrogenated-castor-oil',
+    'castor wax': 'hydrogenated-castor-oil',
+    'ndevacid 12-hsa — 12-hydroxystearic acid': '12-hydroxystearic-acid',
+    'ndevacid 12-hsa - 12-hydroxystearic acid': '12-hydroxystearic-acid',
+    '12-hydroxystearic acid': '12-hydroxystearic-acid',
+    'ndevacid ric — ricinoleic acid': 'ricinoleic-acid',
+    'ndevacid ric - ricinoleic acid': 'ricinoleic-acid',
+    'ricinoleic acid': 'ricinoleic-acid',
+    'ndevgly 995 — refined glycerin (99.5%)': 'refined-glycerin',
+    'ndevgly 995 - refined glycerin (99.5%)': 'refined-glycerin',
+    'refined glycerin (99.5%)': 'refined-glycerin',
+    'refined glycerin': 'refined-glycerin',
+    'ndevest mr — methyl ricinoleate': 'methyl-ricinoleate',
+    'ndevest mr - methyl ricinoleate': 'methyl-ricinoleate',
+    'methyl ricinoleate': 'methyl-ricinoleate',
+    'ndevest m12h — methyl 12-hydroxystearate': 'methyl-12-hydroxystearate',
+    'ndevest m12h - methyl 12-hydroxystearate': 'methyl-12-hydroxystearate',
+    'methyl 12-hydroxystearate': 'methyl-12-hydroxystearate',
+    'ndevacid seb — sebacic acid': 'sebacic-acid',
+    'ndevacid seb - sebacic acid': 'sebacic-acid',
+    'sebacic acid': 'sebacic-acid',
+    'ndevest dos — dioctyl sebacate': 'dioctyl-sebacate',
+    'ndevest dos - dioctyl sebacate': 'dioctyl-sebacate',
+    'dioctyl sebacate': 'dioctyl-sebacate',
+    'ndevest dbs — dibutyl sebacate': 'dibutyl-sebacate',
+    'ndevest dbs - dibutyl sebacate': 'dibutyl-sebacate',
+    'dibutyl sebacate': 'dibutyl-sebacate',
+    'ndevpol bio — bio-polyurethane polyols': 'bio-polyurethane-polyols',
+    'ndevpol bio - bio-polyurethane polyols': 'bio-polyurethane-polyols',
+    'bio-polyurethane polyols': 'bio-polyurethane-polyols',
+    'ndevpol dco — dehydrated castor oil': 'dehydrated-castor-oil',
+    'ndevpol dco - dehydrated castor oil': 'dehydrated-castor-oil',
+    'dehydrated castor oil': 'dehydrated-castor-oil',
+    'ndevox blo — blown / oxidized castor oil': 'blown-oxidized-castor-oil',
+    'ndevox blo - blown / oxidized castor oil': 'blown-oxidized-castor-oil',
+    'blown / oxidized castor oil': 'blown-oxidized-castor-oil',
+    'blown oxidized castor oil': 'blown-oxidized-castor-oil',
+    'ndevacid dco — dco fatty acid': 'dco-fatty-acid',
+    'ndevacid dco - dco fatty acid': 'dco-fatty-acid',
+    'dco fatty acid': 'dco-fatty-acid',
+    'ndevsoap li12 — lithium 12-hydroxystearate': 'lithium-12-hydroxystearate',
+    'ndevsoap li12 - lithium 12-hydroxystearate': 'lithium-12-hydroxystearate',
+    'lithium 12-hydroxystearate': 'lithium-12-hydroxystearate',
+    'ndevsoap ca12 — calcium 12-hydroxystearate': 'calcium-12-hydroxystearate',
+    'ndevsoap ca12 - calcium 12-hydroxystearate': 'calcium-12-hydroxystearate',
+    'calcium 12-hydroxystearate': 'calcium-12-hydroxystearate',
+    'ndevsoap znr — zinc ricinoleate': 'zinc-ricinoleate',
+    'ndevsoap znr - zinc ricinoleate': 'zinc-ricinoleate',
+    'zinc ricinoleate': 'zinc-ricinoleate',
+    'ndevsoap znu — zinc undecylenate': 'zinc-undecylenate',
+    'ndevsoap znu - zinc undecylenate': 'zinc-undecylenate',
+    'zinc undecylenate': 'zinc-undecylenate',
+    'ndevagro cake — castor cake organic fertilizer': 'castor-cake',
+    'ndevagro cake - castor cake organic fertilizer': 'castor-cake',
+    'castor cake organic fertilizer': 'castor-cake',
+    'castor cake': 'castor-cake',
+    'ndevoleo cp — cold pressed castor oil': 'cold-pressed-castor-oil',
+    'cold pressed castor oil': 'cold-pressed-castor-oil',
+    'ndevoleo bp93 — castor oil bp 93 / pharma': 'castor-oil-bp93',
+    'castor oil bp 93 / pharma': 'castor-oil-bp93',
+    'ndevoleo ppg — pale pressed grade (ppg)': 'ppg-castor-oil',
+    'pale pressed grade (ppg)': 'ppg-castor-oil',
+    'ndevoleo fpd — fpd castor oil': 'fpd-castor-oil',
+    'fpd castor oil': 'fpd-castor-oil',
+    'ndevagro hpro — high protein castor meal': 'high-protein-castor-meal',
+    'high protein castor meal': 'high-protein-castor-meal',
+    'ndevgly crude — crude glycerin (80% min)': 'crude-glycerin',
+    'crude glycerin (80% min)': 'crude-glycerin',
+    'crude glycerin': 'crude-glycerin',
+    'ndevchem na2so4 — sodium sulphate anhydrous': 'sodium-sulphate-anhydrous',
+    'sodium sulphate anhydrous': 'sodium-sulphate-anhydrous'
+  };
+
+  function normalizeProductSlug(raw) {
+    if (!raw || typeof raw !== 'string') return 'other';
+    const cleaned = raw.toLowerCase().trim().replace(/[™®]/g, '');
+    if (Object.prototype.hasOwnProperty.call(PRODUCT_SLUG_MAP, cleaned)) {
+      return PRODUCT_SLUG_MAP[cleaned];
+    }
+    const slugStyle = cleaned.replace(/[—/()%,]/g, '-').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    if (Object.prototype.hasOwnProperty.call(PRODUCT_SLUG_MAP, slugStyle)) {
+      return PRODUCT_SLUG_MAP[slugStyle];
+    }
+    for (const key in PRODUCT_SLUG_MAP) {
+      if (Object.prototype.hasOwnProperty.call(PRODUCT_SLUG_MAP, key)) {
+        if (key.length > 5 && (cleaned.indexOf(key) !== -1 || key.indexOf(cleaned) !== -1)) {
+          return PRODUCT_SLUG_MAP[key];
+        }
+      }
+    }
+    return 'other';
+  }
+
+  // 6. Conversion Tracking Helpers
   function getLinkLocation(element) {
     if (!element) return 'body';
     if (element.closest('#whatsapp-fab') || element.closest('.fab') || element.closest('.floating')) return 'floating';
@@ -322,16 +458,18 @@
   function getProductSlug() {
     const path = window.location.pathname;
     const match = path.match(/\/products\/([a-z0-9-]+)/i);
-    if (match && match[1]) return match[1];
+    if (match && match[1]) {
+      return normalizeProductSlug(match[1]);
+    }
 
     try {
       const params = new URLSearchParams(window.location.search);
       const prod = params.get('product');
       if (prod) {
-        return prod.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        return normalizeProductSlug(prod);
       }
     } catch (e) {}
-    return '';
+    return 'other';
   }
 
   function trackEvent(eventName, params) {
@@ -341,6 +479,11 @@
       product_slug: getProductSlug()
     };
     const finalParams = Object.assign(defaultParams, params);
+    if (finalParams.product_slug) {
+      finalParams.product_slug = normalizeProductSlug(finalParams.product_slug);
+    } else {
+      finalParams.product_slug = 'other';
+    }
     gtagCall('event', eventName, finalParams);
   }
 
@@ -393,8 +536,9 @@
     if (href.includes('/downloads/tds/') && href.toLowerCase().endsWith('.pdf')) {
       const fileName = href.split('/').pop().split('?')[0];
       let prodSlug = getProductSlug();
-      if (!prodSlug) {
-        prodSlug = fileName.replace(/\.pdf$/i, '').replace(/^tds[-_]/i, '');
+      if (!prodSlug || prodSlug === 'other') {
+        const rawPdfSlug = fileName.replace(/\.pdf$/i, '').replace(/^tds[-_]/i, '');
+        prodSlug = normalizeProductSlug(rawPdfSlug);
       }
       trackEvent('tds_download', {
         file_name: fileName,
@@ -434,13 +578,7 @@
     }
 
     const formType = detail.form_type || 'quote';
-    let prodSlug = getProductSlug();
-    if (!prodSlug && detail.product_slug) {
-      prodSlug = detail.product_slug.toLowerCase()
-        .replace(/^[a-z0-9™\s]+—\s*/i, '')
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-|-$/g, '');
-    }
+    const prodSlug = detail.product_slug ? normalizeProductSlug(detail.product_slug) : getProductSlug();
     const params = {
       form_type: formType,
       product_slug: prodSlug,
@@ -479,16 +617,9 @@
         if (isValidRef(ref)) {
           if (!isRefFired(ref)) {
             markRefFired(ref);
-            let prodSlug = getProductSlug();
-            if (!prodSlug && prodParam) {
-              prodSlug = prodParam.toLowerCase()
-                .replace(/^[a-z0-9™\s]+—\s*/i, '')
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/^-|-$/g, '');
-            }
             const leadParams = {
               form_type: formType.includes('sample') ? 'sample' : (formType.includes('sds') ? 'sds' : 'quote'),
-              product_slug: prodSlug || '',
+              product_slug: prodParam ? normalizeProductSlug(prodParam) : getProductSlug(),
               link_location: 'body'
             };
             trackEvent('generate_lead', leadParams);
