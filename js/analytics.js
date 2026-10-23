@@ -4,6 +4,7 @@
  * Privacy-safe implementation:
  * - Data sent only on www.nagdevproducts.com (or on preview/localhost with ?ga_debug=1)
  * - Consent Mode v2: ad storage/personalization permanently denied; analytics granted outside EEA/UK/CH
+ * - Conversion event delegation without PII
  */
 (function () {
   'use strict';
@@ -238,9 +239,46 @@
     gtagCall('config', GA_MEASUREMENT_ID, configOptions);
   }
 
+  // 5. Conversion Tracking Helpers
+  function getLinkLocation(element) {
+    if (!element) return 'body';
+    if (element.closest('#whatsapp-fab') || element.closest('.fab') || element.closest('.floating')) return 'floating';
+    if (element.closest('header') || element.closest('.site-header') || element.closest('.top-bar')) return 'header';
+    if (element.closest('footer') || element.closest('.site-footer')) return 'footer';
+    return 'body';
+  }
+
+  function getProductSlug() {
+    const path = window.location.pathname;
+    const match = path.match(/\/products\/([a-z0-9-]+)/i);
+    if (match && match[1]) return match[1];
+
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const prod = params.get('product');
+      if (prod) {
+        return prod.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      }
+    } catch (e) {}
+    return '';
+  }
+
+  function trackEvent(eventName, params) {
+    if (!shouldTrack()) return;
+    const defaultParams = {
+      page_path: window.location.pathname,
+      product_slug: getProductSlug()
+    };
+    const finalParams = Object.assign(defaultParams, params);
+    gtagCall('event', eventName, finalParams);
+  }
+
+  // 6. Delegated Event Listeners
   document.addEventListener('click', function (e) {
-    const button = e.target.closest('button');
     const anchor = e.target.closest('a');
+    const button = e.target.closest('button');
+
+    // Cookie Settings trigger
     if (button && (button.id === 'cookie-settings-btn' || button.classList.contains('cookie-settings-trigger'))) {
       e.preventDefault();
       showConsentBanner();
@@ -251,7 +289,107 @@
       showConsentBanner();
       return;
     }
+
+    if (!anchor) return;
+    const href = (anchor.getAttribute('href') || '').trim();
+    if (!href) return;
+
+    // WhatsApp Click
+    if (href.includes('wa.me') || href.includes('api.whatsapp.com')) {
+      trackEvent('whatsapp_click', {
+        link_location: getLinkLocation(anchor)
+      });
+      return;
+    }
+
+    // Phone Click
+    if (href.startsWith('tel:')) {
+      trackEvent('phone_click', {
+        link_location: getLinkLocation(anchor)
+      });
+      return;
+    }
+
+    // Email Click
+    if (href.startsWith('mailto:')) {
+      trackEvent('email_click', {
+        link_location: getLinkLocation(anchor)
+      });
+      return;
+    }
+
+    // TDS Download (links to /downloads/tds/*.pdf or ending in .pdf with tds)
+    if (href.includes('/downloads/tds/') && href.toLowerCase().endsWith('.pdf')) {
+      const fileName = href.split('/').pop().split('?')[0];
+      let prodSlug = getProductSlug();
+      if (!prodSlug) {
+        prodSlug = fileName.replace(/\.pdf$/i, '').replace(/^tds[-_]/i, '');
+      }
+      trackEvent('tds_download', {
+        file_name: fileName,
+        product_slug: prodSlug,
+        link_location: getLinkLocation(anchor)
+      });
+      return;
+    }
+
+    // Quote / Inquire CTA Click (links to /contact)
+    const cleanHref = href.split('?')[0].split('#')[0];
+    if (cleanHref === '/contact' || cleanHref === 'contact.html' || cleanHref.endsWith('/contact.html')) {
+      const ctaText = (anchor.textContent || '').trim().replace(/\s+/g, ' ');
+      trackEvent('quote_cta_click', {
+        cta_text: ctaText,
+        link_location: getLinkLocation(anchor)
+      });
+      return;
+    }
   });
+
+  // 7. Confirmed Lead & Sample Request Tracking
+  // Listen for the custom nagdev_lead_success event dispatched by site.js on verified submission
+  window.addEventListener('nagdev_lead_success', function (e) {
+    const detail = e.detail || {};
+    const formType = detail.form_type || 'quote';
+    let prodSlug = getProductSlug();
+    if (!prodSlug && detail.product_slug) {
+      prodSlug = detail.product_slug.toLowerCase()
+        .replace(/^[a-z0-9™\s]+—\s*/i, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
+    const params = {
+      form_type: formType,
+      product_slug: prodSlug,
+      link_location: 'body'
+    };
+    if (detail.country) {
+      params.country = detail.country;
+    }
+
+    trackEvent('generate_lead', params);
+
+    if (formType === 'sample') {
+      trackEvent('sample_request', params);
+    }
+  });
+
+  // Check if page loaded with ?submitted=success on /contact
+  if (window.location.pathname.includes('/contact')) {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('submitted') === 'success') {
+        const formType = (params.get('type') || 'quote').toLowerCase();
+        const leadParams = {
+          form_type: formType,
+          link_location: 'body'
+        };
+        trackEvent('generate_lead', leadParams);
+        if (formType === 'sample') {
+          trackEvent('sample_request', leadParams);
+        }
+      }
+    } catch (e) {}
+  }
 
   window.nagdevShowConsent = showConsentBanner;
 })();

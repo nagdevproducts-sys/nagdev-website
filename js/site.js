@@ -199,6 +199,15 @@
       const ref = urlParams.get('ref') || ('NP-' + Date.now().toString().slice(-8));
       renderEnquirySuccess(ref, 'Castor Oil / Derivative', '', '', 'your email');
       if (enquiryForm) enquiryForm.style.display = 'none';
+
+      const typeParam = (urlParams.get('type') || 'quote').toLowerCase();
+      window.dispatchEvent(new CustomEvent('nagdev_lead_success', {
+        detail: {
+          form_type: typeParam.includes('sample') ? 'sample' : (typeParam.includes('sds') ? 'sds' : 'quote'),
+          product_slug: urlParams.get('product') || '',
+          country: ''
+        }
+      }));
     }
   }
 
@@ -302,6 +311,21 @@
           window.showToast(`Enquiry ${refNum} delivered to nagdevproducts@gmail.com!`);
           enquiryForm.style.display = 'none';
           renderEnquirySuccess(refNum, productVal, companyVal, nameVal, emailVal);
+
+          let formType = 'quote';
+          if (enquiryTypeVal.includes('Sample')) formType = 'sample';
+          else if (enquiryTypeVal.includes('TDS') || enquiryTypeVal.includes('Specification')) formType = 'sds';
+          else if (enquiryTypeVal.includes('Quote') || enquiryTypeVal.includes('Bulk')) formType = 'quote';
+          else formType = 'general';
+
+          window.dispatchEvent(new CustomEvent('nagdev_lead_success', {
+            detail: {
+              form_type: formType,
+              product_slug: productVal,
+              country: countryVal
+            }
+          }));
+
           enquiryForm.reset();
         } else {
           console.warn('FormSubmit AJAX returned status', response.status, '— submitting via standard POST fallback');
