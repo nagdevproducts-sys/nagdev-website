@@ -38,8 +38,8 @@ const SITE_CONFIG = {
     },
     googleMapsUrl: "https://maps.app.goo.gl/4eETjMFpRmRxWcf6A",
     coordinates: {
-      latitude: "[ENTER]", // Plant location: 24.183805
-      longitude: "[ENTER]" // Plant location: 71.736510
+      latitude: "24.183805",
+      longitude: "71.736510"
     }
   },
   catalog: {

@@ -1,5 +1,6 @@
 # Vercel Deployment Ignore
 blog-admin.html
+blog/_template.html
 css/blog-admin.css
 js/blog-admin.js
 scratch/
