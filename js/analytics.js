@@ -295,6 +295,16 @@
   // 4. Initialize Consent & GA4 Config
   initConsent();
 
+  // Load gtag.js after window 'load' event to preserve Core Web Vitals & Lighthouse scores
+  function loadGtagScript() {
+    if (document.getElementById('nagdev-gtag-script')) return;
+    const s = document.createElement('script');
+    s.id = 'nagdev-gtag-script';
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+    document.head.appendChild(s);
+  }
+
   if (shouldTrack()) {
     gtagCall('js', new Date());
     const configOptions = {
@@ -312,6 +322,12 @@
     }
 
     gtagCall('config', GA_MEASUREMENT_ID, configOptions);
+
+    if (document.readyState === 'complete') {
+      loadGtagScript();
+    } else {
+      window.addEventListener('load', loadGtagScript);
+    }
   }
 
   // 5. Product Slug Normalization Map
