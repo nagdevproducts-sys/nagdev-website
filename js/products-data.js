@@ -493,13 +493,13 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Pale Yellow / Light Straw",
     "rawMaterial": "Pure Castor Seed (Ricinus communis)",
     "image": "images/products/castor-oil-bp93.webp",
-    "packing": "200 kg Epicoat-lined MS Drums / Food-Grade HDPE Drums • 950 kg IBC • Sealed Pharma containers",
-    "shelfLife": "24 months from date of manufacture under GMP storage",
-    "application": "Complies fully with the British Pharmacopoeia (BP 93) monograph. Formulated under stringent cGMP standards for pharmaceutical laxatives, topical skin ointments, drug delivery vehicles, eye drops, and parenteral emulsification systems.",
+    "packing": "200 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC • Sealed containers",
+    "shelfLife": "24 months from date of manufacture, in original sealed containers",
+    "application": "Manufactured to meet British Pharmacopoeia monograph parameters. Used across topical formulations, cosmetic bases, emollient applications, and chemical intermediate uses.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATIONS"
+      "TYPICAL SPECIFICATION (FINAL VALUES ON COA)"
     ],
     "specs": [
       [
