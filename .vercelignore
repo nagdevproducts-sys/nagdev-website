@@ -1,0 +1,9 @@
+# Vercel Deployment Ignore
+blog-admin.html
+css/blog-admin.css
+js/blog-admin.js
+scratch/
+scripts/
+.git
+.agents
+.gemini
