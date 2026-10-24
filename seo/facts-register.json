@@ -1,116 +1,128 @@
 {
-  "company": {
-    "legal_name": "Nagdev Products Private Limited",
-    "cin": "U15400GJ2019PTC110518",
-    "incorporated": "2019, Gujarat",
-    "head_office": "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal, Gandhinagar 382421, Gujarat",
-    "plant": "Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330",
-    "region_context": "North Gujarat's castor belt (Banaskantha and Vav-Tharad region)",
-    "phone": "+91 63520 98306",
-    "email": "nagdevproducts@gmail.com",
-    "profiles": [
-      "https://www.linkedin.com/company/nagdevproducts",
-      "https://www.instagram.com/nagdev.products",
-      "https://www.google.com/search?kgmid=/g/11fn0sh5tm&q=Nagdev+Products+Private+Limited",
-      "https://maps.google.com/?q=24.183804795616343,71.73651029111288"
-    ],
-    "knowsAbout": [
-      "Castor Oil Manufacturing",
-      "Castor Oil Derivatives",
-      "Commercial Castor Oil",
-      "First Special Grade Castor Oil (FSG)",
-      "Castor Cake Organic Fertilizer",
-      "Hydrogenated Castor Oil (HCO)",
-      "12-Hydroxystearic Acid (12-HSA)",
-      "Ricinoleic Acid",
-      "Refined Glycerin 99.5%",
-      "Oleochemical Engineering",
-      "North Gujarat Castor Agronomy"
-    ]
-  },
-  "operations": {
-    "status": "operational",
-    "seed_crushing_tpd": 50,
-    "processes_allowed": [
-      "mechanical expeller seed crushing",
-      "oil refining (semi-continuous)",
-      "filtration",
-      "hydrogenation and batch pressure reactors for derivatives (HCO, 12-HSA, ricinoleic acid)",
-      "lot testing with COA per lot"
-    ]
-  },
-  "products": {
-    "regular_supply": [
-      "commercial-castor-oil",
-      "first-special-grade-castor-oil",
-      "castor-cake",
-      "hydrogenated-castor-oil",
-      "ricinoleic-acid",
-      "12-hydroxystearic-acid",
-      "refined-glycerin"
-    ],
-    "on_enquiry": [
-      "cold-pressed-castor-oil",
-      "castor-oil-bp93",
-      "ppg-castor-oil",
-      "fpd-castor-oil",
-      "high-protein-castor-meal",
-      "crude-glycerin",
-      "sodium-sulphate-anhydrous"
-    ],
-    "under_development": [
-      "sebacic-acid",
-      "dehydrated-castor-oil",
-      "dco-fatty-acid",
-      "bio-polyurethane-polyols",
-      "dioctyl-sebacate",
-      "dibutyl-sebacate",
-      "methyl-12-hydroxystearate",
-      "methyl-ricinoleate",
-      "lithium-12-hydroxystearate",
-      "calcium-12-hydroxystearate",
-      "zinc-undecylenate",
-      "zinc-ricinoleate",
-      "blown-oxidized-castor-oil"
-    ]
-  },
-  "documents": [
-    "COA per lot",
-    "TDS",
-    "SDS"
-  ],
-  "inspection": "SGS / Bureau Veritas / Intertek arranged at buyer's request and cost",
-  "ports_general": [
-    "Kandla (Deendayal)",
-    "Mundra"
-  ],
-  "banned_phrases": [
-    "worldwide",
-    "global supplier",
-    "premier manufacturer",
-    "leading manufacturer",
-    "largest",
-    "world-class",
-    "every export consignment",
-    "exported to",
-    "countries",
-    "superior ricinoleic purity",
-    "decortication",
-    "contract manufacturing",
-    "toll manufacturing",
-    "ISO 9001",
-    "ISO 14001",
-    "ISO 22000",
-    "GMP certified",
-    "REACH registered",
-    "Halal",
-    "Kosher",
-    "FSSAI",
-    "Fumigation Certificate",
-    "Sardarpura, Banaskantha",
-    "District Banaskantha",
-    "(Banaskantha), Gujarat – 385330",
-    "20 Specialty",
-    "Specialty Range (20)"
+ "company": {
+  "legal_name": "Nagdev Products Private Limited",
+  "cin": "U15400GJ2019PTC110518",
+  "incorporated": "2019",
+  "head_office": "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal, Gandhinagar 382421, Gujarat",
+  "plant": "Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330",
+  "plant_short": "Deodar, Vav-Tharad district, North Gujarat",
+  "region_context": "North Gujarat's castor belt (Banaskantha and Vav-Tharad region)",
+  "phone": "+91 63520 98306",
+  "email": "nagdevproducts@gmail.com",
+  "profiles": [
+   "https://www.linkedin.com/company/nagdevproducts",
+   "https://www.instagram.com/nagdev.products",
+   "https://maps.app.goo.gl/4eETjMFpRmRxWcf6A"
   ]
+ },
+ "operations": {
+  "status": "operational",
+  "seed_crushing_capacity": "50 TPD",
+  "processes_allowed": [
+   "mechanical expeller seed crushing",
+   "oil refining",
+   "semi-continuous refining",
+   "filtration",
+   "hydrogenation",
+   "batch pressure reactors",
+   "lot testing with COA per lot",
+   "in-house QC testing"
+  ]
+ },
+ "products": {
+  "regular_supply": [
+   "commercial-castor-oil",
+   "first-special-grade-castor-oil",
+   "castor-cake",
+   "hydrogenated-castor-oil",
+   "ricinoleic-acid",
+   "12-hydroxystearic-acid",
+   "refined-glycerin"
+  ],
+  "on_enquiry": [
+   "cold-pressed-castor-oil",
+   "castor-oil-bp93",
+   "ppg-castor-oil",
+   "fpd-castor-oil",
+   "high-protein-castor-meal",
+   "crude-glycerin",
+   "sodium-sulphate-anhydrous"
+  ],
+  "under_development": [
+   "sebacic-acid",
+   "dehydrated-castor-oil",
+   "dco-fatty-acid",
+   "bio-polyurethane-polyols",
+   "dioctyl-sebacate",
+   "dibutyl-sebacate",
+   "methyl-12-hydroxystearate",
+   "methyl-ricinoleate",
+   "lithium-12-hydroxystearate",
+   "calcium-12-hydroxystearate",
+   "zinc-undecylenate",
+   "zinc-ricinoleate",
+   "blown-oxidized-castor-oil"
+  ]
+ },
+ "documents": [
+  "COA per lot",
+  "TDS",
+  "SDS"
+ ],
+ "inspection": "SGS, Bureau Veritas or Intertek, arranged at the buyer's request and cost",
+ "ports_general": [
+  "Kandla (Deendayal)",
+  "Mundra"
+ ],
+ "certifications_held": [],
+ "banned_phrases": [
+  "worldwide",
+  "global buyers",
+  "global supplier",
+  "premier manufacturer",
+  "leading manufacturer",
+  "established manufacturer",
+  "established FSG",
+  "largest",
+  "world-class",
+  "every export consignment",
+  "every ocean shipment",
+  "every commercial consignment",
+  "exported to",
+  "countries",
+  "superior ricinoleic",
+  "decortication",
+  "sparkler",
+  "contract manufacturing",
+  "toll manufacturing",
+  "forward contract",
+  "forward contracting",
+  "guaranteed",
+  "priority dispatch",
+  "pricing formula",
+  "MOQ",
+  "minimum order",
+  "ISO 9001",
+  "ISO 14001",
+  "ISO 22000",
+  "GMP",
+  "REACH-compliant",
+  "REACH registered",
+  "REACH pre-registered",
+  "Halal",
+  "Kosher",
+  "FSSAI",
+  "Fumigation",
+  "Geo-Chem",
+  "aviation",
+  "TPA",
+  "established in 2019",
+  "commissioned in 2019",
+  "(Banaskantha), Gujarat",
+  "District Vav-Tharad (Banaskantha)",
+  "Deodar, Banaskantha",
+  "Sardarpura, Banaskantha",
+  "20 Specialty",
+  "Specialty Range (20)"
+ ]
 }
