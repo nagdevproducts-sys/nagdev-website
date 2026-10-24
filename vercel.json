@@ -28,6 +28,16 @@
       "permanent": true
     },
     {
+      "source": "/markets",
+      "destination": "/castor-oil-exporter-india",
+      "permanent": true
+    },
+    {
+      "source": "/markets.html",
+      "destination": "/castor-oil-exporter-india",
+      "permanent": true
+    },
+    {
       "source": "/products/castor-cake-fertilizer",
       "destination": "/products/castor-cake",
       "permanent": true
