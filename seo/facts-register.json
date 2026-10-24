@@ -1,0 +1,101 @@
+{
+  "company": {
+    "legal_name": "Nagdev Products Private Limited",
+    "cin": "U15400GJ2019PTC110518",
+    "incorporated": "2019, Gujarat",
+    "head_office": "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal, Gandhinagar 382421, Gujarat",
+    "plant": "Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330",
+    "region_context": "North Gujarat's castor belt (Banaskantha and Vav-Tharad region)",
+    "phone": "+91 63520 98306",
+    "email": "nagdevproducts@gmail.com",
+    "profiles": [
+      "https://www.linkedin.com/company/nagdevproducts",
+      "https://www.instagram.com/nagdev.products"
+    ]
+  },
+  "operations": {
+    "status": "operational",
+    "seed_crushing_tpd": 50,
+    "processes_allowed": [
+      "mechanical expeller seed crushing",
+      "oil refining (semi-continuous)",
+      "filtration",
+      "hydrogenation and batch pressure reactors for derivatives (HCO, 12-HSA, ricinoleic acid)",
+      "lot testing with COA per lot"
+    ]
+  },
+  "products": {
+    "regular_supply": [
+      "commercial-castor-oil",
+      "first-special-grade-castor-oil",
+      "castor-cake",
+      "hydrogenated-castor-oil",
+      "ricinoleic-acid",
+      "12-hydroxystearic-acid",
+      "refined-glycerin"
+    ],
+    "on_enquiry": [
+      "cold-pressed-castor-oil",
+      "castor-oil-bp93",
+      "ppg-castor-oil",
+      "fpd-castor-oil",
+      "high-protein-castor-meal",
+      "crude-glycerin",
+      "sodium-sulphate-anhydrous"
+    ],
+    "under_development": [
+      "sebacic-acid",
+      "dehydrated-castor-oil",
+      "dco-fatty-acid",
+      "bio-polyurethane-polyols",
+      "dioctyl-sebacate",
+      "dibutyl-sebacate",
+      "methyl-12-hydroxystearate",
+      "methyl-ricinoleate",
+      "lithium-12-hydroxystearate",
+      "calcium-12-hydroxystearate",
+      "zinc-undecylenate",
+      "zinc-ricinoleate",
+      "blown-oxidized-castor-oil"
+    ]
+  },
+  "documents": [
+    "COA per lot",
+    "TDS",
+    "SDS"
+  ],
+  "inspection": "SGS / Bureau Veritas / Intertek arranged at buyer's request and cost",
+  "ports_general": [
+    "Kandla (Deendayal)",
+    "Mundra"
+  ],
+  "banned_phrases": [
+    "worldwide",
+    "global supplier",
+    "premier manufacturer",
+    "leading manufacturer",
+    "largest",
+    "world-class",
+    "every export consignment",
+    "exported to",
+    "countries",
+    "superior ricinoleic purity",
+    "decortication",
+    "contract manufacturing",
+    "toll manufacturing",
+    "ISO 9001",
+    "ISO 14001",
+    "ISO 22000",
+    "GMP certified",
+    "REACH registered",
+    "Halal",
+    "Kosher",
+    "FSSAI",
+    "Fumigation Certificate",
+    "Sardarpura, Banaskantha",
+    "District Banaskantha",
+    "(Banaskantha), Gujarat – 385330",
+    "20 Specialty",
+    "Specialty Range (20)"
+  ]
+}

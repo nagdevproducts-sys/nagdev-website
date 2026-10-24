@@ -1,4 +1,4 @@
-﻿# Backups & Large Archives
+# Backups & Large Archives
 *.zip
 *.tar.gz
 *.bak
@@ -7,6 +7,7 @@
 # Scratch & Internal Dev Scripts
 scratch/
 scripts/
+!scripts/claims_lint.py
 PUBLIC_URL.txt
 before_after_report.md
 
