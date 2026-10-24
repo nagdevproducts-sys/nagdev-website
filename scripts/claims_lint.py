@@ -69,9 +69,10 @@ def strip_tags(text: str) -> str:
     clean = re.sub(r'<(script|style)\b[^>]*>.*?</\1>', ' ', text, flags=re.DOTALL | re.IGNORECASE)
     # Remove HTML comments
     clean = re.sub(r'<!--.*?-->', ' ', clean, flags=re.DOTALL)
-    # Replace block end tags and table cell end tags with periods so sentences don't merge across elements
-    clean = re.sub(r'</(p|div|tr|td|th|li|h[1-6]|section|article|header|footer|dl|dd|dt)>', '. ', clean, flags=re.IGNORECASE)
-    # Remove remaining HTML tags
+    # Replace closing tags and newlines with periods so sentences don't merge across elements or lines
+    clean = re.sub(r'</[a-zA-Z0-9:_-]+>', '. ', clean)
+    clean = re.sub(r'[\r\n]+', '. ', clean)
+    # Remove remaining HTML/XML tags
     clean = re.sub(r'<[^>]+>', ' ', clean)
     clean = re.sub(r'\s+', ' ', clean)
     return clean
@@ -129,15 +130,15 @@ COMMERCIAL_TERMS_RE = re.compile(
 
 def parse_spec_table(html_content: str):
     """
-    Parses analytical parameters from spec-table-section or <table class="spec-table">.
+    Parses analytical parameters from spec-table-section or table with TEST PARAMETER / SR NO.
     Returns dict mapping parameter key -> parsed value details.
     """
-    table_match = re.search(r'<table[^>]*class=["\'][^"\']*spec-table[^"\']*["\'][^>]*>(.*?)</table>', html_content, re.DOTALL | re.IGNORECASE)
+    # Specifically target the analytical table in spec-table-section or containing TEST PARAMETER
+    table_match = re.search(r'<section[^>]*class=["\'][^"\']*spec-table-section[^"\']*["\'][^>]*>.*?<table[^>]*>(.*?)</table>', html_content, re.DOTALL | re.IGNORECASE)
     if not table_match:
-        # Fallback to any table with TEST PARAMETER / SPECIFICATIONS
         tables = re.findall(r'<table[^>]*>(.*?)</table>', html_content, re.DOTALL | re.IGNORECASE)
         for t in tables:
-            if "TEST PARAMETER" in t.upper() or "SPECIFICATIONS" in t.upper() or "SR NO" in t.upper():
+            if "TEST PARAMETER" in t.upper() and ("SPECIFICATIONS" in t.upper() or "SR NO" in t.upper()):
                 table_match = re.search(r'(.*)', t, re.DOTALL)
                 break
     
@@ -145,7 +146,6 @@ def parse_spec_table(html_content: str):
         return {}
 
     table_html = table_match.group(1)
-    # Parse rows: <tr>...<td>param</td><td>spec</td>...</tr>
     rows = re.findall(r'<tr[^>]*>(.*?)</tr>', table_html, re.DOTALL | re.IGNORECASE)
     specs = {
         "color_scale": set(),
@@ -156,7 +156,6 @@ def parse_spec_table(html_content: str):
         cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL | re.IGNORECASE)
         if len(cells) < 2:
             continue
-        # Parameter is usually the second cell (if 3 cells) or first cell (if 2 cells)
         param_cell = cells[1] if len(cells) >= 3 else cells[0]
         val_cell = cells[2] if len(cells) >= 3 else cells[1]
         
@@ -280,8 +279,11 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     # R4: Product counts must be 27 / 7 / 7 / 13
     # ----------------------------------------------------
     for line_idx, line in enumerate(lines, 1):
+        # Ignore lines that are purely HTML attribute declarations like URLs or query params
+        line_no_urls = re.sub(r'https?://[^\s"\'<>]+', '', line)
+        line_no_urls = re.sub(r'%\d{2}', ' ', line_no_urls)
         # Look for numbers preceding products/grades/derivatives
-        count_matches = re.finditer(r'\b(\d+)\s*(?:\+\s*\d+\s*)?(?:core\s+|specialty\s+|commercial\s+)?(products?|grades?|derivatives?)\b', line, re.IGNORECASE)
+        count_matches = re.finditer(r'\b(\d+)\s*(?:\+\s*\d+\s*)?(?:core\s+|specialty\s+|commercial\s+)?(products?|grades?|derivatives?)\b', line_no_urls, re.IGNORECASE)
         for cm in count_matches:
             num = int(cm.group(1))
             if num not in [27, 7, 13]:
@@ -375,10 +377,11 @@ def lint_content(content: str, file_path_str: str, facts: dict):
         table_color_scales = specs.get("color_scale", set())
 
         if table_params:
+            norm_content = content.replace('&le;', '≤').replace('&ge;', '≥').replace('&deg;', '°')
+
             # Check for color scale discrepancy across the page
-            # If Gardner mentioned outside table, but table has only Lovibond (or vice-versa)
-            has_gardner = bool(re.search(r'\bgardner\b', content, re.IGNORECASE))
-            has_lovibond = bool(re.search(r'\blovibond\b', content, re.IGNORECASE))
+            has_gardner = bool(re.search(r'\bgardner\b', norm_content, re.IGNORECASE))
+            has_lovibond = bool(re.search(r'\blovibond\b', norm_content, re.IGNORECASE))
 
             if has_gardner and "gardner" not in table_color_scales:
                 findings.append({
@@ -397,26 +400,21 @@ def lint_content(content: str, file_path_str: str, facts: dict):
                     "text": f"Page mentions 'Lovibond' color scale, but analytical spec table does not define it"
                 })
 
-            # Check Key-Facts table, intro, FAQ, meta description, JSON-LD for numerical parameter mismatches
             # Check Free Fatty Acid (FFA)
             if "ffa" in table_params:
                 table_ffa_num = extract_numeric_val(table_params["ffa"])
-                # Search key-facts, intros, meta, JSON-LD for FFA mentions
-                # e.g., FFA: ≤ 0.50% vs table 1% Max
-                ffa_mentions = re.finditer(r'\bFFA\b[^\w\n]{1,15}([≤<]?\s*\d+(?:\.\d+)?\s*%)', content, re.IGNORECASE)
+                ffa_mentions = re.finditer(r'\b(?:FFA|Free\s+Fatty\s+Acids?)\b[^\w\n]{1,20}([≤<]?\s*\d+(?:\.\d+)?\s*%)', norm_content, re.IGNORECASE)
                 for fm in ffa_mentions:
                     val_num = extract_numeric_val(fm.group(1))
                     if val_num is not None and table_ffa_num is not None:
-                        # Allow exact match
                         if abs(val_num - table_ffa_num) > 0.01:
-                            # Ignore if inside the spec table itself
                             match_pos = fm.start()
-                            table_pos = content.find("class=\"spec-table\"")
-                            if table_pos != -1 and abs(match_pos - table_pos) < 500 and "tbody" in content[table_pos:match_pos+200]:
+                            table_pos = norm_content.find("class=\"spec-table\"")
+                            if table_pos != -1 and abs(match_pos - table_pos) < 500 and "tbody" in norm_content[table_pos:match_pos+200]:
                                 continue
                             findings.append({
                                 "file": file_path_str,
-                                "line": content[:match_pos].count('\n') + 1,
+                                "line": norm_content[:match_pos].count('\n') + 1,
                                 "rule": "R7 Spec consistency (FFA)",
                                 "severity": "FAIL",
                                 "text": f"FFA mention '{fm.group(0)}' conflicts with analytical spec table value '{table_params['ffa']}'"
@@ -425,21 +423,62 @@ def lint_content(content: str, file_path_str: str, facts: dict):
             # Check Acid Value
             if "acid_value" in table_params:
                 table_av_num = extract_numeric_val(table_params["acid_value"])
-                av_mentions = re.finditer(r'\bAcid\s+Value\b[^\w\n]{1,15}([≤<]?\s*\d+(?:\.\d+)?)', content, re.IGNORECASE)
+                av_mentions = re.finditer(r'\bAcid\s+Value\b[^\w\n]{1,20}([≤<]?\s*\d+(?:\.\d+)?)', norm_content, re.IGNORECASE)
                 for am in av_mentions:
                     val_num = extract_numeric_val(am.group(1))
                     if val_num is not None and table_av_num is not None:
                         if abs(val_num - table_av_num) > 0.01:
                             match_pos = am.start()
+                            table_pos = norm_content.find("class=\"spec-table\"")
+                            if table_pos != -1 and abs(match_pos - table_pos) < 500 and "tbody" in norm_content[table_pos:match_pos+200]:
+                                continue
                             findings.append({
                                 "file": file_path_str,
-                                "line": content[:match_pos].count('\n') + 1,
+                                "line": norm_content[:match_pos].count('\n') + 1,
                                 "rule": "R7 Spec consistency (Acid Value)",
                                 "severity": "FAIL",
                                 "text": f"Acid Value mention '{am.group(0)}' conflicts with analytical spec table value '{table_params['acid_value']}'"
                             })
 
             # Check Moisture
+            if "moisture" in table_params:
+                table_m_num = extract_numeric_val(table_params["moisture"])
+                m_mentions = re.finditer(r'\bMoisture\b[^\w\n]{1,15}([≤<]?\s*\d+(?:\.\d+)?\s*%)', norm_content, re.IGNORECASE)
+                for mm in m_mentions:
+                    val_num = extract_numeric_val(mm.group(1))
+                    if val_num is not None and table_m_num is not None:
+                        if abs(val_num - table_m_num) > 0.01:
+                            match_pos = mm.start()
+                            table_pos = norm_content.find("class=\"spec-table\"")
+                            if table_pos != -1 and abs(match_pos - table_pos) < 500 and "tbody" in norm_content[table_pos:match_pos+200]:
+                                continue
+                            findings.append({
+                                "file": file_path_str,
+                                "line": norm_content[:match_pos].count('\n') + 1,
+                                "rule": "R7 Spec consistency (Moisture)",
+                                "severity": "FAIL",
+                                "text": f"Moisture mention '{mm.group(0)}' conflicts with analytical spec table value '{table_params['moisture']}'"
+                            })
+
+            # Check Ricinoleic Acid Content
+            if "ricinoleic" in table_params:
+                table_r_num = extract_numeric_val(table_params["ricinoleic"])
+                r_mentions = re.finditer(r'\bRicinoleic(?:\s+Acid)?(?:\s+Content)?\b[^\w\n]{1,15}([≥>]?\s*\d+(?:\.\d+)?\s*%)', norm_content, re.IGNORECASE)
+                for rm in r_mentions:
+                    val_num = extract_numeric_val(rm.group(1))
+                    if val_num is not None and table_r_num is not None:
+                        if abs(val_num - table_r_num) > 0.01:
+                            match_pos = rm.start()
+                            table_pos = norm_content.find("class=\"spec-table\"")
+                            if table_pos != -1 and abs(match_pos - table_pos) < 500 and "tbody" in norm_content[table_pos:match_pos+200]:
+                                continue
+                            findings.append({
+                                "file": file_path_str,
+                                "line": norm_content[:match_pos].count('\n') + 1,
+                                "rule": "R7 Spec consistency (Ricinoleic)",
+                                "severity": "FAIL",
+                                "text": f"Ricinoleic content mention '{rm.group(0)}' conflicts with analytical spec table value '{table_params['ricinoleic']}'"
+                            })
             if "moisture" in table_params:
                 table_m_num = extract_numeric_val(table_params["moisture"])
                 m_mentions = re.finditer(r'\bMoisture\b[^\w\n]{1,15}([≤<]?\s*\d+(?:\.\d+)?\s*%)', content, re.IGNORECASE)
