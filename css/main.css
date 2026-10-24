@@ -2544,6 +2544,43 @@ input, textarea, select { font-family: var(--font-body); }
 .fade-up.delay-3 { transition-delay: 0.3s; }
 .fade-up.delay-4 { transition-delay: 0.4s; }
 
+/* Immediate First Paint for Hero / LCP Elements (P0-3) */
+.hero,
+.hero-content,
+.hero-headline,
+.hero-eyebrow,
+.hero-sub,
+.hero-actions,
+.hero-image,
+.hero-image img,
+.hero-image picture,
+.product-detail-hero,
+.product-detail-grid,
+.product-detail-media,
+.product-detail-media img,
+.page-header-seamless,
+.page-header-seamless-inner,
+.page-header-seamless-title,
+.page-header-seamless-sub,
+.page-header-breadcrumb {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* ==========================================================================
    31. RESPONSIVE — TABLET (≤ 1024px)
    ========================================================================== */
