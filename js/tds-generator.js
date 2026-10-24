@@ -380,6 +380,7 @@
   }
 
   if (typeof window !== 'undefined') {
+    window._realDownloadProductTDS = downloadProductTDS;
     window.downloadProductTDS = downloadProductTDS;
   }
 })();
