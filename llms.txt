@@ -1,54 +1,62 @@
-# Nagdev Products Private Limited — Product & Technical Reference
+# Nagdev Products Private Limited
 
-> Operational Castor Oil & Derivatives Manufacturing Plant · North Gujarat (Vav-Tharad District)
+> Operational castor oil crushing, refining, and specialty oleochemical derivatives manufacturer located in North Gujarat's castor belt (Vav-Tharad district), India.
 
-## Commercial Portfolio Status (27 Commercial & Technical Grades)
-Summary: 7 grades in regular supply · 7 available on enquiry · 13 under development.
+## Company Overview
+- Legal Corporate Name: Nagdev Products Private Limited
+- Corporate Identity Number (CIN): U15400GJ2019PTC110518
+- Incorporated: 2019, Gujarat, India
+- Operational Crushing Facility: 50 TPD mechanical expeller crushing, semi-continuous oil refining, and derivative reactors
+- Plant Address: Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330, India
+- Head Office: 612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal, Gandhinagar 382421, Gujarat, India
+- Export Ports: Kandla Port (Deendayal) & Mundra Port (Gulf of Kutch)
 
-### 1. Regular Supply (Commercial Volume Production)
-- Commercial Grade Castor Oil (NDEVOLEO™ COMM, CAS 8001-79-4): https://www.nagdevproducts.com/products/commercial-castor-oil
-- Refined Castor Oil First Special Grade / FSG / BSS (NDEVOLEO™ FSG, CAS 8001-79-4): https://www.nagdevproducts.com/products/first-special-grade-castor-oil
-- Castor Cake / Expeller Cake — High-Nitrogen Organic Manure (NDEVAGRO™ CAKE): https://www.nagdevproducts.com/products/castor-cake
-- Hydrogenated Castor Oil / HCO / Castor Wax (NDEVWAX™ HCO, CAS 8001-78-3): https://www.nagdevproducts.com/products/hydrogenated-castor-oil
-- Ricinoleic Acid 85%+ (NDEVACID™ RIC, CAS 141-22-0): https://www.nagdevproducts.com/products/ricinoleic-acid
-- 12-Hydroxystearic Acid / 12-HSA (NDEVACID™ 12-HSA, CAS 106-14-9): https://www.nagdevproducts.com/products/12-hydroxystearic-acid
-- Refined Glycerin 99.5% CP Grade (NDEVGLY™ REF, CAS 56-81-5): https://www.nagdevproducts.com/products/refined-glycerin
+## Commercial Product Range
 
-### 2. Available on Enquiry (Refinery Co-Products & Specialty Grades)
-- Cold Pressed Castor Oil (NDEVOLEO™ CP, CAS 8001-79-4): https://www.nagdevproducts.com/products/cold-pressed-castor-oil
-- Castor Oil BP 93 / Pharma Monograph Grade (NDEVOLEO™ BP93, CAS 8001-79-4): https://www.nagdevproducts.com/products/castor-oil-bp93
-- Pale Pressed Grade / PPG Castor Oil (NDEVOLEO™ PPG, CAS 8001-79-4): https://www.nagdevproducts.com/products/ppg-castor-oil
-- First Pressed Degummed / FPD Castor Oil (NDEVOLEO™ FPD, CAS 8001-79-4): https://www.nagdevproducts.com/products/fpd-castor-oil
-- High Protein Castor Meal N8/N10 (NDEVAGRO™ HPC, CAS 68424-10-2): https://www.nagdevproducts.com/products/high-protein-castor-meal
-- Crude Glycerin 80% (NDEVGLY™ CRU, CAS 56-81-5): https://www.nagdevproducts.com/products/crude-glycerin
-- Sodium Sulphate Anhydrous 99.4% (NDEVSALT™ SSA, CAS 7757-82-6): https://www.nagdevproducts.com/products/sodium-sulphate-anhydrous
+### Regular Supply (Commercial Volume Production)
+- [Commercial Castor Oil](https://www.nagdevproducts.com/products/commercial-castor-oil): Industrial-grade unrefined castor oil (CAS 8001-79-4) for lubricants, alkyds, and industrial synthesis.
+- [First Special Grade Castor Oil (FSG)](https://www.nagdevproducts.com/products/first-special-grade-castor-oil): Refined, bleached, low-acidity castor oil (CAS 8001-79-4, FFA < 1.0%) for polyurethanes, pharma precursors, and coatings.
+- [Castor Cake (Organic Fertilizer)](https://www.nagdevproducts.com/products/castor-cake): Nitrogen-rich expeller de-oiled meal (4.5%–5.5% N) with nematicidal ricin active for commercial agriculture.
+- [Hydrogenated Castor Oil (HCO / Castor Wax)](https://www.nagdevproducts.com/products/hydrogenated-castor-oil): Hard vegetable wax flakes (CAS 8001-78-3, Drop Point 85°C–88°C) for lithium greases, powder coatings, and sealants.
+- [Ricinoleic Acid](https://www.nagdevproducts.com/products/ricinoleic-acid): 85%+ pure hydroxy fatty acid (CAS 141-22-0) for specialty ester synthesis, corrosion inhibitors, and surfactants.
+- [12-Hydroxystearic Acid (12-HSA)](https://www.nagdevproducts.com/products/12-hydroxystearic-acid): Primary gelling fatty acid (CAS 106-14-9, Drop Point 75°C–78°C) for multipurpose automotive and industrial lithium greases.
+- [Refined Glycerin 99.5%](https://www.nagdevproducts.com/products/refined-glycerin): High-purity pure vegetable glycerol (CAS 56-81-5, USP/CP grade) from derivative co-product streams.
 
-### 3. Under Development – Enquiries Welcome (Pilot & Downstream Synthetics)
-- Sebacic Acid (NDEVACID™ SEB, CAS 111-20-6): https://www.nagdevproducts.com/products/sebacic-acid
-- Dioctyl Sebacate / DOS (NDEVEST™ DOS, CAS 122-62-3): https://www.nagdevproducts.com/products/dioctyl-sebacate
-- Dibutyl Sebacate / DBS (NDEVEST™ DBS, CAS 109-43-3): https://www.nagdevproducts.com/products/dibutyl-sebacate
-- Dehydrated Castor Oil / DCO (NDEVPOL™ DCO, CAS 64147-40-6): https://www.nagdevproducts.com/products/dehydrated-castor-oil
-- Dehydrated Castor Oil Fatty Acid / DCO-FA (NDEVACID™ DCO, CAS 61789-45-5): https://www.nagdevproducts.com/products/dco-fatty-acid
-- Bio-Polyurethane Polyols (NDEVPOL™ BIO, CAS 68442-88-6): https://www.nagdevproducts.com/products/bio-polyurethane-polyols
-- Blown / Oxidised Castor Oil (NDEVOX™ BLO, CAS 68187-84-8): https://www.nagdevproducts.com/products/blown-oxidized-castor-oil
-- Lithium 12-Hydroxystearate (NDEVSOAP™ LI12, CAS 7620-77-1): https://www.nagdevproducts.com/products/lithium-12-hydroxystearate
-- Calcium 12-Hydroxystearate (NDEVSOAP™ CA12, CAS 3159-62-4): https://www.nagdevproducts.com/products/calcium-12-hydroxystearate
-- Zinc Ricinoleate (NDEVSOAP™ ZNR, CAS 13040-19-2): https://www.nagdevproducts.com/products/zinc-ricinoleate
-- Zinc Undecylenate (NDEVSOAP™ ZNU, CAS 557-08-4): https://www.nagdevproducts.com/products/zinc-undecylenate
-- Methyl Ricinoleate (NDEVEST™ MR, CAS 141-24-2): https://www.nagdevproducts.com/products/methyl-ricinoleate
-- Methyl 12-Hydroxystearate (NDEVEST™ M12H, CAS 141-23-1): https://www.nagdevproducts.com/products/methyl-12-hydroxystearate
+### Specialty Grades (Available on Technical Enquiry)
+- [Cold Pressed Castor Oil](https://www.nagdevproducts.com/products/cold-pressed-castor-oil): Virgin single-press mechanical extraction (CAS 8001-79-4) for personal care and premium formulations.
+- [Castor Oil BP 93 Grade](https://www.nagdevproducts.com/products/castor-oil-bp93): Monograph-tested pharmacopoeia grade (CAS 8001-79-4) for excipients and topical preparations.
+- [Pale Pressed Grade (PPG)](https://www.nagdevproducts.com/products/ppg-castor-oil): Low-color premium grade (CAS 8001-79-4) for pale alkyds and specialty coatings.
+- [First Pressed Degummed (FPD)](https://www.nagdevproducts.com/products/fpd-castor-oil): Water-degummed primary extraction oil (CAS 8001-79-4) for industrial feedstock.
+- [High Protein Castor Meal](https://www.nagdevproducts.com/products/high-protein-castor-meal): High-nitrogen organic soil conditioner (CAS 68424-10-2) for soil enrichment.
+- [Crude Glycerin 80%](https://www.nagdevproducts.com/products/crude-glycerin): Co-product glycerol stream (CAS 56-81-5) for industrial applications and distillation.
+- [Sodium Sulphate Anhydrous](https://www.nagdevproducts.com/products/sodium-sulphate-anhydrous): Neutralized inorganic salt co-product (CAS 7757-82-6) for detergent builders and glass.
 
-## Technical Specifications & Documentation
-- Documentation available for buyer qualification: Certificate of Analysis (COA) per production lot, TDS (Technical Data Sheets), SDS (Safety Data Sheets).
+### Advanced Derivatives (Under R&D Development)
+- [Sebacic Acid](https://www.nagdevproducts.com/products/sebacic-acid): C10 dicarboxylic acid (CAS 111-20-6, under development) for bio-polyamides (Nylon 6.10, Nylon 10.10) and synthetic diesters.
+- [Dehydrated Castor Oil (DCO)](https://www.nagdevproducts.com/products/dehydrated-castor-oil): Conjugated drying oil (CAS 64147-40-6, under development) for fast-curing architectural and industrial alkyds.
+- [DCO Fatty Acid](https://www.nagdevproducts.com/products/dco-fatty-acid): Conjugated diene fatty acid (CAS 61789-45-5, under development) for epoxy ester and stoving enamels.
+- [Bio-Polyurethane Polyols](https://www.nagdevproducts.com/products/bio-polyurethane-polyols): Tailored OH-value renewable polyols (CAS 68442-88-6, under development) for rigid/flexible PU foams and CASE.
+- [Dioctyl Sebacate (DOS)](https://www.nagdevproducts.com/products/dioctyl-sebacate): Low-temperature synthetic diester plasticizer (CAS 122-62-3, under development) for aerospace rubbers and PVC.
+- [Dibutyl Sebacate (DBS)](https://www.nagdevproducts.com/products/dibutyl-sebacate): Specialty plasticizer ester (CAS 109-43-3, under development) for cellulose and food-contact polymers.
+- [Lithium 12-Hydroxystearate](https://www.nagdevproducts.com/products/lithium-12-hydroxystearate): Pre-reacted lithium soap powder (CAS 7620-77-1, under development) for grease compounding.
+- [Calcium 12-Hydroxystearate](https://www.nagdevproducts.com/products/calcium-12-hydroxystearate): Specialty metallic soap (CAS 3159-62-4, under development) for water-resistant industrial greases.
+- [Zinc Ricinoleate](https://www.nagdevproducts.com/products/zinc-ricinoleate): Natural odor-trapping coordinated active salt (CAS 13040-19-2, under development) for deodorants.
+- [Zinc Undecylenate](https://www.nagdevproducts.com/products/zinc-undecylenate): Antifungal fatty acid zinc salt (CAS 557-08-4, under development) for footcare and topical powders.
+- [Methyl Ricinoleate](https://www.nagdevproducts.com/products/methyl-ricinoleate): Low-viscosity methyl ester (CAS 141-24-2, under development) for diesel lubricity and chemical synthesis.
+- [Methyl 12-Hydroxystearate](https://www.nagdevproducts.com/products/methyl-12-hydroxystearate): Hydroxy ester intermediate (CAS 141-23-1, under development) for synthetic waxes and lithium soaps.
+- [Blown Oxidized Castor Oil](https://www.nagdevproducts.com/products/blown-oxidized-castor-oil): High-viscosity polymerized fluid (CAS 68187-84-8, under development) for printing inks and hydraulic plasticizers.
+
+## Technical & Commercial Hubs
+- [Castor Oil Derivatives Hub](https://www.nagdevproducts.com/castor-oil-derivatives): Complete overview of castor chemistry, fatty acid conversions, and downstream applications.
+- [Gujarat Manufacturing & Crushing Plant](https://www.nagdevproducts.com/castor-oil-manufacturer-gujarat): Crushing operations, regional seed sourcing, APMC mandis, and factory logistics.
+- [Bulk Castor Oil Supply & Packaging](https://www.nagdevproducts.com/bulk-castor-oil-supply): ISO tanks (20-24 MT), Flexitanks (21.5 MT), IBC totes (1,000 L), 200 kg steel drums, and 25 kg bags.
+- [Global Castor Oil Exporter from India](https://www.nagdevproducts.com/castor-oil-exporter-india): Kandla and Mundra port logistics, container stuffing, Incoterms, and trade documents.
+
+## Quality Documentation & Compliance
+- Full buyer qualification pack: Certificate of Analysis (COA) per production lot, Technical Data Sheets (TDS), Safety Data Sheets (SDS).
 - Third-party pre-shipment inspection (SGS, Bureau Veritas, Intertek) arranged at buyer's request and cost.
-- Sales Terms: Spot volume orders and term supply contracts.
 
-## Core Commercial & Technical Hubs
-- Castor Oil Derivatives Hub: https://www.nagdevproducts.com/castor-oil-derivatives
-  Full technical breakdown of 27 castor grades, ricinoleic acid chemistry, gelling mechanisms, and industrial polyols.
-- Gujarat Manufacturing & Crushing Plant: https://www.nagdevproducts.com/castor-oil-manufacturer-gujarat
-  Operational 50 TPD crushing plant in Sardarpura, Vav-Tharad district (North Gujarat), regional castor seed sourcing advantage, APMC network, and plant logistics.
-- Bulk Castor Oil Supply & Packaging: https://www.nagdevproducts.com/bulk-castor-oil-supply
-  Commercial procurement guide, ISO tanks, flexitanks, IBC totes, 200 kg steel drums, and 25 kg bags.
-- Global Castor Oil Exporter from India: https://www.nagdevproducts.com/castor-oil-exporter-india
-  International export operations, Kandla and Mundra port logistics, HS codes, Incoterms, and trade documentation.
+## Procurement Contact
+- Phone / WhatsApp: +91 63520 98306
+- Email: nagdevproducts@gmail.com
+- Technical Inquiries: https://www.nagdevproducts.com/contact
