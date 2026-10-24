@@ -6,6 +6,7 @@ js/blog-admin.js
 scratch/
 scripts/
 seo/
+tests/
 .git
 .agents
 .gemini
