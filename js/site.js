@@ -9,10 +9,17 @@
   // ── Header scroll behaviour ──────────────────────────────────────────────
   const header = document.getElementById('site-header');
   if (header) {
+    const topBar = document.querySelector('.top-bar');
+    let ticking = false;
     const onScroll = () => {
-      const topBar = document.querySelector('.top-bar');
-      const topBarH = (topBar && window.getComputedStyle(topBar).display !== 'none') ? topBar.offsetHeight : 0;
-      header.classList.toggle('scrolled', window.scrollY > (topBarH || 35));
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const topBarH = (topBar && topBar.offsetHeight) ? topBar.offsetHeight : 35;
+          header.classList.toggle('scrolled', window.scrollY > topBarH);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     if (window.scrollY > 0) {
@@ -352,46 +359,60 @@
     <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.845L0 24l6.335-1.502A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.794 9.794 0 01-5.003-1.373l-.36-.214-3.724.883.936-3.617-.235-.373A9.79 9.79 0 012.182 12C2.182 6.575 6.575 2.182 12 2.182S21.818 6.575 21.818 12 17.425 21.818 12 21.818z"/>
   </svg>`;
 
-  const style = document.createElement('style');
-  style.textContent = `
-    #whatsapp-fab {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 1500;
-      width: 52px;
-      height: 52px;
-      background: #25D366;
-      color: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 16px rgba(37,211,102,0.45);
-      transition: transform 0.2s, box-shadow 0.2s, opacity 0.25s ease, visibility 0.25s ease;
-      text-decoration: none;
+  // WhatsApp FAB styling moved to css/main.css
+  function appendFab() {
+    if (!document.getElementById('whatsapp-fab') && document.body) {
+      document.body.appendChild(btn);
     }
-    #whatsapp-fab:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 22px rgba(37,211,102,0.55);
-    }
-    body.drawer-open #whatsapp-fab {
-      opacity: 0 !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-    }
-    @media (max-width: 768px) {
-      #whatsapp-fab { bottom: 1.25rem; right: 1.25rem; width: 48px; height: 48px; }
-    }
-  `;
-
-  document.head.appendChild(style);
-  document.addEventListener('DOMContentLoaded', function () {
-    document.body.appendChild(btn);
-  });
-  if (document.readyState !== 'loading') {
-    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', appendFab);
+  } else {
+    appendFab();
   }
 })();
+
+
+  // ── Dynamic TDS Generator Loader (P0-4) ──────────────────────────────────
+  window.downloadProductTDS = function (productId, targetBtn) {
+    if (window._realDownloadProductTDS) {
+      return window._realDownloadProductTDS(productId);
+    }
+
+    const btn = targetBtn || (window.event && window.event.currentTarget) || document.getElementById('print-tds-btn');
+    let origHtml = '';
+    if (btn) {
+      origHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.style.pointerEvents = 'none';
+      btn.innerHTML = '<span style="display:inline-block;width:13px;height:13px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin 0.6s linear infinite;margin-right:6px;vertical-align:middle;"></span> Generating TDS...';
+    }
+
+    const script = document.createElement('script');
+    script.src = '/js/tds-generator.js';
+    script.async = true;
+    script.onload = function () {
+      if (btn) {
+        btn.innerHTML = origHtml;
+        btn.disabled = false;
+        btn.style.pointerEvents = '';
+      }
+      if (typeof window.downloadProductTDS === 'function' && window.downloadProductTDS !== window._stubDownloadProductTDS) {
+        window.downloadProductTDS(productId);
+      }
+    };
+    script.onerror = function () {
+      if (btn) {
+        btn.innerHTML = origHtml;
+        btn.disabled = false;
+        btn.style.pointerEvents = '';
+      }
+      if (typeof window.showToast === 'function') {
+        window.showToast('Could not load TDS generator. Please try again.');
+      }
+    };
+    document.head.appendChild(script);
+  };
+  window._stubDownloadProductTDS = window.downloadProductTDS;
 
 })();
