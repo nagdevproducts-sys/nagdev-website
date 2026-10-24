@@ -28,13 +28,13 @@
       "permanent": true
     },
     {
-      "source": "/castor-oil-derivatives",
-      "destination": "/products?filter=derivatives",
+      "source": "/markets",
+      "destination": "/castor-oil-exporter-india",
       "permanent": true
     },
     {
-      "source": "/castor-oil-derivatives.html",
-      "destination": "/products?filter=derivatives",
+      "source": "/markets.html",
+      "destination": "/castor-oil-exporter-india",
       "permanent": true
     },
     {
