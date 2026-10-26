@@ -45,6 +45,23 @@ def load_facts(facts_path: Path = None):
     with open(facts_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+# Linter Rule Definitions (Single Source of Truth)
+RULES = {
+    "R1": "banned_phrases (case-insensitive, whole-site: HTML text, meta, JSON-LD, llms*.txt)",
+    "R2": "any certification name not in certifications_held (ISO, GMP, REACH, Halal, Kosher, FSSAI, BIS licence, NABL, etc.)",
+    "R3": "under-development product in a sentence with produce/manufacture/supply/available/in stock/offer/dispatch/solution unless marked 'under development'",
+    "R4": "product counts must be 27 / 7 / 7 / 13; any other count next to products/grades",
+    "R5": "plant address/district must match register; 'Banaskantha' next to Deodar, Sardarpura, 385330 or 'district' forbidden",
+    "R6": "capacity: any TPD/TPA/MT per day value other than '50 TPD' seed crushing",
+    "R7": "SPEC CONSISTENCY: spec table limits must match across key-facts, intro, FAQ, meta, JSON-LD and TDS text",
+    "R8": "commercial terms: MOQ, lead time, delivery days, price, payment terms, monthly allocation unless in register",
+    "R9": "percentages/numbers in prose that are not spec values and have no reference link in paragraph (WARN)",
+    "R10": "Any table citing a data source (Agmarknet, SEA, DGCIS, official) must have matching raw data file and generator script",
+    "R11": "Banned additions to register's banned phrases (certified regional, oil content, processing parity, etc.)",
+    "R12": "Any page claiming data for a period that ends after its own publish date",
+    "R13": "Required standard site template components (header, footer, consent snippet, gtag loader, /js/analytics.js)"
+}
+
 # Ignored paths
 IGNORED_PARTS = {"scratch", "scripts", "seo", "tests", ".git", ".agents", ".gemini", "node_modules", "backup_task4"}
 IGNORED_FILES = {"blog-admin.html", "_template.html", "render_tds.html"}

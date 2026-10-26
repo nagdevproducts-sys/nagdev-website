@@ -8,6 +8,16 @@ OUTPUT_DIR = Path("monitoring_output")
 REPORT_FILE = OUTPUT_DIR / "monthly_report.md"
 CITATIONS_FILE = Path("seo/authority/citations.csv")
 
+SCRIPTS_DIR = Path(__file__).resolve().parent.parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+try:
+    from claims_lint import RULES
+except ImportError:
+    RULES = {}
+
+
 def load_json(name):
     p = OUTPUT_DIR / name
     if p.exists():
@@ -246,6 +256,17 @@ def build_report():
         lines.append("_No P1 keywords tracked or GSC rankings unavailable._")
     lines.append("")
 
+    # Informational: Not yet ranking table (tracking < 90 days)
+    not_yet = recs.get("not_yet_ranking", [])
+    if not_yet:
+        first_d = not_yet[0].get("first_tracked", "2026-10-26")
+        lines.append(f"### Not Yet Ranking (Tracking Since {first_d})")
+        lines.append("| Keyword | Cluster | Target URL | Tracking Since | Days Active | Status |")
+        lines.append("| :--- | :--- | :--- | :--- | :--- | :--- |")
+        for k in not_yet:
+            lines.append(f"| {k['keyword']} | {k['cluster']} | `{k['target_url']}` | {k['first_tracked']} | {k['days_tracked']}d | ⏳ Building Authority |")
+        lines.append("")
+
     # ----------------------------------------------------
     # 7. Mobile Performance (PageSpeed Insights)
     # ----------------------------------------------------
@@ -285,21 +306,7 @@ def build_report():
     if rule_fails:
         lines.append("| Rule | Rule Description | Failures |")
         lines.append("| :--- | :--- | :--- |")
-        rule_desc = {
-            "R1": "Plant capacity (50 TPD max)",
-            "R2": "Forbidden equipment claims",
-            "R3": "Forbidden accreditations (ISO/GMP/FSSC/REACH)",
-            "R4": "Forbidden downstream specialties (sebacic/undecylenic)",
-            "R5": "Purity claims (pure/100% pure)",
-            "R6": "Sustainability/circularity claims",
-            "R7": "Forbidden corporate structure claims",
-            "R8": "Forbidden awards & historical longevity",
-            "R9": "Forbidden lab capabilities & client lists",
-            "R10": "Market data sources (Agmarknet/SEA)",
-            "R11": "Oil content & processing parity claims",
-            "R12": "Future-dated market reports",
-            "R13": "Required HTML tracking & header/footer"
-        }
+        rule_desc = c_chk.get("rule_metadata") or RULES
         for r_code, count in rule_fails.items():
             lines.append(f"| `{r_code}` | {rule_desc.get(r_code, '')} | {count} |")
         lines.append("")

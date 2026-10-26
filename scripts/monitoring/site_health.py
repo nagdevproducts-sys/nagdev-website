@@ -16,6 +16,16 @@ SITEMAP_URL = "https://www.nagdevproducts.com/sitemap.xml"
 
 import xml.etree.ElementTree as ET
 
+SCRIPTS_DIR = Path(__file__).resolve().parent.parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+try:
+    from claims_lint import RULES
+except ImportError:
+    RULES = {}
+
+
 def get_sitemap_urls():
     urls = []
     try:
@@ -115,6 +125,7 @@ def run_health_check():
             "status": "PASS",
             "hard_failures": 0,
             "warnings": 0,
+            "rule_metadata": RULES,
             "rule_failures": {f"R{i}": 0 for i in range(1, 14)}
         }
     }

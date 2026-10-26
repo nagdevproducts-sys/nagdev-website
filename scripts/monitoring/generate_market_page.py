@@ -323,7 +323,7 @@ def generate_page_for_csv(csv_path):
 <footer class="site-footer">
   <div class="container">
     <div class="footer-bottom">
-      <p>© {datetime.now().year} Nagdev Products Private Limited. All rights reserved. Registered Plant: Survey No. 40, Village Kotda, Taluka Deodar, District Banaskantha, Gujarat 385330.</p>
+      <p>© {datetime.now().year} Nagdev Products Private Limited. All rights reserved. Registered Plant: Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330.</p>
     </div>
   </div>
 </footer>

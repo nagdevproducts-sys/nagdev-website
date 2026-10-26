@@ -13,6 +13,26 @@
       "permanent": true
     },
     {
+      "source": "/our-farms",
+      "destination": "/farmers-en",
+      "permanent": true
+    },
+    {
+      "source": "/our-farms/",
+      "destination": "/farmers-en",
+      "permanent": true
+    },
+    {
+      "source": "/factory-setup",
+      "destination": "/plant",
+      "permanent": true
+    },
+    {
+      "source": "/factory-setup/",
+      "destination": "/plant",
+      "permanent": true
+    },
+    {
       "source": "/index.html",
       "destination": "/",
       "permanent": true

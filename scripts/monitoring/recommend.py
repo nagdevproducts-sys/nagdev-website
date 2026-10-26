@@ -80,6 +80,19 @@ def generate_recommendations():
                 "message": f"Strengthen {primary_page} for \"{query_text}\" (internal links/section): observed {imp} impressions at average position {pos}."
             })
 
+    # Load sitemap URLs for legacy URL check
+    sitemap_urls = set()
+    sitemap_path = Path("sitemap.xml")
+    if sitemap_path.exists():
+        import xml.etree.ElementTree as ET
+        try:
+            tree = ET.parse(sitemap_path)
+            ns = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+            for loc in tree.getroot().findall('.//ns:loc', ns):
+                sitemap_urls.add(loc.text.strip())
+        except Exception:
+            pass
+
     # Rule 3: Page with >= 200 impressions and CTR < 1% -> Review title/meta of <page>
     for p in top_pages:
         imp = p.get("impressions", 0)
@@ -92,17 +105,58 @@ def generate_recommendations():
                 "message": f"Review title/meta of {page_url}: observed {imp} impressions with CTR {ctr}% (< 1.0% threshold)."
             })
 
-    # Rule 4: P1 keyword with no impressions -> Check targeting of <url>
+    # Rule 3b: Legacy URL (not in sitemap) with >= 20 impressions -> Consider 308 redirect
+    for p in top_pages:
+        page_url = p.get("page", "")
+        imp = p.get("impressions", 0)
+        full_url = page_url if page_url.startswith("http") else f"https://www.nagdevproducts.com{page_url}"
+        norm_url = full_url.rstrip("/")
+        in_sm = full_url in sitemap_urls or norm_url in sitemap_urls or (norm_url + "/") in sitemap_urls
+        if not in_sm and imp >= 20:
+            recs.append({
+                "severity": "MEDIUM",
+                "rule": "Legacy URL Impressions",
+                "message": f"Legacy URL {page_url} (not in sitemap) received {imp} impressions in last 28 days. Consider a 308 to the closest relevant live page, or leave as 404."
+            })
+
+    # Rule 4: P1 keyword with no impressions -> Check targeting only if tracked >= 90 days
+    from datetime import datetime, date
+    today = date.today()
     keyword_rankings = gsc.get("keyword_rankings", [])
-    p1_no_impressions = [k for k in keyword_rankings if k.get("priority") == "P1" and k.get("impressions", 0) == 0]
-    for k in p1_no_impressions[:5]: # Cap at top 5 to keep actionable
+    if not keyword_rankings:
+        kw_file = Path("seo/keywords.csv")
+        if kw_file.exists():
+            import csv
+            with open(kw_file, "r", encoding="utf-8") as f:
+                keyword_rankings = list(csv.DictReader(f))
+
+    p1_no_impressions = [k for k in keyword_rankings if k.get("priority") == "P1" and int(k.get("impressions", 0)) == 0]
+    
+    not_yet_ranking = []
+    for k in p1_no_impressions:
         kw = k.get("keyword", "")
         t_url = k.get("target_url", "")
-        recs.append({
-            "severity": "MEDIUM",
-            "rule": "P1 Keyword Zero Impressions",
-            "message": f"Check targeting of {t_url} for P1 keyword \"{kw}\": observed 0 impressions in last 28 days."
-        })
+        ft_str = k.get("first_tracked") or "2026-10-26"
+        try:
+            ft_date = datetime.strptime(ft_str, "%Y-%m-%d").date()
+            days_tracked = (today - ft_date).days
+        except Exception:
+            days_tracked = 0
+
+        if days_tracked >= 90:
+            recs.append({
+                "severity": "MEDIUM",
+                "rule": "P1 Keyword Zero Impressions",
+                "message": f"Check targeting of {t_url} for P1 keyword \"{kw}\": observed 0 impressions after {days_tracked} days of tracking (>=90d threshold)."
+            })
+        else:
+            not_yet_ranking.append({
+                "keyword": kw,
+                "cluster": k.get("cluster", ""),
+                "target_url": t_url,
+                "first_tracked": ft_str,
+                "days_tracked": days_tracked
+            })
 
     # Rule 5: PSI drop > 10 points or score < 80 -> Performance regression on <page>
     psi_results = psi.get("results", [])
@@ -131,13 +185,14 @@ def generate_recommendations():
     out_data = {
         "status": "SUCCESS",
         "total_recommendations": len(recs),
-        "recommendations": recs
+        "recommendations": recs,
+        "not_yet_ranking": not_yet_ranking
     }
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(out_data, f, indent=2)
 
-    print(f"Generated {len(recs)} rule-based recommendations, saved to {OUTPUT_FILE}")
+    print(f"Generated {len(recs)} rule-based recommendations and {len(not_yet_ranking)} not-yet-ranking items, saved to {OUTPUT_FILE}")
     return out_data
 
 if __name__ == "__main__":

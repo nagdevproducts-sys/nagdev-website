@@ -9,6 +9,7 @@ scratch/
 scripts/*
 !scripts/claims_lint.py
 !scripts/monitoring/
+!scripts/outreach/
 monitoring_output/
 PUBLIC_URL.txt
 before_after_report.md
