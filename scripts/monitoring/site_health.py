@@ -14,27 +14,31 @@ OUTPUT_DIR = Path("monitoring_output")
 OUTPUT_FILE = OUTPUT_DIR / "site_health.json"
 SITEMAP_URL = "https://www.nagdevproducts.com/sitemap.xml"
 
+import xml.etree.ElementTree as ET
+
 def get_sitemap_urls():
     urls = []
     try:
         resp = requests.get(SITEMAP_URL, timeout=15)
         if resp.status_code == 200:
-            soup = BeautifulSoup(resp.content, "xml")
-            for loc in soup.find_all("loc"):
-                u = loc.text.strip()
-                if u:
-                    urls.append(u)
+            root = ET.fromstring(resp.content)
+            for elem in root.iter():
+                if elem.tag.endswith("loc") and elem.text:
+                    u = elem.text.strip()
+                    if u:
+                        urls.append(u)
     except Exception as e:
         print(f"Error fetching live sitemap: {e}, falling back to local sitemap.xml", file=sys.stderr)
     
     if not urls:
         local_sitemap = Path("sitemap.xml")
         if local_sitemap.exists():
-            soup = BeautifulSoup(local_sitemap.read_text(encoding="utf-8"), "xml")
-            for loc in soup.find_all("loc"):
-                u = loc.text.strip()
-                if u:
-                    urls.append(u)
+            root = ET.fromstring(local_sitemap.read_text(encoding="utf-8"))
+            for elem in root.iter():
+                if elem.tag.endswith("loc") and elem.text:
+                    u = elem.text.strip()
+                    if u:
+                        urls.append(u)
     return urls
 
 def normalize_url(url):
