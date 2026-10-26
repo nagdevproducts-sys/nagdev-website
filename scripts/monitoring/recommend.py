@@ -170,17 +170,35 @@ def generate_recommendations():
                 "days_tracked": days_tracked
             })
 
-    # Rule 5: PSI drop > 10 points or score < 80 -> Performance regression on <page>
+    # Rule 5: Performance Regression (fires only when score drops > 10 points vs previous stored run)
+    psi_prev = load_json("psi_previous.json") or load_json("psi_data_previous.json") or {}
+    prev_results = {p.get("url"): p for p in psi_prev.get("results", [])}
+
     psi_results = psi.get("results", [])
     for pr in psi_results:
         score = pr.get("median_score")
+        lcp = pr.get("median_lcp_ms")
         name = pr.get("name", "")
         url = pr.get("url", "")
-        if score is not None and score < 80:
+
+        # Only fires if score drops > 10 vs previous stored run
+        prev_score = pr.get("previous_score")
+        if prev_score is None and url in prev_results:
+            prev_score = prev_results[url].get("median_score")
+
+        if score is not None and prev_score is not None and (prev_score - score) > 10:
+            recs.append({
+                "severity": "HIGH",
+                "rule": "Performance Regression",
+                "message": f"Performance regression on {name} ({url}): score dropped {prev_score - score} points (from {prev_score} to {score}/100)."
+            })
+
+        # Separate absolute threshold rule: Below target: LCP > 2.5 s on <page>
+        if lcp is not None and lcp > 2500:
             recs.append({
                 "severity": "MEDIUM",
-                "rule": "Performance Regression",
-                "message": f"Performance regression on {name} ({url}): median mobile score is {score}/100 (FCP: {pr.get('median_fcp_ms')}ms, LCP: {pr.get('median_lcp_ms')}ms, CLS: {pr.get('median_cls')})."
+                "rule": f"Below target: LCP > 2.5 s on {name}",
+                "message": f"Below target: LCP > 2.5 s on {name} ({url}): median LCP is {round(lcp / 1000.0, 2)}s ({lcp}ms), exceeding the 2.5 s threshold."
             })
 
     # Rule 6: Leads = 0 for 30 days while organic sessions > 100 -> Review CTAs/contact form
