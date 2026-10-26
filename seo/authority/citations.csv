@@ -1,8 +1,8 @@
 platform,profile_url,status,date,nap_exact,backlink,screenshot_path
 Google Business Profile (Plant),https://maps.app.goo.gl/4eETjMFpRmRxWcf6A,PENDING-OWNERSHIP-REQUEST,2026-10-26,N,follow,seo/authority/evidence/gbp_plant_pin.png
-LinkedIn Company Profile,https://www.linkedin.com/company/146257987/,LIVE,2026-10-26,Y,nofollow,seo/authority/evidence/linkedin_edit_page.png
-LinkedIn Announcement Post,https://www.linkedin.com/feed/update/urn:li:share:7520394894822019073/?actorCompanyId=146257987,LIVE,2026-10-26,Y,nofollow,seo/authority/evidence/linkedin_post_live.png
-IndiaMART Seller Profile,https://www.indiamart.com/company/92404724/,LIVE,2026-10-26,Y,nofollow,seo/authority/evidence/indiamart_profile_manage.png
+LinkedIn Company Profile,https://www.linkedin.com/company/nagdevproducts/,LIVE,2026-10-26,Y,nofollow,seo/authority/evidence/linkedin_public_profile.png
+LinkedIn Announcement Post,https://www.linkedin.com/feed/update/urn:li:share:7520394894822019073/,LIVE,2026-10-26,Y,nofollow,seo/authority/evidence/linkedin_public_post.png
+IndiaMART Seller Profile,https://www.indiamart.com/nagdev-products/,LIVE,2026-10-26,Y,nofollow,seo/authority/evidence/indiamart_public_profile.png
 TradeIndia,https://www.tradeindia.com/,PENDING-OTP,2026-10-26,Y,nofollow,seo/authority/evidence/tradeindia_pending.png
 ExportersIndia,https://www.exportersindia.com/,PENDING-OTP,2026-10-26,Y,nofollow,seo/authority/evidence/exportersindia_pending.png
 JustDial,https://www.justdial.com/,PENDING-OTP,2026-10-26,Y,nofollow,seo/authority/evidence/justdial_pending.png
@@ -11,5 +11,5 @@ GlobalLinker,https://globallinker.com/,PENDING-REVIEW,2026-10-26,Y,nofollow,seo/
 Tridge,https://www.tridge.com/,PENDING-REVIEW,2026-10-26,Y,follow,seo/authority/evidence/tridge_pending.png
 Go4WorldBusiness,https://www.go4worldbusiness.com/,PENDING-REVIEW,2026-10-26,Y,none,seo/authority/evidence/go4wb_pending.png
 Alibaba,https://www.alibaba.com/,SKIPPED,2026-10-26,N,none,seo/authority/evidence/alibaba_skipped.png
-Instagram,https://www.instagram.com/nagdev.products,LIVE,2026-10-26,Y,nofollow,seo/authority/evidence/instagram_profile.png
+Instagram,https://www.instagram.com/nagdev.products,LIVE,2026-10-26,Y,nofollow,seo/authority/evidence/instagram_public_profile.png
 Bing Places for Business,https://www.bingplaces.com/,PENDING-GBP-SYNC,2026-10-26,Y,follow,seo/authority/evidence/bing_places_pending.png
