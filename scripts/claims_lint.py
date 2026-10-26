@@ -592,37 +592,47 @@ def run_production_audit(facts: dict):
         # 1. Plain fetch
         # 2. Cache-busted fetch
         for fetch_url, mode in [(u, "plain"), (f"{u}?cb={cb_ts}", "cache-busted")]:
-            try:
-                req = urllib.request.Request(fetch_url, headers=headers)
-                with urllib.request.urlopen(req, timeout=15) as res:
-                    if res.getcode() != 200:
-                        all_findings.append({
-                            "file": f"{u} ({mode})",
-                            "line": 0,
-                            "rule": "HTTP Status",
-                            "severity": "FAIL",
-                            "text": f"HTTP {res.getcode()} returned"
-                        })
-                        fail_count += 1
-                        continue
-                    html = res.read().decode('utf-8', errors='ignore')
-                    res_findings = lint_content(html, f"{u} ({mode})", facts)
-                    for item in res_findings:
-                        all_findings.append(item)
-                        if item["severity"] == "FAIL":
+            success = False
+            last_err = None
+            for attempt in range(3):
+                try:
+                    req = urllib.request.Request(fetch_url, headers=headers)
+                    with urllib.request.urlopen(req, timeout=20) as res:
+                        if res.getcode() != 200:
+                            all_findings.append({
+                                "file": f"{u} ({mode})",
+                                "line": 0,
+                                "rule": "HTTP Status",
+                                "severity": "FAIL",
+                                "text": f"HTTP {res.getcode()} returned"
+                            })
                             fail_count += 1
-                            for r_key in fails_by_rule:
-                                if item["rule"].startswith(r_key):
-                                    fails_by_rule[r_key] += 1
-                        else:
-                            warn_count += 1
-            except Exception as e:
+                            success = True
+                            break
+                        html = res.read().decode('utf-8', errors='ignore')
+                        res_findings = lint_content(html, f"{u} ({mode})", facts)
+                        for item in res_findings:
+                            all_findings.append(item)
+                            if item["severity"] == "FAIL":
+                                fail_count += 1
+                                for r_key in fails_by_rule:
+                                    if item["rule"].startswith(r_key):
+                                        fails_by_rule[r_key] += 1
+                            else:
+                                warn_count += 1
+                        success = True
+                        break
+                except Exception as e:
+                    last_err = e
+                    time.sleep(1)
+
+            if not success:
                 all_findings.append({
                     "file": f"{u} ({mode})",
                     "line": 0,
                     "rule": "Fetch Error",
                     "severity": "FAIL",
-                    "text": str(e)
+                    "text": str(last_err)
                 })
                 fail_count += 1
 
