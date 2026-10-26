@@ -6,8 +6,10 @@
 
 # Scratch & Internal Dev Scripts
 scratch/
-scripts/
+scripts/*
 !scripts/claims_lint.py
+!scripts/monitoring/
+monitoring_output/
 PUBLIC_URL.txt
 before_after_report.md
 

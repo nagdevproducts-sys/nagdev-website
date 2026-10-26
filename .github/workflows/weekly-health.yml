@@ -1,0 +1,105 @@
+name: Weekly SEO Health & Performance Monitor
+
+on:
+  schedule:
+    # Mondays 00:30 UTC = 06:00 IST
+    - cron: '30 0 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/monitoring/requirements.txt
+
+      - name: Restore previous PSI artifact for regression check
+        uses: actions/cache@v4
+        with:
+          path: monitoring_output/prev_psi.json
+          key: psi-baseline-${{ runner.os }}
+          restore-keys: |
+            psi-baseline-
+
+      - name: Run Site Health Check (Sitemap, Links, Claims Lint)
+        run: |
+          python scripts/monitoring/site_health.py
+
+      - name: Run Mobile PageSpeed Insights Pull
+        env:
+          PSI_API_KEY: ${{ secrets.PSI_API_KEY }}
+        run: |
+          python scripts/monitoring/psi_pull.py
+
+      - name: Evaluate Health and Alert on Failures
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - << 'EOF'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          health_p = Path("monitoring_output/site_health.json")
+          psi_p = Path("monitoring_output/psi_data.json")
+          prev_psi_p = Path("monitoring_output/prev_psi.json")
+
+          failures = []
+
+          if health_p.exists():
+              health = json.loads(health_p.read_text(encoding="utf-8"))
+              if health.get("status") != "PASS":
+                  for r in health.get("failure_reasons", []):
+                      failures.append(f"- **Site Health Issue:** {r}")
+
+          if psi_p.exists():
+              psi = json.loads(psi_p.read_text(encoding="utf-8"))
+              prev_psi = json.loads(prev_psi_p.read_text(encoding="utf-8")) if prev_psi_p.exists() else {}
+              prev_scores = {r["url"]: r["median_score"] for r in prev_psi.get("results", []) if "median_score" in r}
+
+              for r in psi.get("results", []):
+                  u = r.get("url")
+                  score = r.get("median_score")
+                  if score is not None and u in prev_scores:
+                      prev_s = prev_scores[u]
+                      if prev_s - score > 10:
+                          failures.append(f"- **Performance Regression:** {r.get('name')} dropped >10 points ({prev_s} -> {score})")
+              
+              # Save current as baseline for next run
+              prev_psi_p.parent.mkdir(parents=True, exist_ok=True)
+              prev_psi_p.write_text(json.dumps(psi, indent=2), encoding="utf-8")
+
+          if failures:
+              body = "## 🚨 Weekly SEO Health Alert\n\nThe following automated checks failed during the weekly audit:\n\n" + "\n".join(failures) + "\n\n*Please investigate and remediate immediately.*"
+              print("Failures detected! Opening GitHub issue...")
+              subprocess.run([
+                  "gh", "issue", "create",
+                  "--title", "🚨 SEO Health Alert: Weekly Audit Regressions Detected",
+                  "--body", body,
+                  "--label", "seo-alert"
+              ], check=True)
+          else:
+              print("All weekly health and performance checks passed cleanly. No issue opened.")
+          EOF
+
+      - name: Upload Health Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-health-data
+          path: monitoring_output/
+          retention-days: 30

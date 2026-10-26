@@ -1,0 +1,62 @@
+name: Market Page Generator
+
+on:
+  push:
+    paths:
+      - 'seo/data/agmarknet/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate-market-page:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install beautifulsoup4 lxml requests
+
+      - name: Validate CSV and Generate Market Insights Page
+        id: generator
+        run: |
+          python scripts/monitoring/generate_market_page.py
+
+      - name: Run Claims Linter on Generated Pages
+        run: |
+          python scripts/claims_lint.py
+
+      - name: Create Pull Request with Generated Market Page
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH_NAME="market-page/update-$(date +'%Y%m%d-%H%M%S')"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "${BRANCH_NAME}"
+          git add insights/ sitemap.xml llms.txt
+          
+          if git diff --staged --quiet; then
+            echo "No changes detected to commit."
+            exit 0
+          fi
+          
+          git commit -m "feat(insights): generate official Agmarknet mandi price page and update sitemap"
+          git push origin "${BRANCH_NAME}"
+          
+          gh pr create \
+            --title "Market Insights Update: Official Agmarknet Mandi Prices" \
+            --body "Automated PR generated from Agmarknet CSV upload. Contains verified APMC mandi prices, updated sitemap.xml, and llms.txt. Claims linter passed with 0 hard failures." \
+            --base main \
+            --head "${BRANCH_NAME}"
