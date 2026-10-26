@@ -17,7 +17,8 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
-# AI Visibility Evidence (not deployed)
+# AI Visibility & Authority Evidence (not deployed)
 seo/ai-visibility/evidence/
+seo/authority/evidence/
 __pycache__/
 *.pyc
