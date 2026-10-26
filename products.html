@@ -27,6 +27,7 @@
   <meta name="twitter:image" content="https://www.nagdevproducts.com/images/og-share.jpg">
   <link rel="icon" href="favicon.ico">
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/images/products/commercial-castor-oil.webp" fetchpriority="high">
 <link rel="stylesheet" href="/css/main.min.css?v=20261023c">
   <script type="application/ld+json">
@@ -1418,11 +1419,11 @@
     }
     noRes.style.display = 'none';
 
-    grid.innerHTML = items.map(p => `
+    grid.innerHTML = items.map((p, idx) => `
       <a href="/products/${p.id}" class="product-card${p.isSpecialtyRange ? ' is-specialty' : ''}" id="card-${p.id}" role="listitem"
          aria-label="View specifications for ${p.name}">
         <div class="product-card-img-wrap">
-          <img src="/${p.image.replace(/^\//, '')}" alt="${p.name} manufactured in Gujarat, India" width="400" height="300" loading="lazy" onerror="this.style.opacity='0.3'">
+          <img src="/${p.image.replace(/^\//, '')}" alt="${p.name} manufactured in Gujarat, India" width="400" height="300" loading="${idx === 0 ? 'eager' : 'lazy'}" ${idx === 0 ? 'fetchpriority="high"' : ''} decoding="async" onerror="this.style.opacity='0.3'">
           ${
             REGULAR_SUPPLY_IDS.includes(p.id)
               ? '<span class="dev-badge-pill" style="background:#EBF2ED;color:#0B3D1E;border:1px solid #C4D9CA;font-weight:700;">Regular Supply</span>'
@@ -1504,7 +1505,9 @@
 
   // ── Event listeners ───────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
-    renderGrid();
+    if (activeFilter !== 'all' || activeIndustry !== 'all') {
+      renderGrid();
+    }
 
     // Category filter tabs
     document.querySelectorAll('.filter-tab').forEach(btn => {
