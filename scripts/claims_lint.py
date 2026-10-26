@@ -556,8 +556,101 @@ def lint_file(file_path: Path, facts: dict = None):
     content = file_path.read_text(encoding='utf-8', errors='ignore')
     return lint_content(content, rel_path, facts)
 
+def run_production_audit(facts: dict):
+    import xml.etree.ElementTree as ET
+    import urllib.request
+    import time
+
+    sitemap_path = REPO_ROOT / "sitemap.xml"
+    urls = set()
+    if sitemap_path.exists():
+        tree = ET.parse(sitemap_path)
+        root = tree.getroot()
+        namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+        for loc in root.findall('.//ns:loc', namespace):
+            urls.add(loc.text.strip())
+
+    urls.add("https://www.nagdevproducts.com/certifications")
+    urls.add("https://www.nagdevproducts.com/quality")
+    urls.add("https://www.nagdevproducts.com/team")
+
+    sorted_urls = sorted(urls)
+    print("==================================================")
+    print("NAGDEV CLAIMS LINTER: PRODUCTION LIVE AUDIT")
+    print(f"Auditing {len(sorted_urls)} live URLs (Plain + Cache-Busted)...")
+    print("==================================================")
+
+    all_findings = []
+    fail_count = 0
+    warn_count = 0
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 9)}
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+
+    cb_ts = int(time.time())
+
+    for idx, u in enumerate(sorted_urls, 1):
+        # 1. Plain fetch
+        # 2. Cache-busted fetch
+        for fetch_url, mode in [(u, "plain"), (f"{u}?cb={cb_ts}", "cache-busted")]:
+            try:
+                req = urllib.request.Request(fetch_url, headers=headers)
+                with urllib.request.urlopen(req, timeout=15) as res:
+                    if res.getcode() != 200:
+                        all_findings.append({
+                            "file": f"{u} ({mode})",
+                            "line": 0,
+                            "rule": "HTTP Status",
+                            "severity": "FAIL",
+                            "text": f"HTTP {res.getcode()} returned"
+                        })
+                        fail_count += 1
+                        continue
+                    html = res.read().decode('utf-8', errors='ignore')
+                    res_findings = lint_content(html, f"{u} ({mode})", facts)
+                    for item in res_findings:
+                        all_findings.append(item)
+                        if item["severity"] == "FAIL":
+                            fail_count += 1
+                            for r_key in fails_by_rule:
+                                if item["rule"].startswith(r_key):
+                                    fails_by_rule[r_key] += 1
+                        else:
+                            warn_count += 1
+            except Exception as e:
+                all_findings.append({
+                    "file": f"{u} ({mode})",
+                    "line": 0,
+                    "rule": "Fetch Error",
+                    "severity": "FAIL",
+                    "text": str(e)
+                })
+                fail_count += 1
+
+    print("\n==================================================")
+    print("PRODUCTION CLAIMS LINTER AUDIT SUMMARY")
+    print(f"Total Live URLs Scanned: {len(sorted_urls)} (tested plain and cache-busted)")
+    print(f"Production Hard Failures: {fail_count}")
+    print(f"Production Warnings: {warn_count}")
+    print("Failures by Rule:")
+    for r_k, r_c in sorted(fails_by_rule.items()):
+        print(f"  {r_k}: {r_c}")
+    print("==================================================")
+
+    if fail_count > 0:
+        print(f"\n[FAILED] Production claims gate audit failed with {fail_count} failures!")
+        for f in all_findings:
+            if f["severity"] == "FAIL":
+                print(f"  FAIL: {f['file']} [{f['rule']}] -> {f['text']}")
+        return 1
+    else:
+        print("\n[SUCCESS] PRODUCTION LINTER PASSED WITH 0 FAILURES!")
+        return 0
+
 def main():
     facts = load_facts()
+    if "--production" in sys.argv or "--prod" in sys.argv:
+        return run_production_audit(facts)
+
     files = collect_files()
     print("==================================================")
     print("NAGDEV CLAIMS LINTER & PERMANENT FACT GATE (PHASE 3b)")
@@ -621,3 +714,4 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
