@@ -1,2 +1,2 @@
-# Ignored Build Step Test
-This commit touches only .github/ and should be ignored/canceled by Vercel.
+# Ignored Build Step Test - Run 2
+Testing that commits touching only .github/ are ignored/canceled by Vercel.
