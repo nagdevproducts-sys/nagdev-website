@@ -1,6 +1,6 @@
 # Nagdev Claims Linter & Fact Verification Report
 
-- Total Files Scanned: 92
+- Total Files Scanned: 91
 - Total Failures (Exit != 0): **0**
 - Total Warnings (Review items): **1**
 
@@ -13,6 +13,11 @@
 - **R6**: 0
 - **R7**: 0
 - **R8**: 0
+- **R9**: 0
+- **R10**: 0
+- **R11**: 0
+- **R12**: 0
+- **R13**: 0
 
 | File | Line | Rule | Severity | Details |
 |---|---|---|---|---|

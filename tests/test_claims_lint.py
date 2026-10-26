@@ -78,30 +78,136 @@ class TestClaimsLint(unittest.TestCase):
 
     def test_fixtures_must_pass(self):
         clean_html = """
+        <!DOCTYPE html>
         <html>
         <head>
           <meta name="description" content="Commercial Castor Oil supplied by Nagdev Products from Deodar, Vav-Tharad district.">
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {'analytics_storage': 'denied'});
+          </script>
+          <script defer src="/js/analytics.js"></script>
         </head>
         <body>
-          <p>Commercial Castor Oil is raw unrefined castor oil produced by Nagdev Products at its 50 TPD expeller plant in Deodar, Vav-Tharad district, North Gujarat.</p>
-          <p>We source castor seeds directly from local farmers in Banaskantha and Vav-Tharad.</p>
-          <p>Documentation for buyer qualification includes COA per lot, TDS, and SDS. Third-party inspection by SGS, Bureau Veritas or Intertek can be arranged at the buyer's request and cost.</p>
-          <p>Spot orders and term supply contracts are available on enquiry.</p>
-          <p>Export documents provided as required by the buyer: COA, TDS, SDS, commercial invoice, packing list, certificate of origin.</p>
-          <p>Sebacic acid is under development in our R&D pipeline.</p>
-          <p>We offer 27 products across 7 regular supply grades, 7 on enquiry, and 13 under development.</p>
-          <section class="spec-table-section">
-            <table class="spec-table">
-              <tr><td>1</td><td>Free Fatty Acid (FFA)</td><td>1% Max</td></tr>
-              <tr><td>2</td><td>Acid Value</td><td>2.0 mg KOH/g Max</td></tr>
-            </table>
-          </section>
+          <header class="site-header"><nav>Menu</nav></header>
+          <main>
+            <p>Commercial Castor Oil is raw unrefined castor oil produced by Nagdev Products at its 50 TPD expeller plant in Deodar, Vav-Tharad district, North Gujarat.</p>
+            <p>We source castor seeds directly from local farmers in Banaskantha and Vav-Tharad.</p>
+            <p>Documentation for buyer qualification includes COA per lot, TDS, and SDS. Third-party inspection by SGS, Bureau Veritas or Intertek can be arranged at the buyer's request and cost.</p>
+            <p>Spot orders and term supply contracts are available on enquiry.</p>
+            <p>Export documents provided as required by the buyer: COA, TDS, SDS, commercial invoice, packing list, certificate of origin.</p>
+            <p>Sebacic acid is under development in our R&D pipeline.</p>
+            <p>We offer 27 products across 7 regular supply grades, 7 on enquiry, and 13 under development.</p>
+            <section class="spec-table-section">
+              <table class="spec-table">
+                <tr><td>1</td><td>Free Fatty Acid (FFA)</td><td>1% Max</td></tr>
+                <tr><td>2</td><td>Acid Value</td><td>2.0 mg KOH/g Max</td></tr>
+              </table>
+            </section>
+          </main>
+          <footer class="site-footer"><p>Copyright 2026</p></footer>
         </body>
         </html>
         """
         findings = lint_content(clean_html, "products/commercial-castor-oil.html", self.facts)
         fails = [f for f in findings if f["severity"] == "FAIL"]
         self.assertEqual(len(fails), 0, f"Clean fixture should have 0 failures, got: {fails}")
+
+    def test_r10_table_source_missing_raw_data_fails(self):
+        html = """
+        <html>
+        <body>
+          <h3>Market Price Benchmark (Source: Agmarknet)</h3>
+          <table>
+            <tr><th>Market</th><th>Price</th></tr>
+            <tr><td>Deodar</td><td>₹6,200</td></tr>
+          </table>
+        </body>
+        </html>
+        """
+        findings = lint_content(html, "insights/market-test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R10")]
+        self.assertTrue(len(fails) > 0, "R10 must fail when table cites Agmarknet without raw data/generator")
+
+    def test_r11_banned_phrases_fail(self):
+        banned = [
+            "certified regional",
+            "oil content",
+            "seed oil content",
+            "processing parity",
+            "weighted benchmark"
+        ]
+        for phrase in banned:
+            html = f"<p>This report evaluates {phrase} across North Gujarat markets.</p>"
+            findings = lint_content(html, "test.html", self.facts)
+            fails = [f for f in findings if f["rule"].startswith("R11")]
+            self.assertTrue(len(fails) > 0, f"R11 must fail for banned phrase '{phrase}'")
+
+    def test_r12_period_after_publish_date_fails(self):
+        # Case A: 4 completed October weeks on 26 October
+        html_a = """
+        <html>
+        <head>
+          <meta name="publish-date" content="2026-10-26">
+        </head>
+        <body>
+          <p>We review 4 completed October weeks of arrivals across Gujarat mandis.</p>
+        </body>
+        </html>
+        """
+        findings_a = lint_content(html_a, "insights/test.html", self.facts)
+        fails_a = [f for f in findings_a if f["rule"].startswith("R12")]
+        self.assertTrue(len(fails_a) > 0, "R12 must fail for '4 completed October weeks' on 26 October")
+
+        # Case B: Period ending October 31, 2026 published on 2026-10-26
+        html_b = """
+        <html>
+        <head>
+          <meta name="publish-date" content="2026-10-26">
+        </head>
+        <body>
+          <h2>Castor Seed Price Range: October 1–31, 2026</h2>
+        </body>
+        </html>
+        """
+        findings_b = lint_content(html_b, "insights/test.html", self.facts)
+        fails_b = [f for f in findings_b if f["rule"].startswith("R12")]
+        self.assertTrue(len(fails_b) > 0, "R12 must fail for date range ending Oct 31 when published Oct 26")
+
+    def test_r13_missing_standard_components_fails(self):
+        # Missing header, footer, consent, analytics
+        bare_html = "<html><head><title>Test</title></head><body><h1>Content</h1></body></html>"
+        findings = lint_content(bare_html, "test-page.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R13")]
+        self.assertTrue(len(fails) > 0, "R13 must fail when standard template components are missing")
+        self.assertIn("site header", fails[0]["text"])
+        self.assertIn("site footer", fails[0]["text"])
+        self.assertIn("analytics script", fails[0]["text"])
+
+    def test_r13_clean_standard_page_passes(self):
+        standard_html = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Test Clean Page</title>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {'analytics_storage': 'denied'});
+          </script>
+          <script defer src="/js/analytics.js"></script>
+        </head>
+        <body>
+          <header class="site-header"><nav>Menu</nav></header>
+          <main><p>Valid content here.</p></main>
+          <footer class="site-footer"><p>Copyright 2026</p></footer>
+        </body>
+        </html>
+        """
+        findings = lint_content(standard_html, "clean-test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R13")]
+        self.assertEqual(len(fails), 0, f"R13 should pass for standard compliant page, got: {fails}")
 
 if __name__ == "__main__":
     unittest.main()
