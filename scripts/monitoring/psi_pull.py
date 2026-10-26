@@ -13,7 +13,7 @@ OUTPUT_FILE = OUTPUT_DIR / "psi_data.json"
 TARGET_PAGES = [
     {"name": "Homepage (/)", "url": "https://www.nagdevproducts.com/"},
     {"name": "Products Catalog (/products)", "url": "https://www.nagdevproducts.com/products"},
-    {"name": "FSG Castor Oil", "url": "https://www.nagdevproducts.com/products/fsg-castor-oil"},
+    {"name": "FSG Castor Oil", "url": "https://www.nagdevproducts.com/products/first-special-grade-castor-oil"},
     {"name": "Commercial Castor Oil", "url": "https://www.nagdevproducts.com/products/commercial-castor-oil"},
     {"name": "Hydrogenated Castor Oil (HCO)", "url": "https://www.nagdevproducts.com/products/hydrogenated-castor-oil"},
     {"name": "12-HSA", "url": "https://www.nagdevproducts.com/products/12-hydroxystearic-acid"},
@@ -59,13 +59,17 @@ def fetch_single_psi(url, api_key=None, max_retries=3):
                     "tbt_ms": round(tbt)
                 }
             elif resp.status_code in [429, 500, 503]:
-                time.sleep(3 * (attempt + 1))
+                backoff = 5 * (2 ** attempt)
+                print(f"    [PSI Retry] HTTP {resp.status_code}. Backing off {backoff}s...")
+                time.sleep(backoff)
             else:
                 return {"error": f"HTTP {resp.status_code}: {resp.text[:200]}"}
         except Exception as e:
             if attempt == max_retries - 1:
                 return {"error": str(e)}
-            time.sleep(3)
+            backoff = 5 * (2 ** attempt)
+            print(f"    [PSI Retry] Exception {e}. Backing off {backoff}s...")
+            time.sleep(backoff)
     return {"error": "Max retries exceeded"}
 
 def run_pull():
@@ -103,7 +107,7 @@ def run_pull():
                 lcps.append(res["lcp_ms"])
                 clss.append(res["cls"])
                 tbts.append(res["tbt_ms"])
-            time.sleep(1) # Gentle spacing between runs
+            time.sleep(15)  # 15s spacing between calls to respect rate limits
             
         if scores:
             median_score = round(statistics.median(scores))

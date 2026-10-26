@@ -106,6 +106,7 @@ def generate_recommendations():
             })
 
     # Rule 3b: Legacy URL (not in sitemap) with >= 20 impressions -> Consider 308 redirect
+    import requests
     for p in top_pages:
         page_url = p.get("page", "")
         imp = p.get("impressions", 0)
@@ -113,6 +114,17 @@ def generate_recommendations():
         norm_url = full_url.rstrip("/")
         in_sm = full_url in sitemap_urls or norm_url in sitemap_urls or (norm_url + "/") in sitemap_urls
         if not in_sm and imp >= 20:
+            # Check live status before suggesting: exclude URLs that already return 3xx, 410, or 404
+            status_code = None
+            try:
+                chk_resp = requests.head(full_url, allow_redirects=False, timeout=5)
+                status_code = chk_resp.status_code
+            except Exception:
+                pass
+
+            if status_code is not None and (300 <= status_code < 400 or status_code in [404, 410]):
+                continue  # Already properly redirected (3xx) or designated dead (404/410)
+
             recs.append({
                 "severity": "MEDIUM",
                 "rule": "Legacy URL Impressions",

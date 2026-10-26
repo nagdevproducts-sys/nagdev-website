@@ -1,20 +1,14 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
   "redirects": [
-    {
-      "source": "/contact-us",
-      "destination": "/contact",
-      "permanent": true
-    },
     {
       "source": "/contact-us/",
       "destination": "/contact",
       "permanent": true
     },
     {
-      "source": "/our-farms",
-      "destination": "/farmers-en",
+      "source": "/contact-us",
+      "destination": "/contact",
       "permanent": true
     },
     {
@@ -23,12 +17,17 @@
       "permanent": true
     },
     {
-      "source": "/factory-setup",
-      "destination": "/plant",
+      "source": "/our-farms",
+      "destination": "/farmers-en",
       "permanent": true
     },
     {
       "source": "/factory-setup/",
+      "destination": "/plant",
+      "permanent": true
+    },
+    {
+      "source": "/factory-setup",
       "destination": "/plant",
       "permanent": true
     },
