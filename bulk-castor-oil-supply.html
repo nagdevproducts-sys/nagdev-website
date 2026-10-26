@@ -224,6 +224,39 @@
   ]
 }
 </script>
+  <!-- Google Analytics 4 & Consent Mode v2 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'region': ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'IS', 'LI', 'NO', 'GB', 'CH'],
+      'wait_for_update': 500
+    });
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'granted'
+    });
+    try {
+      var _c = localStorage.getItem('nagdev_consent');
+      if (_c) {
+        var _p = JSON.parse(_c);
+        if (_p && _p.timestamp && (Date.now() - _p.timestamp < 31536000000)) {
+          gtag('consent', 'update', {
+            'analytics_storage': _p.choice === 'granted' ? 'granted' : 'denied'
+          });
+        } else {
+          localStorage.removeItem('nagdev_consent');
+        }
+      }
+    } catch(e){}
+  </script>
+  <script defer src="/js/analytics.js"></script>
 </head>
 <body>
 

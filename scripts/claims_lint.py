@@ -17,6 +17,10 @@ R7: SPEC CONSISTENCY (per product page): parse page's spec table (parameter -> l
     A different colour scale (Gardner vs Lovibond) not present in table -> FAIL.
 R8: commercial terms: MOQ, lead time, delivery days, price, payment terms, monthly allocation -> FAIL unless in register
 R9: percentages/numbers in prose that are not spec values and have no <a href> source in the same paragraph -> WARN
+R10: Any table whose caption, heading or nearby text cites a data source (Agmarknet, SEA, DGCIS, government, "official") must have a matching raw data file in seo/data/<source>/<YYYY-MM-DD>/ and a generator script in scripts/ that reproduces the table exactly -> FAIL
+R11: Banned additions to the register's banned_phrases: "certified regional", "oil content", "seed oil content", "processing parity", "weighted benchmark" -> FAIL
+R12: Any page claiming data for a period that ends after its own publish date -> FAIL
+R13: Every deployable HTML page must contain the standard site header, the footer, the consent snippet, gtag loader and /js/analytics.js (compare against index.html) -> FAIL
 """
 
 import sys
@@ -24,6 +28,7 @@ import os
 import re
 import json
 import csv
+import datetime
 from pathlib import Path
 
 # Ensure UTF-8 output
@@ -194,6 +199,228 @@ def parse_spec_table(html_content: str):
 def extract_numeric_val(text: str):
     m = re.search(r'(\d+(?:\.\d+)?)', text)
     return float(m.group(1)) if m else None
+
+R11_BANNED_PHRASES = [
+    "certified regional",
+    "oil content",
+    "seed oil content",
+    "processing parity",
+    "weighted benchmark"
+]
+
+MONTH_MAP = {
+    "january": 1, "jan": 1, "february": 2, "feb": 2, "march": 3, "mar": 3,
+    "april": 4, "apr": 4, "may": 5, "june": 6, "jun": 6, "july": 7, "jul": 7,
+    "august": 8, "aug": 8, "september": 9, "sep": 9, "october": 10, "oct": 10,
+    "november": 11, "nov": 11, "december": 12, "dec": 12
+}
+
+def parse_date_str(s: str):
+    if not s:
+        return None
+    s = s.strip()
+    m = re.match(r'^(\d{4})-(\d{1,2})-(\d{1,2})', s)
+    if m:
+        try:
+            return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        except ValueError:
+            pass
+    m = re.match(r'^(\d{1,2})\s+([a-zA-Z]+)\s+(\d{4})', s)
+    if m and m.group(2).lower() in MONTH_MAP:
+        try:
+            return datetime.date(int(m.group(3)), MONTH_MAP[m.group(2).lower()], int(m.group(1)))
+        except ValueError:
+            pass
+    m = re.match(r'^([a-zA-Z]+)\s+(\d{1,2}),?\s+(\d{4})', s)
+    if m and m.group(1).lower() in MONTH_MAP:
+        try:
+            return datetime.date(int(m.group(3)), MONTH_MAP[m.group(1).lower()], int(m.group(2)))
+        except ValueError:
+            pass
+    return None
+
+def check_r10_table_sources(content: str, file_path_str: str, repo_root: Path = REPO_ROOT):
+    findings = []
+    if not (file_path_str.endswith(".html") or "<table" in content.lower()):
+        return findings
+
+    table_pattern = re.compile(r'<table\b[^>]*>(.*?)</table>', re.DOTALL | re.IGNORECASE)
+    tables = list(table_pattern.finditer(content))
+    if not tables:
+        return findings
+
+    data_sources = [
+        ("agmarknet", r'\bagmarknet(?:\.gov\.in)?\b'),
+        ("sea", r'\b(?:SEA|Solvent\s+Extractors[\'’]?\s+Association)\b'),
+        ("dgcis", r'\b(?:DGCIS|DGCI&S|Directorate\s+General\s+of\s+Commercial\s+Intelligence)\b'),
+        ("government", r'\b(?:government|govt|ministry\s+of\s+agriculture)\b'),
+        ("official", r'\b(?:official\s+(?:data|figures?|statistics?|reports?|rates?|prices?|benchmark|source))\b')
+    ]
+
+    for t_idx, t_match in enumerate(tables, 1):
+        t_content = t_match.group(1)
+        start_pos = t_match.start()
+        preceding_text = content[max(0, start_pos - 600):start_pos]
+        combined_text = preceding_text + " " + t_content
+
+        for src_name, src_regex in data_sources:
+            if re.search(src_regex, combined_text, re.IGNORECASE):
+                data_dir = repo_root / "seo" / "data" / src_name
+                has_raw_file = False
+                if data_dir.exists():
+                    for date_dir in data_dir.iterdir():
+                        if date_dir.is_dir() and re.match(r'^\d{4}-\d{2}-\d{2}$', date_dir.name):
+                            files = [f for f in date_dir.iterdir() if f.is_file() and f.stat().st_size > 0]
+                            if files:
+                                has_raw_file = True
+                                break
+
+                scripts_dir = repo_root / "scripts"
+                has_generator = False
+                if scripts_dir.exists():
+                    gen_files = list(scripts_dir.glob(f"*{src_name}*.py")) + list(scripts_dir.glob("generate_*.py")) + list(scripts_dir.glob("build_*.py"))
+                    if gen_files:
+                        has_generator = True
+
+                missing = []
+                if not has_raw_file:
+                    missing.append(f"raw data file in seo/data/{src_name}/<YYYY-MM-DD>/")
+                if not has_generator:
+                    missing.append(f"generator script in scripts/ (e.g., generate_{src_name}_table.py)")
+
+                if missing:
+                    line_num = content[:start_pos].count('\n') + 1
+                    findings.append({
+                        "file": file_path_str,
+                        "line": line_num,
+                        "rule": "R10 Missing raw data or generator",
+                        "severity": "FAIL",
+                        "text": f"Table cites data source '{src_name}', but missing: {', '.join(missing)}"
+                    })
+    return findings
+
+def check_r11_banned_phrases(lines: list, file_path_str: str):
+    findings = []
+    for line_idx, line in enumerate(lines, 1):
+        for phrase in R11_BANNED_PHRASES:
+            pattern = r'(?<!\w)' + re.escape(phrase) + r'(?!\w)'
+            if re.search(pattern, line, re.IGNORECASE):
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_idx,
+                    "rule": "R11 Banned phrase",
+                    "severity": "FAIL",
+                    "text": f"Found R11 banned phrase: '{phrase}'"
+                })
+    return findings
+
+def check_r12_period_after_publish(content: str, file_path_str: str):
+    findings = []
+    pub_date = None
+    m = re.search(r'<meta\s+name=["\'](?:publish-date|date|article:published_time)["\']\s+content=["\']([^"\']+)["\']', content, re.I)
+    if not m:
+        m = re.search(r'<meta\s+property=["\']article:published_time["\']\s+content=["\']([^"\']+)["\']', content, re.I)
+    if m:
+        pub_date = parse_date_str(m.group(1))
+
+    if not pub_date:
+        m_json = re.search(r'"datePublished"\s*:\s*"([^"]+)"', content)
+        if m_json:
+            pub_date = parse_date_str(m_json.group(1))
+
+    if not pub_date:
+        m_txt = re.search(r'(?:Published|Updated|Date)\s*:\s*([A-Za-z0-9, ]{8,25})', content, re.I)
+        if m_txt:
+            pub_date = parse_date_str(m_txt.group(1))
+
+    if not pub_date:
+        return findings
+
+    week_end_matches = re.finditer(r'week\s+ending\s+([A-Za-z]+)\s+(\d{1,2}),?\s*(\d{4})', content, re.I)
+    for wem in week_end_matches:
+        month_name = wem.group(1).lower()
+        if month_name in MONTH_MAP:
+            try:
+                claimed_end = datetime.date(int(wem.group(3)), MONTH_MAP[month_name], int(wem.group(2)))
+                if claimed_end > pub_date:
+                    findings.append({
+                        "file": file_path_str,
+                        "line": content[:wem.start()].count('\n') + 1,
+                        "rule": "R12 Claimed period after publish date",
+                        "severity": "FAIL",
+                        "text": f"Claimed period '{wem.group(0)}' ends on {claimed_end}, after publish date {pub_date}"
+                    })
+            except ValueError:
+                pass
+
+    range_matches = re.finditer(r'(?:([A-Za-z]+)\s+(\d{1,2})\s*[-–—to]+\s*(?:([A-Za-z]+)\s+)?(\d{1,2}),?\s*(\d{4}))', content, re.I)
+    for rm in range_matches:
+        end_month_str = rm.group(3) or rm.group(1)
+        end_month_str = end_month_str.lower()
+        if end_month_str in MONTH_MAP:
+            try:
+                claimed_end = datetime.date(int(rm.group(5)), MONTH_MAP[end_month_str], int(rm.group(4)))
+                if claimed_end > pub_date:
+                    findings.append({
+                        "file": file_path_str,
+                        "line": content[:rm.start()].count('\n') + 1,
+                        "rule": "R12 Claimed period after publish date",
+                        "severity": "FAIL",
+                        "text": f"Claimed period '{rm.group(0)}' ends on {claimed_end}, after publish date {pub_date}"
+                    })
+            except ValueError:
+                pass
+
+    completed_weeks = re.finditer(r'(\d+)\s+completed\s+([A-Za-z]+)\s+weeks', content, re.I)
+    for cwm in completed_weeks:
+        num_weeks = int(cwm.group(1))
+        month_str = cwm.group(2).lower()
+        if month_str in MONTH_MAP:
+            month_num = MONTH_MAP[month_str]
+            if pub_date.month == month_num:
+                required_days = num_weeks * 7
+                if required_days > pub_date.day:
+                    findings.append({
+                        "file": file_path_str,
+                        "line": content[:cwm.start()].count('\n') + 1,
+                        "rule": "R12 Claimed period after publish date",
+                        "severity": "FAIL",
+                        "text": f"Claimed '{cwm.group(0)}' requires {required_days} completed days, but page was published on day {pub_date.day}"
+                    })
+
+    return findings
+
+def check_r13_standard_template(content: str, file_path_str: str):
+    findings = []
+    if not (file_path_str.endswith(".html") or ".html" in file_path_str):
+        return findings
+
+    # Skip meta-refresh redirect stubs
+    if re.search(r'<meta\s+http-equiv=["\']refresh["\']', content, re.I):
+        return findings
+
+    missing = []
+    if '<header' not in content:
+        missing.append("site header (<header>)")
+    if '<footer' not in content:
+        missing.append("site footer (<footer>)")
+    if 'gtag(\'consent\'' not in content and 'gtag("consent"' not in content:
+        missing.append("consent snippet (gtag consent default)")
+    if 'function gtag()' not in content and 'googletagmanager.com/gtag/js' not in content and 'dataLayer' not in content:
+        missing.append("gtag loader")
+    if '/js/analytics.js' not in content and 'js/analytics.js' not in content:
+        missing.append("analytics script (/js/analytics.js)")
+
+    if missing:
+        findings.append({
+            "file": file_path_str,
+            "line": 1,
+            "rule": "R13 Missing standard site template components",
+            "severity": "FAIL",
+            "text": f"Deployable HTML page is missing standard components: {', '.join(missing)}"
+        })
+
+    return findings
 
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
@@ -544,6 +771,26 @@ def lint_content(content: str, file_path_str: str, facts: dict):
                     "text": f"Statistic '{sm.group(1)}' in prose without nearby reference link in paragraph"
                 })
 
+    # ----------------------------------------------------
+    # R10: Table data sources must have matching raw data & generator script
+    # ----------------------------------------------------
+    findings.extend(check_r10_table_sources(content, file_path_str))
+
+    # ----------------------------------------------------
+    # R11: Banned additions to register's banned phrases
+    # ----------------------------------------------------
+    findings.extend(check_r11_banned_phrases(lines, file_path_str))
+
+    # ----------------------------------------------------
+    # R12: Claimed data period after publish date
+    # ----------------------------------------------------
+    findings.extend(check_r12_period_after_publish(content, file_path_str))
+
+    # ----------------------------------------------------
+    # R13: Standard site template components
+    # ----------------------------------------------------
+    findings.extend(check_r13_standard_template(content, file_path_str))
+
     return findings
 
 def lint_file(file_path: Path, facts: dict = None):
@@ -583,7 +830,7 @@ def run_production_audit(facts: dict):
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 9)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 14)}
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
     cb_ts = int(time.time())
@@ -670,7 +917,7 @@ def main():
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 9)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 14)}
 
     for f in files:
         f_findings = lint_file(f, facts)
@@ -716,10 +963,10 @@ def main():
     print(f"  - {report_csv}")
 
     if fail_count > 0:
-        print("\n[FAILED] One or more hard claims gate rules (R1-R8) failed.")
+        print("\n[FAILED] One or more hard claims gate rules (R1-R13) failed.")
         return 1
     else:
-        print("\n[PASSED] All hard claims gate rules (R1-R8) passed with 0 failures!")
+        print("\n[PASSED] All hard claims gate rules (R1-R13) passed with 0 failures!")
         return 0
 
 if __name__ == "__main__":

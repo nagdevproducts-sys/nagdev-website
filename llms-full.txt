@@ -52,7 +52,7 @@ SECTION 1: CORE PRODUCT SPECIFICATIONS & TECHNICAL DATA
 - Potassium (as K2O): 1.00% – 1.50% Min
 - Organic Matter: 80.0% – 85.0% Min
 - Moisture Content: 8.0% – 10.0% Max
-- Residual Oil Content: 6.0% – 8.0% (expeller process)
+- Residual Oil: 6.0% – 8.0% (expeller process)
 - Agronomic Properties: Naturally contains ricin alkaloid which suppresses plant-parasitic root nematodes, termites, and white grubs. Slow-release organic nitrogen source for soil fertility.
 
 4. HYDROGENATED CASTOR OIL (HCO / CASTOR WAX) (NDEVWAX™ HCO)

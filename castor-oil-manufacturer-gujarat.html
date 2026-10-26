@@ -128,7 +128,7 @@
           "name": "Why is North Gujarat the primary region for castor oil manufacturing?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Gujarat produces approximately 70% of the world's castor seed crop. The arid alluvial soils, low annual rainfall (300–500 mm), and abundant sunlight of North Gujarat (Vav-Tharad, Patan, Mehsana, and Vav-Tharad) yield castor seeds with exceptionally high natural oil content (48% to 52%) and an high ricinoleic purity ricinoleic acid concentration."
+            "text": "Gujarat produces approximately 70% of the world's castor seed crop. The arid alluvial soils, low annual rainfall (300–500 mm), and abundant sunlight of North Gujarat (Vav-Tharad, Patan, Mehsana, and Vav-Tharad) yield high-quality castor seeds with high ricinoleic purity."
           }
         },
         {
@@ -256,6 +256,39 @@
   ]
 }
 </script>
+  <!-- Google Analytics 4 & Consent Mode v2 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'region': ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'IS', 'LI', 'NO', 'GB', 'CH'],
+      'wait_for_update': 500
+    });
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'granted'
+    });
+    try {
+      var _c = localStorage.getItem('nagdev_consent');
+      if (_c) {
+        var _p = JSON.parse(_c);
+        if (_p && _p.timestamp && (Date.now() - _p.timestamp < 31536000000)) {
+          gtag('consent', 'update', {
+            'analytics_storage': _p.choice === 'granted' ? 'granted' : 'denied'
+          });
+        } else {
+          localStorage.removeItem('nagdev_consent');
+        }
+      }
+    } catch(e){}
+  </script>
+  <script defer src="/js/analytics.js"></script>
 </head>
 <body>
 
@@ -448,13 +481,13 @@ Situated in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our
           The state of Gujarat is the primary center of India's castor seed cultivation, accounting for the vast majority of national castor seed production and export processing.
         </p>
         <p style="font-size:1rem; color:var(--charcoal-soft); line-height:1.75; margin-bottom:1.5rem;">
-          Within Gujarat, the arid and semi-arid agro-climatic corridor across North Gujarat's castor belt (Banaskantha and Vav-Tharad region), alongside Patan and Mehsana, offers optimal environmental conditions for <em>Ricinus communis</em>: sandy-loam soils with high drainage, long sunny daylight hours, controlled irrigation networks, and dry maturation periods. This region produces castor seeds with high crude oil content, superior natural ricinoleic acid purity, and low free fatty acid (FFA) levels at harvest.
+          Within Gujarat, the arid and semi-arid agro-climatic corridor across North Gujarat's castor belt (Banaskantha and Vav-Tharad region), alongside Patan and Mehsana, offers optimal environmental conditions for <em>Ricinus communis</em>: sandy-loam soils with high drainage, long sunny daylight hours, controlled irrigation networks, and dry maturation periods. This region produces castor seeds with optimal crushing efficiency, superior natural ricinoleic acid purity, and low free fatty acid (FFA) levels at harvest.
         </p>
 
         <!-- 3 Feature Cards -->
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem;">
           <div style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-md); padding:1.5rem; border-top:3px solid var(--forest); box-shadow:var(--shadow-sm);">
-            <h3 style="font-size:1.15rem; color:var(--forest); margin-bottom:0.5rem; font-family:var(--font-heading);">48%–52% Seed Oil Yield</h3>
+            <h3 style="font-size:1.15rem; color:var(--forest); margin-bottom:0.5rem; font-family:var(--font-heading);">High Seed Crushing Yield</h3>
             <p style="font-size:0.9rem; color:var(--charcoal-soft); line-height:1.65; margin:0;">
               North Gujarat hybrid cultivars (GCH series developed by Sardarkrushna Dantiwada Agricultural University) deliver exceptional natural oil extraction efficiency and consistent triglyceride density.
             </p>
@@ -675,7 +708,7 @@ Situated in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our
           <div style="border-bottom:1px solid var(--border-light); padding:1.25rem 0;">
             <h3 style="font-size:1.1rem; color:var(--forest); font-family:var(--font-heading); margin-bottom:0.5rem;">Why is North Gujarat the primary region for castor oil manufacturing?</h3>
             <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin:0;">
-              North Gujarat (centered around North Gujarat's castor belt, Vav-Tharad, and Patan) provides ideal agronomic conditions: well-drained sandy loam soil, low seasonal precipitation, and abundant solar radiation. Castor seeds grown here yield high natural oil content with high ricinoleic acid fractions (high ricinoleic purity) and low free fatty acid levels.
+              North Gujarat (centered around North Gujarat's castor belt, Vav-Tharad, and Patan) provides ideal agronomic conditions: well-drained sandy loam soil, low seasonal precipitation, and abundant solar radiation. Castor seeds grown here deliver optimal crushing extraction with high ricinoleic acid fractions (high ricinoleic purity) and low free fatty acid levels.
             </p>
           </div>
 
