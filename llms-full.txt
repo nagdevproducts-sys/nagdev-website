@@ -41,7 +41,7 @@ SECTION 1: REGULAR COMMERCIAL SUPPLY (7 CORE PRODUCTS)
 - Saponification Value: 177 – 187 mg KOH/g
 - Hydroxyl Value: 160 – 168 mg KOH/g
 - Specific Gravity (at 25°C): 0.958 – 0.962 g/cm³
-- Primary Applications: Polyurethane bio-polyols, coatings, high-performance polyamides (Nylon 11 / 610), pharmaceutical synthesis, and precision technical lubricants.
+- Primary Applications: Polyurethane bio-polyols, coatings, heavy-duty polyamides (Nylon 11 / 610), pharmaceutical synthesis, and precision technical lubricants.
 
 3. FIRST PRESSED DEGUMMED CASTOR OIL (NDEVOLEO™ FPD)
 - CAS Number: 8001-79-4 | EINECS: 232-293-8 | HS Code: 1515.30.10
@@ -108,7 +108,7 @@ SECTION 2: SPECIALTY CO-PRODUCTS & DEVELOPMENTAL PIPELINE
 ================================================================================
 
 SPECIALTY GRADES (AVAILABLE ON TECHNICAL ENQUIRY - 8 GRADES):
-- Pale Pressed Grade (PPG) (CAS 8001-79-4): Premium light-colored castor oil for pale stoving enamels and clear urethane resins.
+- Pale Pressed Grade (PPG) (CAS 8001-79-4): high-purity light-colored castor oil for pale stoving enamels and clear urethane resins.
 - Cold Pressed Castor Oil (CAS 8001-79-4): Virgin expeller cold press, non-chemical extraction for cosmetics and pharmaceutical carrier oils.
 - Castor Oil BP (British Pharmacopoeia grade) (CAS 8001-79-4): Monograph-tested pharmacopoeia grade for excipients and topical preparations.
 - Castor Oil USP–NF (CAS 8001-79-4): United States Pharmacopeia–National Formulary compendial grade for oral and topical formulations.
