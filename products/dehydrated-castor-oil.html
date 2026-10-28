@@ -203,21 +203,40 @@
 }
   </script>
 
+  <script src="/js/site-config.min.js" defer></script>
   <!-- Google Analytics 4 & Consent Mode v2 -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('consent', 'default', {
       'ad_storage': 'denied',
-      'analytics_storage': 'denied',
-      'personalization_storage': 'denied',
       'ad_user_data': 'denied',
       'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'region': ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'IS', 'LI', 'NO', 'GB', 'CH'],
       'wait_for_update': 500
     });
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'granted'
+    });
+    try {
+      var _c = localStorage.getItem('nagdev_cookie_consent');
+      if (_c) {
+        var _p = JSON.parse(_c);
+        if (_p && _p.timestamp && (Date.now() - _p.timestamp < 31536000000)) {
+          gtag('consent', 'update', {
+            'analytics_storage': _p.choice === 'granted' ? 'granted' : 'denied'
+          });
+        } else {
+          localStorage.removeItem('nagdev_cookie_consent');
+        }
+      }
+    } catch(e){}
   </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1525B9Y98"></script>
-  <script src="/js/analytics.js" defer></script>
+  <script defer src="/js/analytics.js"></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -955,7 +974,6 @@ View Specifications &amp; TDS
 </footer>
 
   <!-- Scripts -->
-  <script src="/js/products-data.min.js" defer></script>
   <script src="/js/site.min.js?v=20261028" defer></script>
 </body>
 </html>
