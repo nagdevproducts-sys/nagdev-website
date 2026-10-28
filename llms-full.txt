@@ -10,7 +10,7 @@ Contact: +91 63520 98306 | nagdevproducts@gmail.com | https://www.nagdevproducts
 Ports of Export: Kandla Port (Deendayal, INIXY) & Mundra Port (INMUN), Gulf of Kutch, Gujarat.
 
 ================================================================================
-SECTION 1: CORE PRODUCT SPECIFICATIONS & TECHNICAL DATA
+SECTION 1: REGULAR COMMERCIAL SUPPLY (7 CORE PRODUCTS)
 ================================================================================
 
 1. COMMERCIAL GRADE CASTOR OIL (NDEVOLEO™ COMM)
@@ -29,11 +29,11 @@ SECTION 1: CORE PRODUCT SPECIFICATIONS & TECHNICAL DATA
 - Primary Applications: Industrial lubricants, specialty grease manufacturing, alkyd resin synthesis, hydraulic fluids, textile auxiliaries, and chemical intermediates.
 
 2. FIRST SPECIAL GRADE CASTOR OIL (FSG / BSS) (NDEVOLEO™ FSG)
-- CAS Number: 8001-79-4 | EINECS: 232-293-8 | HS Code: 1515.30.90
+- CAS Number: 8001-79-4 | EINECS: 232-293-8 | HS Code: 1515.30.10
 - Availability: Regular Commercial Supply
 - Physical Form: Pale yellow, clear, bright viscous liquid (refined & bleached)
-- Free Fatty Acids (FFA): 0.50% Max (as Oleic)
-- Acid Value: 1.0 mg KOH/g Max
+- Free Fatty Acids (FFA): 0.50% – 1.00% Max (as Oleic)
+- Acid Value: 1.0 – 2.0 mg KOH/g Max
 - Color (Lovibond 5¼" Cell): 20.0 Yellow Max, 2.0 Red Max (Gardner Color <= 3)
 - Moisture & Volatiles: 0.25% Max
 - Insoluble Impurities: 0.02% Max
@@ -43,7 +43,21 @@ SECTION 1: CORE PRODUCT SPECIFICATIONS & TECHNICAL DATA
 - Specific Gravity (at 25°C): 0.958 – 0.962 g/cm³
 - Primary Applications: Polyurethane bio-polyols, coatings, high-performance polyamides (Nylon 11 / 610), pharmaceutical synthesis, and precision technical lubricants.
 
-3. CASTOR CAKE (ORGANIC FERTILIZER & MANURE) (NDEVAGRO™ CAKE)
+3. FIRST PRESSED DEGUMMED CASTOR OIL (NDEVOLEO™ FPD)
+- CAS Number: 8001-79-4 | EINECS: 232-293-8 | HS Code: 1515.30.10
+- Availability: Regular Commercial Supply
+- Physical Form: Clear viscous amber liquid
+- Free Fatty Acids (FFA): 1.00% Max (as Oleic)
+- Acid Value: 2.0 mg KOH/g Max
+- Color (Lovibond 1" Cell): 20 Max
+- Moisture & Volatiles: 0.25% Max
+- Iodine Value (Wijs): 82 – 90 g I2/100g
+- Saponification Value: 177 – 187 mg KOH/g
+- Hydroxyl Value: 160 – 168 mg KOH/g
+- Phosphatide / Gum Content: < 15 ppm (water degummed)
+- Primary Applications: Low-phosphatide polyurethane prepolymers, industrial cutting oils, specialized ester feeds.
+
+4. CASTOR CAKE (ORGANIC FERTILIZER & MANURE) (NDEVAGRO™ CAKE)
 - CAS Number: 68187-58-6 | HS Code: 2306.90.17
 - Availability: Regular Commercial Supply
 - Physical Form: Coarse brown flakes / meal pellets
@@ -53,75 +67,64 @@ SECTION 1: CORE PRODUCT SPECIFICATIONS & TECHNICAL DATA
 - Organic Matter: 80.0% – 85.0% Min
 - Moisture Content: 8.0% – 10.0% Max
 - Residual Oil: 6.0% – 8.0% (expeller process)
-- Agronomic Properties: Naturally contains ricin alkaloid which suppresses plant-parasitic root nematodes, termites, and white grubs. Slow-release organic nitrogen source for soil fertility.
+- Agronomic Properties: Naturally contains ricin alkaloid which suppresses plant-parasitic root nematodes and soil grubs.
 
-4. HYDROGENATED CASTOR OIL (HCO / CASTOR WAX) (NDEVWAX™ HCO)
+5. HYDROGENATED CASTOR OIL (HCO / CASTOR WAX) (NDEVWAX™ HCO)
 - CAS Number: 8001-78-3 | EINECS: 232-292-2 | HS Code: 1516.20.91
 - Availability: Regular Commercial Supply
-- Physical Form: Hard, brittle, off-white flakes or powder
+- Physical Form: Hard, brittle, odorless white flakes or micronized powder
 - Melting / Dropping Point: 85.0°C – 88.0°C
 - Acid Value: 2.0 – 3.0 mg KOH/g Max
 - Iodine Value (Wijs): 2.0 – 4.0 g I2/100g Max (complete catalytic hydrogenation)
 - Hydroxyl Value: 155 – 165 mg KOH/g
 - Saponification Value: 176 – 186 mg KOH/g
-- Color (Molten, Gardner): 3.0 Max
-- Primary Applications: Thixotropic rheology modifier in architectural coatings, powder coatings, lithium-complex automotive greases, PVC processing lubricants, electrical potting compounds, and wax polish formulations.
+- Primary Applications: High-temperature multi-purpose lithium lubricating greases, thixotropic anti-sag additives for solvent-based paints and powder coatings, PVC external lubricants, paper water-proofing coatings, and investment casting wax formulations.
 
-5. RICINOLEIC ACID (NDEVACID™ RIC)
-- CAS Number: 141-22-0 | EINECS: 205-470-2 | HS Code: 2918.19.90
+6. DEHYDRATED CASTOR OIL (DCO) (NDEVPOL™ DCO)
+- CAS Number: 64147-40-6 | EINECS: 264-705-7 | HS Code: 1518.00.11
 - Availability: Regular Commercial Supply
-- Chemical Formula: C18H34O3 (12-hydroxy-9-cis-octadecenoic acid)
-- Physical Form: Viscous, clear, light yellow liquid
-- Ricinoleic Acid Purity: 85.0% – 88.0% Min (via gas chromatography)
-- Acid Value: 180 – 190 mg KOH/g
-- Iodine Value: 82 – 90 g I2/100g
-- Saponification Value: 182 – 192 mg KOH/g
-- Hydroxyl Value: 155 – 165 mg KOH/g
-- Moisture: 0.50% Max
-- Primary Applications: Specialty ester synthesis, cutting fluid corrosion inhibitors, textile surfactants, personal care emulsifiers, and bio-intermediate (including developmental sebacic acid R&D).
+- Physical Form: Clear, pale yellow, viscous drying liquid
+- Specific Gravity (at 25°C): 0.926 – 0.937 g/cm³
+- Acid Value: 6.0 mg KOH/g Max
+- Iodine Value (Wijs): 125 – 140 g I2/100g
+- Color (Gardner): 6.0 Max
+- Viscosity (at 25°C): 1.5 – 3.0 poise (unbodied) / tailored bodied viscosities (up to Z3)
+- Hydroxyl Value: 20 – 30 mg KOH/g Max
+- Primary Applications: Fast-drying architectural varnishes, alkyd resin cooking, baking enamels, printing inks, and protective industrial coatings.
 
-6. 12-HYDROXYSTEARIC ACID (12-HSA) (NDEVACID™ 12-HSA)
-- CAS Number: 106-14-9 | EINECS: 203-366-1 | HS Code: 2918.19.90
+7. DCO FATTY ACID (NDEVACID™ DCO)
+- CAS Number: 61789-45-5 | EINECS: 263-000-8 | HS Code: 3823.19.00
 - Availability: Regular Commercial Supply
-- Chemical Formula: C18H36O3 (12-hydroxyoctadecanoic acid)
-- Physical Form: Off-white hard flakes or crystalline powder
-- Melting / Dropping Point: 75.0°C – 78.0°C
-- Acid Value: 175 Min mg KOH/g
-- Iodine Value: 2.0 – 4.0 g I2/100g Max
-- Hydroxyl Value: 155 – 165 mg KOH/g
-- Saponification Value: 180 – 190 mg KOH/g
-- Fatty Acid Purity (12-HSA): 85.0% Min
-- Primary Applications: The global benchmark thickener for multipurpose and lithium complex greases; acrylic and epoxy coating rheology modifier; precursor for specialty cosmetic esters and plasticizers.
-
-7. REFINED GLYCERIN 99.5% (NDEVGLY™ REF)
-- CAS Number: 56-81-5 | EINECS: 200-289-5 | HS Code: 2905.45.00
-- Availability: Regular Commercial Supply
-- Physical Form: Clear, colorless, odorless, hygroscopic viscous liquid
-- Glycerol Purity: 99.5% Min
-- Specific Gravity (at 20°C): 1.261 g/cm³ Min
-- Moisture Content: 0.5% Max
-- Color (APHA / Hazen): 10 Max
-- Heavy Metals: < 5 ppm
-- Chlorides: < 10 ppm
-- Primary Applications: Alkyd resin synthesis, polyurethane chain extension, polyether polyols, personal care formulations, excipient, and humectant.
+- Physical Form: Clear, pale straw liquid
+- Acid Value: 195 – 205 mg KOH/g
+- Saponification Value: 198 – 207 mg KOH/g
+- Iodine Value (Wijs): 130 – 145 g I2/100g
+- Color (Gardner): 2.0 Max
+- Conjugated Diene Acid Content: 28% – 35% Min
+- Primary Applications: High-grade non-yellowing stoving alkyds, epoxy ester resins, automotive primers, and synthetic coatings.
 
 ================================================================================
 SECTION 2: SPECIALTY CO-PRODUCTS & DEVELOPMENTAL PIPELINE
 ================================================================================
 
-SPECIALTY GRADES (AVAILABLE ON TECHNICAL ENQUIRY):
-- Cold Pressed Castor Oil (CAS 8001-79-4): Virgin expeller cold press, non-chemical extraction for cosmetics and pharmaceutical carrier oils.
-- Castor Oil BP 93 (CAS 8001-79-4): Fully compliant with British Pharmacopoeia 1993 / EP / IP monograph standards.
+SPECIALTY GRADES (AVAILABLE ON TECHNICAL ENQUIRY - 8 GRADES):
 - Pale Pressed Grade (PPG) (CAS 8001-79-4): Premium light-colored castor oil for pale stoving enamels and clear urethane resins.
-- First Pressed Degummed (FPD) (CAS 8001-79-4): Primary press degummed industrial oil.
-- High Protein Castor Meal (CAS 68424-10-2): De-oiled high-nitrogen meal (6.0%–7.0% N) for organic horticulture and tea plantations.
-- Crude Glycerin 80% (CAS 56-81-5): Industrial-grade unrefined co-product stream.
-- Sodium Sulphate Anhydrous (CAS 7757-82-6): 99.4% purity neutralized crystalline co-product for detergent builders and glass.
+- Cold Pressed Castor Oil (CAS 8001-79-4): Virgin expeller cold press, non-chemical extraction for cosmetics and pharmaceutical carrier oils.
+- Castor Oil BP (British Pharmacopoeia grade) (CAS 8001-79-4): Monograph-tested pharmacopoeia grade for excipients and topical preparations.
+- Castor Oil USP–NF (CAS 8001-79-4): United States Pharmacopeia–National Formulary compendial grade for oral and topical formulations.
+- Castor Oil Ph. Eur. (CAS 8001-79-4): European Pharmacopoeia compendial grade for pharmaceutical and cosmetic applications.
+- Castor Oil IP (CAS 8001-79-4): Indian Pharmacopoeia compendial grade for medical and therapeutic uses.
+- Castor Oil JP (CAS 8001-79-4): Japanese Pharmacopoeia compendial grade for Japanese regulatory compliance.
+- Cosmetic Grade Castor Oil (CAS 8001-79-4): Low-odor, bleached cosmetic oil for color cosmetics, lip care, and personal care emulsions.
 
-ADVANCED DERIVATIVES (UNDER R&D DEVELOPMENT):
+ADVANCED DERIVATIVES & CO-PRODUCTS (UNDER R&D DEVELOPMENT - 17 GRADES):
+- Ricinoleic Acid (CAS 141-22-0, under development): 85%+ pure hydroxy fatty acid for ester synthesis, corrosion inhibitors, and surfactants.
+- 12-Hydroxystearic Acid (12-HSA) (CAS 106-14-9, under development): Primary gelling fatty acid (Drop Point 75°C–78°C) for multipurpose automotive and industrial lithium greases.
+- Refined Glycerin 99.5% (CAS 56-81-5, under development): High-purity pure vegetable glycerol from derivative co-product streams.
+- Crude Glycerin 80% (CAS 56-81-5, under development): Industrial-grade unrefined co-product stream.
+- High Protein Castor Meal (CAS 68424-10-2, under development): De-oiled high-nitrogen meal (6.0%–7.0% N) for organic horticulture and tea plantations.
+- Sodium Sulphate Anhydrous (CAS 7757-82-6, under development): 99.4% purity neutralized crystalline co-product for detergent builders and glass.
 - Sebacic Acid (CAS 111-20-6, under development): Pure C10 dicarboxylic acid for bio-based polyamides (Nylon 6.10, Nylon 10.10) and jet lubricant diesters.
-- Dehydrated Castor Oil / DCO (CAS 64147-40-6, under development): Conjugated drying oil with 9,11-octadecadienoic acid structure for rapid drying architectural varnishes and printing inks.
-- DCO Fatty Acid (CAS 61789-45-5, under development): Distilled conjugated fatty acid for stoving enamels and epoxy esters.
 - Bio-Polyurethane Polyols (CAS 68442-88-6, under development): Modified bio-polyols with engineered hydroxyl functionality for rigid spray foams, flexible elastomers, and adhesives.
 - Dioctyl Sebacate / DOS (CAS 122-62-3, under development): Low-temperature synthetic lubricating ester.
 - Dibutyl Sebacate / DBS (CAS 109-43-3, under development): High-efficiency plasticizer for vinyl polymers and pharmaceutical film coatings.
@@ -138,24 +141,33 @@ SECTION 3: PACKAGING, LOGISTICS & EXPORT INFRASTRUCTURE
 ================================================================================
 
 BULK PACKAGING FORMATS:
-1. ISO Tank Containers: 20,000 to 24,000 liters / 20–24 MT bulk liquid deliveries for long-term contract industrial accounts.
-2. Multilayer Flexitanks: 21,500 liters / 21.5 MT installed in 20-foot standard dry container (FCL), food-grade virgin polymer barrier.
-3. Composite IBC Totes: 1,000 liter / 950–1,000 kg intermediate bulk containers with UN-certified HDPE inner bottle and galvanized steel cage.
-4. Steel Drums: 200 kg net weight, 216.5 liter gross capacity, new tight-head unlined or epoxy-phenolic lined steel drums (80 drums per 20ft FCL = 16 MT).
-5. Multi-Wall Paper Bags: 25 kg net weight, 3-ply kraft paper bags with internal polyethylene moisture-barrier liner, shrink-wrapped and palletized on heat-treated ISPM-15 wooden or plastic pallets.
+1. ISO Tank Containers: 20,000 – 24,000 Liters (approx. 20–24 MT net). Dedicated chemical-grade stainless steel tanks (T11 specification) with steam heating coils.
+2. Flexitanks: 21,500 – 24,000 Liters (approx. 21.5 MT net) in standard 20 ft GP ocean containers. Food-grade multi-layer polyethylene with automated single-valve discharge.
+3. Intermediate Bulk Containers (IBC Totes): 1,000 Liters (approx. 900–950 kg net). High-density polyethylene inner bottle with galvanized tubular steel cage on four-way entry pallet.
+4. Steel Drums: 200 kg net weight, 216.5 liter gross capacity, new tight-head unlined or epoxy-phenolic lined drums (UN 1A1 rated for export).
+5. Multi-Wall Paper Bags: 25 kg net weight, 3-ply kraft paper bags with internal polyethylene moisture barrier liner for flakes/powder (HCO, 12-HSA soaps). Palletized (1,000 kg / pallet) with UV shrink wrap.
+6. HDPE Woven Sacks: 50 kg net weight laminated bags for expeller castor cake fertilizer.
 
-PORT & EXPORT LOGISTICS:
-- Facility Location: Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat.
-- Proximity to Major Gulf of Kutch Ports:
-  - Deendayal Port (Kandla / INIXY): Dedicated liquid bulk export terminal with shore storage tank access.
-  - Mundra Port (APSEZ / INMUN): High-frequency automated container transshipment terminal for scheduled FCL shipments to Europe, the Americas, Middle East, and Asia.
-- Export Document Pack Provided: Commercial Invoice, Packing List, Bill of Lading, Certificate of Origin (Chamber of Commerce), Non-GMO Declaration, Certificate of Analysis (COA) per production lot, Technical Data Sheet (TDS), Safety Data Sheet (SDS).
-- Third-Party Inspection: Pre-shipment batch sampling, testing, and container stuffing inspection by SGS, Bureau Veritas, or Intertek arranged upon buyer request.
+LOGISTICS CORRIDOR:
+- Processing Location: Deodar, Gujarat — heart of North Gujarat's castor farming region.
+- Rail & Highway: NH-27 arterial multi-lane connectivity.
+- Major Export Seaports:
+  * Kandla Port (Deendayal Port Trust, INIXY) — 180 km from plant.
+  * Mundra Port (Adani Ports & SEZ, INMUN) — 240 km from plant.
+- Lead Times: Ex-works dispatch 3–5 working days; Port FOB clearance 7–10 working days upon LC / commercial confirmation.
 
 ================================================================================
 SECTION 4: QUALITY ASSURANCE & BUYER QUALIFICATION
 ================================================================================
 
-- Quality Policy: Every dispatch is lot-controlled and backed by full traceability to expeller crushing and reaction logs.
-- Analytical Laboratory Capabilities: Testing of Free Fatty Acids (FFA), Acid Value, Iodine Value, Hydroxyl Value, Saponification Value, Color (Lovibond / Gardner), Moisture (Karl Fischer / Oven), Specific Gravity, Melting / Dropping Point, and Gas Chromatography for fatty acid composition.
-- Sample Availability: Commercial qualification samples (100ml to 1kg) available for formulation evaluation, grease testing, and laboratory trials.
+TESTING METHODS:
+- In-house laboratory analytical testing adhering strictly to ASTM (D960, D555, D1959, D1980), AOCS (Cc 1-25, Cd 3-25, Cd 1-25, Cd 13-60), and ISO international testing protocols.
+- Analytical capabilities include gas chromatography (fatty acid methyl ester profiling), Karl Fischer coulometric moisture titration, Lovibond tintometer colorimetry, and Brookfield rotational viscometry.
+
+DOCUMENTATION DELIVERED WITH EVERY CONSIGNMENT:
+1. Batch Certificate of Analysis (COA) containing lot-specific analytical parameters.
+2. Technical Data Sheet (TDS) with complete typical property envelope.
+3. 16-Section Safety Data Sheet (SDS) compliant with UN GHS (Revision 9) safety data sheet guidelines.
+4. Certificate of Origin (COO) issued by recognized Indian Chamber of Commerce or Export Inspection Council (EIC).
+5. Non-manipulation certificate, phytosanitary certificate (for castor cake), and commercial export documentation.
+6. Third-party pre-shipment sampling and sealing (SGS, Bureau Veritas, Intertek) supported at buyer request.

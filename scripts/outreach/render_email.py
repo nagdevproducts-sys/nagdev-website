@@ -21,11 +21,11 @@ from claims_lint import lint_content, load_facts
 REGULAR_PRODUCT_DISPLAY_NAMES = {
     "commercial-castor-oil": "Commercial Castor Oil",
     "first-special-grade-castor-oil": "First Special Grade (FSG) Castor Oil",
+    "fpd-castor-oil": "First Pressed Degummed (FPD) Castor Oil",
     "castor-cake": "Castor Cake",
     "hydrogenated-castor-oil": "Hydrogenated Castor Oil (HCO)",
-    "ricinoleic-acid": "Ricinoleic Acid",
-    "12-hydroxystearic-acid": "12-Hydroxystearic Acid (12-HSA)",
-    "refined-glycerin": "Refined Glycerin"
+    "dehydrated-castor-oil": "Dehydrated Castor Oil (DCO)",
+    "dco-fatty-acid": "DCO Fatty Acid"
 }
 
 CORRECTION_TEMPLATE = """Dear Team,

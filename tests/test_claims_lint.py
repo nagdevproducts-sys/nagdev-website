@@ -98,7 +98,7 @@ class TestClaimsLint(unittest.TestCase):
             <p>Spot orders and term supply contracts are available on enquiry.</p>
             <p>Export documents provided as required by the buyer: COA, TDS, SDS, commercial invoice, packing list, certificate of origin.</p>
             <p>Sebacic acid is under development in our R&D pipeline.</p>
-            <p>We offer 27 products across 7 regular supply grades, 7 on enquiry, and 13 under development.</p>
+            <p>We offer 32 products across 7 regular supply grades, 8 on enquiry, and 17 under development.</p>
             <section class="spec-table-section">
               <table class="spec-table">
                 <tr><td>1</td><td>Free Fatty Acid (FFA)</td><td>1% Max</td></tr>
