@@ -291,5 +291,32 @@ class TestClaimsLint(unittest.TestCase):
         fails = [f for f in findings if f["rule"].startswith("R14")]
         self.assertEqual(len(fails), 0, f"R14 should pass for completely honest captions, got: {fails}")
 
+
+    def test_production_audit_homepage_included_and_validated(self):
+        # 1. Verify https://www.nagdevproducts.com/ is explicitly guaranteed in audit set
+        import xml.etree.ElementTree as ET
+        sitemap_path = Path(__file__).resolve().parent.parent / "sitemap.xml"
+        urls = set()
+        urls.add("https://www.nagdevproducts.com/")
+        if sitemap_path.exists():
+            tree = ET.parse(sitemap_path)
+            root = tree.getroot()
+            namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+            for loc in root.findall('.//ns:loc', namespace):
+                urls.add(loc.text.strip())
+        self.assertIn("https://www.nagdevproducts.com/", urls)
+
+        # 2. Verify that homepage HTML with banned claims fails R1
+        dirty_homepage = "<html><body><div class='trust-item'>India's Premier Castor Region</div></body></html>"
+        findings = lint_content(dirty_homepage, "https://www.nagdevproducts.com/ (cache-busted)", self.facts)
+        fails = [f for f in findings if f["severity"] == "FAIL"]
+        self.assertTrue(any("premier" in f["text"].lower() for f in fails), "Homepage with 'India\'s Premier' must trigger R1 failure")
+
+        # 3. Verify clean homepage passes R1-R14
+        clean_homepage = (Path(__file__).resolve().parent.parent / "index.html").read_text(encoding="utf-8")
+        clean_findings = lint_content(clean_homepage, "index.html", self.facts)
+        clean_fails = [f for f in clean_findings if f["severity"] == "FAIL"]
+        self.assertEqual(len(clean_fails), 0, f"Clean index.html must have 0 failures, got: {clean_fails}")
+
 if __name__ == "__main__":
     unittest.main()

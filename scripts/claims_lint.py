@@ -950,6 +950,8 @@ def run_production_audit(facts: dict):
 
     sitemap_path = REPO_ROOT / "sitemap.xml"
     urls = set()
+    # Explicitly ensure root homepage is audited
+    urls.add("https://www.nagdevproducts.com/")
     if sitemap_path.exists():
         tree = ET.parse(sitemap_path)
         root = tree.getroot()
@@ -961,6 +963,7 @@ def run_production_audit(facts: dict):
     urls.add("https://www.nagdevproducts.com/quality")
     urls.add("https://www.nagdevproducts.com/team")
 
+    assert "https://www.nagdevproducts.com/" in urls, "CRITICAL: Homepage '/' missing from production audit URLs list!"
     sorted_urls = sorted(urls)
     print("==================================================")
     print("NAGDEV CLAIMS LINTER: PRODUCTION LIVE AUDIT")
