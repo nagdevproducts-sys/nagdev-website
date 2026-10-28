@@ -30,6 +30,7 @@ import json
 import csv
 import datetime
 from pathlib import Path
+from bs4 import BeautifulSoup
 
 # Ensure UTF-8 output
 if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
@@ -62,7 +63,8 @@ RULES = {
     "R13": "Required standard site template components (header, footer, consent snippet, gtag loader, /js/analytics.js)",
     "R14": "Crop and video media captions/alts must not contain location/ownership/facility claims and video must include 'illustrative'",
     "R15": "Cross-page specification consistency against canonical product pages",
-    "R16": "Pharmacopoeia and cosmetic grade pages must contain NO numeric specification values and NO certification/regulatory claims"
+    "R16": "Pharmacopoeia and cosmetic grade pages must contain NO numeric specification values and NO certification/regulatory claims",
+    "R17": "PAGE IDENTITY: on each /products/<slug> page, H1, breadcrumb last item, hero img alt, H2/H3, meta title/description, FAQ questions must refer ONLY to that page's product. Cross-product contamination -> FAIL (related-products block exempt)"
 }
 
 # Ignored paths
@@ -237,8 +239,40 @@ R11_BANNED_PHRASES = [
     "seed oil content",
     "processing parity",
     "weighted benchmark",
-    "triglyceride purity"
+    "triglyceride purity",
+    "injectable",
+    "sterile",
+    "sterilization",
+    "sterilisation",
+    "microbial",
+    "deodoriz",
+    "deodoris",
+    "hormone",
+    "veterinary drug",
+    "eye ointment",
+    "transdermal",
+    "drug delivery",
+    "laxative",
+    "nematode",
+    "non-yellowing",
+    "ultra-low odour",
+    "ultra-low odor",
+    "dedicated batch testing",
+    "British Pharmacopoeia 93"
 ]
+
+def get_banned_phrase_pattern(phrase: str) -> str:
+    phrase_lower = phrase.strip().lower()
+    if phrase_lower in ("deodoriz", "deodoris"):
+        return r'(?<!\w)' + re.escape(phrase_lower)
+    elif phrase_lower in ("injectable", "sterile", "hormone", "transdermal", "laxative", "nematode", "eye ointment"):
+        return r'(?<!\w)' + re.escape(phrase_lower) + r'(?:s)?(?!\w)'
+    elif phrase_lower in ("bp 93", "british pharmacopoeia 93"):
+        return r'(?<!castor-oil-)(?<!\w)(?:BP[\s\-]+93|British\s+Pharmacopoeia\s*(?:19)?93)(?!\w)'
+    else:
+        words = phrase.strip().split()
+        flex = r'\s+'.join(re.escape(w) for w in words)
+        return r'(?<!\w)' + flex + r'(?!\w)'
 
 MONTH_MAP = {
     "january": 1, "jan": 1, "february": 2, "feb": 2, "march": 3, "mar": 3,
@@ -335,7 +369,7 @@ def check_r11_banned_phrases(lines: list, file_path_str: str):
     findings = []
     for line_idx, line in enumerate(lines, 1):
         for phrase in R11_BANNED_PHRASES:
-            pattern = r'(?<!\w)' + re.escape(phrase) + r'(?!\w)'
+            pattern = get_banned_phrase_pattern(phrase)
             if re.search(pattern, line, re.IGNORECASE):
                 findings.append({
                     "file": file_path_str,
@@ -712,6 +746,190 @@ def check_r16_pharma_cosmetic(content: str, file_path_str: str) -> list:
 
     return findings
 
+
+def check_r17_page_identity(content: str, file_path_str: str) -> list:
+    norm_path = file_path_str.replace('\\', '/').lower()
+    if not ('products/' in norm_path and norm_path.endswith('.html')):
+        return []
+    filename = norm_path.split('products/')[-1]
+    if filename in ('index.html', 'castor-cake-fertilizer.html', 'de-oiled-cake-castor-meal.html'):
+        return []
+    slug = filename.replace('.html', '')
+
+    PRODUCT_DISTINCTIVE_TERMS = {
+        "commercial-castor-oil": [("Commercial Grade Castor Oil", r'\bcommercial\s+(?:grade\s+)?castor\s+oil\b')],
+        "first-special-grade-castor-oil": [("First Special Grade", r'\bfirst\s+special\s+grade\b'), ("FSG", r'\bFSG\b'), ("BSS", r'\bBSS\b')],
+        "fpd-castor-oil": [("First Pressed Degummed", r'\bfirst\s+pressed\s+degummed\b'), ("FPD", r'\bFPD\b')],
+        "castor-cake": [("Castor Cake", r'\bcastor\s+cake\b'), ("Expeller Cake", r'\bexpeller\s+cake\b')],
+        "hydrogenated-castor-oil": [("Hydrogenated Castor Oil", r'\bhydrogenated\s+castor\s+oil\b'), ("HCO", r'\bHCO\b'), ("Castor Wax", r'\bcastor\s+wax\b')],
+        "dehydrated-castor-oil": [("Dehydrated Castor Oil", r'\bdehydrated\s+castor\s+oil\b(?![\s\-]*fatty)'), ("DCO", r'\bDCO\b(?![\s\-]*fa\b|[\s\-]*fatty)')],
+        "dco-fatty-acid": [("DCO Fatty Acid", r'\b(?:dco[\s\-]*fa|dco\s+fatty\s+acid|dehydrated\s+castor\s+oil\s+fatty\s+acid)\b')],
+        "ppg-castor-oil": [("Pale Pressed Grade", r'\bpale\s+pressed\b'), ("PPG", r'\bPPG\b')],
+        "cold-pressed-castor-oil": [("Cold Pressed", r'\bcold[\s\-]pressed\b')],
+        "castor-oil-bp93": [("British Pharmacopoeia", r'\bbritish\s+pharmacop[oe]+ia\b'), ("BP", r'\bBP\b(?![\s\-]*93\b)'), ("BP 93", r'\bBP[\s\-]*93\b')],
+        "castor-oil-usp-nf": [("United States Pharmacopeia", r'\bunited\s+states\s+pharmacop[oe]+ia\b'), ("USP", r'\bUSP\b'), ("USP-NF", r'\bUSP[\s\-\/]*NF\b')],
+        "castor-oil-ph-eur": [("European Pharmacopoeia", r'\beuropean\s+pharmacop[oe]+ia\b'), ("Ph. Eur.", r'\bph\.?\s*eur\.?\b'), ("EP", r'\bEP\b')],
+        "castor-oil-ip": [("Indian Pharmacopoeia", r'\bindian\s+pharmacop[oe]+ia\b'), ("IP", r'\bIP\b')],
+        "castor-oil-jp": [("Japanese Pharmacopoeia", r'\bjapanese\s+pharmacop[oe]+ia\b'), ("JP", r'\bJP\b')],
+        "cosmetic-grade-castor-oil": [("Cosmetic Grade", r'\bcosmetic\s+grade\b')],
+        "ricinoleic-acid": [("Ricinoleic Acid", r'\bricinoleic\s+acid\b')],
+        "12-hydroxystearic-acid": [("12-Hydroxystearic Acid", r'\b12[\s\-]hydroxy\s*stearic\b'), ("12-HSA", r'(?<!calcium )(?<!calcium-)(?<!lithium )(?<!lithium-)(?<!methyl )(?<!methyl-)\b12[\s\-]*HSA\b')],
+        "sebacic-acid": [("Sebacic Acid", r'\bsebacic\s+acid\b')],
+        "high-protein-castor-meal": [("High-Protein Castor Meal", r'\bhigh[\s\-]protein\s+castor\s+meal\b'), ("Castor Meal", r'\bcastor\s+meal\b')],
+        "crude-glycerin": [("Crude Glycerin", r'\bcrude\s+glycerin[e]?\b')],
+        "refined-glycerin": [("Refined Glycerin", r'\brefined\s+glycerin[e]?\b')],
+        "bio-polyurethane-polyols": [("Bio-Polyurethane Polyols", r'\bbio[\s\-]polyurethane\b'), ("Bio-PU Polyols", r'\bbio[\s\-]pu\b')],
+        "sodium-sulphate-anhydrous": [("Sodium Sulphate Anhydrous", r'\bsodium\s+sul(?:ph|f)ate\b')],
+        "dioctyl-sebacate": [("Dioctyl Sebacate", r'\bdioctyl\s+sebacate\b'), ("DOS", r'\bDOS\b')],
+        "dibutyl-sebacate": [("Dibutyl Sebacate", r'\bdibutyl\s+sebacate\b'), ("DBS", r'\bDBS\b')],
+        "methyl-12-hydroxystearate": [("Methyl 12-Hydroxystearate", r'\bmethyl\s+12[\s\-]hydroxy\b'), ("Methyl 12-HSA", r'\bmethyl\s+12[\s\-]*hsa\b')],
+        "methyl-ricinoleate": [("Methyl Ricinoleate", r'\bmethyl\s+ricinoleate\b')],
+        "lithium-12-hydroxystearate": [("Lithium 12-Hydroxystearate", r'\blithium\s+12[\s\-]hydroxy\b'), ("Lithium 12-HSA", r'\blithium\s+12[\s\-]*hsa\b')],
+        "calcium-12-hydroxystearate": [("Calcium 12-Hydroxystearate", r'\bcalcium\s+12[\s\-]hydroxy\b'), ("Calcium 12-HSA", r'\bcalcium\s+12[\s\-]*hsa\b')],
+        "zinc-undecylenate": [("Zinc Undecylenate", r'\bzinc\s+undecylenate\b')],
+        "zinc-ricinoleate": [("Zinc Ricinoleate", r'\bzinc\s+ricinoleate\b')],
+        "blown-oxidized-castor-oil": [("Blown Castor Oil", r'\bblown\s+castor\s+oil\b'), ("Oxidized Castor Oil", r'\boxidi[sz]ed\s+castor\s+oil\b')]
+    }
+
+    if slug not in PRODUCT_DISTINCTIVE_TERMS:
+        return []
+
+    soup = BeautifulSoup(content, 'html.parser')
+    findings = []
+
+    # 1. H1
+    h1 = soup.find('h1')
+    h1_text = h1.get_text(' ', strip=True) if h1 else ""
+
+    # 2. Breadcrumb last item
+    bc_text = ""
+    bc_div = soup.find('div', id='main-content')
+    if bc_div:
+        spans = bc_div.find_all('span')
+        if spans:
+            bc_text = spans[-1].get_text(' ', strip=True)
+            if bc_text == '/':
+                links = bc_div.find_all(['a', 'span'])
+                if links:
+                    bc_text = links[-1].get_text(' ', strip=True)
+    if not bc_text:
+        for s in soup.find_all('script', type='application/ld+json'):
+            if 'BreadcrumbList' in (s.string or ''):
+                m = re.findall(r'"name"\s*:\s*"([^"]+)"', s.string)
+                if m:
+                    bc_text = m[-1]
+
+    # 3. Hero image alt
+    hero_alt = ""
+    hero_img = soup.find('img', class_=re.compile(r'product-media|hero', re.I))
+    if hero_img and hero_img.get('alt'):
+        hero_alt = hero_img.get('alt')
+    else:
+        img = soup.find('img')
+        if img and img.get('alt'):
+            hero_alt = img.get('alt')
+
+    # 4. H2s and H3s outside related-products
+    headings = []
+    for tag in soup.find_all(['h2', 'h3']):
+        if tag.find_parent(class_=re.compile(r'related', re.I)) or tag.find_parent(id=re.compile(r'related', re.I)):
+            continue
+        txt = tag.get_text(' ', strip=True)
+        if re.search(r'related\s+products', txt, re.I):
+            continue
+        headings.append(txt)
+
+    # 5. Title
+    title = soup.title.string if soup.title else ""
+
+    # 6. Meta description
+    meta_desc = ""
+    md = soup.find('meta', attrs={'name': 'description'})
+    if md and md.get('content'):
+        meta_desc = md.get('content')
+
+    # 7. FAQ questions
+    faq_questions = []
+    for sum_tag in soup.find_all('summary'):
+        if sum_tag.find_parent('nav') or sum_tag.find_parent(class_=re.compile(r'mobile-nav|menu', re.I)):
+            continue
+        txt = sum_tag.get_text(' ', strip=True)
+        if txt.startswith('Products ('):
+            continue
+        faq_questions.append(txt)
+    for s in soup.find_all('script', type='application/ld+json'):
+        if 'Question' in (s.string or '') or 'FAQPage' in (s.string or ''):
+            qs = re.findall(r'"name"\s*:\s*"([^"]+\?)"', s.string)
+            for q in qs:
+                if q not in faq_questions:
+                    faq_questions.append(q)
+
+    # Check for foreign terms in each zone
+    for other_slug, terms in PRODUCT_DISTINCTIVE_TERMS.items():
+        if other_slug == slug:
+            continue
+        for term_name, pat in terms:
+            if re.search(pat, h1_text, re.I):
+                findings.append({
+                    "file": file_path_str,
+                    "line": 0,
+                    "rule": "R17 Page Identity",
+                    "severity": "FAIL",
+                    "text": f"Page '{slug}' H1 contains foreign product term '{term_name}' from '{other_slug}': '{h1_text}'"
+                })
+            if re.search(pat, bc_text, re.I):
+                findings.append({
+                    "file": file_path_str,
+                    "line": 0,
+                    "rule": "R17 Page Identity",
+                    "severity": "FAIL",
+                    "text": f"Page '{slug}' breadcrumb contains foreign product term '{term_name}' from '{other_slug}': '{bc_text}'"
+                })
+            if re.search(pat, hero_alt, re.I):
+                findings.append({
+                    "file": file_path_str,
+                    "line": 0,
+                    "rule": "R17 Page Identity",
+                    "severity": "FAIL",
+                    "text": f"Page '{slug}' hero alt contains foreign product term '{term_name}' from '{other_slug}': '{hero_alt}'"
+                })
+            if re.search(pat, title, re.I):
+                findings.append({
+                    "file": file_path_str,
+                    "line": 0,
+                    "rule": "R17 Page Identity",
+                    "severity": "FAIL",
+                    "text": f"Page '{slug}' title contains foreign product term '{term_name}' from '{other_slug}': '{title}'"
+                })
+            if re.search(pat, meta_desc, re.I):
+                findings.append({
+                    "file": file_path_str,
+                    "line": 0,
+                    "rule": "R17 Page Identity",
+                    "severity": "FAIL",
+                    "text": f"Page '{slug}' meta description contains foreign product term '{term_name}' from '{other_slug}': '{meta_desc}'"
+                })
+            for h in headings:
+                if re.search(pat, h, re.I):
+                    findings.append({
+                        "file": file_path_str,
+                        "line": 0,
+                        "rule": "R17 Page Identity",
+                        "severity": "FAIL",
+                        "text": f"Page '{slug}' heading contains foreign product term '{term_name}' from '{other_slug}': '{h}'"
+                    })
+            for q in faq_questions:
+                if re.search(pat, q, re.I):
+                    findings.append({
+                        "file": file_path_str,
+                        "line": 0,
+                        "rule": "R17 Page Identity",
+                        "severity": "FAIL",
+                        "text": f"Page '{slug}' FAQ question contains foreign product term '{term_name}' from '{other_slug}': '{q}'"
+                    })
+
+    return findings
+
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
     lines = content.splitlines()
@@ -725,8 +943,7 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     # ----------------------------------------------------
     for line_idx, line in enumerate(lines, 1):
         for phrase in banned_phrases:
-            # Word boundary regex for phrases and single words
-            pattern = r'(?<!\w)' + re.escape(phrase) + r'(?!\w)'
+            pattern = get_banned_phrase_pattern(phrase)
             if re.search(pattern, line, re.IGNORECASE):
                 findings.append({
                     "file": file_path_str,
@@ -735,6 +952,30 @@ def lint_content(content: str, file_path_str: str, facts: dict):
                     "severity": "FAIL",
                     "text": f"Found banned phrase: '{phrase}'"
                 })
+
+    # ----------------------------------------------------
+    # Process wording restriction (processes_allowed)
+    # ----------------------------------------------------
+    allowed_procs = set(p.lower() for p in facts.get("processes_allowed", []))
+    banned_proc_patterns = [
+        (r'\bneutrali[sz]ation\b|\bneutrali[sz]e\b|\bneutrali[sz]ing\b|\bneutrali[sz]ed\b', "neutralisation/neutralization"),
+        (r'\bdeodori[sz]ation\b|\bdeodori[sz]e\b|\bdeodori[sz]ing\b|\bdeodori[sz]ed\b', "deodorisation/deodorization"),
+        (r'\bsteam\s+distillation\b', "steam distillation"),
+        (r'\bwinteri[sz]ation\b|\bwinteri[sz]e\b|\bwinteri[sz]ing\b', "winterisation/winterization"),
+    ]
+    for line_idx, line in enumerate(lines, 1):
+        if "<script" in line.lower() or "</script>" in line.lower() or "<style" in line.lower():
+            continue
+        for pat, proc_name in banned_proc_patterns:
+            if re.search(pat, line, re.IGNORECASE):
+                if not any(proc_name.lower() in p or p in proc_name.lower() for p in allowed_procs):
+                    findings.append({
+                        "file": file_path_str,
+                        "line": line_idx,
+                        "rule": "R11 Restricted process claim",
+                        "severity": "FAIL",
+                        "text": f"Found process claim '{proc_name}' not listed in processes_allowed"
+                    })
 
     # ----------------------------------------------------
     # R2: Certifications held
@@ -1093,6 +1334,7 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     findings.extend(check_r14_crop_media_captions(content, file_path_str))
     findings.extend(check_r15_cross_page_specs(content, file_path_str))
     findings.extend(check_r16_pharma_cosmetic(content, file_path_str))
+    findings.extend(check_r17_page_identity(content, file_path_str))
 
     return findings
 
@@ -1136,7 +1378,7 @@ def run_production_audit(facts: dict):
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 17)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 18)}
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
     cb_ts = int(time.time())
@@ -1223,7 +1465,7 @@ def main():
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 17)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 18)}
 
     for f in files:
         f_findings = lint_file(f, facts)

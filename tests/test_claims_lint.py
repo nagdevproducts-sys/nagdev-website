@@ -440,5 +440,80 @@ class TestClaimsLint(unittest.TestCase):
         fails = [f for f in findings if f["rule"].startswith("R16")]
         self.assertEqual(len(fails), 0, f"R16 must pass for compliant pharma content, got {fails}")
 
+
+    def test_banned_phrase_british_pharmacopoeia_93_production_snippet(self):
+        # Exact production snippet from products/cosmetic-grade-castor-oil.html
+        snippet = '<span style="font-weight:600; color:var(--charcoal); font-size:1.0625rem;">What manufacturing processes ensure castor oil conforms to British Pharmacopoeia 93?</span>'
+        findings = lint_content(snippet, "products/cosmetic-grade-castor-oil.html", self.facts)
+        fails = [f for f in findings if f["severity"] == "FAIL" and ("British Pharmacopoeia 93" in f["text"] or "BP 93" in f["text"])]
+        self.assertTrue(len(fails) > 0, f"Linter must catch 'British Pharmacopoeia 93' in production snippet, got: {findings}")
+
+    def test_banned_phrase_deodoriz_stem_catches_deodorization(self):
+        html = "<p>Refinery uses high-vacuum deodorization and deodorizing filtration systems.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if "deodoriz" in f["text"].lower() or "deodoris" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, f"Linter stem matching must catch deodorization, got: {findings}")
+
+    def test_banned_phrase_injectable_and_sterilization(self):
+        html = "<p>Castor oil vehicle base suitable for injectable applications requiring secondary sterilization.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if any(w in f["text"].lower() for w in ("injectable", "sterilization"))]
+        self.assertTrue(len(fails) >= 2, f"Linter must catch injectable and sterilization, got: {findings}")
+
+    def test_banned_process_wording_neutralisation_and_distillation(self):
+        html = "<p>Our refining plant utilizes low-temperature neutralisation and steam distillation.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if "process" in f["rule"].lower()]
+        self.assertTrue(len(fails) >= 2, f"Linter must flag neutralisation and steam distillation, got: {findings}")
+
+    def test_r17_page_identity_failing_fixture(self):
+        # Cosmetic page containing BP grade claims in breadcrumb and hero alt
+        html = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Cosmetic Grade Castor Oil | Nagdev</title>
+          <meta name="description" content="Cosmetic castor oil supplier.">
+        </head>
+        <body>
+          <div id="main-content">
+            <a href="/">Home</a> / <a href="/products">Products</a> /
+            <span>Castor Oil BP (British Pharmacopoeia grade) Castor Oil</span>
+          </div>
+          <h1>Cosmetic Grade Castor Oil – Supplier India</h1>
+          <img class="product-media-img" alt="Castor Oil BP (British Pharmacopoeia grade) Castor Oil specifications" src="test.webp">
+          <h2>Castor Oil BP (British Pharmacopoeia grade) – British Pharmacopoeia Specification Overview</h2>
+          <details><summary>What refining processes ensure castor oil conforms to British Pharmacopoeia 93?</summary></details>
+        </body>
+        </html>
+        """
+        findings = lint_content(html, "products/cosmetic-grade-castor-oil.html", self.facts)
+        r17_fails = [f for f in findings if f["rule"] == "R17 Page Identity"]
+        self.assertTrue(len(r17_fails) >= 3, f"R17 must flag foreign BP identity terms on cosmetic page, got: {r17_fails}")
+
+    def test_r17_page_identity_compliant_passes(self):
+        html = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Cosmetic Grade Castor Oil Supplier India | Nagdev Products</title>
+          <meta name="description" content="Cosmetic Grade Castor Oil supplier in India. High-purity refined castor oil for cosmetic, personal care and lip-care formulations. Request a quote.">
+        </head>
+        <body>
+          <div id="main-content">
+            <a href="/">Home</a> / <a href="/products">Products</a> /
+            <span>Cosmetic Grade Castor Oil</span>
+          </div>
+          <h1>Cosmetic Grade Castor Oil – Supplier India</h1>
+          <img class="product-media-img" alt="Cosmetic Grade Castor Oil from Nagdev Products" src="test.webp">
+          <h2>Cosmetic Grade Castor Oil – Specification Overview</h2>
+          <details><summary>What quality testing is performed on cosmetic grade castor oil?</summary></details>
+        </body>
+        </html>
+        """
+        findings = lint_content(html, "products/cosmetic-grade-castor-oil.html", self.facts)
+        r17_fails = [f for f in findings if f["rule"] == "R17 Page Identity"]
+        self.assertEqual(len(r17_fails), 0, f"R17 must pass for compliant page identity, got: {r17_fails}")
+
 if __name__ == "__main__":
     unittest.main()

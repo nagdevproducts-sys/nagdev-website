@@ -67,7 +67,7 @@ SECTION 1: REGULAR COMMERCIAL SUPPLY (7 CORE PRODUCTS)
 - Organic Matter: 80.0% – 85.0% Min
 - Moisture Content: 8.0% – 10.0% Max
 - Residual Oil: 6.0% – 8.0% (expeller process)
-- Agronomic Properties: Naturally contains ricin alkaloid which suppresses plant-parasitic root nematodes and soil grubs.
+- Agronomic Properties: Naturally contains ricin alkaloid which suppresses soil pests and soil grubs.
 
 5. HYDROGENATED CASTOR OIL (HCO / CASTOR WAX) (NDEVWAX™ HCO)
 - CAS Number: 8001-78-3 | EINECS: 232-292-2 | HS Code: 1516.20.91
@@ -101,7 +101,7 @@ SECTION 1: REGULAR COMMERCIAL SUPPLY (7 CORE PRODUCTS)
 - Iodine Value (Wijs): 130 – 145 g I2/100g
 - Color (Gardner): 2.0 Max
 - Conjugated Diene Acid Content: 28% – 35% Min
-- Primary Applications: High-grade non-yellowing stoving alkyds, epoxy ester resins, automotive primers, and synthetic coatings.
+- Primary Applications: High-grade clear-drying stoving alkyds, epoxy ester resins, automotive primers, and synthetic coatings.
 
 ================================================================================
 SECTION 2: SPECIALTY CO-PRODUCTS & DEVELOPMENTAL PIPELINE
@@ -123,7 +123,7 @@ ADVANCED DERIVATIVES & CO-PRODUCTS (UNDER R&D DEVELOPMENT - 17 GRADES):
 - Refined Glycerin 99.5% (CAS 56-81-5, under development): High-purity pure vegetable glycerol from derivative co-product streams.
 - Crude Glycerin 80% (CAS 56-81-5, under development): Industrial-grade unrefined co-product stream.
 - High Protein Castor Meal (CAS 68424-10-2, under development): De-oiled high-nitrogen meal (6.0%–7.0% N) for organic horticulture and tea plantations.
-- Sodium Sulphate Anhydrous (CAS 7757-82-6, under development): 99.4% purity neutralized crystalline co-product for detergent builders and glass.
+- Sodium Sulphate Anhydrous (CAS 7757-82-6, under development): 99.4% purity crystalline co-product for detergent builders and glass.
 - Sebacic Acid (CAS 111-20-6, under development): Pure C10 dicarboxylic acid for bio-based polyamides (Nylon 6.10, Nylon 10.10) and jet lubricant diesters.
 - Bio-Polyurethane Polyols (CAS 68442-88-6, under development): Modified bio-polyols with engineered hydroxyl functionality for rigid spray foams, flexible elastomers, and adhesives.
 - Dioctyl Sebacate / DOS (CAS 122-62-3, under development): Low-temperature synthetic lubricating ester.

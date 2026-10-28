@@ -155,6 +155,35 @@
     "7 on enquiry",
     "13 under development",
     "BP 93",
-    "triglyceride purity"
+    "triglyceride purity",
+    "injectable",
+    "sterile",
+    "sterilization",
+    "sterilisation",
+    "microbial",
+    "deodoriz",
+    "deodoris",
+    "hormone",
+    "veterinary drug",
+    "eye ointment",
+    "transdermal",
+    "drug delivery",
+    "laxative",
+    "nematode",
+    "non-yellowing",
+    "ultra-low odour",
+    "ultra-low odor",
+    "dedicated batch testing",
+    "British Pharmacopoeia 93"
+  ],
+  "processes_allowed": [
+    "crushing",
+    "refining",
+    "bleaching",
+    "filtration",
+    "hydrogenation",
+    "dehydration",
+    "DCO fatty acid production",
+    "lot testing"
   ]
 }
