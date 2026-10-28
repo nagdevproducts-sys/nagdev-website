@@ -3963,3 +3963,20 @@ body.drawer-open #whatsapp-fab {
 @media (max-width: 768px) {
   #whatsapp-fab { bottom: 1.25rem; right: 1.25rem; width: 48px; height: 48px; }
 }
+
+/* Ensure sticky header never covers section headings on anchor jump */
+:target,
+section[id],
+div[id],
+h1[id],
+h2[id],
+h3[id] {
+  scroll-margin-top: calc(var(--header-h, 72px) + 2rem);
+}
+
+@media (max-width: 640px) {
+  .whatsapp-float {
+    bottom: max(1.25rem, calc(1rem + env(safe-area-inset-bottom)));
+    right: 1.25rem;
+  }
+}
