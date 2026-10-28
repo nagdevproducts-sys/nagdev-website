@@ -1,10 +1,8 @@
 /* ==========================================================================
    NAGDEV PRODUCTS PRIVATE LIMITED — OFFICIAL PRODUCT DATABASE
-   Restructured to align with N.K. Industries Ltd catalog & process flows.
+   Total Products: 32 (7 Regular Supply · 8 Available on Enquiry · 17 Under Development)
    Active Categories: Castor Oil | De Oiled Cake (D.O.C) | Derivatives | By-Products
-   Specialty Range: Available on Enquiry (13 Industrial Grades)
-   Survey No. 301 P-2, Jada-Kotarwada Road, Village – Sardarpura,
-   Post – Ravel, Taluka – Deodar, Dist. Banaskantha - 385330, Gujarat, India
+   Plant: Survey No. 301 P-2, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330
    ========================================================================== */
 
 const PRODUCTS_DATABASE = [
@@ -103,7 +101,7 @@ const PRODUCTS_DATABASE = [
     "id": "fpd-castor-oil",
     "number": "02",
     "name": "First Pressed Degummed Castor Oil (F.P.D)",
-    "brandName": "NDEV-FPD",
+    "brandName": "NDEVOLEO™ FPD",
     "category": "castor-oil",
     "categoryLabel": "Castor Oil",
     "casNumber": "8001-79-4",
@@ -158,7 +156,8 @@ const PRODUCTS_DATABASE = [
       ]
     ],
     "isSpecialtyRange": true,
-    "productGroup": "specialty"
+    "productGroup": "specialty",
+    "brandCode": "NDEVOLEO™ FPD"
   },
   {
     "id": "first-special-grade-castor-oil",
@@ -477,8 +476,8 @@ const PRODUCTS_DATABASE = [
   {
     "id": "castor-oil-bp93",
     "number": "06",
-    "name": "Castor Oil BP 93 Grade (British Pharma)",
-    "brandName": "NDEV-BP93",
+    "name": "Castor Oil BP (British Pharmacopoeia grade)",
+    "brandName": "NDEVOLEO™ BP",
     "category": "castor-oil",
     "categoryLabel": "Castor Oil",
     "casNumber": "8001-79-4",
@@ -495,60 +494,53 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/castor-oil-bp93.webp",
     "packing": "200 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC • Sealed containers",
     "shelfLife": "24 months from date of manufacture, in original sealed containers",
-    "application": "Manufactured to meet British Pharmacopoeia monograph parameters. Used across topical formulations, cosmetic bases, emollient applications, and chemical intermediate uses.",
+    "application": "Supplied for buyers requiring compliance with the current British Pharmacopoeia (BP) monograph for Castor Oil. Serves pharmaceutical vehicles, excipients, and regulated applications.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "TYPICAL SPECIFICATION (FINAL VALUES ON COA)"
+      "MONOGRAPH SPECIFICATION",
+      "TEST METHOD"
     ],
     "specs": [
       [
         "1",
-        "Colour Lovibond 5¼\" Cell (Y+5R)",
-        "20 Max"
+        "Appearance",
+        "Conforms to BP Monograph",
+        "Visual"
       ],
       [
         "2",
-        "Free Fatty Acids (as Ricinoleic)",
-        "1.0% Max"
+        "Identification",
+        "Conforms to BP Monograph",
+        "BP Compendial Method"
       ],
       [
         "3",
-        "Hydroxyl Value",
-        "160 mg KOH/g Min"
+        "Relative Density",
+        "Conforms to BP Monograph",
+        "BP Appendix"
       ],
       [
         "4",
-        "Saponification Value",
-        "177 – 185 mg KOH/g"
+        "Refractive Index",
+        "Conforms to BP Monograph",
+        "BP Appendix"
       ],
       [
         "5",
-        "Iodine Value",
-        "82 – 90 g I₂/100g"
+        "Optical Rotation",
+        "Conforms to BP Monograph",
+        "BP Appendix"
       ],
       [
         "6",
-        "Moisture and Volatiles",
-        "0.25% Max"
-      ],
-      [
-        "7",
-        "Specific Gravity @ 25°C",
-        "0.952 – 0.965"
-      ],
-      [
-        "8",
-        "Heavy Metals (as Pb)",
-        "0.0001% (1 ppm) Max"
-      ],
-      [
-        "9",
-        "Distinction from other fixed oils",
-        "Passes BP Test"
+        "Acid Value",
+        "Conforms to BP Monograph",
+        "BP Compendial Titration"
       ]
     ],
-    "productGroup": "specialty"
+    "productGroup": "specialty",
+    "brandCode": "NDEVOLEO™ BP"
   },
   {
     "id": "castor-cake",
@@ -702,7 +694,7 @@ const PRODUCTS_DATABASE = [
     "id": "12-hydroxystearic-acid",
     "number": "09",
     "name": "12-Hydroxy Stearic Acid (12-H.S.A.) Flakes / Powder",
-    "brandName": "NDEV-12HSA",
+    "brandName": "NDEVWAX™ 12HSA",
     "category": "derivatives",
     "categoryLabel": "Derivatives",
     "casNumber": "106-14-9",
@@ -763,7 +755,8 @@ const PRODUCTS_DATABASE = [
       ]
     ],
     "isSpecialtyRange": false,
-    "productGroup": "core"
+    "productGroup": "core",
+    "brandCode": "NDEVWAX™ 12HSA"
   },
   {
     "id": "hydrogenated-castor-oil",
@@ -857,7 +850,7 @@ const PRODUCTS_DATABASE = [
     "id": "ricinoleic-acid",
     "number": "11",
     "name": "Ricinoleic Acid (R.A.)",
-    "brandName": "NDEV-RA",
+    "brandName": "NDEVACID™ RIC",
     "category": "derivatives",
     "categoryLabel": "Derivatives",
     "casNumber": "141-22-0",
@@ -933,7 +926,8 @@ const PRODUCTS_DATABASE = [
       ]
     ],
     "isSpecialtyRange": false,
-    "productGroup": "core"
+    "productGroup": "core",
+    "brandCode": "NDEVACID™ RIC"
   },
   {
     "id": "crude-glycerin",
@@ -1210,7 +1204,7 @@ const PRODUCTS_DATABASE = [
       ]
     ],
     "brandName": "NDEVPOL™ DCO",
-    "brandCode": "NDEVPOL-DCO",
+    "brandCode": "NDEVPOL™ DCO",
     "isSpecialtyRange": true,
     "productGroup": "specialty"
   },
@@ -1319,7 +1313,7 @@ const PRODUCTS_DATABASE = [
       ]
     ],
     "brandName": "NDEVACID™ DCO",
-    "brandCode": "NDEVACID-DCO",
+    "brandCode": "NDEVACID™ DCO",
     "isSpecialtyRange": true,
     "productGroup": "specialty"
   },
@@ -2603,17 +2597,322 @@ const PRODUCTS_DATABASE = [
         "USP / IP"
       ]
     ],
-    "brandName": "NDEVGLY™ 995",
-    "brandCode": "NDEVGLY-995",
+    "brandName": "NDEVGLY™ REF",
+    "brandCode": "NDEVGLY™ REF",
     "isSpecialtyRange": false,
     "productGroup": "core"
+  },
+  {
+    "id": "castor-oil-usp-nf",
+    "number": "28",
+    "name": "Castor Oil USP–NF Grade",
+    "brandName": "NDEVOLEO™ USP",
+    "brandCode": "NDEVOLEO™ USP",
+    "category": "castor-oil",
+    "categoryLabel": "Castor Oil",
+    "casNumber": "8001-79-4",
+    "industries": [
+      "pharmaceutical",
+      "cosmetics",
+      "personal-care"
+    ],
+    "physicalForm": "Liquid",
+    "typicalColour": "Pale Yellow to Colourless",
+    "rawMaterial": "Castor Seed (Ricinus communis)",
+    "image": "images/products/first-special-grade-castor-oil.webp",
+    "packing": "Bulk in ISO Tank / Flexitank • 200 kg MS/HDPE Drums • 1000 L IBC",
+    "shelfLife": "24 months from date of manufacture, in original unopened packaging",
+    "application": "Supplied for buyers requiring compliance with the current USP–NF monograph for Castor Oil. Serves pharmaceutical formulations, capsule excipients, and personal care.",
+    "headers": [
+      "SR NO",
+      "TEST PARAMETER",
+      "MONOGRAPH SPECIFICATION",
+      "TEST METHOD"
+    ],
+    "specs": [
+      [
+        "1",
+        "Appearance",
+        "Conforms to USP–NF Monograph",
+        "Visual"
+      ],
+      [
+        "2",
+        "Identification",
+        "Conforms to USP–NF Monograph",
+        "USP <197>"
+      ],
+      [
+        "3",
+        "Specific Gravity",
+        "Conforms to USP–NF Monograph",
+        "USP <841>"
+      ],
+      [
+        "4",
+        "Refractive Index",
+        "Conforms to USP–NF Monograph",
+        "USP <831>"
+      ],
+      [
+        "5",
+        "Heavy Metals",
+        "Conforms to USP–NF Monograph",
+        "USP <231>"
+      ],
+      [
+        "6",
+        "Free Fatty Acids",
+        "Conforms to USP–NF Monograph",
+        "USP Compendial Method"
+      ]
+    ]
+  },
+  {
+    "id": "castor-oil-ph-eur",
+    "number": "29",
+    "name": "Castor Oil Ph. Eur. (European Pharmacopoeia)",
+    "brandName": "NDEVOLEO™ EP",
+    "brandCode": "NDEVOLEO™ EP",
+    "category": "castor-oil",
+    "categoryLabel": "Castor Oil",
+    "casNumber": "8001-79-4",
+    "industries": [
+      "pharmaceutical",
+      "cosmetics",
+      "personal-care"
+    ],
+    "physicalForm": "Liquid",
+    "typicalColour": "Almost Colourless to Slightly Yellow",
+    "rawMaterial": "Castor Seed (Ricinus communis)",
+    "image": "images/products/first-special-grade-castor-oil.webp",
+    "packing": "Bulk in ISO Tank / Flexitank • 200 kg MS/HDPE Drums • 1000 L IBC",
+    "shelfLife": "24 months from date of manufacture, in original unopened packaging",
+    "application": "Supplied for buyers requiring compliance with the current European Pharmacopoeia (Ph. Eur.) monograph for Castor Oil. Serves pharmaceutical and personal care applications.",
+    "headers": [
+      "SR NO",
+      "TEST PARAMETER",
+      "MONOGRAPH SPECIFICATION",
+      "TEST METHOD"
+    ],
+    "specs": [
+      [
+        "1",
+        "Appearance",
+        "Conforms to Ph. Eur. Monograph",
+        "Visual"
+      ],
+      [
+        "2",
+        "Identification",
+        "Conforms to Ph. Eur. Monograph",
+        "Ph. Eur. 2.2.24"
+      ],
+      [
+        "3",
+        "Relative Density",
+        "Conforms to Ph. Eur. Monograph",
+        "Ph. Eur. 2.2.5"
+      ],
+      [
+        "4",
+        "Refractive Index",
+        "Conforms to Ph. Eur. Monograph",
+        "Ph. Eur. 2.2.6"
+      ],
+      [
+        "5",
+        "Acid Value",
+        "Conforms to Ph. Eur. Monograph",
+        "Ph. Eur. 2.5.1"
+      ],
+      [
+        "6",
+        "Peroxide Value",
+        "Conforms to Ph. Eur. Monograph",
+        "Ph. Eur. 2.5.5"
+      ]
+    ]
+  },
+  {
+    "id": "castor-oil-ip",
+    "number": "30",
+    "name": "Castor Oil IP (Indian Pharmacopoeia)",
+    "brandName": "NDEVOLEO™ IP",
+    "brandCode": "NDEVOLEO™ IP",
+    "category": "castor-oil",
+    "categoryLabel": "Castor Oil",
+    "casNumber": "8001-79-4",
+    "industries": [
+      "pharmaceutical",
+      "ayurvedic",
+      "cosmetics"
+    ],
+    "physicalForm": "Liquid",
+    "typicalColour": "Pale Yellow to Almost Colourless",
+    "rawMaterial": "Castor Seed (Ricinus communis)",
+    "image": "images/products/first-special-grade-castor-oil.webp",
+    "packing": "Bulk in Tankers • 200 kg MS/HDPE Drums • 1000 L IBC",
+    "shelfLife": "24 months from date of manufacture, in original unopened packaging",
+    "application": "Supplied for buyers requiring compliance with the current Indian Pharmacopoeia (IP) monograph for Castor Oil. Serves pharmaceutical, herbal, and Ayurvedic formulations.",
+    "headers": [
+      "SR NO",
+      "TEST PARAMETER",
+      "MONOGRAPH SPECIFICATION",
+      "TEST METHOD"
+    ],
+    "specs": [
+      [
+        "1",
+        "Appearance",
+        "Conforms to IP Monograph",
+        "Visual"
+      ],
+      [
+        "2",
+        "Identification",
+        "Conforms to IP Monograph",
+        "IP Compendial Method"
+      ],
+      [
+        "3",
+        "Weight per ml",
+        "Conforms to IP Monograph",
+        "IP Appendix"
+      ],
+      [
+        "4",
+        "Refractive Index",
+        "Conforms to IP Monograph",
+        "IP Appendix"
+      ],
+      [
+        "5",
+        "Acid Value",
+        "Conforms to IP Monograph",
+        "IP Compendial Titration"
+      ]
+    ]
+  },
+  {
+    "id": "castor-oil-jp",
+    "number": "31",
+    "name": "Castor Oil JP (Japanese Pharmacopoeia)",
+    "brandName": "NDEVOLEO™ JP",
+    "brandCode": "NDEVOLEO™ JP",
+    "category": "castor-oil",
+    "categoryLabel": "Castor Oil",
+    "casNumber": "8001-79-4",
+    "industries": [
+      "pharmaceutical",
+      "cosmetics",
+      "chemical"
+    ],
+    "physicalForm": "Liquid",
+    "typicalColour": "Almost Colourless to Pale Yellow",
+    "rawMaterial": "Castor Seed (Ricinus communis)",
+    "image": "images/products/first-special-grade-castor-oil.webp",
+    "packing": "Bulk in ISO Tank / Flexitank • 200 kg MS/HDPE Drums • 1000 L IBC",
+    "shelfLife": "24 months from date of manufacture, in original unopened packaging",
+    "application": "Supplied for buyers requiring compliance with the current Japanese Pharmacopoeia (JP) monograph for Castor Oil. Serves East Asian pharmaceutical and cosmetic formulations.",
+    "headers": [
+      "SR NO",
+      "TEST PARAMETER",
+      "MONOGRAPH SPECIFICATION",
+      "TEST METHOD"
+    ],
+    "specs": [
+      [
+        "1",
+        "Appearance",
+        "Conforms to JP Monograph",
+        "Visual"
+      ],
+      [
+        "2",
+        "Identification",
+        "Conforms to JP Monograph",
+        "JP Compendial Method"
+      ],
+      [
+        "3",
+        "Specific Gravity",
+        "Conforms to JP Monograph",
+        "JP Compendial Method"
+      ],
+      [
+        "4",
+        "Refractive Index",
+        "Conforms to JP Monograph",
+        "JP Compendial Method"
+      ],
+      [
+        "5",
+        "Acid Value",
+        "Conforms to JP Monograph",
+        "JP Compendial Titration"
+      ]
+    ]
+  },
+  {
+    "id": "cosmetic-grade-castor-oil",
+    "number": "32",
+    "name": "Cosmetic Grade Castor Oil",
+    "brandName": "NDEVOLEO™ COS",
+    "brandCode": "NDEVOLEO™ COS",
+    "category": "castor-oil",
+    "categoryLabel": "Castor Oil",
+    "casNumber": "8001-79-4",
+    "industries": [
+      "cosmetics",
+      "personal-care",
+      "haircare",
+      "skincare"
+    ],
+    "physicalForm": "Liquid",
+    "typicalColour": "Water White to Very Pale Yellow",
+    "rawMaterial": "Castor Seed (Ricinus communis)",
+    "image": "images/products/first-special-grade-castor-oil.webp",
+    "packing": "200 kg Epoxy-lined MS Drums • 1000 L IBC • ISO Tank / Flexitank",
+    "shelfLife": "24 months from date of manufacture, in original unopened packaging",
+    "application": "Refined castor oil selected for low colour and odour, providing high gloss, emollience, and pigment dispersion in lip care, colour cosmetics, and skincare.",
+    "headers": [
+      "SR NO",
+      "TEST PARAMETER",
+      "SPECIFICATION",
+      "TEST METHOD"
+    ],
+    "specs": [
+      [
+        "1",
+        "Appearance",
+        "Clear, low-odour liquid free from sediment",
+        "Visual"
+      ],
+      [
+        "2",
+        "Colour",
+        "Low colour agreed per order",
+        "Lovibond / AOCS"
+      ],
+      [
+        "3",
+        "Free Fatty Acids",
+        "Agreed per order; reported on COA",
+        "AOCS Ca 5a-40"
+      ],
+      [
+        "4",
+        "Hydroxyl Value",
+        "Agreed per order; reported on COA",
+        "AOCS Cd 13-60"
+      ],
+      [
+        "5",
+        "Peroxide Value",
+        "Agreed per order; reported on COA",
+        "AOCS Cd 8-53"
+      ]
+    ]
   }
 ];
-
-// Universal exports for Browser & Node
-if (typeof window !== 'undefined') {
-  window.PRODUCTS_DATABASE = PRODUCTS_DATABASE;
-}
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { PRODUCTS_DATABASE };
-}

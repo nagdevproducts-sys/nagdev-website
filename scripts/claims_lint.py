@@ -50,7 +50,7 @@ RULES = {
     "R1": "banned_phrases (case-insensitive, whole-site: HTML text, meta, JSON-LD, llms*.txt)",
     "R2": "any certification name not in certifications_held (ISO, GMP, REACH, Halal, Kosher, FSSAI, BIS licence, NABL, etc.)",
     "R3": "under-development product in a sentence with produce/manufacture/supply/available/in stock/offer/dispatch/solution unless marked 'under development'",
-    "R4": "product counts must be 27 / 7 / 7 / 13; any other count next to products/grades",
+    "R4": "product counts must match facts register (32 total, 7 regular, 8 enquiry, 17 under dev)",
     "R5": "plant address/district must match register; 'Banaskantha' next to Deodar, Sardarpura, 385330 or 'district' forbidden",
     "R6": "capacity: any TPD/TPA/MT per day value other than '50 TPD' seed crushing",
     "R7": "SPEC CONSISTENCY: spec table limits must match across key-facts, intro, FAQ, meta, JSON-LD and TDS text",
@@ -60,7 +60,9 @@ RULES = {
     "R11": "Banned additions to register's banned phrases (certified regional, oil content, processing parity, etc.)",
     "R12": "Any page claiming data for a period that ends after its own publish date",
     "R13": "Required standard site template components (header, footer, consent snippet, gtag loader, /js/analytics.js)",
-    "R14": "Crop and video media captions/alts must not contain location/ownership/facility claims and video must include 'illustrative'"
+    "R14": "Crop and video media captions/alts must not contain location/ownership/facility claims and video must include 'illustrative'",
+    "R15": "Cross-page specification consistency against canonical product pages",
+    "R16": "Pharmacopoeia and cosmetic grade pages must contain NO numeric specification values and NO certification/regulatory claims"
 }
 
 # Ignored paths
@@ -111,10 +113,20 @@ def split_into_sentences(text: str):
     return cleaned
 
 DEV_PRODUCT_REGEXES = [
+    r"\bricinoleic\s+acid\b",
+    r"\b12[- ]hydroxystearic\s+acid\b",
+    r"\b12[- ]hsa\b",
+    r"\brefined\s+glycerin\b",
+    r"\brefined\s+glycerine\b",
+    r"\bcrude\s+glycerin\b",
+    r"\bcrude\s+glycerine\b",
+    r"\bhigh[- ]protein\s+castor\s+meal\b",
+    r"\bcastor\s+meal\b",
+    r"\bsodium\s+sulphate\s+anhydrous\b",
+    r"\bsodium\s+sulfate\s+anhydrous\b",
+    r"\bsodium\s+sulphate\b",
+    r"\bsodium\s+sulfate\b",
     r"\bsebacic\s+acid\b",
-    r"\bdehydrated\s+castor\s+oil\b",
-    r"\bdco\b",
-    r"\bdco\s+fatty\s+acid\b",
     r"\bbio[- ]polyurethane\s+polyols?\b",
     r"\bbio[- ]pu\s+polyols?\b",
     r"\bdioctyl\s+sebacate\b",
@@ -128,11 +140,12 @@ DEV_PRODUCT_REGEXES = [
     r"\bzinc\s+undecylenate\b",
     r"\bzinc\s+ricinoleate\b",
     r"\bblown\s+oxidized\s+castor\s+oil\b",
+    r"\bblown\s+oxidised\s+castor\s+oil\b",
     r"\bblown\s+castor\s+oil\b"
 ]
 
 DEV_PROD_RE = re.compile("|".join(DEV_PRODUCT_REGEXES), re.IGNORECASE)
-R3_TRIGGER_RE = re.compile(r"\b(produce|produces|produced|producing|manufacture|manufactures|manufactured|manufacturing|supply|supplies|supplied|supplying|available|in stock|offer|offers|offered|offering|dispatch|dispatches|dispatched|dispatching|solution|solutions)\b", re.IGNORECASE)
+R3_TRIGGER_RE = re.compile(r"\b(produce|produces|produced|producing|manufacture|manufactures|manufactured|manufacturing|supply|supplies|supplied|supplying|available|in stock|offer|offers|offered|offering|dispatch|dispatches|dispatched|dispatching|solution|solutions|regular|regularly)\b", re.IGNORECASE)
 
 CERT_PATTERNS = [
     (r"\bISO\s*[-]?\s*(?:9001|14001|22000|\d{4,5})\b", "ISO"),
@@ -626,6 +639,78 @@ def check_r15_cross_page_specs(content: str, file_path_str: str) -> list:
 
     return findings
 
+def check_r16_pharma_cosmetic(content: str, file_path_str: str) -> list:
+    """
+    R16: Pharmacopoeia and cosmetic grade pages restrictions.
+    Must contain NO numeric specification values and must NOT contain:
+    GMP, certified, approved, drug licence, excipient manufacturer, FDA, CEP, DMF.
+    """
+    findings = []
+    pharma_cosmetic_slugs = [
+        "castor-oil-bp93",
+        "castor-oil-usp-nf",
+        "castor-oil-ph-eur",
+        "castor-oil-ip",
+        "castor-oil-jp",
+        "cosmetic-grade-castor-oil"
+    ]
+    is_pharma_cosmetic = any(slug in file_path_str.lower() for slug in pharma_cosmetic_slugs)
+    if not is_pharma_cosmetic:
+        return findings
+
+    lines = content.splitlines()
+
+    # 1. Banned certification / regulatory claims
+    r16_banned_terms = [
+        (r"\bGMP\b", "GMP"),
+        (r"\bcertified\b", "certified"),
+        (r"\bapproved\b", "approved"),
+        (r"\bdrug\s+licen[sc]e\b", "drug licence"),
+        (r"\bexcipient\s+manufacturer\b", "excipient manufacturer"),
+        (r"\bFDA\b", "FDA"),
+        (r"\bCEP\b", "CEP"),
+        (r"\bDMF\b", "DMF")
+    ]
+    for line_idx, line in enumerate(lines, 1):
+        for pattern, term_name in r16_banned_terms:
+            if re.search(pattern, line, re.IGNORECASE):
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_idx,
+                    "rule": "R16 Pharma/Cosmetic banned claim",
+                    "severity": "FAIL",
+                    "text": f"Pharmacopoeia/cosmetic page contains forbidden term '{term_name}' on line {line_idx}: '{line.strip()[:100]}'"
+                })
+
+    # 2. NO numeric specification values (no numbers next to spec parameter names)
+    spec_param_re = re.compile(
+        r'\b(free\s+fatty\s+acids?|ffa|acid\s+value|saponification\s+value|sap\s+value|iodine\s+value|hydroxyl\s+value|moisture(?:\s+and\s+volatile\s+matter)?|relative\s+density|specific\s+gravity|refractive\s+index|optical\s+rotation|viscosity|colour|color|lovibond|gardner|heavy\s+metals?|peroxide\s+value|unsaponifiable\s+matter|ash)\b',
+        re.IGNORECASE
+    )
+    spec_val_re = re.compile(
+        r'(?:[:=≤≥<>–\-]\s*\d+(?:\.\d+)?|\b\d+(?:\.\d+)?\s*(?:%|mg\b|ppm\b|cst\b|poise\b|°c\b|max\b|min\b)|\b(?:max|min)\b\s*\d+(?:\.\d+)?|\b\d+\.\d+\b)',
+        re.IGNORECASE
+    )
+    for line_idx, line in enumerate(lines, 1):
+        if "<script" in line.lower() or "</script>" in line.lower() or "<style" in line.lower() or "href=" in line or "src=" in line:
+            continue
+        plain = re.sub(r'<[^>]+>', ' ', line)
+        for m in spec_param_re.finditer(plain):
+            start = max(0, m.start() - 35)
+            end = min(len(plain), m.end() + 45)
+            window = plain[start:end]
+            num_match = spec_val_re.search(window)
+            if num_match:
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_idx,
+                    "rule": "R16 Numeric spec on pharma/cosmetic page",
+                    "severity": "FAIL",
+                    "text": f"Pharmacopoeia/cosmetic page contains numeric specification near '{m.group(0)}' on line {line_idx}: '{window.strip()[:100]}'"
+                })
+
+    return findings
+
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
     lines = content.splitlines()
@@ -707,23 +792,29 @@ def lint_content(content: str, file_path_str: str, facts: dict):
                 })
 
     # ----------------------------------------------------
-    # R4: Product counts must be 27 / 7 / 7 / 13
+    # R4: Product counts must match facts register
     # ----------------------------------------------------
+    reg_count = len(facts.get("products", {}).get("regular_supply", []))
+    enq_count = len(facts.get("products", {}).get("on_enquiry", []))
+    dev_count = len(facts.get("products", {}).get("under_development", []))
+    total_count = reg_count + enq_count + dev_count
+    allowed_counts = {total_count, reg_count, enq_count, dev_count}
+
     for line_idx, line in enumerate(lines, 1):
         # Ignore lines that are purely HTML attribute declarations like URLs or query params
         line_no_urls = re.sub(r'https?://[^\s"\'<>]+', '', line)
         line_no_urls = re.sub(r'%\d{2}', ' ', line_no_urls)
         # Look for numbers preceding products/grades/derivatives
-        count_matches = re.finditer(r'\b(\d+)\s*(?:\+\s*\d+\s*)?(?:core\s+|specialty\s+|commercial\s+)?(products?|grades?|derivatives?)\b', line_no_urls, re.IGNORECASE)
+        count_matches = re.finditer(r'\b(\d+)\s*(?:\+\s*\d+\s*)?(?:core\s+|specialty\s+|commercial\s+|under[- ]development\s+|developmental\s+|on[- ]enquiry\s+|regular[- ]supply\s+)?(products?|grades?|derivatives?)\b', line_no_urls, re.IGNORECASE)
         for cm in count_matches:
             num = int(cm.group(1))
-            if num not in [27, 7, 13]:
+            if num not in allowed_counts:
                 findings.append({
                     "file": file_path_str,
                     "line": line_idx,
                     "rule": "R4 Invalid product count",
                     "severity": "FAIL",
-                    "text": f"Invalid count '{cm.group(0)}' (allowed counts: 27 total, 7 regular, 7 enquiry, 13 under dev)"
+                    "text": f"Invalid count '{cm.group(0)}' (allowed counts: {total_count} total, {reg_count} regular, {enq_count} enquiry, {dev_count} under dev)"
                 })
 
     # ----------------------------------------------------
@@ -1000,6 +1091,7 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     # ----------------------------------------------------
     findings.extend(check_r14_crop_media_captions(content, file_path_str))
     findings.extend(check_r15_cross_page_specs(content, file_path_str))
+    findings.extend(check_r16_pharma_cosmetic(content, file_path_str))
 
     return findings
 
@@ -1043,7 +1135,7 @@ def run_production_audit(facts: dict):
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 16)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 17)}
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
     cb_ts = int(time.time())
@@ -1130,7 +1222,7 @@ def main():
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 16)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 17)}
 
     for f in files:
         f_findings = lint_file(f, facts)

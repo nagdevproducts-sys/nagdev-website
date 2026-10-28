@@ -1,8 +1,8 @@
 # Nagdev Claims Linter & Fact Verification Report
 
-- Total Files Scanned: 91
+- Total Files Scanned: 96
 - Total Failures (Exit != 0): **0**
-- Total Warnings (Review items): **1**
+- Total Warnings (Review items): **0**
 
 ### Failures by Rule
 - **R1**: 0
@@ -20,7 +20,7 @@
 - **R13**: 0
 - **R14**: 0
 - **R15**: 0
+- **R16**: 0
 
 | File | Line | Rule | Severity | Details |
 |---|---|---|---|---|
-| `guides/north-gujarat-castor-belt.html` | 0 | R9 Statistic without nearby link | **WARN** | Statistic '50 tonnes' in prose without nearby reference link in paragraph |

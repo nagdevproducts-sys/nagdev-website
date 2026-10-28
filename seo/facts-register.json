@@ -26,32 +26,39 @@
       "hydrogenation",
       "batch pressure reactors",
       "lot testing with COA per lot",
-      "in-house QC testing"
+      "in-house QC testing",
+      "dehydration (DCO)",
+      "DCO fatty acid production"
     ]
   },
   "products": {
     "regular_supply": [
       "commercial-castor-oil",
       "first-special-grade-castor-oil",
+      "fpd-castor-oil",
       "castor-cake",
       "hydrogenated-castor-oil",
-      "ricinoleic-acid",
-      "12-hydroxystearic-acid",
-      "refined-glycerin"
+      "dehydrated-castor-oil",
+      "dco-fatty-acid"
     ],
     "on_enquiry": [
+      "ppg-castor-oil",
       "cold-pressed-castor-oil",
       "castor-oil-bp93",
-      "ppg-castor-oil",
-      "fpd-castor-oil",
-      "high-protein-castor-meal",
-      "crude-glycerin",
-      "sodium-sulphate-anhydrous"
+      "castor-oil-usp-nf",
+      "castor-oil-ph-eur",
+      "castor-oil-ip",
+      "castor-oil-jp",
+      "cosmetic-grade-castor-oil"
     ],
     "under_development": [
+      "ricinoleic-acid",
+      "12-hydroxystearic-acid",
+      "refined-glycerin",
+      "crude-glycerin",
+      "high-protein-castor-meal",
+      "sodium-sulphate-anhydrous",
       "sebacic-acid",
-      "dehydrated-castor-oil",
-      "dco-fatty-acid",
       "bio-polyurethane-polyols",
       "dioctyl-sebacate",
       "dibutyl-sebacate",
@@ -141,6 +148,12 @@
     "export consignments are",
     "rapid vessel",
     "vessel departure",
-    "ensures consistent supply"
+    "ensures consistent supply",
+    "27 products",
+    "27 grades",
+    "All 27",
+    "7 on enquiry",
+    "13 under development",
+    "BP 93"
   ]
 }
