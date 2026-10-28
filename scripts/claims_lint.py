@@ -66,7 +66,8 @@ RULES = {
     "R16": "Pharmacopoeia and cosmetic grade pages must contain NO numeric specification values and NO certification/regulatory claims",
     "R17": "PAGE IDENTITY: on each /products/<slug> page, H1, breadcrumb last item, hero img alt, H2/H3, meta title/description, FAQ questions must refer ONLY to that page's product. Cross-product contamination -> FAIL (related-products block exempt)",
     "R18": "INTERNAL LINKS: all internal links must resolve to valid local files and contain no malformed percent encodings",
-    "R19": "BRAND CODES: brand codes must strictly match canonical codes from seo/product-master.json; no legacy NDEV- hyphens or 'Specialty Range'"
+    "R19": "BRAND CODES: brand codes must strictly match canonical codes from seo/product-master.json; no legacy NDEV- hyphens or 'Specialty Range'",
+    "R20": "EFFICACY & AGRONOMIC/HEALTH CLAIMS: no efficacy claims (pest/nematode/insect/fungus/weed/disease within 6 words of suppress/repel/control/kill/prevent/protect/resist), phytosanitary, cash crops benefit, yield increase, boosts yield, cures, heals"
 }
 
 # Ignored paths
@@ -1062,6 +1063,49 @@ def check_r19_brand_codes(content: str, file_path_str: str, repo_root: Path = RE
 
     return findings
 
+
+def check_r20_efficacy_claims(content: str, file_path_str: str) -> list:
+    findings = []
+    lines = content.splitlines()
+
+    pests = r'\b(pest|nematod|insect|fung|weed|disease)\w*'
+    actions = r'\b(suppress|repel|control|kill|prevent|protect|resist)\w*'
+    p1 = rf'{pests}(?:\s+\S+){{0,5}}\s+{actions}'
+    p2 = rf'{actions}(?:\s+\S+){{0,5}}\s+{pests}'
+    efficacy_re = re.compile(rf'({p1}|{p2})', re.IGNORECASE)
+
+    direct_phrases = [
+        "phytosanitary",
+        "cash crops benefit",
+        "yield increase",
+        "boosts yield",
+        "cures",
+        "heals"
+    ]
+    direct_re = re.compile(r'\b(' + '|'.join(re.escape(p) for p in direct_phrases) + r')\b', re.IGNORECASE)
+
+    for line_idx, line in enumerate(lines, 1):
+        m_eff = efficacy_re.search(line)
+        if m_eff:
+            findings.append({
+                "file": file_path_str,
+                "line": line_idx,
+                "rule": "R20 Efficacy claim",
+                "severity": "FAIL",
+                "text": f"Found prohibited efficacy claim: '{m_eff.group(0)}'"
+            })
+        m_dir = direct_re.search(line)
+        if m_dir:
+            findings.append({
+                "file": file_path_str,
+                "line": line_idx,
+                "rule": "R20 Prohibited claim phrase",
+                "severity": "FAIL",
+                "text": f"Found prohibited agricultural/health claim phrase: '{m_dir.group(0)}'"
+            })
+
+    return findings
+
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
     lines = content.splitlines()
@@ -1484,6 +1528,7 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     findings.extend(check_r17_page_identity(content, file_path_str))
     findings.extend(check_r18_internal_links(content, file_path_str))
     findings.extend(check_r19_brand_codes(content, file_path_str))
+    findings.extend(check_r20_efficacy_claims(content, file_path_str))
 
     return findings
 
@@ -1527,7 +1572,7 @@ def run_production_audit(facts: dict):
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 20)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 21)}
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
     cb_ts = int(time.time())
@@ -1614,7 +1659,7 @@ def main():
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 20)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 21)}
 
     for f in files:
         f_findings = lint_file(f, facts)

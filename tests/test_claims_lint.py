@@ -564,5 +564,108 @@ class TestClaimsLint(unittest.TestCase):
         self.assertTrue(len(fails) > 0, "R1/R11 must fail for 'copied from'")
         self.assertTrue(any("copied from" in f["text"].lower() for f in fails))
 
+
+    def test_r20_failing_fixture_pest_suppression(self):
+        """Test R20 catches the exact live failing sentence: 'How does castor cake suppress plant-parasitic soil pests?'"""
+        html = '<p>How does castor cake suppress plant-parasitic soil pests?</p>'
+        findings = lint_content(html, "products/castor-cake.html", self.facts)
+        r20_fails = [f for f in findings if f["rule"].startswith("R20")]
+        self.assertTrue(len(r20_fails) > 0, "R20 must fail for 'suppress plant-parasitic soil pests'")
+        self.assertEqual(r20_fails[0]["rule"], "R20 Efficacy claim")
+
+    def test_r20_failing_fixture_prohibited_phrases(self):
+        """Test R20 catches phytosanitary, cash crops benefit, yield increase, boosts yield, cures, heals"""
+        for phrase in ["phytosanitary", "cash crops benefit", "yield increase", "boosts yield", "cures", "heals"]:
+            html = f'<p>Shipment documentation includes {phrase} for agricultural orders.</p>'
+            findings = lint_content(html, "products/test.html", self.facts)
+            r20_fails = [f for f in findings if f["rule"].startswith("R20")]
+            self.assertTrue(len(r20_fails) > 0, f"R20 must fail for prohibited phrase '{phrase}'")
+
+    def test_task1_physical_form_consistency(self):
+        """Task 1: Liquid products must not contain 'Flakes' or 'Solid' in Physical Form, and vice versa."""
+        import json
+        master = json.load(open("seo/product-master.json", encoding="utf-8"))
+        
+        liquids = [
+            "commercial-castor-oil", "first-special-grade-castor-oil", "fpd-castor-oil", 
+            "ppg-castor-oil", "cold-pressed-castor-oil", "castor-oil-bp93", 
+            "castor-oil-usp-nf", "castor-oil-ph-eur", "castor-oil-ip", "castor-oil-jp", 
+            "cosmetic-grade-castor-oil", "dehydrated-castor-oil", "dco-fatty-acid", 
+            "ricinoleic-acid", "crude-glycerin", "refined-glycerin", 
+            "bio-polyurethane-polyols", "dioctyl-sebacate", "dibutyl-sebacate", 
+            "methyl-ricinoleate", "blown-oxidized-castor-oil"
+        ]
+        solids = [
+            "castor-cake", "hydrogenated-castor-oil", "12-hydroxystearic-acid", 
+            "sebacic-acid", "high-protein-castor-meal", "sodium-sulphate-anhydrous", 
+            "methyl-12-hydroxystearate", "lithium-12-hydroxystearate", 
+            "calcium-12-hydroxystearate", "zinc-undecylenate", "zinc-ricinoleate"
+        ]
+        
+        by_slug = {p["slug"]: p for p in master}
+        for slug in liquids:
+            pform = by_slug[slug]["physical_form"]
+            self.assertIn("Liquid", pform, f"{slug} must be Liquid, got {pform}")
+            self.assertNotIn("Solid", pform, f"{slug} must not contain Solid, got {pform}")
+            self.assertNotIn("Flakes", pform, f"{slug} must not contain Flakes, got {pform}")
+            
+        for slug in solids:
+            pform = by_slug[slug]["physical_form"]
+            self.assertNotIn("Liquid", pform, f"{slug} must not contain Liquid, got {pform}")
+            has_solid_term = any(t in pform for t in ["Solid", "Flakes", "Powder", "Cake", "Pellets", "Crystals"])
+            self.assertTrue(has_solid_term, f"{slug} must contain solid form term, got {pform}")
+
+    def test_task1_no_duplicate_applications_and_no_defaults(self):
+        """Task 1: No applications set may be identical on >2 pages, and no default application string."""
+        import json
+        master = json.load(open("seo/product-master.json", encoding="utf-8"))
+        app_sets = {}
+        for p in master:
+            slug = p["slug"]
+            titles = tuple(a["title"] for a in p["applications"])
+            app_sets.setdefault(titles, []).append(slug)
+            
+            # Check for old default string
+            full_str = json.dumps(p)
+            self.assertNotIn("Industrial Formulations · Coatings & Polymers · Specialty Chemical Synthesis", full_str)
+            
+        for titles, slugs in app_sets.items():
+            self.assertLessEqual(len(slugs), 2, f"Applications set {titles} shared by more than 2 products: {slugs}")
+
+    def test_task1_single_breadcrumb_and_no_leaks(self):
+        """Task 1: Exactly one breadcrumb per page on all 32 products, 0 visible leaked html attributes."""
+        import re
+        import json
+        with open("seo/product-master.json", "r", encoding="utf-8") as f:
+            master = json.load(f)
+        for p in master:
+            fpath = f"products/{p['slug']}.html"
+            with open(fpath, "r", encoding="utf-8") as f:
+                content = f.read()
+            crumbs = re.findall(r'<nav class="breadcrumb-bar"', content)
+            self.assertEqual(len(crumbs), 1, f"{fpath} must have exactly 1 breadcrumb, found {len(crumbs)}")
+            
+            # Check for leaked HTML attributes in body prose
+            body_start = content.find("<main")
+            body_end = content.find("</main>")
+            if body_start != -1 and body_end != -1:
+                body = content[body_start:body_end]
+                # Strip valid HTML tags to check visible prose
+                prose = re.sub(r'<[^>]+>', ' ', body)
+                self.assertFalse('">' in prose, f"{fpath} leaked quote-bracket in body prose")
+                self.assertFalse('style="' in prose, f"{fpath} leaked style-attr in body prose")
+                self.assertFalse('class="' in prose, f"{fpath} leaked class-attr in body prose")
+
+    def test_task3_top_bar_present_on_all_pages(self):
+        """Task 3: Every deployable public page contains the top contact bar."""
+        import glob
+        all_pages = glob.glob("*.html") + glob.glob("products/*.html") + glob.glob("guides/*.html") + glob.glob("compare/*.html") + glob.glob("markets/*.html") + glob.glob("applications/*.html")
+        for fpath in all_pages:
+            if "blog-admin.html" in fpath:
+                continue
+            with open(fpath, "r", encoding="utf-8") as f:
+                content = f.read()
+            self.assertTrue('class="top-bar"' in content or 'class="top-bar ' in content, f"{fpath} missing top contact bar")
+
 if __name__ == "__main__":
     unittest.main()

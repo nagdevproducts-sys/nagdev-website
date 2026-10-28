@@ -1545,23 +1545,20 @@
   let activeIndustry = 'all';
   let currentProductId = null;
 
-  // Normalization map for URL filter / cat parameters
+  // Normalization map for URL filter / cat / status parameters
   function normalizeCategory(cat) {
     if (!cat) return 'all';
     const c = cat.toLowerCase().trim();
-    if (c === 'core' || c === 'core-products') return 'core';
-    if (c === 'derivative' || c === 'derivatives') return 'derivatives';
-    if (c === 'by-product' || c === 'byproduct' || c === 'by-products' || c === 'byproducts') return 'by-products';
-    if (c === 'doc' || c === 'cake' || c === 'de-oiled' || c === 'deoiled-cake' || c === 'organic-manure' || c === 'manure') return 'organic-manure';
-    if (c === 'oil' || c === 'oils' || c === 'castor-oils') return 'castor-oil';
-    if (c === 'dev' || c === 'development' || c === 'under_development' || c === 'under-development' || c === 'specialty' || c === 'specialty-range') return 'specialty-range';
+    if (c === 'regular' || c === 'core' || c === 'core-products' || c === 'castor-oils' || c === 'oil' || c === 'oils') return 'regular';
+    if (c === 'enquiry' || c === 'on-enquiry' || c === 'pharma-cosmetic') return 'enquiry';
+    if (c === 'under-development' || c === 'under_development' || c === 'dev' || c === 'development' || c === 'specialty' || c === 'specialty-range') return 'under-development';
     return c;
   }
 
-  // Check URL params (?filter= or ?cat=)
+  // Check URL params (?filter=, ?cat=, or ?status=)
   (function () {
     const params = new URLSearchParams(window.location.search);
-    const f = params.get('filter') || params.get('cat');
+    const f = params.get('filter') || params.get('cat') || params.get('status');
     const ind = params.get('ind');
     if (f) activeFilter = normalizeCategory(f);
     if (ind) activeIndustry = ind;

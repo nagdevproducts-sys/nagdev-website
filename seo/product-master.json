@@ -5,7 +5,59 @@
     "brand_code": "NDEVOLEO™ COMM",
     "status": "regular_supply",
     "category": "Regular Supply",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Industrial Lubricants & Greases",
+        "desc": "Used as a primary bio-lubricant base fluid and extreme-pressure additive for heavy industrial gearboxes and automotive lubricants.",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Alkyd Resins & Protective Paints",
+        "desc": "Acts as an standard light-stable drying and plasticizing oil in architectural coatings, industrial enamels, and varnishes.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Turkey Red Oil (Sulfonated Oil)",
+        "desc": "Readily sulfonated to yield water-soluble Turkey Red Oil, a foundational wetting and dispersing agent in textile dyeing and leather finishing.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Urethane Prepolymers & Polyols",
+        "desc": "Reacts with diisocyanates to produce tough, chemically resistant bio-polyurethane coatings, potting compounds, and industrial sealants.",
+        "link": "/applications/castor-oil-for-polyurethane"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How does mechanical screw expelling yield raw commercial castor oil?",
+        "a": "Commercial grade oil is pressed directly from cleaned Gujarat castor seeds via continuous mechanical screw expellers without solvent washing, retaining raw amber coloration and ricinoleic triglycerides."
+      },
+      {
+        "q": "Which raw FFA and Lovibond colour standards verify crude expeller castor oil?",
+        "a": "Conforms to industrial standards: free fatty acids below 2.0%, moisture under 0.50%, Lovibond color under 40 units (Y+5R in 1-inch cell), and minimum hydroxyl value of 160 mg KOH/g."
+      },
+      {
+        "q": "Why is unrefined castor oil selected for alkyd paints and motor racing oils?",
+        "a": "Its high hydroxyl content and natural lubricity provide non-drying film flexibility in alkyd enamel formulations and boundary anti-wear protection in racing engine lubricants."
+      },
+      {
+        "q": "What bulk liquid transport configurations are dispatched from Deodar?",
+        "a": "Supplied in 200 kg tight-head steel drums, 1,000L composite IBC totes, dedicated road tankers, and 21.5 MT flexitanks dispatched to Mundra or Kandla seaport terminals."
+      },
+      {
+        "q": "Can buyers book forward term supply contracts for commercial castor oil?",
+        "a": "Yes. We support annual term contracts with scheduled monthly dispatches, formula pricing, and lot-specific Certificate of Analysis documentation."
+      }
+    ]
   },
   {
     "slug": "first-special-grade-castor-oil",
@@ -13,7 +65,59 @@
     "brand_code": "NDEVOLEO™ FSG",
     "status": "regular_supply",
     "category": "Regular Supply",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Transparent Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Urethane Elastomers & Adhesives",
+        "desc": "High purity, low acidity, and low moisture content ensure precise NCO:OH stoichiometry in structural polyurethanes, sealants, and potting resins.",
+        "link": "/applications/castor-oil-for-polyurethane"
+      },
+      {
+        "title": "Cosmetics & Personal Care",
+        "desc": "High optical clarity and natural emolliency make FSG an industry standard gloss enhancer in color cosmetics, creams, and lip formulations.",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      },
+      {
+        "title": "Clear Greases & Lubricant Esters",
+        "desc": "Low acidity and pale Lovibond colour prevent lacquer formation and oxidative thickening in formulated high-temperature bio-lubricants.",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Specialty Chemical Intermediates",
+        "desc": "Serves as the high-purity starting triglyceride for hydrogenation to HCO, dehydration to DCO, and synthetic esterification.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What refining steps ensure First Special Grade conforms to BSS standards?",
+        "a": "FSG undergoes dedicated refining, bleaching with activated earth, and fine filtration to reduce free acidity and pigments, meeting British Standard Specifications."
+      },
+      {
+        "q": "Which optical absorbance and fatty acid limits govern refined FSG oil?",
+        "a": "Features pale yellow color (Lovibond yellow below 2.5, red below 0.5), free fatty acid under 1.0%, moisture below 0.25%, and minimum hydroxyl value of 160."
+      },
+      {
+        "q": "How does FSG castor oil perform in polyurethane prepolymers?",
+        "a": "Consistent NCO:OH reaction kinetics and absence of moisture prevent pinhole bubbling in urethane potting compounds, clear adhesives, and coatings."
+      },
+      {
+        "q": "What export verification documents accompany FSG consignments?",
+        "a": "Each export consignment carries a lot-specific Certificate of Analysis (COA), Technical Data Sheet (TDS), 16-section SDS, and Certificate of Origin."
+      },
+      {
+        "q": "Can overseas buyers request independent surveyor testing before shipment?",
+        "a": "Yes. Independent sampling and verification by SGS, Bureau Veritas, or Intertek can be conducted at Kandla or Mundra at the buyer's cost."
+      }
+    ]
   },
   {
     "slug": "fpd-castor-oil",
@@ -21,7 +125,46 @@
     "brand_code": "NDEVOLEO™ FPD",
     "status": "regular_supply",
     "category": "Regular Supply",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Sludge-Free Industrial Lubricants",
+        "desc": "Removal of hydratable phosphatides prevents varnish formation and sludge deposition in high-load industrial machinery and compressors.",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Automotive Gear Oils",
+        "desc": "Offers clean expeller base oil performance with high natural viscosity index, extreme thermal stability, and low carbon residue.",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Chemical Synthesis Feedstock",
+        "desc": "Eliminates phosphorus-induced catalyst poisoning during downstream catalytic hydrogenation, transesterification, and epoxidation.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What distinguishes first pressed degummed oil from crude commercial oil?",
+        "a": "FPD is produced by cold screw expelling followed by water degumming to remove hydratable phosphatides and mucilage before export."
+      },
+      {
+        "q": "Why do hydraulic oil and gear lubricant manufacturers select first pressed degummed oil?",
+        "a": "Its low ash, absence of gums, and high thermal stability prevent varnish buildup in high-pressure hydraulic pumps and marine gearboxes."
+      },
+      {
+        "q": "What commercial lot sizes are supplied for degummed grade oil?",
+        "a": "Supplied on enquiry in 20ft container loads (drums/IBCs) or bulk tanker trucks from our plant."
+      }
+    ]
   },
   {
     "slug": "castor-cake",
@@ -29,7 +172,53 @@
     "brand_code": "NDEVAGRO™ CAKE",
     "status": "regular_supply",
     "category": "Regular Supply",
-    "cas": "68187-58-6"
+    "cas": "68187-58-6",
+    "physical_form": "Solid (Expeller Cake / Meal / Pellets)",
+    "packaging": [
+      "50 kg HDPE woven sacks with inner liner",
+      "1,000 kg UV-stabilized PP jumbo bags with corner loops",
+      "Bulk truckload trailers directly from Deodar crushing plant"
+    ],
+    "packaging_tile_text": "50 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Organic Soil Input & Manure",
+        "desc": "Expeller-pressed organic cake supplying natural organic nitrogen (4.0% to 4.5% N), phosphorus, and potassium for agricultural soil conditioning.",
+        "link": "/applications/castor-cake-organic-fertilizer"
+      },
+      {
+        "title": "Commercial Fertilizer Blending",
+        "desc": "Supplied to fertilizer granulators, blenders, and organic manure formulators as a uniform, plant-derived soil fertility ingredient.",
+        "link": "/applications/castor-cake-organic-fertilizer"
+      },
+      {
+        "title": "Bio-Compost Enrichment",
+        "desc": "Blended into farm compost piles and organic farming substrates to enhance organic matter content and support soil structure development.",
+        "link": "/applications/castor-cake-organic-fertilizer"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What is castor cake and how is it produced?",
+        "a": "Castor cake is the solid organic residue obtained after mechanical expeller pressing of cleaned Gujarat castor seeds at our Deodar plant to extract crude castor oil."
+      },
+      {
+        "q": "What typical nutrient values are present in expeller castor cake?",
+        "a": "Typical nutrient values from expeller pressing are Nitrogen (N) 4.0% to 4.5%, Phosphorus (P₂O₅) 1.0% to 1.5%, Potassium (K₂O) 1.0% to 1.5%, and moisture under 10.0% Max, as stated in our technical specification."
+      },
+      {
+        "q": "What packaging formats are available for castor cake?",
+        "a": "Castor cake is packed in 50 kg HDPE woven sacks, 1,000 kg PP jumbo bags with corner lifting loops, and bulk truckload trailers for domestic agricultural distribution."
+      },
+      {
+        "q": "What documents are provided with each castor cake consignment?",
+        "a": "Each commercial dispatch is accompanied by a batch Certificate of Analysis (COA) specifying nitrogen and moisture content, Technical Data Sheet (TDS), and Safety Data Sheet (SDS)."
+      },
+      {
+        "q": "Where is castor cake dispatched from?",
+        "a": "All dispatches originate directly from our operational seed crushing facility at Survey No. 301 P-2, Sardarpura, Deodar, Vav-Tharad district, Gujarat."
+      }
+    ]
   },
   {
     "slug": "hydrogenated-castor-oil",
@@ -37,7 +226,58 @@
     "brand_code": "NDEVWAX™ HCO",
     "status": "regular_supply",
     "category": "Regular Supply",
-    "cas": "8001-78-3"
+    "cas": "8001-78-3",
+    "physical_form": "Solid (White Flakes / Powder)",
+    "packaging": [
+      "25 kg multi-ply paper bags with HDPE moisture barrier",
+      "500 kg / 1,000 kg PP jumbo bags with discharge spout",
+      "Palletized container stuffing for ocean container shipping"
+    ],
+    "packaging_tile_text": "25 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Lithium Complex Lubricating Greases",
+        "desc": "Forms the structural thickener matrix in automotive chassis, wheel bearings, and heavy industrial machinery greases operating under extreme loads.",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Thixotropic Rheology in Coatings",
+        "desc": "Functions as an anti-sagging and anti-settling agent in solvent-borne architectural paints, industrial epoxies, and marine coatings.",
+        "link": "/applications/hco-for-coatings-and-pvc"
+      },
+      {
+        "title": "PVC Extrusion Lubrication",
+        "desc": "Acts as an efficient internal and external lubricant in rigid PVC pipe and profile extrusion, improving melt flow and surface gloss.",
+        "link": "/applications/hco-for-coatings-and-pvc"
+      },
+      {
+        "title": "Cosmetic Sticks & Wax Polishes",
+        "desc": "Provides hardness, temperature stability, and clean release in cosmetic lipsticks, deodorant sticks, and protective industrial wax polishes.",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What chemical transformation occurs during the production of castor wax?",
+        "a": "Refined castor oil is reacted with molecular hydrogen over a nickel catalyst to saturate all double bonds, creating tri-hydroxystearin wax with melting point 85–88°C."
+      },
+      {
+        "q": "What physical parameters define NDEVWAX™ HCO flakes?",
+        "a": "Sharp melting point of 85°C to 88°C, iodine value under 3.0 g I2/100g, acid value below 3.0 mg KOH/g, and hydroxyl value of 155 to 165."
+      },
+      {
+        "q": "How does micronized HCO prevent pigment sagging in industrial coatings?",
+        "a": "When activated by shear and heat, fine HCO particles form an entangled thixotropic hydrogen-bonded network that prevents pigment slump on vertical walls."
+      },
+      {
+        "q": "How are HCO wax flakes protected during ocean transport?",
+        "a": "Packaged in 25 kg multi-wall paper sacks with inner polyethylene moisture barriers, palletized, and stretch-wrapped (20 MT per 20ft container)."
+      },
+      {
+        "q": "What is the difference in chemical structure between HCO and hydroxylated fatty acids?",
+        "a": "HCO is a complete triglyceride wax ester containing glycerin, whereas 12-HSA is a split, isolated free fatty acid used directly in soap making."
+      }
+    ]
   },
   {
     "slug": "dehydrated-castor-oil",
@@ -45,7 +285,46 @@
     "brand_code": "NDEVOLEO™ DCO",
     "status": "regular_supply",
     "category": "Regular Supply",
-    "cas": "64147-40-6"
+    "cas": "64147-40-6",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Architectural Paints & Varnishes",
+        "desc": "Light-stable conjugated double bonds provide rapid drying, high film hardness, and excellent gloss retention in exterior architectural enamels.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Quick-Set Printing Inks",
+        "desc": "High refractive index and fast oxidative curing make DCO a premier binder in offset lithographic inks and metal decorating varnishes.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Marine Spar Varnishes",
+        "desc": "Forms chemically resistant, water-impermeable protective films for marine deck coatings, clear industrial primers, and stoving finishes.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What catalyst is employed during the dehydration of castor oil?",
+        "a": "Heated in vacuum with acid catalysts (such as sulfuric or sulfonic acids) to cleave hydroxyl groups and form conjugated diene bonds."
+      },
+      {
+        "q": "Which exterior marine spar varnishes and clear alkyd topcoats depend on DCO oil?",
+        "a": "Used in exterior marine varnishes, protective industrial enamels, and printing inks where fast tack-free drying is imperative."
+      },
+      {
+        "q": "What R&D stage has been reached for dehydrated castor oil?",
+        "a": "Under development. Technical data sheets and development allocations are open for coatings and resin formulators."
+      }
+    ]
   },
   {
     "slug": "dco-fatty-acid",
@@ -53,7 +332,46 @@
     "brand_code": "NDEVACID™ DCO-FA",
     "status": "regular_supply",
     "category": "Regular Supply",
-    "cas": "61789-45-5"
+    "cas": "61789-45-5",
+    "physical_form": "Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "High-Solids Alkyd Enamels",
+        "desc": "Conjugated diene structure enables the synthesis of high-solids, low-VOC architectural alkyd resins with outstanding gloss and color retention.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Stoving & Baking Enamels",
+        "desc": "Imparts chemical resistance, flexibility, and light-stable characteristics to industrial automotive and appliance baking finishes.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Epoxy Ester Resins",
+        "desc": "Reacts with bisphenol-A epoxy resins to yield rapid-curing, corrosion-resistant primers and maintenance coatings.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Why does the conjugated diene in DCO-FA prevent oven yellowing?",
+        "a": "Conjugated 9,11-octadecadienoic acid promotes rapid oxidative cross-linking while resisting thermal discoloration during high-temperature baking."
+      },
+      {
+        "q": "What conjugated diene fraction and acid value are specified for DCO fatty acid?",
+        "a": "Target parameters include acid value of 195 to 205 and minimum 28% conjugated diene content."
+      },
+      {
+        "q": "In what coating systems is DCO fatty acid formulated?",
+        "a": "High-solids industrial stoving enamels, light-stable architectural finishes, and chemical-resistant epoxy ester primers."
+      }
+    ]
   },
   {
     "slug": "ppg-castor-oil",
@@ -61,7 +379,46 @@
     "brand_code": "NDEVOLEO™ PPG",
     "status": "on_enquiry",
     "category": "Available on Enquiry",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "High-Clarity Urethane Resins",
+        "desc": "Pale optical Lovibond rating prevents discoloration in optical-grade polyurethanes, clear casting adhesives, and electronic potting gels.",
+        "link": "/applications/castor-oil-for-polyurethane"
+      },
+      {
+        "title": "Specialty Lubricant Blends",
+        "desc": "Ultra-low free acidity and refined clarity provide clean lubricating boundaries for racing engines and precision instrument mechanisms.",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Specialty Chemical Synthesis",
+        "desc": "Serves as an analytical-grade bio-based chemical intermediate for specialty esters, bio-surfactants, and polymer additives.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How does initial hydraulic cold pressing yield pure pale pressed grade oil?",
+        "a": "Pale pressed grade is produced exclusively from first mechanical cold pressing of choice seeds, maintaining low acidity and pale color without chemical refining."
+      },
+      {
+        "q": "How does virgin cold pressing guarantee ultra-low Gardner colour for pale pressed oil?",
+        "a": "Stringent selection yields Lovibond color under 1.0 Yellow and 0.2 Red, FFA under 0.5%, and moisture under 0.15% for color-critical applications."
+      },
+      {
+        "q": "What packaging options are available for polyol grade castor oil on enquiry?",
+        "a": "Available on enquiry in 200 kg net tight-head steel drums, 1,000 L composite IBC totes, or bulk ISO tank containers."
+      }
+    ]
   },
   {
     "slug": "cold-pressed-castor-oil",
@@ -69,7 +426,46 @@
     "brand_code": "NDEVOLEO™ CP",
     "status": "on_enquiry",
     "category": "Available on Enquiry",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Virgin Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Virgin Cosmetic Serums",
+        "desc": "Extracted without external heating or chemical solvents, preserving native fatty acid profile and natural antioxidants for topical cosmetic oils.",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      },
+      {
+        "title": "Sensitive Dermatological Bases",
+        "desc": "Unprocessed pure expeller quality provides a gentle emollient vehicle for dermatological creams, therapeutic balms, and skin ointments.",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      },
+      {
+        "title": "Specialized Formulations",
+        "desc": "Applied in technical and personal care formulations requiring solvent-free, single-origin botanical castor oil.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What distinguishes cold mechanical pressing from standard expeller processing?",
+        "a": "Cold pressing operates below 50°C without external heating or chemical solvents, preserving natural tocopherols and unheated fatty acid profiles."
+      },
+      {
+        "q": "What natural fatty acid characteristics define virgin cold pressed oil?",
+        "a": "Natural golden straw color, free fatty acid under 1.0%, moisture below 0.25%, and absence of solvent or chemical bleaching residues."
+      },
+      {
+        "q": "What specialty sectors enquire about cold pressed castor oil?",
+        "a": "Botanical personal care formulators, therapeutic scalp treatment brands, and artisan machinery maintenance blenders."
+      }
+    ]
   },
   {
     "slug": "castor-oil-bp93",
@@ -77,7 +473,46 @@
     "brand_code": "NDEVOLEO™ BP",
     "status": "on_enquiry",
     "category": "Available on Enquiry",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Pharmaceutical Excipients",
+        "desc": "Tested against British Pharmacopoeia monograph criteria for use as an excipient carrier, capsule lubricant, and emulsion base.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Topical Ointments & Liniments",
+        "desc": "Low peroxide value and light colour ensure non-irritating, occlusive film formation in therapeutic ointments and liniments.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Nutraceutical Formulation Feedstock",
+        "desc": "Natural triglyceride integrity supports precise softgel encapsulation and formulation requirements upon commercial enquiry.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What refining processes ensure castor oil conforms to British Pharmacopoeia (BP 1993 edition) standards?",
+        "a": "Undergoes dedicated refining, bleaching with activated earth, and fine filtration to eliminate trace acidity and meet British Pharmacopoeia requirements."
+      },
+      {
+        "q": "In which topical and personal care applications is BP93 grade used?",
+        "a": "Used in topical dermatological formulations, skin creams, lip balms, soaps, and as an excipient carrier for personal care products."
+      },
+      {
+        "q": "How are pharmaceutical batches tested for compliance?",
+        "a": "Offered on enquiry with compendial batch testing per British Pharmacopoeia (BP 1993 edition) monographs and batch-specific Certificate of Analysis."
+      }
+    ]
   },
   {
     "slug": "castor-oil-usp-nf",
@@ -85,7 +520,46 @@
     "brand_code": "NDEVOLEO™ USP",
     "status": "on_enquiry",
     "category": "Available on Enquiry",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "USP-NF Compendial Compounding",
+        "desc": "Tested against United States Pharmacopeia–National Formulary monograph standards for pharmaceutical compounding and excipient blending.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Lipid-Based Carrier Systems",
+        "desc": "High-purity botanical triglyceride vehicle for oral solutions, soft gelatin capsule fill matrices, and topical preparations.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Dermatological Vehicles",
+        "desc": "Controlled acidity and iodine value provide consistent viscosity and emolliency in therapeutic dermal ointments.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which edition of the USP–NF monograph is referenced for batch testing?",
+        "a": "State the edition with your enquiry; testing is performed against the edition you request, and verified on the Certificate of Analysis (COA)."
+      },
+      {
+        "q": "How is batch analysis verified prior to dispatch?",
+        "a": "Each production lot is tested per compendial monograph parameters and dispatched with a detailed Certificate of Analysis (COA)."
+      },
+      {
+        "q": "What standard bulk packaging formats are available?",
+        "a": "Castor Oil USP–NF is available in 200 kg steel or HDPE drums, 950 kg IBC totes, and bulk ISO tanks supplied from our Deodar plant."
+      }
+    ]
   },
   {
     "slug": "castor-oil-ph-eur",
@@ -93,7 +567,46 @@
     "brand_code": "NDEVOLEO™ EP",
     "status": "on_enquiry",
     "category": "Available on Enquiry",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "European Pharmacopoeia Compounding",
+        "desc": "Tested against European Pharmacopoeia (Ph. Eur.) monograph requirements for medicinal excipients and healthcare preparations.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Dermatological Preparations",
+        "desc": "High-purity refined oil providing uniform occlusive skin barrier properties in regulated medicinal ointments and lotions.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Regulated Formulation Feedstock",
+        "desc": "Batch-tested botanical raw material for contract healthcare manufacturers and pharmaceutical formulators upon commercial enquiry.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which edition of the European Pharmacopoeia is referenced for testing?",
+        "a": "State the required Ph. Eur. edition with your order; testing is conducted and reported against the specified monograph edition."
+      },
+      {
+        "q": "What documentation accompanies each Ph. Eur. consignment?",
+        "a": "Each shipment includes a batch-specific Certificate of Analysis (COA) confirming testing against the European Pharmacopoeia monograph, along with SDS and TDS."
+      },
+      {
+        "q": "What packaging options are offered for European Pharmacopoeia grade?",
+        "a": "Supplied in 200 kg steel or HDPE drums, 950 kg IBC totes, and bulk ISO containers prepared under strict quality standards."
+      }
+    ]
   },
   {
     "slug": "castor-oil-ip",
@@ -101,7 +614,46 @@
     "brand_code": "NDEVOLEO™ IP",
     "status": "on_enquiry",
     "category": "Available on Enquiry",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Indian Pharmacopoeia Compounding",
+        "desc": "Tested against Indian Pharmacopoeia (IP) monograph specifications for medicinal excipients, tinctures, and liquid compounding.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Topical & Medicinal Ointments",
+        "desc": "Consistent viscosity and high hydroxyl content provide natural emollient and soothing action in pharmaceutical salves.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Healthcare Formulations",
+        "desc": "Pure expeller-pressed refined castor oil base for pharmaceutical and wellness manufacturing in commercial supply.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which edition of the Indian Pharmacopoeia applies to batch testing?",
+        "a": "State the required IP edition with your enquiry; testing is performed against the edition you request and reported on the batch COA."
+      },
+      {
+        "q": "What quality records are issued with each commercial order?",
+        "a": "Every consignment is accompanied by a batch Certificate of Analysis (COA) detailing tested monograph parameters."
+      },
+      {
+        "q": "What container formats are available for domestic supply?",
+        "a": "Available in 200 kg HDPE or epoxy-lined steel drums, 950 kg IBC totes, and dedicated road tankers dispatched from our Deodar plant."
+      }
+    ]
   },
   {
     "slug": "castor-oil-jp",
@@ -109,7 +661,46 @@
     "brand_code": "NDEVOLEO™ JP",
     "status": "on_enquiry",
     "category": "Available on Enquiry",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Japanese Pharmacopoeia Compounding",
+        "desc": "Tested against Japanese Pharmacopoeia (JP) compendial monograph standards for pharmaceutical preparations upon commercial order.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Precision Liquid Formulations",
+        "desc": "Controlled optical clarity, low acid value, and minimal moisture content for high-specification pharmaceutical and healthcare products.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Healthcare Emulsions & Bases",
+        "desc": "Pure vegetable oil excipient for external emulsions, topical ointments, and medical formulations.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which edition of the Japanese Pharmacopoeia is referenced for testing?",
+        "a": "Testing is conducted per the JP edition specified in the purchase contract and reported on the lot-specific Certificate of Analysis (COA)."
+      },
+      {
+        "q": "Can third-party inspection be conducted prior to vessel loading?",
+        "a": "Yes, buyers may appoint accredited inspection agencies such as SGS or Bureau Veritas for pre-shipment sampling and testing at port terminals."
+      },
+      {
+        "q": "What packaging formats are used for overseas container shipping?",
+        "a": "Castor Oil JP is exported in 200 kg steel drums, 950 kg IBC totes, and bulk ISO tanks with full seal integrity."
+      }
+    ]
   },
   {
     "slug": "cosmetic-grade-castor-oil",
@@ -117,7 +708,46 @@
     "brand_code": "NDEVOLEO™ COS",
     "status": "on_enquiry",
     "category": "Available on Enquiry",
-    "cas": "8001-79-4"
+    "cas": "8001-79-4",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Lip Balms & Color Cosmetics",
+        "desc": "Natural gloss, rich pigment wetting, and high viscosity make it an ideal botanical binder for lipsticks, glosses, and mineral makeup.",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      },
+      {
+        "title": "Hair Care & Scalp Treatments",
+        "desc": "Rich ricinoleic acid content coats hair shafts, delivering natural shine and moisture retention in pomades, conditioning oils, and serums.",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      },
+      {
+        "title": "Cleansing Balms & Moisturizers",
+        "desc": "Acts as an effective non-comedogenic makeup-dissolving base oil and skin-conditioning emollient in facial balms and body creams.",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What testing parameters are verified for cosmetic grade castor oil?",
+        "a": "Testing is performed against the technical parameters agreed upon in the purchase specification, with batch COA issued per shipment."
+      },
+      {
+        "q": "How is cosmetic grade castor oil packaged for personal care manufacturers?",
+        "a": "Supplied in 200 kg steel or HDPE drums, 950 kg IBC totes, and bulk flexitanks tailored for cosmetic and personal care manufacturing."
+      },
+      {
+        "q": "What quality documents accompany each consignment?",
+        "a": "Every order includes a lot-specific Certificate of Analysis (COA), technical data sheet, standard safety data sheet (SDS), and dispatch records."
+      }
+    ]
   },
   {
     "slug": "ricinoleic-acid",
@@ -125,7 +755,59 @@
     "brand_code": "NDEVACID™ RIC",
     "status": "under_development",
     "category": "Under development",
-    "cas": "141-22-0"
+    "cas": "141-22-0",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Metalworking Soluble Oils",
+        "desc": "Easily reacted to form water-soluble potassium or amine soaps that act as extreme-pressure lubricants and emulsifiers in cutting fluids.",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Bio-Based Polyurethane Polyols",
+        "desc": "Primary chemical intermediate for tailoring hydroxyl functionality in specialty bio-polyurethanes, adhesives, and flexible sealants.",
+        "link": "/applications/castor-oil-for-polyurethane"
+      },
+      {
+        "title": "Textile Wetting & Dyeing Soaps",
+        "desc": "Reacted into alkaline soaps to create wetting, scouring, and leveling agents for natural and synthetic textile wet processing.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Polymer Additives & Esters",
+        "desc": "Starting fatty acid for manufacturing plasticizers, specialty surfactant esters, and polymeric dispersing aids.",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How is ricinoleic acid isolated from the castor triglyceride structure?",
+        "a": "High-pressure fat splitting cleaves the ester bonds, followed by fractional crystallization to concentrate ricinoleic acid above 85% purity."
+      },
+      {
+        "q": "What iodine value and hydroxyl ratings characterize technical ricinoleic acid?",
+        "a": "Maintains minimum hydroxyl value of 150 mg KOH/g, iodine value 82–90 g I2/100g, and acid value 175–185 mg KOH/g."
+      },
+      {
+        "q": "How do chemical processors esterify or ethoxylate the C-12 hydroxyl position on ricinoleic acid?",
+        "a": "Its unique C-12 secondary hydroxyl group allows sulfation into Turkey Red Oil, esterification, and ethoxylation into non-ionic textile surfactants."
+      },
+      {
+        "q": "How is liquid ricinoleic acid shipped to prevent discoloration?",
+        "a": "Dispatched in ISO tanks, epoxy-lined 200 kg steel drums, or heated tank containers to prevent oxidative darkening during sea transit (under development)."
+      },
+      {
+        "q": "What quality certificates are provided for export orders?",
+        "a": "Each batch includes complete gas chromatography (GC) fatty acid profile, moisture analysis, and Certificate of Origin."
+      }
+    ]
   },
   {
     "slug": "12-hydroxystearic-acid",
@@ -133,7 +815,58 @@
     "brand_code": "NDEVACID™ 12-HSA",
     "status": "under_development",
     "category": "Under development",
-    "cas": "106-14-9"
+    "cas": "106-14-9",
+    "physical_form": "Solid (Creamish Flakes / Powder)",
+    "packaging": [
+      "25 kg multi-ply paper bags with HDPE moisture barrier",
+      "500 kg / 1,000 kg PP jumbo bags with discharge spout",
+      "Palletized container stuffing for ocean container shipping"
+    ],
+    "packaging_tile_text": "25 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Lithium Complex Greases",
+        "desc": "Reacts with lithium hydroxide to form lithium 12-hydroxystearate, the world's most widely used lubricating grease thickener soap.",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Coating Rheology Modifiers",
+        "desc": "Dispersed into solvent-borne industrial coatings and sealants to impart thixotropic viscosity, anti-sagging, and pigment suspension.",
+        "link": "/applications/hco-for-coatings-and-pvc"
+      },
+      {
+        "title": "Plastic & Rubber Processing",
+        "desc": "Functions as an internal lubricant and mold release agent for acrylic, PVC, and engineering thermoplastic compounding.",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Cosmetic Emollient Esters",
+        "desc": "Esterified into high-molecular-weight esters (e.g. trioctyldodecyl citrate derivatives) for long-wear color cosmetic sticks.",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How does 12-HSA soap fiber matrix stabilize lithium complex greases?",
+        "a": "Reacting with lithium hydroxide yields lithium 12-hydroxystearate, which forms an interwoven fibrous network trapping base oil and raising drop point above 190°C."
+      },
+      {
+        "q": "What acid value and ester values govern 12-HSA flakes?",
+        "a": "Acid value of 175 to 182 mg KOH/g, ester value of 180 to 190, melting point 74°C to 77°C, and iodine value under 3.5."
+      },
+      {
+        "q": "What role does 12-hydroxystearic acid play in acrylic coating finishes?",
+        "a": "Reacted into acrylic polyols to enhance sag resistance, control pseudoplastic viscosity, and align metallic flake pigments evenly."
+      },
+      {
+        "q": "What warehouse storage guidelines prevent clumping of 12-HSA flakes?",
+        "a": "Store in palletized 25 kg bags in a dry, ventilated warehouse below 35°C away from heat and direct sunlight."
+      },
+      {
+        "q": "Can overseas grease blenders secure annual monthly supply quotas (under development)?",
+        "a": "Yes. We support global grease blenders with forward term contracts, lot-traceable COAs, and direct ocean container dispatch from Kandla and Mundra (under development)."
+      }
+    ]
   },
   {
     "slug": "sebacic-acid",
@@ -141,7 +874,45 @@
     "brand_code": "NDEVACID™ SEB",
     "status": "under_development",
     "category": "Under development",
-    "cas": "111-20-6"
+    "cas": "111-20-6",
+    "physical_form": "Solid (White Powder / Crystals)",
+    "packaging": [
+      "25 kg multi-ply paper bags with HDPE moisture barrier",
+      "500 kg / 1,000 kg PP jumbo bags with discharge spout",
+      "Palletized container stuffing for ocean container shipping"
+    ],
+    "packaging_tile_text": "25 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Bio-Based Engineering Polyamides",
+        "desc": "Target dicarboxylic acid building block for synthesizing engineered Nylon 6,10 and Nylon 10,10 engineering plastics (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Synthetic Lubricant Diesters",
+        "desc": "Target monomer for esterification into dioctyl sebacate (DOS) and dibutyl sebacate (DBS) synthetic lubricant base stocks (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Corrosion Inhibitors & Coolants",
+        "desc": "Target dicarboxylate additive for extended-life automotive engine coolants and aqueous industrial metalworking fluids (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What high-temperature alkaline cleavage synthesis route generates sebacic acid?",
+        "a": "Castor oil ricinoleic acid is subjected to alkali fusion with sodium hydroxide at elevated temperatures (250–275°C), cleaving the 18-carbon chain into 10-carbon sebacic acid and 8-carbon 2-octanol."
+      },
+      {
+        "q": "Why is sebacic acid the benchmark monomer for bio-polyamides like Nylon 6,10 and Nylon 4,10?",
+        "a": "Its linear 10-carbon aliphatic chain confers enhanced flexibility, low moisture absorption, and dimensional stability compared to petroleum adipic acid."
+      },
+      {
+        "q": "What is the development status of sebacic acid at Nagdev Products?",
+        "a": "Under development. Pilot fusion and purification trials are underway to achieve polymer-grade purity (<0.1% monobasic acids)."
+      }
+    ]
   },
   {
     "slug": "high-protein-castor-meal",
@@ -149,7 +920,45 @@
     "brand_code": "NDEVAGRO™ HPRO",
     "status": "under_development",
     "category": "Under development",
-    "cas": "68424-10-2"
+    "cas": "68424-10-2",
+    "physical_form": "Solid (De-oiled Meal / Powder)",
+    "packaging": [
+      "25 kg multi-ply paper bags with HDPE moisture barrier",
+      "500 kg / 1,000 kg PP jumbo bags with discharge spout",
+      "Palletized container stuffing for ocean container shipping"
+    ],
+    "packaging_tile_text": "25 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "High-Nitrogen Organic Farming",
+        "desc": "Target concentrated organic soil input with elevated nitrogen content for precision soil fertility management (under development).",
+        "link": "/applications/castor-cake-organic-fertilizer"
+      },
+      {
+        "title": "Soil Microbiome Conditioning",
+        "desc": "Target organic matter source for improving soil aeration, moisture holding capacity, and cation exchange capacity (under development).",
+        "link": "/applications/castor-cake-organic-fertilizer"
+      },
+      {
+        "title": "Commercial Bio-Compost Base",
+        "desc": "Target high-organic carbon raw material for blending into fortified organic fertilizers and biological composts (under development).",
+        "link": "/applications/castor-cake-organic-fertilizer"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What process enriches nitrogen content up to 6.0% in castor meal?",
+        "a": "Secondary de-oiling of expeller cake removes residual oil, concentrating crude protein to 50–60% and nitrogen content to 5.5–6.0%."
+      },
+      {
+        "q": "What agronomic advantages does high-protein meal offer plantation crops (under development)?",
+        "a": "Delivers rapid yet sustained vegetative nitrogen release, stimulates soil microflora, and improves soil moisture holding capacity."
+      },
+      {
+        "q": "How is high protein castor meal bagged for commercial delivery?",
+        "a": "Supplied in 50 kg HDPE woven bags with polyethylene liners, 1,000 kg bulk bags, or containerized liner bags for bulk sea freight (under development)."
+      }
+    ]
   },
   {
     "slug": "crude-glycerin",
@@ -157,7 +966,46 @@
     "brand_code": "NDEVGLY™ CRUDE",
     "status": "under_development",
     "category": "Under development",
-    "cas": "56-81-5"
+    "cas": "56-81-5",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Commercial Glycerin Distillation",
+        "desc": "Target unrefined co-product feedstock for commercial distillation into technical and refined glycerin grades (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Anaerobic Biogas Fermentation",
+        "desc": "Target high-energy carbon booster substrate for industrial anaerobic digesters and bio-methane production units (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Industrial Dust Suppression",
+        "desc": "Target humectant liquid for coal and mineral transport dust control and industrial animal feed binding formulations (under development).",
+        "link": "/applications/castor-cake-organic-fertilizer"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What is the chemical source of 80% crude castor glycerin?",
+        "a": "Obtained as sweet water byproduct during the high-pressure thermal splitting of castor oil, then concentrated via multi-effect evaporators."
+      },
+      {
+        "q": "What biogas digesters and oleochemical distillers procure 80% sweet water crude glycerin?",
+        "a": "Sold to commercial refiners for redistillation into CP glycerin, animal feed formulation, and anaerobic digesters for renewable methane generation."
+      },
+      {
+        "q": "In what bulk packaging is crude glycerin planned to be supplied once commercialized (under development)?",
+        "a": "Target commercial packaging (under development) includes bulk road tankers, 20 MT flexitanks, and 1,000L composite IBC containers."
+      }
+    ]
   },
   {
     "slug": "refined-glycerin",
@@ -165,7 +1013,59 @@
     "brand_code": "NDEVGLY™ REF",
     "status": "under_development",
     "category": "Under development",
-    "cas": "56-81-5"
+    "cas": "56-81-5",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Alkyd Resins & Surface Coatings",
+        "desc": "Target trihydric alcohol building block for synthesizing short and medium-oil industrial alkyd enamels and polyesters (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Polyurethane Foam Chain Extender",
+        "desc": "Target low-viscosity crosslinker and cell modifier for rigid polyurethane insulation panels and elastomeric foams (under development).",
+        "link": "/applications/castor-oil-for-polyurethane"
+      },
+      {
+        "title": "Industrial Humectant & Plasticizer",
+        "desc": "Target moisture retainer and conditioning fluid in cellulose film, paper, and industrial textile finishing (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Synthetic Chemical Intermediates",
+        "desc": "Target pure chemical precursor for producing specialty polyols, nitro compounds, and synthetic lubricants (under development).",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How is 99.5% CP grade glycerin purified from castor split sweet-water?",
+        "a": "Sweet water from fat splitting is concentrated, triple vacuum-distilled, and carbon-bleached to yield anhydrous glycerol exceeding 99.5% purity."
+      },
+      {
+        "q": "What compendial limits define pure refined castor glycerin?",
+        "a": "Conforms to minimum 99.5% glycerol assay, specific gravity at 25°C of 1.2598 min, and heavy metals under 5 ppm."
+      },
+      {
+        "q": "What role does 99.5% pure glycerin play as a chain-extending triol in urethane casting?",
+        "a": "Its trifunctional alcohol backbone acts as a crosslinker and polymer building block in rigid polyurethanes, alkyd resins, and cellulose plasticization."
+      },
+      {
+        "q": "What container formats are evaluated for refined glycerin under technical development?",
+        "a": "Supplied in 250 kg epoxy-lined steel drums, 1,250 kg food-grade IBC totes, and dedicated stainless steel ISO road tankers (under development)."
+      },
+      {
+        "q": "Which certificates of purity and analytical dossiers accompany refined glycerin lots?",
+        "a": "Every lot is backed by comprehensive COA verifying GC purity, moisture by Karl Fischer, and compendial traceability."
+      }
+    ]
   },
   {
     "slug": "bio-polyurethane-polyols",
@@ -173,7 +1073,46 @@
     "brand_code": "NDEVPOL™ BIO",
     "status": "under_development",
     "category": "Under development",
-    "cas": "68442-88-6"
+    "cas": "68442-88-6",
+    "physical_form": "Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Rigid Insulation Polyurethane Foams",
+        "desc": "Target bio-based polyol offering high crosslink density and thermal insulation in appliance and construction foam panels (under development).",
+        "link": "/applications/castor-oil-for-polyurethane"
+      },
+      {
+        "title": "Flexible & Integral Skin Foams",
+        "desc": "Target renewable polyol delivering resilience and ergonomic cushioning in automotive seating and shoe soling (under development).",
+        "link": "/applications/castor-oil-for-polyurethane"
+      },
+      {
+        "title": "Polyurethane Coatings & Adhesives",
+        "desc": "Target moisture-curing polyurethane vehicle for weather-resistant industrial floor coatings, sealants, and binders (under development).",
+        "link": "/applications/castor-oil-for-polyurethane"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What chemical reactions yield bio-based polyurethane polyols from castor oil?",
+        "a": "Synthesized through catalytic transesterification and ring-opening functionalization of ricinoleic ester bonds to achieve targeted hydroxyl functionality."
+      },
+      {
+        "q": "In what manner do secondary hydroxyl castor polyols elevate dimensional stability in rigid PIR panels?",
+        "a": "Natural dangling hydrocarbon chains introduce micro-phase elasticity and hydrophobic moisture barriers in polyurethane rigid and spray foam systems."
+      },
+      {
+        "q": "What is the current R&D availability of bio-polyol samples?",
+        "a": "Under technical development. Formulators can submit technical targets and performance parameters for custom evaluation."
+      }
+    ]
   },
   {
     "slug": "sodium-sulphate-anhydrous",
@@ -181,7 +1120,45 @@
     "brand_code": "NDEVCHEM™ NA2SO4",
     "status": "under_development",
     "category": "Under development",
-    "cas": "7757-82-6"
+    "cas": "7757-82-6",
+    "physical_form": "Solid (White Crystalline Powder)",
+    "packaging": [
+      "25 kg multi-ply paper bags with HDPE moisture barrier",
+      "500 kg / 1,000 kg PP jumbo bags with discharge spout",
+      "Palletized container stuffing for ocean container shipping"
+    ],
+    "packaging_tile_text": "25 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Powdered Laundry Detergents",
+        "desc": "Target neutral builder and flow-promoting bulk filler in commercial laundry detergent powder formulations (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Container & Flat Glass Refining",
+        "desc": "Target fining agent helping eliminate microscopic air bubbles from molten silica in industrial glass manufacturing (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Textile Dyeing Leveling Agent",
+        "desc": "Target electrolyte reducing negative surface charges on cellulose fibers to promote uniform dyestuff absorption (under development).",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Why is neutral anhydrous sodium sulphate used in powdered detergents?",
+        "a": "Acts as an inert, non-corrosive, free-flowing bulking salt that regulates powder density and improves detergent solubility."
+      },
+      {
+        "q": "What purity and moisture standards govern technical sodium sulphate?",
+        "a": "Minimum 99.0% Na2SO4 purity, moisture below 0.20%, water insolubles under 0.05%, and neutral pH in 5% aqueous solution."
+      },
+      {
+        "q": "Where is technical sodium sulphate applied outside detergents?",
+        "a": "Used as a fining agent in container glass melting furnaces and as an electrolyte leveling salt in commercial textile dyeing."
+      }
+    ]
   },
   {
     "slug": "dioctyl-sebacate",
@@ -189,7 +1166,46 @@
     "brand_code": "NDEVEST™ DOS",
     "status": "under_development",
     "category": "Under development",
-    "cas": "122-62-3"
+    "cas": "122-62-3",
+    "physical_form": "Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Aerospace Synthetic Lubricants",
+        "desc": "Target extreme low-temperature ester base fluid for gas turbine oils, aerospace greases, and hydraulic fluids (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Cold-Resistant Cable Sheathing",
+        "desc": "Target non-migrating plasticizer delivering low-temperature flexibility to automotive wiring harness and cable PVC jackets (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Military & Aerospace Seals",
+        "desc": "Target plasticizing agent for nitrile and neoprene rubber O-rings operating down to sub-zero service temperatures (under development).",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Why is dioctyl sebacate selected for aerospace and Arctic hydraulic oils?",
+        "a": "Offers low volatility, pour points below -60°C, and stable viscosity-temperature stability under extreme cold weather conditions (under development)."
+      },
+      {
+        "q": "Which low-temperature pour point and flash point thresholds define dioctyl sebacate?",
+        "a": "Target parameters include minimum 99.0% ester purity, flash point exceeding 215°C, and kinematic viscosity around 11–13 cSt at 40°C."
+      },
+      {
+        "q": "Where is DOS evaluated outside synthetic lubricants?",
+        "a": "Cold-resistant outdoor PVC cable sheathing, military radar equipment seals, and automotive interior polymers."
+      }
+    ]
   },
   {
     "slug": "dibutyl-sebacate",
@@ -197,7 +1213,46 @@
     "brand_code": "NDEVEST™ DBS",
     "status": "under_development",
     "category": "Under development",
-    "cas": "109-43-3"
+    "cas": "109-43-3",
+    "physical_form": "Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Safety Glass PVB Interlayers",
+        "desc": "Target specialty plasticizer for polyvinyl butyral (PVB) films used in automotive and architectural laminated safety glass (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Food-Contact Flexible Films",
+        "desc": "Target non-toxic monomeric plasticizer for flexible vinyl and cellulosic packaging films (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Low-Temperature Rubber Seals",
+        "desc": "Target synthetic ester additive imparting cold-flex resistance and resilience to molded rubber gaskets (under development).",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which polymers utilize dibutyl sebacate for sub-zero flexibility?",
+        "a": "Plasticizes polyvinyl butyral (PVB) safety glass interlayers, food-packaging cellulose films, and low-temperature nitrile rubber seals."
+      },
+      {
+        "q": "What ester purity assay and refractive index are targeted for dibutyl sebacate?",
+        "a": "Target parameters include minimum 99.0% ester purity, acid value under 0.1 mg KOH/g, and refractive index of 1.438 to 1.442."
+      },
+      {
+        "q": "What regulatory advantage does DBS hold in packaging films?",
+        "a": "Bio-based origin and low toxicity profile facilitate international approvals for food-contact packaging membranes."
+      }
+    ]
   },
   {
     "slug": "methyl-12-hydroxystearate",
@@ -205,7 +1260,45 @@
     "brand_code": "NDEVEST™ M12H",
     "status": "under_development",
     "category": "Under development",
-    "cas": "141-23-1"
+    "cas": "141-23-1",
+    "physical_form": "Solid (White Flakes / Powder)",
+    "packaging": [
+      "25 kg multi-ply paper bags with HDPE moisture barrier",
+      "500 kg / 1,000 kg PP jumbo bags with discharge spout",
+      "Palletized container stuffing for ocean container shipping"
+    ],
+    "packaging_tile_text": "25 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Low-Melting Grease Precursors",
+        "desc": "Target intermediate that dissolves rapidly into base oils during lithium complex grease manufacturing at reduced cooking temperatures (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Plasticizers & Slip Additives",
+        "desc": "Target internal lubricant and surface slip additive in rigid PVC, polystyrene, and rubber compounding (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Cosmetic Wax Intermediates",
+        "desc": "Target wax modifier providing smooth texture and structured emolliency in anhydrous personal care products (under development).",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How does methyl 12-HSA accelerate grease cooking compared to acid flakes?",
+        "a": "Melts at 48–53°C (much lower than 12-HSA flakes), dissolving rapidly into base oils during lithium complex grease compounding."
+      },
+      {
+        "q": "Which melting range and hydroxyl values are planned for methyl 12-hydroxystearate?",
+        "a": "Target parameters include melting point of 48°C to 53°C, hydroxyl value 165 to 180, and ester value 170 to 185."
+      },
+      {
+        "q": "What non-grease uses utilize methyl 12-hydroxystearate?",
+        "a": "Functions as an internal lubricant in vinyl extrusion, slip additive for polymers, and emollient wax in cosmetic sticks."
+      }
+    ]
   },
   {
     "slug": "methyl-ricinoleate",
@@ -213,7 +1306,46 @@
     "brand_code": "NDEVEST™ MR",
     "status": "under_development",
     "category": "Under development",
-    "cas": "141-24-2"
+    "cas": "141-24-2",
+    "physical_form": "Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Bio-Diesel Lubricity Improvers",
+        "desc": "Target ester additive restoring boundary lubrication in ultra-low sulfur diesel (ULSD) and heavy transport fuels (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Leather Fatliquoring Oils",
+        "desc": "Target deep-penetrating softening oil imparting natural pliability, water repellency, and softness to finished leathers (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Cutting Fluid Emulsifier Bases",
+        "desc": "Target secondary emulsifier and lubricity fluid in water-soluble metalworking fluids and drawing compounds (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How is methyl ricinoleate synthesized via transesterification?",
+        "a": "Produced by reacting refined castor oil with anhydrous methanol in the presence of an alkaline catalyst, yielding methyl ester and glycerin (under development)."
+      },
+      {
+        "q": "What downstream synthesis routes evaluate methyl ricinoleate for bio-lubricants?",
+        "a": "Evaluated as a low-viscosity renewable carrier, lubricity additive for low-sulfur diesel, and intermediate for cosmetic emollients."
+      },
+      {
+        "q": "How can formulators request development samples of methyl ricinoleate?",
+        "a": "Under development. Custom ester specifications and development inquiries can be submitted directly through our technical desk."
+      }
+    ]
   },
   {
     "slug": "lithium-12-hydroxystearate",
@@ -221,7 +1353,45 @@
     "brand_code": "NDEVSOAP™ LI12",
     "status": "under_development",
     "category": "Under development",
-    "cas": "7620-77-1"
+    "cas": "7620-77-1",
+    "physical_form": "Solid (White Powder / Granules)",
+    "packaging": [
+      "25 kg multi-ply paper bags with HDPE moisture barrier",
+      "500 kg / 1,000 kg PP jumbo bags with discharge spout",
+      "Palletized container stuffing for ocean container shipping"
+    ],
+    "packaging_tile_text": "25 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Pre-Formed Grease Thickener Soap",
+        "desc": "Target dry pre-formed lithium soap eliminating the handling of lithium hydroxide and aqueous cooking stages in grease plants (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Multipurpose Industrial Greases",
+        "desc": "Target high-temperature thickener for automotive wheel bearing, chassis, and heavy industrial plant greases (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Heavy Industrial & Mining Greases",
+        "desc": "Target structural matrix offering high drop point and mechanical stability under shock-loaded conditions (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What processing benefit does pre-formed lithium soap offer grease kettles (under development)?",
+        "a": "Eliminates on-site handling of lithium hydroxide and water removal stages, reducing cooking cycle times by up to 40%."
+      },
+      {
+        "q": "What analytical limits govern the reaction completion of pre-formed lithium soap?",
+        "a": "Controlled lithium content of 2.2% to 2.5%, drop point over 200°C, and minimal free alkalinity below 0.2%."
+      },
+      {
+        "q": "How does pre-reacted soap ensure grease batch uniformity?",
+        "a": "Provides pre-crystallized soap fibers that dissolve predictably in mineral and synthetic base oils without soap reaction variance."
+      }
+    ]
   },
   {
     "slug": "calcium-12-hydroxystearate",
@@ -229,7 +1399,45 @@
     "brand_code": "NDEVSOAP™ CA12",
     "status": "under_development",
     "category": "Under development",
-    "cas": "3159-47-5"
+    "cas": "3159-47-5",
+    "physical_form": "Solid (Fine White Powder)",
+    "packaging": [
+      "25 kg multi-ply paper bags with HDPE moisture barrier",
+      "500 kg / 1,000 kg PP jumbo bags with discharge spout",
+      "Palletized container stuffing for ocean container shipping"
+    ],
+    "packaging_tile_text": "25 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Water-Resistant Lubricating Greases",
+        "desc": "Target soap thickener for heavy-duty marine stern tubes, water pumps, and agricultural machinery exposed to severe water washout (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Rigid PVC Extrusion Lubrication",
+        "desc": "Target non-toxic heat stabilizer and external lubricant for PVC pipes, vinyl siding, and conduit profiles (under development).",
+        "link": "/applications/hco-for-coatings-and-pvc"
+      },
+      {
+        "title": "Polymer Processing Stabilizers",
+        "desc": "Target acid scavenger and mold release agent for polypropylene and polyolefin compounding (under development).",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Where is calcium 12-hydroxystearate soap specified over lithium soaps?",
+        "a": "Preferred in marine stern tubes and agricultural machinery where water washout resistance is critical, and as a PVC internal lubricant."
+      },
+      {
+        "q": "Which drop point temperature and calcium assay thresholds characterize NDEVSOAP™ CA12?",
+        "a": "Conforms to 6.2% to 6.8% calcium content, melting point of 145°C to 155°C, and moisture below 1.5%."
+      },
+      {
+        "q": "How can grease compounders submit formulation requirements?",
+        "a": "Grease compounders can submit drop point and consistency parameters via our enquiry portal to coordinate pilot batch review."
+      }
+    ]
   },
   {
     "slug": "zinc-undecylenate",
@@ -237,7 +1445,45 @@
     "brand_code": "NDEVSOAP™ ZNU",
     "status": "under_development",
     "category": "Under development",
-    "cas": "557-08-4"
+    "cas": "557-08-4",
+    "physical_form": "Solid (Fine White Powder)",
+    "packaging": [
+      "25 kg multi-ply paper bags with HDPE moisture barrier",
+      "500 kg / 1,000 kg PP jumbo bags with discharge spout",
+      "Palletized container stuffing for ocean container shipping"
+    ],
+    "packaging_tile_text": "25 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Topical Dusting Powders",
+        "desc": "Target compendial powder ingredient for soothing topical foot powders and body care formulations upon commercialization (under development).",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      },
+      {
+        "title": "Dermatological Ointments & Creams",
+        "desc": "Target cosmetic and personal care additive providing skin-protecting and moisture-absorbing performance (under development).",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      },
+      {
+        "title": "Antibacterial Cosmetic Formulations",
+        "desc": "Target mineral ingredient for deodorants, foot balms, and antimicrobial skin care formulations (under development).",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Why is zinc undecylenate formulated into topical antifungal powders?",
+        "a": "Functions as an insoluble cosmetic soap and topical additive used in talcs, foot powders, and personal care formulations for moisture management and smooth skin feel."
+      },
+      {
+        "q": "Which analytical assay tests confirm compendial monograph compliance for zinc undecylenate powder?",
+        "a": "Monograph standards mandate 12.0–14.0% zinc content, melting point 115–120°C, and loss on drying under 1.2%."
+      },
+      {
+        "q": "How is zinc undecylenate synthesized from castor oil?",
+        "a": "Undecylenic acid (obtained from high-temperature vacuum pyrolysis of castor oil) is reacted with high-purity zinc oxide."
+      }
+    ]
   },
   {
     "slug": "zinc-ricinoleate",
@@ -245,7 +1491,45 @@
     "brand_code": "NDEVSOAP™ ZNR",
     "status": "under_development",
     "category": "Under development",
-    "cas": "13040-19-2"
+    "cas": "13040-19-2",
+    "physical_form": "Solid (Fine Powder / Pellets)",
+    "packaging": [
+      "25 kg multi-ply paper bags with HDPE moisture barrier",
+      "500 kg / 1,000 kg PP jumbo bags with discharge spout",
+      "Palletized container stuffing for ocean container shipping"
+    ],
+    "packaging_tile_text": "25 kg bags, jumbo bags · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Cosmetic Deodorants & Body Sprays",
+        "desc": "Target highly effective natural odor neutralizer that traps malodor molecules in underarm sticks, roll-ons, and sprays (under development).",
+        "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
+      },
+      {
+        "title": "Household Fabric & Pet Odor Neutralizers",
+        "desc": "Target active agent for carpet refreshers, fabric sprays, and room odour-absorbing formulations (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Industrial Wastewater & Waste Treatment",
+        "desc": "Target complexing agent for binding mercaptans and volatile amine odors in municipal and industrial waste treatment (under development).",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What chemical mechanism allows zinc ricinoleate to trap malodor molecules?",
+        "a": "Coordinates sulfur and nitrogen atoms into non-volatile chemical complexes, trapping odors permanently without masking fragrances."
+      },
+      {
+        "q": "How is the purity and metal chelation ratio of zinc ricinoleate verified?",
+        "a": "Verified by EDTA complexometric titration showing 9.0–10.5% zinc, sharp melting point (70–75°C), and low moisture."
+      },
+      {
+        "q": "In which personal care and home care goods is zinc ricinoleate formulated?",
+        "a": "Natural stick and spray deodorants, household carpet odor removers, pet hygiene sprays, and municipal waste treatment."
+      }
+    ]
   },
   {
     "slug": "blown-oxidized-castor-oil",
@@ -253,6 +1537,45 @@
     "brand_code": "NDEVOX™ BLO",
     "status": "under_development",
     "category": "Under development",
-    "cas": "68187-84-8"
+    "cas": "68187-84-8",
+    "physical_form": "Heavy Viscous Liquid",
+    "packaging": [
+      "200 kg tight-head steel and HDPE export drums",
+      "1,000 L intermediate bulk containers (IBC totes)",
+      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
+      "20–24 MT bulk ISO tank containers"
+    ],
+    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "applications": [
+      {
+        "title": "Lithographic Printing Inks",
+        "desc": "Target viscous binder and wetting agent providing pigment dispersion and gloss in web offset and sheetfed printing inks (under development).",
+        "link": "/process-flow"
+      },
+      {
+        "title": "Hydraulic Fluids & Brake Fluids",
+        "desc": "Target shear-stable bio-lubricant component delivering high film strength and seal compatibility in hydraulic systems (under development).",
+        "link": "/applications/castor-oil-for-lubricants"
+      },
+      {
+        "title": "Polymeric Plasticizers",
+        "desc": "Target non-volatile plasticizer for nitrocellulose lacquers, synthetic resins, and natural rubber formulations (under development).",
+        "link": "/process-flow"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How does controlled air sparging raise kinematic viscosity into viscous varnish polymers?",
+        "a": "Heated raw castor oil is sparged with compressed air at 100–130°C, inducing peroxide crosslinking that multiplies viscosity up to 200 Poise."
+      },
+      {
+        "q": "Where do printing ink and hydraulic brake fluid compounders apply blown oil?",
+        "a": "Heavily specified as a non-migrating plasticizer and pigment dispersant in lithographic web offset inks and industrial hydraulic fluids."
+      },
+      {
+        "q": "What development status applies to blown castor oil?",
+        "a": "Under R&D development. Lab-scale batch trials are standardizing oxidation viscosity endpoints for coatings and sealant formulators."
+      }
+    ]
   }
 ]
