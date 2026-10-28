@@ -209,5 +209,87 @@ class TestClaimsLint(unittest.TestCase):
         fails = [f for f in findings if f["rule"].startswith("R13")]
         self.assertEqual(len(fails), 0, f"R13 should pass for standard compliant page, got: {fails}")
 
+
+    def test_r14_failing_fixture_location_and_facility(self):
+        # Failing fixture: Image under /images/crop/ with location and plant facility claims
+        failing_html = """
+        <html>
+        <body>
+          <figure>
+            <img src="/images/crop/castor-crop-field-rows-960w.webp" alt="Castor crop in North Gujarat">
+            <figcaption>Cleaned castor seeds prepared for transport at our plant in Deodar</figcaption>
+          </figure>
+        </body>
+        </html>
+        """
+        findings = lint_content(failing_html, "test-crop-fail.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R14")]
+        self.assertTrue(len(fails) >= 3, f"R14 must catch multiple forbidden terms, got: {fails}")
+        reasons = [f["text"] for f in fails]
+        self.assertTrue(any("North Gujarat" in r for r in reasons))
+        self.assertTrue(any("cleaned" in r for r in reasons))
+        self.assertTrue(any("prepared for" in r for r in reasons))
+        self.assertTrue(any("our" in r for r in reasons))
+
+    def test_r14_failing_fixture_video_missing_illustrative(self):
+        # Failing fixture: Video under /media/video/ without 'illustrative' in caption
+        failing_video_html = """
+        <html>
+        <body>
+          <div>
+            <video src="/media/video/castor-crop-to-seed.mp4"></video>
+            <figcaption>Real footage of castor seeds arriving from APMC mandi.</figcaption>
+          </div>
+        </body>
+        </html>
+        """
+        findings = lint_content(failing_video_html, "test-video-fail.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R14")]
+        self.assertTrue(len(fails) > 0, "R14 must fail when video caption lacks 'illustrative'")
+        reasons = [f["text"] for f in fails]
+        self.assertTrue(any("must contain the word 'illustrative'" in r for r in reasons))
+        self.assertTrue(any("APMC" in r for r in reasons))
+        self.assertTrue(any("mandi" in r for r in reasons))
+
+    def test_r14_failing_fixture_gujarati_banned_terms(self):
+        # Failing fixture: Gujarati banned terms in caption
+        failing_gu_html = """
+        <html>
+        <body>
+          <figure>
+            <img src="/images/crop/castor-seeds-jute-sack-960w.webp" alt="એરંડાના બીજ">
+            <figcaption>અમારા પ્લાન્ટ ખાતે બનાસકાંઠાના એરંડા</figcaption>
+          </figure>
+        </body>
+        </html>
+        """
+        findings = lint_content(failing_gu_html, "test-gu-fail.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R14")]
+        self.assertTrue(len(fails) >= 2, "R14 must fail for Gujarati banned terms")
+        reasons = [f["text"] for f in fails]
+        self.assertTrue(any("અમારા" in r for r in reasons))
+        self.assertTrue(any("પ્લાન્ટ" in r for r in reasons))
+        self.assertTrue(any("બનાસકાંઠા" in r for r in reasons))
+
+    def test_r14_clean_crop_and_video_passes(self):
+        # Passing fixture: Neutral alt and figcaptions, video with 'illustrative'
+        passing_html = """
+        <html>
+        <body>
+          <figure>
+            <img src="/images/crop/castor-crop-field-rows-960w.webp" alt="Castor crop growing in rows in an open field">
+            <figcaption>Castor crop growing in rows in an open field.</figcaption>
+          </figure>
+          <div>
+            <video src="/media/video/castor-crop-to-seed.mp4" aria-label="Illustrative footage of castor crop"></video>
+            <figcaption>Castor crop to seed — illustrative footage.</figcaption>
+          </div>
+        </body>
+        </html>
+        """
+        findings = lint_content(passing_html, "test-clean-crop.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R14")]
+        self.assertEqual(len(fails), 0, f"R14 should pass for completely honest captions, got: {fails}")
+
 if __name__ == "__main__":
     unittest.main()
