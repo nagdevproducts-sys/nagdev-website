@@ -28,6 +28,8 @@
   <meta name="twitter:image" content="https://www.nagdevproducts.com/images/og-share.jpg">
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/images/castor-field-480w.avif" type="image/avif" media="(max-width: 767px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/images/castor-field-1600w.avif" type="image/avif" media="(min-width: 768px)">
   <link rel="stylesheet" href="/css/main.min.css?v=20261023c">
 
   <script type="application/ld+json">
@@ -557,8 +559,12 @@
 
     <div class="hero-image">
     <picture>
-      <source type="image/avif" srcset="/images/castor-field-480w.avif 480w, /images/castor-field-960w.avif 960w, /images/castor-field-1600w.avif 1600w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px">
-      <source type="image/webp" srcset="/images/castor-field-480w.webp 480w, /images/castor-field-960w.webp 960w, /images/castor-field-1600w.webp 1600w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px">
+      <!-- Mobile optimized sources (max-width: 767px) -->
+      <source media="(max-width: 767px)" type="image/avif" srcset="/images/castor-field-480w.avif">
+      <source media="(max-width: 767px)" type="image/webp" srcset="/images/castor-field-480w.webp">
+      <!-- Desktop & tablet responsive sources -->
+      <source type="image/avif" srcset="/images/castor-field-960w.avif 960w, /images/castor-field-1600w.avif 1600w" sizes="(max-width: 1200px) 50vw, 800px">
+      <source type="image/webp" srcset="/images/castor-field-960w.webp 960w, /images/castor-field-1600w.webp 1600w" sizes="(max-width: 1200px) 50vw, 800px">
       <img src="/images/castor-field.webp"
            alt="Castor crop field"
            width="1200" height="800"
