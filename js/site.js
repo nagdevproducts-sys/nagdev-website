@@ -84,6 +84,7 @@
   if (dropdownItem) {
     const dropdownToggle = dropdownItem.querySelector('.nav-link-dropdown');
     const megaMenu = dropdownItem.querySelector('.mega-menu');
+    let openTimer = null;
     let closeTimer = null;
     let pinnedOpen = false;
 
@@ -102,6 +103,10 @@
     }
 
     function closeMenu(immediate = false) {
+      if (openTimer) {
+        clearTimeout(openTimer);
+        openTimer = null;
+      }
       if (immediate) {
         if (closeTimer) clearTimeout(closeTimer);
         closeTimer = null;
@@ -123,19 +128,36 @@
       }
     }
 
-    // Hover intent (desktop)
+    // Hover intent (desktop): 300ms debounce on open
     dropdownItem.addEventListener('mouseenter', () => {
-      openMenu(false);
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      if (!dropdownItem.classList.contains('is-open')) {
+        openTimer = setTimeout(() => {
+          openMenu(false);
+          openTimer = null;
+        }, 300);
+      }
     });
 
     dropdownItem.addEventListener('mouseleave', () => {
+      if (openTimer) {
+        clearTimeout(openTimer);
+        openTimer = null;
+      }
       closeMenu(false);
     });
 
-    // Click toggle
+    // Click toggle: clicking "Products" pins the menu open
     if (dropdownToggle) {
       dropdownToggle.addEventListener('click', (e) => {
         e.preventDefault();
+        if (openTimer) {
+          clearTimeout(openTimer);
+          openTimer = null;
+        }
         if (pinnedOpen) {
           closeMenu(true);
         } else {
@@ -147,6 +169,10 @@
       dropdownToggle.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
+          if (openTimer) {
+            clearTimeout(openTimer);
+            openTimer = null;
+          }
           if (pinnedOpen || dropdownItem.classList.contains('is-open')) {
             closeMenu(true);
           } else {
@@ -154,6 +180,10 @@
           }
         } else if (e.key === 'ArrowDown') {
           e.preventDefault();
+          if (openTimer) {
+            clearTimeout(openTimer);
+            openTimer = null;
+          }
           openMenu(true);
           const firstLink = megaMenu ? megaMenu.querySelector('a') : null;
           if (firstLink) firstLink.focus();
@@ -161,16 +191,25 @@
       });
     }
 
-    // Escape key inside dropdown closes and returns focus to trigger
-    dropdownItem.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
+    // Clicking a product link inside the mega menu closes immediately and navigates
+    if (megaMenu) {
+      megaMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          closeMenu(true);
+        });
+      });
+    }
+
+    // Escape key inside or outside closes and returns focus to trigger
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && (pinnedOpen || dropdownItem.classList.contains('is-open'))) {
         closeMenu(true);
         if (dropdownToggle) dropdownToggle.focus();
-        return;
       }
+    });
 
-      // Column arrow-key navigation
+    // Column arrow-key navigation inside megaMenu
+    dropdownItem.addEventListener('keydown', (e) => {
       if (megaMenu && (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
         const target = e.target;
         if (target && target.tagName === 'A' && megaMenu.contains(target)) {

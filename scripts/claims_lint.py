@@ -236,7 +236,8 @@ R11_BANNED_PHRASES = [
     "oil content",
     "seed oil content",
     "processing parity",
-    "weighted benchmark"
+    "weighted benchmark",
+    "triglyceride purity"
 ]
 
 MONTH_MAP = {
