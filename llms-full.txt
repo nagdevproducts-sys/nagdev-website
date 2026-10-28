@@ -86,7 +86,7 @@ SECTION 1: CORE PRODUCT SPECIFICATIONS & TECHNICAL DATA
 - Chemical Formula: C18H36O3 (12-hydroxyoctadecanoic acid)
 - Physical Form: Off-white hard flakes or crystalline powder
 - Melting / Dropping Point: 75.0°C – 78.0°C
-- Acid Value: 175 – 185 mg KOH/g
+- Acid Value: 175 Min mg KOH/g
 - Iodine Value: 2.0 – 4.0 g I2/100g Max
 - Hydroxyl Value: 155 – 165 mg KOH/g
 - Saponification Value: 180 – 190 mg KOH/g

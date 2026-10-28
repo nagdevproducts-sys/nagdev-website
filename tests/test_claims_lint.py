@@ -318,5 +318,50 @@ class TestClaimsLint(unittest.TestCase):
         clean_fails = [f for f in clean_findings if f["severity"] == "FAIL"]
         self.assertEqual(len(clean_fails), 0, f"Clean index.html must have 0 failures, got: {clean_fails}")
 
+
+    def test_r15_cross_page_spec_mismatch_fails(self):
+        # Failing fixture: table with outdated FSG Lovibond and Ricinoleic Acid AV
+        dirty_html = """
+        <html>
+        <body>
+          <table>
+            <tr>
+              <td>First Special Grade (FSG)</td>
+              <td>Lovibond Y+5R < 2.5</td>
+            </tr>
+            <tr>
+              <td>Ricinoleic Acid</td>
+              <td>Acid Value 175–185</td>
+            </tr>
+          </table>
+        </body>
+        </html>
+        """
+        findings = lint_content(dirty_html, "test-specs.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R15")]
+        self.assertTrue(len(fails) >= 2, f"R15 must fail for both FSG Lovibond and Ricinoleic Acid AV, got: {fails}")
+
+    def test_r15_clean_cross_page_specs_passes(self):
+        # Passing fixture: canonical specs
+        clean_html = """
+        <html>
+        <body>
+          <table>
+            <tr>
+              <td>First Special Grade (FSG)</td>
+              <td>FFA: 1% Max · Lovibond (5¼"): Max 20Y + 2R</td>
+            </tr>
+            <tr>
+              <td>Ricinoleic Acid</td>
+              <td>Purity: ≥ 85.0% · Acid Value: 175 Min</td>
+            </tr>
+          </table>
+        </body>
+        </html>
+        """
+        findings = lint_content(clean_html, "test-specs.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R15")]
+        self.assertEqual(len(fails), 0, f"R15 must pass for canonical specs, got: {fails}")
+
 if __name__ == "__main__":
     unittest.main()

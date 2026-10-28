@@ -78,25 +78,104 @@
     }
   });
 
-  // ── Dropdown support for touch/click ─────────────────────────────────────
+  // ── Mega-Menu: Hover-Intent, Click Toggle, Keyboard & Touch Support ────
   const dropdownItem = document.querySelector('.nav-item-has-dropdown');
   if (dropdownItem) {
     const dropdownToggle = dropdownItem.querySelector('.nav-link-dropdown');
+    const megaMenu = dropdownItem.querySelector('.mega-menu');
+    let closeTimer = null;
+    let pinnedOpen = false;
+
+    function openMenu(pin = false) {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      dropdownItem.classList.add('is-open');
+      dropdownItem.classList.add('touch-open');
+      if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'true');
+      if (pin) pinnedOpen = true;
+    }
+
+    function closeMenu(immediate = false) {
+      if (immediate) {
+        if (closeTimer) clearTimeout(closeTimer);
+        closeTimer = null;
+        dropdownItem.classList.remove('is-open');
+        dropdownItem.classList.remove('touch-open');
+        if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
+        pinnedOpen = false;
+      } else {
+        if (pinnedOpen) return;
+        if (closeTimer) clearTimeout(closeTimer);
+        closeTimer = setTimeout(() => {
+          dropdownItem.classList.remove('is-open');
+          dropdownItem.classList.remove('touch-open');
+          if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
+          closeTimer = null;
+        }, 300);
+      }
+    }
+
+    // Hover intent (desktop)
+    dropdownItem.addEventListener('mouseenter', () => {
+      openMenu(false);
+    });
+
+    dropdownItem.addEventListener('mouseleave', () => {
+      closeMenu(false);
+    });
+
+    // Click toggle
     if (dropdownToggle) {
-      dropdownToggle.addEventListener('click', function (e) {
-        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-          if (!dropdownItem.classList.contains('touch-open')) {
+      dropdownToggle.addEventListener('click', (e) => {
+        if (dropdownItem.classList.contains('is-open') || dropdownItem.classList.contains('touch-open')) {
+          if (pinnedOpen) {
             e.preventDefault();
-            dropdownItem.classList.add('touch-open');
+            closeMenu(true);
+          } else {
+            e.preventDefault();
+            openMenu(true);
           }
+        } else {
+          e.preventDefault();
+          openMenu(true);
         }
       });
-      document.addEventListener('click', function (e) {
-        if (!dropdownItem.contains(e.target)) {
-          dropdownItem.classList.remove('touch-open');
+
+      // Keyboard support
+      dropdownToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (dropdownItem.classList.contains('is-open')) {
+            closeMenu(true);
+          } else {
+            openMenu(true);
+          }
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          openMenu(true);
+          const firstLink = megaMenu ? megaMenu.querySelector('a') : null;
+          if (firstLink) firstLink.focus();
         }
       });
     }
+
+    // Escape key inside dropdown closes and returns focus to trigger
+    dropdownItem.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeMenu(true);
+        if (dropdownToggle) dropdownToggle.focus();
+      }
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!dropdownItem.contains(e.target)) {
+        closeMenu(true);
+      }
+    });
   }
 
   // ── Scroll fade-up animations ────────────────────────────────────────────

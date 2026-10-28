@@ -459,37 +459,23 @@ input, textarea, select { font-family: var(--font-body); }
 
 /* ── Mega Menu & Dropdown ── */
 .nav-item-has-dropdown {
-  position: relative;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-.nav-link-dropdown {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-.dropdown-chevron {
-  width: 11px;
-  height: 11px;
-  transition: transform 0.22s ease;
-  stroke: currentColor;
-}
-.nav-item-has-dropdown:hover .dropdown-chevron {
-  transform: rotate(180deg);
+  position: static;
 }
 
 .mega-menu {
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-40%) translateY(14px);
-  width: 900px;
-  max-width: 95vw;
+  transform: translateX(-50%) translateY(0);
+  width: min(1160px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
   background: #ffffff;
   border: 1px solid rgba(11, 61, 30, 0.12);
   border-top: 3px solid var(--forest);
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 
     0 24px 60px -12px rgba(11, 61, 30, 0.2),
     0 8px 24px -4px rgba(0, 0, 0, 0.08),
@@ -497,47 +483,65 @@ input, textarea, select { font-family: var(--font-body); }
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 1.65rem 1.85rem 1.25rem 1.85rem;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 1.25rem 1.5rem 1rem 1.5rem;
   z-index: 1200;
 }
+
+/* Hover bridge: connects trigger link to dropdown panel so diagonal mouse movement never crosses a dead zone */
+.mega-menu::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: transparent;
+}
+
+.nav-item-has-dropdown.is-open .mega-menu,
 .nav-item-has-dropdown:hover .mega-menu,
 .nav-item-has-dropdown:focus-within .mega-menu,
 .nav-item-has-dropdown.touch-open .mega-menu {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateX(-40%) translateY(2px);
 }
 
-/* Mega menu columns */
+/* Mega menu 4-column grid */
 .mega-menu-grid {
   display: grid;
-  grid-template-columns: 1fr 1.25fr 1fr;
-  gap: 1.75rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
 }
+@media (max-width: 1199px) and (min-width: 992px) {
+  .mega-menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
 .mega-col {
   display: flex;
   flex-direction: column;
 }
 .mega-col:not(:last-child) {
   border-right: 1px solid rgba(0, 0, 0, 0.06);
-  padding-right: 1.5rem;
+  padding-right: 1.15rem;
 }
 .mega-col-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding-bottom: 0.65rem;
-  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
   border-bottom: 1.5px solid rgba(11, 61, 30, 0.1);
 }
 .mega-col-title {
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -546,11 +550,11 @@ input, textarea, select { font-family: var(--font-body); }
 }
 .mega-col-badge {
   font-family: var(--font-sans);
-  font-size: 0.625rem;
+  font-size: 0.6rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 0.2rem 0.55rem;
+  padding: 0.15rem 0.45rem;
   border-radius: 20px;
   background: rgba(11, 61, 30, 0.08);
   color: var(--forest);
@@ -562,106 +566,86 @@ input, textarea, select { font-family: var(--font-body); }
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.15rem;
   margin: 0;
   padding: 0;
 }
 .mega-prod-link {
   display: flex;
   flex-direction: column;
-  padding: 0.45rem 0.65rem;
-  border-radius: 8px;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
   text-decoration: none;
   background: transparent;
   border: 1px solid transparent;
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.15s ease;
 }
-.mega-prod-link:hover {
+.mega-prod-link:hover,
+.mega-prod-link:focus {
   background: #f4f8f5;
   border-color: rgba(11, 61, 30, 0.1);
-  transform: translateX(4px);
+  transform: translateX(3px);
 }
 .mega-prod-brand {
   font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 800;
-  color: #a17924;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #926f20;
   letter-spacing: 0.02em;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 .mega-prod-brand::before {
   content: '';
   display: inline-block;
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--gold);
   opacity: 0.85;
 }
 .mega-prod-name {
-  font-size: 0.8125rem;
+  font-size: 0.78rem;
   font-weight: 500;
   color: #374151;
-  line-height: 1.3;
-  margin-top: 2px;
+  line-height: 1.25;
+  margin-top: 1px;
 }
-.mega-prod-link:hover .mega-prod-name {
+.mega-prod-link:hover .mega-prod-name,
+.mega-prod-link:focus .mega-prod-name {
   color: var(--forest);
 }
 
-/* Feature tip for column balance */
-.mega-feature-tip {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.45rem;
-  margin-top: 0.75rem;
-  padding: 0.55rem 0.65rem;
-  background: rgba(212, 165, 55, 0.08);
-  border-left: 2.5px solid var(--gold);
-  border-radius: 0 6px 6px 0;
-  font-size: 0.72rem;
-  color: #4b5563;
-  line-height: 1.35;
-}
-.mega-feature-tip .tip-dot {
-  color: var(--gold-dark);
-  font-weight: 700;
-  font-size: 0.8rem;
-  line-height: 1;
-  margin-top: 1px;
-}
-
 .mega-view-all {
-  margin-top: 0.6rem;
-  padding: 0.35rem 0.65rem;
-  font-size: 0.78rem;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--forest);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  border-radius: 6px;
-  transition: all 0.18s ease;
+  gap: 0.3rem;
+  border-radius: 5px;
+  transition: all 0.15s ease;
 }
-.mega-view-all:hover {
+.mega-view-all:hover,
+.mega-view-all:focus {
   background: rgba(11, 61, 30, 0.07);
-  gap: 0.55rem;
+  gap: 0.5rem;
 }
 
-/* Mega menu bottom banner (Chemistry tree callout) */
 .mega-menu-bottom {
-  margin-top: 1.4rem;
-  padding: 0.85rem 1.15rem;
+  margin-top: 1rem;
+  padding: 0.65rem 1rem;
   background: linear-gradient(135deg, #091a10 0%, #112e1c 100%);
-  border-radius: 12px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.25rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 .mega-tree-callout {
   display: flex;
@@ -833,7 +817,8 @@ input, textarea, select { font-family: var(--font-body); }
    ========================================================================== */
 
 .hero {
-  min-height: 100dvh;
+  min-height: min(calc(100svh - var(--header-h, 72px)), 760px);
+  max-height: 760px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
@@ -846,7 +831,7 @@ input, textarea, select { font-family: var(--font-body); }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5rem 3rem 5rem 0;
+  padding: 2.5rem 3rem 2.5rem 0;
   padding-left: calc((100vw - 1280px) / 2);
   padding-left: max(2rem, calc((100vw - 1280px) / 2));
 }
@@ -857,10 +842,10 @@ input, textarea, select { font-family: var(--font-body); }
   gap: 0.625rem;
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.85rem;
 }
 .hero-eyebrow::before {
   content: '';
@@ -872,31 +857,36 @@ input, textarea, select { font-family: var(--font-body); }
 .hero-headline {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(3.25rem, 5.5vw, 5.25rem);
-  line-height: 1.04;
+  font-size: clamp(2.1rem, 1.2rem + 2.6vw, 3.4rem);
+  line-height: 1.1;
   letter-spacing: -0.015em;
   color: var(--charcoal);
-  margin-bottom: 1.75rem;
+  margin-bottom: 0.85rem;
 }
-.hero-headline em {
+.hero-headline em,
+.hero-headline .hero-subline {
+  display: block;
+  font-size: 0.6em;
   font-style: italic;
   color: var(--forest);
+  line-height: 1.2;
+  margin-top: 0.35rem;
 }
 
 .hero-sub {
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  font-size: clamp(0.9375rem, 1.1vw, 1.05rem);
   color: var(--text-mid);
-  line-height: 1.7;
-  max-width: 480px;
-  margin-bottom: 2.5rem;
+  line-height: 1.55;
+  max-width: 56ch;
+  margin-bottom: 1.25rem;
 }
 
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.875rem;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
+  margin-bottom: 1.25rem;
 }
 
 .hero-location {
@@ -2649,6 +2639,9 @@ input, textarea, select { font-family: var(--font-body); }
 
   .modal-body-inner { grid-template-columns: 160px 1fr; }
 
+  }
+
+@media (max-width: 991px) {
   .nav-list { display: none; }
   .header-cta { display: none; }
   .mobile-toggle { display: flex; }
@@ -3969,4 +3962,21 @@ body.drawer-open #whatsapp-fab {
 }
 @media (max-width: 768px) {
   #whatsapp-fab { bottom: 1.25rem; right: 1.25rem; width: 48px; height: 48px; }
+}
+
+/* Ensure sticky header never covers section headings on anchor jump */
+:target,
+section[id],
+div[id],
+h1[id],
+h2[id],
+h3[id] {
+  scroll-margin-top: calc(var(--header-h, 72px) + 2rem);
+}
+
+@media (max-width: 640px) {
+  .whatsapp-float {
+    bottom: max(1.25rem, calc(1rem + env(safe-area-inset-bottom)));
+    right: 1.25rem;
+  }
 }

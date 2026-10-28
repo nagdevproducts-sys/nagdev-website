@@ -557,6 +557,75 @@ def check_r14_crop_media_captions(content: str, file_path_str: str):
 
     return findings
 
+
+def check_r15_cross_page_specs(content: str, file_path_str: str) -> list:
+    """
+    R15: Cross-page specification consistency.
+    Any page (/castor-oil-manufacturer-gujarat, /bulk-castor-oil-supply,
+    /castor-oil-exporter-india, /about, /process-flow, etc.) that quotes
+    spec parameters/limits for any product must match canonical product specs.
+    A different limit or unit -> FAIL.
+    """
+    findings = []
+    norm = content.replace('&lt;', '<').replace('&gt;', '>').replace('&le;', '≤').replace('&ge;', '≥').replace('&ndash;', '–')
+
+    # 1. FSG Lovibond mismatch: Lovibond Y+5R < 2.5 is forbidden; must be Max 20Y + 2R
+    if re.search(r'first\s+special\s+grade|FSG', norm, re.IGNORECASE):
+        if re.search(r'Lovibond\s*(?:Y\s*\+\s*5R|\(Y\+5R\))\s*<\s*2\.5', norm, re.IGNORECASE):
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "FSG spec mismatch: found outdated Lovibond Y+5R < 2.5; canonical spec is Lovibond: Max 20Y + 2R"
+            })
+
+    # 2. Ricinoleic Acid Acid Value mismatch: 175–185 is forbidden; must be 175 Min
+    if re.search(r'ricinoleic\s+acid', norm, re.IGNORECASE):
+        rows = re.findall(r'<tr\b[^>]*>(.*?)</tr>', norm, re.DOTALL | re.IGNORECASE)
+        found_ra_av = False
+        for row in rows:
+            if re.search(r'ricinoleic\s+acid', row, re.IGNORECASE) and not re.search(r'12-hydroxy', row, re.IGNORECASE):
+                if re.search(r'Acid\s+Value[^\w\r\n]{1,10}175\s*[–—\-]\s*185', row, re.IGNORECASE):
+                    found_ra_av = True
+                    break
+        if not found_ra_av and not rows:
+            if re.search(r'Acid\s+Value[^\w\r\n]{1,10}175\s*[–—\-]\s*185', norm, re.IGNORECASE):
+                found_ra_av = True
+
+        if found_ra_av:
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "Ricinoleic Acid spec mismatch: found Acid Value 175–185; canonical spec is Acid Value: 175 Min"
+            })
+
+    # 3. 12-HSA Melting Point mismatch: 74–77°C is forbidden; must be 75°C–78°C
+    if re.search(r'12-hydroxystearic|12-HSA', norm, re.IGNORECASE):
+        if re.search(r'Melting\s+Point[^\w\r\n]{1,10}74\s*[–—\-]\s*77', norm, re.IGNORECASE):
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "12-HSA spec mismatch: found Melting Point 74–77°C; canonical spec is Melting Point: 75°C–78°C"
+            })
+
+    # 4. HCO Iodine Value mismatch: IV < 3.0 is forbidden; must be ≤ 4.0
+    if re.search(r'hydrogenated\s+castor|HCO', norm, re.IGNORECASE):
+        if re.search(r'(?:IV|Iodine\s+Value)\s*<\s*3\.0', norm, re.IGNORECASE):
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "HCO spec mismatch: found IV < 3.0; canonical spec is Iodine Value: ≤ 4.0"
+            })
+
+    return findings
+
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
     lines = content.splitlines()
@@ -930,6 +999,7 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     # R14: Crop & Video Media Captions / Alt Honesty
     # ----------------------------------------------------
     findings.extend(check_r14_crop_media_captions(content, file_path_str))
+    findings.extend(check_r15_cross_page_specs(content, file_path_str))
 
     return findings
 
@@ -973,7 +1043,7 @@ def run_production_audit(facts: dict):
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 15)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 16)}
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
     cb_ts = int(time.time())
@@ -1060,7 +1130,7 @@ def main():
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 15)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 16)}
 
     for f in files:
         f_findings = lint_file(f, facts)
