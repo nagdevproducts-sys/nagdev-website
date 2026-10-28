@@ -17,18 +17,16 @@
   },
   "operations": {
     "status": "operational",
+    "refinery_status": "operational – FSG in regular production",
     "seed_crushing_capacity": "50 TPD",
     "processes_allowed": [
       "mechanical expeller seed crushing",
-      "oil refining",
-      "semi-continuous refining",
-      "filtration",
-      "hydrogenation",
-      "batch pressure reactors",
-      "lot testing with COA per lot",
-      "in-house QC testing",
+      "refining line producing FSG (refining, bleaching, filtration)",
+      "hydrogenation (HCO)",
       "dehydration (DCO)",
-      "DCO fatty acid production"
+      "DCO fatty acid production",
+      "lot testing with COA per lot",
+      "in-house QC testing"
     ]
   },
   "products": {
@@ -174,16 +172,12 @@
     "ultra-low odour",
     "ultra-low odor",
     "dedicated batch testing",
-    "British Pharmacopoeia 93"
-  ],
-  "processes_allowed": [
-    "crushing",
-    "refining",
-    "bleaching",
-    "filtration",
-    "hydrogenation",
-    "dehydration",
-    "DCO fatty acid production",
-    "lot testing"
+    "British Pharmacopoeia 93",
+    "solvent extraction",
+    "solvent-extracted",
+    "saponification",
+    "copied from",
+    "metal soaps",
+    "Fumigat"
   ]
 }

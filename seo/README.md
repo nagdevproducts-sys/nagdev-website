@@ -35,7 +35,7 @@ All factual claims, product classifications, production metrics, facility addres
 `scripts/claims_lint.py` scans all deployable HTML, txt, and xml assets against rules (a)-(e):
 - **Rule (a) Banned phrases:** Scans all text, attributes, and JSON-LD for banned claims.
 - **Rule (b) Unqualified under-development claims:** Scans sentences containing under-development product names and commercial trigger words (`supply`, `produce`, `manufacture`, `available`), enforcing that `under development`, `R&D`, or `developmental` qualifications are explicitly attached.
-- **Rule (c) Product count accuracy:** Prohibits grouping products as a generic "20 Specialty Range"; enforces exact counts (7 on enquiry, 13 under development).
+- **Rule (c) Product count accuracy:** Prohibits grouping products as a generic "20 Under development"; enforces exact counts (7 on enquiry, 13 under development).
 - **Rule (d) Plant District:** Enforces updated district name `District Vav-Tharad` and flags outdated references.
 - **Rule (e) Unapproved Annual Capacity:** Flags unratified annual capacity claims.
 

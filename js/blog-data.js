@@ -94,8 +94,8 @@ window.NAGDEV_BLOG_POSTS = [
       <h2>1. Molecular Difference: Triglyceride vs. Free Fatty Acid</h2>
       <p>Although both molecules originate from castor oil hydrogenation, their chemical structures differ significantly:</p>
       <ul>
-        <li><strong>Hydrogenated Castor Oil (HCO / NDEVAX™ HCO):</strong> A glyceryl tri-(12-hydroxystearate) triglyceride. Melting point is typically 85°C to 88°C with an iodine value under 3.0 g I₂/100g. It contains glycerol bound to three 12-hydroxystearate chains.</li>
-        <li><strong>12-Hydroxystearic Acid (12-HSA / NDEVACID™ 12HSA):</strong> A pure monocarboxylic fatty acid produced by splitting HCO and removing the glycerin backbone. Melting point is 75°C to 78°C with an acid value of 175 to 182 mg KOH/g.</li>
+        <li><strong>Hydrogenated Castor Oil (HCO / NDEVWAX™ HCO):</strong> A glyceryl tri-(12-hydroxystearate) triglyceride. Melting point is typically 85°C to 88°C with an iodine value under 3.0 g I₂/100g. It contains glycerol bound to three 12-hydroxystearate chains.</li>
+        <li><strong>12-Hydroxystearic Acid (12-HSA / NDEVACID™ 12-HSA):</strong> A pure monocarboxylic fatty acid produced by splitting HCO and removing the glycerin backbone. Melting point is 75°C to 78°C with an acid value of 175 to 182 mg KOH/g.</li>
       </ul>
 
       <h2>2. Saponification Mechanism in Lithium Soap Formation</h2>
@@ -143,7 +143,7 @@ window.NAGDEV_BLOG_POSTS = [
 
       <h2>4. Formulator Guidance</h2>
       <p>For standard multipurpose automotive wheel-bearing greases (NLGI 2), high-purity 12-HSA remains the industry benchmark. However, HCO can be strategically incorporated as a co-thickener or rheology control agent, offering cost savings and enhanced water wash-out resistance.</p>
-      <p>Nagdev Products produces both <strong>NDEVACID™ 12HSA (Flakes/Powder)</strong> and <strong>NDEVAX™ HCO</strong> with ultra-low color values (&lt; 2 Gardner) and tightly controlled acid/hydroxyl numbers, ensuring batch-to-batch consistency in high-speed grease kettles.</p>
+      <p>Nagdev Products produces both <strong>NDEVACID™ 12-HSA (Flakes/Powder)</strong> and <strong>NDEVWAX™ HCO</strong> with ultra-low color values (&lt; 2 Gardner) and tightly controlled acid/hydroxyl numbers, ensuring batch-to-batch consistency in high-speed grease kettles.</p>
     `
   },
   {
