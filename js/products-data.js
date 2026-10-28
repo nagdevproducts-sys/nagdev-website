@@ -867,7 +867,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/ricinoleic-acid.webp",
     "packing": "Bulk in ISO Tank / Flexitank • 190 / 200 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC",
     "shelfLife": "12 months from date of manufacture, in tightly sealed original drums",
-    "application": "12-hydroxy-9-cis-octadecenoic acid obtained by saponification and acidulation of castor oil. Essential intermediate for Turkey Red Oil (sulfated castor oil), cutting fluids, clear soaps, polyurethanes, alkyd resins, and esterification synthesis.",
+    "application": "12-hydroxy-9-cis-octadecenoic acid obtained by hydrolysis and acidulation of castor oil. Essential intermediate for Turkey Red Oil (sulfated castor oil), cutting fluids, clear soaps, polyurethanes, alkyd resins, and esterification synthesis.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -947,11 +947,11 @@ const PRODUCTS_DATABASE = [
     ],
     "physicalForm": "Viscous Dark Liquid",
     "typicalColour": "Brown to Dark Amber",
-    "rawMaterial": "Castor Oil Saponification Aqueous Phase",
+    "rawMaterial": "Castor Oil Hydrolysis Aqueous Phase",
     "image": "images/products/crude-glycerin.webp",
     "packing": "Bulk in ISO Tankers / Flexi-Tanks • 250 kg MS Drums / HDPE Drums • 1000 kg IBC",
     "shelfLife": "12 months from date of manufacture under ambient conditions",
-    "application": "By-product generated during the splitting and saponification of castor oil. Feedstock for glycerin refining plants to produce technical, USP, and pharmaceutical glycerin, as well as anaerobic bio-digesters, animal feed energy supplements, and industrial anti-freeze.",
+    "application": "By-product generated during the splitting and hydrolysis of castor oil. Feedstock for glycerin refining plants to produce technical, USP, and pharmaceutical glycerin, as well as anaerobic bio-digesters, animal feed energy supplements, and industrial anti-freeze.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
