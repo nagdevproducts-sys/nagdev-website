@@ -59,7 +59,8 @@ RULES = {
     "R10": "Any table citing a data source (Agmarknet, SEA, DGCIS, official) must have matching raw data file and generator script",
     "R11": "Banned additions to register's banned phrases (certified regional, oil content, processing parity, etc.)",
     "R12": "Any page claiming data for a period that ends after its own publish date",
-    "R13": "Required standard site template components (header, footer, consent snippet, gtag loader, /js/analytics.js)"
+    "R13": "Required standard site template components (header, footer, consent snippet, gtag loader, /js/analytics.js)",
+    "R14": "Crop and video media captions/alts must not contain location/ownership/facility claims and video must include 'illustrative'"
 }
 
 # Ignored paths
@@ -439,6 +440,123 @@ def check_r13_standard_template(content: str, file_path_str: str):
 
     return findings
 
+
+def check_r14_crop_media_captions(content: str, file_path_str: str):
+    findings = []
+    if not (file_path_str.endswith(".html") or ".html" in file_path_str or "<html" in content.lower()):
+        return findings
+
+    # Only inspect files referencing /images/crop/ or /media/video/
+    if "/images/crop/" not in content and "/media/video/" not in content:
+        return findings
+
+    try:
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(content, "html.parser")
+    except Exception:
+        return findings
+
+    # Banned terms and regexes for R14
+    banned_patterns = [
+        (r'\bNorth\s+Gujarat\b', "North Gujarat"),
+        (r'\bGujarat\b', "Gujarat"),
+        (r'\bBanaskantha\b', "Banaskantha"),
+        (r'\bVav\s*[-/]?\s*Tharad\b', "Vav-Tharad"),
+        (r'\bDeodar\b', "Deodar"),
+        (r'\bSardarpura\b', "Sardarpura"),
+        (r'\bour\b', "our"),
+        (r'\bNagdev\b', "Nagdev"),
+        (r'\b(?:our\s+plant|Nagdev\s+plant|at\s+(?:the|our)\s+plant|(?:crushing|manufacturing|processing|extraction|refining|solvent)\s+plant|plant\s+(?:facility|facilities|equipment|premises|site|operations|setup|floor))\b', "plant (as a facility)"),
+        (r'\bfarms?\s+of\b', "farm of"),
+        (r'\bcleaned\b', "cleaned"),
+        (r'\bprocessing\b', "processing"),
+        (r'\bprocessed\b', "processed"),
+        (r'\bprepared\s+for\b', "prepared for"),
+        (r'\btransport\b', "transport"),
+        (r'\bmandi\b', "mandi"),
+        (r'\bAPMC\b', "APMC"),
+        (r'\bprocured\b', "procured"),
+        # Gujarati equivalents
+        (r'ગુજરાત', "ગુજરાત"),
+        (r'બનાસકાંઠા', "બનાસકાંઠા"),
+        (r'દિયોદર', "દિયોદર"),
+        (r'અમારા', "અમારા"),
+        (r'અમારી', "અમારી"),
+        (r'પ્લાન્ટ', "પ્લાન્ટ (plant)")
+    ]
+
+    elements = soup.find_all(['img', 'source', 'video'])
+    checked_elements = set()
+
+    for el in elements:
+        src = el.get('src', '') or ''
+        srcset = el.get('srcset', '') or ''
+        data_src = el.get('data-src', '') or ''
+        poster = el.get('poster', '') or ''
+
+        combined_src = f"{src} {srcset} {data_src} {poster}"
+        if not ('/images/crop/' in combined_src or '/media/video/' in combined_src):
+            continue
+
+        alt = el.get('alt', '')
+        aria_label = el.get('aria-label', '')
+
+        # Enclosing or associated figcaption
+        fig = el.find_parent('figure')
+        figcaption_text = ""
+        if fig and fig.find('figcaption'):
+            figcaption_text = fig.find('figcaption').get_text(strip=True)
+        else:
+            # Climb up parent containers
+            curr = el.parent
+            for _ in range(4):
+                if curr:
+                    fc = curr.find('figcaption')
+                    if fc:
+                        figcaption_text = fc.get_text(strip=True)
+                        break
+                    curr = curr.parent
+
+        elem_id = (el.name, alt, aria_label, figcaption_text)
+        if elem_id in checked_elements:
+            continue
+        checked_elements.add(elem_id)
+
+        line_num = 1
+        # Check forbidden words across alt, aria-label, figcaption
+        checks = [
+            ("alt text", alt),
+            ("aria-label", aria_label),
+            ("figcaption", figcaption_text)
+        ]
+
+        for label, text_val in checks:
+            if not text_val:
+                continue
+            for pattern, name in banned_patterns:
+                if re.search(pattern, text_val, re.IGNORECASE):
+                    findings.append({
+                        "file": file_path_str,
+                        "line": line_num,
+                        "rule": "R14 Crop/video caption honesty",
+                        "severity": "FAIL",
+                        "text": f"Found forbidden {label} term '{name}' in crop/video media element: \"{text_val}\""
+                    })
+
+        # Video must contain 'illustrative' in figcaption
+        is_video = (el.name == 'video') or ('/media/video/' in combined_src)
+        if is_video:
+            if not figcaption_text or not re.search(r'\billustrative\b', figcaption_text, re.IGNORECASE):
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_num,
+                    "rule": "R14 Crop/video caption honesty",
+                    "severity": "FAIL",
+                    "text": f"Video caption must contain the word 'illustrative'. Found: \"{figcaption_text}\""
+                })
+
+    return findings
+
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
     lines = content.splitlines()
@@ -808,6 +926,11 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     # ----------------------------------------------------
     findings.extend(check_r13_standard_template(content, file_path_str))
 
+    # ----------------------------------------------------
+    # R14: Crop & Video Media Captions / Alt Honesty
+    # ----------------------------------------------------
+    findings.extend(check_r14_crop_media_captions(content, file_path_str))
+
     return findings
 
 def lint_file(file_path: Path, facts: dict = None):
@@ -847,7 +970,7 @@ def run_production_audit(facts: dict):
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 14)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 15)}
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
     cb_ts = int(time.time())
@@ -934,7 +1057,7 @@ def main():
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 14)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 15)}
 
     for f in files:
         f_findings = lint_file(f, facts)
@@ -980,10 +1103,10 @@ def main():
     print(f"  - {report_csv}")
 
     if fail_count > 0:
-        print("\n[FAILED] One or more hard claims gate rules (R1-R13) failed.")
+        print("\n[FAILED] One or more hard claims gate rules (R1-R14) failed.")
         return 1
     else:
-        print("\n[PASSED] All hard claims gate rules (R1-R13) passed with 0 failures!")
+        print("\n[PASSED] All hard claims gate rules (R1-R14) passed with 0 failures!")
         return 0
 
 if __name__ == "__main__":
