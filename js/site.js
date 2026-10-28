@@ -79,6 +79,7 @@
   });
 
   // ── Mega-Menu: Hover-Intent, Click Toggle, Keyboard & Touch Support ────
+  // Desktop Mega Menu & Dropdown Interaction
   const dropdownItem = document.querySelector('.nav-item-has-dropdown');
   if (dropdownItem) {
     const dropdownToggle = dropdownItem.querySelector('.nav-link-dropdown');
@@ -94,7 +95,10 @@
       dropdownItem.classList.add('is-open');
       dropdownItem.classList.add('touch-open');
       if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'true');
-      if (pin) pinnedOpen = true;
+      if (pin) {
+        pinnedOpen = true;
+        dropdownItem.setAttribute('data-pinned', 'true');
+      }
     }
 
     function closeMenu(immediate = false) {
@@ -103,6 +107,7 @@
         closeTimer = null;
         dropdownItem.classList.remove('is-open');
         dropdownItem.classList.remove('touch-open');
+        dropdownItem.removeAttribute('data-pinned');
         if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
         pinnedOpen = false;
       } else {
@@ -111,6 +116,7 @@
         closeTimer = setTimeout(() => {
           dropdownItem.classList.remove('is-open');
           dropdownItem.classList.remove('touch-open');
+          dropdownItem.removeAttribute('data-pinned');
           if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
           closeTimer = null;
         }, 300);
@@ -129,25 +135,19 @@
     // Click toggle
     if (dropdownToggle) {
       dropdownToggle.addEventListener('click', (e) => {
-        if (dropdownItem.classList.contains('is-open') || dropdownItem.classList.contains('touch-open')) {
-          if (pinnedOpen) {
-            e.preventDefault();
-            closeMenu(true);
-          } else {
-            e.preventDefault();
-            openMenu(true);
-          }
+        e.preventDefault();
+        if (pinnedOpen) {
+          closeMenu(true);
         } else {
-          e.preventDefault();
           openMenu(true);
         }
       });
 
-      // Keyboard support
+      // Keyboard support on trigger
       dropdownToggle.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          if (dropdownItem.classList.contains('is-open')) {
+          if (pinnedOpen || dropdownItem.classList.contains('is-open')) {
             closeMenu(true);
           } else {
             openMenu(true);
@@ -167,6 +167,70 @@
         e.preventDefault();
         closeMenu(true);
         if (dropdownToggle) dropdownToggle.focus();
+        return;
+      }
+
+      // Column arrow-key navigation
+      if (megaMenu && (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+        const target = e.target;
+        if (target && target.tagName === 'A' && megaMenu.contains(target)) {
+          const cols = Array.from(megaMenu.querySelectorAll('.mega-col'));
+          const currentCol = target.closest('.mega-col');
+          if (currentCol) {
+            const colIndex = cols.indexOf(currentCol);
+            const colLinks = Array.from(currentCol.querySelectorAll('a'));
+            const linkIndex = colLinks.indexOf(target);
+
+            if (e.key === 'ArrowDown') {
+              if (linkIndex >= 0 && linkIndex < colLinks.length - 1) {
+                e.preventDefault();
+                colLinks[linkIndex + 1].focus();
+              } else if (linkIndex === colLinks.length - 1) {
+                const footerFirst = megaMenu.querySelector('.mega-menu-bottom a');
+                if (footerFirst) {
+                  e.preventDefault();
+                  footerFirst.focus();
+                }
+              }
+            } else if (e.key === 'ArrowUp') {
+              if (linkIndex > 0) {
+                e.preventDefault();
+                colLinks[linkIndex - 1].focus();
+              } else if (linkIndex === 0) {
+                e.preventDefault();
+                if (dropdownToggle) dropdownToggle.focus();
+              }
+            } else if (e.key === 'ArrowRight' && colIndex < cols.length - 1) {
+              e.preventDefault();
+              const nextColLinks = Array.from(cols[colIndex + 1].querySelectorAll('a'));
+              const targetIdx = Math.min(linkIndex, nextColLinks.length - 1);
+              if (targetIdx >= 0 && nextColLinks[targetIdx]) {
+                nextColLinks[targetIdx].focus();
+              }
+            } else if (e.key === 'ArrowLeft' && colIndex > 0) {
+              e.preventDefault();
+              const prevColLinks = Array.from(cols[colIndex - 1].querySelectorAll('a'));
+              const targetIdx = Math.min(linkIndex, prevColLinks.length - 1);
+              if (targetIdx >= 0 && prevColLinks[targetIdx]) {
+                prevColLinks[targetIdx].focus();
+              }
+            }
+          } else if (target.closest('.mega-menu-bottom')) {
+            const footerLinks = Array.from(megaMenu.querySelectorAll('.mega-menu-bottom a'));
+            const fIndex = footerLinks.indexOf(target);
+            if (e.key === 'ArrowRight' && fIndex < footerLinks.length - 1) {
+              e.preventDefault();
+              footerLinks[fIndex + 1].focus();
+            } else if (e.key === 'ArrowLeft' && fIndex > 0) {
+              e.preventDefault();
+              footerLinks[fIndex - 1].focus();
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              const lastColLinks = Array.from(cols[0].querySelectorAll('a'));
+              if (lastColLinks.length) lastColLinks[lastColLinks.length - 1].focus();
+            }
+          }
+        }
       }
     });
 
