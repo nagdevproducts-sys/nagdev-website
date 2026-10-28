@@ -136,7 +136,8 @@ class TestClaimsLint(unittest.TestCase):
             "oil content",
             "seed oil content",
             "processing parity",
-            "weighted benchmark"
+            "weighted benchmark",
+            "triglyceride purity"
         ]
         for phrase in banned:
             html = f"<p>This report evaluates {phrase} across North Gujarat markets.</p>"
