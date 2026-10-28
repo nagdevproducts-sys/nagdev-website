@@ -4855,3 +4855,77 @@ h3[id] {
   gap: 1rem;
   flex-wrap: wrap;
 }
+
+
+/* ==========================================================================
+   MOBILE TAP TARGET ENHANCEMENTS (WCAG 2.5.5 / 2.5.8 >= 44px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .mobile-drawer-close {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+  .mobile-prod-sublink {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .mobile-view-all-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer-link {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .product-app-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .hero-location a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer-social-icon,
+  .footer-social-link,
+  .footer-social-icon-wrap,
+  a:has(> .footer-social-icon) {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-google-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .filter-tab,
+  .ind-chip,
+  .blog-filter-btn,
+  .btn-tds,
+  .btn-sample,
+  .contact-link,
+  .cookie-settings-trigger,
+  .chem-tab-btn,
+  .pipeline-prod-btn,
+  .blog-read-link {
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+  .modal-close {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+}
