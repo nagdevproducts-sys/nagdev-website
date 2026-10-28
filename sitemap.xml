@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.nagdevproducts.com/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    </url>
+      <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-crop-to-seed-poster.webp</image:loc>
+    </image:image>
+  </url>
   <url>
     <loc>https://www.nagdevproducts.com/products</loc>
     <lastmod>2026-10-24</lastmod>
@@ -23,6 +26,12 @@
     <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-crop-field-rows-960w.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-seeds-on-jute-960w.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nagdevproducts.com/bulk-castor-oil-supply</loc>
@@ -41,7 +50,10 @@
     <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    </url>
+      <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-seeds-and-capsules-960w.webp</image:loc>
+    </image:image>
+  </url>
   <url>
     <loc>https://www.nagdevproducts.com/chemistry-tree</loc>
     <lastmod>2026-10-24</lastmod>
@@ -101,13 +113,31 @@
     <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    </url>
+      <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/harvested-castor-capsules-heap-960w.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-capsules-and-seed-in-hand-960w.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-seeds-jute-sack-960w.webp</image:loc>
+    </image:image>
+  </url>
   <url>
     <loc>https://www.nagdevproducts.com/farmers-en</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    </url>
+      <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/harvested-castor-capsules-heap-960w.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-capsules-and-seed-in-hand-960w.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-seeds-jute-sack-960w.webp</image:loc>
+    </image:image>
+  </url>
   <url>
     <loc>https://www.nagdevproducts.com/contact</loc>
     <lastmod>2026-10-24</lastmod>
@@ -359,7 +389,10 @@
     <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    </url>
+      <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-capsules-close-up-960w.webp</image:loc>
+    </image:image>
+  </url>
   <url>
     <loc>https://www.nagdevproducts.com/compare/castor-oil-vs-other-vegetable-oils</loc>
     <lastmod>2026-10-24</lastmod>
@@ -425,7 +458,10 @@
     <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    </url>
+      <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-seeds-close-up-960w.webp</image:loc>
+    </image:image>
+  </url>
   <url>
     <loc>https://www.nagdevproducts.com/glossary/saponification-value</loc>
     <lastmod>2026-10-24</lastmod>
@@ -479,6 +515,9 @@
     <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.nagdevproducts.com/images/crop/castor-capsule-cluster-960w.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nagdevproducts.com/privacy</loc>

@@ -171,6 +171,41 @@
       ]
     },
     {
+      "source": "/media/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/media/video/(.*)\\.mp4",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "video/mp4"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/media/video/(.*)\\.webm",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "video/webm"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/robots.txt",
       "headers": [
         {
@@ -236,4 +271,4 @@
       ]
     }
   ]
-}
+}

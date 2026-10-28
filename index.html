@@ -35,6 +35,18 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "VideoObject",
+      "@id": "https://www.nagdevproducts.com/#video-crop-to-seed",
+      "name": "Castor crop to seed (illustrative)",
+      "description": "Illustrative footage showing green castor plant capsules and harvested castor seeds from North Gujarat's castor belt.",
+      "thumbnailUrl": [
+        "https://www.nagdevproducts.com/images/crop/castor-crop-to-seed-poster.webp"
+      ],
+      "uploadDate": "2026-10-28",
+      "duration": "PT5S",
+      "contentUrl": "https://www.nagdevproducts.com/media/video/castor-crop-to-seed.mp4"
+    },
+    {
       "@type": "Organization",
       "@id": "https://www.nagdevproducts.com/#organization",
       "name": "Nagdev Products",
@@ -853,6 +865,64 @@
   </div>
 </section>
 
+
+<!-- ══════════════════════════════════════ FROM CASTOR CROP TO SEED ══ -->
+<section class="section bg-white" id="crop-seed-section" aria-labelledby="crop-seed-heading" style="padding:4.5rem 0; border-bottom:1px solid var(--border-light);">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:3.5rem; align-items:center;">
+      
+      <!-- Video Column -->
+      <div style="text-align:center;">
+        <div style="position:relative; max-width:292px; max-height:520px; aspect-ratio:9/16; margin:0 auto; border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 12px 32px rgba(11,61,30,0.12); background:#0B3D1E;">
+          <video id="crop-video" muted loop playsinline preload="none" poster="/images/crop/castor-crop-to-seed-poster.webp" width="540" height="960" aria-label="Illustrative footage of castor capsules and seeds" style="width:100%; height:100%; max-height:520px; object-fit:cover; display:block;">
+            <source data-src="/media/video/castor-crop-to-seed.webm" type="video/webm">
+            <source data-src="/media/video/castor-crop-to-seed.mp4" type="video/mp4">
+          </video>
+          <button id="crop-video-play-btn" type="button" aria-label="Play illustrative video" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:64px; height:64px; border-radius:50%; background:rgba(11,61,30,0.85); color:#ffffff; border:2px solid var(--gold); cursor:pointer; display:none; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,0.3); z-index:2;">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28" style="margin-left:3px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+        </div>
+        <figcaption style="font-size:0.8rem; color:var(--text-muted); margin-top:0.75rem; text-align:center;">Castor crop to seed — illustrative footage.</figcaption>
+      </div>
+
+      <!-- Content Column -->
+      <div>
+        <div class="section-eyebrow">Regional Feedstock Origin</div>
+        <h2 class="section-title" id="crop-seed-heading" style="font-size:clamp(1.75rem,3.2vw,2.5rem); margin-bottom:1.25rem;">
+          From Castor Crop to Seed.<br><em>Rooted in North Gujarat.</em>
+        </h2>
+        
+        <div style="display:flex; flex-direction:column; gap:1.25rem; margin-bottom:2rem;">
+          <div style="display:flex; gap:1rem; align-items:flex-start;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background:var(--forest); color:#ffffff; font-size:0.85rem; font-weight:700; flex-shrink:0; margin-top:0.15rem;">✓</span>
+            <p style="font-size:0.95rem; color:var(--charcoal-soft); line-height:1.7; margin:0;">
+              North Gujarat's semi-arid soil and high sun exposure form the core of India's castor belt.
+            </p>
+          </div>
+          <div style="display:flex; gap:1rem; align-items:flex-start;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background:var(--gold); color:#1a1a1a; font-size:0.85rem; font-weight:700; flex-shrink:0; margin-top:0.15rem;">✓</span>
+            <p style="font-size:0.95rem; color:var(--charcoal-soft); line-height:1.7; margin:0;">
+              Direct farm-gate access to local agricultural APMC mandis ensures consistent supply of fresh castor seed arrivals.
+            </p>
+          </div>
+          <div style="display:flex; gap:1rem; align-items:flex-start;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background:var(--forest); color:#ffffff; font-size:0.85rem; font-weight:700; flex-shrink:0; margin-top:0.15rem;">✓</span>
+            <p style="font-size:0.95rem; color:var(--charcoal-soft); line-height:1.7; margin:0;">
+              Mechanical expeller pressing converts cleaned castor seed into unrefined crude oil and high-nitrogen meal.
+            </p>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="/farmers-en" class="btn btn-outline">Farmer Sourcing Program →</a>
+          <a href="/castor-oil-manufacturer-gujarat" class="btn btn-primary">Gujarat Crushing Facility →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ══════════════════════════════════════ COMPANY PROFILE & ORIGIN ══ -->
 <section class="section bg-ivory" aria-labelledby="about-heading">
   <div class="container">
@@ -1176,5 +1246,59 @@
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
 <script src="/js/site.min.js?v=20261023c" defer></script>
+
+<script>
+(function() {
+  var video = document.getElementById('crop-video');
+  var playBtn = document.getElementById('crop-video-play-btn');
+  var section = document.getElementById('crop-seed-section');
+  if (!video || !section) return;
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var saveData = Boolean(navigator.connection && navigator.connection.saveData);
+  var loaded = false;
+
+  function loadVideo() {
+    if (loaded) return;
+    var canVp9 = video.canPlayType && video.canPlayType('video/webm; codecs="vp9"');
+    if (canVp9) {
+      video.src = '/media/video/castor-crop-to-seed.webm';
+    } else {
+      video.src = '/media/video/castor-crop-to-seed.mp4';
+    }
+    video.load();
+    loaded = true;
+  }
+
+  if (prefersReducedMotion || saveData) {
+    if (playBtn) {
+      playBtn.style.display = 'flex';
+      playBtn.addEventListener('click', function() {
+        loadVideo();
+        video.play().then(function() {
+          playBtn.style.display = 'none';
+        }).catch(function(err) { console.log('Video play error:', err); });
+      });
+    }
+  } else {
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            loadVideo();
+            video.play().catch(function(e) { console.log('Auto-play muted prevented:', e); });
+          } else {
+            if (loaded && !video.paused) {
+              video.pause();
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(section);
+    }
+  }
+})();
+</script>
+
 </body>
 </html>
