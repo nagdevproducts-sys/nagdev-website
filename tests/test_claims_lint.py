@@ -363,5 +363,81 @@ class TestClaimsLint(unittest.TestCase):
         fails = [f for f in findings if f["rule"].startswith("R15")]
         self.assertEqual(len(fails), 0, f"R15 must pass for canonical specs, got: {fails}")
 
+
+    def test_r4_old_counts_fail(self):
+        # 27 products and 13 under development must fail R4
+        html = "<p>Nagdev Products produces 27 products across our portfolio, with 13 under development grades.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R4")]
+        self.assertTrue(len(fails) >= 2, f"R4 must fail for old counts (27 products, 13 under development grades), got {fails}")
+
+    def test_r4_new_counts_pass(self):
+        html = "<p>Our portfolio includes 32 products: 7 regular supply, 8 on enquiry, and 17 under development grades.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R4")]
+        self.assertEqual(len(fails), 0, f"R4 must pass for valid counts 32, 7, 8, 17, got {fails}")
+
+    def test_r3_demoted_products_fail_without_under_dev(self):
+        # Ricinoleic Acid, 12-HSA, Refined Glycerin cannot claim production/supply without 'under development'
+        html1 = "<p>We manufacture and supply high-purity Ricinoleic Acid from our plant.</p>"
+        findings1 = lint_content(html1, "test.html", self.facts)
+        fails1 = [f for f in findings1 if f["rule"].startswith("R3")]
+        self.assertTrue(len(fails1) > 0, "R3 must fail for Ricinoleic Acid supply claim without 'under development'")
+
+        html2 = "<p>Nagdev Products offers 12-HSA for grease formulation.</p>"
+        findings2 = lint_content(html2, "test.html", self.facts)
+        fails2 = [f for f in findings2 if f["rule"].startswith("R3")]
+        self.assertTrue(len(fails2) > 0, "R3 must fail for 12-HSA offer claim without 'under development'")
+
+        html3 = "<p>We produce refined glycerin for industrial applications.</p>"
+        findings3 = lint_content(html3, "test.html", self.facts)
+        fails3 = [f for f in findings3 if f["rule"].startswith("R3")]
+        self.assertTrue(len(fails3) > 0, "R3 must fail for refined glycerin production claim without 'under development'")
+
+    def test_r3_demoted_products_pass_with_under_dev(self):
+        html = "<p>Ricinoleic Acid, 12-HSA and refined glycerin are developmental grades currently under development.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R3")]
+        self.assertEqual(len(fails), 0, f"R3 must pass when 'under development' is stated, got {fails}")
+
+    def test_r16_pharma_cosmetic_numeric_spec_fails(self):
+        # Numeric specification on pharma page must fail R16
+        html = """
+        <html>
+        <body>
+          <table>
+            <tr><td>Free Fatty Acids</td><td>0.7% Max</td></tr>
+          </table>
+        </body>
+        </html>
+        """
+        findings = lint_content(html, "products/castor-oil-usp-nf.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R16")]
+        self.assertTrue(len(fails) > 0, "R16 must fail for numeric spec on pharma page")
+
+    def test_r16_pharma_cosmetic_banned_terms_fail(self):
+        # Banned certification/regulatory terms on pharma page must fail R16
+        html = "<p>Manufactured in a GMP certified unit with FDA approval.</p>"
+        findings = lint_content(html, "products/castor-oil-ip.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R16")]
+        self.assertTrue(len(fails) >= 3, f"R16 must fail for GMP, certified, FDA, got {fails}")
+
+    def test_r16_pharma_cosmetic_compliant_passes(self):
+        # Compliant pharma page with no numbers next to specs and no banned terms must pass R16
+        html = """
+        <html>
+        <body>
+          <p>Castor oil supplied for buyers requiring compliance with current European Pharmacopoeia monograph.</p>
+          <table>
+            <tr><td>Free Fatty Acids</td><td>Tested to Ph. Eur. monograph; reported on COA</td></tr>
+            <tr><td>Acid Value</td><td>Tested to monograph limit per batch</td></tr>
+          </table>
+        </body>
+        </html>
+        """
+        findings = lint_content(html, "products/castor-oil-ph-eur.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R16")]
+        self.assertEqual(len(fails), 0, f"R16 must pass for compliant pharma content, got {fails}")
+
 if __name__ == "__main__":
     unittest.main()
