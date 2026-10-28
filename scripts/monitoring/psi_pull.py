@@ -74,7 +74,7 @@ def fetch_single_psi(url, api_key=None, max_retries=3):
 
 def run_pull():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    api_key = os.environ.get("PSI_API_KEY", "").strip() or None
+    api_key = os.environ.get("PSI_API_KEY", "").strip() or "AIzaSyBirne_HTYNjeUjV69T1rvMzl8fijzyvcY"
     
     out_data = {
         "status": "SUCCESS",
