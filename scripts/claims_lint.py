@@ -687,6 +687,10 @@ def check_r16_pharma_cosmetic(content: str, file_path_str: str) -> list:
         r'\b(free\s+fatty\s+acids?|ffa|acid\s+value|saponification\s+value|sap\s+value|iodine\s+value|hydroxyl\s+value|moisture(?:\s+and\s+volatile\s+matter)?|relative\s+density|specific\s+gravity|refractive\s+index|optical\s+rotation|viscosity|colour|color|lovibond|gardner|heavy\s+metals?|peroxide\s+value|unsaponifiable\s+matter|ash)\b',
         re.IGNORECASE
     )
+    spec_val_re = re.compile(
+        r'(?:[:=≤≥<>–\-]\s*\d+(?:\.\d+)?|\b\d+(?:\.\d+)?\s*(?:%|mg\b|ppm\b|cst\b|poise\b|°c\b|max\b|min\b)|\b(?:max|min)\b\s*\d+(?:\.\d+)?|\b\d+\.\d+\b)',
+        re.IGNORECASE
+    )
     for line_idx, line in enumerate(lines, 1):
         if "<script" in line.lower() or "</script>" in line.lower() or "<style" in line.lower() or "href=" in line or "src=" in line:
             continue
@@ -695,8 +699,8 @@ def check_r16_pharma_cosmetic(content: str, file_path_str: str) -> list:
             start = max(0, m.start() - 35)
             end = min(len(plain), m.end() + 45)
             window = plain[start:end]
-            num_match = re.search(r'([:=≤≥<>–\-]|max|min|\b)\s*\d+(?:\.\d+)?\s*(?:%|mg|g|ppm|cst|y|r|\b)', window, re.IGNORECASE)
-            if num_match and re.search(r'\d', num_match.group(0)):
+            num_match = spec_val_re.search(window)
+            if num_match:
                 findings.append({
                     "file": file_path_str,
                     "line": line_idx,
