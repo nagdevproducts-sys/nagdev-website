@@ -193,12 +193,12 @@ def generate_recommendations():
                 "message": f"Performance regression on {name} ({url}): score dropped {prev_score - score} points (from {prev_score} to {score}/100)."
             })
 
-        # Separate absolute threshold rule: Below target: LCP > 2.5 s on <page>
+        # Separate absolute threshold rule: Below target: LCP > 2.5 s on <page> (lab estimate based on median of 3 cache-busted runs)
         if lcp is not None and lcp > 2500:
             recs.append({
                 "severity": "MEDIUM",
-                "rule": f"Below target: LCP > 2.5 s on {name}",
-                "message": f"Below target: LCP > 2.5 s on {name} ({url}): median LCP is {round(lcp / 1000.0, 2)}s ({lcp}ms), exceeding the 2.5 s threshold."
+                "rule": f"Below target: LCP > 2.5 s on {name} (lab estimate)",
+                "message": f"Below target: LCP > 2.5 s on {name} ({url}): median LCP is {round(lcp / 1000.0, 2)}s ({lcp}ms) [lab estimate from 3 cache-busted runs], exceeding the 2.5 s threshold."
             })
 
     # Rule 6: Leads = 0 for 30 days while organic sessions > 100 -> Review CTAs/contact form

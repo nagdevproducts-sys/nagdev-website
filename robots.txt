@@ -40,7 +40,6 @@ Allow: /
 # llms-full.txt: https://www.nagdevproducts.com/llms-full.txt
 
 # Internal folders
-Disallow: /lab/
 Disallow: /scratch/
 Disallow: /scripts/
 
