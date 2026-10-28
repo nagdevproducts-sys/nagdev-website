@@ -96,17 +96,35 @@ def run_pull():
         clss = []
         tbts = []
         errors = []
+        runs_detail = []
         
         for run_idx in range(3):
-            res = fetch_single_psi(url, api_key=api_key)
+            # Cache-busting query to guarantee runs are independent
+            ts = int(time.time())
+            cache_bust = f"?psi={ts}-{run_idx + 1}"
+            run_url = f"{url}{cache_bust}"
+            print(f"  [Run {run_idx + 1}/3] Querying {run_url}...")
+            res = fetch_single_psi(run_url, api_key=api_key)
             if "error" in res:
                 errors.append(res["error"])
+                runs_detail.append({"run": run_idx + 1, "url": run_url, "error": res["error"]})
+                print(f"    Run {run_idx + 1} Error: {res['error']}")
             else:
                 scores.append(res["score"])
                 fcps.append(res["fcp_ms"])
                 lcps.append(res["lcp_ms"])
                 clss.append(res["cls"])
                 tbts.append(res["tbt_ms"])
+                runs_detail.append({
+                    "run": run_idx + 1,
+                    "url": run_url,
+                    "score": res["score"],
+                    "fcp_ms": res["fcp_ms"],
+                    "lcp_ms": res["lcp_ms"],
+                    "cls": res["cls"],
+                    "tbt_ms": res["tbt_ms"]
+                })
+                print(f"    Run {run_idx + 1}: Score={res['score']}, LCP={res['lcp_ms']}ms, FCP={res['fcp_ms']}ms")
             time.sleep(15)  # 15s spacing between calls to respect rate limits
             
         if scores:
@@ -125,15 +143,19 @@ def run_pull():
                 "median_cls": median_cls,
                 "median_tbt_ms": median_tbt,
                 "all_scores": scores,
+                "all_lcps": lcps,
+                "all_fcps": fcps,
+                "runs": runs_detail,
                 "status": "OK"
             })
-            print(f"  -> Score: {median_score} (FCP: {median_fcp}ms, LCP: {median_lcp}ms, CLS: {median_cls}, TBT: {median_tbt}ms)")
+            print(f"  -> Median: Score: {median_score} (FCP: {median_fcp}ms, LCP: {median_lcp}ms, CLS: {median_cls}, TBT: {median_tbt}ms)")
         else:
             out_data["results"].append({
                 "name": name,
                 "url": url,
                 "status": "ERROR",
-                "errors": errors
+                "errors": errors,
+                "runs": runs_detail
             })
             print(f"  -> FAILED: {errors}")
 
