@@ -262,6 +262,17 @@ input, textarea, select { font-family: var(--font-body); }
   transform: translateY(-1px);
 }
 
+.btn-secondary {
+  background: transparent;
+  color: var(--forest);
+  border: 1.5px solid var(--forest);
+}
+.btn-secondary:hover {
+  background: var(--forest);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
 .btn-ghost-white {
   background: transparent;
   color: #fff;
@@ -4014,12 +4025,20 @@ button, a, input, select, textarea {
 }
 
 /* ── Skip to Content (Accessibility) ───────────────────── */
+.skip-link,
 .skip-to-content {
   position: absolute;
   top: -100px;
   left: 1rem;
   z-index: 9999;
-  padding: 0.75rem 1.5rem;
+  padding: 0;
+  margin: -1px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
   background: var(--forest, #1a4731);
   color: #fff;
   font-weight: 700;
@@ -4028,8 +4047,17 @@ button, a, input, select, textarea {
   text-decoration: none;
   transition: top 0.2s;
 }
+.skip-link:focus,
 .skip-to-content:focus {
   top: 0;
+  padding: 0.75rem 1.5rem;
+  margin: 0;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
   outline: 3px solid var(--gold, #c8960c);
   outline-offset: 2px;
 }
@@ -4549,6 +4577,7 @@ h3[id] {
 .product-hero-ctas .btn {
   height: 44px;
   min-height: 44px;
+  max-height: 46px;
   padding: 0 1.25rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -4558,6 +4587,7 @@ h3[id] {
   border-radius: var(--radius-sm, 4px);
   text-decoration: none;
   box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 /* SECTION 3: COMMERCIAL SUMMARY STRIP */

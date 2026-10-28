@@ -67,7 +67,7 @@ SECTION 1: REGULAR COMMERCIAL SUPPLY (7 CORE PRODUCTS)
 - Organic Matter: 80.0% – 85.0% Min
 - Moisture Content: 8.0% – 10.0% Max
 - Residual Oil: 6.0% – 8.0% (expeller process)
-- Agronomic Properties: Naturally contains ricin alkaloid which suppresses soil pests and soil grubs.
+- Agronomic Properties: Naturally rich in organic matter and slow-release nitrogen for soil conditioning.
 
 5. HYDROGENATED CASTOR OIL (HCO / CASTOR WAX) (NDEVWAX™ HCO)
 - CAS Number: 8001-78-3 | EINECS: 232-292-2 | HS Code: 1516.20.91
@@ -169,5 +169,5 @@ DOCUMENTATION DELIVERED WITH EVERY CONSIGNMENT:
 2. Technical Data Sheet (TDS) with complete typical property envelope.
 3. 16-Section Safety Data Sheet (SDS) compliant with UN GHS (Revision 9) safety data sheet guidelines.
 4. Certificate of Origin (COO) issued by recognized Indian Chamber of Commerce or Export Inspection Council (EIC).
-5. Non-manipulation certificate, phytosanitary certificate (for castor cake), and commercial export documentation.
+5. Non-manipulation certificate, export inspection documentation (where required), and commercial export documentation.
 6. Third-party pre-shipment sampling and sealing (SGS, Bureau Veritas, Intertek) supported at buyer request.
