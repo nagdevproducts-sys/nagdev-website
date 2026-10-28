@@ -80,7 +80,7 @@ SECTION 1: REGULAR COMMERCIAL SUPPLY (7 CORE PRODUCTS)
 - Saponification Value: 176 – 186 mg KOH/g
 - Primary Applications: High-temperature multi-purpose lithium lubricating greases, thixotropic anti-sag additives for solvent-based paints and powder coatings, PVC external lubricants, paper water-proofing coatings, and investment casting wax formulations.
 
-6. DEHYDRATED CASTOR OIL (DCO) (NDEVPOL™ DCO)
+6. DEHYDRATED CASTOR OIL (DCO) (NDEVOLEO™ DCO)
 - CAS Number: 64147-40-6 | EINECS: 264-705-7 | HS Code: 1518.00.11
 - Availability: Regular Commercial Supply
 - Physical Form: Clear, pale yellow, viscous drying liquid
@@ -92,7 +92,7 @@ SECTION 1: REGULAR COMMERCIAL SUPPLY (7 CORE PRODUCTS)
 - Hydroxyl Value: 20 – 30 mg KOH/g Max
 - Primary Applications: Fast-drying architectural varnishes, alkyd resin cooking, baking enamels, printing inks, and protective industrial coatings.
 
-7. DCO FATTY ACID (NDEVACID™ DCO)
+7. DCO FATTY ACID (NDEVACID™ DCO-FA)
 - CAS Number: 61789-45-5 | EINECS: 263-000-8 | HS Code: 3823.19.00
 - Availability: Regular Commercial Supply
 - Physical Form: Clear, pale straw liquid
@@ -128,8 +128,8 @@ ADVANCED DERIVATIVES & CO-PRODUCTS (UNDER R&D DEVELOPMENT - 17 GRADES):
 - Bio-Polyurethane Polyols (CAS 68442-88-6, under development): Modified bio-polyols with engineered hydroxyl functionality for rigid spray foams, flexible elastomers, and adhesives.
 - Dioctyl Sebacate / DOS (CAS 122-62-3, under development): Low-temperature synthetic lubricating ester.
 - Dibutyl Sebacate / DBS (CAS 109-43-3, under development): High-efficiency plasticizer for vinyl polymers and pharmaceutical film coatings.
-- Lithium 12-Hydroxystearate (CAS 7620-77-1, under development): Pre-reacted metallic soap powder for direct grease manufacturing.
-- Calcium 12-Hydroxystearate (CAS 3159-62-4, under development): Water-resistant metallic soap for marine greases and calcium-complex greases.
+- Lithium 12-Hydroxystearate (CAS 7620-77-1, under development): Pre-reacted pre-reacted soap powder for direct grease manufacturing.
+- Calcium 12-Hydroxystearate (CAS 3159-62-4, under development): Water-resistant pre-reacted soap for marine greases and calcium-complex greases.
 - Zinc Ricinoleate (CAS 13040-19-2, under development): Coordinated zinc active salt that chemically traps volatile mercaptans and amine malodors in personal care deodorants.
 - Zinc Undecylenate (CAS 557-08-4, under development): Topical antifungal active for pharmaceuticals and footcare powders.
 - Methyl Ricinoleate (CAS 141-24-2, under development): Fatty acid methyl ester for diesel fuel lubricity improvement and specialty synthesis.

@@ -69,7 +69,7 @@ const SITE_CONFIG = {
     coreCount: 14,
     specialtyCount: 13,
     coreLabel: "Core Products",
-    specialtyLabel: "Specialty Range — Available on Enquiry"
+    specialtyLabel: "Under development — Available on Enquiry"
   }
 };
 

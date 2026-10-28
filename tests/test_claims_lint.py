@@ -515,5 +515,54 @@ class TestClaimsLint(unittest.TestCase):
         r17_fails = [f for f in findings if f["rule"] == "R17 Page Identity"]
         self.assertEqual(len(r17_fails), 0, f"R17 must pass for compliant page identity, got: {r17_fails}")
 
+
+    def test_r3_failing_fixture_attribute_manufactured(self):
+        # 1. alt="Sebacic Acid manufactured in Gujarat, India" (R3 FAIL)
+        html = '<img src="/images/products/sebacic-acid.webp" alt="Sebacic Acid manufactured in Gujarat, India">'
+        findings = lint_content(html, "products/test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R3")]
+        self.assertTrue(len(fails) > 0, "R3 must fail for developmental product marked as manufactured in attribute")
+        self.assertIn("Sebacic Acid", fails[0]["text"])
+
+    def test_r4_failing_fixture_explore_27_grades(self):
+        # 2. content="Explore 27 castor oil grades" (R4 FAIL)
+        html = '<meta name="description" content="Explore 27 castor oil grades, bio-based derivatives, high-nitrogen castor meals">'
+        findings = lint_content(html, "products.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R4")]
+        self.assertTrue(len(fails) > 0, "R4 must fail for '27 ... grades'")
+        self.assertIn("27", fails[0]["text"])
+
+    def test_r1_failing_fixture_palletization_fumigated(self):
+        # 3. Palletization:Fumigated wooden/plastic pallets (R1/R11 banned FAIL)
+        html = '<div class="pkg-spec-row"><span class="lbl">Palletization:</span><span class="val">Fumigated wooden/plastic pallets</span></div>'
+        findings = lint_content(html, "products.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") or f["rule"].startswith("R11")]
+        self.assertTrue(len(fails) > 0, "R1/R11 must fail for 'Fumigated'")
+        self.assertTrue(any("fumigat" in f["text"].lower() for f in fails))
+
+    def test_r18_failing_fixture_broken_bp_link(self):
+        # 4. href="/products/castor-oil-Castor%20Oil%20BP" (R18 FAIL)
+        html = '<a href="/products/castor-oil-Castor%20Oil%20BP" class="product-card">Castor Oil BP</a>'
+        findings = lint_content(html, "products.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R18")]
+        self.assertTrue(len(fails) > 0, "R18 must fail for malformed/broken BP link")
+        self.assertTrue(any("castor-oil-Castor%20Oil%20BP" in f["text"] for f in fails))
+
+    def test_r19_failing_fixture_ndev_comm(self):
+        # 5. NDEV-COMM (R19 FAIL)
+        html = '<div class="product-card-brand">NDEV-COMM</div>'
+        findings = lint_content(html, "products.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R19")]
+        self.assertTrue(len(fails) > 0, "R19 must fail for legacy hyphen brand code 'NDEV-COMM'")
+        self.assertTrue(any("NDEV-COMM" in f["text"] for f in fails))
+
+    def test_r1_failing_fixture_copied_from(self):
+        # 6. copied from high-capacity crushing (R1/R11 banned FAIL)
+        html = '<p>Explore quantitative mass balances copied from high-capacity crushing & refining standards.</p>'
+        findings = lint_content(html, "products.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") or f["rule"].startswith("R11")]
+        self.assertTrue(len(fails) > 0, "R1/R11 must fail for 'copied from'")
+        self.assertTrue(any("copied from" in f["text"].lower() for f in fails))
+
 if __name__ == "__main__":
     unittest.main()

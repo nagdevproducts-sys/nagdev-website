@@ -64,7 +64,9 @@ RULES = {
     "R14": "Crop and video media captions/alts must not contain location/ownership/facility claims and video must include 'illustrative'",
     "R15": "Cross-page specification consistency against canonical product pages",
     "R16": "Pharmacopoeia and cosmetic grade pages must contain NO numeric specification values and NO certification/regulatory claims",
-    "R17": "PAGE IDENTITY: on each /products/<slug> page, H1, breadcrumb last item, hero img alt, H2/H3, meta title/description, FAQ questions must refer ONLY to that page's product. Cross-product contamination -> FAIL (related-products block exempt)"
+    "R17": "PAGE IDENTITY: on each /products/<slug> page, H1, breadcrumb last item, hero img alt, H2/H3, meta title/description, FAQ questions must refer ONLY to that page's product. Cross-product contamination -> FAIL (related-products block exempt)",
+    "R18": "INTERNAL LINKS: all internal links must resolve to valid local files and contain no malformed percent encodings",
+    "R19": "BRAND CODES: brand codes must strictly match canonical codes from seo/product-master.json; no legacy NDEV- hyphens or 'Specialty Range'"
 }
 
 # Ignored paths
@@ -85,10 +87,13 @@ def collect_files(root: Path = None):
     if root is None:
         root = REPO_ROOT
     deployable = []
-    for p in root.rglob("*"):
-        if p.is_file() and is_deployable(p):
-            if p.suffix == ".html" or p.name in ["llms.txt", "llms-full.txt", "sitemap.xml"]:
-                deployable.append(p)
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = [d for d in dirnames if d not in IGNORED_PARTS and not d.startswith('.')]
+        for f in filenames:
+            p = Path(dirpath) / f
+            if is_deployable(p):
+                if p.suffix == ".html" or p.name in ["llms.txt", "llms-full.txt", "sitemap.xml"]:
+                    deployable.append(p)
     return sorted(deployable)
 
 def strip_tags(text: str) -> str:
@@ -258,13 +263,29 @@ R11_BANNED_PHRASES = [
     "ultra-low odour",
     "ultra-low odor",
     "dedicated batch testing",
-    "British Pharmacopoeia 93"
+    "British Pharmacopoeia 93",
+    "solvent extraction",
+    "solvent-extracted",
+    "saponification",
+    "copied from",
+    "metal soaps",
+    "Fumigat"
 ]
 
 def get_banned_phrase_pattern(phrase: str) -> str:
     phrase_lower = phrase.strip().lower()
     if phrase_lower in ("deodoriz", "deodoris"):
         return r'(?<!\w)' + re.escape(phrase_lower)
+    elif phrase_lower == "fumigat":
+        return r'(?<![a-zA-Z])fumigat[a-zA-Z]*'
+    elif phrase_lower == "saponification":
+        return r'(?<![a-zA-Z])saponif[a-zA-Z]*(?!(?:[\s\-_]+value))(?![a-zA-Z])'
+    elif phrase_lower in ("solvent extraction", "solvent-extracted"):
+        return r'(?<![a-zA-Z])solvent[\s\-]extract(?:ion|ed)\b'
+    elif phrase_lower == "metal soaps":
+        return r'(?<![a-zA-Z])metal(?:lic)?\s+soaps?(?![a-zA-Z])'
+    elif phrase_lower == "copied from":
+        return r'(?<![a-zA-Z])copied\s+from\b'
     elif phrase_lower in ("injectable", "sterile", "hormone", "transdermal", "laxative", "nematode", "eye ointment"):
         return r'(?<!\w)' + re.escape(phrase_lower) + r'(?:s)?(?!\w)'
     elif phrase_lower in ("bp 93", "british pharmacopoeia 93"):
@@ -930,6 +951,117 @@ def check_r17_page_identity(content: str, file_path_str: str) -> list:
 
     return findings
 
+
+def load_product_master(repo_root: Path = REPO_ROOT):
+    master_path = repo_root / "seo" / "product-master.json"
+    if master_path.exists():
+        try:
+            with open(master_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
+def check_r18_internal_links(content: str, file_path_str: str, repo_root: Path = REPO_ROOT):
+    findings = []
+    if not file_path_str.endswith(".html"):
+        return findings
+
+    # Find all href in a and link tags
+    # Remove script and style tags before checking HTML links
+    no_scripts = re.sub(r'<(?:script|style)\b[^>]*>.*?</(?:script|style)>', ' ', content, flags=re.DOTALL | re.IGNORECASE)
+    hrefs = re.finditer(r"""<(?:a|link)\b[^>]*\bhref=["']([^"']+)["']""", no_scripts, re.IGNORECASE)
+    for hm in hrefs:
+        href = hm.group(1).strip()
+        if not href or href.startswith(("#", "mailto:", "tel:", "javascript:", "data:", "${")):
+            continue
+        if "${" in href or "{{" in href:
+            continue
+            continue
+        if href.startswith(("http://", "https://")):
+            # If it's an internal nagdev URL, extract the path
+            if "nagdevproducts.com" in href:
+                href = re.sub(r'^https?://(?:www\.)?nagdevproducts\.com', '', href)
+            else:
+                continue
+
+        # Check for malformed or un-normalized URL encodings
+        if "%20" in href or " " in href:
+            findings.append({
+                "file": file_path_str,
+                "line": content[:hm.start()].count('\n') + 1,
+                "rule": "R18 Malformed internal link URL",
+                "severity": "FAIL",
+                "text": f"Internal link has un-normalized percent encoding or space: '{href}'"
+            })
+            continue
+
+        clean_path = href.split("?")[0].split("#")[0]
+        if not clean_path or clean_path == "/":
+            continue
+
+        rel = clean_path.lstrip("/")
+        # Verify target existence locally
+        target_file = repo_root / rel
+        target_html = repo_root / (rel + ".html")
+        target_idx = repo_root / rel / "index.html"
+
+        if not (target_file.exists() or target_html.exists() or target_idx.exists()):
+            findings.append({
+                "file": file_path_str,
+                "line": content[:hm.start()].count('\n') + 1,
+                "rule": "R18 Broken internal link",
+                "severity": "FAIL",
+                "text": f"Internal link '{href}' does not resolve to an existing file in repo"
+            })
+    return findings
+
+def check_r19_brand_codes(content: str, file_path_str: str, repo_root: Path = REPO_ROOT):
+    findings = []
+    lines = content.splitlines()
+
+    master = load_product_master(repo_root)
+    canonical_codes = set(p.get("brand_code", "") for p in master if "brand_code" in p)
+
+    legacy_hyphen_re = re.compile(r'\bNDEV-[A-Z0-9\-]+\b')
+    specialty_range_re = re.compile(r'\bSpecialty\s+Range\b', re.IGNORECASE)
+    ndev_brand_re = re.compile(r'\bNDEV[A-Z]+(?:\u2122|™)\s+[A-Z0-9\-]+')
+
+    for line_idx, line in enumerate(lines, 1):
+        # 1. Check legacy hyphens
+        for m in legacy_hyphen_re.finditer(line):
+            findings.append({
+                "file": file_path_str,
+                "line": line_idx,
+                "rule": "R19 Legacy brand code",
+                "severity": "FAIL",
+                "text": f"Found legacy hyphenated brand code: '{m.group(0)}' (must use canonical code from product-master.json)"
+            })
+
+        # 2. Check Specialty Range
+        for m in specialty_range_re.finditer(line):
+            findings.append({
+                "file": file_path_str,
+                "line": line_idx,
+                "rule": "R19 Banned Specialty Range label",
+                "severity": "FAIL",
+                "text": f"Found banned label '{m.group(0)}' (must use 'Under development')"
+            })
+
+        # 3. Check trademarked NDEV brand codes against canonical set
+        for m in ndev_brand_re.finditer(line):
+            code_found = m.group(0).replace('\u2122', '™')
+            if canonical_codes and code_found not in canonical_codes:
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_idx,
+                    "rule": "R19 Non-canonical brand code",
+                    "severity": "FAIL",
+                    "text": f"Brand code '{code_found}' does not match canonical codes in product-master.json"
+                })
+
+    return findings
+
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
     lines = content.splitlines()
@@ -956,7 +1088,7 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     # ----------------------------------------------------
     # Process wording restriction (processes_allowed)
     # ----------------------------------------------------
-    allowed_procs = set(p.lower() for p in facts.get("processes_allowed", []))
+    allowed_procs = set(p.lower() for p in (facts.get("operations", {}).get("processes_allowed") or facts.get("processes_allowed", [])))
     banned_proc_patterns = [
         (r'\bneutrali[sz]ation\b|\bneutrali[sz]e\b|\bneutrali[sz]ing\b|\bneutrali[sz]ed\b', "neutralisation/neutralization"),
         (r'\bdeodori[sz]ation\b|\bdeodori[sz]e\b|\bdeodori[sz]ing\b|\bdeodori[sz]ed\b', "deodorisation/deodorization"),
@@ -1022,6 +1154,13 @@ def lint_content(content: str, file_path_str: str, facts: dict):
         except Exception:
             pass
 
+    # Also collect raw HTML attributes (alt, title, aria-label, meta content)
+    attr_matches = re.finditer(r"""(?:alt|title|aria-label|content)=["']([^"']+)["']""", content, re.IGNORECASE)
+    for am in attr_matches:
+        val = am.group(1).strip()
+        if len(val) > 10:
+            sentences.append(val)
+
     for sent in sentences:
         if DEV_PROD_RE.search(sent) and R3_TRIGGER_RE.search(sent):
             if "under development" not in sent.lower():
@@ -1047,7 +1186,15 @@ def lint_content(content: str, file_path_str: str, facts: dict):
         line_no_urls = re.sub(r'https?://[^\s"\'<>]+', '', line)
         line_no_urls = re.sub(r'%\d{2}', ' ', line_no_urls)
         # Look for numbers preceding products/grades/derivatives
-        count_matches = re.finditer(r'\b(\d+)\s*(?:\+\s*\d+\s*)?(?:core\s+|specialty\s+|commercial\s+|under[- ]development\s+|developmental\s+|on[- ]enquiry\s+|regular[- ]supply\s+)?(products?|grades?|derivatives?)\b', line_no_urls, re.IGNORECASE)
+        # Remove decimal numbers like 21.5 MT so '5' is not extracted
+        line_no_urls = re.sub(r'\d+\.\d+', ' ', line_no_urls)
+        # Remove NLGI Grade mentions
+        line_no_urls = re.sub(r'NLGI\s+Grade\s+\d+', ' ', line_no_urls, flags=re.IGNORECASE)
+        # Remove 12-Hydroxystearic or 12-HSA
+        line_no_urls = re.sub(r'12[- ](?:Hydroxystearic|HSA)', ' ', line_no_urls, flags=re.IGNORECASE)
+        # Remove question counts
+        line_no_urls = re.sub(r'\b\d+\s+critical\s+questions?\b', ' ', line_no_urls, flags=re.IGNORECASE)
+        count_matches = re.finditer(r'\b(\d+)\s*(?:\+\s*\d+\s*)?(?:core\s+|specialty\s+|commercial\s+|under[- ]development\s+|developmental\s+|on[- ]enquiry\s+|regular[- ]supply\s+|advanced\s+|castor(?:\s+oil)?\s+)?(products?|grades?|derivatives?)\b', line_no_urls, re.IGNORECASE)
         for cm in count_matches:
             num = int(cm.group(1))
             if num not in allowed_counts:
@@ -1335,6 +1482,8 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     findings.extend(check_r15_cross_page_specs(content, file_path_str))
     findings.extend(check_r16_pharma_cosmetic(content, file_path_str))
     findings.extend(check_r17_page_identity(content, file_path_str))
+    findings.extend(check_r18_internal_links(content, file_path_str))
+    findings.extend(check_r19_brand_codes(content, file_path_str))
 
     return findings
 
@@ -1378,7 +1527,7 @@ def run_production_audit(facts: dict):
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 18)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 20)}
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
     cb_ts = int(time.time())
@@ -1465,7 +1614,7 @@ def main():
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 18)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 20)}
 
     for f in files:
         f_findings = lint_file(f, facts)

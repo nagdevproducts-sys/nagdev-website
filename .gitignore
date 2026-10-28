@@ -25,3 +25,4 @@ seo/ai-visibility/evidence/
 seo/authority/evidence/
 __pycache__/
 *.pyc
+node_modules/

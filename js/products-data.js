@@ -10,7 +10,7 @@ const PRODUCTS_DATABASE = [
     "id": "commercial-castor-oil",
     "number": "01",
     "name": "Commercial Grade Castor Oil",
-    "brandName": "NDEV-COMM",
+    "brandName": "NDEVOLEO™ COMM",
     "category": "castor-oil",
     "categoryLabel": "Castor Oil",
     "casNumber": "8001-79-4",
@@ -163,7 +163,7 @@ const PRODUCTS_DATABASE = [
     "id": "first-special-grade-castor-oil",
     "number": "03",
     "name": "Refined Castor Oil (First Special Grade – F.S.G / B.S.S)",
-    "brandName": "NDEV-FSG",
+    "brandName": "NDEVOLEO™ FSG",
     "category": "castor-oil",
     "categoryLabel": "Castor Oil",
     "casNumber": "8001-79-4",
@@ -260,7 +260,7 @@ const PRODUCTS_DATABASE = [
     "id": "ppg-castor-oil",
     "number": "04",
     "name": "Refined Castor Oil (Pale Pressed Grade – P.P.G)",
-    "brandName": "NDEV-PPG",
+    "brandName": "NDEVOLEO™ PPG",
     "category": "castor-oil",
     "categoryLabel": "Castor Oil",
     "casNumber": "8001-79-4",
@@ -376,7 +376,7 @@ const PRODUCTS_DATABASE = [
     "id": "cold-pressed-castor-oil",
     "number": "05",
     "name": "Cold Pressed Castor Oil",
-    "brandName": "NDEV-COLD",
+    "brandName": "NDEVOLEO™ CP",
     "category": "castor-oil",
     "categoryLabel": "Castor Oil",
     "casNumber": "8001-79-4",
@@ -620,9 +620,9 @@ const PRODUCTS_DATABASE = [
     "id": "high-protein-castor-meal",
     "number": "08",
     "name": "High Protein Castor Meal (N8/N10)",
-    "brandName": "NDEV-HPC",
+    "brandName": "NDEVAGRO™ HPRO",
     "category": "specialty-derivatives",
-    "categoryLabel": "Specialty Range (Available on Enquiry)",
+    "categoryLabel": "Under development (Available on Enquiry)",
     "casNumber": "68424-10-2",
     "isSpecialtyRange": true,
     "industries": [
@@ -637,7 +637,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/high-protein-castor-meal.webp",
     "packing": "25 kg / 50 kg Laminated HDPE Bags • 1000 kg Jumbo Bags with moisture-barrier liner",
     "shelfLife": "12 months from date of manufacture in cool, dry warehouse",
-    "application": "Specialty high-nitrogen organic plant nutrient and soil conditioner offered under our Specialty Range — Available on Enquiry for precision organic horticulture and customized fertilizer blending formulations.",
+    "application": "Specialty high-nitrogen organic plant nutrient and soil conditioner offered under our Under development — Available on Enquiry for precision organic horticulture and customized fertilizer blending formulations.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -694,7 +694,7 @@ const PRODUCTS_DATABASE = [
     "id": "12-hydroxystearic-acid",
     "number": "09",
     "name": "12-Hydroxy Stearic Acid (12-H.S.A.) Flakes / Powder",
-    "brandName": "NDEVWAX™ 12HSA",
+    "brandName": "NDEVACID™ 12-HSA",
     "category": "derivatives",
     "categoryLabel": "Derivatives",
     "casNumber": "106-14-9",
@@ -756,13 +756,13 @@ const PRODUCTS_DATABASE = [
     ],
     "isSpecialtyRange": false,
     "productGroup": "core",
-    "brandCode": "NDEVWAX™ 12HSA"
+    "brandCode": "NDEVACID™ 12-HSA"
   },
   {
     "id": "hydrogenated-castor-oil",
     "number": "10",
     "name": "Hydrogenated Castor Oil (H.C.O) Flakes / Powder",
-    "brandName": "NDEV-HCO",
+    "brandName": "NDEVWAX™ HCO",
     "category": "derivatives",
     "categoryLabel": "Derivatives",
     "casNumber": "8001-78-3",
@@ -867,7 +867,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/ricinoleic-acid.webp",
     "packing": "Bulk in ISO Tank / Flexitank • 190 / 200 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC",
     "shelfLife": "12 months from date of manufacture, in tightly sealed original drums",
-    "application": "12-hydroxy-9-cis-octadecenoic acid obtained by saponification and acidulation of castor oil. Essential intermediate for Turkey Red Oil (sulfated castor oil), cutting fluids, clear soaps, polyurethanes, alkyd resins, and esterification synthesis.",
+    "application": "12-hydroxy-9-cis-octadecenoic acid obtained by hydrolysis and acidulation of castor oil. Essential intermediate for Turkey Red Oil (sulfated castor oil), cutting fluids, clear soaps, polyurethanes, alkyd resins, and esterification synthesis.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -933,7 +933,7 @@ const PRODUCTS_DATABASE = [
     "id": "crude-glycerin",
     "number": "12",
     "name": "Crude Glycerin",
-    "brandName": "NDEV-CGLY",
+    "brandName": "NDEVGLY™ CRUDE",
     "category": "by-products",
     "categoryLabel": "By-Products",
     "casNumber": "56-81-5",
@@ -947,11 +947,11 @@ const PRODUCTS_DATABASE = [
     ],
     "physicalForm": "Viscous Dark Liquid",
     "typicalColour": "Brown to Dark Amber",
-    "rawMaterial": "Castor Oil Saponification Aqueous Phase",
+    "rawMaterial": "Castor Oil Hydrolysis Aqueous Phase",
     "image": "images/products/crude-glycerin.webp",
     "packing": "Bulk in ISO Tankers / Flexi-Tanks • 250 kg MS Drums / HDPE Drums • 1000 kg IBC",
     "shelfLife": "12 months from date of manufacture under ambient conditions",
-    "application": "By-product generated during the splitting and saponification of castor oil. Feedstock for glycerin refining plants to produce technical, USP, and pharmaceutical glycerin, as well as anaerobic bio-digesters, animal feed energy supplements, and industrial anti-freeze.",
+    "application": "By-product generated during the splitting and hydrolysis of castor oil. Feedstock for glycerin refining plants to produce technical, USP, and pharmaceutical glycerin, as well as anaerobic bio-digesters, animal feed energy supplements, and industrial anti-freeze.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -1010,7 +1010,7 @@ const PRODUCTS_DATABASE = [
     "id": "sodium-sulphate-anhydrous",
     "number": "13",
     "name": "Sodium Sulphate Anhydrous",
-    "brandName": "NDEV-NASO4",
+    "brandName": "NDEVCHEM™ NA2SO4",
     "category": "by-products",
     "categoryLabel": "By-Products",
     "casNumber": "7757-82-6",
@@ -1110,7 +1110,7 @@ const PRODUCTS_DATABASE = [
     "number": "14",
     "name": "Dehydrated Castor Oil (DCO)",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "64147-40-6",
     "industries": [
       "coatings",
@@ -1203,8 +1203,8 @@ const PRODUCTS_DATABASE = [
         "UV Spectrophotometric / GC"
       ]
     ],
-    "brandName": "NDEVPOL™ DCO",
-    "brandCode": "NDEVPOL™ DCO",
+    "brandName": "NDEVOLEO™ DCO",
+    "brandCode": "NDEVOLEO™ DCO",
     "isSpecialtyRange": true,
     "productGroup": "specialty"
   },
@@ -1213,7 +1213,7 @@ const PRODUCTS_DATABASE = [
     "number": "15",
     "name": "Dehydrated Castor Oil Fatty Acid (DCO-FA)",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "61789-45-5",
     "industries": [
       "coatings",
@@ -1312,8 +1312,8 @@ const PRODUCTS_DATABASE = [
         "AOCS Ca 5a-40"
       ]
     ],
-    "brandName": "NDEVACID™ DCO",
-    "brandCode": "NDEVACID™ DCO",
+    "brandName": "NDEVACID™ DCO-FA",
+    "brandCode": "NDEVACID™ DCO-FA",
     "isSpecialtyRange": true,
     "productGroup": "specialty"
   },
@@ -1322,7 +1322,7 @@ const PRODUCTS_DATABASE = [
     "number": "16",
     "name": "Blown / Oxidized Castor Oil",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "68187-84-8",
     "industries": [
       "coatings",
@@ -1425,7 +1425,7 @@ const PRODUCTS_DATABASE = [
     "number": "17",
     "name": "Bio-Polyurethane Polyols (Castor-Oil-Based Polyols)",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "68441-60-1",
     "industries": [
       "polyurethane",
@@ -1534,7 +1534,7 @@ const PRODUCTS_DATABASE = [
     "number": "18",
     "name": "Sebacic Acid",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "111-20-6",
     "industries": [
       "plastics",
@@ -1644,7 +1644,7 @@ const PRODUCTS_DATABASE = [
     "number": "19",
     "name": "Methyl Ricinoleate",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "141-24-2",
     "industries": [
       "lubricants",
@@ -1754,7 +1754,7 @@ const PRODUCTS_DATABASE = [
     "number": "20",
     "name": "Methyl 12-Hydroxystearate (Methyl 12-HSA)",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "141-23-1",
     "industries": [
       "lubricants",
@@ -1863,7 +1863,7 @@ const PRODUCTS_DATABASE = [
     "number": "21",
     "name": "Dioctyl Sebacate (DOS / DEHS)",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "122-62-3",
     "industries": [
       "plastics",
@@ -1966,7 +1966,7 @@ const PRODUCTS_DATABASE = [
     "number": "22",
     "name": "Dibutyl Sebacate (DBS)",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "109-43-3",
     "industries": [
       "plastics",
@@ -2069,7 +2069,7 @@ const PRODUCTS_DATABASE = [
     "number": "23",
     "name": "Lithium 12-Hydroxystearate (Lithium 12-HSA)",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "7620-77-1",
     "industries": [
       "lubricants"
@@ -2177,7 +2177,7 @@ const PRODUCTS_DATABASE = [
     "number": "24",
     "name": "Calcium 12-Hydroxystearate (Calcium 12-HSA)",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "3159-62-4",
     "industries": [
       "lubricants",
@@ -2286,7 +2286,7 @@ const PRODUCTS_DATABASE = [
     "number": "25",
     "name": "Zinc Ricinoleate",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "13040-19-2",
     "industries": [
       "cosmetics",
@@ -2389,7 +2389,7 @@ const PRODUCTS_DATABASE = [
     "number": "26",
     "name": "Zinc Undecylenate",
     "category": "specialty-range",
-    "categoryLabel": "Specialty Range",
+    "categoryLabel": "Under development",
     "casNumber": "557-08-4",
     "industries": [
       "cosmetics",

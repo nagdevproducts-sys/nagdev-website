@@ -78,17 +78,14 @@
     }
   });
 
-  // ── Mega-Menu: Hover-Intent, Click Toggle, Keyboard & Touch Support ────
-  // Desktop Mega Menu & Dropdown Interaction
+  // ── Mega-Menu: Navigation, Hover, Keyboard & Touch Support (Phase 11) ────
   const dropdownItem = document.querySelector('.nav-item-has-dropdown');
   if (dropdownItem) {
     const dropdownToggle = dropdownItem.querySelector('.nav-link-dropdown');
     const megaMenu = dropdownItem.querySelector('.mega-menu');
-    let openTimer = null;
     let closeTimer = null;
-    let pinnedOpen = false;
 
-    function openMenu(pin = false) {
+    function openMenu() {
       if (closeTimer) {
         clearTimeout(closeTimer);
         closeTimer = null;
@@ -96,102 +93,97 @@
       dropdownItem.classList.add('is-open');
       dropdownItem.classList.add('touch-open');
       if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'true');
-      if (pin) {
-        pinnedOpen = true;
-        dropdownItem.setAttribute('data-pinned', 'true');
-      }
     }
 
     function closeMenu(immediate = false) {
-      if (openTimer) {
-        clearTimeout(openTimer);
-        openTimer = null;
-      }
       if (immediate) {
-        if (closeTimer) clearTimeout(closeTimer);
-        closeTimer = null;
+        if (closeTimer) {
+          clearTimeout(closeTimer);
+          closeTimer = null;
+        }
         dropdownItem.classList.remove('is-open');
         dropdownItem.classList.remove('touch-open');
-        dropdownItem.removeAttribute('data-pinned');
         if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
-        pinnedOpen = false;
       } else {
-        if (pinnedOpen) return;
         if (closeTimer) clearTimeout(closeTimer);
         closeTimer = setTimeout(() => {
           dropdownItem.classList.remove('is-open');
           dropdownItem.classList.remove('touch-open');
-          dropdownItem.removeAttribute('data-pinned');
           if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
           closeTimer = null;
         }, 300);
       }
     }
 
-    // Hover intent (desktop): 300ms debounce on open
+    // HOVER (fine pointer): opens the mega-menu; stays open while pointer is on trigger or panel, closes 300ms after leaving
     dropdownItem.addEventListener('mouseenter', () => {
-      if (closeTimer) {
-        clearTimeout(closeTimer);
-        closeTimer = null;
-      }
-      if (!dropdownItem.classList.contains('is-open')) {
-        openTimer = setTimeout(() => {
-          openMenu(false);
-          openTimer = null;
-        }, 300);
+      if (window.matchMedia('(pointer: fine)').matches) {
+        openMenu();
       }
     });
 
     dropdownItem.addEventListener('mouseleave', () => {
-      if (openTimer) {
-        clearTimeout(openTimer);
-        openTimer = null;
+      if (window.matchMedia('(pointer: fine)').matches) {
+        closeMenu(false); // 300ms delay
       }
-      closeMenu(false);
     });
 
-    // Click toggle: clicking "Products" pins the menu open
     if (dropdownToggle) {
+      // CLICK on "Products":
+      // Fine pointer (mouse) -> navigates to /products directly (default anchor navigation)
+      // Touch (coarse pointer): the FIRST tap opens the menu; a tap outside closes it.
       dropdownToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (openTimer) {
-          clearTimeout(openTimer);
-          openTimer = null;
+        const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+        const isOpen = dropdownItem.classList.contains('is-open');
+        if (isCoarse) {
+          if (!isOpen) {
+            e.preventDefault();
+            openMenu();
+          }
+          // If already open on touch, clicking again navigates to /products
         }
-        if (pinnedOpen) {
-          closeMenu(true);
-        } else {
-          openMenu(true);
-        }
+        // Fine pointer: default action (navigates to /products) proceeds!
       });
 
-      // Keyboard support on trigger
+      // KEYBOARD:
+      // Enter on "Products" navigates to /products (default anchor navigation)
+      // ArrowDown / Space opens the menu and focuses the first link; Esc closes it
       dropdownToggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.key === 'Enter') {
+          // Navigates to /products (default action)
+        } else if (e.key === 'ArrowDown' || e.key === ' ') {
           e.preventDefault();
-          if (openTimer) {
-            clearTimeout(openTimer);
-            openTimer = null;
-          }
-          if (pinnedOpen || dropdownItem.classList.contains('is-open')) {
-            closeMenu(true);
-          } else {
-            openMenu(true);
-          }
-        } else if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          if (openTimer) {
-            clearTimeout(openTimer);
-            openTimer = null;
-          }
-          openMenu(true);
+          openMenu();
           const firstLink = megaMenu ? megaMenu.querySelector('a') : null;
           if (firstLink) firstLink.focus();
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          closeMenu(true);
         }
       });
     }
 
-    // Clicking a product link inside the mega menu closes immediately and navigates
+    // Touch / click outside closes menu
+    document.addEventListener('click', (e) => {
+      if (!dropdownItem.contains(e.target)) {
+        closeMenu(true);
+      }
+    });
+    document.addEventListener('touchstart', (e) => {
+      if (!dropdownItem.contains(e.target)) {
+        closeMenu(true);
+      }
+    }, { passive: true });
+
+    // Escape closes menu anywhere
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dropdownItem.classList.contains('is-open')) {
+        closeMenu(true);
+        if (dropdownToggle) dropdownToggle.focus();
+      }
+    });
+
+    // Clicking any link inside mega menu closes immediately
     if (megaMenu) {
       megaMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
@@ -199,14 +191,6 @@
         });
       });
     }
-
-    // Escape key inside or outside closes and returns focus to trigger
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && (pinnedOpen || dropdownItem.classList.contains('is-open'))) {
-        closeMenu(true);
-        if (dropdownToggle) dropdownToggle.focus();
-      }
-    });
 
     // Column arrow-key navigation inside megaMenu
     dropdownItem.addEventListener('keydown', (e) => {
@@ -237,7 +221,12 @@
                 colLinks[linkIndex - 1].focus();
               } else if (linkIndex === 0) {
                 e.preventDefault();
-                if (dropdownToggle) dropdownToggle.focus();
+                const topLink = megaMenu.querySelector('.mega-top-link');
+                if (topLink && target !== topLink) {
+                  topLink.focus();
+                } else if (dropdownToggle) {
+                  dropdownToggle.focus();
+                }
               }
             } else if (e.key === 'ArrowRight' && colIndex < cols.length - 1) {
               e.preventDefault();
@@ -268,15 +257,17 @@
               const lastColLinks = Array.from(cols[0].querySelectorAll('a'));
               if (lastColLinks.length) lastColLinks[lastColLinks.length - 1].focus();
             }
+          } else if (target.classList.contains('mega-top-link')) {
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              const firstColLink = megaMenu.querySelector('.mega-col a');
+              if (firstColLink) firstColLink.focus();
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              if (dropdownToggle) dropdownToggle.focus();
+            }
           }
         }
-      }
-    });
-
-    // Close on click outside
-    document.addEventListener('click', (e) => {
-      if (!dropdownItem.contains(e.target)) {
-        closeMenu(true);
       }
     });
   }

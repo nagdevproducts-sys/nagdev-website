@@ -1,0 +1,258 @@
+[
+  {
+    "slug": "commercial-castor-oil",
+    "display_name": "Commercial Castor Oil",
+    "brand_code": "NDEVOLEO™ COMM",
+    "status": "regular_supply",
+    "category": "Regular Supply",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "first-special-grade-castor-oil",
+    "display_name": "First Special Grade (FSG) Castor Oil",
+    "brand_code": "NDEVOLEO™ FSG",
+    "status": "regular_supply",
+    "category": "Regular Supply",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "fpd-castor-oil",
+    "display_name": "First Pressed Degummed (FPD) Castor Oil",
+    "brand_code": "NDEVOLEO™ FPD",
+    "status": "regular_supply",
+    "category": "Regular Supply",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "castor-cake",
+    "display_name": "Castor Cake",
+    "brand_code": "NDEVAGRO™ CAKE",
+    "status": "regular_supply",
+    "category": "Regular Supply",
+    "cas": "68187-58-6"
+  },
+  {
+    "slug": "hydrogenated-castor-oil",
+    "display_name": "Hydrogenated Castor Oil (HCO)",
+    "brand_code": "NDEVWAX™ HCO",
+    "status": "regular_supply",
+    "category": "Regular Supply",
+    "cas": "8001-78-3"
+  },
+  {
+    "slug": "dehydrated-castor-oil",
+    "display_name": "Dehydrated Castor Oil (DCO)",
+    "brand_code": "NDEVOLEO™ DCO",
+    "status": "regular_supply",
+    "category": "Regular Supply",
+    "cas": "64147-40-6"
+  },
+  {
+    "slug": "dco-fatty-acid",
+    "display_name": "DCO Fatty Acid",
+    "brand_code": "NDEVACID™ DCO-FA",
+    "status": "regular_supply",
+    "category": "Regular Supply",
+    "cas": "61789-45-5"
+  },
+  {
+    "slug": "ppg-castor-oil",
+    "display_name": "Pale Pressed Grade (PPG) Castor Oil",
+    "brand_code": "NDEVOLEO™ PPG",
+    "status": "on_enquiry",
+    "category": "Available on Enquiry",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "cold-pressed-castor-oil",
+    "display_name": "Cold Pressed Castor Oil",
+    "brand_code": "NDEVOLEO™ CP",
+    "status": "on_enquiry",
+    "category": "Available on Enquiry",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "castor-oil-bp93",
+    "display_name": "Castor Oil BP",
+    "brand_code": "NDEVOLEO™ BP",
+    "status": "on_enquiry",
+    "category": "Available on Enquiry",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "castor-oil-usp-nf",
+    "display_name": "Castor Oil USP-NF",
+    "brand_code": "NDEVOLEO™ USP",
+    "status": "on_enquiry",
+    "category": "Available on Enquiry",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "castor-oil-ph-eur",
+    "display_name": "Castor Oil Ph. Eur.",
+    "brand_code": "NDEVOLEO™ EP",
+    "status": "on_enquiry",
+    "category": "Available on Enquiry",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "castor-oil-ip",
+    "display_name": "Castor Oil IP",
+    "brand_code": "NDEVOLEO™ IP",
+    "status": "on_enquiry",
+    "category": "Available on Enquiry",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "castor-oil-jp",
+    "display_name": "Castor Oil JP",
+    "brand_code": "NDEVOLEO™ JP",
+    "status": "on_enquiry",
+    "category": "Available on Enquiry",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "cosmetic-grade-castor-oil",
+    "display_name": "Cosmetic Grade Castor Oil",
+    "brand_code": "NDEVOLEO™ COS",
+    "status": "on_enquiry",
+    "category": "Available on Enquiry",
+    "cas": "8001-79-4"
+  },
+  {
+    "slug": "ricinoleic-acid",
+    "display_name": "Ricinoleic Acid",
+    "brand_code": "NDEVACID™ RIC",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "141-22-0"
+  },
+  {
+    "slug": "12-hydroxystearic-acid",
+    "display_name": "12-Hydroxystearic Acid (12-HSA)",
+    "brand_code": "NDEVACID™ 12-HSA",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "106-14-9"
+  },
+  {
+    "slug": "sebacic-acid",
+    "display_name": "Sebacic Acid",
+    "brand_code": "NDEVACID™ SEB",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "111-20-6"
+  },
+  {
+    "slug": "high-protein-castor-meal",
+    "display_name": "High-Protein Castor Meal",
+    "brand_code": "NDEVAGRO™ HPRO",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "68424-10-2"
+  },
+  {
+    "slug": "crude-glycerin",
+    "display_name": "Crude Glycerin",
+    "brand_code": "NDEVGLY™ CRUDE",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "56-81-5"
+  },
+  {
+    "slug": "refined-glycerin",
+    "display_name": "Refined Glycerin",
+    "brand_code": "NDEVGLY™ REF",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "56-81-5"
+  },
+  {
+    "slug": "bio-polyurethane-polyols",
+    "display_name": "Bio-Polyurethane Polyols",
+    "brand_code": "NDEVPOL™ BIO",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "68442-88-6"
+  },
+  {
+    "slug": "sodium-sulphate-anhydrous",
+    "display_name": "Sodium Sulphate Anhydrous",
+    "brand_code": "NDEVCHEM™ NA2SO4",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "7757-82-6"
+  },
+  {
+    "slug": "dioctyl-sebacate",
+    "display_name": "Dioctyl Sebacate (DOS)",
+    "brand_code": "NDEVEST™ DOS",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "122-62-3"
+  },
+  {
+    "slug": "dibutyl-sebacate",
+    "display_name": "Dibutyl Sebacate (DBS)",
+    "brand_code": "NDEVEST™ DBS",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "109-43-3"
+  },
+  {
+    "slug": "methyl-12-hydroxystearate",
+    "display_name": "Methyl 12-Hydroxystearate",
+    "brand_code": "NDEVEST™ M12H",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "141-23-1"
+  },
+  {
+    "slug": "methyl-ricinoleate",
+    "display_name": "Methyl Ricinoleate",
+    "brand_code": "NDEVEST™ MR",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "141-24-2"
+  },
+  {
+    "slug": "lithium-12-hydroxystearate",
+    "display_name": "Lithium 12-Hydroxystearate",
+    "brand_code": "NDEVSOAP™ LI12",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "7620-77-1"
+  },
+  {
+    "slug": "calcium-12-hydroxystearate",
+    "display_name": "Calcium 12-Hydroxystearate",
+    "brand_code": "NDEVSOAP™ CA12",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "3159-47-5"
+  },
+  {
+    "slug": "zinc-undecylenate",
+    "display_name": "Zinc Undecylenate",
+    "brand_code": "NDEVSOAP™ ZNU",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "557-08-4"
+  },
+  {
+    "slug": "zinc-ricinoleate",
+    "display_name": "Zinc Ricinoleate",
+    "brand_code": "NDEVSOAP™ ZNR",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "13040-19-2"
+  },
+  {
+    "slug": "blown-oxidized-castor-oil",
+    "display_name": "Blown (Oxidized) Castor Oil",
+    "brand_code": "NDEVOX™ BLO",
+    "status": "under_development",
+    "category": "Under development",
+    "cas": "68187-84-8"
+  }
+]
