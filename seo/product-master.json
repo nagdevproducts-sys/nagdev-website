@@ -46,15 +46,15 @@
         "a": "Conforms to industrial standards: free fatty acids below 2.0%, moisture under 0.50%, Lovibond color under 40 units (Y+5R in 1-inch cell), and minimum hydroxyl value of 160 mg KOH/g."
       },
       {
-        "q": "Why is unrefined castor oil selected for alkyd paints and motor racing oils?",
-        "a": "Its high hydroxyl content and natural lubricity provide non-drying film flexibility in alkyd enamel formulations and boundary anti-wear protection in racing engine lubricants."
+        "q": "Why is unrefined castor oil selected for alkyd paints and industrial lubricants?",
+        "a": "Its high hydroxyl content and natural lubricity provide non-drying film flexibility in alkyd enamel formulations and boundary anti-wear protection in heavy-duty industrial lubricants."
       },
       {
         "q": "What bulk liquid transport configurations are dispatched from Deodar?",
         "a": "Supplied in 200 kg tight-head steel drums, 1,000L composite IBC totes, dedicated road tankers, and 21.5 MT flexitanks dispatched to Mundra or Kandla seaport terminals."
       },
       {
-        "q": "Can buyers book forward term supply contracts for commercial castor oil?",
+        "q": "Can buyers book term supply contracts for commercial castor oil?",
         "a": "Yes. We support annual term contracts with scheduled monthly dispatches, formula pricing, and lot-specific Certificate of Analysis documentation."
       }
     ]
@@ -136,8 +136,8 @@
     "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
     "applications": [
       {
-        "title": "Sludge-Free Industrial Lubricants",
-        "desc": "Removal of hydratable phosphatides prevents varnish formation and sludge deposition in high-load industrial machinery and compressors.",
+        "title": "Industrial Lubricants",
+        "desc": "Removal of hydratable phosphatides prevents varnish formation and residue deposition in high-load industrial machinery and compressors.",
         "link": "/applications/castor-oil-for-lubricants"
       },
       {
@@ -396,7 +396,7 @@
       },
       {
         "title": "Specialty Lubricant Blends",
-        "desc": "Ultra-low free acidity and refined clarity provide clean lubricating boundaries for racing engines and precision instrument mechanisms.",
+        "desc": "Ultra-low free acidity and refined clarity provide clean lubricating boundaries for specialty engines and precision instrument mechanisms.",
         "link": "/applications/castor-oil-for-lubricants"
       },
       {
@@ -442,8 +442,8 @@
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       },
       {
-        "title": "Sensitive Dermatological Bases",
-        "desc": "Unprocessed pure expeller quality provides a gentle emollient vehicle for dermatological creams, therapeutic balms, and skin ointments.",
+        "title": "Skin-Care Formulation Bases",
+        "desc": "Unprocessed pure expeller quality provides an emollient vehicle for skin-care creams, balms, and topical formulations.",
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       },
       {
@@ -494,8 +494,8 @@
         "link": "/process-flow"
       },
       {
-        "title": "Nutraceutical Formulation Feedstock",
-        "desc": "Natural triglyceride integrity supports precise softgel encapsulation and formulation requirements upon commercial enquiry.",
+        "title": "Pharmaceutical Formulation Feedstock",
+        "desc": "Natural triglyceride integrity supports liquid fill encapsulation and formulation requirements upon commercial enquiry.",
         "link": "/process-flow"
       }
     ],
@@ -694,7 +694,7 @@
       },
       {
         "q": "Can third-party inspection be conducted prior to vessel loading?",
-        "a": "Yes, buyers may appoint accredited inspection agencies such as SGS or Bureau Veritas for pre-shipment sampling and testing at port terminals."
+        "a": "Yes, buyers may appoint independent inspection agencies such as SGS or Bureau Veritas for pre-shipment sampling and testing at port terminals."
       },
       {
         "q": "What packaging formats are used for overseas container shipping?",
@@ -864,7 +864,7 @@
       },
       {
         "q": "Can overseas grease blenders secure annual monthly supply quotas (under development)?",
-        "a": "Yes. We support global grease blenders with forward term contracts, lot-traceable COAs, and direct ocean container dispatch from Kandla and Mundra (under development)."
+        "a": "Yes. We support global grease blenders with term supply contracts, lot-traceable COAs, and direct ocean container dispatch from Kandla and Mundra (under development)."
       }
     ]
   },
@@ -935,7 +935,7 @@
         "link": "/applications/castor-cake-organic-fertilizer"
       },
       {
-        "title": "Soil Microbiome Conditioning",
+        "title": "Organic Soil Input",
         "desc": "Target organic matter source for improving soil aeration, moisture holding capacity, and cation exchange capacity (under development).",
         "link": "/applications/castor-cake-organic-fertilizer"
       },
@@ -1059,7 +1059,7 @@
       },
       {
         "q": "What container formats are evaluated for refined glycerin under technical development?",
-        "a": "Supplied in 250 kg epoxy-lined steel drums, 1,250 kg food-grade IBC totes, and dedicated stainless steel ISO road tankers (under development)."
+        "a": "Supplied in 250 kg epoxy-lined steel drums, 1,250 kg composite IBC totes, and dedicated stainless steel ISO road tankers (under development)."
       },
       {
         "q": "Which certificates of purity and analytical dossiers accompany refined glycerin lots?",
@@ -1187,7 +1187,7 @@
         "link": "/process-flow"
       },
       {
-        "title": "Military & Aerospace Seals",
+        "title": "Low-Temperature Seals & Elastomers",
         "desc": "Target plasticizing agent for nitrile and neoprene rubber O-rings operating down to sub-zero service temperatures (under development).",
         "link": "/process-flow"
       }
@@ -1203,7 +1203,7 @@
       },
       {
         "q": "Where is DOS evaluated outside synthetic lubricants?",
-        "a": "Cold-resistant outdoor PVC cable sheathing, military radar equipment seals, and automotive interior polymers."
+        "a": "Cold-resistant outdoor PVC cable sheathing, aerospace radar equipment seals, and automotive interior polymers."
       }
     ]
   },
@@ -1229,8 +1229,8 @@
         "link": "/process-flow"
       },
       {
-        "title": "Food-Contact Flexible Films",
-        "desc": "Target non-toxic monomeric plasticizer for flexible vinyl and cellulosic packaging films (under development).",
+        "title": "Flexible Films & Plastics",
+        "desc": "Target monomeric plasticizer for flexible vinyl and cellulosic packaging films (under development).",
         "link": "/process-flow"
       },
       {
@@ -1250,7 +1250,7 @@
       },
       {
         "q": "What regulatory advantage does DBS hold in packaging films?",
-        "a": "Bio-based origin and low toxicity profile facilitate international approvals for food-contact packaging membranes."
+        "a": "Bio-based origin and low toxicity profile facilitate international approvals for flexible packaging packaging membranes."
       }
     ]
   },
@@ -1415,7 +1415,7 @@
       },
       {
         "title": "Rigid PVC Extrusion Lubrication",
-        "desc": "Target non-toxic heat stabilizer and external lubricant for PVC pipes, vinyl siding, and conduit profiles (under development).",
+        "desc": "Target calcium-based heat stabilizer and external lubricant for PVC pipes, vinyl siding, and conduit profiles (under development).",
         "link": "/applications/hco-for-coatings-and-pvc"
       },
       {
@@ -1465,8 +1465,8 @@
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       },
       {
-        "title": "Antibacterial Cosmetic Formulations",
-        "desc": "Target mineral ingredient for deodorants, foot balms, and antimicrobial skin care formulations (under development).",
+        "title": "Cosmetic Formulations",
+        "desc": "Target mineral ingredient for deodorants, foot balms, and personal care skin formulations (under development).",
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       }
     ],
@@ -1553,7 +1553,7 @@
         "link": "/process-flow"
       },
       {
-        "title": "Hydraulic Fluids & Brake Fluids",
+        "title": "Hydraulic Fluid Formulations",
         "desc": "Target shear-stable bio-lubricant component delivering high film strength and seal compatibility in hydraulic systems (under development).",
         "link": "/applications/castor-oil-for-lubricants"
       },

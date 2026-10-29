@@ -287,14 +287,22 @@ def get_banned_phrase_pattern(phrase: str) -> str:
         return r'(?<![a-zA-Z])metal(?:lic)?\s+soaps?(?![a-zA-Z])'
     elif phrase_lower == "copied from":
         return r'(?<![a-zA-Z])copied\s+from\b'
-    elif phrase_lower in ("injectable", "sterile", "hormone", "transdermal", "laxative", "nematode", "eye ointment"):
+    elif phrase_lower in ("injectable", "sterile", "hormone", "transdermal", "laxative", "nematode", "eye ointment", "accredited", "accreditation", "antibacterial", "antimicrobial", "hypoallergenic", "sludge-free", "racing"):
         return r'(?<!\w)' + re.escape(phrase_lower) + r'(?:s)?(?!\w)'
     elif phrase_lower in ("bp 93", "british pharmacopoeia 93"):
         return r'(?<!castor-oil-)(?<!\w)(?:BP[\s\-]+93|British\s+Pharmacopoeia\s*(?:19)?93)(?!\w)'
     else:
         words = phrase.strip().split()
-        flex = r'\s+'.join(re.escape(w) for w in words)
-        return r'(?<!\w)' + flex + r'(?!\w)'
+        if len(words) == 1:
+            return r'(?<!\w)' + re.escape(words[0]) + r'(?:s)?(?!\w)'
+        escaped_words = []
+        for i, w in enumerate(words):
+            esc = re.escape(w)
+            if i == len(words) - 1 and not esc.endswith('s'):
+                esc = esc + r'(?:s)?'
+            escaped_words.append(esc)
+        gap = r'(?:\s+[\w\-]+){0,2}\s+'
+        return r'(?<!\w)' + gap.join(escaped_words) + r'(?!\w)'
 
 MONTH_MAP = {
     "january": 1, "jan": 1, "february": 2, "feb": 2, "march": 3, "mar": 3,
