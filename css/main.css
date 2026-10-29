@@ -5296,3 +5296,231 @@ details[open] .product-faq-chevron {
   min-height: 28px;
   padding: 4px 0;
 }
+
+/* ================================================================
+   PHASE 13 PART B: PACKAGING TILES & MULTI-SAMPLE REQUEST
+   ================================================================ */
+
+/* Packaging Tiles Grid (Feature B3) */
+.product-pkg-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+@media (max-width: 480px) {
+  .product-pkg-tiles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.product-pkg-tile {
+  background: var(--ivory, #FAF8F5);
+  border: 1px solid var(--border-light, #EDE8DF);
+  border-radius: var(--radius-sm, 4px);
+  padding: 0.85rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.product-pkg-tile:hover {
+  border-color: var(--forest, #0B3D1E);
+  transform: translateY(-1px);
+}
+.pkg-tile-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  background: #ffffff;
+  border: 1px solid var(--border-light, #EDE8DF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--forest, #0B3D1E);
+}
+.pkg-tile-text {
+  font-size: var(--text-xs, 12px);
+  line-height: 1.45;
+  color: var(--charcoal, #2B2927);
+  flex: 1;
+}
+.pkg-tile-text strong {
+  display: block;
+  color: var(--forest, #0B3D1E);
+  margin-bottom: 0.15rem;
+  font-weight: 600;
+}
+
+/* Multi-Sample Request Floating Drawer (Feature B2) */
+.sample-request-drawer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 990;
+  background: var(--forest, #0B3D1E);
+  color: #ffffff;
+  border-radius: var(--radius-full, 9999px);
+  box-shadow: 0 8px 32px rgba(11, 61, 30, 0.35);
+  padding: 0.5rem 0.65rem 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: var(--text-sm, 14px);
+  font-weight: 500;
+  transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+  animation: slideUpFade 0.3s ease-out forwards;
+}
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.sample-drawer-body {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.sample-drawer-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.sample-drawer-label {
+  color: #ffffff;
+  font-size: var(--text-xs, 12px);
+  white-space: nowrap;
+}
+.sample-drawer-label strong {
+  color: var(--gold-on-dark, #DFC07A);
+  font-weight: 700;
+}
+.sample-drawer-action {
+  background: var(--gold-on-dark, #DFC07A);
+  color: var(--forest, #0B3D1E);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full, 9999px);
+  font-size: var(--text-xs, 12px);
+  font-weight: 700;
+  text-decoration: none;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+}
+.sample-drawer-action:hover {
+  background: #ffffff;
+  color: var(--forest, #0B3D1E);
+  transform: scale(1.04);
+}
+.sample-drawer-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.25rem;
+  cursor: pointer;
+  min-width: 32px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s;
+}
+.sample-drawer-close:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Sample toggle button states */
+.btn-sample-toggle {
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn-sample-toggle.in-cart {
+  background: var(--forest, #0B3D1E) !important;
+  color: #ffffff !important;
+  border-color: var(--forest, #0B3D1E) !important;
+}
+.btn-sample-toggle-sm {
+  font-size: var(--text-xs, 12px);
+  padding: 0.35rem 0.65rem;
+  min-height: 32px;
+  border-radius: var(--radius-sm, 4px);
+  background: #ffffff;
+  border: 1px solid var(--border-light, #EDE8DF);
+  color: var(--forest, #0B3D1E);
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.btn-sample-toggle-sm:hover {
+  border-color: var(--forest, #0B3D1E);
+}
+
+/* Sample chips on contact page */
+.sample-chips-wrap {
+  background: #FAF8F5;
+  border: 1px solid var(--border-light, #EDE8DF);
+  border-radius: var(--radius-sm, 4px);
+  padding: 0.85rem 1rem;
+}
+.sample-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  border: 1px solid #C4D9CA;
+  border-radius: var(--radius-full, 9999px);
+  padding: 0.3rem 0.75rem;
+  font-size: var(--text-xs, 12px);
+  font-weight: 600;
+  color: var(--forest, #0B3D1E);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.btn-remove-chip {
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #595959);
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 50%;
+  transition: color 0.15s, background 0.15s;
+}
+.btn-remove-chip:hover {
+  color: #c0392b;
+  background: rgba(192, 57, 43, 0.1);
+}
+
+@media (max-width: 640px) {
+  .sample-request-drawer {
+    left: 16px;
+    right: 16px;
+    bottom: 80px;
+    justify-content: space-between;
+  }
+}
+
+.product-card-link-block {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.product-card-link-block:hover {
+  text-decoration: none;
+  color: inherit;
+}

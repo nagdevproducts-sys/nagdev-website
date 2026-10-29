@@ -618,6 +618,13 @@
             </div>
 
             <div class="form-field">
+              <div id="sample-chips-wrap" class="sample-chips-wrap" style="display:none;margin-bottom:0.85rem;">
+                <div style="font-size:var(--text-xs);font-weight:700;color:var(--gold-text);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.4rem;">
+                  Requested Sample Grades (Max 5):
+                </div>
+                <div id="sample-chips-list" class="sample-chips-list" style="display:flex;flex-wrap:wrap;gap:0.5rem;" role="list"></div>
+              </div>
+              <input type="hidden" name="sample_products" id="sample-products-hidden" value="">
               <label class="form-label" for="contact-product">Product(s) of Interest <span class="req">*</span></label>
               <select class="form-input form-select" id="contact-product" name="product" required>
                 <option value="" disabled selected>Select a product or category…</option>
