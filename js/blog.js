@@ -1,214 +1,210 @@
 /**
  * NAGDEV PRODUCTS — BLOG DIRECTORY CONTROLLER
- * Handles client-side rendering, instant search, and category filtering.
+ * Progressive Enhancement: operates strictly on server-rendered cards.
+ * No data array re-rendering, no IndexedDB / localStorage.
  */
 
 (function () {
   'use strict';
 
-  let allPosts = [];
-  let currentCategory = 'all';
-  let searchQuery = '';
+  const POSTS_PER_PAGE = 12;
 
-  const featuredContainer = document.getElementById('featured-post-container');
+  let currentFilter = 'all';
+  let searchQuery = '';
+  let currentPage = 1;
+
   const featuredSection = document.getElementById('featured-section');
   const postsGrid = document.getElementById('blog-posts-grid');
   const searchInput = document.getElementById('blog-search-input');
-  const categoryFilters = document.getElementById('category-filters');
+  const filterContainer = document.getElementById('category-filters');
   const noResultsBox = document.getElementById('blog-no-results');
   const resetBtn = document.getElementById('reset-filters-btn');
+  let paginationContainer = document.getElementById('blog-pagination');
 
-  // Format date helper
-  function formatDate(isoStr) {
-    if (!isoStr) return '';
-    try {
-      const d = new Date(isoStr);
-      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-    } catch (e) {
-      return isoStr;
+  if (!postsGrid) return;
+
+  const cards = Array.from(postsGrid.querySelectorAll('.blog-card'));
+
+  // Ensure pagination container exists in DOM if not present
+  if (!paginationContainer) {
+    paginationContainer = document.createElement('nav');
+    paginationContainer.id = 'blog-pagination';
+    paginationContainer.className = 'blog-pagination';
+    paginationContainer.setAttribute('aria-label', 'Blog pagination');
+    postsGrid.parentNode.insertBefore(paginationContainer, postsGrid.nextSibling);
+  }
+
+  function matchesFilter(card, filter) {
+    if (filter === 'all') return true;
+    const type = (card.getAttribute('data-type') || '').trim();
+    const cat = (card.getAttribute('data-category') || '').trim().toLowerCase();
+    const lang = (card.getAttribute('data-lang') || '').trim().toLowerCase();
+    const f = filter.toLowerCase().trim();
+
+    if (f === 'guide' || f === 't1') {
+      return type === 'T1' || cat.includes('guide');
     }
-  }
-
-  // Escape HTML
-  function esc(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-
-  // Known pre-rendered static HTML files in /blog/
-  const PRE_RENDERED_SLUGS = [
-    'sustainable-castor-oil-derivatives-green-chemistry',
-    'hydrogenated-castor-oil-12-hsa-lithium-greases',
-    'dehydrated-castor-oil-alkyd-resins-coatings',
-    'bio-based-polyurethane-polyols-castor-oil'
-  ];
-
-  // Get article link (clean URL)
-  function getPostLink(post) {
-    if (!post) return '/blog';
-    if (post.slug && PRE_RENDERED_SLUGS.includes(post.slug)) {
-      return `/blog/${post.slug}`;
+    if (f === 'application' || f === 't2') {
+      return type === 'T2' || cat.includes('application');
     }
-    // Dynamic or browser-authored post:
-    return `/blog-post?slug=${encodeURIComponent(post.slug)}`;
+    if (f === 'buyer' || f === 't3') {
+      return type === 'T3' || cat.includes('buyer') || cat.includes('procurement');
+    }
+    if (f === 'regional' || f === 't4') {
+      return type === 'T4' || cat.includes('regional');
+    }
+    if (f === 'gu' || f === 't5') {
+      return type === 'T5' || lang === 'gu';
+    }
+    return type.toLowerCase() === f || cat === f;
   }
 
-  // Render featured post
-  function renderFeatured(post) {
-    if (!featuredContainer || !post) {
-      if (featuredSection) featuredSection.style.display = 'none';
+  function matchesSearch(card, query) {
+    if (!query) return true;
+    const q = query.toLowerCase().trim();
+    const title = (card.querySelector('.blog-card-title')?.textContent || '').toLowerCase();
+    const excerpt = (card.querySelector('.blog-card-excerpt')?.textContent || '').toLowerCase();
+    const category = (card.querySelector('.blog-card-category')?.textContent || '').toLowerCase();
+    return title.includes(q) || excerpt.includes(q) || category.includes(q);
+  }
+
+  function renderPagination(totalPages, activePage) {
+    if (!paginationContainer) return;
+    if (totalPages <= 1) {
+      paginationContainer.style.display = 'none';
+      paginationContainer.innerHTML = '';
       return;
     }
 
-    if (featuredSection) featuredSection.style.display = '';
-    const link = getPostLink(post);
-    featuredContainer.innerHTML = `
-      <div class="featured-card">
-        <a href="${link}" class="featured-media" aria-label="${esc(post.title)}">
-          <img src="${post.coverImage}" alt="${esc(post.title)}" width="1200" height="630" loading="eager">
-        </a>
-        <div class="featured-content">
-          <span class="featured-badge">✦ Featured Insight · ${esc(post.category)}</span>
-          <h2 class="featured-title">
-            <a href="${link}">${esc(post.title)}</a>
-          </h2>
-          <p class="featured-excerpt">${esc(post.seoDescription || '')}</p>
-          <div class="featured-meta">
-            <span>By ${esc(post.author || 'Nagdev Products')}</span>
-            <span>•</span>
-            <time datetime="${post.date}">${formatDate(post.date)}</time>
-            <span>•</span>
-            <span>${esc(post.readTime || '5 min read')}</span>
-          </div>
-          <div>
-            <a href="${link}" class="btn btn-primary btn-sm">Read Full Paper →</a>
-          </div>
-        </div>
-      </div>
-    `;
+    paginationContainer.style.display = 'flex';
+    let html = '';
+
+    // Prev Button
+    html += `<button class="blog-pagination-btn prev-btn" ${activePage === 1 ? 'disabled' : ''} data-page="${activePage - 1}" aria-label="Previous page">&larr; Prev</button>`;
+
+    // Page numbers
+    for (let p = 1; p <= totalPages; p++) {
+      html += `<button class="blog-pagination-btn page-num ${p === activePage ? 'active' : ''}" data-page="${p}" aria-label="Page ${p}" ${p === activePage ? 'aria-current="page"' : ''}>${p}</button>`;
+    }
+
+    // Next Button
+    html += `<button class="blog-pagination-btn next-btn" ${activePage === totalPages ? 'disabled' : ''} data-page="${activePage + 1}" aria-label="Next page">Next &rarr;</button>`;
+
+    paginationContainer.innerHTML = html;
   }
 
-  // Render grid cards
-  function renderGrid(posts) {
-    if (!postsGrid) return;
-    if (!posts.length) {
-      postsGrid.innerHTML = '';
+  function updateView() {
+    const matchingCards = [];
+
+    cards.forEach(card => {
+      if (matchesFilter(card, currentFilter) && matchesSearch(card, searchQuery)) {
+        matchingCards.push(card);
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    const totalMatching = matchingCards.length;
+
+    if (totalMatching === 0) {
       if (noResultsBox) noResultsBox.style.display = 'block';
+      if (paginationContainer) paginationContainer.style.display = 'none';
+      if (featuredSection) featuredSection.style.display = 'none';
       return;
     }
 
     if (noResultsBox) noResultsBox.style.display = 'none';
 
-    postsGrid.innerHTML = posts.map(post => {
-      const link = getPostLink(post);
-      return `
-        <article class="blog-card">
-          <a href="${link}" class="blog-card-media" aria-label="${esc(post.title)}">
-            <img src="${post.coverImage}" alt="${esc(post.title)}" width="600" height="315" loading="lazy">
-          </a>
-          <div class="blog-card-body">
-            <div class="blog-card-category">${esc(post.category)}</div>
-            <h3 class="blog-card-title">
-              <a href="${link}">${esc(post.title)}</a>
-            </h3>
-            <p class="blog-card-excerpt">${esc(post.seoDescription || '')}</p>
-            <div class="blog-card-footer">
-              <time datetime="${post.date}">${formatDate(post.date)} · ${esc(post.readTime || '5 min')}</time>
-              <a href="${link}" class="blog-read-link">Read →</a>
-            </div>
-          </div>
-        </article>
-      `;
-    }).join('');
+    // Show featured only on page 1 of 'all' without search
+    if (featuredSection) {
+      if (currentFilter === 'all' && !searchQuery.trim() && currentPage === 1) {
+        featuredSection.style.display = '';
+      } else {
+        featuredSection.style.display = 'none';
+      }
+    }
+
+    const totalPages = Math.ceil(totalMatching / POSTS_PER_PAGE);
+    if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    const endIndex = startIndex + POSTS_PER_PAGE;
+
+    matchingCards.forEach((card, idx) => {
+      if (idx >= startIndex && idx < endIndex) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    renderPagination(totalPages, currentPage);
   }
 
-  // Filter posts based on search and category
-  function applyFilters() {
-    let filtered = allPosts.slice();
-
-    // Category filter
-    if (currentCategory !== 'all') {
-      filtered = filtered.filter(p => p.category === currentCategory);
-    }
-
-    // Search query filter
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase().trim();
-      filtered = filtered.filter(p => {
-        const titleMatch = (p.title || '').toLowerCase().includes(q);
-        const descMatch = (p.seoDescription || '').toLowerCase().includes(q);
-        const tagsMatch = (p.tags || []).some(t => t.toLowerCase().includes(q));
-        const authorMatch = (p.author || '').toLowerCase().includes(q);
-        return titleMatch || descMatch || tagsMatch || authorMatch;
-      });
-    }
-
-    // If searching or filtering by category, hide separate featured banner and show all filtered in grid
-    if (currentCategory !== 'all' || searchQuery.trim()) {
-      if (featuredSection) featuredSection.style.display = 'none';
-      renderGrid(filtered);
-    } else {
-      // Normal state: pick featured post and render all publications in grid (newest first)
-      const featured = filtered.find(p => p.featured) || filtered[0];
-      renderFeatured(featured);
-      renderGrid(filtered);
-    }
+  // Filter click handler
+  if (filterContainer) {
+    filterContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.blog-filter-btn');
+      if (!btn) return;
+      filterContainer.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.getAttribute('data-filter') || btn.getAttribute('data-category') || 'all';
+      currentPage = 1;
+      updateView();
+    });
   }
 
-  // Initialize
-  async function init() {
-    if (window.BlogStorage) {
-      allPosts = await window.BlogStorage.getAllPosts();
-    } else {
-      allPosts = window.NAGDEV_BLOG_POSTS || [];
-    }
-
-    applyFilters();
-
-    // Category click handler
-    if (categoryFilters) {
-      categoryFilters.addEventListener('click', (e) => {
-        const btn = e.target.closest('.blog-filter-btn');
-        if (!btn) return;
-        categoryFilters.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentCategory = btn.getAttribute('data-category') || 'all';
-        applyFilters();
-      });
-    }
-
-    // Search input handler
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
+  // Search input handler
+  if (searchInput) {
+    let debounceTimer;
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
         searchQuery = e.target.value;
-        applyFilters();
-      });
-    }
-
-    // Reset button
-    if (resetBtn) {
-      resetBtn.addEventListener('click', () => {
-        if (searchInput) searchInput.value = '';
-        searchQuery = '';
-        currentCategory = 'all';
-        if (categoryFilters) {
-          categoryFilters.querySelectorAll('.blog-filter-btn').forEach((b, idx) => {
-            b.classList.toggle('active', idx === 0);
-          });
-        }
-        applyFilters();
-      });
-    }
+        currentPage = 1;
+        updateView();
+      }, 150);
+    });
   }
 
+  // Reset button handler
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      currentFilter = 'all';
+      currentPage = 1;
+      if (filterContainer) {
+        filterContainer.querySelectorAll('.blog-filter-btn').forEach((b, idx) => {
+          b.classList.toggle('active', idx === 0);
+        });
+      }
+      updateView();
+    });
+  }
+
+  // Pagination click handler
+  if (paginationContainer) {
+    paginationContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.blog-pagination-btn');
+      if (!btn || btn.disabled) return;
+      const targetPage = parseInt(btn.getAttribute('data-page'), 10);
+      if (!isNaN(targetPage) && targetPage !== currentPage) {
+        currentPage = targetPage;
+        updateView();
+        const header = document.querySelector('.section-header') || postsGrid;
+        if (header) {
+          header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  }
+
+  // Initial execution to setup page 1
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', updateView);
   } else {
-    init();
+    updateView();
   }
 })();

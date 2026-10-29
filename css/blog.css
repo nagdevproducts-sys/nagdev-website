@@ -1058,3 +1058,49 @@
   font-weight: 700;
   text-decoration: underline;
 }
+
+
+/* ══════════════════════════════════════════ BLOG PAGINATION ═══════════ */
+.blog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-light, #EDE8DF);
+}
+
+.blog-pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 0.85rem;
+  border-radius: var(--radius-sm, 4px);
+  border: 1px solid var(--border-light, #EDE8DF);
+  background: #ffffff;
+  color: var(--forest, #0B3D1E);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.blog-pagination-btn:hover:not(:disabled) {
+  border-color: var(--forest, #0B3D1E);
+  background: var(--forest-subtle, #EBF3ED);
+}
+
+.blog-pagination-btn.active {
+  background: var(--forest, #0B3D1E);
+  color: #ffffff;
+  border-color: var(--forest, #0B3D1E);
+}
+
+.blog-pagination-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

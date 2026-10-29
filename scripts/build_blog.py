@@ -36,6 +36,19 @@ except Exception:
     pass
 
 IST = timezone(timedelta(hours=5, minutes=30))
+FONTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fonts')
+
+def get_build_version():
+    """Retrieve git short SHA for cache-busting asset query strings."""
+    try:
+        import subprocess
+        sha = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']).decode().strip()
+        if sha:
+            return sha
+    except Exception:
+        pass
+    return "20261029d"
+
 
 def parse_ist(dt_str):
     """Parse ISO datetime string with IST offset."""
@@ -147,7 +160,7 @@ def wrap_text(text, font, max_width, draw):
     return lines
 
 def generate_cover_image(title, category, subtitle, out_path, width=1200, height=630, is_gujarati=False):
-    """Generate dark-green cover tile with gold left rule and branding."""
+    """Generate dark-green cover tile with gold left rule and branding using bundled fonts."""
     img = Image.new('RGB', (width, height), color='#0b2e1f')
     draw = ImageDraw.Draw(img)
 
@@ -155,31 +168,30 @@ def generate_cover_image(title, category, subtitle, out_path, width=1200, height
     bar_width = int(width * 0.018)
     draw.rectangle([(0, 0), (bar_width, height)], fill='#d4af37')
 
-    # Fonts
+    # Fonts - prioritize repo-bundled fonts under scripts/fonts/
     if is_gujarati:
         font_candidates = [
+            os.path.join(FONTS_DIR, "NotoSansGujarati-Bold.ttf"),
             "C:/Windows/Fonts/Nirmala.ttc",
-            "C:/Windows/Fonts/ARIALUNI.TTF",
             "/usr/share/fonts/truetype/noto/NotoSansGujarati-Bold.ttf",
             "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
         ]
         sub_candidates = [
+            os.path.join(FONTS_DIR, "NotoSansGujarati-Regular.ttf"),
             "C:/Windows/Fonts/Nirmala.ttc",
-            "C:/Windows/Fonts/ARIALUNI.TTF",
             "/usr/share/fonts/truetype/noto/NotoSansGujarati-Regular.ttf",
             "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
         ]
     else:
         font_candidates = [
+            os.path.join(FONTS_DIR, "NotoSans-Bold.ttf"),
+            os.path.join(FONTS_DIR, "NotoSerif-Bold.ttf"),
             "C:/Windows/Fonts/arialbd.ttf",
-            "C:/Windows/Fonts/calibrib.ttf",
-            "C:/Windows/Fonts/Nirmala.ttc",
             "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
         ]
         sub_candidates = [
+            os.path.join(FONTS_DIR, "NotoSans-Regular.ttf"),
             "C:/Windows/Fonts/arial.ttf",
-            "C:/Windows/Fonts/calibri.ttf",
-            "C:/Windows/Fonts/Nirmala.ttc",
             "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
         ]
 
@@ -199,7 +211,13 @@ def generate_cover_image(title, category, subtitle, out_path, width=1200, height
 
     # 1. Category chip
     chip_y = int(height * 0.14)
-    chip_text = category.upper()
+    if is_gujarati:
+        if not category or not any('\u0A80' <= c <= '\u0AFF' for c in category):
+            chip_text = "ખેડૂત માર્ગદર્શિકા"
+        else:
+            chip_text = category
+    else:
+        chip_text = category.upper()
     chip_bbox = draw.textbbox((0, 0), chip_text, font=chip_font)
     chip_w = chip_bbox[2] - chip_bbox[0]
     chip_h = chip_bbox[3] - chip_bbox[1]
@@ -237,30 +255,35 @@ def generate_cover_image(title, category, subtitle, out_path, width=1200, height
     # 4. Footer line & branding
     foot_y = height - int(height * 0.12)
     draw.line([(left_margin, foot_y - int(height * 0.04)), (width - right_margin, foot_y - int(height * 0.04))], fill='#1e543b', width=1)
-    foot_text = "NAGDEV PRODUCTS PRIVATE LIMITED \u00b7 TECHNICAL GUIDES"
+    if is_gujarati:
+        foot_text = "નાગદેવ પ્રોડક્ટ્સ પ્રાઇવેટ લિમિટેડ | ખેડૂત માર્ગદર્શિકા"
+    else:
+        foot_text = "NAGDEV PRODUCTS PRIVATE LIMITED · TECHNICAL GUIDES"
     draw.text((left_margin, foot_y), foot_text, font=foot_font, fill='#d4af37')
 
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     img.save(out_path, format='WEBP', quality=90)
 
-def generate_post_covers(post_meta):
+def generate_post_covers(post_meta, force=False):
     """Generate both 800x420 and 1200x630 covers for a blog post."""
     slug = post_meta['slug']
     title = post_meta['title']
-    category = post_meta.get('category_name', 'Technical Guide')
+    is_gu = (post_meta.get('type') == 'T5') or (post_meta.get('lang') == 'gu') or any('\u0A80' <= c <= '\u0AFF' for c in title)
+    if is_gu:
+        category = post_meta.get('category_name') or 'ખેડૂત માર્ગદર્શિકા'
+    else:
+        category = post_meta.get('category_name', 'Technical Guide')
     subtitle = post_meta.get('in_brief', '') or post_meta.get('description', '')
     if len(subtitle) > 120:
-        subtitle = subtitle[:117] + '...'
-
-    is_gu = (post_meta.get('lang') == 'gu') or any('\u0A80' <= c <= '\u0AFF' for c in title)
+        subtitle = subtitle[:117] + '...' 
 
     path_800 = f"images/blog-covers/{slug}-800w.webp"
     path_1200 = f"images/blog-covers/{slug}-1200w.webp"
 
-    # Always generate if missing or rebuild
-    if not os.path.exists(path_800):
+    # Always generate if missing or force rebuild
+    if force or not os.path.exists(path_800):
         generate_cover_image(title, category, subtitle, path_800, width=800, height=420, is_gujarati=is_gu)
-    if not os.path.exists(path_1200):
+    if force or not os.path.exists(path_1200):
         generate_cover_image(title, category, subtitle, path_1200, width=1200, height=630, is_gujarati=is_gu)
 
     return path_800, path_1200
@@ -328,6 +351,12 @@ def render_key_facts_table(product_slug, product_data):
   </table>
 </div>
 """
+    # Inject version
+    version = get_build_version()
+    html = html.replace("/css/main.min.css?v=20261023c", f"/css/main.min.css?v={version}")
+    html = html.replace("/css/blog.min.css", f"/css/blog.min.css?v={version}")
+    html = html.replace("/js/analytics.js", f"/js/analytics.js?v={version}")
+    html = html.replace("/js/site.min.js?v=20261023c", f"/js/site.min.js?v={version}")
     return html
 
 def render_spec_table_block(product_slug, product_data):
@@ -852,12 +881,19 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
 
 {footer_html}
 """
+    # Inject version
+    version = get_build_version()
+    html = html.replace("/css/main.min.css?v=20261023c", f"/css/main.min.css?v={version}")
+    html = html.replace("/css/blog.min.css", f"/css/blog.min.css?v={version}")
+    html = html.replace("/js/analytics.js", f"/js/analytics.js?v={version}")
+    html = html.replace("/js/site.min.js?v=20261023c", f"/js/site.min.js?v={version}")
     return html
 
 # ── BLOG INDEX & HOMEPAGE (Task 2b & 2c) ──────────────────────────────────────
 
 def update_blog_index(published_posts):
     """Regenerate blog.html with SSR SS-3 cards and update js/blog-data.js."""
+    version = get_build_version()
     # 1. Update js/blog-data.js
     posts_data = []
     for p in published_posts:
@@ -865,12 +901,15 @@ def update_blog_index(published_posts):
         plain = re.sub(r'<[^>]+>', ' ', p.get('content_html', ''))
         words = len(re.findall(r'\b\w+\b', plain))
         read_time = f"{max(3, round(words / 220))} min read"
+        is_gu = (p.get('type') == 'T5') or any('\u0A80' <= c <= '\u0AFF' for c in p['title'])
+        lang = 'gu' if is_gu else 'en'
+        cat = p.get('category_name', 'માર્ગદર્શિકા' if is_gu else 'Technical Guide')
         
         posts_data.append({
             "id": f"post-{p['slug']}",
             "slug": p['slug'],
             "title": p['title'],
-            "category": p.get('category_name', 'Technical Guide'),
+            "category": cat,
             "type": p.get('type', 'T1'),
             "product_slug": p.get('product_slug', ''),
             "date": format_date_iso(dt),
@@ -898,6 +937,17 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
 
     # Set title (Task 2b)
     blog_html = re.sub(r'<title>.*?</title>', '<title>Technical Guides & Buyer Resources | Nagdev Products</title>', blog_html)
+
+    # Update filter buttons to match Task 2b specification
+    filter_buttons_html = """<div class="blog-filters" role="group" aria-label="Filter articles by category" id="category-filters">
+          <button class="blog-filter-btn active" data-filter="all">All Topics</button>
+          <button class="blog-filter-btn" data-filter="guide">Product Guides</button>
+          <button class="blog-filter-btn" data-filter="application">Applications</button>
+          <button class="blog-filter-btn" data-filter="buyer">Buyer Guides</button>
+          <button class="blog-filter-btn" data-filter="regional">Regional Supply</button>
+          <button class="blog-filter-btn" data-filter="gu">ગુજરાતી</button>
+        </div>"""
+    blog_html = re.sub(r'<div class="blog-filters".*?</div>\s*</div>', f'{filter_buttons_html}\n      </div>', blog_html, flags=re.DOTALL)
         
     cards_html = []
     for p in published_posts:
@@ -907,13 +957,15 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
         read_time = f"{max(3, round(words / 220))} min"
         date_str = format_date_display(dt)
         date_iso = format_date_iso(dt)
-        cat = p.get('category_name', 'Technical Guide')
+        is_gu = (p.get('type') == 'T5') or any('\u0A80' <= c <= '\u0AFF' for c in p['title'])
+        cat = p.get('category_name', 'માર્ગદર્શિકા' if is_gu else 'Technical Guide')
+        lang = 'gu' if is_gu else 'en'
         cover_src = f"/images/blog-covers/{p['slug']}-800w.webp"
         
         cards_html.append(f"""
-        <article class="blog-card" data-category="{cat}" data-type="{p.get('type', 'T1')}" data-product="{p.get('product_slug', '')}">
+        <article class="blog-card" data-category="{cat}" data-type="{p.get('type', 'T1')}" data-product="{p.get('product_slug', '')}" data-lang="{lang}">
           <a href="/blog/{p['slug']}" class="blog-card-media" aria-label="{p['title']}">
-            <img src="{cover_src}" alt="{p['title']}" width="800" height="420" loading="lazy">
+            <img src="{cover_src}" alt="{p['title']}" width="800" height="420" loading="lazy" decoding="async">
           </a>
           <div class="blog-card-body">
             <div class="blog-card-category">{cat}</div>
@@ -929,8 +981,8 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
         </article>
 """)
         
-    grid_replacement = f'<div class="blog-grid blog-cards-grid" id="blog-posts-grid">{"".join(cards_html)}</div>'
-    new_blog_html = re.sub(r'<div class="blog-grid.*?" id="blog-posts-grid">.*?</div>\s*<!-- No Results State -->', f'{grid_replacement}\n\n      <!-- No Results State -->', blog_html, flags=re.DOTALL)
+    grid_replacement = f'<div class="blog-grid blog-cards-grid" id="blog-posts-grid">{" ".join(cards_html)}</div>\n      <nav id="blog-pagination" class="blog-pagination" aria-label="Blog pagination"></nav>'
+    new_blog_html = re.sub(r'<div class="blog-grid.*?" id="blog-posts-grid">.*?</div>(?:\s*<nav id="blog-pagination".*?</nav>)?\s*<!-- No Results State -->', f'{grid_replacement}\n\n      <!-- No Results State -->', blog_html, flags=re.DOTALL)
     
     # 3. Update featured post in blog.html with newest published post
     if published_posts:
@@ -946,7 +998,7 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
         
         feat_card_html = f"""<div class="featured-card">
         <a href="/blog/{feat['slug']}" class="featured-media" aria-label="{feat['title']}">
-          <img src="{feat_cover}" alt="{feat['title']}" width="1200" height="630" loading="eager">
+          <img src="{feat_cover}" alt="{feat['title']}" width="1200" height="630" loading="eager" decoding="async">
         </a>
         <div class="featured-content">
           <span class="featured-badge">&#10022; Featured Technical Guide &middot; {feat_cat}</span>
@@ -967,6 +1019,14 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
         </div>
       </div>"""
         new_blog_html = re.sub(r'<div id="featured-post-container">.*?</div>\s*</div>\s*</div>\s*</section>', f'<div id="featured-post-container">\n{feat_card_html}\n    </div>\n    </div>\n  </section>', new_blog_html, flags=re.DOTALL)
+
+    # 4. Remove blog-storage.js and add cache-busting version strings
+    new_blog_html = re.sub(r'<script src="/js/blog-storage\.js"[^>]*></script>\s*', '', new_blog_html)
+    new_blog_html = re.sub(r'<link rel="stylesheet" href="/css/main\.min\.css(?:\?v=[^"]*)?"', f'<link rel="stylesheet" href="/css/main.min.css?v={version}"', new_blog_html)
+    new_blog_html = re.sub(r'<link rel="stylesheet" href="/css/blog\.min\.css(?:\?v=[^"]*)?"', f'<link rel="stylesheet" href="/css/blog.min.css?v={version}"', new_blog_html)
+    new_blog_html = re.sub(r'<script src="/js/site\.min\.js(?:\?v=[^"]*)?"', f'<script src="/js/site.min.js?v={version}"', new_blog_html)
+    new_blog_html = re.sub(r'<script src="/js/blog\.min\.js(?:\?v=[^"]*)?"', f'<script src="/js/blog.min.js?v={version}"', new_blog_html)
+    new_blog_html = re.sub(r'<script defer src="/js/analytics\.js(?:\?v=[^"]*)?"', f'<script defer src="/js/analytics.js?v={version}"', new_blog_html)
         
     with open('blog.html', 'w', encoding='utf-8') as f:
         f.write(new_blog_html)
@@ -977,6 +1037,8 @@ def update_homepage(published_posts):
         return
     with open('index.html', 'r', encoding='utf-8') as f:
         content = f.read()
+
+    version = get_build_version()
         
     # Pick top 4 newest (Task 2c)
     top4 = published_posts[:4]
@@ -994,7 +1056,7 @@ def update_homepage(published_posts):
         cards_html.append(f"""
         <article class="blog-card" style="background:#ffffff;border:1px solid var(--border-light);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;overflow:hidden;">
           <a href="/blog/{p['slug']}" class="blog-card-media" aria-label="{p['title']}" style="position:relative;width:100%;aspect-ratio:800/420;overflow:hidden;background:#0b2e1f;display:block;">
-            <img src="{cover_src}" alt="{p['title']}" width="800" height="420" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="{cover_src}" alt="{p['title']}" width="800" height="420" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
           </a>
           <div class="blog-card-body" style="padding:1.25rem 1.5rem 1.5rem;display:flex;flex-direction:column;flex-grow:1;">
             <div style="font-size:0.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;">{cat}</div>
@@ -1011,7 +1073,7 @@ def update_homepage(published_posts):
 """)
         
     section_html = f"""<!-- LATEST INSIGHTS SECTION -->
-<section class="section bg-ivory" id="latest-insights" aria-labelledby="insights-heading" style="border-top: 1px solid var(--border-light); padding: 4.5rem 0;">
+<section class="section bg-ivory" id="latest-insights" aria-labelledby="insights-heading" style="border-top: 1px solid var(--border-light); padding: 4.5rem 0; content-visibility: auto; contain-intrinsic-size: 1px 600px;">
   <div class="container">
     <div class="section-header fade-up" style="text-align:center; max-width:760px; margin: 0 auto 3rem;">
       <span class="section-eyebrow" style="color:var(--gold);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:0.85rem;">Technical Perspectives</span>
@@ -1038,16 +1100,18 @@ def update_homepage(published_posts):
 
     if 'id="latest-insights"' in content:
         new_content = re.sub(r'<!-- LATEST INSIGHTS SECTION -->.*?<!-- /LATEST INSIGHTS SECTION -->', section_html, content, flags=re.DOTALL)
-        if new_content == content:
-            new_content = re.sub(r'<section[^>]*id=["\']latest-insights["\'].*?</section>', section_html, content, flags=re.DOTALL)
     else:
-        faq_marker = '<section class="section bg-ivory" id="faq"'
-        if faq_marker in content:
-            new_content = content.replace(faq_marker, f'{section_html}\n\n{faq_marker}')
-        else:
-            cta_marker = '<section class="final-cta-section"'
-            new_content = content.replace(cta_marker, f'{section_html}\n\n{cta_marker}')
-            
+        new_content = content
+
+    # Clean hero preload fetchpriority
+    new_content = re.sub(r'<link rel="preload" as="image" href="/images/castor-field-480w\.avif" type="image/avif" media="\(max-width: 767px\)" fetchpriority="high">',
+                         r'<link rel="preload" as="image" href="/images/castor-field-480w.avif" type="image/avif" media="(max-width: 767px)">',
+                         new_content)
+
+    # Ensure cache-busting on index.html
+    new_content = re.sub(r'<link rel="stylesheet" href="/css/main\.min\.css(?:\?v=[^"]*)?"', f'<link rel="stylesheet" href="/css/main.min.css?v={version}"', new_content)
+    new_content = re.sub(r'<script src="/js/site\.min\.js(?:\?v=[^"]*)?"', f'<script src="/js/site.min.js?v={version}"', new_content)
+
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(new_content)
 
@@ -1371,6 +1435,8 @@ def main():
                 print(f"  -> [{nep['publish_date']}] {nep['slug']}: '{nep['title']}'")
                 print(f"     Primary Keyword: {nep.get('primary_keyword', '')}")
                 print(f"     Live URL: https://www.nagdevproducts.com/blog/{nep['slug']}")
+                # Generate covers during dry run so CI can inspect and upload artifacts
+                generate_post_covers(nep, force=True)
         else:
             print(f"[DRY RUN] All {len(published_posts)} eligible posts are already rendered on disk.")
         if future_posts:

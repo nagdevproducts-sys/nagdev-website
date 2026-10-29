@@ -86,6 +86,14 @@ jobs:
           echo "Running pytest test suite..."
           python -m pytest tests/
 
+      - name: Upload Blog Covers Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: blog-covers
+          path: images/blog-covers/
+          if-no-files-found: ignore
+
       - name: Commit, Push & Index
         if: ${{ github.event.inputs.dry_run != 'true' }}
         env:
