@@ -1,4 +1,5 @@
 # Vercel Deployment Ignore
+content/
 blog-admin.html
 blog/_template.html
 css/blog-admin.css
