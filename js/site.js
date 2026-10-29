@@ -449,37 +449,36 @@
       const nextField = document.getElementById('form-next');
       if (nextField) nextField.value = window.location.origin + window.location.pathname + `?submitted=success&ref=${encodeURIComponent(refNum)}`;
 
-      const payload = {
-        _subject: `Commercial Enquiry [${refNum}]: ${productVal} — ${companyVal} (${nameVal})`,
-        _template: 'table',
-        _captcha: 'false',
-        _replyto: emailVal,
-        'Enquiry Reference': refNum,
-        'Submission Time (IST)': now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-        'Enquiry Type': enquiryTypeVal,
-        'Product(s) of Interest': productVal,
-        'Quantity Required': quantityVal || 'Not specified',
-        'Packing Preference': packingVal || 'Not specified',
-        'Contact Person': nameVal,
-        'Company Name': companyVal,
-        'Email Address': emailVal,
-        'Phone / WhatsApp': phoneVal || 'Not provided',
-        'Country / Region': countryVal || 'Not provided',
-        'Message / Requirements': messageVal || 'No additional message',
-        'Direct Mailbox': 'nagdevproducts@gmail.com'
-      };
+      const formData = new FormData(this);
+      formData.set('_subject', 'Commercial Enquiry [' + refNum + ']: ' + productVal + ' — ' + companyVal + ' (' + nameVal + ')');
+      formData.set('_template', 'table');
+      formData.set('_captcha', 'false');
+      formData.set('_replyto', emailVal);
+      formData.set('Enquiry Reference', refNum);
+      formData.set('Submission Time (IST)', now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }));
+      formData.set('Enquiry Type', enquiryTypeVal);
+      formData.set('Product(s) of Interest', productVal);
+      formData.set('Quantity Required', quantityVal || 'Not specified');
+      formData.set('Packing Preference', packingVal || 'Not specified');
+      formData.set('Contact Person', nameVal);
+      formData.set('Company Name', companyVal);
+      formData.set('Email Address', emailVal);
+      formData.set('Phone / WhatsApp', phoneVal || 'Not provided');
+      formData.set('Country / Region', countryVal || 'Not provided');
+      formData.set('Message / Requirements', messageVal || 'No additional message');
+      formData.set('Direct Mailbox', 'nagdevproducts@gmail.com');
 
       try {
         const response = await fetch('https://formsubmit.co/ajax/nagdevproducts@gmail.com', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: formData
         });
 
-        if (response.ok) {
+        const resData = await response.json().catch(() => ({}));
+        if (response.ok && (resData.success === 'true' || resData.success === true || response.status === 200)) {
           window.showToast(`Enquiry ${refNum} delivered to nagdevproducts@gmail.com!`);
           enquiryForm.style.display = 'none';
           renderEnquirySuccess(refNum, productVal, companyVal, nameVal, emailVal);
