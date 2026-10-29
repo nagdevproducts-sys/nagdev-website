@@ -1,0 +1,75 @@
+name: Weekly Blog Publisher
+
+on:
+  schedule:
+    # Mondays 01:30 UTC = 07:00 IST
+    - cron: '30 1 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  publish-blog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install beautifulsoup4 pyyaml pytest requests
+
+      - name: Build Blog Engine
+        run: |
+          python scripts/build_blog.py
+
+      - name: Detect New Published Posts and Deploy
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if there are newly rendered blog HTML files
+          NEW_FILES=$(git status --porcelain blog/*.html | awk '{print $2}')
+          
+          if [ -z "$NEW_FILES" ]; then
+            echo "No new blog posts scheduled for release this cycle."
+            # Still run queue depth check
+            python scripts/publish_automation.py --check-queue
+            exit 0
+          fi
+          
+          echo "Found new post files to publish:"
+          echo "$NEW_FILES"
+          
+          # Run verification gate before pushing
+          python scripts/claims_lint.py
+          python -m pytest tests/
+          
+          # Identify published post slug and week
+          FIRST_NEW=$(echo "$NEW_FILES" | head -n 1)
+          SLUG=$(basename "$FIRST_NEW" .html)
+          
+          # Git configuration
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add blog/ index.html js/blog-data.js sitemap.xml blog/rss.xml llms.txt seo/keywords.csv
+          git commit -m "chore(blog): publish scheduled post – $SLUG"
+          git push origin main
+          
+          # Post-deployment automation: verify live 200, ping indexers, generate social pack & queue alert
+          echo "Waiting 30 seconds for Vercel production build to trigger..."
+          sleep 30
+          
+          python scripts/publish_automation.py --post-slug "$SLUG" --verify-url --ping --social-pack --check-queue
