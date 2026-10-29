@@ -9,10 +9,12 @@ scratch/
 scripts/*
 !scripts/claims_lint.py
 !scripts/build_blog.py
+!scripts/cache_bust.py
 !scripts/publish_automation.py
 !scripts/workflows/
 !scripts/monitoring/
 !scripts/outreach/
+!scripts/fonts/
 monitoring_output/
 PUBLIC_URL.txt
 before_after_report.md
