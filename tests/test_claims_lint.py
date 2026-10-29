@@ -90,8 +90,10 @@ class TestClaimsLint(unittest.TestCase):
           <script defer src="/js/analytics.js"></script>
         </head>
         <body>
-          <header class="site-header"><nav>Menu</nav></header>
-          <main>
+          <a href="#main-content" class="skip-to-content">Skip to main content</a>
+          <div class="top-bar">Contact Info</div>
+          <header class="site-header"><nav><ul class="nav-list"><li><a href="/products">Products</a></li></ul></nav></header>
+          <main id="main-content">
             <p>Commercial Castor Oil is raw unrefined castor oil produced by Nagdev Products at its 50 TPD expeller plant in Deodar, Vav-Tharad district, North Gujarat.</p>
             <p>We source castor seeds directly from local farmers in Banaskantha and Vav-Tharad.</p>
             <p>Documentation for buyer qualification includes COA per lot, TDS, and SDS. Third-party inspection by SGS, Bureau Veritas or Intertek can be arranged at the buyer's request and cost.</p>
@@ -106,7 +108,11 @@ class TestClaimsLint(unittest.TestCase):
               </table>
             </section>
           </main>
-          <footer class="site-footer"><p>Copyright 2026</p></footer>
+          <footer class="site-footer">
+            <p>Copyright 2026</p>
+            <button type="button" id="cookie-settings-btn" class="cookie-settings-trigger">Cookie Settings</button>
+          </footer>
+          <a href="https://wa.me/916352098306" class="whatsapp-float" id="whatsapp-fab">WhatsApp</a>
         </body>
         </html>
         """
@@ -186,6 +192,42 @@ class TestClaimsLint(unittest.TestCase):
         self.assertIn("site footer", fails[0]["text"])
         self.assertIn("analytics script", fails[0]["text"])
 
+    def test_r13_bare_blog_post_fails(self):
+        # Failing fixture: Previous bare post HTML lacking top bar, site header, mega-menu, cookie trigger, whatsapp button
+        bare_post_html = """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <title>Bare Post | Nagdev Products</title>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {'analytics_storage': 'denied'});
+          </script>
+          <script defer src="/js/analytics.js"></script>
+        </head>
+        <body>
+          <a href="#main-content" class="skip-to-content">Skip to main content</a>
+          <article class="blog-article">
+            <header class="blog-article-header">
+              <h1>Bare Post Title</h1>
+            </header>
+            <p>Some content</p>
+          </article>
+          <footer class="site-footer" role="contentinfo"><div class="container-wide"><p>&copy; 2026 Nagdev Products</p></div></footer>
+        </body>
+        </html>
+        """
+        findings = lint_content(bare_post_html, "blog/test-bare-post.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R13")]
+        self.assertTrue(len(fails) > 0, "R13 must fail on bare blog post lacking top-bar, site-header, nav-list, cookie-settings, whatsapp")
+        fail_text = fails[0]["text"]
+        self.assertIn("site header", fail_text)
+        self.assertIn("top contact bar", fail_text)
+        self.assertIn("main navigation", fail_text)
+        self.assertIn("cookie settings", fail_text)
+        self.assertIn("WhatsApp button", fail_text)
+
     def test_r13_clean_standard_page_passes(self):
         standard_html = """
         <!DOCTYPE html>
@@ -200,9 +242,16 @@ class TestClaimsLint(unittest.TestCase):
           <script defer src="/js/analytics.js"></script>
         </head>
         <body>
-          <header class="site-header"><nav>Menu</nav></header>
-          <main><p>Valid content here.</p></main>
-          <footer class="site-footer"><p>Copyright 2026</p></footer>
+          <a href="#main-content" class="skip-to-content">Skip to main content</a>
+          <div class="top-bar">Contact Info</div>
+          <header class="site-header">
+            <ul class="nav-list"><li><a href="/blog">Blog</a></li></ul>
+          </header>
+          <main id="main-content"><p>Valid content here.</p></main>
+          <footer class="site-footer">
+            <button type="button" id="cookie-settings-btn" class="cookie-settings-trigger">Cookie Settings</button>
+          </footer>
+          <a href="https://wa.me/916352098306" class="whatsapp-float" id="whatsapp-fab">WhatsApp</a>
         </body>
         </html>
         """

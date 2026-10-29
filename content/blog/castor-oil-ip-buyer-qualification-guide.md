@@ -15,7 +15,7 @@ in_brief: "Consult this castor oil IP buyer qualification guide for vital Indian
 faqs:
   - q: "What regulatory authority oversees the Indian Pharmacopoeia (IP)?"
     a: "The Indian Pharmacopoeia Commission (IPC), operating under the Ministry of Health and Family Welfare, publishes the official standards under the Drugs and Cosmetics Act."
-  - q: "What primary testing criteria are verified for Castor Oil IP?"
+  - q: "What primary testing criteria are tested for Castor Oil IP?"
     a: "The IP monograph specifies verification of acid value, optical rotation, relative density, refractive index, iodine number, soap formation value, and unsaponifiable matter."
   - q: "How does mechanical expeller crushing support IP grade purity?"
     a: "Expelling whole seeds mechanically without chemical extraction solvents ensures pure vegetable oil free from solvent residues or foreign chemical adulterants."

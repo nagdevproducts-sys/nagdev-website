@@ -12,7 +12,7 @@ secondary_keywords:
 - industrial castor oil Deodar
 - unrefined castor oil supplier
 lang: en
-in_brief: Looking for a verified commercial castor oil supplier in Gujarat? Nagdev
+in_brief: Looking for a commercial castor oil supplier in Gujarat? Nagdev
   Products operates a 50 TPD expeller crushing facility in Deodar, North Gujarat.
   We produce unrefined commercial castor oil directly from regional seeds, providing
   steady bulk supply in drums, IBC totes, and flexitanks with full lot-specific Certificate
@@ -66,9 +66,9 @@ Gujarat produces over three-quarters of India's annual castor harvest, driven by
 
 From our Deodar crushing plant, road logistics provide rapid connectivity across domestic industrial corridors and seaport departure gates:
 
-- **Western India Industrial Corridors**: Seamless transit via SH 127 and NH 27 connects our facility to major manufacturing clusters in Ahmedabad, Vadodara, Dahej, Ankleshwar, and Vapi.
+- **Western India Industrial Corridors**: Seamless transit direct road transit connects our facility to major manufacturing clusters in Ahmedabad, Vadodara, Dahej, Ankleshwar, and Vapi.
 - **Northern Industrial Markets**: Reliable freight lines supply manufacturing facilities in Rajasthan, Haryana, Delhi NCR, and Punjab.
-- **Port Logistics for Export Enquiries**: Export enquiries welcome. Our plant is located within 260 km of Kandla (Deendayal Port) and 310 km of Mundra Port, allowing liquid flexitanks and containerized drums to arrive at dockside container freight stations within hours of dispatch.
+- **Port Logistics for Export Enquiries**: Export enquiries welcome. Our plant is equipped with road access to Kandla (Deendayal Port) and Mundra Port, allowing liquid flexitanks and containerized drums to arrive at dockside container freight stations efficiently.
 
 ## Technical Specifications & Plain Parameter Explanations
 

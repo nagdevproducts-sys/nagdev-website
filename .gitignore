@@ -29,3 +29,5 @@ seo/authority/evidence/
 __pycache__/
 *.pyc
 node_modules/
+.vercel
+.env*

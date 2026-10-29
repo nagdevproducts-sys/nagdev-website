@@ -1,7 +1,7 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':!.github' ':!scripts' ':!seo' ':!tests' ':!content'",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':!.github' ':!tests'",
   "redirects": [
     {
       "source": "/contact-us/",
@@ -110,12 +110,12 @@
     },
     {
       "source": "/blog/bio-based-polyurethane-polyols-castor-oil",
-      "destination": "/blog",
+      "destination": "/castor-oil-derivatives",
       "permanent": true
     },
     {
       "source": "/blog/bio-based-polyurethane-polyols-castor-oil.html",
-      "destination": "/blog",
+      "destination": "/castor-oil-derivatives",
       "permanent": true
     },
     {
@@ -140,11 +140,21 @@
     },
     {
       "source": "/blog/sustainable-castor-oil-derivatives-green-chemistry",
-      "destination": "/blog",
+      "destination": "/castor-oil-derivatives",
       "permanent": true
     },
     {
       "source": "/blog/sustainable-castor-oil-derivatives-green-chemistry.html",
+      "destination": "/castor-oil-derivatives",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post.html",
       "destination": "/blog",
       "permanent": true
     }

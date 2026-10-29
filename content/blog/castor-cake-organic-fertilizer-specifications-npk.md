@@ -68,4 +68,4 @@ Our distribution infrastructure services agricultural cooperatives and fertilize
 - **Interstate Farm Logistics**: Regular road freight connects Deodar to agricultural markets and plantation buyers in Rajasthan, Maharashtra, Madhya Pradesh, and Punjab.
 - **Export Seaports**: Export enquiries welcome. Proximity to Mundra Port and Deendayal Port (Kandla) allows containerized export shipments of 50 kg bags or jumbo sacks to overseas agricultural markets.
 
-Procuring directly from our Deodar crushing mill guarantees bulk buyers verified castor cake fertilizer specifications NPK, high organic matter, and consistent batch quality for soil nutrition.
+Procuring directly from our Deodar crushing mill guarantees bulk buyers official castor cake fertilizer specifications NPK, high organic matter, and consistent batch quality for soil nutrition.

@@ -16,7 +16,7 @@ faqs:
   - q: "What industrial clusters in Gujarat receive bulk deliveries from Deodar?"
     a: "We supply manufacturing facilities in Ahmedabad, Sanand, Vadodara, Nandesari, Ankleshwar, Panoli, Dahej PCPIR, and Vapi."
   - q: "What lead times are standard for bulk deliveries across Gujarat?"
-    a: "Dedicated road tankers and drum trucks typically deliver to central and southern Gujarat industrial estates within 24 to 48 hours of order confirmation."
+    a: "Dedicated road tankers and drum trucks deliver to central and southern Gujarat industrial estates via state highway freight corridors."
   - q: "What transportation formats are used for domestic industrial buyers?"
     a: "We operate dedicated stainless steel road tankers (20 to 30 MT capacity), 1,000 L composite IBCs, and 200 kg steel drums."
   - q: "How does plant location in Deodar improve supply reliability?"
@@ -37,11 +37,11 @@ Located in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), Nagd
 
 Our logistics desk coordinates continuous surface transport across Gujarat's primary manufacturing zones:
 
-- **Ahmedabad and Sanand Industrial Belt (160 to 180 km / 4 to 6 hours)**: Sourcing commercial, FSG, and cosmetic grades for textile auxiliary manufacturing, engineering lubricants, automobile coatings, and personal care contract packaging in Naroda, Vatva, Odhav, and Sanand GIDC estates.
-- **Vadodara and Nandesari Chemical Corridor (260 to 290 km / 6 to 8 hours)**: Supplying First Special Grade (FSG) and Hydrogenated Castor Oil (HCO) to specialty synthetic resin, lubricant compounding, and rubber additive plants in Nandesari, Makarpura, and Ranoli.
-- **Bharuch, Ankleshwar, and Panoli Chemical Parks (340 to 370 km / 8 to 10 hours)**: Anchoring deliveries of FPD castor oil, DCO, and DCO fatty acids to India's dense chemical synthesis clusters for polyurethane polyols, paint resins, and agrochemical adjuvants.
-- **Dahej Petroleum, Chemicals and Petrochemicals Investment Region (PCPIR) (380 km / 9 to 11 hours)**: Coordinating dedicated bulk road tankers of industrial castor oil for mega-scale chemical synthesis and port-based industrial processing.
-- **Vapi and Valsad Industrial Zone (460 to 490 km / 11 to 14 hours)**: Serving southern Gujarat's coatings, printing ink, leather chemical, and textile specialty manufacturers with scheduled weekly drum and IBC dispatches.
+- **Ahmedabad and Sanand Industrial Belt **: Sourcing commercial, FSG, and cosmetic grades for textile auxiliary manufacturing, engineering lubricants, automobile coatings, and personal care contract packaging in Naroda, Vatva, Odhav, and Sanand GIDC estates.
+- **Vadodara and Nandesari Chemical Corridor **: Supplying First Special Grade (FSG) and Hydrogenated Castor Oil (HCO) to specialty synthetic resin, lubricant compounding, and rubber additive plants in Nandesari, Makarpura, and Ranoli.
+- **Bharuch, Ankleshwar, and Panoli Chemical Parks **: Anchoring deliveries of FPD castor oil, DCO, and DCO fatty acids to India's dense chemical synthesis clusters for polyurethane polyols, paint resins, and agrochemical adjuvants.
+- **Dahej Petroleum, Chemicals and Petrochemicals Investment Region (PCPIR) **: Coordinating dedicated bulk road tankers of industrial castor oil for mega-scale chemical synthesis and port-based industrial processing.
+- **Vapi and Valsad Industrial Zone **: Serving southern Gujarat's coatings, printing ink, leather chemical, and textile specialty manufacturers with scheduled weekly drum and IBC dispatches.
 
 ## Dedicated Transportation Assets and Container Integrity
 

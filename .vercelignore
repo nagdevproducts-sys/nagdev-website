@@ -16,6 +16,7 @@ monitoring_output/
 
 # Content Drafts & Admin CMS
 content/
+templates/
 blog-admin.html
 blog/_template.html
 css/blog-admin.css
