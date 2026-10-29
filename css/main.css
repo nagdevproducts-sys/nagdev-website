@@ -4389,7 +4389,9 @@ h3[id] {
 .product-breadcrumb-strip {
   background: var(--ivory, #F4EFE4);
   border-bottom: 1px solid var(--border-light, #EDE8DF);
-  padding: 0.85rem 0;
+  padding: 0.6rem 0;
+  min-height: 36px;
+  box-sizing: border-box;
 }
 .product-breadcrumb-inner {
   display: flex;
@@ -4397,7 +4399,15 @@ h3[id] {
   gap: 0.5rem;
   font-size: 0.8rem;
   color: var(--text-muted, #888888);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow-x: auto;
+  line-height: 1.3;
+}
+.breadcrumb-separator {
+  color: var(--text-muted, #888888);
+  font-size: 0.8rem;
+  user-select: none;
 }
 .product-breadcrumb-inner a {
   color: var(--text-muted, #888888);
@@ -4643,10 +4653,18 @@ h3[id] {
   border-bottom: 1px solid var(--border-light, #EDE8DF);
 }
 .product-section-title {
-  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: 1.75rem;
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem);
   color: var(--forest, #0B3D1E);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+.product-section-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-mid, #555555);
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
 }
 .product-keyfacts-table {
   width: 100%;
@@ -4822,12 +4840,24 @@ h3[id] {
 .product-faq-summary {
   padding: 1rem 1.25rem;
   font-weight: 600;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: var(--charcoal, #1A1A1A);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  list-style: none;
+}
+.product-faq-summary::-webkit-details-marker {
+  display: none;
+}
+.product-faq-chevron {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  color: var(--forest, #0B3D1E);
+}
+details[open] .product-faq-chevron {
+  transform: rotate(180deg);
 }
 .product-faq-answer {
   padding: 0 1.25rem 1.25rem;
@@ -4884,6 +4914,17 @@ h3[id] {
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+}
+.btn-outline-white {
+  background: transparent;
+  color: #ffffff !important;
+  border: 1.5px solid #ffffff !important;
+  transition: all 0.2s ease;
+}
+.btn-outline-white:hover {
+  background: #ffffff;
+  color: var(--forest, #0B3D1E) !important;
+  transform: translateY(-1px);
 }
 
 
@@ -4958,4 +4999,39 @@ h3[id] {
     min-width: 44px !important;
     min-height: 44px !important;
   }
+}
+
+/* Product & Global Shared Utility Classes */
+.dev-badge-pill {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  z-index: 2;
+}
+.footer-quality-line {
+  font-size: 0.8125rem;
+  color: var(--text-muted, #888888);
+  margin-top: 0.5rem;
+}
+.footer-social-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.mobile-nav-item {
+  border-bottom: 1px solid var(--border-light, #EDE8DF);
+}
+.mobile-prod-group {
+  margin-bottom: 0.75rem;
+}
+.top-bar-email,
+.top-bar-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }

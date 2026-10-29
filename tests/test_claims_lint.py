@@ -642,7 +642,7 @@ class TestClaimsLint(unittest.TestCase):
             fpath = f"products/{p['slug']}.html"
             with open(fpath, "r", encoding="utf-8") as f:
                 content = f.read()
-            crumbs = re.findall(r'<nav class="breadcrumb-bar"', content)
+            crumbs = re.findall(r'<nav class="(?:breadcrumb-bar|product-breadcrumb-strip)"', content)
             self.assertEqual(len(crumbs), 1, f"{fpath} must have exactly 1 breadcrumb, found {len(crumbs)}")
             
             # Check for leaked HTML attributes in body prose
@@ -666,6 +666,52 @@ class TestClaimsLint(unittest.TestCase):
             with open(fpath, "r", encoding="utf-8") as f:
                 content = f.read()
             self.assertTrue('class="top-bar"' in content or 'class="top-bar ' in content, f"{fpath} missing top contact bar")
+
+
+    def test_forward_term_supply_contracts_fails(self):
+        """Phase 11c/11d: Banned phrase matching tolerant of up to 2 inserted words catches 'forward term supply contracts'."""
+        fixture = "<p>Can buyers book forward term supply contracts for commercial castor oil?</p>"
+        findings = lint_content(fixture, "test.html", self.facts)
+        r1_fails = [f for f in findings if "R1" in f.get("rule", "") and "forward contract" in f.get("text", "")]
+        self.assertTrue(len(r1_fails) > 0, "Expected 'forward term supply contracts' to trigger an R1 banned phrase failure")
+
+    def test_manufacturer_and_bulk_exporter_fails(self):
+        """Phase 11c/11d: Banned phrase matching catches 'Manufacturer & Bulk Exporter'."""
+        fixture = "<title>Castor Oil Manufacturer & Bulk Exporter | Nagdev Products</title>"
+        findings = lint_content(fixture, "test.html", self.facts)
+        r1_fails = [f for f in findings if "R1" in f.get("rule", "") and ("bulk exporter" in f.get("text", "") or "Manufacturer & Exporter" in f.get("text", ""))]
+        self.assertTrue(len(r1_fails) > 0, "Expected 'Manufacturer & Bulk Exporter' to trigger an R1 failure")
+
+    def test_guard_product_template_classes_in_main_min_css(self):
+        """Phase 11d Guard: Every class used in the product template markup has a matching rule in css/main.min.css."""
+        import re
+        from pathlib import Path
+        min_css = Path("css/main.min.css").read_text(encoding="utf-8")
+        html = Path("products/commercial-castor-oil.html").read_text(encoding="utf-8")
+        
+        # Extract body classes
+        body_match = re.search(r'<body[^>]*>(.*?)</body>', html, re.DOTALL)
+        body_html = body_match.group(1) if body_match else html
+        class_matches = re.findall(r'class="([^"]+)"', body_html)
+        classes = set()
+        for c in class_matches:
+            for cls in c.strip().split():
+                classes.add(cls)
+                
+        missing = []
+        for cls in classes:
+            pattern = rf'\.{re.escape(cls)}(?=[^a-zA-Z0-9_-]|$)'
+            if not re.search(pattern, min_css):
+                missing.append(cls)
+                
+        self.assertEqual(missing, [], f"Classes missing from css/main.min.css: {missing}")
+
+    def test_main_min_css_newer_than_main_css(self):
+        """Phase 11d Guard: css/main.min.css must be newer than or equal to css/main.css."""
+        import os
+        css_mtime = os.path.getmtime("css/main.css")
+        min_mtime = os.path.getmtime("css/main.min.css")
+        self.assertGreaterEqual(min_mtime, css_mtime, "css/main.min.css is older than css/main.css! Rebuild with clean-css-cli.")
 
 if __name__ == "__main__":
     unittest.main()

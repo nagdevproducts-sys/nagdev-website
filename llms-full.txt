@@ -142,7 +142,7 @@ SECTION 3: PACKAGING, LOGISTICS & EXPORT INFRASTRUCTURE
 
 BULK PACKAGING FORMATS:
 1. ISO Tank Containers: 20,000 – 24,000 Liters (approx. 20–24 MT net). Dedicated chemical-grade stainless steel tanks (T11 specification) with steam heating coils.
-2. Flexitanks: 21,500 – 24,000 Liters (approx. 21.5 MT net) in standard 20 ft GP ocean containers. Food-grade multi-layer polyethylene with automated single-valve discharge.
+2. Flexitanks: 21,500 – 24,000 Liters (approx. 21.5 MT net) in standard 20 ft GP ocean containers. Multi-layer virgin polyethylene with automated single-valve discharge.
 3. Intermediate Bulk Containers (IBC Totes): 1,000 Liters (approx. 900–950 kg net). High-density polyethylene inner bottle with galvanized tubular steel cage on four-way entry pallet.
 4. Steel Drums: 200 kg net weight, 216.5 liter gross capacity, new tight-head unlined or epoxy-phenolic lined drums (UN 1A1 rated for export).
 5. Multi-Wall Paper Bags: 25 kg net weight, 3-ply kraft paper bags with internal polyethylene moisture barrier liner for flakes/powder (HCO, 12-HSA soaps). Palletized (1,000 kg / pallet) with UV shrink wrap.
