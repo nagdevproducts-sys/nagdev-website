@@ -1103,12 +1103,7 @@ def update_homepage(published_posts):
     else:
         new_content = content
 
-    # Clean hero preload fetchpriority
-    new_content = re.sub(r'<link rel="preload" as="image" href="/images/castor-field-480w\.avif" type="image/avif" media="\(max-width: 767px\)" fetchpriority="high">',
-                         r'<link rel="preload" as="image" href="/images/castor-field-480w.avif" type="image/avif" media="(max-width: 767px)">',
-                         new_content)
-
-    # Ensure cache-busting on index.html
+# Ensure cache-busting on index.html
     new_content = re.sub(r'<link rel="stylesheet" href="/css/main\.min\.css(?:\?v=[^"]*)?"', f'<link rel="stylesheet" href="/css/main.min.css?v={version}"', new_content)
     new_content = re.sub(r'<script src="/js/site\.min\.js(?:\?v=[^"]*)?"', f'<script src="/js/site.min.js?v={version}"', new_content)
 
