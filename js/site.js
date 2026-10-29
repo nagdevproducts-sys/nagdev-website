@@ -445,13 +445,58 @@
       const phoneVal = (this.querySelector('input[name="phone"]')?.value || '').trim();
       const countryVal = (this.querySelector('input[name="country"]')?.value || '').trim();
       const enquiryTypeVal = (this.querySelector('select[name="enquiry_type"]')?.value || '').trim();
-      const productVal = (this.querySelector('select[name="product"]')?.value || '').trim();
-      const quantityVal = (this.querySelector('input[name="quantity"]')?.value || '').trim();
+      
+      // Multi-product table aggregation
+      const tableRows = this.querySelectorAll('.enquiry-product-row');
+      let productVal = '';
+      let quantityVal = '';
+      let sampleList = [];
+
+      if (tableRows && tableRows.length > 0) {
+        const prodParts = [];
+        const qtyParts = [];
+        tableRows.forEach(r => {
+          const pSelect = r.querySelector('.enquiry-product-select');
+          const qInput = r.querySelector('.enquiry-qty-input');
+          const uSelect = r.querySelector('.enquiry-uom-select');
+          if (pSelect && pSelect.value) {
+            const pText = pSelect.options[pSelect.selectedIndex]?.text || pSelect.value;
+            const cleanName = pText.split('—')[1]?.trim() || pText.split('(')[0]?.trim() || pSelect.value;
+            const qVal = (qInput?.value || '').trim();
+            const uVal = (uSelect?.value || '').trim();
+            if (qVal && uVal) {
+              prodParts.push(`${cleanName} (${qVal} ${uVal})`);
+              qtyParts.push(`${qVal} ${uVal}`);
+            } else if (uVal) {
+              prodParts.push(`${cleanName} (${uVal})`);
+              qtyParts.push(uVal);
+            } else {
+              prodParts.push(cleanName);
+              if (qVal) qtyParts.push(qVal);
+            }
+            if (uVal.includes('Sample') || enquiryTypeVal.includes('Sample')) {
+              sampleList.push(cleanName);
+            }
+          }
+        });
+        if (prodParts.length > 0) {
+          productVal = prodParts.join(', ');
+          quantityVal = qtyParts.join(', ');
+        }
+      }
+
+      if (!productVal) {
+        productVal = (this.querySelector('select[name="product"]')?.value || '').trim();
+      }
+      if (!quantityVal) {
+        quantityVal = (this.querySelector('input[name="quantity"]')?.value || '').trim();
+      }
+
       const packingVal = (this.querySelector('select[name="packing"]')?.value || '').trim();
       const messageVal = (this.querySelector('textarea[name="message"]')?.value || '').trim();
 
       const sampleHidden = document.getElementById('sample-products-hidden');
-      const sampleSlugsVal = (sampleHidden ? sampleHidden.value : '') || '';
+      const sampleSlugsVal = (sampleList.length > 0 ? sampleList.join(', ') : (sampleHidden ? sampleHidden.value : '')) || '';
 
       const payload = {
         name: nameVal,
@@ -688,38 +733,9 @@
       }
     });
 
-    // 2. Update or create floating sticky drawer
+    // 2. Floating sticky drawer disabled (sample request integrated into /contact enquiry form)
     let drawer = document.getElementById('sample-request-drawer');
-    if (count > 0) {
-      if (!drawer) {
-        drawer = document.createElement('aside');
-        drawer.id = 'sample-request-drawer';
-        drawer.className = 'sample-request-drawer';
-        drawer.setAttribute('aria-label', 'Sample request summary');
-        document.body.appendChild(drawer);
-      }
-      const slugList = cart.map(i => encodeURIComponent(i.slug)).join(',');
-      const contactUrl = `/contact?type=sample&products=${slugList}`;
-      drawer.style.display = 'flex';
-      drawer.innerHTML = `
-        <div class="sample-drawer-body">
-          <span class="sample-drawer-icon" aria-hidden="true">🧪</span>
-          <span class="sample-drawer-label">Sample request (<strong>${count}</strong>/5)</span>
-          <a href="${contactUrl}" class="sample-drawer-action" aria-label="Review and submit sample request for ${count} products">Request &rarr;</a>
-          <button type="button" class="sample-drawer-close" aria-label="Clear all samples from request" title="Clear sample request">&times;</button>
-        </div>
-      `;
-      const closeBtn = drawer.querySelector('.sample-drawer-close');
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          clearSampleCart();
-        });
-      }
-    } else if (drawer) {
-      drawer.style.display = 'none';
-    }
+    if (drawer) drawer.style.display = 'none';
 
     // 3. Update chips on /contact if present
     renderContactChips();

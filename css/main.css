@@ -2759,6 +2759,98 @@ input, textarea, select { font-family: var(--font-body); }
   line-height: 1.55;
 }
 
+/* ── Multi-Product Selection Table in Enquiry Form ── */
+.enquiry-products-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  margin-top: 0.35rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+.enquiry-products-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+}
+.enquiry-products-table th {
+  background: var(--ivory);
+  border-bottom: 1px solid var(--border);
+  color: var(--forest);
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.55rem 0.65rem;
+  text-align: left;
+}
+.enquiry-products-table td {
+  padding: 0.45rem 0.55rem;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: middle;
+}
+.enquiry-products-table tr:last-child td {
+  border-bottom: none;
+}
+.enquiry-products-table .form-input,
+.enquiry-products-table .form-select {
+  height: 38px;
+  min-height: 38px;
+  font-size: 0.8125rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--ivory);
+  width: 100%;
+}
+.enquiry-products-table .form-input:focus,
+.enquiry-products-table .form-select:focus {
+  border-color: var(--forest);
+  background: #ffffff;
+}
+.btn-remove-row {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-remove-row:hover:not(:disabled) {
+  color: #c0392b;
+  background: #fdf2f2;
+}
+.btn-remove-row:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+.btn-add-product-row {
+  background: #ffffff;
+  border: 1px dashed var(--forest);
+  color: var(--forest);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.18s ease;
+}
+.btn-add-product-row:hover {
+  background: var(--forest-subtle);
+  border-style: solid;
+}
+
+
 /* ==========================================================================
    29. TOAST
    ========================================================================== */

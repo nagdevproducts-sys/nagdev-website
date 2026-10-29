@@ -28,7 +28,7 @@
   <link rel="icon" href="favicon.ico">
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/main.min.css?v=c61161f">
+<link rel="stylesheet" href="/css/main.min.css?v=017605c">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -173,7 +173,7 @@
   <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="/site.webmanifest">
-  <script src="/js/site-config.min.js?v=c61161f" defer></script>
+  <script src="/js/site-config.min.js?v=017605c" defer></script>
   <!-- Google Analytics 4 & Consent Mode v2 -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -206,7 +206,7 @@
       }
     } catch(e){}
   </script>
-  <script defer src="/js/analytics.js?v=c61161f"></script>
+  <script defer src="/js/analytics.js?v=017605c"></script>
 </head>
 <body>
 <a href="#main-content" class="skip-to-content">Skip to main content</a>
@@ -609,72 +609,118 @@
               <input class="form-input" type="text" id="contact-country" name="country" placeholder="e.g. Germany, USA, UAE">
             </div>
 
-            <div class="form-field">
-              <div id="sample-chips-wrap" class="sample-chips-wrap" style="display:none;margin-bottom:0.85rem;">
-                <div style="font-size:var(--text-xs);font-weight:700;color:var(--gold-text);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.4rem;">
-                  Requested Sample Grades (Max 5):
-                </div>
-                <div id="sample-chips-list" class="sample-chips-list" style="display:flex;flex-wrap:wrap;gap:0.5rem;" role="list"></div>
+            <div class="form-field" style="margin-bottom:0.85rem;">
+              <label class="form-label" style="display:flex;justify-content:space-between;align-items:center;">
+                <span>Products &amp; Quantities Required <span class="req">*</span></span>
+                <span style="font-size:var(--text-xs);font-weight:normal;color:var(--text-muted);">Multiple products can be added</span>
+              </label>
+              
+              <div class="enquiry-products-table-wrap">
+                <table class="enquiry-products-table">
+                  <thead>
+                    <tr>
+                      <th style="width:48%;">Product / Grade</th>
+                      <th style="width:20%;">Quantity</th>
+                      <th style="width:26%;">UOM</th>
+                      <th style="width:6%;text-align:center;"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="enquiry-products-body">
+                    <tr class="enquiry-product-row" data-row-index="0">
+                      <td>
+                        <select class="form-input form-select enquiry-product-select" id="contact-product" name="product" required aria-label="Select Product">
+                          <option value="" disabled selected>Select a product or category…</option>
+                          <optgroup label="Castor Oils (Refined Castor Oils)">
+                            <option value="Commercial Castor Oil">NDEVOLEO™ COMM — Commercial Castor Oil</option>
+                            <option value="First Special Grade (FSG) Castor Oil">NDEVOLEO™ FSG — First Special Grade (FSG) Castor Oil</option>
+                            <option value="First Pressed Degummed (FPD) Castor Oil">NDEVOLEO™ FPD — First Pressed Degummed (FPD) Castor Oil</option>
+                            <option value="Pale Pressed Grade (PPG) Castor Oil">NDEVOLEO™ PPG — Pale Pressed Grade (PPG) Castor Oil</option>
+                            <option value="Cold Pressed Castor Oil">Cold Pressed Castor Oil</option>
+                            <option value="Castor Oil BP">Castor Oil BP (British Pharmacopoeia)</option>
+                            <option value="Castor Oil USP-NF">Castor Oil USP-NF (United States Pharmacopeia)</option>
+                            <option value="Castor Oil Ph. Eur.">Castor Oil Ph. Eur. (European Pharmacopoeia)</option>
+                            <option value="Castor Oil IP">Castor Oil IP (Indian Pharmacopoeia)</option>
+                            <option value="Castor Oil JP">Castor Oil JP (Japanese Pharmacopoeia)</option>
+                            <option value="Cosmetic Grade Castor Oil">Cosmetic Grade Castor Oil</option>
+                            <option value="Dehydrated Castor Oil (DCO)">NDEVOLEO™ DCO — Dehydrated Castor Oil</option>
+                            <option value="Blown / Oxidized Castor Oil">NDEVOX™ BLO — Blown / Oxidized Castor Oil</option>
+                            <option value="General — All Castor Oils">General — All Castor Oils</option>
+                          </optgroup>
+                          <optgroup label="Derivatives &amp; Polymers">
+                            <option value="Hydrogenated Castor Oil (HCO)">NDEVWAX™ HCO — Hydrogenated Castor Oil (Castor Wax)</option>
+                            <option value="12-Hydroxystearic Acid (12-HSA)">NDEVACID™ 12-HSA — 12-Hydroxystearic Acid</option>
+                            <option value="Ricinoleic Acid">NDEVACID™ RIC — Ricinoleic Acid</option>
+                            <option value="Refined Glycerin (99.5%)">NDEVGLY™ REF — Refined Glycerin (99.5%)</option>
+                            <option value="Crude Glycerin">Crude Glycerin</option>
+                            <option value="Methyl Ricinoleate">NDEVEST™ MR — Methyl Ricinoleate</option>
+                            <option value="Methyl 12-Hydroxystearate">NDEVEST™ M12H — Methyl 12-Hydroxystearate</option>
+                            <option value="Sebacic Acid">NDEVACID™ SEB — Sebacic Acid</option>
+                            <option value="Dioctyl Sebacate (DOS)">NDEVEST™ DOS — Dioctyl Sebacate</option>
+                            <option value="Dibutyl Sebacate (DBS)">NDEVEST™ DBS — Dibutyl Sebacate</option>
+                            <option value="Bio-Polyurethane Polyols">NDEVPOL™ BIO — Bio-Polyurethane Polyols</option>
+                            <option value="DCO Fatty Acid">NDEVACID™ DCO-FA — DCO Fatty Acid</option>
+                            <option value="Lithium 12-Hydroxystearate">NDEVSOAP™ LI12 — Lithium 12-Hydroxystearate</option>
+                            <option value="Calcium 12-Hydroxystearate">NDEVSOAP™ CA12 — Calcium 12-Hydroxystearate</option>
+                            <option value="Zinc Ricinoleate">NDEVSOAP™ ZNR — Zinc Ricinoleate</option>
+                            <option value="Zinc Undecylenate">NDEVSOAP™ ZNU — Zinc Undecylenate</option>
+                            <option value="Sodium Sulphate Anhydrous">Sodium Sulphate Anhydrous</option>
+                            <option value="General — All Derivatives">General — All Derivatives</option>
+                          </optgroup>
+                          <optgroup label="Organic Fertilizer &amp; Meal">
+                            <option value="Castor Cake Organic Fertilizer">NDEVAGRO™ CAKE — Castor Cake Organic Fertilizer</option>
+                            <option value="High Protein Castor Meal">High Protein Castor Meal</option>
+                          </optgroup>
+                          <optgroup label="Other">
+                            <option value="Multiple Products — General Bulk Enquiry">Multiple Products — General Bulk Enquiry</option>
+                            <option value="Custom Formulation / Synthesis Requirement">Custom Formulation / Synthesis Requirement</option>
+                            <option value="Other / Not listed">Other / Not listed</option>
+                          </optgroup>
+                        </select>
+                      </td>
+                      <td>
+                        <input class="form-input enquiry-qty-input" type="text" id="contact-quantity" name="quantity" placeholder="e.g. 20" aria-label="Quantity">
+                      </td>
+                      <td>
+                        <select class="form-input form-select enquiry-uom-select" id="contact-uom" name="uom" aria-label="Unit of Measure">
+                          <option value="MT" selected>MT (Metric Tons)</option>
+                          <option value="kg">kg</option>
+                          <option value="Drums (200L)">Drums (200L)</option>
+                          <option value="IBC Totes (1000L)">IBC Totes (1000L)</option>
+                          <option value="Flexitank">Flexitank</option>
+                          <option value="Sample (500g / 1kg)">Sample (500g / 1kg)</option>
+                        </select>
+                      </td>
+                      <td style="text-align:center;">
+                        <button type="button" class="btn-remove-row" title="Remove product" aria-label="Remove product" disabled>&times;</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div style="margin-top:0.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+                <button type="button" id="btn-add-product-row" class="btn-add-product-row">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  + Add Product
+                </button>
+                <span style="font-size:0.75rem;color:var(--text-muted);">Add multiple grades or combine sample requests in one enquiry</span>
               </div>
               <input type="hidden" name="sample_products" id="sample-products-hidden" value="">
-              <label class="form-label" for="contact-product">Product(s) of Interest <span class="req">*</span></label>
-              <select class="form-input form-select" id="contact-product" name="product" required>
-                <option value="" disabled selected>Select a product or category…</option>
-                <optgroup label="Castor Oils (Refined Castor Oils)">
-                  <option>NDEVOLEO™ COMM — Commercial Castor Oil</option>
-                  <option>NDEVOLEO™ FSG — First Special Grade (FSG) Castor Oil</option>
-                  <option>General — All Castor Oils</option>
-                </optgroup>
-                <optgroup label="Derivatives &amp; Polymers">
-                  <option>NDEVWAX™ HCO — Hydrogenated Castor Oil (Castor Wax)</option>
-                  <option>NDEVACID™ 12-HSA — 12-Hydroxystearic Acid</option>
-                  <option>NDEVACID™ RIC — Ricinoleic Acid</option>
-                  <option>NDEVGLY™ REF — Refined Glycerin (99.5%)</option>
-                  <option>NDEVEST™ MR — Methyl Ricinoleate</option>
-                  <option>NDEVEST™ M12H — Methyl 12-Hydroxystearate</option>
-                  <option>NDEVACID™ SEB — Sebacic Acid</option>
-                  <option>NDEVEST™ DOS — Dioctyl Sebacate</option>
-                  <option>NDEVEST™ DBS — Dibutyl Sebacate</option>
-                  <option>NDEVPOL™ BIO — Bio-Polyurethane Polyols</option>
-                  <option>NDEVOLEO™ DCO — Dehydrated Castor Oil</option>
-                  <option>NDEVOX™ BLO — Blown / Oxidized Castor Oil</option>
-                  <option>NDEVACID™ DCO-FA — DCO Fatty Acid</option>
-                  <option>NDEVSOAP™ LI12 — Lithium 12-Hydroxystearate</option>
-                  <option>NDEVSOAP™ CA12 — Calcium 12-Hydroxystearate</option>
-                  <option>NDEVSOAP™ ZNR — Zinc Ricinoleate</option>
-                  <option>NDEVSOAP™ ZNU — Zinc Undecylenate</option>
-                  <option>General — All Derivatives</option>
-                </optgroup>
-                <optgroup label="Organic Fertilizer &amp; Co-Products">
-                  <option>NDEVAGRO™ CAKE — Castor Cake Organic Fertilizer</option>
-                </optgroup>
-                <optgroup label="Other">
-                  <option>Multiple Products — General Bulk Enquiry</option>
-                  <option>Custom Formulation / Synthesis Requirement</option>
-                  <option>Other / Not listed</option>
-                </optgroup>
+            </div>
+
+            <!-- PACKING PREFERENCE -->
+            <div class="form-field" style="margin-bottom:0.75rem;">
+              <label class="form-label" for="contact-packing">Packing Preference</label>
+              <select class="form-input form-select" id="contact-packing" name="packing">
+                <option value="" selected>Not specified / standard packaging</option>
+                <option>Steel / HDPE Drums (200L)</option>
+                <option>IBC Totes (1000L)</option>
+                <option>Multi-ply Bags (25 kg)</option>
+                <option>Bulk / Flexitank</option>
+                <option>500g / 1kg Lab Sample Jar / Bottle</option>
+                <option>As per your recommendation</option>
               </select>
             </div>
-
-            <div class="form-row">
-              <div class="form-field">
-                <label class="form-label" for="contact-quantity">Quantity Required</label>
-                <input class="form-input" type="text" id="contact-quantity" name="quantity" placeholder="e.g. 5 MT / month or 1 kg sample">
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="contact-packing">Packing Preference</label>
-                <select class="form-input form-select" id="contact-packing" name="packing">
-                  <option value="" selected>Not specified</option>
-                  <option>Steel / HDPE Drums (200L)</option>
-                  <option>IBC Totes (1000L)</option>
-                  <option>Multi-ply Bags (25 kg)</option>
-                  <option>Bulk / Flexitank</option>
-                  <option>500g / 1kg Lab Sample Jar / Bottle</option>
-                  <option>As per your recommendation</option>
-                </select>
-              </div>
-            </div>
-
             <div class="form-field">
               <label class="form-label" for="contact-message">Message / Additional Requirements</label>
               <textarea class="form-input form-textarea" id="contact-message" name="message" rows="5" placeholder="Include any specification requirements, courier delivery details, intended application or other relevant details."></textarea>
@@ -1034,6 +1080,103 @@ function loadMapFacade(el) {
   el.parentNode.replaceChild(iframe, el);
 }
 </script>
-<script src="/js/site.min.js?v=c61161f" defer></script>
+<script src="/js/site.min.js?v=017605c" defer></script>
+
+<script>
+(function() {
+  const tbody = document.getElementById('enquiry-products-body');
+  const addBtn = document.getElementById('btn-add-product-row');
+  const enquiryTypeSelect = document.getElementById('contact-enquiry-type');
+
+  if (!tbody || !addBtn) return;
+
+  function updateRemoveButtons() {
+    const rows = tbody.querySelectorAll('.enquiry-product-row');
+    rows.forEach(r => {
+      const btn = r.querySelector('.btn-remove-row');
+      if (btn) btn.disabled = (rows.length <= 1);
+    });
+  }
+
+  // Get options HTML from the first select
+  const firstSelect = tbody.querySelector('.enquiry-product-select');
+  const productOptionsHtml = firstSelect ? firstSelect.innerHTML : '';
+
+  addBtn.addEventListener('click', function() {
+    const rows = tbody.querySelectorAll('.enquiry-product-row');
+    const newIdx = rows.length;
+    const tr = document.createElement('tr');
+    tr.className = 'enquiry-product-row';
+    tr.dataset.rowIndex = newIdx;
+
+    const isSampleEnquiry = enquiryTypeSelect && enquiryTypeSelect.value.includes('Sample');
+    const defaultUom = isSampleEnquiry ? 'Sample (500g / 1kg)' : 'MT';
+    const defaultQty = isSampleEnquiry ? '1' : '';
+
+    tr.innerHTML = `
+      <td>
+        <select class="form-input form-select enquiry-product-select" required aria-label="Select Product">
+          ${productOptionsHtml}
+        </select>
+      </td>
+      <td>
+        <input class="form-input enquiry-qty-input" type="text" placeholder="${isSampleEnquiry ? '1' : 'e.g. 20'}" value="${defaultQty}" aria-label="Quantity">
+      </td>
+      <td>
+        <select class="form-input form-select enquiry-uom-select" aria-label="Unit of Measure">
+          <option value="MT"${defaultUom === 'MT' ? ' selected' : ''}>MT (Metric Tons)</option>
+          <option value="kg">kg</option>
+          <option value="Drums (200L)">Drums (200L)</option>
+          <option value="IBC Totes (1000L)">IBC Totes (1000L)</option>
+          <option value="Flexitank">Flexitank</option>
+          <option value="Sample (500g / 1kg)"${defaultUom.includes('Sample') ? ' selected' : ''}>Sample (500g / 1kg)</option>
+        </select>
+      </td>
+      <td style="text-align:center;">
+        <button type="button" class="btn-remove-row" title="Remove product" aria-label="Remove product">&times;</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+    updateRemoveButtons();
+  });
+
+  tbody.addEventListener('click', function(e) {
+    if (e.target.closest('.btn-remove-row')) {
+      const row = e.target.closest('.enquiry-product-row');
+      const rows = tbody.querySelectorAll('.enquiry-product-row');
+      if (rows.length > 1 && row) {
+        row.remove();
+        updateRemoveButtons();
+      }
+    }
+  });
+
+  // Switch default UOM when enquiry type changes
+  if (enquiryTypeSelect) {
+    enquiryTypeSelect.addEventListener('change', function() {
+      const isSample = this.value.includes('Sample');
+      const rows = tbody.querySelectorAll('.enquiry-product-row');
+      rows.forEach(r => {
+        const uom = r.querySelector('.enquiry-uom-select');
+        const qty = r.querySelector('.enquiry-qty-input');
+        if (isSample) {
+          if (uom) uom.value = 'Sample (500g / 1kg)';
+          if (qty && !qty.value) qty.value = '1';
+        } else {
+          if (uom && uom.value.includes('Sample')) uom.value = 'MT';
+        }
+      });
+      const packing = document.getElementById('contact-packing');
+      if (packing) {
+        if (isSample) packing.value = '500g / 1kg Lab Sample Jar / Bottle';
+        else if (packing.value.includes('Sample')) packing.value = 'Not specified / standard packaging';
+      }
+    });
+  }
+
+  updateRemoveButtons();
+})();
+</script>
+
 </body>
 </html>
