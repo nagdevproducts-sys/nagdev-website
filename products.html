@@ -29,7 +29,7 @@
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/images/products/commercial-castor-oil-480w.webp" imagesrcset="/images/products/commercial-castor-oil-480w.webp 480w, /images/products/commercial-castor-oil.webp 900w" imagesizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) 234px, 303px" fetchpriority="high">
-<link rel="stylesheet" href="/css/main.min.css?v=6ec6897">
+<link rel="stylesheet" href="/css/main.min.css?v=468eb4b">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -198,7 +198,7 @@
   <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="/site.webmanifest">
-  <script src="/js/site-config.min.js?v=6ec6897" defer></script>
+  <script src="/js/site-config.min.js?v=468eb4b" defer></script>
   <!-- Google Analytics 4 & Consent Mode v2 -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -231,7 +231,7 @@
       }
     } catch(e){}
   </script>
-  <script defer src="/js/analytics.js?v=6ec6897"></script>
+  <script defer src="/js/analytics.js?v=468eb4b"></script>
 </head>
 <body>
 <a href="#main-content" class="skip-to-content">Skip to main content</a>
@@ -1538,7 +1538,7 @@
 
 <div id="toast-container" class="toast-container"></div>
 
-<script src="/js/products-data.min.js?v=6ec6897" defer></script>
+<script src="/js/products-data.min.js?v=468eb4b" defer></script>
 <script>
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
@@ -1620,8 +1620,10 @@
 
   // ── Render grid ───────────────────────────────────────────────────────────
   function renderGrid() {
-    const search = (document.getElementById('catalog-search').value || '').toLowerCase().trim();
     const grid = document.getElementById('products-grid');
+    if (!grid) return;
+    const searchEl = document.getElementById('catalog-search');
+    const search = (searchEl && searchEl.value ? searchEl.value : '').toLowerCase().trim();
     const noRes = document.getElementById('no-results');
     let items = PRODUCTS_DATABASE;
 
@@ -1656,15 +1658,15 @@
       );
     }
 
-    document.getElementById('catalog-count').textContent =
-      `Showing ${items.length} product${items.length !== 1 ? 's' : ''}`;
+    const countEl = document.getElementById('catalog-count');
+    if (countEl) countEl.textContent = `Showing ${items.length} product${items.length !== 1 ? 's' : ''}`;
 
     if (!items.length) {
-      grid.innerHTML = '';
-      noRes.style.display = 'block';
+      if (grid) grid.innerHTML = '';
+      if (noRes) noRes.style.display = 'block';
       return;
     }
-    noRes.style.display = 'none';
+    if (noRes) noRes.style.display = 'none';
 
     grid.innerHTML = items.map((p, idx) => `
       <a href="/products/${p.id}" class="product-card${p.isSpecialtyRange ? ' is-specialty' : ''}" id="card-${p.id}" role="listitem"
@@ -1743,7 +1745,8 @@
   };
 
   function closeModal() {
-    document.getElementById('product-modal').classList.remove('active');
+    const modal = document.getElementById('product-modal');
+    if (modal) modal.classList.remove('active');
     document.body.style.overflow = '';
     currentProductId = null;
   }
@@ -1783,11 +1786,16 @@
       });
     });
 
-    document.getElementById('catalog-search').addEventListener('input', renderGrid);
-    document.getElementById('modal-close-btn').addEventListener('click', closeModal);
-    document.getElementById('product-modal').addEventListener('click', e => {
-      if (e.target === document.getElementById('product-modal')) closeModal();
-    });
+    const searchEl = document.getElementById('catalog-search');
+    if (searchEl) searchEl.addEventListener('input', renderGrid);
+    const closeBtn = document.getElementById('modal-close-btn');
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    const prodModal = document.getElementById('product-modal');
+    if (prodModal) {
+      prodModal.addEventListener('click', e => {
+        if (e.target === prodModal) closeModal();
+      });
+    }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     // TDS Download button
@@ -1827,6 +1835,6 @@
     if (hash) { const p = window.getProductById(hash); if (p) setTimeout(() => openModal(hash), 400); }
   });
 </script>
-<script src="/js/site.min.js?v=6ec6897" defer></script>
+<script src="/js/site.min.js?v=468eb4b" defer></script>
 </body>
 </html>

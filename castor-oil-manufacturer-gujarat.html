@@ -30,7 +30,7 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/main.min.css?v=6ec6897">
+  <link rel="stylesheet" href="/css/main.min.css?v=468eb4b">
 
   <!-- Structured Data JSON-LD -->
   <script type="application/ld+json">
@@ -289,7 +289,7 @@
       }
     } catch(e){}
   </script>
-  <script defer src="/js/analytics.js?v=6ec6897"></script>
+  <script defer src="/js/analytics.js?v=468eb4b"></script>
 </head>
 <body>
 
@@ -979,7 +979,7 @@ Situated in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our
 
 <div id="toast-container" class="toast-container"></div>
 
-<script src="/js/products-data.min.js?v=6ec6897" defer></script>
+<script src="/js/products-data.min.js?v=468eb4b" defer></script>
 <script>
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
@@ -1064,14 +1064,16 @@ Situated in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our
 
   // ── Render grid ───────────────────────────────────────────────────────────
   function renderGrid() {
-    const search = (document.getElementById('catalog-search').value || '').toLowerCase().trim();
     const grid = document.getElementById('products-grid');
+    if (!grid) return;
+    const searchEl = document.getElementById('catalog-search');
+    const search = (searchEl && searchEl.value ? searchEl.value : '').toLowerCase().trim();
     const noRes = document.getElementById('no-results');
     let items = PRODUCTS_DATABASE;
 
-        const REGULAR_SUPPLY_IDS = ["commercial-castor-oil", "first-special-grade-castor-oil", "castor-cake", "hydrogenated-castor-oil", "ricinoleic-acid", "12-hydroxystearic-acid", "refined-glycerin"];
-    const ENQUIRY_IDS = ["cold-pressed-castor-oil", "castor-oil-bp93", "ppg-castor-oil", "fpd-castor-oil", "high-protein-castor-meal", "crude-glycerin", "sodium-sulphate-anhydrous"];
-    const DEV_IDS = ["sebacic-acid", "dioctyl-sebacate", "dibutyl-sebacate", "dehydrated-castor-oil", "dco-fatty-acid", "bio-polyurethane-polyols", "blown-oxidized-castor-oil", "lithium-12-hydroxystearate", "calcium-12-hydroxystearate", "zinc-ricinoleate", "zinc-undecylenate", "methyl-ricinoleate", "methyl-12-hydroxystearate"];
+        const REGULAR_SUPPLY_IDS = ["commercial-castor-oil", "first-special-grade-castor-oil", "fpd-castor-oil", "castor-cake", "hydrogenated-castor-oil", "dehydrated-castor-oil", "dco-fatty-acid"];
+    const ENQUIRY_IDS = ["cold-pressed-castor-oil", "castor-oil-bp93", "ppg-castor-oil", "castor-oil-usp-nf", "castor-oil-ph-eur", "castor-oil-ip", "castor-oil-jp", "cosmetic-grade-castor-oil"];
+    const DEV_IDS = ["ricinoleic-acid", "12-hydroxystearic-acid", "refined-glycerin", "crude-glycerin", "high-protein-castor-meal", "sodium-sulphate-anhydrous", "sebacic-acid", "dioctyl-sebacate", "dibutyl-sebacate", "bio-polyurethane-polyols", "blown-oxidized-castor-oil", "lithium-12-hydroxystearate", "calcium-12-hydroxystearate", "zinc-ricinoleate", "zinc-undecylenate", "methyl-ricinoleate", "methyl-12-hydroxystearate"];
 
     if (activeFilter === 'regular' || activeFilter === 'core') {
       items = items.filter(p => REGULAR_SUPPLY_IDS.includes(p.id));
@@ -1100,15 +1102,15 @@ Situated in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our
       );
     }
 
-    document.getElementById('catalog-count').textContent =
-      `Showing ${items.length} product${items.length !== 1 ? 's' : ''}`;
+    const countEl = document.getElementById('catalog-count');
+    if (countEl) countEl.textContent = `Showing ${items.length} product${items.length !== 1 ? 's' : ''}`;
 
     if (!items.length) {
-      grid.innerHTML = '';
-      noRes.style.display = 'block';
+      if (grid) grid.innerHTML = '';
+      if (noRes) noRes.style.display = 'block';
       return;
     }
-    noRes.style.display = 'none';
+    if (noRes) noRes.style.display = 'none';
 
     grid.innerHTML = items.map(p => `
       <a href="/products/${p.id}" class="product-card${p.isSpecialtyRange ? ' is-specialty' : ''}" id="card-${p.id}" role="listitem"
@@ -1187,7 +1189,8 @@ Situated in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our
   };
 
   function closeModal() {
-    document.getElementById('product-modal').classList.remove('active');
+    const modal = document.getElementById('product-modal');
+    if (modal) modal.classList.remove('active');
     document.body.style.overflow = '';
     currentProductId = null;
   }
@@ -1225,11 +1228,16 @@ Situated in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our
       });
     });
 
-    document.getElementById('catalog-search').addEventListener('input', renderGrid);
-    document.getElementById('modal-close-btn').addEventListener('click', closeModal);
-    document.getElementById('product-modal').addEventListener('click', e => {
-      if (e.target === document.getElementById('product-modal')) closeModal();
-    });
+    const searchEl = document.getElementById('catalog-search');
+    if (searchEl) searchEl.addEventListener('input', renderGrid);
+    const closeBtn = document.getElementById('modal-close-btn');
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    const prodModal = document.getElementById('product-modal');
+    if (prodModal) {
+      prodModal.addEventListener('click', e => {
+        if (e.target === prodModal) closeModal();
+      });
+    }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     // TDS Download button
@@ -1269,6 +1277,6 @@ Situated in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our
     if (hash) { const p = window.getProductById(hash); if (p) setTimeout(() => openModal(hash), 400); }
   });
 </script>
-<script src="/js/site.min.js?v=6ec6897" defer></script>
+<script src="/js/site.min.js?v=468eb4b" defer></script>
 </body>
 </html>

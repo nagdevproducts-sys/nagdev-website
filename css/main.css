@@ -1897,8 +1897,10 @@ input, textarea, select { font-family: var(--font-body); }
   letter-spacing: 0.08em;
   margin-bottom: 0.35rem;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.4rem;
+  row-gap: 0.25rem;
 }
 .page-header-seamless-title {
   font-family: var(--font-display);
@@ -3793,6 +3795,12 @@ button, a, input, select, textarea {
   margin-top: 0.5rem;
   border-top: 1px solid var(--border-light);
 }
+@media (min-width: 992px) {
+  .industry-filter-row {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
 .industry-filter-row::-webkit-scrollbar {
   display: none;
 }
@@ -5446,8 +5454,8 @@ details[open] .product-faq-chevron {
 }
 .btn-sample-toggle-sm {
   font-size: var(--text-xs, 12px);
-  padding: 0.35rem 0.65rem;
-  min-height: 32px;
+  padding: 0.45rem 0.75rem;
+  min-height: 38px;
   border-radius: var(--radius-sm, 4px);
   background: #ffffff;
   border: 1px solid var(--border-light, #EDE8DF);

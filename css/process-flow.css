@@ -532,7 +532,8 @@
   background: #FFFFFF;
   border: 1.5px solid #E2E8F0;
   border-radius: 12px;
-  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
   margin-bottom: 3.5rem;
 }
@@ -544,6 +545,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width: 680px;
 }
 
 .balance-table-title {
@@ -559,6 +561,7 @@
 
 .balance-table {
   width: 100%;
+  min-width: 680px;
   border-collapse: collapse;
 }
 
