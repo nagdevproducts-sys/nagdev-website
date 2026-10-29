@@ -17,12 +17,12 @@
     "applications": [
       {
         "title": "Industrial Lubricants & Greases",
-        "desc": "Used as a primary bio-lubricant base fluid and extreme-pressure additive for heavy industrial gearboxes and automotive lubricants.",
+        "desc": "Used as a lubricity component and base oil in industrial lubricant and grease formulations",
         "link": "/applications/castor-oil-for-lubricants"
       },
       {
         "title": "Alkyd Resins & Protective Paints",
-        "desc": "Acts as a standard light-stable drying and plasticizing oil in architectural coatings, industrial enamels, and varnishes.",
+        "desc": "Used as a plasticizing, non-drying oil in alkyd resin manufacture (non-drying and semi-drying alkyds)",
         "link": "/process-flow"
       },
       {
@@ -57,7 +57,9 @@
         "q": "Can buyers book term supply contracts for commercial castor oil?",
         "a": "Yes. We support annual term contracts with scheduled monthly dispatches, formula pricing, and lot-specific Certificate of Analysis documentation."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "Commercial Castor Oil (NDEVOLEO COMM) is unrefined industrial-grade pale yellow viscous castor oil in regular commercial supply. It serves as a base oil in industrial lubricants, a plasticizing component in alkyd resins, and a feedstock for Turkey Red Oil, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "first-special-grade-castor-oil",
@@ -117,7 +119,9 @@
         "q": "Can overseas buyers request independent surveyor testing before shipment?",
         "a": "Yes. Independent sampling and verification by SGS, Bureau Veritas, or Intertek can be conducted at Kandla or Mundra at the buyer's cost."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "First Special Grade (FSG) Castor Oil (NDEVOLEO FSG) is refined, bleached pale yellow liquid castor oil in regular commercial supply. It is used in polyurethane polyols, specialty lubricants, and chemical intermediate syntheses, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "fpd-castor-oil",
@@ -137,17 +141,17 @@
     "applications": [
       {
         "title": "Industrial Lubricants",
-        "desc": "Removal of hydratable phosphatides prevents varnish formation and residue deposition in high-load industrial machinery and compressors.",
+        "desc": "Removal of hydratable phosphatides provides reduced gum content and lower residue deposition in industrial machinery.",
         "link": "/applications/castor-oil-for-lubricants"
       },
       {
-        "title": "Automotive Gear Oils",
-        "desc": "Offers clean expeller base oil performance with high natural viscosity index, extreme thermal stability, and low carbon residue.",
+        "title": "Industrial lubricant formulations",
+        "desc": "Clean expeller base oil performance with low carbon residue for industrial lubricant formulations.",
         "link": "/applications/castor-oil-for-lubricants"
       },
       {
         "title": "Chemical Synthesis Feedstock",
-        "desc": "Eliminates phosphorus-induced catalyst poisoning during downstream catalytic hydrogenation, transesterification, and epoxidation.",
+        "desc": "Lower phosphatide content suits downstream processing such as hydrogenation and esterification.",
         "link": "/process-flow"
       }
     ],
@@ -157,22 +161,24 @@
         "a": "FPD is produced by cold screw expelling followed by water degumming to remove hydratable phosphatides and mucilage before export."
       },
       {
-        "q": "Why do hydraulic oil and gear lubricant manufacturers select first pressed degummed oil?",
-        "a": "Its low ash, absence of gums, and high thermal stability prevent varnish buildup in high-pressure hydraulic pumps and marine gearboxes."
+        "q": "Why do industrial equipment and gear lubricant manufacturers select first pressed degummed oil?",
+        "a": "Its low ash and reduced gum content suit industrial equipment and gearboxes."
       },
       {
         "q": "What commercial lot sizes are supplied for degummed grade oil?",
         "a": "Supplied on enquiry in 20ft container loads (drums/IBCs) or bulk tanker trucks from our plant."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "First Pressed Degummed (FPD) Castor Oil (NDEVOLEO FPD) is water-degummed expeller-pressed pale liquid castor oil in regular commercial supply. With reduced gum content, it is used in industrial lubricant formulations and chemical processing like hydrogenation, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "castor-cake",
     "display_name": "Castor Cake",
     "brand_code": "NDEVAGRO™ CAKE",
     "status": "regular_supply",
-    "category": "Regular Supply",
-    "cas": "68187-58-6",
+    "category": "Agri Products",
+    "cas": "",
     "physical_form": "Solid (Expeller Cake / Meal / Pellets)",
     "packaging": [
       "50 kg HDPE woven sacks with inner liner",
@@ -218,14 +224,16 @@
         "q": "Where is castor cake dispatched from?",
         "a": "All dispatches originate directly from our operational seed crushing facility at Survey No. 301 P-2, Sardarpura, Deodar, Vav-Tharad district, Gujarat."
       }
-    ]
+    ],
+    "hs_code": "2306.90",
+    "unique_intro": "Castor Cake (NDEVAGRO CAKE) is an organic expeller solid by-product in cake or meal form in regular commercial supply. Rich in organic nitrogen, phosphorus, and potassium, it is used as an agricultural organic fertilizer and soil amendment, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "hydrogenated-castor-oil",
     "display_name": "Hydrogenated Castor Oil (HCO)",
     "brand_code": "NDEVWAX™ HCO",
     "status": "regular_supply",
-    "category": "Regular Supply",
+    "category": "Castor Oil Derivatives",
     "cas": "8001-78-3",
     "physical_form": "Solid (White Flakes / Powder)",
     "packaging": [
@@ -237,7 +245,7 @@
     "applications": [
       {
         "title": "Lithium Complex Lubricating Greases",
-        "desc": "Forms the structural thickener matrix in automotive chassis, wheel bearings, and heavy industrial machinery greases operating under extreme loads.",
+        "desc": "Forms the structural thickener matrix in automotive chassis, wheel bearings, and industrial machinery greases.",
         "link": "/applications/castor-oil-for-lubricants"
       },
       {
@@ -266,8 +274,8 @@
         "a": "Sharp melting point of 85°C to 88°C, iodine value under 3.0 g I2/100g, acid value below 3.0 mg KOH/g, and hydroxyl value of 155 to 165."
       },
       {
-        "q": "How does micronized HCO prevent pigment sagging in industrial coatings?",
-        "a": "When activated by shear and heat, fine HCO particles form an entangled thixotropic hydrogen-bonded network that prevents pigment slump on vertical walls."
+        "q": "What physical forms are available for hydrogenated castor oil?",
+        "a": "Supplied as flakes or powder as specified per order, packaged in 25 kg bags with inner poly liner."
       },
       {
         "q": "How are HCO wax flakes protected during ocean transport?",
@@ -277,14 +285,16 @@
         "q": "What is the difference in chemical structure between HCO and hydroxylated fatty acids?",
         "a": "HCO is a complete triglyceride wax ester containing glycerin, whereas 12-HSA is a split, isolated free fatty acid used directly in soap making."
       }
-    ]
+    ],
+    "hs_code": "1516.20",
+    "unique_intro": "Hydrogenated Castor Oil (NDEVWAX HCO) is a hard, high-melting white vegetable wax in regular commercial supply. It is used as a thickener in lithium greases, a rheology modifier in coatings, and a lubricant in PVC extrusion, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "dehydrated-castor-oil",
     "display_name": "Dehydrated Castor Oil (DCO)",
     "brand_code": "NDEVOLEO™ DCO",
     "status": "regular_supply",
-    "category": "Regular Supply",
+    "category": "Castor Oil Derivatives",
     "cas": "64147-40-6",
     "physical_form": "Viscous Liquid",
     "packaging": [
@@ -302,7 +312,7 @@
       },
       {
         "title": "Quick-Set Printing Inks",
-        "desc": "High refractive index and fast oxidative curing make DCO a premier binder in offset lithographic inks and metal decorating varnishes.",
+        "desc": "High refractive index and fast oxidative curing make DCO a binder in offset lithographic inks and metal decorating varnishes.",
         "link": "/process-flow"
       },
       {
@@ -321,17 +331,19 @@
         "a": "Used in exterior marine varnishes, protective industrial enamels, and printing inks where fast tack-free drying is imperative."
       },
       {
-        "q": "What R&D stage has been reached for dehydrated castor oil?",
-        "a": "Under development. Technical data sheets and development allocations are open for coatings and resin formulators."
+        "q": "What packaging options and documentation are supplied with dehydrated castor oil?",
+        "a": "Supplied in 200 kg steel drums, 950 kg IBC totes, or bulk ISO tanks. Each lot is supplied with a Certificate of Analysis (COA), Technical Data Sheet (TDS), and Safety Data Sheet (SDS)."
       }
-    ]
+    ],
+    "hs_code": "1518.00",
+    "unique_intro": "Dehydrated Castor Oil (NDEVPOL DCO) is a pale, transparent drying oil featuring conjugated double bonds in regular commercial supply. It is used as a binder in architectural enamels, quick-set printing inks, and clear varnishes, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "dco-fatty-acid",
     "display_name": "DCO Fatty Acid",
     "brand_code": "NDEVACID™ DCO-FA",
     "status": "regular_supply",
-    "category": "Regular Supply",
+    "category": "Castor Oil Derivatives",
     "cas": "61789-45-5",
     "physical_form": "Liquid",
     "packaging": [
@@ -349,7 +361,7 @@
       },
       {
         "title": "Stoving & Baking Enamels",
-        "desc": "Imparts chemical resistance, flexibility, and light-stable characteristics to industrial automotive and appliance baking finishes.",
+        "desc": "Used where low yellowing in baking finishes is required, imparting chemical resistance, flexibility, and light-stable characteristics to industrial baking finishes.",
         "link": "/process-flow"
       },
       {
@@ -360,8 +372,8 @@
     ],
     "faqs": [
       {
-        "q": "Why does the conjugated diene in DCO-FA prevent oven yellowing?",
-        "a": "Conjugated 9,11-octadecadienoic acid promotes rapid oxidative cross-linking while resisting thermal discoloration during high-temperature baking."
+        "q": "Why is DCO fatty acid used where low yellowing in baking finishes is required?",
+        "a": "Conjugated 9,11-octadecadienoic acid promotes rapid oxidative cross-linking while resisting thermal discoloration during high-temperature baking finishes."
       },
       {
         "q": "What conjugated diene fraction and acid value are specified for DCO fatty acid?",
@@ -371,7 +383,9 @@
         "q": "In what coating systems is DCO fatty acid formulated?",
         "a": "High-solids industrial stoving enamels, light-stable architectural finishes, and chemical-resistant epoxy ester primers."
       }
-    ]
+    ],
+    "hs_code": "3823.19",
+    "unique_intro": "DCO Fatty Acid (NDEVACID DCO) is a distilled conjugated diene liquid fatty acid in regular commercial supply. It is used where low yellowing in baking finishes is required, including high-solids stoving enamels and epoxy ester resins, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "ppg-castor-oil",
@@ -390,35 +404,37 @@
     "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
     "applications": [
       {
-        "title": "High-Clarity Urethane Resins",
-        "desc": "Pale optical Lovibond rating prevents discoloration in optical-grade polyurethanes, clear casting adhesives, and electronic potting gels.",
+        "title": "Urethane resins and adhesives where low colour is required",
+        "desc": "Low Lovibond colour helps maintain clarity in polyurethane resins, casting adhesives, and coating formulations.",
         "link": "/applications/castor-oil-for-polyurethane"
       },
       {
-        "title": "Specialty Lubricant Blends",
-        "desc": "Ultra-low free acidity and refined clarity provide clean lubricating boundaries for specialty engines and precision instrument mechanisms.",
+        "title": "Lubricant blends",
+        "desc": "Low free acidity and pale clarity provide base stock performance in industrial and specialty lubricant blends.",
         "link": "/applications/castor-oil-for-lubricants"
       },
       {
-        "title": "Specialty Chemical Synthesis",
-        "desc": "Serves as an analytical-grade bio-based chemical intermediate for specialty esters, bio-surfactants, and polymer additives.",
+        "title": "Chemical intermediates",
+        "desc": "Serves as a bio-based intermediate for specialty esters, bio-surfactants, and polymer synthesis.",
         "link": "/process-flow"
       }
     ],
     "faqs": [
       {
-        "q": "How does initial hydraulic cold pressing yield pure pale pressed grade oil?",
-        "a": "Pale pressed grade is produced exclusively from first mechanical cold pressing of choice seeds, maintaining low acidity and pale color without chemical refining."
+        "q": "How does mechanical expelling yield pale pressed grade oil?",
+        "a": "Pale pressed grade is produced from first mechanical pressing of choice seeds, maintaining low acidity and pale color through mechanical pressing without chemical solvents."
       },
       {
-        "q": "How does virgin cold pressing guarantee ultra-low Gardner colour for pale pressed oil?",
-        "a": "Stringent selection yields Lovibond color under 1.0 Yellow and 0.2 Red, FFA under 0.5%, and moisture under 0.15% for color-critical applications."
+        "q": "How does mechanical pressing achieve low Lovibond colour for pale pressed grade castor oil?",
+        "a": "Stringent seed selection yields Lovibond color under 1.0 Yellow and 0.2 Red, FFA under 0.5%, and moisture under 0.15% for color-critical applications."
       },
       {
-        "q": "What packaging options are available for polyol grade castor oil on enquiry?",
+        "q": "What packaging options are available for PPG castor oil on enquiry?",
         "a": "Available on enquiry in 200 kg net tight-head steel drums, 1,000 L composite IBC totes, or bulk ISO tank containers."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "Pale Pressed Grade (PPG) Castor Oil (NDEVOLEO PPG) is an exceptionally pale, low-acidity refined liquid castor oil available on enquiry. It is used in urethane resins where low colour is required, lubricant blends, and chemical intermediates, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "cold-pressed-castor-oil",
@@ -437,35 +453,37 @@
     "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
     "applications": [
       {
-        "title": "Virgin Cosmetic Serums",
-        "desc": "Extracted without external heating or chemical solvents, preserving native fatty acid profile and natural antioxidants for topical cosmetic oils.",
+        "title": "Cosmetic & Personal-Care Formulations",
+        "desc": "Mechanically pressed without chemical solvents, preserving native fatty acid profile for cosmetic and personal-care formulations.",
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       },
       {
         "title": "Skin-Care Formulation Bases",
-        "desc": "Unprocessed pure expeller quality provides an emollient vehicle for skin-care creams, balms, and topical formulations.",
+        "desc": "Expeller quality provides an emollient vehicle for skin-care creams, balms, and topical formulations.",
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       },
       {
         "title": "Specialized Formulations",
-        "desc": "Applied in technical and personal care formulations requiring solvent-free, single-origin botanical castor oil.",
+        "desc": "Applied in technical and personal care formulations requiring solvent-free castor oil.",
         "link": "/process-flow"
       }
     ],
     "faqs": [
       {
         "q": "What distinguishes cold mechanical pressing from standard expeller processing?",
-        "a": "Cold pressing operates below 50°C without external heating or chemical solvents, preserving natural tocopherols and unheated fatty acid profiles."
+        "a": "Cold pressing is performed by mechanical expelling, maintaining fatty acid parameters through mechanical pressing without solvents."
       },
       {
-        "q": "What natural fatty acid characteristics define virgin cold pressed oil?",
+        "q": "What fatty acid characteristics define cold pressed oil?",
         "a": "Natural golden straw color, free fatty acid under 1.0%, moisture below 0.25%, and absence of solvent or chemical bleaching residues."
       },
       {
         "q": "What specialty sectors enquire about cold pressed castor oil?",
-        "a": "Botanical personal care formulators, therapeutic scalp treatment brands, and artisan machinery maintenance blenders."
+        "a": "Personal care formulators, cosmetic brands, and specialty maintenance blenders."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "Cold Pressed Castor Oil (NDEVOLEO CP) is mechanically pressed, unrefined golden liquid castor oil available on enquiry. It is used in cosmetic and personal-care formulations, topical skin-care vehicle bases, and specialty preparations, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "castor-oil-bp93",
@@ -485,12 +503,12 @@
     "applications": [
       {
         "title": "Pharmaceutical Excipients",
-        "desc": "Tested against British Pharmacopoeia monograph criteria for use as an excipient carrier, capsule lubricant, and emulsion base.",
+        "desc": "For pharmaceutical formulators who require BP monograph compliance (e.g. topical and oral formulation feedstock); suitability is qualified by the buyer.",
         "link": "/process-flow"
       },
       {
         "title": "Topical Ointments & Liniments",
-        "desc": "Low peroxide value and light colour ensure non-irritating, occlusive film formation in therapeutic ointments and liniments.",
+        "desc": "Low peroxide value and light colour ensure reliable base performance in topical ointments and liniments.",
         "link": "/process-flow"
       },
       {
@@ -501,18 +519,20 @@
     ],
     "faqs": [
       {
-        "q": "What refining processes ensure castor oil conforms to British Pharmacopoeia (BP 1993 edition) standards?",
-        "a": "Undergoes dedicated refining, bleaching with activated earth, and fine filtration to eliminate trace acidity and meet British Pharmacopoeia requirements."
+        "q": "Which BP edition is used?",
+        "a": "Specify the edition with your enquiry; testing is performed against the edition you request."
       },
       {
-        "q": "In which topical and personal care applications is BP93 grade used?",
+        "q": "In which topical and personal care applications is Castor Oil BP used?",
         "a": "Used in topical dermatological formulations, skin creams, lip balms, soaps, and as an excipient carrier for personal care products."
       },
       {
         "q": "How are pharmaceutical batches tested for compliance?",
-        "a": "Offered on enquiry with compendial batch testing per British Pharmacopoeia (BP 1993 edition) monographs and batch-specific Certificate of Analysis."
+        "a": "Offered on enquiry with compendial batch testing per British Pharmacopoeia monographs and batch-specific Certificate of Analysis."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "Castor Oil BP (NDEVOLEO BP) is a refined pharmaceutical-grade clear viscous liquid castor oil available on enquiry. For pharmaceutical formulators who require BP monograph compliance (e.g. topical and oral formulation feedstock), suitability is qualified by the buyer, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "castor-oil-usp-nf",
@@ -542,7 +562,7 @@
       },
       {
         "title": "Dermatological Vehicles",
-        "desc": "Controlled acidity and iodine value provide consistent viscosity and emolliency in therapeutic dermal ointments.",
+        "desc": "Controlled acidity and iodine value provide consistent viscosity and emolliency in dermal vehicle ointments.",
         "link": "/process-flow"
       }
     ],
@@ -559,7 +579,9 @@
         "q": "What standard bulk packaging formats are available?",
         "a": "Castor Oil USP–NF is available in 200 kg steel or HDPE drums, 950 kg IBC totes, and bulk ISO tanks supplied from our Deodar plant."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "Castor Oil USP-NF (NDEVOLEO USP) is a compendial pharmaceutical-grade liquid castor oil available on enquiry. Tested per buyer-requested USP-NF monograph specifications for pharmaceutical excipient blending, oral solution compounding, and dermatological vehicles, it is supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "castor-oil-ph-eur",
@@ -584,7 +606,7 @@
       },
       {
         "title": "Dermatological Preparations",
-        "desc": "High-purity refined oil providing uniform occlusive skin barrier properties in regulated medicinal ointments and lotions.",
+        "desc": "Refined oil providing uniform carrier properties in regulated medicinal ointments and lotions.",
         "link": "/process-flow"
       },
       {
@@ -606,7 +628,9 @@
         "q": "What packaging options are offered for European Pharmacopoeia grade?",
         "a": "Supplied in 200 kg steel or HDPE drums, 950 kg IBC totes, and bulk ISO containers prepared under strict quality standards."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "Castor Oil Ph. Eur. (NDEVOLEO EP) is a compendial European Pharmacopoeia compliant liquid castor oil available on enquiry. It is tested for regulated pharmaceutical excipients, oral solutions, and regulated dermal formulations, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "castor-oil-ip",
@@ -631,7 +655,7 @@
       },
       {
         "title": "Topical & Medicinal Ointments",
-        "desc": "Consistent viscosity and high hydroxyl content provide natural emollient and soothing action in pharmaceutical salves.",
+        "desc": "Consistent viscosity and high hydroxyl content for formulation in pharmaceutical salves.",
         "link": "/process-flow"
       },
       {
@@ -653,7 +677,9 @@
         "q": "What container formats are available for domestic supply?",
         "a": "Available in 200 kg HDPE or epoxy-lined steel drums, 950 kg IBC totes, and dedicated road tankers dispatched from our Deodar plant."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "Castor Oil IP (NDEVOLEO IP) is a refined compendial liquid castor oil available on enquiry. Formulated for pharmaceutical manufacturers requiring Indian Pharmacopoeia compliance for medicinal excipients, liquid compounding, and topical ointment bases, it is supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "castor-oil-jp",
@@ -683,7 +709,7 @@
       },
       {
         "title": "Healthcare Emulsions & Bases",
-        "desc": "Pure vegetable oil excipient for external emulsions, topical ointments, and medical formulations.",
+        "desc": "Vegetable oil excipient for external emulsions, topical ointments, and compounded formulations.",
         "link": "/process-flow"
       }
     ],
@@ -700,7 +726,9 @@
         "q": "What packaging formats are used for overseas container shipping?",
         "a": "Castor Oil JP is exported in 200 kg steel drums, 950 kg IBC totes, and bulk ISO tanks with full seal integrity."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "Castor Oil JP (NDEVOLEO JP) is a high-purity compendial liquid castor oil available on enquiry. Sourced and tested against Japanese Pharmacopoeia specifications for pharmaceutical excipients, external emulsions, and precision healthcare compounding, it is supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "cosmetic-grade-castor-oil",
@@ -730,7 +758,7 @@
       },
       {
         "title": "Cleansing Balms & Moisturizers",
-        "desc": "Acts as an effective non-comedogenic makeup-dissolving base oil and skin-conditioning emollient in facial balms and body creams.",
+        "desc": "Acts as an effective makeup-dissolving base oil and emollient in facial balms and body creams.",
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       }
     ],
@@ -747,7 +775,9 @@
         "q": "What quality documents accompany each consignment?",
         "a": "Every order includes a lot-specific Certificate of Analysis (COA), technical data sheet, standard safety data sheet (SDS), and dispatch records."
       }
-    ]
+    ],
+    "hs_code": "1515.30",
+    "unique_intro": "Cosmetic Grade Castor Oil (NDEVOLEO COS) is a refined, low-odor clear liquid castor oil available on enquiry. It provides pigment wetting and emolliency in color cosmetics, lipsticks, and personal-care formulations, supplied from our plant at Deodar, Vav-Tharad district, Gujarat, with a COA per lot."
   },
   {
     "slug": "ricinoleic-acid",
@@ -767,7 +797,7 @@
     "applications": [
       {
         "title": "Metalworking Soluble Oils",
-        "desc": "Easily reacted to form water-soluble potassium or amine soaps that act as extreme-pressure lubricants and emulsifiers in cutting fluids.",
+        "desc": "Easily reacted to form water-soluble potassium or amine soaps that act as lubricity lubricants and emulsifiers in cutting fluids.",
         "link": "/applications/castor-oil-for-lubricants"
       },
       {
@@ -807,7 +837,8 @@
         "q": "What quality certificates are provided for export orders?",
         "a": "Each batch includes complete gas chromatography (GC) fatty acid profile, moisture analysis, and Certificate of Origin."
       }
-    ]
+    ],
+    "hs_code": "2918.19"
   },
   {
     "slug": "12-hydroxystearic-acid",
@@ -866,7 +897,8 @@
         "q": "Can overseas grease blenders secure annual monthly supply quotas (under development)?",
         "a": "Yes. We support global grease blenders with term supply contracts, lot-traceable COAs, and direct ocean container dispatch from Kandla and Mundra (under development)."
       }
-    ]
+    ],
+    "hs_code": "2918.19"
   },
   {
     "slug": "sebacic-acid",
@@ -912,7 +944,8 @@
         "q": "What is the development status of sebacic acid at Nagdev Products?",
         "a": "Under development. Pilot fusion and purification trials are underway to achieve polymer-grade purity (<0.1% monobasic acids)."
       }
-    ]
+    ],
+    "hs_code": "2917.13"
   },
   {
     "slug": "high-protein-castor-meal",
@@ -920,7 +953,7 @@
     "brand_code": "NDEVAGRO™ HPRO",
     "status": "under_development",
     "category": "Under development",
-    "cas": "68424-10-2",
+    "cas": "",
     "physical_form": "Solid (De-oiled Meal / Powder)",
     "packaging": [
       "25 kg multi-ply paper bags with HDPE moisture barrier",
@@ -958,7 +991,8 @@
         "q": "How is high protein castor meal bagged for commercial delivery?",
         "a": "Supplied in 50 kg HDPE woven bags with polyethylene liners, 1,000 kg bulk bags, or containerized liner bags for bulk sea freight (under development)."
       }
-    ]
+    ],
+    "hs_code": "2306.90"
   },
   {
     "slug": "crude-glycerin",
@@ -1005,7 +1039,8 @@
         "q": "In what bulk packaging is crude glycerin planned to be supplied once commercialized (under development)?",
         "a": "Target commercial packaging (under development) includes bulk road tankers, 20 MT flexitanks, and 1,000L composite IBC containers."
       }
-    ]
+    ],
+    "hs_code": "1520.00"
   },
   {
     "slug": "refined-glycerin",
@@ -1065,7 +1100,8 @@
         "q": "Which certificates of purity and analytical dossiers accompany refined glycerin lots?",
         "a": "Every lot is backed by comprehensive COA verifying GC purity, moisture by Karl Fischer, and compendial traceability."
       }
-    ]
+    ],
+    "hs_code": "2905.45"
   },
   {
     "slug": "bio-polyurethane-polyols",
@@ -1112,7 +1148,8 @@
         "q": "What is the current R&D availability of bio-polyol samples?",
         "a": "Under technical development. Formulators can submit technical targets and performance parameters for custom evaluation."
       }
-    ]
+    ],
+    "hs_code": "3907.29"
   },
   {
     "slug": "sodium-sulphate-anhydrous",
@@ -1158,7 +1195,8 @@
         "q": "Where is technical sodium sulphate applied outside detergents?",
         "a": "Used as a fining agent in container glass melting furnaces and as an electrolyte leveling salt in commercial textile dyeing."
       }
-    ]
+    ],
+    "hs_code": "2833.11"
   },
   {
     "slug": "dioctyl-sebacate",
@@ -1205,7 +1243,8 @@
         "q": "Where is DOS evaluated outside synthetic lubricants?",
         "a": "Cold-resistant outdoor PVC cable sheathing, aerospace radar equipment seals, and automotive interior polymers."
       }
-    ]
+    ],
+    "hs_code": "2917.13"
   },
   {
     "slug": "dibutyl-sebacate",
@@ -1252,7 +1291,8 @@
         "q": "What regulatory advantage does DBS hold in packaging films?",
         "a": "Bio-based origin and low toxicity profile facilitate international approvals for flexible packaging packaging membranes."
       }
-    ]
+    ],
+    "hs_code": "2917.13"
   },
   {
     "slug": "methyl-12-hydroxystearate",
@@ -1298,7 +1338,8 @@
         "q": "What non-grease uses utilize methyl 12-hydroxystearate?",
         "a": "Functions as an internal lubricant in vinyl extrusion, slip additive for polymers, and emollient wax in cosmetic sticks."
       }
-    ]
+    ],
+    "hs_code": "2918.19"
   },
   {
     "slug": "methyl-ricinoleate",
@@ -1345,7 +1386,8 @@
         "q": "How can formulators request development samples of methyl ricinoleate?",
         "a": "Under development. Custom ester specifications and development inquiries can be submitted directly through our technical desk."
       }
-    ]
+    ],
+    "hs_code": "2918.19"
   },
   {
     "slug": "lithium-12-hydroxystearate",
@@ -1391,7 +1433,8 @@
         "q": "How does pre-reacted soap ensure grease batch uniformity?",
         "a": "Provides pre-crystallized soap fibers that dissolve predictably in mineral and synthetic base oils without soap reaction variance."
       }
-    ]
+    ],
+    "hs_code": "2918.19"
   },
   {
     "slug": "calcium-12-hydroxystearate",
@@ -1437,7 +1480,8 @@
         "q": "How can grease compounders submit formulation requirements?",
         "a": "Grease compounders can submit drop point and consistency parameters via our enquiry portal to coordinate pilot batch review."
       }
-    ]
+    ],
+    "hs_code": "2918.19"
   },
   {
     "slug": "zinc-undecylenate",
@@ -1483,7 +1527,8 @@
         "q": "How is zinc undecylenate synthesized from castor oil?",
         "a": "Undecylenic acid (obtained from high-temperature vacuum pyrolysis of castor oil) is reacted with high-purity zinc oxide."
       }
-    ]
+    ],
+    "hs_code": "2918.19"
   },
   {
     "slug": "zinc-ricinoleate",
@@ -1529,7 +1574,8 @@
         "q": "In which personal care and home care goods is zinc ricinoleate formulated?",
         "a": "Natural stick and spray deodorants, household carpet odor removers, pet hygiene sprays, and municipal waste treatment."
       }
-    ]
+    ],
+    "hs_code": "2918.19"
   },
   {
     "slug": "blown-oxidized-castor-oil",
@@ -1576,6 +1622,7 @@
         "q": "What development status applies to blown castor oil?",
         "a": "Under R&D development. Lab-scale batch trials are standardizing oxidation viscosity endpoints for coatings and sealant formulators."
       }
-    ]
+    ],
+    "hs_code": "1518.00"
   }
 ]

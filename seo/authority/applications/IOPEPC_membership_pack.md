@@ -52,7 +52,7 @@ APPLICATION FOR MEMBERSHIP & REGISTRATION-CUM-MEMBERSHIP-CERTIFICATE (RCMC)
    Taluka Deodar, District Vav-Tharad, Gujarat 385330, India.
 
 10. Contact Details:
-    - Official Phone: +91 63520 98306
+    - Sales & Enquiry Desk: +91 63520 98306
     - Official Email: nagdevproducts@gmail.com
     - Official Website: https://www.nagdevproducts.com
 
@@ -61,15 +61,16 @@ APPLICATION FOR MEMBERSHIP & REGISTRATION-CUM-MEMBERSHIP-CERTIFICATE (RCMC)
 13. Installed Production Capacity: 50 TPD Seed Crushing Capacity
 14. Manufacturing Processes: Mechanical expeller seed crushing, oil refining, semi-continuous refining, filtration, hydrogenation, batch pressure reactors.
 
-15. Product Details (ITC HS Chapter 15 & 29):
+15. Product Details (ITC HS Chapters 15, 23, 29 & 38):
     - Commercial Castor Oil (HS 1515.30.90) - Regular Supply
-    - First Special Grade (FSG) Castor Oil (HS 1515.30.90) - Regular Supply
-    - Hydrogenated Castor Oil / Castor Wax (HS 1516.30.00) - Regular Supply
-    - 12-Hydroxystearic Acid (12-HSA) (HS 2918.19.00 / 3823.19.00) - Regular Supply
-    - Ricinoleic Acid (HS 2918.19.00) - Regular Supply
-    - Refined Glycerin (HS 2905.45.00) - Regular Supply
+    - First Special Grade (FSG) Castor Oil (HS 1515.30.10) - Regular Supply
+    - First Pressed Degummed (FPD) Castor Oil (HS 1515.30.10) - Regular Supply
     - Castor Cake / Meal (HS 2306.90.17) - Regular Supply
-    - Additional Specialty Grades: Available on enquiry
+    - Hydrogenated Castor Oil / Castor Wax (HS 1516.20.91) - Regular Supply
+    - Dehydrated Castor Oil (DCO) (HS 1518.00.11) - Regular Supply
+    - Dehydrated Castor Oil Fatty Acid (DCO-FA) (HS 3823.19.00) - Regular Supply
+    - Downstream Derivatives (Under Development): Ricinoleic Acid (HS 2918.19.00), 12-Hydroxystearic Acid (12-HSA) (HS 2918.19.00 / 3823.19.00), Refined Glycerin (HS 2905.45.00)
+    - Additional Compendial & Technical Grades: Available on enquiry
 
 16. Quality & Inspection Standards:
     - Standard methods; COA supplied per lot; TDS and SDS available.

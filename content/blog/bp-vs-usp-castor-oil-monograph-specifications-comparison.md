@@ -53,7 +53,7 @@ For multinational pharmaceutical companies, sourcing a multi-compendial grade th
 
 1. **Inventory Simplification**: Maintaining a single inventory stock code for both UK/European and North American export product lines reduces warehouse complexity.
 2. **Standardized Quality Dossiers**: Nagdev Products furnishes comprehensive dual-compendial Certificates of Analysis reporting exact laboratory results against both BP and USP monograph thresholds side by side.
-3. **Traceability and Packaging**: Supplied in 200 kg epoxy-lined steel drums and 1,000 L composite IBC totes fitted with tamper-evident security seals to guarantee container integrity.
+3. **Traceability and Packaging**: Supplied in 200 kg epoxy-lined steel drums and 1,000 L composite IBC totes fitted with tamper-evident security seals to ensure container integrity.
 
 ## Sourcing and Regional Infrastructure in Deodar
 

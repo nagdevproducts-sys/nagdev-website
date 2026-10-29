@@ -50,7 +50,7 @@ Ashram Road, Ahmedabad - 380 009, Gujarat, India.
    Taluka Deodar, District Vav-Tharad, Gujarat 385330, India.
 
 7. Contact Information:
-   - Phone: +91 63520 98306
+   - Sales & Enquiry Desk: +91 63520 98306
    - Email: nagdevproducts@gmail.com
    - Website: https://www.nagdevproducts.com
 
@@ -63,8 +63,9 @@ Ashram Road, Ahmedabad - 380 009, Gujarat, India.
 10. Operational Setup:
     - Crushing Capacity: 50 TPD Seed Crushing Capacity
     - Plant Status: Operational plant at Deodar, Vav-Tharad district, North Gujarat
-    - Core Regular-Supply Products: Commercial Castor Oil, First Special Grade (FSG) Castor Oil, Hydrogenated Castor Oil (HCO), 12-Hydroxystearic Acid (12-HSA), Ricinoleic Acid, Refined Glycerin, Castor Cake.
-    - Other Grades: Available on enquiry.
+    - Core Regular-Supply Products (7 Products): Commercial Castor Oil (HS 1515.30), First Special Grade (FSG) Castor Oil (HS 1515.30), First Pressed Degummed (FPD) Castor Oil (HS 1515.30), Castor Cake Organic Fertilizer (HS 2306.90), Hydrogenated Castor Oil (HCO, HS 1516.20), Dehydrated Castor Oil (DCO, HS 1518.00), DCO Fatty Acid (HS 3823.19).
+    - Downstream Derivatives (Under Development): Ricinoleic Acid, 12-Hydroxystearic Acid (12-HSA), Refined Glycerin.
+    - Compendial & Technical Grades: Available on enquiry.
 
 11. Quality System:
     - COA supplied per lot; TDS and SDS available.

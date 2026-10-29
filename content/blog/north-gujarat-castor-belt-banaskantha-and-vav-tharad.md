@@ -39,7 +39,7 @@ For global chemical manufacturers, resin formulators, and pharmaceutical buyers,
 
 - **Direct APMC Mandi Integration**: Our crushing mill at Deodar operates in close proximity to major Agricultural Produce Market Committee (APMC) yards—including Deodar, Tharad, Bhabhar, Lakhani, Rah, and Dhanera. Our procurement specialists inspect daily farmer arrivals directly on the mandi floor, selecting prime, mature seed lots with minimal moisture and low mechanical damage.
 - **Preservation of Native Triglyceride Freshness**: When castor seeds are transported across long distances in humid coastal climates, biological enzymes and heat trigger rapid hydrolysis within the seed kernel. This causes free fatty acids to spike and darkens seed color. Sourcing freshly harvested seed within a thirty-kilometer radius ensures that crushing begins within days of harvesting, maintaining baseline acid values below 1.5 to 2.0 mg KOH/g.
-- **Traceability and Supply Continuity**: Direct relationships with regional farming communities and agricultural cooperatives provide complete visibility into crop conditions, sowing acreages, and harvest timings, guaranteeing reliable year-round supply continuity for our industrial contract partners.
+- **Traceability and Supply Continuity**: Direct relationships with regional farming communities and agricultural cooperatives provide complete visibility into crop conditions, sowing acreages, and harvest timings, ensuring reliable year-round supply continuity for our industrial contract partners.
 
 ## Manufacturing Capabilities at Our Deodar Facility
 
@@ -54,6 +54,6 @@ Nagdev Products operates an integrated seed processing and refining installation
 Situated in North Gujarat, our Deodar facility enjoys pronounced transportation links across western India:
 
 - **Domestic Chemical Hubs**: State and national highway networks connect Deodar directly to major industrial chemical, polymer, and lubricant manufacturing clusters across Ahmedabad, Sanand, Vadodara, Ankleshwar, Dahej, and Vapi.
-- **Maritime Seaports for Global Trade**: Export enquiries welcome. Our strategic geographic position provides swift transit to Deendayal Port (Kandla) and Mundra Port—India's premier maritime container gateways. Drummed consignments, intermediate bulk containers (IBCs), flexitanks, and dedicated ISO tanks arrive at port terminals within hours of factory dispatch.
+- **Maritime Seaports for Global Trade**: Export enquiries welcome. Our strategic geographic position provides swift transit to Deendayal Port (Kandla) and Mundra Port—India's primary maritime container gateways. Drummed consignments, intermediate bulk containers (IBCs), flexitanks, and dedicated ISO tanks arrive at port terminals within hours of factory dispatch.
 
 Establishing direct partnerships through North Gujarat castor belt sourcing gives industrial buyers reliable raw material authenticity, fresh seed chemistry, and robust supply chain resilience.

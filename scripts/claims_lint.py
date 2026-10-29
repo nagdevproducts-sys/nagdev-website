@@ -29,6 +29,7 @@ import re
 import json
 import csv
 import datetime
+from functools import lru_cache
 from pathlib import Path
 from bs4 import BeautifulSoup
 
@@ -67,7 +68,10 @@ RULES = {
     "R17": "PAGE IDENTITY: on each /products/<slug> page, H1, breadcrumb last item, hero img alt, H2/H3, meta title/description, FAQ questions must refer ONLY to that page's product. Cross-product contamination -> FAIL (related-products block exempt)",
     "R18": "INTERNAL LINKS: all internal links must resolve to valid local files and contain no malformed percent encodings",
     "R19": "BRAND CODES: brand codes must strictly match canonical codes from seo/product-master.json; no legacy NDEV- hyphens or 'Specialty Range'",
-    "R20": "EFFICACY & AGRONOMIC/HEALTH CLAIMS: no efficacy claims (pest/nematode/insect/fungus/weed/disease within 6 words of suppress/repel/control/kill/prevent/protect/resist), phytosanitary, cash crops benefit, yield increase, boosts yield, cures, heals"
+    "R20": "EFFICACY & AGRONOMIC/HEALTH CLAIMS: no efficacy claims (pest/nematode/insect/fungus/weed/disease within 6 words of suppress/repel/control/kill/prevent/protect/resist), phytosanitary, cash crops benefit, yield increase, boosts yield, cures, heals",
+    "R21": "CAS number integrity: no unauthorized CAS numbers on agricultural meals",
+    "R22": "Colour scale mismatch: 'Gardner' on a page whose spec table uses Lovibond (and vice versa) -> FAIL",
+    "R23": "HS code mismatch: HS code must match product-master across page, chips, JSON-LD, TDS and catalog -> FAIL"
 }
 
 # Ignored paths
@@ -210,7 +214,7 @@ def parse_spec_table(html_content: str):
         # Track color scale in table
         if "lovibond" in param_text or "lovibond" in val_clean.lower():
             specs["color_scale"].add("lovibond")
-        if "gardner" in param_text or "gardner" in val_clean.lower():
+        if ("gardner" in param_text or "gardner" in val_clean.lower()) and "viscosity" not in param_text and "holdt" not in param_text:
             specs["color_scale"].add("gardner")
 
         # Map parameters
@@ -276,6 +280,7 @@ R11_BANNED_PHRASES = [
     "Fumigat"
 ]
 
+@lru_cache(maxsize=512)
 def get_banned_phrase_pattern(phrase: str) -> str:
     phrase_lower = phrase.strip().lower()
     if phrase_lower in ("deodoriz", "deodoris"):
@@ -292,8 +297,42 @@ def get_banned_phrase_pattern(phrase: str) -> str:
         return r'(?<![a-zA-Z])copied\s+from\b'
     elif phrase_lower in ("injectable", "sterile", "hormone", "transdermal", "laxative", "nematode", "eye ointment", "accredited", "accreditation", "antibacterial", "antimicrobial", "hypoallergenic", "sludge-free", "racing"):
         return r'(?<!\w)' + re.escape(phrase_lower) + r'(?:s)?(?!\w)'
-    elif phrase_lower in ("bp 93", "british pharmacopoeia 93"):
-        return r'(?<!castor-oil-)(?<!\w)(?:BP[\s\-]+93|British\s+Pharmacopoeia\s*(?:19)?93)(?!\w)'
+    elif phrase_lower in ("bp 93", "bp93"):
+        return r'(?<!castor-oil-)(?<!\w)BP[\s\-]*93(?!\w)'
+    elif phrase_lower == "british pharmacopoeia 93":
+        return r'(?<!\w)(?:British\s+Pharmacopoeia\s*(?:19)?93)(?!\w)'
+    elif phrase_lower in ("bp 1993", "bp1993"):
+        return r'(?<!\w)BP[\s\-]*1993(?!\w)'
+    elif phrase_lower == "1993 edition":
+        return r'(?<!\w)1993\s+edition(?!\w)'
+    elif phrase_lower == "premier":
+        return r'(?<!\w)premier(?!\w)'
+    elif phrase_lower in ("r&d stage", "r & d stage"):
+        return r'(?<!\w)R&D\s+stage(?!\w)'
+    elif phrase_lower == "extreme thermal":
+        return r'(?<!\w)extreme\s+thermal(?!\w)'
+    elif phrase_lower in ("extreme-pressure", "extreme pressure"):
+        return r'(?<!\w)extreme[\s\-]pressure(?!\w)'
+    elif phrase_lower == "extreme loads":
+        return r'(?<!\w)extreme\s+loads(?!\w)'
+    elif phrase_lower in ("guarantee", "guaranteed"):
+        return r'(?<!\w)guarante\w*(?!\w)'
+    elif phrase_lower in ("analytical-grade", "analytical grade"):
+        return r'(?<!\w)analytical[\s\-]grade(?!\w)'
+    elif phrase_lower in ("optical-grade", "optical grade"):
+        return r'(?<!\w)optical[\s\-]grade(?!\w)'
+    elif phrase_lower in ("natural antioxidants", "natural antioxidant"):
+        return r'(?<!\w)natural\s+antioxidants?(?!\w)'
+    elif phrase_lower in ("single-origin", "single origin"):
+        return r'(?<!\w)single[\s\-]origin(?!\w)'
+    elif phrase_lower == "unprocessed":
+        return r'(?<!\w)unprocessed(?!\w)'
+    elif phrase_lower in ("non-irritating", "non irritating"):
+        return r'(?<!\w)non[\s\-]irritating(?!\w)'
+    elif phrase_lower == "therapeutic":
+        return r'(?<!\w)therapeutic(?!\w)'
+    elif phrase_lower == "complies to bp":
+        return r'(?<!\w)complies\s+to\s+BP(?!\w)'
     else:
         words = phrase.strip().split()
         if len(words) == 1:
@@ -306,6 +345,11 @@ def get_banned_phrase_pattern(phrase: str) -> str:
             escaped_words.append(esc)
         gap = r'(?:\s+[\w\-]+){0,2}\s+'
         return r'(?<!\w)' + gap.join(escaped_words) + r'(?!\w)'
+
+
+@lru_cache(maxsize=512)
+def get_compiled_banned_pattern(phrase: str):
+    return re.compile(get_banned_phrase_pattern(phrase), re.IGNORECASE)
 
 MONTH_MAP = {
     "january": 1, "jan": 1, "february": 2, "feb": 2, "march": 3, "mar": 3,
@@ -993,12 +1037,18 @@ def check_r17_page_identity(content: str, file_path_str: str) -> list:
     return findings
 
 
+_PRODUCT_MASTER_CACHE = None
+
 def load_product_master(repo_root: Path = REPO_ROOT):
+    global _PRODUCT_MASTER_CACHE
+    if _PRODUCT_MASTER_CACHE is not None:
+        return _PRODUCT_MASTER_CACHE
     master_path = repo_root / "seo" / "product-master.json"
     if master_path.exists():
         try:
             with open(master_path, "r", encoding="utf-8") as f:
-                return json.load(f)
+                _PRODUCT_MASTER_CACHE = json.load(f)
+                return _PRODUCT_MASTER_CACHE
         except Exception:
             return []
     return []
@@ -1146,6 +1196,168 @@ def check_r20_efficacy_claims(content: str, file_path_str: str) -> list:
 
     return findings
 
+
+def check_r21_cas_integrity(content: str, file_path_str: str) -> list:
+    findings = []
+    unauthorized_cas = [
+        "68187-58-6",
+        "68424-10-2"
+    ]
+    lines = content.splitlines()
+    for line_idx, line in enumerate(lines, 1):
+        for cas in unauthorized_cas:
+            if cas in line:
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_idx,
+                    "rule": "R21 CAS number integrity",
+                    "severity": "FAIL",
+                    "text": f"Unauthorized CAS number '{cas}' found (no unauthorized CAS numbers on agricultural meals)"
+                })
+    return findings
+
+
+def check_r22_color_scale(content: str, file_path_str: str) -> list:
+    findings = []
+    specs = parse_spec_table(content)
+    table_color_scales = specs.get("color_scale", set())
+    if not table_color_scales:
+        return findings
+
+    norm_content = content.replace('&le;', '≤').replace('&ge;', '≥').replace('&deg;', '°')
+    # Filter out Viscosity Gardner - Holdt to avoid confusing viscosity with colour scale
+    content_no_holdt = re.sub(r'\b(?:viscosity\s+)?gardner[\s\-]+holdt\b', '', norm_content, flags=re.IGNORECASE)
+
+    has_lovibond = bool(re.search(r'\blovibond\b', norm_content, re.IGNORECASE))
+    has_gardner = bool(re.search(r'\bgardner\b', content_no_holdt, re.IGNORECASE))
+
+    # Also explicitly inspect FAQ accordion answers (<details>/<div class="product-faq-answer">)
+    faq_answer_matches = re.findall(r'<div[^>]*class=[^>]*product-faq-answer[^>]*>(.*?)</div>', content, re.DOTALL | re.IGNORECASE)
+    faq_details_matches = re.findall(r'<details\b[^>]*>(.*?)</details>', content, re.DOTALL | re.IGNORECASE)
+    all_faq_text = " ".join(faq_answer_matches + faq_details_matches)
+    all_faq_no_holdt = re.sub(r'\b(?:viscosity\s+)?gardner[\s\-]+holdt\b', '', all_faq_text, flags=re.IGNORECASE)
+
+    faq_has_gardner = bool(re.search(r'\bgardner\b', all_faq_no_holdt, re.IGNORECASE))
+    faq_has_lovibond = bool(re.search(r'\blovibond\b', all_faq_text, re.IGNORECASE))
+
+    # 1. Spec table has Lovibond, but Gardner is mentioned
+    if "lovibond" in table_color_scales and "gardner" not in table_color_scales:
+        if has_gardner or faq_has_gardner:
+            m = re.search(r'\bgardner\b', content_no_holdt, re.IGNORECASE) or re.search(r'\bgardner\b', all_faq_no_holdt, re.IGNORECASE)
+            line_num = content_no_holdt[:m.start()].count('\n') + 1 if m else 0
+            line_snippet = content_no_holdt.splitlines()[line_num - 1].strip()[:100] if line_num > 0 else ""
+            findings.append({
+                "file": file_path_str,
+                "line": line_num,
+                "rule": "R22 Colour scale mismatch",
+                "severity": "FAIL",
+                "text": f"Colour scale mismatch: 'Gardner' mentioned on page whose analytical spec table uses Lovibond: '{line_snippet}'"
+            })
+
+    # 2. Spec table has Gardner, but Lovibond is mentioned
+    if "gardner" in table_color_scales and "lovibond" not in table_color_scales:
+        if has_lovibond or faq_has_lovibond:
+            m = re.search(r'\blovibond\b', norm_content, re.IGNORECASE) or re.search(r'\blovibond\b', all_faq_text, re.IGNORECASE)
+            line_num = norm_content[:m.start()].count('\n') + 1 if m else 0
+            line_snippet = norm_content.splitlines()[line_num - 1].strip()[:100] if line_num > 0 else ""
+            findings.append({
+                "file": file_path_str,
+                "line": line_num,
+                "rule": "R22 Colour scale mismatch",
+                "severity": "FAIL",
+                "text": f"Colour scale mismatch: 'Lovibond' mentioned on page whose analytical spec table uses Gardner: '{line_snippet}'"
+            })
+
+    return findings
+
+
+def check_r23_hs_code(content: str, file_path_str: str, repo_root: Path = REPO_ROOT) -> list:
+    findings = []
+    norm_path = file_path_str.replace('\\', '/').lower()
+    if not ('products/' in norm_path and norm_path.endswith('.html')):
+        return findings
+
+    filename = norm_path.split('products/')[-1]
+    if filename in ('index.html', 'castor-cake-fertilizer.html', 'de-oiled-cake-castor-meal.html'):
+        return findings
+    slug = filename.replace('.html', '')
+
+    master = load_product_master(repo_root)
+    prod = next((p for p in master if p.get("slug") == slug), None)
+    if not prod or not prod.get("hs_code"):
+        return findings
+
+    expected_hs = prod["hs_code"]
+
+    # 1. Check JSON-LD mpn and PropertyValue
+    mpn_matches = re.finditer(r'"mpn"\s*:\s*"([^"]+)"', content)
+    for m in mpn_matches:
+        mpn_val = m.group(1).strip()
+        if re.match(r'^\d{4}\.\d{2}$', mpn_val) and mpn_val != expected_hs:
+            findings.append({
+                "file": file_path_str,
+                "line": content[:m.start()].count('\n') + 1,
+                "rule": "R23 HS code mismatch",
+                "severity": "FAIL",
+                "text": f"HS code mismatch in JSON-LD mpn: found '{mpn_val}', expected '{expected_hs}'"
+            })
+
+    prop_matches = re.finditer(r'"(?:propertyID|name)"\s*:\s*"HS Code"[^}]*?"value"\s*:\s*"([^"]+)"', content, re.DOTALL)
+    for m in prop_matches:
+        val = m.group(1).strip()
+        if val != expected_hs:
+            findings.append({
+                "file": file_path_str,
+                "line": content[:m.start()].count('\n') + 1,
+                "rule": "R23 HS code mismatch",
+                "severity": "FAIL",
+                "text": f"HS code mismatch in JSON-LD PropertyValue: found '{val}', expected '{expected_hs}'"
+            })
+
+    # 2. Check Hero / chips / page text
+    hs_text_matches = re.finditer(r'\b(?:HS|HS\s*Code|Harmonized\s*System)\b[^\w\d<]{1,15}(\d{4}\.\d{2})\b', content, re.IGNORECASE)
+    for m in hs_text_matches:
+        found_code = m.group(1)
+        if found_code != expected_hs:
+            findings.append({
+                "file": file_path_str,
+                "line": content[:m.start()].count('\n') + 1,
+                "rule": "R23 HS code mismatch",
+                "severity": "FAIL",
+                "text": f"HS code mismatch in page hero/chips: found '{found_code}', expected '{expected_hs}'"
+            })
+
+    # 3. Check TDS PDF (if exists)
+    tds_pdf = repo_root / "downloads" / "tds" / f"{slug}.pdf"
+    if tds_pdf.exists():
+        try:
+            import fitz
+            doc = fitz.open(str(tds_pdf))
+            tds_text = "".join([page.get_text() for page in doc])
+            m_tds = re.search(r'HS\s*(?:Tariff)?\s*Code:?\s*(\d{4}\.\d{2})', tds_text, re.IGNORECASE)
+            if m_tds:
+                tds_hs = m_tds.group(1)
+                if tds_hs != expected_hs:
+                    findings.append({
+                        "file": file_path_str,
+                        "line": 0,
+                        "rule": "R23 HS code mismatch",
+                        "severity": "FAIL",
+                        "text": f"HS code mismatch in TDS PDF '{tds_pdf.name}': found '{tds_hs}', expected '{expected_hs}'"
+                    })
+            elif expected_hs not in tds_text:
+                findings.append({
+                    "file": file_path_str,
+                    "line": 0,
+                    "rule": "R23 HS code mismatch",
+                    "severity": "FAIL",
+                    "text": f"TDS PDF '{tds_pdf.name}' missing expected HS code '{expected_hs}'"
+                })
+        except Exception:
+            pass
+
+    return findings
+
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
     lines = content.splitlines()
@@ -1159,8 +1371,11 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     # ----------------------------------------------------
     for line_idx, line in enumerate(lines, 1):
         for phrase in banned_phrases:
-            pattern = get_banned_phrase_pattern(phrase)
-            if re.search(pattern, line, re.IGNORECASE):
+            phrase_clean = phrase.strip().lower()
+            if phrase_clean == "complies to bp" and "castor-oil-bp93.html" in file_path_str.replace("\\", "/"):
+                continue
+            pat = get_compiled_banned_pattern(phrase)
+            if pat.search(line):
                 findings.append({
                     "file": file_path_str,
                     "line": line_idx,
@@ -1374,26 +1589,7 @@ def lint_content(content: str, file_path_str: str, facts: dict):
         if table_params:
             norm_content = content.replace('&le;', '≤').replace('&ge;', '≥').replace('&deg;', '°')
 
-            # Check for color scale discrepancy across the page
-            has_gardner = bool(re.search(r'\bgardner\b', norm_content, re.IGNORECASE))
-            has_lovibond = bool(re.search(r'\blovibond\b', norm_content, re.IGNORECASE))
-
-            if has_gardner and "gardner" not in table_color_scales:
-                findings.append({
-                    "file": file_path_str,
-                    "line": 0,
-                    "rule": "R7 Spec consistency (Colour scale)",
-                    "severity": "FAIL",
-                    "text": f"Page mentions 'Gardner' color scale, but analytical spec table only defines Lovibond"
-                })
-            if has_lovibond and "lovibond" not in table_color_scales:
-                findings.append({
-                    "file": file_path_str,
-                    "line": 0,
-                    "rule": "R7 Spec consistency (Colour scale)",
-                    "severity": "FAIL",
-                    "text": f"Page mentions 'Lovibond' color scale, but analytical spec table does not define it"
-                })
+            # Colour scale check moved to R22
 
             # Check Free Fatty Acid (FFA)
             if "ffa" in table_params:
@@ -1569,6 +1765,9 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     findings.extend(check_r18_internal_links(content, file_path_str))
     findings.extend(check_r19_brand_codes(content, file_path_str))
     findings.extend(check_r20_efficacy_claims(content, file_path_str))
+    findings.extend(check_r21_cas_integrity(content, file_path_str))
+    findings.extend(check_r22_color_scale(content, file_path_str))
+    findings.extend(check_r23_hs_code(content, file_path_str))
 
     return findings
 
@@ -1612,7 +1811,7 @@ def run_production_audit(facts: dict):
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 21)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 24)}
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
     cb_ts = int(time.time())
@@ -1699,7 +1898,7 @@ def main():
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 21)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 24)}
 
     for f in files:
         f_findings = lint_file(f, facts)
@@ -1745,10 +1944,10 @@ def main():
     print(f"  - {report_csv}")
 
     if fail_count > 0:
-        print("\n[FAILED] One or more hard claims gate rules (R1-R14) failed.")
+        print("\n[FAILED] One or more hard claims gate rules (R1-R23) failed.")
         return 1
     else:
-        print("\n[PASSED] All hard claims gate rules (R1-R14) passed with 0 failures!")
+        print("\n[PASSED] All hard claims gate rules (R1-R23) passed with 0 failures!")
         return 0
 
 if __name__ == "__main__":

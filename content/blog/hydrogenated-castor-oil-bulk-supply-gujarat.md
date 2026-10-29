@@ -78,7 +78,7 @@ Our Deodar manufacturing unit provides reliable shipping logistics:
 Industrial buyers evaluate Hydrogenated Castor Oil against strict analytical limits documented on the Certificate of Analysis:
 
 - **Dropping Point (Mettler / Ubbelohde)**: Specified between 85.0°C and 88.0°C. The dropping point is the defining physical metric for castor wax. A high, sharp melting point confirms complete molecular saturation and ensures high thermal stability when used as a thickener in automotive greases.
-- **Iodine Value**: Maintained below 5.0 g I2/100g. Residual iodine value measures remaining unhydrogenated double bonds. Low iodine value guarantees complete resistance to oxidation, yellowing, and thermal rancidity.
+- **Iodine Value**: Maintained below 5.0 g I2/100g. Residual iodine value measures remaining unhydrogenated double bonds. Low iodine value ensures complete resistance to oxidation, yellowing, and thermal rancidity.
 - **Acid Value**: Controlled below 3.0 mg KOH/g. Low acid value ensures minimal unreacted free fatty acids, preventing corrosion on metallic parts and avoiding interference with polyurethane catalysts.
 - **Saponification Value**: Specified between 175 and 185 mg KOH/g, confirming high ester purity and guiding stoichiometric calculations for specialty soap or ester conversions.
 - **Hydroxyl Value**: Specified between 155 and 165 mg KOH/g. The retention of secondary hydroxyl functionality provides the basis for rheological hydrogen bonding in thixotropic coatings.

@@ -15,7 +15,7 @@ lang: en
 in_brief: Consult our pale pressed grade castor oil buyer guide to explore this high-purity
   industrial grade. Sourced from the first pressing of Gujarat castor seed at our
   Deodar plant, PPG castor oil features free fatty acids under 0.8% and pronounced
-  Lovibond clarity, making it the premier choice for clear polyurethanes, optical
+  Lovibond clarity, making it the primary choice for clear polyurethanes, optical
   sealants, and pale specialty alkyds.
 faqs:
 - q: What core parameters define Pale Pressed Grade (PPG) castor oil?

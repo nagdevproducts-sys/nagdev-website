@@ -89,7 +89,7 @@ First Pressed Degummed castor oil is selected for technical processes where gum-
 FPD is an optimal feedstock for synthesizing bio-based polyols used in rigid polyurethane insulation, structural foams, and elastomeric sealants. Because phosphatides have been removed, the oil reacts cleanly with isocyanates without generating cloudiness or fouling reaction vessels.
 
 ### 2. High-Temperature Industrial Lubricants
-In extreme-pressure gear oils and heavy industrial lubricants, phosphatides can decompose at high operating temperatures to form sticky lacquers and deposits. FPD provides clean boundary lubrication films with enhanced thermal stability.
+In lubricity gear oils and heavy industrial lubricants, phosphatides can decompose at high operating temperatures to form sticky lacquers and deposits. FPD provides clean boundary lubrication films with enhanced thermal stability.
 
 ### 3. Specialty Esters and Plasticizers
 Chemical manufacturers use FPD as an intermediate to produce ricinoleate esters, lubricating additives, and specialty plasticizers where low phosphorus ensures consistent reaction kinetics and prevents catalyst poisoning.

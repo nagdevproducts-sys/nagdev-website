@@ -68,7 +68,7 @@ Formulating personal care products requires absolute adherence to raw material i
 Each production lot of cosmetic grade castor oil is tested in our quality control laboratory for several critical parameters:
 
 - **Lovibond Color Verification**: Measured in a standard optical tintometer. Low yellow and red color readings ensure the oil will not impart undesirable tints to white cosmetic creams or pale foundation makeup.
-- **Free Fatty Acid and Acid Value**: Low acid values confirm thorough alkali refining, guaranteeing that free organic acids will not alter emulsion pH or destabilize acid-sensitive active ingredients.
+- **Free Fatty Acid and Acid Value**: Low acid values confirm thorough alkali refining, ensuring that free organic acids will not alter emulsion pH or destabilize acid-sensitive active ingredients.
 - **Peroxide Value**: Testing ensures fresh, unoxidized oil with minimal primary oxidation peroxides, thereby preventing odor development or rancidity during the consumer shelf life of cosmetic goods.
 - **Hydroxyl Value**: Verifies the abundance of reactive ricinoleic hydroxyl groups that provide high viscosity, pigment suspension power, and emulsification compatibility.
 - **Moisture and Insoluble Impurities**: Stringent drying protocols keep residual moisture minimal, preventing phase separation in anhydrous cosmetic sticks and hot-pour formulas.
