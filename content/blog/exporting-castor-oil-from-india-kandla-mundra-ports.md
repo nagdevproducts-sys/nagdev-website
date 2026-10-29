@@ -29,7 +29,7 @@ faqs:
 
 India accounts for the vast majority of the world's exported castor oil, supplying vital chemical feedstocks to industrial manufacturers across Europe, the Americas, East Asia, and the Middle East. For international procurement managers, understanding the maritime supply chain—from processing plant gates to container loading berths—is vital to ensuring on-time delivery and product integrity. In this practical export logistics guide, we evaluate the protocols, container choices, and regulatory documentation required when exporting castor oil from India ports.
 
-Geographically, the vast majority of Indian castor seed crushing and refining occurs within Gujarat. Consequently, maritime export movements are concentrated in Gujarat's premier deep-water ports situated along the Gulf of Kutch: Mundra Port and Deendayal Port (Kandla). Operating our crushing and refining facility in Deodar, North Gujarat, Nagdev Products maintains a direct freight corridor to both maritime gateways.
+Geographically, the vast majority of Indian castor seed crushing and refining occurs within Gujarat. Consequently, maritime export movements are concentrated in Gujarat's primary deep-water ports situated along the Gulf of Kutch: Mundra Port and Deendayal Port (Kandla). Operating our crushing and refining facility in Deodar, North Gujarat, Nagdev Products maintains a direct freight corridor to both maritime gateways.
 
 {{mid_cta}}
 
@@ -55,9 +55,9 @@ Selecting the appropriate export packaging protects refined castor oil and its d
 Export consignments managed by Nagdev Products are accompanied by complete, legally complete shipping dossiers:
 
 - **Commercial Invoice and Packing List**: Detailing exact batch lot numbers, gross and net weights, HS codes, and container numbers.
-- **Clean on Board Ocean Bill of Lading (B/L)**: Issued by premier container shipping lines.
+- **Clean on Board Ocean Bill of Lading (B/L)**: Issued by primary container shipping lines.
 - **Certificate of Origin (Preferential / Non-Preferential)**: Certified by authorized chambers of commerce to facilitate duty-free or concessional tariff clearance under international trade agreements.
 - **Lot-Specific Certificate of Analysis (COA)**: Certified by our quality laboratory, detailing physical-chemical constants matching contract specifications.
 - **Safety Data Sheet (SDS) **: Formatted to international GHS standards for European and American customs authorities.
 
-Export enquiries welcome. Partnering directly with an integrated processing manufacturer when exporting castor oil from India ports guarantees international buyers verifiable product authenticity, secure maritime packing, and streamlined customs clearance.
+Export enquiries welcome. Partnering directly with an integrated processing manufacturer when exporting castor oil from India ports ensures international buyers verifiable product authenticity, secure maritime packing, and streamlined customs clearance.

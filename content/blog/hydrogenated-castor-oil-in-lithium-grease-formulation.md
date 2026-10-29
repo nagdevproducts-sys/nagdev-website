@@ -68,4 +68,4 @@ Our logistics network coordinates continuous bulk deliveries:
 - **Northern and Central Manufacturing Zones**: Regular road freight connects to automotive and industrial grease blending plants across Haryana, Rajasthan, Madhya Pradesh, and Uttar Pradesh.
 - **International Seaports**: Export enquiries welcome. Our proximity to Mundra Port and Deendayal Port (Kandla) allows prompt stuffing and maritime dispatch of palletized container loads for global grease manufacturers.
 
-Formulating with hydrogenated castor oil in lithium greases guarantees pronounced thermal performance, mechanical endurance, and consistent soap structure in multi-purpose industrial lubricants.
+Formulating with hydrogenated castor oil in lithium greases ensures pronounced thermal performance, mechanical endurance, and consistent soap structure in multi-purpose industrial lubricants.

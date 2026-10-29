@@ -41,7 +41,7 @@ faqs:
 
 ## What is First Special Grade (FSG) Castor Oil?
 
-First Special Grade (FSG) castor oil is the premier industrial refined standard in the global castor derivatives market. Often designated as British Standard Specification (BSS) castor oil, FSG is produced by subjecting crude expeller-pressed oil to an integrated refining process consisting of caustic alkali refining, washing, vacuum drying, and adsorptive earth bleaching. This treatment removes free fatty acids, color bodies, and residual moisture, producing an optically clear, pale straw-colored liquid.
+First Special Grade (FSG) castor oil is the primary industrial refined standard in the global castor derivatives market. Often designated as British Standard Specification (BSS) castor oil, FSG is produced by subjecting crude expeller-pressed oil to an integrated refining process consisting of caustic alkali refining, washing, vacuum drying, and adsorptive earth bleaching. This treatment removes free fatty acids, color bodies, and residual moisture, producing an optically clear, pale straw-colored liquid.
 
 While crude oil is suitable for general technical applications, chemical formulators specifically require FSG castor oil specifications and bulk supply when producing color-sensitive alkyds, high-clarity polyurethane polymers, and precision specialty esters. Because ricinoleic fatty acid chains comprise the majority of the triglyceride structure, FSG retains the full hydroxyl functionality (hydroxyl value 160–168 mg KOH/g) while offering enhanced chemical stability. Nagdev Products manufactures and refines FSG castor oil at our operational facility in Deodar, North Gujarat, providing commercial quantities for domestic manufacturers and international export markets.
 
@@ -72,7 +72,7 @@ Our location in Deodar provides robust transportation infrastructure:
 
 ## Comprehensive Analysis of FSG Technical Parameters
 
-Understanding the analytical limits on the Certificate of Analysis allows technical buyers to guarantee formulation performance:
+Understanding the analytical limits on the Certificate of Analysis allows technical buyers to ensure formulation performance:
 
 - **Free Fatty Acids (FFA)**: Capped at 1.00% maximum (calculated as oleic acid). Low acidity is vital in urethane and esterification reactions to prevent premature catalyst deactivation and unwanted side reactions.
 - **Moisture and Volatile Matter**: Specified at 0.25% maximum. Minimal moisture prevents hydrolysis during storage and eliminates isocyanate foaming in polyurethane potting applications.
@@ -91,7 +91,7 @@ Refined FSG castor oil serves as an vital chemical intermediate across diverse m
 In Coatings, Adhesives, Sealants, and Elastomers (CASE), FSG functions as a natural bio-based polyol. The trifunctional hydroxyl structure cross-links with aliphatic and aromatic isocyanates to create resilient polyurethane polymers with high hydrolytic resistance and dielectric insulation properties.
 
 ### 2. heavy-duty Lubricants and Synthetic Greases
-FSG is utilized as a base fluid for synthetic lubricant formulations, extreme-pressure gear greases, and high-temperature hydraulic fluids where low acidity and oxidation stability are demanded.
+FSG is utilized as a base fluid for synthetic lubricant formulations, lubricity gear greases, and high-temperature hydraulic fluids where low acidity and oxidation stability are demanded.
 
 ### 3. Specialty Chemical Precursors and Esters
 Industrial chemical synthesis facilities utilize FSG to manufacture specialty ester derivatives (ricinoleic acid is under development), polyoxyethylated surfactants, and specialty plasticizers for cellulose acetate and nitrocellulose lacquers.

@@ -12,7 +12,7 @@ secondary_keywords:
 - dehydrated castor oil specifications
 - conjugated drying oil
 lang: en
-in_brief: Consult our dehydrated castor oil technical guide to evaluate this premier
+in_brief: Consult our dehydrated castor oil technical guide to evaluate this primary
   conjugated drying oil. Manufactured at our Deodar plant in North Gujarat via catalytic
   thermal dehydration, DCO delivers fast air-drying, high gloss retention, and chemical
   resistance in high-solids alkyd enamels, printing inks, and protective clear varnishes.
@@ -85,7 +85,7 @@ Industrial coating chemists evaluate Dehydrated Castor Oil against rigorous anal
 The conjugated diene chemistry of DCO supports high-value industrial manufacturing applications:
 
 ### 1. High-Solids Alkyd Resins and Enamels
-DCO is the premier drying oil used to cook short-, medium-, and long-oil alkyd resins. DCO alkyds exhibit rapid tack-free times, high gloss, hardness, and excellent resistance to water, mild alkalis, and outdoor atmospheric weathering.
+DCO is the primary drying oil used to cook short-, medium-, and long-oil alkyd resins. DCO alkyds exhibit rapid tack-free times, high gloss, hardness, and excellent resistance to water, mild alkalis, and outdoor atmospheric weathering.
 
 ### 2. Printing Inks and Lithographic Varnishes
 In offset and lithographic printing inks, DCO acts as a fast-setting pigment binder. Its quick oxidative polymerization ensures sharp print definition, rapid setting on paper substrates, and high rub resistance.

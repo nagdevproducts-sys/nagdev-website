@@ -3,7 +3,7 @@
 ## 1. Official Portal & Membership URLs
 - **Official Website:** https://www.seaofindia.com
 - **Membership Section:** https://www.seaofindia.com/membership/
-- **Organization Role:** Premier apex body for vegetable oil industry, solvent extractors, seed crushers, and castor oil processors in India. Recognized by Ministry of Consumer Affairs, Food & Public Distribution and Ministry of Commerce.
+- **Organization Role:** Primary apex body for vegetable oil industry, solvent extractors, seed crushers, and castor oil processors in India. Recognized by Ministry of Consumer Affairs, Food & Public Distribution and Ministry of Commerce.
 
 ## 2. Eligibility Rules & Membership Fees
 - **Eligibility:**
@@ -15,7 +15,7 @@
 - **Fee Structure (Official SEA Schedule):**
   - **Entrance Fee (One-time):** ₹10,000 + 18% GST (approx. ₹11,800)
   - **Annual Subscription:**
-    - Crushing / Processing units (up to 100 TPD): ₹12,000 + 18% GST (approx. ₹14,160)
+    - Small and medium processing units category: ₹12,000 + 18% GST (approx. ₹14,160)
   - *Reference URL:* https://www.seaofindia.com/become-a-member/
 
 ## 3. Mandatory Document Checklist
@@ -51,23 +51,24 @@ The Solvent Extractors' Association of India,
    Taluka Deodar, District Vav-Tharad, Gujarat 385330, India.
 
 7. Telecommunications:
-   - Phone: +91 63520 98306
+   - Sales & Enquiry Desk: +91 63520 98306
    - Email: nagdevproducts@gmail.com
    - Website: https://www.nagdevproducts.com
 
 8. Type of Processing Plant:
    - Mechanical seed crushing (expeller units)
    - Oil refining & filtration
-   - Chemical derivatives processing (hydrogenation, batch reactors)
+   - Chemical derivatives processing (hydrogenation, dehydration, batch reactors)
 
 9. Daily Crushing / Processing Capacity:
    - Seed Crushing Capacity: 50 Metric Tonnes Per Day (50 TPD)
 
 10. Products Manufactured & Marketed:
-    - Castor Oil Grades: Commercial Castor Oil, First Special Grade (FSG) Castor Oil
-    - Castor Co-Products: Castor Cake (Organic Fertilizer Grade), Refined Glycerin
-    - Castor Derivatives: Hydrogenated Castor Oil (HCO), 12-Hydroxystearic Acid (12-HSA), Ricinoleic Acid
-    - Specialty Castor Derivatives: Available on enquiry
+    - Castor Oil Grades (Regular Supply): Commercial Castor Oil (HS 1515.30), First Special Grade (FSG) Castor Oil (HS 1515.30), First Pressed Degummed (FPD) Castor Oil (HS 1515.30)
+    - Castor Co-Products (Regular Supply): Castor Cake Organic Fertilizer Grade (HS 2306.90)
+    - Castor Derivatives (Regular Supply): Hydrogenated Castor Oil (HCO, HS 1516.20), Dehydrated Castor Oil (DCO, HS 1518.00), DCO Fatty Acid (HS 3823.19)
+    - Downstream Derivatives (Under Development): Ricinoleic Acid, 12-Hydroxystearic Acid (12-HSA), Refined Glycerin
+    - Specialty Castor Derivatives & Compendial Grades: Available on enquiry
 
 11. Quality Protocols:
     - Parameters tested by standard methods; COA supplied per lot; TDS and SDS available.

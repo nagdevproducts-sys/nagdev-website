@@ -42,7 +42,7 @@ Resin chemists routinely synthesize isocyanate-terminated polyurethane prepolyme
 To ensure consistent polymer molecular weight and prevent premature gelling inside reaction kettles, formulators rely on tightly specified raw material constants:
 
 - **Hydroxyl Value (160 to 168 mg KOH/g)**: Precise hydroxyl value determination is critical for calculating the exact isocyanate index (NCO:OH ratio). Variations in hydroxyl numbers alter stoichiometric balance, established to sticky under-cured films or brittle over-crosslinked coatings.
-- **Acid Value (Maximum 2.0 mg KOH/g)**: Free carboxylic acids can act as retarders or consume reactive isocyanate groups, generating unwanted amide linkages. Low acidity in FSG guarantees predictable catalysis and uniform reaction rates.
+- **Acid Value (Maximum 2.0 mg KOH/g)**: Free carboxylic acids can act as retarders or consume reactive isocyanate groups, generating unwanted amide linkages. Low acidity in FSG ensures predictable catalysis and uniform reaction rates.
 - **Moisture Content (Maximum 0.25%)**: Water is the foremost competitor to polyol hydroxyl groups. A single mole of water consumes two isocyanate equivalents, releasing gaseous carbon dioxide. In solid coatings or potting compounds, unaddressed moisture produces unsightly micro-bubbles, pinholes, and reduced dielectric breakdown strength.
 
 {{mid_cta}}

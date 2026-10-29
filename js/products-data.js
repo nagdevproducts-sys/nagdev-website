@@ -180,7 +180,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/first-special-grade-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank / Vessel • 200 / 225 kg MS Drums / HDPE Drums • 950 kg IBC • Customized drum lines",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
-    "application": "High-purity refined, neutralized and bleached castor oil manufactured to British Standard Specifications (B.S.S). Premier grade for manufacturing HCO, 12-HSA, clear coatings, urethanes, cosmetic formulations, and premium specialty lubricants.",
+    "application": "High-purity refined, neutralized and bleached castor oil manufactured to British Standard Specifications (B.S.S). Grade for manufacturing HCO, 12-HSA, clear coatings, urethanes, cosmetic formulations, and premium specialty lubricants.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -392,7 +392,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/cold-pressed-castor-oil.webp",
     "packing": "200 kg HDPE Drums • 50 kg Carboys • 25 kg Cans • 950 kg IBC • Flexi-Tanks on request",
     "shelfLife": "24 months from date of manufacture, stored in cool dark ambient conditions",
-    "application": "Obtained by virgin mechanical cold-pressing without chemical solvents or elevated thermal treatments, preserving natural antioxidants and essential fatty acid bio-integrity. Used widely in hair care, brow & lash serums, dermatology, and cosmetic bases.",
+    "application": "Obtained by virgin mechanical cold-pressing without chemical solvents or elevated thermal treatments, preserving natural characteristics and essential fatty acid bio-integrity. Used widely in hair care, brow & lash serums, dermatology, and cosmetic bases.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -451,21 +451,6 @@ const PRODUCTS_DATABASE = [
       ],
       [
         "11",
-        "Light Absorption",
-        "Complies to BP"
-      ],
-      [
-        "12",
-        "1 cm Cell at 268 / 270 nm",
-        "0.5 Max"
-      ],
-      [
-        "13",
-        "Foreign Fatty Substances",
-        "Complies to BP"
-      ],
-      [
-        "14",
         "Ricinoleic Acid Content",
         "85% Min"
       ]
@@ -562,7 +547,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/castor-cake.webp",
     "packing": "50 kg HDPE woven bags with inner poly liner • 1,000 kg PP jumbo bulk bags with bottom discharge spout",
     "shelfLife": "12 months from date of manufacture in dry, covered storage",
-    "application": "Premier 100% natural organic manure with slow-release Nitrogen, Phosphorus, and Potash (N-P-K ~ 4-1-1). Castor cake has traditionally been used by farmers as an organic soil amendment.",
+    "application": "100% natural organic manure with slow-release Nitrogen, Phosphorus, and Potash (N-P-K ~ 4-1-1). Castor cake has traditionally been used by farmers as an organic soil amendment.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -623,7 +608,7 @@ const PRODUCTS_DATABASE = [
     "brandName": "NDEVAGRO™ HPRO",
     "category": "specialty-derivatives",
     "categoryLabel": "Under development (Available on Enquiry)",
-    "casNumber": "68424-10-2",
+    "casNumber": "",
     "isSpecialtyRange": true,
     "industries": [
       "agriculture",
@@ -829,18 +814,6 @@ const PRODUCTS_DATABASE = [
         "Colour Gardner",
         "3 Max",
         "3 Max"
-      ],
-      [
-        "8",
-        "Nickel Content (PPM)",
-        "—",
-        "5 PPM Max"
-      ],
-      [
-        "9",
-        "Particle Size",
-        "—",
-        "99% Passing through 16 Mesh"
       ]
     ],
     "isSpecialtyRange": false,

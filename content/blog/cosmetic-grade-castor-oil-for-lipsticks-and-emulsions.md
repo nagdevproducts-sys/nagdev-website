@@ -31,7 +31,7 @@ In cosmetic science and decorative makeup formulation, selecting the appropriate
 
 The functional performance of castor oil in decorative cosmetics stems from its fatty acid profile, which is composed of roughly ninety percent ricinoleic acid. The secondary hydroxyl group located at the twelfth carbon atom grants the molecule a polar character absent in common vegetable triglycerides like olive, sunflower, or palm oils. When formulating cosmetic grade castor oil in cosmetics, this natural polarity significantly lowers the interfacial tension between the liquid oil phase and fine cosmetic pigment particles—including iron oxides, titanium dioxide, ultramarines, and organic D&C lakes.
 
-During the mechanical pigment milling process on three-roll mills or bead mills, cosmetic grade castor oil coats the dry agglomerated pigment surfaces. It displaces trapped air, shears agglomerates down to primary particle sizes, and surrounds each particle with an electrostatic and steric barrier. This prevents pigment flocculation, ensures uniform color development, eliminates streaking during lipstick application, and guarantees consistent batch-to-batch color reproducibility for cosmetic contract manufacturers.
+During the mechanical pigment milling process on three-roll mills or bead mills, cosmetic grade castor oil coats the dry agglomerated pigment surfaces. It displaces trapped air, shears agglomerates down to primary particle sizes, and surrounds each particle with an electrostatic and steric barrier. This prevents pigment flocculation, ensures uniform color development, eliminates streaking during lipstick application, and ensures consistent batch-to-batch color reproducibility for cosmetic contract manufacturers.
 
 {{key_facts}}
 

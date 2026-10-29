@@ -27,7 +27,7 @@ faqs:
 
 ## Commercial Procurement Essentials for Dehydrated Castor Oil
 
-In the alkyd resin, printing ink, and industrial paint manufacturing sectors, dehydrated castor oil (DCO) serves as a premier renewable drying oil. Because catalytic dehydration alters the molecular architecture of castor oil—converting secondary hydroxyl groups into conjugated and non-conjugated double bonds—procurement managers must apply rigorous quality verification standards. In this practical procurement guide, we examine the vital criteria for buying dehydrated castor oil in bulk, reviewing analytical Certificates of Analysis (COA), viscosity grades, and container protection.
+In the alkyd resin, printing ink, and industrial paint manufacturing sectors, dehydrated castor oil (DCO) serves as a primary renewable drying oil. Because catalytic dehydration alters the molecular architecture of castor oil—converting secondary hydroxyl groups into conjugated and non-conjugated double bonds—procurement managers must apply rigorous quality verification standards. In this practical procurement guide, we examine the vital criteria for buying dehydrated castor oil in bulk, reviewing analytical Certificates of Analysis (COA), viscosity grades, and container protection.
 
 Commercial buyers require reliable batch-to-batch consistency. Inconsistent dehydration yields variable drying times in architectural finishes, erratic tack development in offset printing inks, and unstable resin cook times in alkyd reactors. Sourcing directly from an established processing facility ensures transparent analytical documentation, verifiable raw material traceability, and dependable delivery schedules across domestic and international markets.
 
@@ -37,7 +37,7 @@ Commercial buyers require reliable batch-to-batch consistency. Inconsistent dehy
 
 When buying dehydrated castor oil in bulk, quality assurance auditors should evaluate four decisive parameters documented on the lot COA:
 
-- **Refractive Index at 25°C (1.480 to 1.488)**: This optical constant is the primary benchmark of dehydration completeness. Native castor oil exhibits a refractive index of approximately 1.477. As catalytic dehydration forms conjugated diene bonds (-CH=CH-CH=CH-), the refractive index climbs systematically. A reading between 1.482 and 1.486 confirms high conjugated unsaturation, guaranteeing rapid oxidative film drying.
+- **Refractive Index at 25°C (1.480 to 1.488)**: This optical constant is the primary benchmark of dehydration completeness. Native castor oil exhibits a refractive index of approximately 1.477. As catalytic dehydration forms conjugated diene bonds (-CH=CH-CH=CH-), the refractive index climbs systematically. A reading between 1.482 and 1.486 confirms high conjugated unsaturation, ensuring rapid oxidative film drying.
 - **Iodine Value (130 to 145 g I2/100g)**: Reflects total ethylenic unsaturation. Unmodified castor oil exhibits an iodine value around 85; chemical dehydration increases this to over 130 as secondary double bonds are generated along the fatty acid chains.
 - **Acid Value (Maximum 4.0 to 6.0 mg KOH/g)**: Elevated acidity indicates excessive thermal degradation or unstripped fatty acids. Low acid values ensure neutral resin cooking without adverse catalytic side-reactions.
 - **Gardner Color Scale**: Low Gardner color (typically 2 to 4) ensures the drying oil will not impart unwanted brown or yellow tints to clear varnishes or white appliance finishes.

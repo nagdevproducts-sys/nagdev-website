@@ -1,7 +1,7 @@
 /**
  * NAGDEV PRODUCTS PRIVATE LIMITED — OFFICIAL TECHNICAL DATA SHEET (TDS) GENERATOR
  * Generates an official, publication-ready A4 TDS document with embedded watermark,
- * official company header, guaranteed specification table, and ISO audit stamp.
+ * official company header, verified specification table, and ISO audit stamp.
  */
 
 (function() {

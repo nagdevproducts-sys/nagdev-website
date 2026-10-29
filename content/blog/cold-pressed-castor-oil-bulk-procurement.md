@@ -25,7 +25,7 @@ faqs:
 - q: How does cold pressed oil differ from standard commercial castor oil?
   a: Standard commercial oil utilizes multi-pass expelling with thermal conditioning,
     whereas cold pressed oil captures only the virgin, unheated primary extraction
-    fluid, preserving natural antioxidants and minimizing peroxide formation.
+    fluid, preserving natural tocopherols and minimizing peroxide formation.
 - q: What technical specifications govern cold pressed castor oil?
   a: Specifications include free fatty acids below 1.0%, moisture under 0.25%, peroxide
     value below 5.0 meq O2/kg, and a pale yellow visual clarity with hydroxyl value
@@ -60,7 +60,7 @@ Nagdev Products manufactures Cold Pressed Castor Oil at our plant located at Sur
 
 ## Cold Pressed Castor Oil Bulk Procurement: Virgin Pressing
 
-Conducting your cold pressed castor oil bulk procurement directly with our primary crushing facility in North Gujarat ensures complete integrity of origin. Direct cold pressed castor oil bulk procurement eliminates trading intermediaries and guarantees authentic virgin mechanical extraction.
+Conducting your cold pressed castor oil bulk procurement directly with our primary crushing facility in North Gujarat ensures complete integrity of origin. Direct cold pressed castor oil bulk procurement eliminates trading intermediaries and ensures authentic virgin mechanical extraction.
 
 Gujarat is the center of world castor agronomy, with the semi-arid soils across North Gujarat's castor belt (Banaskantha and Vav-Tharad region) producing high-quality seed. Sourcing seeds directly from regional farmers and APMC mandis across Tharad, Deesa, and Vav allows our plant to press freshly harvested seeds within days of arrival, preventing the enzymatic hydrolysis that elevates acidity in aged seed stocks.
 
