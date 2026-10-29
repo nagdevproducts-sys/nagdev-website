@@ -1878,7 +1878,7 @@ input, textarea, select { font-family: var(--font-body); }
 /* ── Clean & Seamless Page Header (Solution 1) ── */
 .page-header-seamless {
   background: var(--cream);
-  padding: calc(var(--header-h) + 0.85rem) 0 0.85rem;
+  padding: 1.6rem 0 1rem;
   border-bottom: 1px solid rgba(11, 61, 30, 0.08);
 }
 .page-header-seamless-inner {
