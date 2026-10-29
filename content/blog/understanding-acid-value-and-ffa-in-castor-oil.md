@@ -55,7 +55,7 @@ The concentration of free acidity directly determines processing performance acr
 
 - **Chemical Refining Yields**: For refiners purchasing crude commercial castor oil, acid value dictates alkali alkali refining losses. Caustic soda (NaOH) reacts with free fatty acids to precipitate sodium soapstock. Higher acid values mean greater refining shrinkage and higher volumes of soapstock by-product.
 - **Polyurethane Resin Synthesis**: In polyurethane chemistry, free carboxylic groups (-COOH) are detrimental. They consume expensive diisocyanates, forming amide linkages while generating carbon dioxide gas that can cause micro-voids in cast elastomers. Furthermore, free acidity neutralizes basic tertiary amine catalysts, prolonging resin cure times.
-- **Lubricant and Grease Compounding**: In grease manufacturing, compounders use the verified acid value of incoming castor oil to calculate stoichiometric lithium or calcium hydroxide charges. In contrast, in finished industrial lubricants, elevated acid values accelerate metal corrosion and oil oxidation.
+- **Lubricant and Grease Compounding**: In grease manufacturing, compounders use the measured acid value of incoming castor oil to calculate stoichiometric lithium or calcium hydroxide charges. In contrast, in finished industrial lubricants, elevated acid values accelerate metal corrosion and oil oxidation.
 - **Alkyd Resin Cooking**: In alkyd reactors, free fatty acids participate directly in esterification reactions with polyols (pentaerythritol or glycerol). Knowing the exact acid value allows polymer chemists to balance the reaction stoichiometry.
 
 ## Testing Standards and Laboratory Analysis at Deodar

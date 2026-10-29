@@ -22,7 +22,7 @@ faqs:
   - q: "Can buyers specify custom viscosity grades for printing inks?"
     a: "Yes. We supply unbodied low-viscosity DCO as well as thermally bodied stand oils across varying poise ranges on commercial enquiry."
   - q: "How quickly can bulk consignments reach Gujarat industrial zones from Deodar?"
-    a: "Bulk road tankers and drum trucks typically reach industrial parks in Ahmedabad, Vadodara, and Ankleshwar within 24 to 48 hours of dispatch."
+    a: "Bulk road tankers and drum trucks typically reach industrial parks in Ahmedabad, Vadodara, and Ankleshwar via Gujarat highway freight corridors of dispatch."
 ---
 
 ## Commercial Procurement Essentials for Dehydrated Castor Oil

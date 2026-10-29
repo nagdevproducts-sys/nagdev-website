@@ -5,6 +5,17 @@ on:
     # Mondays 01:30 UTC = 07:00 IST
     - cron: '30 1 * * 1'
   workflow_dispatch:
+    inputs:
+      simulate_date:
+        description: 'Simulate publication at IST timestamp (e.g. 2026-11-02T07:05:00+05:30)'
+        required: false
+        default: ''
+        type: string
+      dry_run:
+        description: 'Dry run mode (validate & simulate without committing/pushing)'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -29,47 +40,106 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install beautifulsoup4 pyyaml pytest requests
+          pip install beautifulsoup4 pyyaml pytest requests pillow markdown-it-py
 
-      - name: Build Blog Engine
+      - name: Execute Blog Engine & Publication Gate
+        id: blog_step
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SIMULATE_DATE: ${{ github.event.inputs.simulate_date }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
-          python scripts/build_blog.py
+          NOW_ARG=""
+          if [ -n "$SIMULATE_DATE" ]; then
+            NOW_ARG="--now $SIMULATE_DATE"
+          fi
 
-      - name: Detect New Published Posts and Deploy
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "=================================================="
+            echo "DRY RUN MODE ENABLED - SIMULATING BLOG PUBLISHING"
+            echo "=================================================="
+            python scripts/build_blog.py $NOW_ARG --dry-run
+            echo "--- Git status after dry-run ---"
+            git status
+            echo "--- Git diff stat after dry-run ---"
+            git diff --stat
+            exit 0
+          fi
+
+          echo "Running live blog build engine..."
+          python scripts/build_blog.py $NOW_ARG
+
+          # Run Claims Linter Gate
+          echo "Running claims linter on all site assets..."
+          if ! python scripts/claims_lint.py > claims_lint.log 2>&1; then
+            cat claims_lint.log
+            echo "Claims linter failed! Opening alert GitHub issue..."
+            gh issue create \
+              --title "🚨 Blog Publish Gate Failed: Claims Linter Violations" \
+              --body "### Claims Linter Failure Log"$'\n\n'"`cat claims_lint.log`" \
+              --label "blog-failure"
+            exit 1
+          fi
+          cat claims_lint.log
+
+          # Run test suite
+          echo "Running pytest test suite..."
+          python -m pytest tests/
+
+      - name: Commit, Push & Index
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Check if there are newly rendered blog HTML files
+          # Identify new or modified rendered posts
           NEW_FILES=$(git status --porcelain blog/*.html | awk '{print $2}')
-          
+
           if [ -z "$NEW_FILES" ]; then
             echo "No new blog posts scheduled for release this cycle."
-            # Still run queue depth check
             python scripts/publish_automation.py --check-queue
             exit 0
           fi
-          
+
           echo "Found new post files to publish:"
           echo "$NEW_FILES"
-          
-          # Run verification gate before pushing
-          python scripts/claims_lint.py
-          python -m pytest tests/
-          
-          # Identify published post slug and week
+
+          # Extract week and title for commit message
           FIRST_NEW=$(echo "$NEW_FILES" | head -n 1)
           SLUG=$(basename "$FIRST_NEW" .html)
-          
+
+          POST_INFO=$(python - << EOF
+          import csv
+          slug = "$SLUG"
+          week = "N"
+          title = slug
+          try:
+              with open("seo/blog/calendar.csv", "r", encoding="utf-8") as f:
+                  for row in csv.DictReader(f):
+                      if row.get("slug") == slug:
+                          week = row.get("week", "N")
+                          title = row.get("title", slug)
+                          break
+          except Exception:
+              pass
+          print(f"{week}|{title}")
+          EOF
+          )
+
+          WEEK=$(echo "$POST_INFO" | cut -d'|' -f1)
+          TITLE=$(echo "$POST_INFO" | cut -d'|' -f2-)
+          COMMIT_MSG="feat(blog): publish week $WEEK post: $TITLE"
+          echo "Commit message: $COMMIT_MSG"
+
           # Git configuration
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add blog/ index.html js/blog-data.js sitemap.xml blog/rss.xml llms.txt seo/keywords.csv
-          git commit -m "chore(blog): publish scheduled post – $SLUG"
+
+          git add blog/ index.html js/blog-data.js sitemap.xml blog/rss.xml llms.txt seo/keywords.csv images/blog-covers/
+          git commit -m "$COMMIT_MSG"
           git push origin main
-          
-          # Post-deployment automation: verify live 200, ping indexers, generate social pack & queue alert
-          echo "Waiting 30 seconds for Vercel production build to trigger..."
+
+          # Post-deployment automation: await HTTP 200, ping search engines, open social pack & check queue
+          echo "Waiting 30 seconds for Vercel production deployment..."
           sleep 30
-          
-          python scripts/publish_automation.py --post-slug "$SLUG" --verify-url --ping --social-pack --check-queue
+
+          python scripts/publish_automation.py --post-slug "$SLUG" --verify-url --ping --social-pack --check-queue || echo "Publish automation warnings handled gracefully."

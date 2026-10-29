@@ -71,7 +71,7 @@ RULES = {
 }
 
 # Ignored paths
-IGNORED_PARTS = {"scratch", "scripts", "seo", "tests", ".git", ".agents", ".gemini", "node_modules", "backup_task4"}
+IGNORED_PARTS = {"scratch", "scripts", "seo", "tests", ".git", ".agents", ".gemini", "node_modules", "backup_task4", "templates"}
 IGNORED_FILES = {"blog-admin.html", "_template.html", "render_tds.html"}
 
 def is_deployable(path: Path) -> bool:
@@ -240,6 +240,9 @@ def extract_numeric_val(text: str):
     return float(m.group(1)) if m else None
 
 R11_BANNED_PHRASES = [
+    "verified commercial castor oil supplier",
+    "verified supplier",
+    "verified manufacturer",
     "certified regional",
     "oil content",
     "seed oil content",
@@ -496,16 +499,45 @@ def check_r13_standard_template(content: str, file_path_str: str):
         return findings
 
     missing = []
-    if '<header' not in content:
-        missing.append("site header (<header>)")
-    if '<footer' not in content:
-        missing.append("site footer (<footer>)")
+    # 1. Site header with class="site-header"
+    if 'class="site-header"' not in content and 'class=\'site-header\'' not in content:
+        missing.append("site header (<header class=\"site-header\">)")
+
+    # 2. Top info bar with class="top-bar"
+    if 'class="top-bar"' not in content and 'class=\'top-bar\'' not in content:
+        missing.append("top contact bar (<div class=\"top-bar\">)")
+
+    # 3. Main navigation with nav-list
+    if 'nav-list' not in content:
+        missing.append("main navigation (class=\"nav-list\")")
+
+    # 4. Skip to content link (required on blog posts)
+    if ('blog/' in file_path_str.replace('\\', '/')) and 'skip-to-content' not in content and 'skip-link' not in content:
+        missing.append("skip-to-content link")
+
+    # 5. Site footer with class="site-footer"
+    if 'class="site-footer"' not in content and 'class=\'site-footer\'' not in content:
+        missing.append("site footer (<footer class=\"site-footer\">)")
+
+    # 6. Cookie settings trigger
+    if 'cookie-settings' not in content and 'cookie-settings-btn' not in content:
+        missing.append("cookie settings trigger (#cookie-settings-btn)")
+
+    # 7. Consent mode snippet
     if 'gtag(\'consent\'' not in content and 'gtag("consent"' not in content:
         missing.append("consent snippet (gtag consent default)")
+
+    # 8. Gtag loader / dataLayer
     if 'function gtag()' not in content and 'googletagmanager.com/gtag/js' not in content and 'dataLayer' not in content:
         missing.append("gtag loader")
+
+    # 9. Analytics script
     if '/js/analytics.js' not in content and 'js/analytics.js' not in content:
         missing.append("analytics script (/js/analytics.js)")
+
+    # 10. WhatsApp floating button / contact action
+    if 'whatsapp-float' not in content and 'whatsapp-fab' not in content and 'wa.me' not in content:
+        missing.append("WhatsApp button (class=\"whatsapp-float\" or #whatsapp-fab)")
 
     if missing:
         findings.append({
@@ -1676,7 +1708,7 @@ def main():
             if item["severity"] == "FAIL":
                 fail_count += 1
                 for r_key in fails_by_rule:
-                    if item["rule"].startswith(r_key):
+                    if re.match(rf'^{r_key}\b', item["rule"]):
                         fails_by_rule[r_key] += 1
             else:
                 warn_count += 1

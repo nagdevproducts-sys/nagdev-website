@@ -47,7 +47,7 @@ Greases formulated with castor oil derivatives demonstrate pronounced mechanical
 
 When procuring raw materials for lubricant and grease compounding, quality managers evaluate several critical chemical benchmarks:
 
-- **Free Fatty Acids (FFA) and Acid Value**: In commercial grade oil, free acidity reflects expeller pressing efficiency and natural seed freshness. Compounders calculate exact alkali charges based on the verified acid value of each incoming batch.
+- **Free Fatty Acids (FFA) and Acid Value**: In commercial grade oil, free acidity reflects expeller pressing efficiency and natural seed freshness. Compounders calculate exact alkali charges based on the measured acid value of each incoming batch.
 - **Kinematic Viscosity**: Castor oil possesses a viscosity significantly higher than typical vegetable oils (approximately 9.5 to 10.0 Stokes at 25°C). This heavy fluid body creates robust hydrodynamic separation between moving mechanical parts.
 - **Moisture and Volatile Content**: Residual water must remain tightly restricted. Excess moisture promotes hydrolysis of ester bonds during thermal blending and can cause steam foaming inside grease reaction kettles.
 - **Insoluble Impurities**: Stringent expeller filtration removes meal fines and particulate debris, ensuring that abrasive matter does not contaminate lubricant manufacturing equipment.

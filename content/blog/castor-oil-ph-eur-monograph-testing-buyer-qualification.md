@@ -29,7 +29,7 @@ faqs:
 
 European pharmaceutical corporations, clinical compounding facilities, and high-purity chemical synthesizers operate under the regulatory governance of the European Directorate for the Quality of Medicines & HealthCare (EDQM). In the European Pharmacopoeia, Castor Oil is governed by Monograph 0051 (covering both *Castor Oil, Virgin* and *Castor Oil, Refined*). This monograph is recognized globally as one of the most comprehensive and stringent compendial standards for natural vegetable oils. In this technical review, we evaluate the testing criteria, analytical instrumentation, and quality assurance workflows of castor oil Ph Eur monograph testing.
 
-Monograph 0051 establishes uncompromising boundaries to guarantee botanical provenance, chemical uniformity, and the absence of thermal oxidation artifacts or chemical solvent residues. For procurement directors, quality auditors, and regulatory affairs executives, qualifying an active pharmaceutical ingredient (API) vehicle or excipient supplier requires complete transparency and verified batch-to-batch consistency.
+Monograph 0051 establishes uncompromising boundaries to guarantee botanical provenance, chemical uniformity, and the absence of thermal oxidation artifacts or chemical solvent residues. For procurement directors, quality auditors, and regulatory affairs executives, qualifying an active pharmaceutical ingredient (API) vehicle or excipient supplier requires complete transparency and batch-to-batch consistency.
 
 Nagdev Products manufactures Castor Oil Ph. Eur. on technical enquiry at our Deodar facility in North Gujarat, providing European importers and multinational chemical manufacturers with robust batch analytical dossiers and full supply chain traceability.
 

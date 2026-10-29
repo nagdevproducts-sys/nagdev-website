@@ -20,7 +20,7 @@ faqs:
   - q: "What vital shipping documents accompany export consignments?"
     a: "Standard export dossiers include Commercial Invoice, Packing List, Bill of Lading, Certificate of Origin, Certificate of Analysis, and Safety Data Sheet."
   - q: "How long does domestic road transit take from Deodar to Mundra or Kandla?"
-    a: "Container trucks and road tankers typically travel from our Deodar plant to port gates within 6 to 10 hours, enabling rapid customs clearance."
+    a: "Container trucks and road tankers typically travel from our Deodar plant to port gates via direct highway corridors, enabling rapid customs clearance."
   - q: "Can international buyers appoint third-party inspection agencies at the port?"
     a: "Yes. Export enquiries welcome. Buyers may nominate independent surveyors like SGS, Bureau Veritas, or Intertek to draw samples and verify weights."
 ---
@@ -39,7 +39,7 @@ Evaluating the logistical infrastructure of Mundra and Kandla highlights specifi
 
 - **Mundra Port (APSEZ)**: India's largest private commercial port features state-of-the-art container terminals, deep-water container berths, dedicated railway freight corridors, and specialized tank farms. Mundra provides frequent, direct container liner sailings to Rotterdam, Antwerp, Hamburg, Felixstowe, New York, Houston, Shanghai, Busan, and Yokohama.
 - **Deendayal Port (Kandla)**: A major public port authority with extensive liquid bulk terminal facilities, specialized vegetable oil jetties, and dedicated pipeline manifolds. Kandla handles large parcel tankers for bulk liquid vegetable oil exports alongside containerized cargo.
-- **Domestic Transit Corridor from Deodar**: Situated at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330, our plant is located approximately 240 to 280 kilometers from these ports. Dedicated freight carriers transport sealed container loads to port container freight stations (CFS) within 6 to 10 hours, minimizing pre-shipment delays.
+- **Domestic Transit Corridor from Deodar**: Situated at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330, our plant is located approximately 240 to 280 kilometers from these ports. Dedicated freight carriers transport sealed container loads to port container freight stations (CFS) via direct highway corridors, minimizing pre-shipment delays.
 
 ## Ocean Packaging Configurations for International Buyers
 
@@ -52,7 +52,7 @@ Selecting the appropriate export packaging protects refined castor oil and its d
 
 ## Export Documentation Dossier and Regulatory Clearance
 
-Export consignments managed by Nagdev Products are accompanied by complete, legally verified shipping dossiers:
+Export consignments managed by Nagdev Products are accompanied by complete, legally complete shipping dossiers:
 
 - **Commercial Invoice and Packing List**: Detailing exact batch lot numbers, gross and net weights, HS codes, and container numbers.
 - **Clean on Board Ocean Bill of Lading (B/L)**: Issued by premier container shipping lines.

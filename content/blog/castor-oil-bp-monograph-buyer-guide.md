@@ -17,7 +17,7 @@ faqs:
     a: "The British Pharmacopoeia compendial monograph specifies that the oil must be obtained by cold expression from the seeds of Ricinus communis, with optical rotation verifying authentic botanical origin."
   - q: "Why is specific optical rotation a decisive test in the BP monograph?"
     a: "Because ricinoleic acid possesses an asymmetric carbon center at C-12, the oil exhibits dextrorotatory optical activity within monograph positive limits, proving the absence of adulteration with optically inactive seed oils."
-  - q: "What chemical criteria are verified on the BP analytical certificate?"
+  - q: "What chemical criteria are evaluated on the BP analytical certificate?"
     a: "The laboratory reports exact quantitative results for acid value, optical rotation, relative density, refractive index, iodine number, soap formation value, and unsaponifiable matter."
   - q: "How are containers sealed to prevent cross-contamination during transit?"
     a: "We pack Castor Oil BP into 200 kg epoxy-lined steel drums and 1,000 L IBCs fitted with numbered tamper-evident security seals, ensuring tamper-proof delivery."

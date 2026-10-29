@@ -12,7 +12,7 @@ secondary_keywords:
 - refined castor oil FSG supplier
 - BSS castor oil bulk supply
 lang: en
-in_brief: Seeking verified FSG castor oil specifications and bulk supply? Nagdev Products
+in_brief: Seeking FSG castor oil specifications and bulk supply? Nagdev Products
   manufactures refined, bleached First Special Grade castor oil at our Deodar processing
   plant in North Gujarat. Featuring free fatty acids below 1.0% and pale Lovibond
   color, our FSG grade is supplied in drums, IBCs, and ISO tanks with complete batch
@@ -62,13 +62,13 @@ Nagdev Products operates an integrated manufacturing and refining complex at Sur
 
 ## FSG Castor Oil Specifications and Bulk Supply from Gujarat
 
-Gujarat represents the global center of castor agronomy and commercial crushing. By locating our manufacturing operations in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), Nagdev Products establishes direct supply continuity from regional farming communities and APMC trading centers in Deesa, Tharad, and Palanpur. When chemical purchasers seek verified FSG castor oil specifications and bulk supply, establishing a direct supply line with our plant eliminates intermediary traders, verifies seed provenance, and ensures timely dispatches.
+Gujarat represents the global center of castor agronomy and commercial crushing. By locating our manufacturing operations in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), Nagdev Products establishes direct supply continuity from regional farming communities and APMC trading centers in Deesa, Tharad, and Palanpur. When chemical purchasers seek FSG castor oil specifications and bulk supply, establishing a direct supply line with our plant eliminates intermediary traders, verifies seed provenance, and ensures timely dispatches.
 
 Our location in Deodar provides robust transportation infrastructure:
 
 - **Domestic Industrial Corridors**: Dedicated road tankers and flatbed trucks transport palletized drums across Gujarat's chemical manufacturing zones in Dahej, Ankleshwar, Panoli, and Vapi.
-- **Northern and Central India**: Direct connectivity via NH 27 and Western Dedicated Freight corridors to Rajasthan, Maharashtra, Punjab, and Uttar Pradesh.
-- **Port Logistics**: Regular containerized cargo and bulk liquid dispatches arrive at Mundra Port and Deendayal Port (Kandla) within hours, facilitating prompt ocean departures. Technical buyers rely on our verified FSG castor oil specifications and bulk supply for seamless overseas formulation.
+- **Northern and Central India**: Direct connectivity via Gujarat highway and freight corridors to Rajasthan, Maharashtra, Punjab, and Uttar Pradesh.
+- **Port Logistics**: Regular containerized cargo and bulk liquid dispatches arrive at Mundra Port and Deendayal Port (Kandla) within hours, facilitating prompt ocean departures. Technical buyers rely on our FSG castor oil specifications and bulk supply for seamless overseas formulation.
 
 ## Comprehensive Analysis of FSG Technical Parameters
 

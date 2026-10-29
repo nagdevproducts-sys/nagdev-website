@@ -1,26 +1,20 @@
 #!/usr/bin/env python3
 """
 Nagdev Products — Automated Blog Publishing Engine
-Phase 14: 2-Year Scheduled Publishing System
+Phase 14c: Blog Design Integration & Publishing Reliability
 
 Builds blog posts from content/blog/<slug>.md based on publish_date <= now (IST).
 Regenerates:
-  - blog/<slug>.html (published posts only)
-  - blog.html (blog index with SSR cards and filters)
+  - images/blog-covers/<slug>-800w.webp (800x420)
+  - images/blog-covers/<slug>-1200w.webp (1200x630)
+  - blog/<slug>.html (published posts only, full site shell, 2-col sidebar layout)
+  - blog.html (blog index with SSR SS-3 cards and filters)
   - js/blog-data.js (client-side data for search/filtering)
-  - index.html (homepage 'Latest insights' showing 3 newest published posts)
+  - index.html (homepage 'Latest Technical Publications' showing 4 newest published posts)
   - sitemap.xml (includes only published posts with lastmod)
   - blog/rss.xml (RSS 2.0 feed)
   - llms.txt (blog section)
   - seo/keywords.csv (tracks blog primary keywords)
-
-Performs strict validations:
-  - Title <= 60 chars, meta description 140-160 chars
-  - Primary keyword placement (title, slug, description, first 100 words, H2, 2-4 body mentions)
-  - 3-shingle similarity < 30% against all other posts and product pages
-  - Unique FAQ questions across all posts
-  - No hand-typed spec numbers conflicting with official specs
-  - Zero claims linter violations
 """
 
 import os
@@ -28,16 +22,18 @@ import re
 import sys
 import csv
 import json
+import argparse
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
+from bs4 import BeautifulSoup
+import yaml
+import markdown_it
+from PIL import Image, ImageDraw, ImageFont
 
 try:
     sys.stdout.reconfigure(encoding='utf-8')
 except Exception:
     pass
-import argparse
-from datetime import datetime, timezone, timedelta
-from bs4 import BeautifulSoup
-import yaml
-import markdown_it
 
 IST = timezone(timedelta(hours=5, minutes=30))
 
@@ -99,9 +95,7 @@ def get_product_hs_code(product_slug):
 
 def get_word_shingles(text, n=3):
     """Generate n-word shingles from plain text."""
-    # Strip HTML tags
     clean = re.sub(r'<[^>]+>', ' ', text)
-    # Tokenize words
     words = re.findall(r'[a-zA-Z0-9\u0A80-\u0AFF]+', clean.lower())
     if len(words) < n:
         return set([' '.join(words)])
@@ -120,15 +114,167 @@ def compute_similarity(shingles_a, shingles_b):
         return 0.0
     return intersection / union
 
+# ── COVER IMAGE GENERATOR (Task 2a) ──────────────────────────────────────────
+
+def get_font(font_path_candidates, size):
+    for fp in font_path_candidates:
+        if os.path.exists(fp):
+            try:
+                return ImageFont.truetype(fp, size)
+            except Exception:
+                pass
+    return ImageFont.load_default()
+
+def wrap_text(text, font, max_width, draw):
+    words = text.split()
+    lines = []
+    current_line = []
+    for word in words:
+        test_line = ' '.join(current_line + [word])
+        bbox = draw.textbbox((0, 0), test_line, font=font)
+        w = bbox[2] - bbox[0]
+        if w <= max_width:
+            current_line.append(word)
+        else:
+            if current_line:
+                lines.append(' '.join(current_line))
+                current_line = [word]
+            else:
+                lines.append(word)
+                current_line = []
+    if current_line:
+        lines.append(' '.join(current_line))
+    return lines
+
+def generate_cover_image(title, category, subtitle, out_path, width=1200, height=630, is_gujarati=False):
+    """Generate dark-green cover tile with gold left rule and branding."""
+    img = Image.new('RGB', (width, height), color='#0b2e1f')
+    draw = ImageDraw.Draw(img)
+
+    # Gold left accent bar
+    bar_width = int(width * 0.018)
+    draw.rectangle([(0, 0), (bar_width, height)], fill='#d4af37')
+
+    # Fonts
+    if is_gujarati:
+        font_candidates = [
+            "C:/Windows/Fonts/Nirmala.ttc",
+            "C:/Windows/Fonts/ARIALUNI.TTF",
+            "/usr/share/fonts/truetype/noto/NotoSansGujarati-Bold.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ]
+        sub_candidates = [
+            "C:/Windows/Fonts/Nirmala.ttc",
+            "C:/Windows/Fonts/ARIALUNI.TTF",
+            "/usr/share/fonts/truetype/noto/NotoSansGujarati-Regular.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+        ]
+    else:
+        font_candidates = [
+            "C:/Windows/Fonts/arialbd.ttf",
+            "C:/Windows/Fonts/calibrib.ttf",
+            "C:/Windows/Fonts/Nirmala.ttc",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ]
+        sub_candidates = [
+            "C:/Windows/Fonts/arial.ttf",
+            "C:/Windows/Fonts/calibri.ttf",
+            "C:/Windows/Fonts/Nirmala.ttc",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+        ]
+
+    title_size = int(height * 0.085)
+    chip_size = int(height * 0.038)
+    sub_size = int(height * 0.045)
+    foot_size = int(height * 0.032)
+
+    title_font = get_font(font_candidates, title_size)
+    chip_font = get_font(font_candidates, chip_size)
+    sub_font = get_font(sub_candidates, sub_size)
+    foot_font = get_font(font_candidates, foot_size)
+
+    left_margin = int(width * 0.08)
+    right_margin = int(width * 0.08)
+    max_text_width = width - left_margin - right_margin
+
+    # 1. Category chip
+    chip_y = int(height * 0.14)
+    chip_text = category.upper()
+    chip_bbox = draw.textbbox((0, 0), chip_text, font=chip_font)
+    chip_w = chip_bbox[2] - chip_bbox[0]
+    chip_h = chip_bbox[3] - chip_bbox[1]
+    pad_x = int(chip_size * 0.6)
+    pad_y = int(chip_size * 0.3)
+    draw.rounded_rectangle(
+        [(left_margin, chip_y), (left_margin + chip_w + pad_x * 2, chip_y + chip_h + pad_y * 2)],
+        radius=4,
+        fill='#154730',
+        outline='#d4af37',
+        width=1
+    )
+    draw.text((left_margin + pad_x, chip_y + pad_y - 2), chip_text, font=chip_font, fill='#d4af37')
+
+    # 2. Title (wrapped)
+    title_y = chip_y + chip_h + pad_y * 2 + int(height * 0.05)
+    title_lines = wrap_text(title, title_font, max_text_width, draw)
+    curr_y = title_y
+    for line in title_lines[:3]:
+        draw.text((left_margin, curr_y), line, font=title_font, fill='#ffffff')
+        bbox = draw.textbbox((0, 0), line, font=title_font)
+        curr_y += (bbox[3] - bbox[1]) + int(height * 0.02)
+
+    # 3. Subtitle (one line)
+    if subtitle:
+        sub_y = curr_y + int(height * 0.02)
+        sub_line = subtitle
+        bbox = draw.textbbox((0, 0), sub_line, font=sub_font)
+        if (bbox[2] - bbox[0]) > max_text_width:
+            while len(sub_line) > 10 and draw.textbbox((0, 0), sub_line + '...', font=sub_font)[2] > max_text_width:
+                sub_line = sub_line[:-4]
+            sub_line += '...'
+        draw.text((left_margin, sub_y), sub_line, font=sub_font, fill='#c2d6cb')
+
+    # 4. Footer line & branding
+    foot_y = height - int(height * 0.12)
+    draw.line([(left_margin, foot_y - int(height * 0.04)), (width - right_margin, foot_y - int(height * 0.04))], fill='#1e543b', width=1)
+    foot_text = "NAGDEV PRODUCTS PRIVATE LIMITED \u00b7 TECHNICAL GUIDES"
+    draw.text((left_margin, foot_y), foot_text, font=foot_font, fill='#d4af37')
+
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    img.save(out_path, format='WEBP', quality=90)
+
+def generate_post_covers(post_meta):
+    """Generate both 800x420 and 1200x630 covers for a blog post."""
+    slug = post_meta['slug']
+    title = post_meta['title']
+    category = post_meta.get('category_name', 'Technical Guide')
+    subtitle = post_meta.get('in_brief', '') or post_meta.get('description', '')
+    if len(subtitle) > 120:
+        subtitle = subtitle[:117] + '...'
+
+    is_gu = (post_meta.get('lang') == 'gu') or any('\u0A80' <= c <= '\u0AFF' for c in title)
+
+    path_800 = f"images/blog-covers/{slug}-800w.webp"
+    path_1200 = f"images/blog-covers/{slug}-1200w.webp"
+
+    # Always generate if missing or rebuild
+    if not os.path.exists(path_800):
+        generate_cover_image(title, category, subtitle, path_800, width=800, height=420, is_gujarati=is_gu)
+    if not os.path.exists(path_1200):
+        generate_cover_image(title, category, subtitle, path_1200, width=1200, height=630, is_gujarati=is_gu)
+
+    return path_800, path_1200
+
+# ── ARTICLE COMPONENTS ───────────────────────────────────────────────────────
+
 def render_key_facts_table(product_slug, product_data):
-    """Render the standard key facts table from product-master."""
+    """Render standard key facts table from product-master."""
     if not product_data:
         return ""
     
     brand_code = product_data.get('brand_code', '')
     cas = product_data.get('cas', '8001-79-4')
     hs = get_product_hs_code(product_slug)
-    category = product_data.get('category', 'Regular Supply')
     status_label = "Regular Commercial Supply" if "regular" in product_data.get('status', '').lower() else "Available on Technical Enquiry"
     physical_form = product_data.get('physical_form', 'Viscous Liquid')
     packaging_list = product_data.get('packaging', ['200 kg steel drums', '1,000 L IBC totes', '20-21.5 MT flexitanks'])
@@ -200,10 +346,9 @@ def render_spec_table_block(product_slug, product_data):
 """
 
 def render_cta_box(product_slug, product_data):
-    """Render mid-article CTA box with quote, sample, and optional TDS download."""
+    """Render mid-article CTA box."""
     prod_name = product_data.get('display_name', 'Industrial Castor Derivative') if product_data else 'Castor Products'
     slug_param = f"&product={product_slug}" if product_slug else ""
-    product_param = f"?product={product_slug}" if product_slug else ""
     
     tds_button = ""
     if product_slug and os.path.exists(f"downloads/tds/{product_slug}.pdf"):
@@ -213,7 +358,7 @@ def render_cta_box(product_slug, product_data):
 <div class="blog-cta-box" style="background:var(--ivory);border:1px solid var(--border-light);border-left:4px solid var(--gold);border-radius:var(--radius-md);padding:2rem;margin:2.5rem 0;">
   <h3 style="font-family:var(--font-heading);font-size:1.4rem;color:var(--forest);margin-bottom:0.5rem;">Procure {prod_name} from Gujarat</h3>
   <p style="color:var(--charcoal-soft);font-size:0.95rem;line-height:1.6;margin-bottom:1.25rem;">
-    Our technical and sales team dispatches ISO tanks, flexitanks, IBC totes, and steel drums directly from our Deodar crushing plant. Request commercial pricing, lot-specific COA, or laboratory trial samples.
+    Our sales desk and technical plant team dispatch ISO tanks, flexitanks, IBC totes, and steel drums directly from our Deodar crushing plant. Request commercial pricing, lot-specific COA, or laboratory trial samples.
   </p>
   <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
     <a href="/contact?type=quote{slug_param}" class="btn btn-primary btn-sm">Request a Quote &rarr;</a>
@@ -242,7 +387,7 @@ def render_faq_section(faqs):
 """)
     return f"""
 <section id="section-faq" style="margin-top:3rem; padding-top:2.5rem; border-top:1px solid var(--border-light);">
-  <span style="font-size:0.8rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:0.35rem;">Technical FAQ</span>
+  <span style="font-size:0.8rem; font-weight:700; color:var(--gold-dark, #7a5200); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:0.35rem;">Technical FAQ</span>
   <h2 style="font-size:1.75rem; font-family:var(--font-heading); color:var(--forest); margin-bottom:1.25rem;">Frequently Asked Questions</h2>
   <div style="display:flex; flex-direction:column; gap:0.25rem;">
     {''.join(items_html)}
@@ -250,46 +395,8 @@ def render_faq_section(faqs):
 </section>
 """
 
-def render_related_block(post, product_slug, product_data, other_posts):
-    """Render Related block linking to product page, 2 related blog posts, and compare page."""
-    items = []
-    
-    # 1. Product page link
-    if product_slug:
-        prod_name = product_data.get('display_name', product_slug) if product_data else product_slug
-        items.append(f'<li><a href="/products/{product_slug}" style="color:var(--forest); font-weight:700; text-decoration:underline;">{prod_name} Technical Page &amp; Packaging</a></li>')
-    
-    # 2. Compare page link
-    if product_slug in ('commercial-castor-oil', 'first-special-grade-castor-oil'):
-        items.append('<li><a href="/compare/fsg-vs-commercial-castor-oil" style="color:var(--forest); font-weight:700; text-decoration:underline;">Compare FSG vs Commercial Castor Oil</a></li>')
-    elif product_slug == 'hydrogenated-castor-oil':
-        items.append('<li><a href="/compare/castor-wax-vs-paraffin-wax" style="color:var(--forest); font-weight:700; text-decoration:underline;">Compare Castor Wax (HCO) vs Paraffin Wax</a></li>')
-    else:
-        items.append('<li><a href="/compare/castor-oil-grades" style="color:var(--forest); font-weight:700; text-decoration:underline;">Compare Castor Oil Technical Grades</a></li>')
-    
-    # 3. Two related blog posts
-    related_added = 0
-    for op in other_posts:
-        if op['slug'] != post['slug']:
-            op_slug = op['slug']
-            op_title = op['title']
-            items.append(f'<li><a href="/blog/{op_slug}" style="color:var(--forest); font-weight:700; text-decoration:underline;">{op_title}</a></li>')
-            related_added += 1
-            if related_added >= 2:
-                break
-                
-    return f"""
-<div style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-md); padding:1.75rem; margin:2.5rem 0; border-top:3px solid var(--gold); box-shadow:var(--shadow-sm);">
-  <strong style="color:var(--forest); font-size:1.1rem; display:block; margin-bottom:0.75rem; font-family:var(--font-heading);">Related Technical Resources &amp; Specifications</strong>
-  <ul style="list-style:disc; padding-left:1.5rem; margin:0; font-size:0.925rem; line-height:1.75; color:var(--charcoal-soft);">
-    {''.join(items)}
-  </ul>
-</div>
-"""
-
 def render_end_cta_band(product_slug, product_data):
     """Render standard end CTA band identical to product pages."""
-    prod_name = product_data.get('display_name', 'Industrial Castor Derivatives') if product_data else 'Castor Oil & Derivatives'
     slug_param = f"?product={product_slug}" if product_slug else ""
     return f"""
 <section class="product-enquiry-band" style="background:var(--forest);color:#ffffff;padding:4rem 0;margin-top:3.5rem;">
@@ -331,29 +438,66 @@ def extract_headings(html_content):
         count += 1
     return str(soup), headings
 
-def render_toc(headings):
-    """Render Table of Contents block."""
+def render_toc_list(headings):
+    """Render Table of Contents list items."""
     if not headings:
         return ""
     items = []
     for h in headings:
-        indent = "margin-left:1.25rem;" if h['tag'] == 'h3' else ""
-        h_id = h['id']
-        h_text = h['text']
-        items.append(f'<li style="{indent}"><a href="#{h_id}" style="color:var(--forest); text-decoration:none; font-weight:600;">{h_text}</a></li>')
-    items.append('<li><a href="#section-faq" style="color:var(--forest); text-decoration:none; font-weight:600;">Frequently Asked Questions</a></li>')
+        indent = "margin-left:1rem;" if h['tag'] == 'h3' else ""
+        items.append(f'<li style="{indent}"><a href="#{h["id"]}">{h["text"]}</a></li>')
+    items.append('<li><a href="#section-faq">Frequently Asked Questions</a></li>')
+    return f'<ul class="blog-toc-list">{"".join(items)}</ul>'
+
+def render_sidebar_related_products(product_slug, product_master):
+    """Render 2-3 related product cards for the sidebar."""
+    related_slugs = []
+    # If this product exists, find 2-3 complementary products
+    candidates = [
+        ('commercial-castor-oil', 'NDEVOLEO™ COMM', 'Commercial Castor Oil'),
+        ('first-special-grade-castor-oil', 'NDEVOLEO™ FSG', 'First Special Grade (FSG)'),
+        ('fpd-castor-oil', 'NDEVOLEO™ FPD', 'First Pressed Degummed'),
+        ('castor-cake', 'NDEVAGRO™ CAKE', 'Castor Cake Fertilizer'),
+        ('hydrogenated-castor-oil', 'NDEVWAX™ HCO', 'Hydrogenated Castor Oil'),
+        ('dehydrated-castor-oil', 'NDEVOLEO™ DCO', 'Dehydrated Castor Oil'),
+        ('dco-fatty-acid', 'NDEVACID™ DCO-FA', 'DCO Fatty Acid')
+    ]
     
-    return f"""
-<nav class="blog-toc-box" aria-label="Table of Contents" style="background:var(--ivory); border:1px solid var(--border-light); border-left:4px solid var(--forest); border-radius:var(--radius-sm); padding:1.5rem; margin:2rem 0; box-shadow:var(--shadow-sm);">
-  <strong style="color:var(--forest); font-size:1.05rem; display:block; margin-bottom:0.75rem; font-family:var(--font-heading);">Table of Contents</strong>
-  <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem; font-size:0.9rem;">
-    {''.join(items)}
-  </ul>
-</nav>
-"""
+    for c_slug, c_brand, c_name in candidates:
+        if c_slug != product_slug:
+            related_slugs.append((c_slug, c_brand, c_name))
+        if len(related_slugs) >= 3:
+            break
+            
+    cards_html = []
+    for s_slug, s_brand, s_name in related_slugs:
+        cards_html.append(f"""
+    <a href="/products/{s_slug}" class="sidebar-prod-card">
+      <div class="sidebar-prod-info">
+        <span class="sidebar-prod-brand">{s_brand}</span>
+        <span class="sidebar-prod-name">{s_name}</span>
+      </div>
+      <span class="sidebar-prod-arrow">&rarr;</span>
+    </a>
+""")
+    return "".join(cards_html)
+
+def render_sidebar_more_guides(current_slug, all_published):
+    """Render 3 links to other published technical guides."""
+    guides_html = []
+    count = 0
+    for op in all_published:
+        if op['slug'] != current_slug:
+            guides_html.append(f'<li><a href="/blog/{op["slug"]}">{op["title"]}</a></li>')
+            count += 1
+            if count >= 3:
+                break
+    return "".join(guides_html)
+
+# ── POST HTML BUILDER (Task 1 & Task 2d) ─────────────────────────────────────
 
 def build_post_html(post_meta, body_markdown, product_master, facts_register, all_published):
-    """Generate complete standalone HTML for a blog post."""
+    """Generate complete HTML for a blog post with full shell and 2-column sidebar layout."""
     slug = post_meta['slug']
     title = post_meta['title']
     description = post_meta['description']
@@ -368,6 +512,7 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
     date_iso = format_date_iso(dt_pub)
     
     product_data = product_master.get(product_slug)
+    prod_name = product_data.get('display_name', 'Industrial Castor Derivatives') if product_data else 'Castor Oil'
     category_name = post_meta.get('category_name')
     if not category_name:
         category_map = {
@@ -379,6 +524,10 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
         }
         category_name = category_map.get(post_meta.get('type', 'T1'), 'Technical Perspectives')
     
+    # Generate cover images (Task 2a)
+    generate_post_covers(post_meta)
+    cover_1200_url = f"https://www.nagdevproducts.com/images/blog-covers/{slug}-1200w.webp"
+    
     # Render placeholders in markdown
     md_content = body_markdown
     
@@ -387,7 +536,6 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
         kf_html = render_key_facts_table(product_slug, product_data)
         md_content = re.sub(r'\{\{key_facts(?::[^}]+)?\}\}', kf_html, md_content)
     elif product_slug and post_meta.get('type') in ('T1', 'T2', 'T3'):
-        # Automatically inject key facts if not explicitly present
         kf_html = render_key_facts_table(product_slug, product_data)
         md_content = kf_html + "\n\n" + md_content
         
@@ -396,7 +544,6 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
         st_html = render_spec_table_block(product_slug, product_data)
         md_content = re.sub(r'\{\{spec_table(?::[^}]+)?\}\}', st_html, md_content)
     elif product_slug and post_meta.get('type') == 'T1':
-        # Automatically append spec table for T1 if not explicitly present
         st_html = render_spec_table_block(product_slug, product_data)
         md_content = md_content + "\n\n" + st_html
         
@@ -405,19 +552,18 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
     if '{{mid_cta}}' in md_content:
         md_content = md_content.replace('{{mid_cta}}', cta_mid_html)
     else:
-        # Insert mid-article CTA roughly halfway through body
         paras = md_content.split('\n\n')
         mid = max(1, len(paras) // 2)
         paras.insert(mid, cta_mid_html)
         md_content = '\n\n'.join(paras)
         
-    # Convert Markdown to HTML using markdown_it
+    # Convert Markdown to HTML
     md = markdown_it.MarkdownIt()
     raw_body_html = md.render(md_content)
     
     # Process headings for TOC
     processed_body_html, headings = extract_headings(raw_body_html)
-    toc_html = render_toc(headings)
+    toc_list_html = render_toc_list(headings)
     
     # Summary box ("In brief")
     in_brief_html = ""
@@ -432,9 +578,6 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
     # FAQ HTML
     faq_html = render_faq_section(faqs)
     
-    # Related block
-    related_html = render_related_block(post_meta, product_slug, product_data, all_published)
-    
     # End CTA band
     end_cta_html = render_end_cta_band(product_slug, product_data)
     
@@ -442,6 +585,11 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
     plain_text = re.sub(r'<[^>]+>', ' ', raw_body_html)
     word_count = len(re.findall(r'\b\w+\b', plain_text))
     read_mins = max(3, round(word_count / 220))
+    
+    # Sidebar components
+    related_prod_cards = render_sidebar_related_products(product_slug, product_master)
+    more_guides_links = render_sidebar_more_guides(slug, all_published)
+    slug_param = f"&product={product_slug}" if product_slug else ""
     
     # Schema JSON-LD Graph
     faq_schema = []
@@ -501,6 +649,7 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
             "@id": f"https://www.nagdevproducts.com/blog/{slug}#article",
             "headline": title,
             "description": description,
+            "image": [cover_1200_url],
             "datePublished": publish_date,
             "dateModified": publish_date,
             "inLanguage": lang,
@@ -526,28 +675,14 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
         
     schema_json = json.dumps({"@context": "https://schema.org", "@graph": schema_graph}, indent=2)
     
-    # Read base header/footer template from blog/_template.html
-    template_path = 'blog/_template.html'
-    if not os.path.exists(template_path):
-        template_path = 'plant.html'
-    with open(template_path, 'r', encoding='utf-8') as f:
-        full_sample = f.read()
+    # Read canonical shared header and footer partials (Task 1)
+    with open('templates/site_header.html', 'r', encoding='utf-8') as f:
+        header_html = f.read()
         
-    # Extract site header
-    header_match = re.search(r'(<header.*?</header>)', full_sample, re.DOTALL)
-    header_html = header_match.group(1) if header_match else ""
-    
-    # Extract site footer and scripts up to </html>
-    footer_match = re.search(r'(<footer.*</html>)', full_sample, re.DOTALL)
-    if footer_match:
-        footer_html = footer_match.group(1)
-        # Ensure analytics.js is present before </body>
-        if '/js/analytics.js' not in footer_html:
-            footer_html = footer_html.replace('</body>', '  <script defer src="/js/analytics.js"></script>\n</body>')
-    else:
-        footer_html = """<footer class="site-footer" role="contentinfo"><div class="container-wide"><p>&copy; 2026 Nagdev Products</p></div></footer>\n<script defer src="/js/analytics.js"></script>\n</body>\n</html>"""
-    
-    # Assemble complete page
+    with open('templates/site_footer.html', 'r', encoding='utf-8') as f:
+        footer_html = f.read()
+
+    # Assemble complete page with responsive 2-col sidebar layout
     html = f"""<!DOCTYPE html>
 <html lang="{lang}">
 <head>
@@ -557,25 +692,29 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
   <meta name="description" content="{description}">
   <link rel="canonical" href="https://www.nagdevproducts.com/blog/{slug}">
 
-  <!-- Open Graph / Facebook / LinkedIn -->
+  <!-- Open Graph / Facebook / LinkedIn (Task 2d) -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.nagdevproducts.com/blog/{slug}">
   <meta property="og:title" content="{title} | Nagdev Products">
   <meta property="og:description" content="{description}">
-  <meta property="og:image" content="https://www.nagdevproducts.com/images/og-share.jpg">
+  <meta property="og:image" content="{cover_1200_url}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{title} | Nagdev Products">
   <meta name="twitter:description" content="{description}">
-  <meta name="twitter:image" content="https://www.nagdevproducts.com/images/og-share.jpg">
+  <meta name="twitter:image" content="{cover_1200_url}">
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/main.min.css?v=20261023c">
   <link rel="stylesheet" href="/css/blog.min.css">
   <meta name="theme-color" content="#0b3d1e">
-  <link rel="icon" href="/favicon.ico">\n\n  <!-- Google Analytics 4 & Consent Mode v2 -->
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Google Analytics 4 & Consent Mode v2 -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){{dataLayer.push(arguments);}}
@@ -607,6 +746,7 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
       }}
     }} catch(e){{}}
   </script>
+  <script defer src="/js/analytics.js"></script>
 
   <!-- JSON-LD Structured Data: BlogPosting + BreadcrumbList + FAQPage -->
   <script type="application/ld+json">
@@ -614,59 +754,110 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
   </script>
 </head>
 <body>
-<a href="#main-content" class="skip-to-content">Skip to main content</a>
-
 {header_html}
 
-  <article class="blog-article">
-    <header class="blog-article-header">
-      <div class="container-narrow">
-        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-          <a href="/">Home</a> &gt; 
-          <a href="/blog">Blog</a> &gt; 
-          <span aria-current="page">{category_name}</span>
-        </nav>
+<main id="main-content" class="blog-post-page">
+  <header class="blog-article-header">
+    <div class="container" style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb" style="font-size:0.875rem;margin-bottom:1rem;color:var(--text-muted);">
+        <a href="/" style="color:var(--forest);text-decoration:underline;">Home</a> &gt; 
+        <a href="/blog" style="color:var(--forest);text-decoration:underline;">Blog</a> &gt; 
+        <span aria-current="page" style="color:var(--charcoal-soft);">{category_name}</span>
+      </nav>
 
-        <span class="blog-category-badge">{category_name}</span>
-        <h1 class="blog-article-title">{title}</h1>
+      <span class="blog-category-badge" style="display:inline-block;padding:0.25rem 0.75rem;background:var(--forest-subtle);color:var(--forest);font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;border-radius:9999px;margin-bottom:0.75rem;">{category_name}</span>
+      <h1 class="blog-article-title" style="font-family:var(--font-heading);font-size:clamp(1.85rem, 3.5vw, 2.75rem);color:var(--forest);line-height:1.2;margin-bottom:1.25rem;">{title}</h1>
 
-        <div class="blog-meta-bar" style="margin-top:1.25rem;">
-          <div class="meta-item">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <strong style="color:var(--forest);">Nagdev Products technical team</strong>
-          </div>
-          <div class="meta-item">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            <span>Published: <time datetime="{date_iso}">{date_display}</time> · Updated: <time datetime="{date_iso}">{date_display}</time></span>
-          </div>
-          <div class="meta-item">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span>{read_mins} min read</span>
-          </div>
+      <div class="blog-meta-bar" style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;font-size:0.875rem;color:var(--text-muted);border-bottom:1px solid var(--border-light);padding-bottom:1.25rem;">
+        <div class="meta-item" style="display:inline-flex;align-items:center;gap:0.4rem;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <strong style="color:var(--forest);">Nagdev Products technical team</strong>
+        </div>
+        <div class="meta-item" style="display:inline-flex;align-items:center;gap:0.4rem;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Published: <time datetime="{date_iso}">{date_display}</time> · Updated: <time datetime="{date_iso}">{date_display}</time></span>
+        </div>
+        <div class="meta-item" style="display:inline-flex;align-items:center;gap:0.4rem;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>{read_mins} min read</span>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <div class="container-narrow">
-      <div class="blog-content-body typography">
+  <!-- 2-Column Responsive Layout: >=1200px (article max 760px + sticky sidebar 320px) / <1200px (single column) -->
+  <div class="blog-layout-container">
+    <div class="blog-layout-grid">
+      
+      <!-- Collapsible TOC on mobile (< 1200px) -->
+      <div class="blog-toc-mobile-wrap">
+        <details class="blog-toc-mobile-details">
+          <summary class="blog-toc-mobile-summary">
+            <span>Table of Contents</span>
+            <span class="toc-chevron">&#9662;</span>
+          </summary>
+          <div class="blog-toc-mobile-body">
+            {toc_list_html}
+          </div>
+        </details>
+      </div>
+
+      <!-- Main Article Column (max 760px) -->
+      <article class="blog-article-col typography">
         {in_brief_html}
-        {toc_html}
         {processed_body_html}
         {faq_html}
-        {related_html}
-      </div>
-    </div>
+      </article>
 
-    {end_cta_html}
-  </article>
+      <!-- Right Column: Sticky Sidebar (>= 1200px) or End Cards (< 1200px) -->
+      <aside class="blog-sidebar" aria-label="Technical guides sidebar">
+        <div class="blog-sidebar-sticky">
+          <!-- Desktop Table of Contents -->
+          <nav class="blog-sidebar-card blog-sidebar-toc-card" aria-label="Table of Contents">
+            <div class="sidebar-card-title">Table of Contents</div>
+            {toc_list_html}
+          </nav>
+
+          <!-- Request a Quote card (product pre-filled) -->
+          <div class="blog-sidebar-card sidebar-quote-card">
+            <span class="sidebar-quote-badge">Direct Crushing Plant Supply</span>
+            <h4 class="sidebar-quote-title">Source {prod_name} in Bulk</h4>
+            <p class="sidebar-quote-text">Request mill-gate commercial pricing, batch COA, or laboratory trial samples from our Deodar plant.</p>
+            <a href="/contact?type=quote{slug_param}" class="btn btn-gold btn-sm btn-block">Request a Quote &rarr;</a>
+          </div>
+
+          <!-- Related products (2-3 cards) -->
+          <div class="blog-sidebar-card sidebar-related-prods">
+            <div class="sidebar-card-title">Related Products</div>
+            <div class="sidebar-prod-list">
+              {related_prod_cards}
+            </div>
+          </div>
+
+          <!-- More guides (3 links) -->
+          <div class="blog-sidebar-card sidebar-more-guides">
+            <div class="sidebar-card-title">More Guides</div>
+            <ul class="sidebar-guides-list">
+              {more_guides_links}
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  {end_cta_html}
 </main>
 
 {footer_html}
 """
     return html
 
+# ── BLOG INDEX & HOMEPAGE (Task 2b & 2c) ──────────────────────────────────────
+
 def update_blog_index(published_posts):
-    """Regenerate blog.html with SSR post cards and update js/blog-data.js."""
+    """Regenerate blog.html with SSR SS-3 cards and update js/blog-data.js."""
     # 1. Update js/blog-data.js
     posts_data = []
     for p in published_posts:
@@ -686,7 +877,7 @@ def update_blog_index(published_posts):
             "author": "Nagdev Products technical team",
             "readTime": read_time,
             "seoDescription": p['description'],
-            "coverImage": "images/og-share.jpg",
+            "coverImage": f"images/blog-covers/{p['slug']}-800w.webp",
             "tags": p.get('secondary_keywords', [])
         })
         
@@ -701,9 +892,12 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
     with open('js/blog-data.js', 'w', encoding='utf-8') as f:
         f.write(js_content)
         
-    # 2. Update blog.html SSR cards grid
+    # 2. Update blog.html
     with open('blog.html', 'r', encoding='utf-8') as f:
         blog_html = f.read()
+
+    # Set title (Task 2b)
+    blog_html = re.sub(r'<title>.*?</title>', '<title>Technical Guides & Buyer Resources | Nagdev Products</title>', blog_html)
         
     cards_html = []
     for p in published_posts:
@@ -714,9 +908,13 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
         date_str = format_date_display(dt)
         date_iso = format_date_iso(dt)
         cat = p.get('category_name', 'Technical Guide')
+        cover_src = f"/images/blog-covers/{p['slug']}-800w.webp"
         
         cards_html.append(f"""
         <article class="blog-card" data-category="{cat}" data-type="{p.get('type', 'T1')}" data-product="{p.get('product_slug', '')}">
+          <a href="/blog/{p['slug']}" class="blog-card-media" aria-label="{p['title']}">
+            <img src="{cover_src}" alt="{p['title']}" width="800" height="420" loading="lazy">
+          </a>
           <div class="blog-card-body">
             <div class="blog-card-category">{cat}</div>
             <h3 class="blog-card-title">
@@ -731,8 +929,8 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
         </article>
 """)
         
-    grid_replacement = f'<div class="blog-grid" id="blog-posts-grid">{"".join(cards_html)}</div>'
-    new_blog_html = re.sub(r'<div class="blog-grid" id="blog-posts-grid">.*?</div>\s*<!-- No Results State -->', f'{grid_replacement}\n\n      <!-- No Results State -->', blog_html, flags=re.DOTALL)
+    grid_replacement = f'<div class="blog-grid blog-cards-grid" id="blog-posts-grid">{"".join(cards_html)}</div>'
+    new_blog_html = re.sub(r'<div class="blog-grid.*?" id="blog-posts-grid">.*?</div>\s*<!-- No Results State -->', f'{grid_replacement}\n\n      <!-- No Results State -->', blog_html, flags=re.DOTALL)
     
     # 3. Update featured post in blog.html with newest published post
     if published_posts:
@@ -744,13 +942,14 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
         feat_words = len(re.findall(r'\b\w+\b', feat_plain))
         feat_read_time = f"{max(3, round(feat_words / 220))} min read"
         feat_cat = feat.get('category_name', 'Technical Guide')
+        feat_cover = f"/images/blog-covers/{feat['slug']}-1200w.webp"
         
         feat_card_html = f"""<div class="featured-card">
         <a href="/blog/{feat['slug']}" class="featured-media" aria-label="{feat['title']}">
-          <img src="/images/og-share.jpg" alt="{feat['title']}" width="1200" height="630" loading="eager">
+          <img src="{feat_cover}" alt="{feat['title']}" width="1200" height="630" loading="eager">
         </a>
         <div class="featured-content">
-          <span class="featured-badge">&#10022; Featured Insight &middot; {feat_cat}</span>
+          <span class="featured-badge">&#10022; Featured Technical Guide &middot; {feat_cat}</span>
           <h2 class="featured-title">
             <a href="/blog/{feat['slug']}">{feat['title']}</a>
           </h2>
@@ -773,75 +972,81 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
         f.write(new_blog_html)
 
 def update_homepage(published_posts):
-    """Update index.html 'Latest insights' section with the 3 newest published posts."""
+    """Update index.html 'Latest Technical Publications' section with 4 newest published posts."""
     if not os.path.exists('index.html'):
         return
     with open('index.html', 'r', encoding='utf-8') as f:
         content = f.read()
         
-    # Pick top 3 newest
-    top3 = published_posts[:3]
+    # Pick top 4 newest (Task 2c)
+    top4 = published_posts[:4]
     
     cards_html = []
-    for p in top3:
+    for p in top4:
         dt = parse_ist(p['publish_date'])
         plain = re.sub(r'<[^>]+>', ' ', p.get('content_html', ''))
         words = len(re.findall(r'\b\w+\b', plain))
         read_time = f"{max(3, round(words / 220))} min"
         date_str = format_date_display(dt)
         cat = p.get('category_name', 'Technical Guide')
+        cover_src = f"/images/blog-covers/{p['slug']}-800w.webp"
         
         cards_html.append(f"""
-        <article class="blog-card" style="background:#ffffff;border:1px solid var(--border-light);border-radius:var(--radius-md);padding:1.5rem;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;">
-          <div style="font-size:0.8rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">{cat}</div>
-          <h3 style="font-size:1.15rem;font-family:var(--font-heading);color:var(--forest);margin-bottom:0.75rem;line-height:1.4;">
-            <a href="/blog/{p['slug']}" style="color:inherit;text-decoration:none;">{p['title']}</a>
-          </h3>
-          <p style="font-size:0.9rem;color:var(--charcoal-soft);line-height:1.6;margin-bottom:1.25rem;flex-grow:1;">{p['description']}</p>
-          <div style="font-size:0.825rem;color:var(--text-muted);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border-light);padding-top:0.75rem;">
-            <span>{date_str} · {read_time}</span>
-            <a href="/blog/{p['slug']}" style="color:var(--forest);font-weight:700;text-decoration:underline;">Read &rarr;</a>
+        <article class="blog-card" style="background:#ffffff;border:1px solid var(--border-light);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;overflow:hidden;">
+          <a href="/blog/{p['slug']}" class="blog-card-media" aria-label="{p['title']}" style="position:relative;width:100%;aspect-ratio:800/420;overflow:hidden;background:#0b2e1f;display:block;">
+            <img src="{cover_src}" alt="{p['title']}" width="800" height="420" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </a>
+          <div class="blog-card-body" style="padding:1.25rem 1.5rem 1.5rem;display:flex;flex-direction:column;flex-grow:1;">
+            <div style="font-size:0.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;">{cat}</div>
+            <h3 style="font-size:1.15rem;font-family:var(--font-heading);color:var(--forest);margin-bottom:0.65rem;line-height:1.35;">
+              <a href="/blog/{p['slug']}" style="color:inherit;text-decoration:none;">{p['title']}</a>
+            </h3>
+            <p style="font-size:0.9rem;color:var(--charcoal-soft);line-height:1.6;margin-bottom:1.15rem;flex-grow:1;">{p['description']}</p>
+            <div style="font-size:0.825rem;color:var(--text-muted);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border-light);padding-top:0.75rem;margin-top:auto;">
+              <span>{date_str} · {read_time}</span>
+              <a href="/blog/{p['slug']}" style="color:var(--forest);font-weight:700;text-decoration:underline;">Read &rarr;</a>
+            </div>
           </div>
         </article>
 """)
         
-    insights_section = f"""<!-- LATEST INSIGHTS SECTION -->
+    section_html = f"""<!-- LATEST INSIGHTS SECTION -->
 <section class="section bg-ivory" id="latest-insights" aria-labelledby="insights-heading" style="border-top: 1px solid var(--border-light); padding: 4.5rem 0;">
   <div class="container">
     <div class="section-header fade-up" style="text-align:center; max-width:760px; margin: 0 auto 3rem;">
       <span class="section-eyebrow" style="color:var(--gold);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:0.85rem;">Technical Perspectives</span>
       <h2 class="section-title" id="insights-heading" style="font-family:var(--font-heading);font-size:2.4rem;color:var(--forest);margin:0.5rem 0 1rem;">
-        Latest Oleochemical Insights
+        Latest Technical Publications
       </h2>
       <p class="section-sub" style="color:var(--charcoal-soft);font-size:1.05rem;line-height:1.6;">
         Peer-reviewed specifications, processing chemistry, and regional market intelligence from North Gujarat's castor belt.
       </p>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
+    <div class="homepage-blog-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.75rem;">
       {''.join(cards_html)}
     </div>
 
-    <div style="text-align:center; margin-top:2.5rem;">
+    <div style="text-align:center; margin-top:2.75rem;">
       <a href="/blog" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:0.5rem;">
-        Explore All Technical Articles &rarr;
+        View all guides &rarr;
       </a>
     </div>
   </div>
 </section>
-"""
-    # If section already exists, replace it
+<!-- /LATEST INSIGHTS SECTION -->"""
+
     if 'id="latest-insights"' in content:
-        new_content = re.sub(r'<!-- LATEST INSIGHTS SECTION -->.*?<!-- /LATEST INSIGHTS SECTION -->', f'<!-- LATEST INSIGHTS SECTION -->\n{insights_section}\n<!-- /LATEST INSIGHTS SECTION -->', content, flags=re.DOTALL)
+        new_content = re.sub(r'<!-- LATEST INSIGHTS SECTION -->.*?<!-- /LATEST INSIGHTS SECTION -->', section_html, content, flags=re.DOTALL)
+        if new_content == content:
+            new_content = re.sub(r'<section[^>]*id=["\']latest-insights["\'].*?</section>', section_html, content, flags=re.DOTALL)
     else:
-        # Insert right before FAQ section
         faq_marker = '<section class="section bg-ivory" id="faq"'
         if faq_marker in content:
-            new_content = content.replace(faq_marker, f'<!-- LATEST INSIGHTS SECTION -->\n{insights_section}\n<!-- /LATEST INSIGHTS SECTION -->\n\n{faq_marker}')
+            new_content = content.replace(faq_marker, f'{section_html}\n\n{faq_marker}')
         else:
-            # Fallback before final CTA
             cta_marker = '<section class="final-cta-section"'
-            new_content = content.replace(cta_marker, f'<!-- LATEST INSIGHTS SECTION -->\n{insights_section}\n<!-- /LATEST INSIGHTS SECTION -->\n\n{cta_marker}')
+            new_content = content.replace(cta_marker, f'{section_html}\n\n{cta_marker}')
             
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(new_content)
@@ -853,7 +1058,6 @@ def update_sitemap(published_posts):
     with open('sitemap.xml', 'r', encoding='utf-8') as f:
         lines = f.readlines()
         
-    # Filter out existing blog/<slug> entries
     non_blog_lines = []
     in_blog_url = False
     buffer = []
@@ -878,7 +1082,6 @@ def update_sitemap(published_posts):
         
     base_sitemap = "".join(non_blog_lines)
     
-    # Generate XML entries for published posts
     blog_xml_entries = []
     for p in published_posts:
         dt = parse_ist(p['publish_date'])
@@ -919,9 +1122,9 @@ def update_rss(published_posts):
     rss_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nagdev Products Oleochemical Blog</title>
+    <title>Nagdev Products Technical Guides</title>
     <link>https://www.nagdevproducts.com/blog</link>
-    <description>Technical insights, chemical engineering analysis, and industrial guides on castor oil derivatives and green oleochemistry.</description>
+    <description>Technical guides, specifications, and buyer resources on castor oil and oleochemical derivatives from Nagdev Products.</description>
     <language>en</language>
     <atom:link href="https://www.nagdevproducts.com/blog/rss.xml" rel="self" type="application/rss+xml" />
     <lastBuildDate>{datetime.now(IST).strftime('%a, %d %b %Y %H:%M:%S +0530')}</lastBuildDate>
@@ -950,7 +1153,6 @@ def update_llms_txt(published_posts):
     if "## Technical Insights & Blog" in content:
         new_content = re.sub(r'## Technical Insights & Blog.*?(?=\n## |\Z)', blog_section.strip() + "\n\n", content, flags=re.DOTALL)
     else:
-        # Append before Procurement Contact
         if "## Procurement Contact" in content:
             new_content = content.replace("## Procurement Contact", f"{blog_section.strip()}\n\n## Procurement Contact")
         else:
@@ -968,11 +1170,9 @@ def update_keywords_csv(published_posts):
     with open('seo/keywords.csv', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for r in reader:
-            # Preserve existing non-blog rows or blog rows
             if r['cluster'] != 'Blog':
                 rows.append(r)
                 
-    # Add all published blog posts
     for p in published_posts:
         dt = parse_ist(p['publish_date'])
         rows.append({
@@ -1033,35 +1233,27 @@ def validate_posts(posts_metadata, product_master):
         if len(desc) < 130 or len(desc) > 160:
             errors.append(f"{slug}: Meta description length {len(desc)} not in 130-160 range: '{desc}'")
             
-        # Primary keyword in title
         if kw not in title.lower():
             errors.append(f"{slug}: Primary keyword '{kw}' missing from title '{title}'")
             
-        # Primary keyword in slug
         slug_clean = slug.replace('-', ' ')
-        # allow Gujarati or english slug
         if p.get('lang', 'en') == 'en' and not all(w in slug_clean for w in kw.split()[:2]):
             errors.append(f"{slug}: Primary keyword '{kw}' not reflected in slug '{slug}'")
             
-        # Primary keyword in description
         if kw not in desc.lower():
             errors.append(f"{slug}: Primary keyword '{kw}' missing from meta description")
             
-        # Primary keyword in first 100 words
         first_100_words = " ".join(body.split()[:100]).lower()
         if kw not in first_100_words:
-            # check in_brief summary box as well
             in_brief = p.get('in_brief', '').lower()
             if kw not in in_brief and kw not in first_100_words:
                 errors.append(f"{slug}: Primary keyword '{kw}' missing from first 100 words / in-brief box")
                 
-        # Primary keyword in at least one H2
         h2_headings = re.findall(r'##\s*(.+)', body)
         h2_found = any(kw in h.lower() for h in h2_headings)
         if not h2_found:
             errors.append(f"{slug}: Primary keyword '{kw}' missing from any H2 heading")
             
-        # Primary keyword mentions in body (2-4 natural mentions)
         mentions = len(re.findall(re.escape(kw), body.lower()))
         if mentions < 2:
             errors.append(f"{slug}: Primary keyword '{kw}' mentioned only {mentions} times in body (requires 2-4 mentions)")
@@ -1103,13 +1295,12 @@ def main():
         now_ist = datetime.now(IST)
         
     print(f"==================================================")
-    print(f"NAGDEV PRODUCTS BLOG ENGINE (PHASE 14)")
+    print(f"NAGDEV PRODUCTS BLOG ENGINE (PHASE 14c)")
     print(f"Target Run Time (IST): {now_ist.isoformat()}")
     print(f"==================================================")
     
     product_master = load_product_master()
     facts_register = load_facts_register()
-    calendar = load_calendar()
     
     # 1. Read all content/blog/*.md posts
     content_dir = 'content/blog'
@@ -1141,7 +1332,6 @@ def main():
         meta['body_markdown'] = body
         posts.append(meta)
         
-    # Sort posts by publish_date ascending
     posts.sort(key=lambda x: parse_ist(x['publish_date']))
     
     # 2. Run validations
@@ -1173,17 +1363,31 @@ def main():
     print(f"  Future scheduled posts: {len(future_posts)}")
     
     if args.dry_run:
-        print("\n[DRY RUN] No files modified.")
+        print("\n[DRY RUN] Simulating post generation without writing live files.")
+        newly_eligible = [p for p in published_posts if not os.path.exists(f"blog/{p['slug']}.html")]
+        if newly_eligible:
+            print(f"[DRY RUN] Found {len(newly_eligible)} newly eligible scheduled post(s) to publish:")
+            for nep in newly_eligible:
+                print(f"  -> [{nep['publish_date']}] {nep['slug']}: '{nep['title']}'")
+                print(f"     Primary Keyword: {nep.get('primary_keyword', '')}")
+                print(f"     Live URL: https://www.nagdevproducts.com/blog/{nep['slug']}")
+        else:
+            print(f"[DRY RUN] All {len(published_posts)} eligible posts are already rendered on disk.")
+        if future_posts:
+            next_post = future_posts[0]
+            print(f"Next upcoming post in calendar schedule: '{next_post['title']}' ({next_post['slug']}) scheduled for {next_post['publish_date']}")
         return
         
-    # Clean up any blog/*.html corresponding to future posts (e.g. from prior simulation runs)
+    # Clean up any blog/*.html corresponding to future posts
     for p in future_posts:
         future_path = f"blog/{p['slug']}.html"
         if os.path.exists(future_path):
             os.remove(future_path)
 
-    # 4. Render eligible posts into blog/<slug>.html
+    # 4. Generate covers & render eligible posts into blog/<slug>.html
     os.makedirs('blog', exist_ok=True)
+    os.makedirs('images/blog-covers', exist_ok=True)
+    
     rendered_count = 0
     for p in published_posts:
         html = build_post_html(p, p['body_markdown'], product_master, facts_register, published_posts)
@@ -1193,10 +1397,10 @@ def main():
             f.write(html)
         rendered_count += 1
         
-    print(f"[OK] Rendered {rendered_count} post HTML files into blog/")
+    print(f"[OK] Rendered {rendered_count} post HTML files into blog/ with full shell & sidebar layout")
     
     # 5. Regenerate secondary assets
-    print("Regenerating blog index, homepage insights, sitemap.xml, rss.xml, llms.txt, and keywords.csv...")
+    print("Regenerating blog index, homepage publications, sitemap.xml, rss.xml, llms.txt, and keywords.csv...")
     update_blog_index(published_posts)
     update_homepage(published_posts)
     update_sitemap(published_posts)

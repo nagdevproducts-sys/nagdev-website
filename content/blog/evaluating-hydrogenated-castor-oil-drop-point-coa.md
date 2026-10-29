@@ -11,7 +11,7 @@ secondary_keywords:
   - HCO Certificate of Analysis review
   - hydrogenated castor oil specifications
 lang: en
-in_brief: "Learn the technical procedures for evaluating hydrogenated castor oil COA and analytical parameters. Produced at our Deodar plant in North Gujarat, our Hydrogenated Castor Oil (HCO) flakes provide grease compounders and wax formulators with verified drop points (85°C to 88°C), low iodine values, and low free acidity."
+in_brief: "Learn the technical procedures for evaluating hydrogenated castor oil COA and analytical parameters. Produced at our Deodar plant in North Gujarat, our Hydrogenated Castor Oil (HCO) flakes provide grease compounders and wax formulators with measured drop point (85°C to 88°C), low iodine values, and low free acidity."
 faqs:
   - q: "What does the drop point on an HCO Certificate of Analysis indicate?"
     a: "The drop point (85°C to 88°C) measures the temperature at which the wax passes from solid to liquid, verifying complete hydrogenation."
@@ -37,7 +37,7 @@ A reliable Certificate of Analysis (COA) provides transparent confirmation that 
 
 When evaluating hydrogenated castor oil COA documentation, technical auditors should examine four decisive chemical and physical constants:
 
-- **Drop Point / Melting Point (85°C to 88°C)**: The dropping point is the foremost physical indicator of hydrogenation completeness. Native castor oil remains liquid down to sub-zero temperatures. As hydrogen saturates the ethylenic double bonds at C-9, the melting point climbs rapidly. A verified drop point between 85°C and 88°C (tested via ASTM D3954 or IP 132) confirms that ricinoleic chains have converted fully into 12-hydroxystearic units, establishing the crystalline structure required for high-temperature grease stability.
+- **Drop Point / Melting Point (85°C to 88°C)**: The dropping point is the foremost physical indicator of hydrogenation completeness. Native castor oil remains liquid down to sub-zero temperatures. As hydrogen saturates the ethylenic double bonds at C-9, the melting point climbs rapidly. A measured drop point between 85°C and 88°C (tested via ASTM D3954 or IP 132) confirms that ricinoleic chains have converted fully into 12-hydroxystearic units, establishing the crystalline structure required for high-temperature grease stability.
 - **Iodine Value (Maximum 3.0 to 5.0 g I2/100g)**: Iodine value quantifies residual double-bond unsaturation. Raw castor oil exhibits an iodine value around 85. When evaluating hydrogenated castor oil COA reports, an iodine value below 5.0 indicates that more than 95% of double bonds have been saturated. Low residual unsaturation is vital to prevent post-hardening, rancidity, and yellowing when exposed to heat.
 - **Acid Value (Maximum 3.0 to 5.0 mg KOH/g)**: Low acid value confirms that the ester linkages remained stable during high-pressure hydrogenation without excessive hydrolytic cleavage into free fatty acids. In grease manufacturing, a low, consistent acid value enables grease makers to calculate precise stoichiometric lithium hydroxide charges.
 - **Physical Appearance and Color**: High-quality HCO is supplied as crisp, free-flowing white flakes or powder with a Gardner color below 2. Uniform flake dimensions promote rapid melting inside heated processing kettles without thermal charring.
