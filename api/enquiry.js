@@ -259,7 +259,7 @@ module.exports = async function handler(req, res) {
   // 2. Resend Email Task
   const resendApiKey = process.env.RESEND_API_KEY;
   if (resendApiKey) {
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'Nagdev Products Website <enquiries@nagdevproducts.com>';
+    const fromEmail = process.env.RESEND_FROM || process.env.RESEND_FROM_EMAIL || 'Nagdev Products Website <enquiries@nagdevproducts.com>';
     const emailSubject = `[Website enquiry] ${enquiryType} – ${product || 'General'} – ${company || name} – ${ref}`;
     const emailHtml = `
       <h2>New Website Commercial Enquiry</h2>
@@ -327,6 +327,17 @@ module.exports = async function handler(req, res) {
   if (atLeastOneSuccess) {
     return res.status(200).json({ ok: true, ref });
   }
+
+  // Step 5: Log error class and ref explicitly for Vercel logs monitoring
+  console.error(JSON.stringify({
+    level: 'ERROR',
+    ref,
+    error_class: 'DeliveryFailure',
+    sheet_status: sheetResult?.skipped ? 'SKIPPED_UNCONFIGURED' : (sheetResult?.success ? 'OK' : 'FAILED'),
+    email_status: emailResult?.skipped ? 'SKIPPED_UNCONFIGURED' : (emailResult?.success ? 'OK' : 'FAILED'),
+    sheet_error: sheetResult?.error || null,
+    email_error: emailResult?.error || null
+  }));
 
   // If both failed or unconfigured
   return res.status(502).json({ ok: false, error: 'Delivery failed' });
