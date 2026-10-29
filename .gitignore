@@ -8,6 +8,9 @@
 scratch/
 scripts/*
 !scripts/claims_lint.py
+!scripts/build_blog.py
+!scripts/publish_automation.py
+!scripts/workflows/
 !scripts/monitoring/
 !scripts/outreach/
 monitoring_output/

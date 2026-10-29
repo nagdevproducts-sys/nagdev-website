@@ -259,7 +259,7 @@ module.exports = async function handler(req, res) {
   // 2. Resend Email Task
   const resendApiKey = process.env.RESEND_API_KEY;
   if (resendApiKey) {
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'Nagdev Products Website <enquiries@nagdevproducts.com>';
+    const fromEmail = process.env.RESEND_FROM || process.env.RESEND_FROM_EMAIL || 'Nagdev Products Website <enquiries@nagdevproducts.com>';
     const emailSubject = `[Website enquiry] ${enquiryType} – ${product || 'General'} – ${company || name} – ${ref}`;
     const emailHtml = `
       <h2>New Website Commercial Enquiry</h2>

@@ -106,6 +106,46 @@
       "source": "/products/de-oiled-cake-castor-meal.html",
       "destination": "/products/castor-cake",
       "permanent": true
+    },
+    {
+      "source": "/blog/bio-based-polyurethane-polyols-castor-oil",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/bio-based-polyurethane-polyols-castor-oil.html",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dehydrated-castor-oil-alkyd-resins-coatings",
+      "destination": "/blog/dehydrated-castor-oil-technical-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dehydrated-castor-oil-alkyd-resins-coatings.html",
+      "destination": "/blog/dehydrated-castor-oil-technical-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hydrogenated-castor-oil-12-hsa-lithium-greases",
+      "destination": "/blog/hydrogenated-castor-oil-bulk-supply-gujarat",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hydrogenated-castor-oil-12-hsa-lithium-greases.html",
+      "destination": "/blog/hydrogenated-castor-oil-bulk-supply-gujarat",
+      "permanent": true
+    },
+    {
+      "source": "/blog/sustainable-castor-oil-derivatives-green-chemistry",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/sustainable-castor-oil-derivatives-green-chemistry.html",
+      "destination": "/blog",
+      "permanent": true
     }
   ],
   "headers": [
