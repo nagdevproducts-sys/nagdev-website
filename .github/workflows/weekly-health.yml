@@ -36,6 +36,43 @@ jobs:
           restore-keys: |
             psi-baseline-
 
+      - name: Run Enquiry API Health Check
+        env:
+          HEALTH_CHECK_SECRET: ${{ secrets.HEALTH_CHECK_SECRET }}
+        run: |
+          python - << 'EOF'
+          import urllib.request
+          import os
+          import sys
+
+          secret = os.environ.get("HEALTH_CHECK_SECRET")
+          if not secret:
+              print("HEALTH_CHECK_SECRET not set in GitHub secrets; skipping live probe.")
+              sys.exit(0)
+
+          url = "https://www.nagdevproducts.com/api/enquiry"
+          req = urllib.request.Request(
+              url,
+              data=b'{}',
+              headers={
+                  "Content-Type": "application/json",
+                  "Origin": "https://www.nagdevproducts.com",
+                  "X-Health-Check": secret
+              },
+              method="POST"
+          )
+          try:
+              with urllib.request.urlopen(req, timeout=15) as resp:
+                  if resp.status == 200:
+                      print("Enquiry API Health Check PASSED (200 OK)")
+                  else:
+                      print(f"Enquiry API Health Check returned non-200: {resp.status}")
+                      sys.exit(1)
+          except Exception as e:
+              print(f"Enquiry API Health Check FAILED: {e}")
+              sys.exit(1)
+          EOF
+
       - name: Run Site Health Check (Sitemap, Links, Claims Lint)
         run: |
           python scripts/monitoring/site_health.py

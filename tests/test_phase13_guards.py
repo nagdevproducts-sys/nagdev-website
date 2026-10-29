@@ -37,13 +37,20 @@ def test_guard_packshot_aspect_ratio_and_object_fit():
     assert "aspect-ratio: 4 / 3" in css or "aspect-ratio:4/3" in css, "Missing 4:3 aspect ratio on product cards"
     assert "object-fit: contain" in css or "object-fit:contain" in css, "Missing object-fit: contain on product images"
 
-def test_guard_formsubmit_cors_simple_request():
-    """Verify formsubmit request is a CORS simple request without custom Content-Type or JSON stringify."""
-    js = (REPO_ROOT / "js" / "site.js").read_text(encoding="utf-8")
-    assert "new FormData(this)" in js or "new FormData(form)" in js or "FormData(" in js
-    assert "'Content-Type': 'application/json'" not in js
-    assert '"Content-Type": "application/json"' not in js
-    assert "'Accept': 'application/json'" in js or '"Accept": "application/json"' in js
+def test_guard_enquiry_api_endpoint_and_zero_formsubmit():
+    """Verify contact form uses /api/enquiry and zero formsubmit references exist across site."""
+    contact_html = (REPO_ROOT / "contact.html").read_text(encoding="utf-8")
+    assert 'action="/api/enquiry"' in contact_html
+    assert "formsubmit" not in contact_html.lower()
+
+    site_js = (REPO_ROOT / "js" / "site.js").read_text(encoding="utf-8")
+    assert "/api/enquiry" in site_js
+    assert "formsubmit" not in site_js.lower()
+
+    privacy_html = (REPO_ROOT / "privacy.html").read_text(encoding="utf-8")
+    assert "formsubmit" not in privacy_html.lower()
+    assert "via Resend" in privacy_html
+    assert "Google Sheets" in privacy_html
 
 def test_guard_mobile_drawer_hidden():
     """Verify off-canvas mobile drawer is hidden when closed to prevent scrollWidth expansion."""

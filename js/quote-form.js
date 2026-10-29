@@ -90,12 +90,12 @@ class QuoteController {
       if (!form) return;
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        this.handleFormSubmit(form);
+        this.handleRfqSubmit(form);
       });
     });
   }
 
-  handleFormSubmit(form) {
+  handleRfqSubmit(form) {
     const formData = new FormData(form);
     const name = formData.get('name') || 'Valued Partner';
     const product = formData.get('product') || 'Castor Products';

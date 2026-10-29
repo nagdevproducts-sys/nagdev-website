@@ -568,18 +568,10 @@
           <!-- Inline Status Alert Container -->
           <div id="enquiry-alert-container" style="display:none;margin-bottom:1.5rem;"></div>
 
-          <form class="enquiry-form" id="enquiry-form" action="https://formsubmit.co/nagdevproducts@gmail.com" method="POST" novalidate>
-            <!-- FormSubmit Configuration -->
-            <input type="hidden" name="_subject" id="form-subject" value="New Commercial Enquiry — Nagdev Products">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_replyto" id="form-replyto" value="">
-            <input type="hidden" name="_next" id="form-next" value="/contact?submitted=success">
-            <input type="hidden" name="_autoresponse" value="Thank you for contacting Nagdev Products Private Limited. We have successfully received your enquiry. Our commercial sales and technical evaluation team will review your specifications and contact you within 24 business hours. For urgent requirements, please contact us on WhatsApp at +91 63520 98306 or email nagdevproducts@gmail.com">
+          <form class="enquiry-form" id="enquiry-form" action="/api/enquiry" method="POST" novalidate>
+            <!-- Anti-Spam & Timestamp -->
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-            <input type="hidden" name="enquiry_reference" id="form-ref" value="">
-            <input type="hidden" name="submission_timestamp" id="form-timestamp" value="">
-
+            <input type="hidden" name="_timestamp" id="form-timestamp" value="">
             <div class="form-field" style="margin-bottom:0.75rem;">
               <label class="form-label" for="contact-enquiry-type">Enquiry Type <span class="req">*</span></label>
               <select class="form-input form-select" id="contact-enquiry-type" name="enquiry_type" required style="font-weight:600;color:var(--forest);">
@@ -688,6 +680,13 @@
               <textarea class="form-input form-textarea" id="contact-message" name="message" rows="5" placeholder="Include any specification requirements, courier delivery details, intended application or other relevant details."></textarea>
             </div>
 
+            <!-- Inline Error Container on Delivery Failure -->
+            <div id="enquiry-error-container" style="display:none;background:#fdf2f2;border:1px solid #f8d7da;border-radius:6px;padding:1rem;margin-bottom:1rem;color:#721c24;">
+              <p style="margin:0 0 0.75rem 0;font-weight:600;font-size:0.875rem;">Sorry, your enquiry could not be sent. Please WhatsApp us at +91 63520 98306 or email <a href="mailto:nagdevproducts@gmail.com" style="color:#721c24;text-decoration:underline;">nagdevproducts@gmail.com</a>.</p>
+              <a id="error-whatsapp-btn" href="https://wa.me/916352098306" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="background:#25D366;border-color:#25D366;color:#fff;display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
+                Chat on WhatsApp &rarr;
+              </a>
+            </div>
             <button type="submit" class="btn btn-primary" id="contact-submit" style="width:100%;justify-content:center;padding:0.95rem;font-size:0.9375rem;">Send Enquiry</button>
 
             <p style="font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:0.75rem;">
