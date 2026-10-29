@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':!.github' ':!scripts' ':!seo' ':!tests' ':!content'",
   "redirects": [
     {
       "source": "/contact-us/",

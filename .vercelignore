@@ -1,13 +1,56 @@
 # Vercel Deployment Ignore
+
+# Source control & IDEs
+.github/
+.vscode/
+.pytest_cache/
+.agents/
+.gemini/
+
+# Development & Test Suites
+scratch/
+scripts/
+seo/
+tests/
+monitoring_output/
+
+# Content Drafts & Admin CMS
 content/
 blog-admin.html
 blog/_template.html
 css/blog-admin.css
 js/blog-admin.js
-scratch/
-scripts/
-seo/
-tests/
-.agents
-.gemini
+
+# Dependencies & Package Managers
+node_modules/
+package.json
+package-lock.json
+requirements*.txt
+
+# Documentation & Markdown
+docs/
+*.md
+!llms.txt
+!llms-full.txt
+
+# Source Scripts, Data & Backups
+*.py
+*.csv
+*.psd
 *.zip
+*.bak
+*.log
+PUBLIC_URL.txt
+
+# Non-runtime JSON (keep vercel.json)
+*.json
+!vercel.json
+
+# Image Originals, Archives, and Screenshot Folders
+images/**/originals/
+images/**/originals/**
+images/**/archive/
+images/**/archive/**
+screenshots/
+**/screenshots/
+**/screenshots/**

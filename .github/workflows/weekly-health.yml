@@ -97,6 +97,71 @@ jobs:
               print("All weekly health and performance checks passed cleanly. No issue opened.")
           EOF
 
+      - name: Check Vercel Deployment Count & Storage Guard
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - << 'EOF'
+          import os
+          import json
+          import subprocess
+          import urllib.request
+          import urllib.error
+
+          token = os.environ.get("VERCEL_TOKEN")
+          if not token:
+              print("VERCEL_TOKEN secret not configured; skipping Vercel deployment count check.")
+              exit(0)
+
+          project_name = "nagdev-website"
+          url = f"https://api.vercel.com/v6/deployments?projectId={project_name}&limit=100"
+          headers = {
+              "Authorization": f"Bearer {token}",
+              "Content-Type": "application/json"
+          }
+
+          try:
+              req = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(req) as resp:
+                  data = json.loads(resp.read().decode())
+                  deployments = data.get("deployments", [])
+                  count = len(deployments)
+                  print(f"Total Vercel deployments retrieved: {count}")
+
+                  if count > 20:
+                      title = "Vercel deployments high – run cleanup"
+                      body = (
+                          f"### ⚠️ Vercel Storage / Deployment Alert\n\n"
+                          f"Active Vercel deployment count for **{project_name}** is currently **{count}**, which exceeds the threshold of 20.\n\n"
+                          f"To prevent reaching the Vercel Hobby plan 10 GB Deployment Storage limit, run cleanup immediately:\n"
+                          f"1. Keep current production + 9 rollback deployments\n"
+                          f"2. Delete older deployments via `vercel remove <deployment-url> --safe --yes`\n"
+                      )
+                      print(f"Deployment count {count} > 20! Opening GitHub issue...")
+                      check_issue = subprocess.run(
+                          ["gh", "issue", "list", "--search", title, "--json", "number"],
+                          capture_output=True, text=True
+                      )
+                      existing = json.loads(check_issue.stdout) if check_issue.returncode == 0 and check_issue.stdout.strip() else []
+                      if not existing:
+                          subprocess.run([
+                              "gh", "issue", "create",
+                              "--title", title,
+                              "--body", body,
+                              "--label", "maintenance"
+                          ], check=True)
+                          print("Opened GitHub issue: 'Vercel deployments high – run cleanup'")
+                      else:
+                          print("Cleanup issue already open. Skipping duplicate issue creation.")
+                  else:
+                      print(f"Deployment count ({count}) is healthy (<= 20).")
+          except urllib.error.HTTPError as e:
+              print(f"Error querying Vercel API: HTTP {e.code} - {e.read().decode()}")
+          except Exception as e:
+              print(f"Unexpected error checking Vercel deployments: {e}")
+          EOF
+
       - name: Upload Health Artifacts
         uses: actions/upload-artifact@v4
         with:
