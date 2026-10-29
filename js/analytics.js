@@ -448,6 +448,9 @@
 
   function normalizeProductSlug(raw) {
     if (!raw || typeof raw !== 'string') return 'other';
+    if (raw.indexOf(',') !== -1) {
+      return raw.split(',').map(function(s) { return normalizeProductSlug(s.trim()); }).filter(Boolean).join(',');
+    }
     const cleaned = raw.toLowerCase().trim().replace(/[™®]/g, '');
     if (Object.prototype.hasOwnProperty.call(PRODUCT_SLUG_MAP, cleaned)) {
       return PRODUCT_SLUG_MAP[cleaned];
@@ -646,7 +649,10 @@
     trackEvent('generate_lead', params);
 
     if (formType === 'sample') {
-      trackEvent('sample_request', params);
+      const sampleParams = Object.assign({}, params);
+      const slugsStr = detail.product_slugs ? (Array.isArray(detail.product_slugs) ? detail.product_slugs.join(',') : detail.product_slugs) : (prodSlug || '');
+      sampleParams.product_slugs = slugsStr;
+      trackEvent('sample_request', sampleParams);
     }
   });
 

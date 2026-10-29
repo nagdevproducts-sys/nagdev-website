@@ -489,14 +489,25 @@
           else if (enquiryTypeVal.includes('Quote') || enquiryTypeVal.includes('Bulk')) formType = 'quote';
           else formType = 'general';
 
+          const sampleHidden = document.getElementById('sample-products-hidden');
+          const sampleSlugsVal = (sampleHidden ? sampleHidden.value : '') || '';
+          if (sampleSlugsVal) {
+            formType = 'sample';
+          }
+
           window.dispatchEvent(new CustomEvent('nagdev_lead_success', {
             detail: {
               ref: refNum,
               form_type: formType,
-              product_slug: productVal,
+              product_slug: sampleSlugsVal || productVal,
+              product_slugs: sampleSlugsVal || productVal,
               country: countryVal
             }
           }));
+
+          if (typeof window.clearSampleCart === 'function') {
+            window.clearSampleCart();
+          }
 
           enquiryForm.reset();
         } else {
@@ -586,5 +597,248 @@
     document.head.appendChild(script);
   };
   window._stubDownloadProductTDS = window.downloadProductTDS;
+
+
+  // ── Multi-Sample Request Flow (Phase 13 Feature B2) ──────────────────────────
+  const SAMPLE_STORAGE_KEY = 'nagdev_sample_cart';
+
+  function getSampleCart() {
+    try {
+      const data = localStorage.getItem(SAMPLE_STORAGE_KEY);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveSampleCart(items) {
+    try {
+      localStorage.setItem(SAMPLE_STORAGE_KEY, JSON.stringify(items));
+    } catch (e) {}
+  }
+
+  function addSampleItem(slug, name) {
+    const cart = getSampleCart();
+    if (cart.some(item => item.slug === slug)) {
+      return { success: true, count: cart.length };
+    }
+    if (cart.length >= 5) {
+      if (typeof window.showToast === 'function') {
+        window.showToast('Maximum 5 sample grades per request. Remove a grade to add another.');
+      } else {
+        alert('Maximum 5 sample grades per request. Remove a grade to add another.');
+      }
+      return { success: false, count: cart.length, limitReached: true };
+    }
+    cart.push({ slug: slug, name: name || slug });
+    saveSampleCart(cart);
+    updateSampleUI();
+    if (typeof window.showToast === 'function') {
+      window.showToast(`Added ${name} to sample request (${cart.length}/5)`);
+    }
+    return { success: true, count: cart.length };
+  }
+
+  function removeSampleItem(slug) {
+    let cart = getSampleCart();
+    const removedItem = cart.find(item => item.slug === slug);
+    cart = cart.filter(item => item.slug !== slug);
+    saveSampleCart(cart);
+    updateSampleUI();
+    if (removedItem && typeof window.showToast === 'function') {
+      window.showToast(`Removed ${removedItem.name} from sample request`);
+    }
+    return cart.length;
+  }
+
+  function clearSampleCart() {
+    try {
+      localStorage.removeItem(SAMPLE_STORAGE_KEY);
+    } catch (e) {}
+    updateSampleUI();
+  }
+
+  window.clearSampleCart = clearSampleCart;
+  window.getSampleCart = getSampleCart;
+  window.addSampleItem = addSampleItem;
+  window.removeSampleItem = removeSampleItem;
+
+  function updateSampleUI() {
+    const cart = getSampleCart();
+    const count = cart.length;
+    const inCartSlugs = new Set(cart.map(i => i.slug));
+
+    // 1. Update toggle buttons sitewide
+    document.querySelectorAll('.btn-sample-toggle').forEach(btn => {
+      const slug = btn.getAttribute('data-slug');
+      if (!slug) return;
+      const isSelected = inCartSlugs.has(slug);
+      btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+      if (isSelected) {
+        btn.classList.add('in-cart');
+        if (btn.classList.contains('btn-sample-toggle-sm')) {
+          btn.innerHTML = '✓ Added';
+        } else {
+          btn.innerHTML = '✓ Added to request (Remove)';
+        }
+      } else {
+        btn.classList.remove('in-cart');
+        if (btn.classList.contains('btn-sample-toggle-sm')) {
+          btn.innerHTML = '+ Sample';
+        } else {
+          btn.innerHTML = '+ Add to sample request';
+        }
+      }
+    });
+
+    // 2. Update or create floating sticky drawer
+    let drawer = document.getElementById('sample-request-drawer');
+    if (count > 0) {
+      if (!drawer) {
+        drawer = document.createElement('aside');
+        drawer.id = 'sample-request-drawer';
+        drawer.className = 'sample-request-drawer';
+        drawer.setAttribute('aria-label', 'Sample request summary');
+        document.body.appendChild(drawer);
+      }
+      const slugList = cart.map(i => encodeURIComponent(i.slug)).join(',');
+      const contactUrl = `/contact?type=sample&products=${slugList}`;
+      drawer.style.display = 'flex';
+      drawer.innerHTML = `
+        <div class="sample-drawer-body">
+          <span class="sample-drawer-icon" aria-hidden="true">🧪</span>
+          <span class="sample-drawer-label">Sample request (<strong>${count}</strong>/5)</span>
+          <a href="${contactUrl}" class="sample-drawer-action" aria-label="Review and submit sample request for ${count} products">Request &rarr;</a>
+          <button type="button" class="sample-drawer-close" aria-label="Clear all samples from request" title="Clear sample request">&times;</button>
+        </div>
+      `;
+      const closeBtn = drawer.querySelector('.sample-drawer-close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          clearSampleCart();
+        });
+      }
+    } else if (drawer) {
+      drawer.style.display = 'none';
+    }
+
+    // 3. Update chips on /contact if present
+    renderContactChips();
+  }
+
+  function renderContactChips() {
+    const wrap = document.getElementById('sample-chips-wrap');
+    if (!wrap) return;
+    const list = document.getElementById('sample-chips-list');
+    const hidden = document.getElementById('sample-products-hidden');
+    const select = document.getElementById('contact-product');
+    const enquiryTypeSelect = document.getElementById('contact-enquiry-type');
+
+    const cart = getSampleCart();
+    if (cart.length === 0) {
+      wrap.style.display = 'none';
+      if (hidden) hidden.value = '';
+      if (select) {
+        const customOpt = select.querySelector('option[data-multi-sample="true"]');
+        if (customOpt) customOpt.remove();
+      }
+      return;
+    }
+
+    wrap.style.display = 'block';
+
+    // Auto-select Sample Request option in enquiry type
+    if (enquiryTypeSelect && !enquiryTypeSelect.value.includes('Sample')) {
+      for (let i = 0; i < enquiryTypeSelect.options.length; i++) {
+        if (enquiryTypeSelect.options[i].value.includes('Sample')) {
+          enquiryTypeSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    const slugStr = cart.map(i => i.slug).join(',');
+    const nameStr = cart.map(i => i.name).join(', ');
+    if (hidden) hidden.value = slugStr;
+
+    // Update select element with multi-sample option
+    if (select) {
+      let customOpt = select.querySelector('option[data-multi-sample="true"]');
+      if (!customOpt) {
+        customOpt = document.createElement('option');
+        customOpt.setAttribute('data-multi-sample', 'true');
+        select.prepend(customOpt);
+      }
+      customOpt.value = `Multi-Sample (${cart.length} grades): ${slugStr}`;
+      customOpt.textContent = `🧪 Multi-Sample (${cart.length} grades): ${nameStr}`;
+      select.value = customOpt.value;
+    }
+
+    if (list) {
+      list.innerHTML = cart.map(item => `
+        <div class="sample-chip" role="listitem" data-slug="${escapeHtml(item.slug)}">
+          <span>${escapeHtml(item.name)}</span>
+          <button type="button" class="btn-remove-chip" aria-label="Remove ${escapeHtml(item.name)} from sample request" data-slug="${escapeHtml(item.slug)}">&times;</button>
+        </div>
+      `).join('');
+
+      list.querySelectorAll('.btn-remove-chip').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const slug = this.getAttribute('data-slug');
+          removeSampleItem(slug);
+        });
+      });
+    }
+  }
+
+  // Handle URL parameters on /contact (e.g. ?type=sample&products=fsg,commercial)
+  function initContactUrlParams() {
+    if (!window.location.pathname.includes('/contact')) return;
+    try {
+      const url = new URL(window.location.href);
+      const params = url.searchParams;
+      const typeParam = params.get('type') || params.get('inquiry') || '';
+      const prodParam = params.get('products') || params.get('product') || '';
+
+      if (prodParam && (typeParam === 'sample' || params.get('type') === 'sample')) {
+        const slugs = prodParam.split(',').map(s => s.trim()).filter(Boolean);
+        slugs.forEach(slug => {
+          const formattedName = slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+          addSampleItem(slug, formattedName);
+        });
+      }
+    } catch (e) {}
+  }
+
+  // Delegate click event for sample toggle buttons
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.btn-sample-toggle');
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const slug = btn.getAttribute('data-slug');
+    const name = btn.getAttribute('data-name') || slug;
+    const cart = getSampleCart();
+    if (cart.some(item => item.slug === slug)) {
+      removeSampleItem(slug);
+    } else {
+      addSampleItem(slug, name);
+    }
+  });
+
+  // Initialize sample UI on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initContactUrlParams();
+      updateSampleUI();
+    });
+  } else {
+    initContactUrlParams();
+    updateSampleUI();
+  }
 
 })();
