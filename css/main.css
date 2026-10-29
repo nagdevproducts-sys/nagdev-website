@@ -1878,15 +1878,46 @@ input, textarea, select { font-family: var(--font-body); }
 /* ── Clean & Seamless Page Header (Solution 1) ── */
 .page-header-seamless {
   background: var(--cream);
-  padding: calc(var(--header-h) + 1.35rem) 0 1.15rem;
+  padding: calc(var(--header-h) + 0.85rem) 0 0.85rem;
   border-bottom: 1px solid rgba(11, 61, 30, 0.08);
 }
 .page-header-seamless-inner {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
   flex-wrap: wrap;
+}
+.page-header-title-block {
+  flex: 1;
+  min-width: 280px;
+}
+.page-header-seamless-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+.compare-matrix-btn {
+  background: #ffffff;
+  border-color: var(--border);
+  color: var(--forest);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
+}
+.compare-matrix-btn:hover {
+  background: var(--forest);
+  color: #ffffff;
+  border-color: var(--forest);
+  box-shadow: 0 4px 12px rgba(11,61,30,0.15);
 }
 .page-header-breadcrumb {
   font-family: var(--font-sans);
@@ -1987,6 +2018,12 @@ input, textarea, select { font-family: var(--font-body); }
   margin-left: auto;
   position: relative;
 }
+.catalog-search-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-left: auto;
+}
 .catalog-search {
   padding: 0.45rem 0.85rem 0.45rem 2.25rem;
   font-size: var(--text-sm);
@@ -1994,7 +2031,7 @@ input, textarea, select { font-family: var(--font-body); }
   border-radius: var(--radius-sm);
   background: var(--ivory);
   color: var(--charcoal);
-  width: 220px;
+  width: 275px;
   transition: border-color 0.18s, box-shadow 0.18s;
   outline: none;
 }
@@ -3781,54 +3818,55 @@ button, a, input, select, textarea {
 }
 
 /* ==========================================================================
-   39. INDUSTRY FILTER CONTROLS IN PRODUCT CATALOG (SINGLE LINE)
+   39. INDUSTRY FILTER CONTROLS IN PRODUCT CATALOG (STRICT SINGLE LINE)
    ========================================================================== */
 .industry-filter-row {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
+  padding-top: 0.4rem;
+  margin-top: 0.4rem;
   border-top: 1px solid var(--border-light);
-}
-@media (min-width: 992px) {
-  .industry-filter-row {
-    flex-wrap: wrap;
-    overflow-x: visible;
-  }
 }
 .industry-filter-row::-webkit-scrollbar {
   display: none;
 }
 .industry-filter-label {
-  font-size: var(--text-xs);
+  font-size: 0.715rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-right: 0.25rem;
+  margin-right: 0.2rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
+.industry-chips-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+  flex-wrap: nowrap !important;
+  flex-shrink: 0;
+}
 .ind-chip {
-  padding: 0.26rem 0.625rem;
+  padding: 0.2rem 0.48rem;
   border-radius: var(--radius-lg);
-  font-size: var(--text-sm);
+  font-size: 0.775rem;
   font-weight: 500;
   background: var(--ivory);
   border: 1px solid var(--border);
-  color: var(--charcoal-soft);
+  color: var(--text-body);
   cursor: pointer;
+  white-space: nowrap !important;
   transition: all 0.18s;
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  white-space: nowrap;
-  flex-shrink: 0;
+  gap: 0.25rem;
 }
 .ind-chip:hover {
   background: var(--forest-subtle);

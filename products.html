@@ -29,7 +29,7 @@
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/images/products/commercial-castor-oil-480w.webp" imagesrcset="/images/products/commercial-castor-oil-480w.webp 480w, /images/products/commercial-castor-oil.webp 900w" imagesizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) 234px, 303px" fetchpriority="high">
-<link rel="stylesheet" href="/css/main.min.css?v=468eb4b">
+<link rel="stylesheet" href="/css/main.min.css?v=c61161f">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -198,7 +198,7 @@
   <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="/site.webmanifest">
-  <script src="/js/site-config.min.js?v=468eb4b" defer></script>
+  <script src="/js/site-config.min.js?v=c61161f" defer></script>
   <!-- Google Analytics 4 & Consent Mode v2 -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -231,7 +231,7 @@
       }
     } catch(e){}
   </script>
-  <script defer src="/js/analytics.js?v=468eb4b"></script>
+  <script defer src="/js/analytics.js?v=c61161f"></script>
 </head>
 <body>
 <a href="#main-content" class="skip-to-content">Skip to main content</a>
@@ -465,19 +465,23 @@
   
 
 <main id="main-content">
-<!-- SEAMLESS LIGHT PAGE HEADER (Solution 1) -->
+<!-- SEAMLESS LIGHT PAGE HEADER -->
 <div class="page-header-seamless">
   <div class="container">
     <div class="page-header-seamless-inner">
-      <div>
+      <div class="page-header-title-block">
         <div class="page-header-breadcrumb">
           <span>Home</span> <span>/</span> <span>Products Catalog</span>
         </div>
         <h1 class="page-header-seamless-title">Castor Products for Industrial Applications</h1>
-        <p class="page-header-seamless-sub">Complete 32-grade catalog: 7 grades in regular supply · 8 available on enquiry · 17 in specialty development pipeline</p>
+        <p class="page-header-seamless-sub">Commercial &amp; technical castor oil grades manufactured and refined in North Gujarat · 32 grades with full batch CoAs</p>
       </div>
-      <div class="page-header-badge-pill">7 Regular Supply · 8 on Enquiry · 17 Under Development</div>
-      <div style="margin-top:0.75rem;"><a href="/compare/castor-oil-grades" class="btn btn-outline btn-sm" style="background:#fff;border-color:var(--border);color:var(--forest);font-size:var(--text-xs);padding:0.35rem 0.85rem;border-radius:var(--radius-full);text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem;">Compare Grades Matrix &rarr;</a></div>
+      <div class="page-header-seamless-actions">
+        <a href="/compare/castor-oil-grades" class="btn btn-outline btn-sm compare-matrix-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          Compare Grades Matrix &rarr;
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -486,17 +490,17 @@
 <div class="catalog-controls" id="catalog-controls">
   <div class="container">
     <div class="catalog-controls-inner">
-            <div class="filter-tabs" role="group" aria-label="Filter by availability status">
+      <div class="filter-tabs" role="group" aria-label="Filter by availability status">
         <button class="filter-tab active" data-filter="all" id="filter-all">All Products (32)</button>
         <button class="filter-tab" data-filter="regular" id="filter-regular">Regular Supply (7)</button>
         <button class="filter-tab" data-filter="enquiry" id="filter-enquiry">Available on Enquiry (8)</button>
         <button class="filter-tab" data-filter="under-development" id="filter-dev">Under Development (17)</button>
       </div>
-      <div style="display:flex;align-items:center;gap:1rem;margin-left:auto;">
+      <div class="catalog-search-group">
         <span class="catalog-count" id="catalog-count">Showing 32 products</span>
         <div class="catalog-search-wrap">
           <svg class="catalog-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="search" class="catalog-search" id="catalog-search" placeholder="Search by name, CAS No. or application…" aria-label="Search products">
+          <input type="search" class="catalog-search" id="catalog-search" placeholder="Search by name, CAS No., application…" aria-label="Search products">
         </div>
       </div>
     </div>
@@ -504,13 +508,15 @@
     <!-- Industry Filter Row -->
     <div class="industry-filter-row">
       <span class="industry-filter-label">Filter By Industry:</span>
-      <button class="ind-chip active" data-ind="all">All Industries</button>
-      <button class="ind-chip" data-ind="lubricants">🔧 Lubricants &amp; Greases</button>
-      <button class="ind-chip" data-ind="coatings">🎨 Paints &amp; Resins</button>
-      <button class="ind-chip" data-ind="plastics">🧱 Plastics &amp; Rubber</button>
-      <button class="ind-chip" data-ind="cosmetics">🧴 Cosmetics &amp; 💊 Pharma</button>
-      <button class="ind-chip" data-ind="polyurethane">🏗️ Polyurethanes</button>
-      <button class="ind-chip" data-ind="agriculture">🌾 Agriculture</button>
+      <div class="industry-chips-wrap">
+        <button class="ind-chip active" data-ind="all">All</button>
+        <button class="ind-chip" data-ind="lubricants">🔧 Lubricants &amp; Greases</button>
+        <button class="ind-chip" data-ind="coatings">🎨 Paints &amp; Resins</button>
+        <button class="ind-chip" data-ind="plastics">🧱 Plastics &amp; Rubber</button>
+        <button class="ind-chip" data-ind="cosmetics">🧴 Cosmetics &amp; Pharma</button>
+        <button class="ind-chip" data-ind="polyurethane">🏗️ Polyurethanes</button>
+        <button class="ind-chip" data-ind="agriculture">🌾 Agriculture</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1538,7 +1544,7 @@
 
 <div id="toast-container" class="toast-container"></div>
 
-<script src="/js/products-data.min.js?v=468eb4b" defer></script>
+<script src="/js/products-data.min.js?v=c61161f" defer></script>
 <script>
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
@@ -1835,6 +1841,6 @@
     if (hash) { const p = window.getProductById(hash); if (p) setTimeout(() => openModal(hash), 400); }
   });
 </script>
-<script src="/js/site.min.js?v=468eb4b" defer></script>
+<script src="/js/site.min.js?v=c61161f" defer></script>
 </body>
 </html>
