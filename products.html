@@ -29,7 +29,7 @@
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/images/products/commercial-castor-oil-480w.webp" imagesrcset="/images/products/commercial-castor-oil-480w.webp 480w, /images/products/commercial-castor-oil.webp 900w" imagesizes="(max-width: 480px) calc(100vw - 40px), (max-width: 768px) 234px, 303px" fetchpriority="high">
-<link rel="stylesheet" href="/css/main.min.css?v=017605c">
+<link rel="stylesheet" href="/css/main.min.css?v=5fdcfb1">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -198,7 +198,7 @@
   <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="/site.webmanifest">
-  <script src="/js/site-config.min.js?v=017605c" defer></script>
+  <script src="/js/site-config.min.js?v=5fdcfb1" defer></script>
   <!-- Google Analytics 4 & Consent Mode v2 -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -231,7 +231,7 @@
       }
     } catch(e){}
   </script>
-  <script defer src="/js/analytics.js?v=017605c"></script>
+  <script defer src="/js/analytics.js?v=5fdcfb1"></script>
 </head>
 <body>
 <a href="#main-content" class="skip-to-content">Skip to main content</a>
@@ -1358,7 +1358,7 @@
       <div class="modal-btn-group">
         <button class="btn-tds" id="modal-tds-btn" title="Download Technical Data Sheet">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download TDS (PDF)
+          View / Download TDS
         </button>
         <button class="btn-sample" id="modal-sample-btn" title="Request 500g/1kg Lab Sample">
           Request Sample
@@ -1529,7 +1529,7 @@
 
 <div id="toast-container" class="toast-container"></div>
 
-<script src="/js/products-data.min.js?v=017605c" defer></script>
+<script src="/js/products-data.min.js?v=5fdcfb1" defer></script>
 <script>
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
@@ -1793,7 +1793,22 @@
     const tdsBtn = document.getElementById('modal-tds-btn');
     if (tdsBtn) {
       tdsBtn.addEventListener('click', function () {
-        if (currentProductId) downloadProductTDS(currentProductId);
+        if (!currentProductId) return;
+        const staticPdfs = [
+          '12-hydroxystearic-acid', 'bio-polyurethane-polyols', 'blown-oxidized-castor-oil',
+          'calcium-12-hydroxystearate', 'castor-cake', 'castor-oil-bp93', 'cold-pressed-castor-oil',
+          'commercial-castor-oil', 'crude-glycerin', 'dco-fatty-acid', 'de-oiled-cake-castor-meal',
+          'dehydrated-castor-oil', 'dibutyl-sebacate', 'dioctyl-sebacate', 'first-special-grade-castor-oil',
+          'fpd-castor-oil', 'high-protein-castor-meal', 'hydrogenated-castor-oil',
+          'lithium-12-hydroxystearate', 'methyl-12-hydroxystearate', 'methyl-ricinoleate',
+          'ppg-castor-oil', 'refined-glycerin', 'ricinoleic-acid', 'sebacic-acid',
+          'sodium-sulphate-anhydrous', 'zinc-ricinoleate', 'zinc-undecylenate'
+        ];
+        if (staticPdfs.includes(currentProductId)) {
+          window.open('/downloads/tds/' + currentProductId + '.pdf', '_blank', 'noopener,noreferrer');
+        } else {
+          downloadProductTDS(currentProductId);
+        }
       });
     }
 
@@ -1826,6 +1841,6 @@
     if (hash) { const p = window.getProductById(hash); if (p) setTimeout(() => openModal(hash), 400); }
   });
 </script>
-<script src="/js/site.min.js?v=017605c" defer></script>
+<script src="/js/site.min.js?v=5fdcfb1" defer></script>
 </body>
 </html>

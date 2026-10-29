@@ -320,6 +320,23 @@
           "value": "public, max-age=86400, stale-while-revalidate=86400"
         }
       ]
+    },
+    {
+      "source": "/downloads/tds/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }

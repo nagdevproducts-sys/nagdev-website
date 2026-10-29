@@ -381,7 +381,7 @@ def render_cta_box(product_slug, product_data):
     
     tds_button = ""
     if product_slug and os.path.exists(f"downloads/tds/{product_slug}.pdf"):
-        tds_button = f'<a href="/downloads/tds/{product_slug}.pdf" class="btn btn-outline" download style="border:1px solid var(--forest);color:var(--forest);">Download TDS (PDF) &darr;</a>'
+        tds_button = f'<a href="/downloads/tds/{product_slug}.pdf" class="btn btn-outline" target="_blank" rel="noopener noreferrer" style="border:1px solid var(--forest);color:var(--forest);">View / Download TDS &rarr;</a>'
     
     return f"""
 <div class="blog-cta-box" style="background:var(--ivory);border:1px solid var(--border-light);border-left:4px solid var(--gold);border-radius:var(--radius-md);padding:2rem;margin:2.5rem 0;">
