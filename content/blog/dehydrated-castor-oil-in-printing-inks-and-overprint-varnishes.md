@@ -27,7 +27,7 @@ faqs:
 
 ## Dehydrated Castor Oil in Printing Inks: Drying Mechanics
 
-In the printing ink and graphic arts manufacturing industry, high-speed sheet-fed offset, web lithographic, and overprint varnish systems require binder fluids that dry rapidly, wet carbon black and color pigments effectively, and yield hard, scratch-resistant print films. While traditional formulations relied heavily on linseed oil or mineral ink oils, modern graphic arts chemists increasingly specify dehydrated castor oil (DCO). In this technical guide, we evaluate the polymerization mechanisms and performance advantages of utilizing dehydrated castor oil in printing inks and overprint varnishes.
+In the printing ink and graphic arts manufacturing industry, high-speed sheet-fed offset, web lithographic, and overprint varnish systems require binder fluids that dry rapidly, wet carbon black and color pigments thoroughly, and yield hard, scratch-resistant print films. While traditional formulations relied heavily on linseed oil or mineral ink oils, modern graphic arts chemists increasingly specify dehydrated castor oil (DCO). In this technical guide, we evaluate the polymerization mechanisms and performance advantages of utilizing dehydrated castor oil in printing inks and overprint varnishes.
 
 Dehydrated castor oil is produced by the catalytic chemical removal of the hydroxyl group and an adjacent hydrogen atom from the ricinoleic acid chains of pure castor oil. This dehydration process generates a mixture of conjugated (9,11-octadecadienoic acid) and non-conjugated (9,12-octadecadienoic acid) diene isomers. When formulating dehydrated castor oil in printing inks, the conjugated diene fraction (approximately thirty percent of total unsaturation) is the decisive performance driver.
 
@@ -40,7 +40,7 @@ Unlike the unconjugated methylene-interrupted double bonds found in linseed oil 
 Printing ink formulators value dehydrated castor oil in printing inks for its balanced rheological and film-forming characteristics:
 
 - **pronounced Carbon Black and Organic Pigment Wetting**: The residual polar nature of DCO facilitates rapid wetting and deagglomeration of carbon black, copper phthalocyanines, and azo pigments during three-roll or horizontal bead milling. This ensures maximum color density, high tinting strength, and excellent gloss on coated paper stocks.
-- **enhanced Rub and Scratch Resistance**: On packaging boxboards and commercial catalogs, printed images must endure mechanical friction during automated folder-gluers and transit shipping. DCO polymerizes into an exceptionally tough, elastic polymer matrix that locks pigment particles to the cellulose fibers, preventing ink rub-off and smudging.
+- **enhanced Rub and Scratch Resistance**: On packaging boxboards and commercial catalogs, printed images must endure mechanical friction during automated folder-gluers and transit shipping. DCO polymerizes into an notably tough, elastic polymer matrix that locks pigment particles to the cellulose fibers, preventing ink rub-off and smudging.
 - **Permanent color-stable in Overprint Varnishes (OPV)**: Overprint varnishes applied over white packaging boards must remain crystal clear. Linseed oil contains seven to ten percent linolenic acid, which inevitably triggers unsightly yellow discoloration upon oxidation. In contrast, DCO contains virtually zero linolenic acid, ensuring that clear varnishes and white ink prints retain pure optical clarity over prolonged shelf life.
 
 {{mid_cta}}

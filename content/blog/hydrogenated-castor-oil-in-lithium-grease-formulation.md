@@ -53,7 +53,7 @@ Lubricant chemists evaluating hydrogenated castor oil lots require strict batch-
 
 - **Melting Point / Drop Point**: A well-defined melting range (85°C to 88°C) confirms complete hydrogenation and enables grease formulators to achieve rapid, homogenous dissolution inside processing kettles.
 - **Iodine Value**: Low iodine values (typically below 5.0 g I2/100g) confirm near-total saturation of ethylenic bonds, ensuring that residual unsaturation will not trigger thermal oxidation or lacquer formation inside operating bearings.
-- **Acid Value**: Low free acidity indicates a neutral wax profile, allowing compounders to calculate stoichiometric lithium hydroxide charges with high precision.
+- **Acid Value**: Low free acidity indicates a neutral wax profile, allowing compounders to calculate stoichiometric lithium hydroxide charges with high accurate.
 - **Physical Form**: Dust-free, free-flowing white flakes accelerate pneumatic conveyancing, reduce worker dusting exposure, and melt rapidly without forming thermal agglomerates.
 
 Nagdev Products manufactures hydrogenated castor oil flakes from selected expeller-pressed castor oil, delivering reliable chemical purity and physical consistency across every dispatched lot.

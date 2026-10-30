@@ -25,7 +25,7 @@ faqs:
 - q: How is FSG castor oil refined from raw expeller oil?
   a: Raw castor oil undergoes primary filtration, controlled caustic alkali refining
     to strip free fatty acids, activated bleaching earth treatment to adsorb pigments,
-    and precision filter-press polishing.
+    and accurate filter-press polishing.
 - q: How does FSG differ from British Standard BSS castor oil?
   a: FSG and BSS are functionally interchangeable commercial designations in India,
     both requiring FFA below 1.0% and pale Lovibond coloration conforming to IS 435
@@ -43,7 +43,7 @@ faqs:
 
 First Special Grade (FSG) castor oil is the primary industrial refined standard in the global castor derivatives market. Often designated as British Standard Specification (BSS) castor oil, FSG is produced by subjecting crude expeller-pressed oil to an integrated refining process consisting of caustic alkali refining, washing, vacuum drying, and adsorptive earth bleaching. This treatment removes free fatty acids, color bodies, and residual moisture, producing an optically clear, pale straw-colored liquid.
 
-While crude oil is suitable for general technical applications, chemical formulators specifically require FSG castor oil specifications and bulk supply when producing color-sensitive alkyds, high-clarity polyurethane polymers, and precision specialty esters. Because ricinoleic fatty acid chains comprise the majority of the triglyceride structure, FSG retains the full hydroxyl functionality (hydroxyl value 160–168 mg KOH/g) while offering enhanced chemical stability. Nagdev Products manufactures and refines FSG castor oil at our operational facility in Deodar, North Gujarat, providing commercial quantities for domestic manufacturers and international export markets.
+While crude oil is suitable for general technical applications, chemical formulators specifically require FSG castor oil specifications and bulk supply when producing color-sensitive alkyds, high-clarity polyurethane polymers, and accurate specialty esters. Because ricinoleic fatty acid chains comprise the majority of the triglyceride structure, FSG retains the full hydroxyl functionality (hydroxyl value 160–168 mg KOH/g) while offering enhanced chemical stability. Nagdev Products manufactures and refines FSG castor oil at our operational facility in Deodar, North Gujarat, providing commercial quantities for domestic manufacturers and international export markets.
 
 {{key_facts}}
 
@@ -105,7 +105,7 @@ Nagdev Products provides versatile packaging solutions designed to maintain puri
 
 - **200 kg Epoxy-Coated Steel Drums**: Robust, airtight containers packaged 4 drums per pallet, stretch-wrapped for secure handling.
 - **1,000 L Intermediate Bulk Containers (IBCs)**: Rigid composite containers with bottom discharge valves, allowing efficient space utilization and crane handling.
-- **20–21.5 MT Flexitanks**: Multi-ply virgin polyethylene liners installed in 20ft ocean dry containers, ideal for bulk international ocean freight.
+- **20–21.5 MT Flexitanks**: Multi-ply virgin polyethylene liners installed in 20ft ocean dry containers, well-suited for bulk international ocean freight.
 - **ISO Tank Containers (20–24 MT)**: Dedicated stainless steel intermodal tanks for bulk commercial volume contracts.
 
 Every dispatched lot is backed by comprehensive quality control documentation, including an individual Certificate of Analysis (COA) containing exact laboratory test results, Technical Data Sheet (TDS), and Safety Data Sheet (SDS). Export enquiries welcome; third-party inspections at port terminals are routinely accommodated.

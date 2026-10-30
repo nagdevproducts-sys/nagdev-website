@@ -56,7 +56,7 @@ RULES = {
     "R5": "plant address/district must match register; 'Banaskantha' next to Deodar, Sardarpura, 385330 or 'district' forbidden",
     "R6": "capacity: any TPD/TPA/MT per day value other than '50 TPD' seed crushing",
     "R7": "SPEC CONSISTENCY: spec table limits must match across key-facts, intro, FAQ, meta, JSON-LD and TDS text",
-    "R8": "commercial terms: MOQ, lead time, delivery days, price, payment terms, monthly allocation unless in register",
+    "R8": "commercial terms: MOQ, lead time, delivery days, price, payment terms, monthly allocation unless in register; 'in commercial supply' forbidden on on-enquiry pages",
     "R9": "percentages/numbers in prose that are not spec values and have no reference link in paragraph (WARN)",
     "R10": "Any table citing a data source (Agmarknet, SEA, DGCIS, official) must have matching raw data file and generator script",
     "R11": "Banned additions to register's banned phrases (certified regional, oil content, processing parity, etc.)",
@@ -64,7 +64,7 @@ RULES = {
     "R13": "Required standard site template components (header, footer, consent snippet, gtag loader, /js/analytics.js)",
     "R14": "Crop and video media captions/alts must not contain location/ownership/facility claims and video must include 'illustrative'",
     "R15": "Cross-page specification consistency against canonical product pages",
-    "R16": "Pharmacopoeia and cosmetic grade pages must contain NO numeric specification values and NO certification/regulatory claims",
+    "R16": "Pharmacopoeia and cosmetic grade pages must contain NO numeric specification values and NO certification/regulatory claims; cosmetic grade must not contain monograph or compendial claims",
     "R17": "PAGE IDENTITY: on each /products/<slug> page, H1, breadcrumb last item, hero img alt, H2/H3, meta title/description, FAQ questions must refer ONLY to that page's product. Cross-product contamination -> FAIL (related-products block exempt)",
     "R18": "INTERNAL LINKS: all internal links must resolve to valid local files and contain no malformed percent encodings",
     "R19": "BRAND CODES: brand codes must strictly match canonical codes from seo/product-master.json; no legacy NDEV- hyphens or 'Specialty Range'",
@@ -332,6 +332,14 @@ def get_banned_phrase_pattern(phrase: str) -> str:
         return r'(?<!\w)non[\s\-]irritating(?!\w)'
     elif phrase_lower == "therapeutic":
         return r'(?<!\w)therapeutic(?!\w)'
+    elif phrase_lower in ("high-purity", "high purity"):
+        return r'(?<!\w)high[\s\-]purity(?!\w)'
+    elif phrase_lower in ("high-specification", "high specification"):
+        return r'(?<!\w)high[\s\-]specification(?!\w)'
+    elif phrase_lower in ("pharmacopoeia compliant", "pharmacopeia compliant"):
+        return r'(?<!\w)pharmacop[oe]+ia(?:\s+[\w\-]+){0,2}\s+compliant(?:s)?(?!\w)'
+    elif phrase_lower in ("tinctures", "tincture"):
+        return r'(?<!\w)tinctures?(?!\w)'
     elif phrase_lower == "complies to bp":
         return r'(?<!\w)complies\s+to\s+BP(?!\w)'
     else:
@@ -801,6 +809,7 @@ def check_r16_pharma_cosmetic(content: str, file_path_str: str) -> list:
         return findings
 
     lines = content.splitlines()
+    norm_file_path = file_path_str.replace('\\', '/').lower()
 
     # 1. Banned certification / regulatory claims
     r16_banned_terms = [
@@ -1111,6 +1120,7 @@ def check_r18_internal_links(content: str, file_path_str: str, repo_root: Path =
 def check_r19_brand_codes(content: str, file_path_str: str, repo_root: Path = REPO_ROOT):
     findings = []
     lines = content.splitlines()
+    norm_file_path = file_path_str.replace('\\', '/').lower()
 
     master = load_product_master(repo_root)
     canonical_codes = set(p.get("brand_code", "") for p in master if "brand_code" in p)
@@ -1158,6 +1168,7 @@ def check_r19_brand_codes(content: str, file_path_str: str, repo_root: Path = RE
 def check_r20_efficacy_claims(content: str, file_path_str: str) -> list:
     findings = []
     lines = content.splitlines()
+    norm_file_path = file_path_str.replace('\\', '/').lower()
 
     pests = r'\b(pest|nematod|insect|fung|weed|disease)\w*'
     actions = r'\b(suppress|repel|control|kill|prevent|protect|resist)\w*'
@@ -1205,6 +1216,7 @@ def check_r21_cas_integrity(content: str, file_path_str: str) -> list:
         "68424-10-2"
     ]
     lines = content.splitlines()
+    norm_file_path = file_path_str.replace('\\', '/').lower()
     for line_idx, line in enumerate(lines, 1):
         for cas in unauthorized_cas:
             if cas in line:
@@ -1465,8 +1477,29 @@ def check_pdf_consistency_r19_r24(facts: dict, repo_root: Path = REPO_ROOT) -> l
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
     lines = content.splitlines()
+    norm_file_path = file_path_str.replace('\\', '/').lower()
 
-    banned_phrases = facts.get("banned_phrases", [])
+    SECTION_D_BANNED_PHRASES = [
+        "high-purity",
+        "precision",
+        "high-specification",
+        "wellness",
+        "ideal",
+        "effective",
+        "coats hair",
+        "moisture retention",
+        "scalp treatment",
+        "natural shine",
+        "Pharmacopoeia compliant",
+        "Formulated for",
+        "exceptionally",
+        "rich in",
+        "tinctures"
+    ]
+    banned_phrases = list(facts.get("banned_phrases", []))
+    for bp in SECTION_D_BANNED_PHRASES:
+        if bp not in banned_phrases:
+            banned_phrases.append(bp)
     certifications_held = set(facts.get("certifications_held", []))
     region_context = facts.get("company", {}).get("region_context", "")
     
@@ -1822,6 +1855,36 @@ def lint_content(content: str, file_path_str: str, facts: dict):
             })
 
     # ----------------------------------------------------
+    # R8: 'in commercial supply' forbidden on on-enquiry product pages
+    # ----------------------------------------------------
+    norm_file_path = file_path_str.replace('\\', '/').lower()
+    on_enquiry_slugs = [
+        "castor-oil-bp93",
+        "castor-oil-usp-nf",
+        "castor-oil-ph-eur",
+        "castor-oil-ip",
+        "castor-oil-jp",
+        "ppg-castor-oil",
+        "cold-pressed-castor-oil",
+        "cosmetic-grade-castor-oil"
+    ]
+    is_on_enquiry_page = (
+        any(slug in norm_file_path for slug in on_enquiry_slugs)
+        or bool(re.search(r'\bavailable\s+on\s+enquiry\b', content, re.IGNORECASE))
+    )
+    if is_on_enquiry_page:
+        comm_supply_re = re.compile(r'\bin\s+commercial\s+supply\b', re.IGNORECASE)
+        for line_idx, line in enumerate(lines, 1):
+            if comm_supply_re.search(line):
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_idx,
+                    "rule": "R8: 'in commercial supply' forbidden on on-enquiry product pages",
+                    "severity": "FAIL",
+                    "text": f"Found forbidden phrase 'in commercial supply' on on-enquiry page on line {line_idx}: '{line.strip()[:100]}'"
+                })
+
+    # ----------------------------------------------------
     # R9: Unlinked percentages/numbers in prose (WARN)
     # ----------------------------------------------------
     paragraphs = re.findall(r'<p\b[^>]*>(.*?)</p>', content, flags=re.DOTALL | re.IGNORECASE)
@@ -1865,6 +1928,22 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     findings.extend(check_r14_crop_media_captions(content, file_path_str))
     findings.extend(check_r15_cross_page_specs(content, file_path_str))
     findings.extend(check_r16_pharma_cosmetic(content, file_path_str))
+
+    # ----------------------------------------------------
+    # R16: Cosmetic grade must not contain monograph or compendial claims
+    # ----------------------------------------------------
+    if "cosmetic-grade-castor-oil" in norm_file_path:
+        cosmetic_monograph_re = re.compile(r'\b(monographs?|compendial)\b', re.IGNORECASE)
+        for line_idx, line in enumerate(lines, 1):
+            m = cosmetic_monograph_re.search(line)
+            if m:
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_idx,
+                    "rule": "R16: Cosmetic grade must not contain monograph or compendial claims",
+                    "severity": "FAIL",
+                    "text": f"Cosmetic grade must not contain monograph or compendial claims: '{m.group(0)}' found on line {line_idx}"
+                })
     findings.extend(check_r17_page_identity(content, file_path_str))
     findings.extend(check_r18_internal_links(content, file_path_str))
     findings.extend(check_r19_brand_codes(content, file_path_str))

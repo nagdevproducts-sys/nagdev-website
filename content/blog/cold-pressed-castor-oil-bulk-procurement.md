@@ -15,7 +15,7 @@ lang: en
 in_brief: Streamline your cold pressed castor oil bulk procurement with Nagdev Products.
   Crushed at our operational plant in Deodar, North Gujarat, our virgin cold pressed
   oil is extracted from cleaned seeds in a single mechanical pass without added heat
-  or chemical solvents. Featuring low acidity and high purity, it serves personal
+  or chemical solvents. Featuring low acidity and high quality, it serves personal
   care and technical formulations.
 faqs:
 - q: What extraction methodology defines cold pressed castor oil?
@@ -42,7 +42,7 @@ faqs:
 
 Cold Pressed Castor Oil, widely termed virgin castor oil, represents the pure, unheated primary extraction fluid recovered from the seeds of *Ricinus communis*. Unlike conventional commercial expelling—which utilizes thermal seed conditioning and high-friction multiple pressings to maximize oil extraction yield—cold pressing relies strictly on a single, gentle mechanical pass where operating temperatures are kept below 50°C. No steam cooking, external heating coils, or chemical extraction solvents are employed during the extraction cycle.
 
-Industrial buyers and cosmetic formulators prioritize cold pressed castor oil bulk procurement because the gentle extraction preserves the native triglyceride structure, natural tocopherols, and bio-active constituents without thermal degradation or oxidation. The oil exhibits low initial peroxide values, minimal free fatty acid content, and an exceptionally light, fresh aroma. Nagdev Products produces authentic cold pressed castor oil at our specialized manufacturing facility in Deodar, North Gujarat, supplying standard bulk packaging for personal care formulators, specialty chemical manufacturers, and commercial export buyers.
+Industrial buyers and cosmetic formulators prioritize cold pressed castor oil bulk procurement because the gentle extraction preserves the native triglyceride structure, natural tocopherols, and bio-active constituents without thermal degradation or oxidation. The oil exhibits low initial peroxide values, minimal free fatty acid content, and an notably light, fresh aroma. Nagdev Products produces authentic cold pressed castor oil at our specialized manufacturing facility in Deodar, North Gujarat, supplying standard bulk packaging for personal care formulators, specialty chemical manufacturers, and commercial export buyers.
 
 {{key_facts}}
 
@@ -53,7 +53,7 @@ Nagdev Products manufactures Cold Pressed Castor Oil at our plant located at Sur
 1. **Seed Cleaning and Destoning**: High-grade whole castor seeds sourced from North Gujarat agricultural mandis pass through rotary seed cleaners, de-stoners, and magnetic grids to remove dust, stones, and vegetable debris.
 2. **Single-Pass Cold Screw Pressing**: Cleaned whole seeds feed directly into dedicated mechanical screw presses operating at low rotational speeds. Mechanical friction is carefully managed using water-cooled expeller shafts to ensure internal oil temperatures never exceed 50°C.
 3. **Gravity Settling of Crude Oil**: The freshly expelled virgin oil flows into stainless steel settling tanks, allowing coarse seed particles to settle naturally under gravity without chemical flocculants.
-4. **Precision Plate-and-Frame Filtration**: The settled oil passes through multi-layer filter presses fitted with virgin cotton filter cloths, removing particulate fines down to complete optical clarity.
+4. **accurate Plate-and-Frame Filtration**: The settled oil passes through multi-layer filter presses fitted with virgin cotton filter cloths, removing particulate fines down to complete optical clarity.
 5. **Quality Verification and Packaging**: The clarified cold pressed oil transfers into clean, dedicated storage tanks where laboratory technicians verify acidity, peroxide value, and moisture before packaging.
 
 {{mid_cta}}
@@ -90,11 +90,11 @@ The purity and gentle extraction profile of Cold Pressed Castor Oil make it a ve
 ### 1. Cosmetic and Personal Care Formulations
 Cold pressed castor oil is utilized in natural lipsticks, lip glosses, mascara, and foundation emulsions. Its high viscosity provides long-lasting gloss, pigment wetting, and smooth sensory spreadability.
 
-### 2. High-Purity Hair Care and Conditioning Serums
-In selected hair oils, conditioning balms, and scalp treatments, cold pressed oil acts as an emollient base that coats hair shafts, delivering natural luster without synthetic silicones.
+### 2. high-grade Hair Care and Conditioning Serums
+In selected hair oils, conditioning balms, and scalp care, cold pressed oil acts as an emollient base that conditions hair shafts, delivering natural luster without synthetic silicones.
 
-### 3. Specialty Technical Lubricants and Precision Instruments
-Because of its low acidity and absence of thermal degradation products, cold pressed oil serves as a specialty lubricant for precision machinery, clockwork mechanisms, and food-processing equipment where natural botanical vegetable lubricants are required.
+### 3. Specialty Technical Lubricants and accurate Instruments
+Because of its low acidity and absence of thermal degradation products, cold pressed oil serves as a specialty lubricant for accurate machinery, clockwork mechanisms, and food-processing equipment where natural botanical vegetable lubricants are required.
 
 ### 4. Natural Soaps and Artisanal Emollients
 In cold-process soap manufacturing, cold pressed castor oil is reacted with sodium hydroxide to create rich, stable lather and provide moisturizing properties in selected specialty bar soaps.

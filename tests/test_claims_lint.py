@@ -776,5 +776,140 @@ class TestClaimsLint(unittest.TestCase):
         r19_fails = [f for f in findings if f["rule"].startswith("R19")]
         self.assertEqual(r19_fails, [], f"R19 PDF brand code / status failures found: {r19_fails}")
 
+    # ------------------------------------------------------------------
+    # PHASE 15d: Section D Banned Phrases and Rules Tests
+    # ------------------------------------------------------------------
+    def test_banned_phrase_high_purity(self):
+        html = "<p>Our facility produces high-purity castor oil for export markets.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "high-purity" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'high-purity'")
+
+    def test_banned_phrase_precision(self):
+        html = "<p>Engineered with precision for industrial lubricant formulations.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "precision" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'precision'")
+
+    def test_banned_phrase_high_specification(self):
+        html = "<p>We supply high-specification oleochemical products to buyers.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "high-specification" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'high-specification'")
+
+    def test_banned_phrase_wellness(self):
+        html = "<p>Castor oil solutions for wellness and personal care markets.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "wellness" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'wellness'")
+
+    def test_banned_phrase_ideal(self):
+        html = "<p>This grade is ideal for polyurethane polymer synthesis.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "ideal" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'ideal'")
+
+    def test_banned_phrase_effective(self):
+        html = "<p>An effective bio-based component in resin production.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "effective" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'effective'")
+
+    def test_banned_phrase_coats_hair(self):
+        html = "<p>The formula coats hair evenly to condition cuticles.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "coats hair" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'coats hair'")
+
+    def test_banned_phrase_moisture_retention(self):
+        html = "<p>Castor cake improves moisture retention in arid farming soils.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "moisture retention" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'moisture retention'")
+
+    def test_banned_phrase_scalp_treatment(self):
+        html = "<p>Cosmetic oil used for scalp treatment and hair nourish products.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "scalp treatment" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'scalp treatment'")
+
+    def test_banned_phrase_natural_shine(self):
+        html = "<p>Gives a natural shine in lipsticks and gloss formulations.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "natural shine" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'natural shine'")
+
+    def test_banned_phrase_pharmacopoeia_compliant(self):
+        html = "<p>Refined castor oil supplied as Pharmacopoeia compliant material.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "pharmacopoeia compliant" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'Pharmacopoeia compliant'")
+
+    def test_banned_phrase_formulated_for(self):
+        html = "<p>Formulated for industrial high-temperature lubricants.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "formulated for" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'Formulated for'")
+
+    def test_banned_phrase_exceptionally(self):
+        html = "<p>Offers exceptionally consistent viscosity and color values.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "exceptionally" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'exceptionally'")
+
+    def test_banned_phrase_rich_in(self):
+        html = "<p>Castor oil is rich in hydroxy fatty acids for chemical synthesis.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "rich in" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'rich in'")
+
+    def test_banned_phrase_tinctures(self):
+        html = "<p>Base oil used in compounding tinctures and medicinal preparations.</p>"
+        findings = lint_content(html, "test.html", self.facts)
+        fails = [f for f in findings if f["rule"].startswith("R1") and "tinctures" in f["text"].lower()]
+        self.assertTrue(len(fails) > 0, "R1 must fail for 'tinctures'")
+
+    def test_r16_cosmetic_grade_monograph_fails(self):
+        html = "<p>Castor oil tested according to cosmetic monograph standards.</p>"
+        findings = lint_content(html, "products/cosmetic-grade-castor-oil.html", self.facts)
+        fails = [f for f in findings if f["rule"] == "R16: Cosmetic grade must not contain monograph or compendial claims"]
+        self.assertTrue(len(fails) > 0, "R16 must fail when 'monograph' appears in products/cosmetic-grade-castor-oil.html")
+
+    def test_r16_cosmetic_grade_compendial_fails(self):
+        html = "<p>We provide full compendial analytical documentation for cosmetic grades.</p>"
+        findings = lint_content(html, "products/cosmetic-grade-castor-oil.html", self.facts)
+        fails = [f for f in findings if f["rule"] == "R16: Cosmetic grade must not contain monograph or compendial claims"]
+        self.assertTrue(len(fails) > 0, "R16 must fail when 'compendial' appears in products/cosmetic-grade-castor-oil.html")
+
+    def test_r8_in_commercial_supply_on_enquiry_page_fails(self):
+        html = """
+        <html>
+        <body>
+          <div class="product-status">Available on Enquiry</div>
+          <p>This product is in commercial supply for qualified buyers.</p>
+        </body>
+        </html>
+        """
+        findings = lint_content(html, "products/cold-pressed-castor-oil.html", self.facts)
+        fails = [f for f in findings if f["rule"] == "R8: 'in commercial supply' forbidden on on-enquiry product pages"]
+        self.assertTrue(len(fails) > 0, "R8 must fail when 'in commercial supply' appears on an on-enquiry product page")
+
+    def test_r8_in_commercial_supply_all_on_enquiry_slugs_fail(self):
+        slugs = [
+            "castor-oil-bp93",
+            "castor-oil-usp-nf",
+            "castor-oil-ph-eur",
+            "castor-oil-ip",
+            "castor-oil-jp",
+            "ppg-castor-oil",
+            "cold-pressed-castor-oil",
+            "cosmetic-grade-castor-oil"
+        ]
+        html = "<p>Grade material in commercial supply.</p>"
+        for slug in slugs:
+            findings = lint_content(html, f"products/{slug}.html", self.facts)
+            fails = [f for f in findings if f["rule"] == "R8: 'in commercial supply' forbidden on on-enquiry product pages"]
+            self.assertTrue(len(fails) > 0, f"R8 must fail for 'in commercial supply' on on-enquiry slug {slug}")
+
 if __name__ == "__main__":
     unittest.main()

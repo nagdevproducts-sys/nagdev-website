@@ -12,7 +12,7 @@ secondary_keywords:
 - dehydrated castor fatty acid specs
 - conjugated diene fatty acid
 lang: en
-in_brief: Review our comprehensive DCO fatty acid specifications guide for high-purity
+in_brief: Review our comprehensive DCO fatty acid specifications guide for high-grade
   resin synthesis. Produced at our Deodar plant in North Gujarat through split distillation
   of dehydrated castor oil, DCO-FA provides 60% to 65% conjugated diene fatty acids,
   low titer, and high acid value for rapid air-drying and stoving alkyd enamels.
@@ -42,7 +42,7 @@ faqs:
 
 Dehydrated Castor Oil Fatty Acid (DCO-FA) is a specialized distilled oleochemical intermediate derived from Dehydrated Castor Oil. While whole DCO is a triglyceride ester containing three fatty acid chains bound to a glycerol backbone, DCO-FA represents the free, unesterified fatty acid mixture recovered after high-pressure splitting (hydrolysis) followed by fractional vacuum distillation. Chemically, DCO-FA consists primarily of conjugated 9,11-octadecadienoic acid (approximately 30% to 35%) and non-conjugated 9,12-octadecadienoic acid (approximately 45% to 55%), alongside minor quantities of saturated fatty acids.
 
-Resin chemists and polymer engineers rely on this DCO fatty acid specifications guide because DCO-FA represents one of the most reactive and versatile bio-based conjugated fatty acids available to the chemical industry. Because it contains free carboxylic acid functionality (-COOH) and elevated conjugated unsaturation without glycerol, DCO-FA can be reacted directly with specialized polyols (such as pentaerythritol, trimethylolpropane, and neopentyl glycol) to engineer high-solids baking enamels, epoxy esters, and clear-drying alkyds with pronounced hardness and chemical resistance. Nagdev Products produces high-purity DCO Fatty Acid at our Deodar processing plant in North Gujarat.
+Resin chemists and polymer engineers rely on this DCO fatty acid specifications guide because DCO-FA represents one of the most reactive and versatile bio-based conjugated fatty acids available to the chemical industry. Because it contains free carboxylic acid functionality (-COOH) and elevated conjugated unsaturation without glycerol, DCO-FA can be reacted directly with specialized polyols (such as pentaerythritol, trimethylolpropane, and neopentyl glycol) to engineer high-solids baking enamels, epoxy esters, and clear-drying alkyds with pronounced hardness and chemical resistance. Nagdev Products produces high-grade DCO Fatty Acid at our Deodar processing plant in North Gujarat.
 
 {{key_facts}}
 
@@ -50,7 +50,7 @@ Resin chemists and polymer engineers rely on this DCO fatty acid specifications 
 
 Nagdev Products manufactures DCO Fatty Acid at our manufacturing facility located at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330. Integrated with our 50 TPD seed crushing capacity, our production chain executes high-efficiency splitting and vacuum distillation:
 
-1. **DCO Precursor Dehydration**: High-purity refined castor oil is thermally dehydrated under high vacuum in the presence of acidic catalysts to form the conjugated octadecadienoic triglyceride backbone.
+1. **DCO Precursor Dehydration**: high-grade refined castor oil is thermally dehydrated under high vacuum in the presence of acidic catalysts to form the conjugated octadecadienoic triglyceride backbone.
 2. **High-Pressure Hydrolysis (Splitting)**: The dehydrated oil is charged into a continuous high-pressure splitting column where counter-current demineralized steam splits the triglyceride molecules into crude free fatty acids and an aqueous glycerin co-product stream.
 3. **Phase Separation & Sweetwater Recovery**: The aqueous glycerin sweetwater is drawn off for separation, while the crude DCO fatty acids pass to a drying column to eliminate residual moisture.
 4. **High-Vacuum Fractional Distillation**: The crude fatty acid stream enters high-vacuum distillation towers operating under deep vacuum. Light boiling fractions and heavy pitch residues are separated, distilling pure, clear DCO Fatty Acid overhead.
@@ -86,7 +86,7 @@ Industrial formulators evaluate DCO Fatty Acid against strict analytical paramet
 The conjugated fatty acid architecture of DCO-FA supports heavy-duty coating and resin manufacturing:
 
 ### 1. High-Solids and Stoving Alkyd Enamels
-DCO-FA is the ideal fatty acid for producing short-oil and medium-oil baking alkyds cured with melamine-formaldehyde or urea resins. These stoving enamels provide enhanced hardness, chemical resistance, and color-stable performance on automotive components, home appliances, and metal furniture.
+DCO-FA is the suitable fatty acid for producing short-oil and medium-oil baking alkyds cured with melamine-formaldehyde or urea resins. These stoving enamels provide enhanced hardness, chemical resistance, and color-stable performance on automotive components, home appliances, and metal furniture.
 
 ### 2. heavy-duty Epoxy Esters
 Reacting DCO-FA with bisphenol-A epoxy resins produces flexible epoxy esters used in heavy-duty anti-corrosive maintenance primers, offshore structural coatings, and marine barrier primers.

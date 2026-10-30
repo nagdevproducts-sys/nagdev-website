@@ -13,7 +13,7 @@ secondary_keywords:
 lang: en
 in_brief: "Discover the critical role of commercial castor oil for industrial lubricants and greases. Crushed from North Gujarat castor seed at our Deodar processing plant, this unrefined expeller oil delivers unmatched hydrodynamic film strength and boundary film adhesion across demanding mechanical applications, gear drives, and specialty greases."
 faqs:
-  - q: "Why is unrefined commercial castor oil effective in heavy-load lubricants?"
+  - q: "Why is unrefined commercial castor oil functional in heavy-load lubricants?"
     a: "The natural hydroxyl functionality at C-12 imparts intense molecular polarity, enabling triglycerides to adhere tenaciously to ferrous metallic surfaces under boundary lubrication."
   - q: "What viscosity characteristics define commercial castor oil in gear systems?"
     a: "It maintains a high kinematic viscosity index, remaining viscous under elevated frictional shear and resisting mechanical thinning better than non-polar mineral base stocks."

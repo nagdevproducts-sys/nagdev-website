@@ -71,4 +71,4 @@ Our logistics desk coordinates scheduled bulk shipments:
 - **Interstate Industrial Supply**: Tanker and drum dispatches regularly supply polyol manufacturers in Maharashtra, Tamil Nadu, Karnataka, and northern industrial areas.
 - **International Seaports**: Export enquiries welcome. Our proximity to Mundra Port and Deendayal Port (Kandla) facilitates containerized shipments of drums, IBCs, and ISO tanks to overseas chemical synthesizers.
 
-Incorporating FPD castor oil for polyol synthesis provides polymer manufacturers with an economical, high-purity renewable building block for advanced polyurethane systems.
+Incorporating FPD castor oil for polyol synthesis provides polymer manufacturers with an economical, high-grade renewable building block for advanced polyurethane systems.

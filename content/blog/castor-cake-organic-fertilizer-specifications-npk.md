@@ -53,7 +53,7 @@ To preserve nutrient content and prevent biological degradation during warehouse
 
 1. **Packaging Formats**:
    - **50 kg Woven HDPE Bags**: Laminated or unlined woven polypropylene sacks designed for manual handling, retail agricultural distribution, and palletized stacking.
-   - **1,000 kg Jumbo Bags (FIBC)**: Heavy-duty bulk bags equipped with top filling spouts and bottom discharge chutes, ideal for commercial fertilizer blenders.
+   - **1,000 kg Jumbo Bags (FIBC)**: Heavy-duty bulk bags equipped with top filling spouts and bottom discharge chutes, well-suited for commercial fertilizer blenders.
    - **Loose Bulk Truckloads**: Open-top or tarped tipper trucks for direct transport to regional compost blending facilities.
 2. **Moisture and Ventilation**: Castor cake must be stored in well-ventilated, dry warehouses on raised wooden or plastic pallets. Avoiding moisture ingress prevents fungal growth and ensures free-flowing application through mechanical broadcast spreaders.
 3. **Animal Safety Precaution**: Because castor seeds naturally contain ricin, castor cake is strictly non-edible and must never be used as livestock feed. Storage areas must be kept secure from cattle and domestic animals.

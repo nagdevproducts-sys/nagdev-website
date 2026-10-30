@@ -59,4 +59,4 @@ Supply chain disruptions—such as sudden agricultural mandi strikes, regional t
 - **Finished Goods Warehousing**: We maintain buffer stocks of Commercial Castor Oil, First Special Grade (FSG), and Castor Cake at our Deodar works for immediate dispatch.
 - **Customized Delivery Schedules**: We arrange staggered weekly or bi-weekly dispatches aligned with customer reactor charging cycles, minimizing on-site raw material holding costs for buyers.
 
-Partnering with Nagdev Products for supplying castor oil Gujarat industrial hubs ensures manufacturing plants across the state secure dependable, high-purity oleochemical raw materials backed by transparent local delivery logistics.
+Partnering with Nagdev Products for supplying castor oil Gujarat industrial hubs ensures manufacturing plants across the state secure dependable, high-grade oleochemical raw materials backed by transparent local delivery logistics.

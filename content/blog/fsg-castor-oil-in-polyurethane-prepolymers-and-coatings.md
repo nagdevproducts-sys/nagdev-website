@@ -66,4 +66,4 @@ Our logistics infrastructure ensures dependable bulk supply across domestic and 
 - **National Distribution Network**: Dedicated transport partners deliver scheduled consignments to polyurethane manufacturing hubs across Maharashtra, Tamil Nadu, Karnataka, and northern industrial states.
 - **Seaport Export Terminals**: Export enquiries welcome. Proximity to Mundra Port and Deendayal Port (Kandla) allows prompt container stuffing of drums, IBCs, and ISO tanks for global shipment.
 
-Specifying FSG castor oil in polyurethanes provides polymer chemists with an exceptionally pure, naturally renewable polyol for resilient, heavy-duty polyurethane systems.
+Specifying FSG castor oil in polyurethanes provides polymer chemists with an notably pure, naturally renewable polyol for resilient, heavy-duty polyurethane systems.

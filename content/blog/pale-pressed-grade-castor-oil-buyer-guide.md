@@ -1,7 +1,7 @@
 ---
-title: 'Pale Pressed Grade Castor Oil Buyer Guide: High Purity'
+title: 'Pale Pressed Grade Castor Oil Buyer Guide: high quality'
 slug: pale-pressed-grade-castor-oil-buyer-guide
-description: Pale pressed grade castor oil buyer guide. High-purity, ultra-low color
+description: Pale pressed grade castor oil buyer guide. high-grade, ultra-low color
   oil from Gujarat. Review specifications, packaging, and technical procurement.
 publish_date: '2026-10-29T12:07:00+05:30'
 type: T1
@@ -10,16 +10,16 @@ primary_keyword: pale pressed grade castor oil buyer guide
 secondary_keywords:
 - PPG castor oil supplier Gujarat
 - pale pressed castor oil specifications
-- high purity castor oil bulk
+- high quality castor oil bulk
 lang: en
-in_brief: Consult our pale pressed grade castor oil buyer guide to explore this high-purity
+in_brief: Consult our pale pressed grade castor oil buyer guide to explore this high-grade
   industrial grade. Sourced from the first pressing of Gujarat castor seed at our
   Deodar plant, PPG castor oil features free fatty acids under 0.8% and pronounced
   Lovibond clarity, making it the primary choice for clear polyurethanes, optical
   sealants, and pale specialty alkyds.
 faqs:
 - q: What core parameters define Pale Pressed Grade (PPG) castor oil?
-  a: Pale Pressed Grade (PPG) is an exceptionally pure, refined castor oil specifying
+  a: Pale Pressed Grade (PPG) is an notably pure, refined castor oil specifying
     free fatty acids below 0.8%, moisture under 0.20%, and an ultra-pale Lovibond
     color under 1.5 units (Y+5R in 1-inch cell).
 - q: How does PPG differ from standard First Special Grade (FSG)?
@@ -51,7 +51,7 @@ Nagdev Products manufactures Pale Pressed Grade castor oil at our plant located 
 
 1. **Seed Selection and Triple Screening**: Only hand-selected, freshly harvested hybrid castor seeds from North Gujarat mandis are chosen for PPG production. The seeds pass through triple-deck vibratory screens, air separators, and magnetic grids to ensure zero foreign matter.
 2. **Gentle First Expeller Pressing**: The seeds are pressed in mechanical screw expellers under reduced barrel pressure and controlled low temperature. This captures the lightest, purest triglyceride fraction while leaving secondary oil in the cake.
-3. **Precision alkali refining**: The crude pale oil is treated with a precise stoichiometric volume of dilute sanitary sodium hydroxide. This selectively precipitates free fatty acids into insoluble soaps without hydrolyzing triglycerides, reducing FFA below 0.8%.
+3. **accurate alkali refining**: The crude pale oil is treated with a precise stoichiometric volume of dilute sanitary sodium hydroxide. This selectively precipitates free fatty acids into insoluble soaps without hydrolyzing triglycerides, reducing FFA below 0.8%.
 4. **Multi-Stage Demineralized Water Washing**: The refined oil is thoroughly washed with hot, demineralized soft water to remove trace soap and polar impurities down to undetectable levels.
 5. **High-Vacuum Dehydration**: The washed oil enters a high-vacuum flash drying column, removing entrained moisture below 0.20%.
 6. **Double Bleaching & Polishing Filtration**: The dehydrated oil is treated with specialized acid-activated bleaching earth and activated carbon under vacuum, followed by multi-pass filtration through closed polishing presses, producing sparkling, water-pale PPG oil.

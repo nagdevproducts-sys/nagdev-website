@@ -49,10 +49,10 @@ This chemical transformation dramatically elevates the melting point from a room
 
 ## How Nagdev Produces Hydrogenated Castor Oil in Deodar
 
-Nagdev Products manufactures Hydrogenated Castor Oil at our manufacturing facility located at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330. Operating an integrated processing setup with a 50 TPD seed crushing capacity, our production chain executes catalytic hydrogenation under precision process automation:
+Nagdev Products manufactures Hydrogenated Castor Oil at our manufacturing facility located at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330. Operating an integrated processing setup with a 50 TPD seed crushing capacity, our production chain executes catalytic hydrogenation under accurate process automation:
 
 1. **Feedstock Refining**: Freshly expelled First Special Grade (FSG) castor oil is pre-treated and dried to eliminate trace moisture and impurities that could deactivate hydrogenation catalysts.
-2. **Catalytic Hydrogenation Reaction**: The dry refined oil is charged into high-pressure stainless steel hydrogenation autoclaves. High-purity hydrogen gas is sparged through the oil in the presence of an active nickel catalyst under controlled pressure and temperature (140°C–180°C). The reaction continues until the iodine value drops below 5.0 g I2/100g, indicating complete double bond saturation.
+2. **Catalytic Hydrogenation Reaction**: The dry refined oil is charged into high-pressure stainless steel hydrogenation autoclaves. high-grade hydrogen gas is sparged through the oil in the presence of an active nickel catalyst under controlled pressure and temperature (140°C–180°C). The reaction continues until the iodine value drops below 5.0 g I2/100g, indicating complete double bond saturation.
 3. **Catalyst Filtration**: The molten hydrogenated wax is pumped through closed pressure leaf filters to separate and recover the nickel catalyst particles completely, yielding an optically clear, transparent molten wax.
 4. **Continuous Flaking and Solidification**: The molten wax feeds onto internal water-cooled rotating flaker drums. As the wax contacts the chilled drum surface, it solidifies into uniform, free-flowing white crystalline flakes.
 5. **Screening and Packaging**: The solid flakes are classified, metal-detected, and packed into 25 kg moisture-barrier poly-lined paper bags, followed by automated palletization.
@@ -63,7 +63,7 @@ Nagdev Products manufactures Hydrogenated Castor Oil at our manufacturing facili
 
 Procuring hydrogenated castor oil bulk supply Gujarat directly from our manufacturing base in North Gujarat provides significant chemical supply chain advantages. Gujarat provides strategic benefits for industrial oleochemical manufacturing, ensuring reliable bulk supply and vertical integration.
 
-As the center of world castor agronomy, North Gujarat's castor belt (Banaskantha and Vav-Tharad region) provides high-purity seed feedstock, ensuring full control over oil quality prior to hydrogenation.
+As the center of world castor agronomy, North Gujarat's castor belt (Banaskantha and Vav-Tharad region) provides high-grade seed feedstock, ensuring full control over oil quality prior to hydrogenation.
 
 Our processing facility maintains strict lot-to-lot consistency, allowing formulators to rely on our hydrogenated castor oil bulk supply Gujarat for stable grease batch production.
 

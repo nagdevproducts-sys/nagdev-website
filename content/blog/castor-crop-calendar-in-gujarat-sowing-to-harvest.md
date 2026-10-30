@@ -65,7 +65,7 @@ The cultivation of *Ricinus communis* in Banaskantha and Vav-Tharad follows well
 
 Understanding the castor crop calendar in Gujarat provides valuable operational insights for industrial buyers:
 
-- **Baseline Free Acidity (FFA)**: Fresh seed crushed during peak harvest months (January through April) exhibits the lowest baseline free acidity (acid values often below 1.5 mg KOH/g), yielding exceptionally pale refined oils with minimal refining loss.
+- **Baseline Free Acidity (FFA)**: Fresh seed crushed during peak harvest months (January through April) exhibits the lowest baseline free acidity (acid values often below 1.5 mg KOH/g), yielding notably pale refined oils with minimal refining loss.
 - **Consistent seed oil concentration**: Fully matured spikes harvested during sunny dry months maintain optimal seed oil concentration (47% to 50%), ensuring high expeller crushing efficiency.
 - **Continuous Crushing Through Sourced Buffers**: By securing sound, dry seeds during peak mandi arrivals and storing them in well-ventilated, dry warehouses, Nagdev Products maintains steady 50 TPD crushing operations throughout the entire calendar year.
 
