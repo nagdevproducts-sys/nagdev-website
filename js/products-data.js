@@ -584,8 +584,8 @@ const PRODUCTS_DATABASE = [
     "number": "08",
     "name": "High Protein Castor Meal (N8/N10)",
     "brandName": "NDEVAGRO™ HPRO",
-    "category": "specialty-derivatives",
-    "categoryLabel": "Under development (Available on Enquiry)",
+    "category": "agri",
+    "categoryLabel": "Agri Products",
     "casNumber": "",
     "isSpecialtyRange": true,
     "industries": [
@@ -598,57 +598,51 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Light Brownish Grey",
     "rawMaterial": "De-hulled Castor Seed Meal",
     "image": "images/products/high-protein-castor-meal.webp",
-    "packing": "25 kg / 50 kg Laminated HDPE Bags • 1000 kg Jumbo Bags with moisture-barrier liner",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "12 months from date of manufacture in cool, dry warehouse",
     "application": "Specialty high-nitrogen organic plant nutrient and soil conditioner offered under our Under development — Available on Enquiry for organic horticulture and customized fertilizer blending formulations.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION (N8 GRADE)",
-      "SPECIFICATION (N10 GRADE)"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Crude Protein",
-        "50% Min",
-        "60% Min"
+        "Target value shared on request"
       ],
       [
         "2",
         "Nitrogen (N)",
-        "8.0% Min",
-        "8.0% Min"
+        "Target value shared on request"
       ],
       [
         "3",
         "Phosphorus (P₂O₅)",
-        "1.0% Min",
-        "1.0% Min"
+        "Target value shared on request"
       ],
       [
         "4",
         "Potash (K₂O)",
-        "1.0% Min",
-        "1.0% Min"
+        "Target value shared on request"
       ],
       [
         "5",
         "Moisture",
-        "12.0% Max",
-        "12.0% Max"
+        "Target value shared on request"
       ],
       [
         "6",
         "Bulk Density",
-        "0.62 – 0.65 g/cc",
-        "0.62 – 0.65 g/cc"
+        "Target value shared on request"
       ],
       [
         "7",
         "Ash Content",
-        "8.0% Max",
-        "8.0% Max"
+        "Target value shared on request"
       ]
     ],
     "productGroup": "specialty"
@@ -659,7 +653,7 @@ const PRODUCTS_DATABASE = [
     "name": "12-Hydroxy Stearic Acid (12-H.S.A.) Flakes / Powder",
     "brandName": "NDEVACID™ 12-HSA",
     "category": "derivatives",
-    "categoryLabel": "Derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "106-14-9",
     "industries": [
       "lubricants",
@@ -672,49 +666,51 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Creamish White to Light Off-White",
     "rawMaterial": "Hydrogenated Castor Oil (HCO)",
     "image": "images/products/hydrogenated-12-hydroxystearic-acid.webp",
-    "packing": "25 kg Multiwall Paper Bags / HDPE Laminated Bags with poly liner • 500 kg / 1000 kg Jumbo Bags • Palletized & shrink-wrapped",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months from date of manufacture in original sealed bags",
     "application": "Primary thickener for premium multi-purpose Lithium, Calcium and Complex greases. Imparts excellent mechanical shear stability, thermal reversibility, high dropping point (>190°C), and water-washout resistance. Also widely used in rubber compounding, plastics, acrylic polymers, and cosmetics.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATIONS"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Creamish Flakes / Powder"
+        "Target value shared on request"
       ],
       [
         "2",
         "Iodine Value, g I₂/100g",
-        "3.0 Max"
+        "Target value shared on request"
       ],
       [
         "3",
         "Saponification Value, mg KOH/g",
-        "175 Min"
+        "Target value shared on request"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "175 Min"
+        "Target value shared on request"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "155 Min"
+        "Target value shared on request"
       ],
       [
         "6",
         "Melting Point, °C",
-        "74.0°C Min"
+        "Target value shared on request"
       ],
       [
         "7",
         "Colour Gardner",
-        "3 – 4 Max"
+        "Target value shared on request"
       ]
     ],
     "isSpecialtyRange": false,
@@ -815,7 +811,7 @@ const PRODUCTS_DATABASE = [
     "name": "Ricinoleic Acid (R.A.)",
     "brandName": "NDEVACID™ RIC",
     "category": "derivatives",
-    "categoryLabel": "Derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "141-22-0",
     "industries": [
       "coatings",
@@ -828,64 +824,66 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Light Amber to Golden",
     "rawMaterial": "Refined Castor Oil (FSG)",
     "image": "images/products/ricinoleic-acid.webp",
-    "packing": "Bulk in ISO Tank / Flexitank • 190 / 200 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "12 months from date of manufacture, in tightly sealed original drums",
     "application": "12-hydroxy-9-cis-octadecenoic acid obtained by hydrolysis and acidulation of castor oil. Essential intermediate for Turkey Red Oil (sulfated castor oil), cutting fluids, clear soaps, polyurethanes, alkyd resins, and esterification synthesis.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATIONS"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Viscous Clear Liquid"
+        "Target value shared on request"
       ],
       [
         "2",
         "Iodine Value, g I₂/100g",
-        "82 – 90"
+        "Target value shared on request"
       ],
       [
         "3",
         "Saponification Value, mg KOH/g",
-        "180 – 190"
+        "Target value shared on request"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "175 Min"
+        "Target value shared on request"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "155 Min"
+        "Target value shared on request"
       ],
       [
         "6",
         "Moisture",
-        "1.0% Max"
+        "Target value shared on request"
       ],
       [
         "7",
         "Colour Gardner",
-        "4 – 5 Max"
+        "Target value shared on request"
       ],
       [
         "8",
         "Unsaponifiable Matter",
-        "1.0% Max"
+        "Target value shared on request"
       ],
       [
         "9",
         "Specific Gravity @ 25°C",
-        "0.935 – 0.945"
+        "Target value shared on request"
       ],
       [
         "10",
         "Ricinoleic Acid % by GC",
-        "85% Min"
+        "Target value shared on request"
       ]
     ],
     "isSpecialtyRange": false,
@@ -897,8 +895,8 @@ const PRODUCTS_DATABASE = [
     "number": "12",
     "name": "Crude Glycerin",
     "brandName": "NDEVGLY™ CRUDE",
-    "category": "by-products",
-    "categoryLabel": "By-Products",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "56-81-5",
     "isSpecialtyRange": true,
     "industries": [
@@ -912,59 +910,61 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Brown to Dark Amber",
     "rawMaterial": "Castor Oil Hydrolysis Aqueous Phase",
     "image": "images/products/crude-glycerin.webp",
-    "packing": "Bulk in ISO Tankers / Flexi-Tanks • 250 kg MS Drums / HDPE Drums • 1000 kg IBC",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "12 months from date of manufacture under ambient conditions",
-    "application": "By-product generated during the splitting and hydrolysis of castor oil. Feedstock for glycerin refining plants to produce technical, USP, and pharmaceutical glycerin, as well as anaerobic bio-digesters, animal feed energy supplements, and industrial anti-freeze.",
+    "application": "A by-product of castor oil fatty-acid production (target). Feedstock for glycerin refining plants to produce technical and refined glycerin, as well as anaerobic bio-digesters and industrial dust suppression.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Colour Gardner",
-        "4 – 10"
+        "Target value shared on request"
       ],
       [
         "2",
         "Moisture %",
-        "10.0% Max"
+        "Target value shared on request"
       ],
       [
         "3",
         "Density @ 25°C",
-        "1.20 – 1.25 kg/L"
+        "Target value shared on request"
       ],
       [
         "4",
         "Ash %",
-        "7.0% Max"
+        "Target value shared on request"
       ],
       [
         "5",
         "MONG (Matter Organic Non-Glycerol)",
-        "1.0% to 2.0% Max"
+        "Target value shared on request"
       ],
       [
         "6",
         "Purity %",
-        "80% Min"
+        "Target value shared on request"
       ],
       [
         "7",
         "Glycerol Content",
-        "80% Min"
+        "Target value shared on request"
       ],
       [
         "8",
         "Methanol Content",
-        "0.5% Max"
+        "Target value shared on request"
       ],
       [
         "9",
         "Salt (as NaCl / Na₂SO₄)",
-        "5.0% Max"
+        "Target value shared on request"
       ]
     ],
     "productGroup": "specialty"
@@ -974,8 +974,8 @@ const PRODUCTS_DATABASE = [
     "number": "13",
     "name": "Sodium Sulphate Anhydrous",
     "brandName": "NDEVCHEM™ NA2SO4",
-    "category": "by-products",
-    "categoryLabel": "By-Products",
+    "category": "co-products",
+    "categoryLabel": "Co-products",
     "casNumber": "7757-82-6",
     "industries": [
       "detergents",
@@ -988,81 +988,71 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Brilliant White",
     "rawMaterial": "Castor Acidulation Effluent Neutralization",
     "image": "images/products/sodium-sulphate-anhydrous.webp",
-    "packing": "50 kg HDPE / PP Bags with LDPE liner • 1000 kg Jumbo Bags • Moisture-proof palletized packaging",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months in tightly sealed moisture-proof bags",
     "application": "Crystalline anhydrous sodium sulphate recovered during the acidulation of saponified castor oil. Widely used as a prime filler and builder in synthetic laundry detergents, fining agent in glass manufacturing, textile direct dyeing leveling agent, and paper pulp processing.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "UNIT",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Visual",
-        "White Powder"
+        "Target value shared on request"
       ],
       [
         "2",
         "Purity (as Na₂SO₄)",
-        "%",
-        "Min. 99.40%"
+        "Target value shared on request"
       ],
       [
         "3",
         "Moisture Content",
-        "%",
-        "Max 0.10%"
+        "Target value shared on request"
       ],
       [
         "4",
         "pH (10% Aqueous Solution)",
-        "—",
-        "6.0 – 10.0"
+        "Target value shared on request"
       ],
       [
         "5",
         "Loss on Ignition @ 600°C",
-        "%",
-        "Max 0.30%"
+        "Target value shared on request"
       ],
       [
         "6",
         "Hardness (as Ca + Mg)",
-        "ppm",
-        "Max 100 ppm"
+        "Target value shared on request"
       ],
       [
         "7",
         "Heavy Metals (Pb+As+Fe+Cr+Co+Zn+Ni+Hg)",
-        "ppm",
-        "Max 50 ppm"
+        "Target value shared on request"
       ],
       [
         "8",
         "Chloride Content",
-        "%",
-        "Max 0.10%"
+        "Target value shared on request"
       ],
       [
         "9",
         "NaCl Content",
-        "%",
-        "Max 0.15%"
+        "Target value shared on request"
       ],
       [
         "10",
         "Bulk Density",
-        "g/cc",
-        "1.45 – 1.65"
+        "Target value shared on request"
       ],
       [
         "11",
         "Sieve Test (Passing through 60 Mesh)",
-        "—",
-        "Passes 100%"
+        "Target value shared on request"
       ]
     ],
     "isSpecialtyRange": true,
@@ -1257,8 +1247,8 @@ const PRODUCTS_DATABASE = [
     "id": "blown-oxidized-castor-oil",
     "number": "16",
     "name": "Blown / Oxidized Castor Oil",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "68187-84-8",
     "industries": [
       "coatings",
@@ -1268,74 +1258,76 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Pale Yellow to Amber",
     "rawMaterial": "Refined Castor Oil",
     "image": "images/products/blown-oxidized-castor-oil.webp",
-    "packing": "Bulk in ISO Tank / Flexi Tank    •    200 / 225 kg MS Drums / HDPE Drums    •    950 / 1,000 kg IBC    •    Bulk in Vessel for large-volume shipments    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "18-24 months",
     "application": "Blown (Oxidized) Castor Oil (NDEVOX™ BLO) is an oxypolymerized high-viscosity bio-polymer under development. Produced by controlled aeration of refined castor oil, it provides excellent pigment wetting, non-migrating plasticization, and tack control for printing inks, lacquers, and industrial lubricants from our Deodar plant, Banaskantha district, Gujarat.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear to Slightly Hazy, Viscous Liquid, free from visible foreign matter"
+        "Target value shared on request"
       ],
       [
         "2",
         "Colour, Gardner",
-        "8.0 Max"
+        "Target value shared on request"
       ],
       [
         "3",
         "Acid Value, mg KOH/g",
-        "5.0 – 20.0 (Grade Dependent)"
+        "Target value shared on request"
       ],
       [
         "4",
         "Iodine Value, g I₂/100g",
-        "65 – 80"
+        "Target value shared on request"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "130 – 155"
+        "Target value shared on request"
       ],
       [
         "6",
         "Saponification Value, mg KOH/g",
-        "180 – 215"
+        "Target value shared on request"
       ],
       [
         "7",
         "Moisture & Volatile Matter, %",
-        "0.50 Max"
+        "Target value shared on request"
       ],
       [
         "8",
         "Specific Gravity at 30°C",
-        "0.965 – 0.995"
+        "Target value shared on request"
       ],
       [
         "9",
         "Refractive Index at 40°C",
-        "1.475 – 1.485"
+        "Target value shared on request"
       ],
       [
         "10",
         "Viscosity at 25°C",
-        "1,000 – 20,000 cP (Custom grades: 10 – 200 Poise)"
+        "Target value shared on request"
       ],
       [
         "11",
         "Unsaponifiable Matter, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "12",
         "Oxidation / Blowing Level",
-        "As per Grade / Customer Requirement"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVOX™ BLO",
@@ -1347,8 +1339,8 @@ const PRODUCTS_DATABASE = [
     "id": "bio-polyurethane-polyols",
     "number": "17",
     "name": "Bio-Polyurethane Polyols (Castor-Oil-Based Polyols)",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "8001-79-4 / 61789-44-4",
     "industries": [
       "polyurethane",
@@ -1358,79 +1350,81 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Pale Yellow to Amber",
     "rawMaterial": "Castor Oil / Castor-Oil-Derived Feedstock",
     "image": "images/products/bio-polyurethane-polyols.webp",
-    "packing": "200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in ISO Tank / Flexi Tank for large-volume supply    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "12-18 months",
     "application": "Bio-Polyurethane Polyols (NDEVPOL™ BIO) is a renewable, castor-oil-based polyol under technical development. Designed primarily for 2K polyurethane coatings, adhesives, sealants, and elastomers (CASE), it delivers natural hydrophobicity and hydrolytic resistance from our facility at Deodar, Gujarat.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear to Slightly Hazy, Viscous Pale Yellow Liquid, free from suspended matter"
+        "Target value shared on request"
       ],
       [
         "2",
         "Colour, Gardner",
-        "4.0 Max"
+        "Target value shared on request"
       ],
       [
         "3",
         "Hydroxyl Value, mg KOH/g",
-        "150 – 170"
+        "Target value shared on request"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "3.0 Max"
+        "Target value shared on request"
       ],
       [
         "5",
         "Moisture Content, %",
-        "0.10 Max"
+        "Target value shared on request"
       ],
       [
         "6",
         "Viscosity at 25°C, cP",
-        "650 – 900"
+        "Target value shared on request"
       ],
       [
         "7",
         "Specific Gravity at 25°C",
-        "0.950 – 0.970"
+        "Target value shared on request"
       ],
       [
         "8",
         "Average Hydroxyl Functionality",
-        "2.7 – 3.0"
+        "Target value shared on request"
       ],
       [
         "9",
         "Iodine Value, g I₂/100g",
-        "80 – 90"
+        "Target value shared on request"
       ],
       [
         "10",
         "Saponification Value, mg KOH/g",
-        "175 – 190"
+        "Target value shared on request"
       ],
       [
         "11",
         "Unsaponifiable Matter, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "12",
         "Flash Point, °C",
-        "200 Min"
+        "Target value shared on request"
       ],
       [
         "13",
         "Hydroxyl Content Consistency",
-        "Within agreed batch specification"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVPOL™ BIO",
@@ -1442,8 +1436,8 @@ const PRODUCTS_DATABASE = [
     "id": "sebacic-acid",
     "number": "18",
     "name": "Sebacic Acid",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "111-20-6",
     "industries": [
       "plastics",
@@ -1454,79 +1448,81 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "White to Off-White",
     "rawMaterial": "Castor Oil",
     "image": "images/products/sebacic-acid.webp",
-    "packing": "25 kg PP / Paper / HDPE-Lined Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Bulk packing for large-volume industrial supply    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "36 months",
     "application": "Used in manufacture of plasticizers (DOS, DBS), nylon 6,10 and other polyamides, polyester and alkyd resins, lubricants, coatings, adhesives and other specialty chemicals. It is a major downstream derivative obtained from castor-oil-based processing.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "White to Off-White Flakes / Powder / Granules"
+        "Target value shared on request"
       ],
       [
         "2",
         "Sebacic Acid Content, %",
-        "99.0 Min"
+        "Target value shared on request"
       ],
       [
         "3",
         "Acid Value, mg KOH/g",
-        "545 – 570"
+        "Target value shared on request"
       ],
       [
         "4",
         "Melting Point, °C",
-        "131 – 134"
+        "Target value shared on request"
       ],
       [
         "5",
         "Iodine Value, g I₂/100g",
-        "0.5 Max"
+        "Target value shared on request"
       ],
       [
         "6",
         "Moisture, %",
-        "0.30 Max"
+        "Target value shared on request"
       ],
       [
         "7",
         "Ash, %",
-        "0.10 Max"
+        "Target value shared on request"
       ],
       [
         "8",
         "Colour, APHA",
-        "50 Max"
+        "Target value shared on request"
       ],
       [
         "9",
         "Adipic Acid, %",
-        "0.50 Max"
+        "Target value shared on request"
       ],
       [
         "10",
         "Caprylic Acid, %",
-        "0.20 Max"
+        "Target value shared on request"
       ],
       [
         "11",
         "Capric Acid, %",
-        "0.20 Max"
+        "Target value shared on request"
       ],
       [
         "12",
         "Solubility in Alcohol",
-        "Clear Solution"
+        "Target value shared on request"
       ],
       [
         "13",
         "Particle Size",
-        "As per Grade / Customer Requirement"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVACID™ SEB",
@@ -1538,8 +1534,8 @@ const PRODUCTS_DATABASE = [
     "id": "methyl-ricinoleate",
     "number": "19",
     "name": "Methyl Ricinoleate",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "141-24-2",
     "industries": [
       "lubricants",
@@ -1550,79 +1546,81 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Colourless to Pale Yellow",
     "rawMaterial": "Ricinoleic Acid / Castor Oil",
     "image": "images/products/methyl-ricinoleate.webp",
-    "packing": "200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in ISO Tank / Flexi Tank    •    Bulk Tanker for large-volume supply    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months in sealed original packaging.",
     "application": "Used as a castor-oil-derived methyl ester in biodegradable lubricants, specialty solvents, plasticizers, coatings, personal-care formulations and as a chemical intermediate.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear to Slightly Hazy Liquid, free from suspended matter"
+        "Target value shared on request"
       ],
       [
         "2",
         "Colour",
-        "Colourless to Pale Yellow"
+        "Target value shared on request"
       ],
       [
         "3",
         "Methyl Ricinoleate Content, %",
-        "95.0 Min"
+        "Target value shared on request"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "5",
         "Iodine Value, g I₂/100g",
-        "80 – 90"
+        "Target value shared on request"
       ],
       [
         "6",
         "Saponification Value, mg KOH/g",
-        "170 – 185"
+        "Target value shared on request"
       ],
       [
         "7",
         "Hydroxyl Value, mg KOH/g",
-        "145 – 160"
+        "Target value shared on request"
       ],
       [
         "8",
         "Moisture, %",
-        "0.20 Max"
+        "Target value shared on request"
       ],
       [
         "9",
         "Unsaponifiable Matter, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "10",
         "Specific Gravity at 25°C",
-        "0.920 – 0.940"
+        "Target value shared on request"
       ],
       [
         "11",
         "Refractive Index at 40°C",
-        "1.460 – 1.470"
+        "Target value shared on request"
       ],
       [
         "12",
         "Free Fatty Acids, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "13",
         "Methanol, %",
-        "0.10 Max"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVEST™ MR",
@@ -1634,8 +1632,8 @@ const PRODUCTS_DATABASE = [
     "id": "methyl-12-hydroxystearate",
     "number": "20",
     "name": "Methyl 12-Hydroxystearate (Methyl 12-HSA)",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "141-23-1",
     "industries": [
       "lubricants",
@@ -1645,79 +1643,81 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "White to Off-White",
     "rawMaterial": "12-Hydroxystearic Acid / Hydrogenated Castor Oil",
     "image": "images/products/methyl-12-hydroxystearate.webp",
-    "packing": "25 kg / 50 lb PE-Laminated HDPE / PP Bags    •    500 kg HDPE Jumbo Bags    •    650 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    1,200 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months in sealed original packaging.",
     "application": "Used in specialty lubricants and greases, coatings, plastics, cosmetics, personal-care products and as a castor-oil-derived chemical intermediate.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "White to Off-White Flakes / Powder"
+        "Target value shared on request"
       ],
       [
         "2",
         "Clarity on Melting",
-        "Clear, free from suspended matter"
+        "Target value shared on request"
       ],
       [
         "3",
         "Colour, Gardner",
-        "5.0 Max"
+        "Target value shared on request"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "2.0 Max"
+        "Target value shared on request"
       ],
       [
         "5",
         "Melting Point, °C",
-        "75 – 82"
+        "Target value shared on request"
       ],
       [
         "6",
         "Iodine Value, g I₂/100g",
-        "5.0 Max"
+        "Target value shared on request"
       ],
       [
         "7",
         "Saponification Value, mg KOH/g",
-        "175 – 185"
+        "Target value shared on request"
       ],
       [
         "8",
         "Hydroxyl Value, mg KOH/g",
-        "145 – 160"
+        "Target value shared on request"
       ],
       [
         "9",
         "Moisture, %",
-        "0.50 Max"
+        "Target value shared on request"
       ],
       [
         "10",
         "Unsaponifiable Matter, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "11",
         "Methyl 12-Hydroxystearate Content, %",
-        "95.0 Min"
+        "Target value shared on request"
       ],
       [
         "12",
         "Free Fatty Acids, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "13",
         "Particle Size, Passing Through 1 mm Sieve, %",
-        "98 Min"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVEST™ M12H",
@@ -1729,8 +1729,8 @@ const PRODUCTS_DATABASE = [
     "id": "dioctyl-sebacate",
     "number": "21",
     "name": "Dioctyl Sebacate (DOS / DEHS)",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "122-62-3",
     "industries": [
       "plastics",
@@ -1740,74 +1740,76 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Colourless to Pale Yellow / Clear Pale Straw",
     "rawMaterial": "Sebacic Acid + 2-Ethylhexanol; Sebacic Acid is produced from Castor Oil",
     "image": "images/products/dioctyl-sebacate.webp",
-    "packing": "200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in ISO Tank / Flexi Tank    •    Bulk Tanker for large-volume supply    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months in sealed original packaging.",
     "application": "Used primarily as a plasticizer and low-temperature plasticizer for PVC, synthetic rubber and other polymer systems. Also used in lubricants, greases, coatings and specialty formulations where low-temperature flexibility is required.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear, Colourless to Pale Yellow Liquid, free from suspended matter"
+        "Target value shared on request"
       ],
       [
         "2",
         "Colour, APHA",
-        "50 Max"
+        "Target value shared on request"
       ],
       [
         "3",
         "Ester Content, %",
-        "99.0 Min"
+        "Target value shared on request"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "0.15 Max"
+        "Target value shared on request"
       ],
       [
         "5",
         "Water Content, %",
-        "0.10 Max"
+        "Target value shared on request"
       ],
       [
         "6",
         "Specific Gravity at 25°C",
-        "0.910 – 0.916"
+        "Target value shared on request"
       ],
       [
         "7",
         "Refractive Index at 20°C",
-        "1.448 – 1.452"
+        "Target value shared on request"
       ],
       [
         "8",
         "Moisture & Volatile Matter, %",
-        "0.30 Max"
+        "Target value shared on request"
       ],
       [
         "9",
         "Flash Point, °C",
-        "210 Min"
+        "Target value shared on request"
       ],
       [
         "10",
         "Purity by GC, %",
-        "99.0 Min"
+        "Target value shared on request"
       ],
       [
         "11",
         "Free 2-Ethylhexanol, %",
-        "0.50 Max"
+        "Target value shared on request"
       ],
       [
         "12",
         "Residual Acidity, %",
-        "0.02 Max"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVEST™ DOS",
@@ -1819,8 +1821,8 @@ const PRODUCTS_DATABASE = [
     "id": "dibutyl-sebacate",
     "number": "22",
     "name": "Dibutyl Sebacate (DBS)",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "109-43-3",
     "industries": [
       "plastics",
@@ -1830,74 +1832,76 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Colourless to Pale Yellow, Clear Liquid",
     "rawMaterial": "Sebacic Acid + n-Butanol; Sebacic Acid is derived from Castor Oil",
     "image": "images/products/dibutyl-sebacate.webp",
-    "packing": "200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in ISO Tank / Flexi Tank    •    Bulk Tanker for large-volume supply    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months in sealed original packaging.",
     "application": "Used as a plasticizer for PVC, cellulosics and synthetic rubber, in coatings and adhesives, and as a fixative/solvent in cosmetic and fragrance formulations.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear, Colourless to Pale Yellow Liquid, free from suspended matter"
+        "Target value shared on request"
       ],
       [
         "2",
         "Colour, APHA",
-        "50 Max"
+        "Target value shared on request"
       ],
       [
         "3",
         "Dibutyl Sebacate Content, %",
-        "98.0 Min"
+        "Target value shared on request"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "0.20 Max"
+        "Target value shared on request"
       ],
       [
         "5",
         "Moisture, %",
-        "0.10 Max"
+        "Target value shared on request"
       ],
       [
         "6",
         "Specific Gravity at 20°C",
-        "0.934 – 0.940"
+        "Target value shared on request"
       ],
       [
         "7",
         "Refractive Index at 20°C",
-        "1.439 – 1.443"
+        "Target value shared on request"
       ],
       [
         "8",
         "Saponification Value, mg KOH/g",
-        "345 – 360"
+        "Target value shared on request"
       ],
       [
         "9",
         "Flash Point, °C",
-        "180 Min"
+        "Target value shared on request"
       ],
       [
         "10",
         "Free n-Butanol, %",
-        "0.50 Max"
+        "Target value shared on request"
       ],
       [
         "11",
         "Free Sebacic Acid / Acidity, %",
-        "0.10 Max"
+        "Target value shared on request"
       ],
       [
         "12",
         "Volatile Matter, %",
-        "0.50 Max"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVEST™ DBS",
@@ -1909,8 +1913,8 @@ const PRODUCTS_DATABASE = [
     "id": "lithium-12-hydroxystearate",
     "number": "23",
     "name": "Lithium 12-Hydroxystearate (Lithium 12-HSA)",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "7620-77-1",
     "industries": [
       "lubricants"
@@ -1919,79 +1923,81 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "White to Off-White",
     "rawMaterial": "12-Hydroxystearic Acid (12-HSA), derived from Castor Oil",
     "image": "images/products/lithium-12-hydroxystearate.webp",
-    "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months in sealed, moisture-protected packaging.",
     "application": "Lithium 12-Hydroxystearate (NDEVSOAP™ LI12) is a pre-formed metallic soap thickener under development. Derived from 12-HSA, it enables rapid grease compounding with reduced cycle times for high-temperature multi-purpose greases, prepared at Deodar, Gujarat.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "White to Off-White Fine Powder / Flakes"
+        "Target value shared on request"
       ],
       [
         "2",
         "Lithium Content, %",
-        "2.1 – 2.5"
+        "Target value shared on request"
       ],
       [
         "3",
         "12-Hydroxystearic Acid Content, %",
-        "85.0 Min"
+        "Target value shared on request"
       ],
       [
         "4",
         "Acid Value (Finished Soap), mg KOH/g",
-        "3.0 Max"
+        "Target value shared on request"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "145 – 165"
+        "Target value shared on request"
       ],
       [
         "6",
         "Melting Point, °C",
-        "205 – 215"
+        "Target value shared on request"
       ],
       [
         "7",
         "Moisture, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "8",
         "Free Fatty Acids, %",
-        "1.5 Max"
+        "Target value shared on request"
       ],
       [
         "9",
         "Ash, %",
-        "10.0 Max"
+        "Target value shared on request"
       ],
       [
         "10",
         "Water-Soluble Matter, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "11",
         "Free Alkali, %",
-        "0.2 Max"
+        "Target value shared on request"
       ],
       [
         "12",
         "Particle Size, Passing Through 100 Mesh, %",
-        "95 Min"
+        "Target value shared on request"
       ],
       [
         "13",
         "Grease Penetration (Formulated Grease), 0.1 mm",
-        "As per Grade / Customer Requirement"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVSOAP™ LI12",
@@ -2003,8 +2009,8 @@ const PRODUCTS_DATABASE = [
     "id": "calcium-12-hydroxystearate",
     "number": "24",
     "name": "Calcium 12-Hydroxystearate (Calcium 12-HSA)",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "3159-62-4",
     "industries": [
       "lubricants",
@@ -2014,79 +2020,81 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "White to Off-White",
     "rawMaterial": "12-Hydroxystearic Acid (12-HSA), derived from Castor Oil",
     "image": "images/products/calcium-12-hydroxystearate.webp",
-    "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months in sealed, moisture-protected packaging.",
     "application": "Calcium 12-Hydroxystearate (NDEVSOAP™ CA12) is a specialty water-resistant metallic soap under technical development. Synthesized from 12-HSA, it provides exceptional water-washout resistance in marine and chassis greases and serves as a non-toxic lubricant for PVC processing, from our plant at Deodar, Gujarat.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "White to Off-White Fine Powder / Flakes"
+        "Target value shared on request"
       ],
       [
         "2",
         "Calcium Content, %",
-        "6.0 – 6.8"
+        "Target value shared on request"
       ],
       [
         "3",
         "12-Hydroxystearic Acid Content, %",
-        "85.0 Min"
+        "Target value shared on request"
       ],
       [
         "4",
         "Acid Value (Finished Soap), mg KOH/g",
-        "3.0 Max"
+        "Target value shared on request"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "145 – 165"
+        "Target value shared on request"
       ],
       [
         "6",
         "Melting Point, °C",
-        "145 – 160"
+        "Target value shared on request"
       ],
       [
         "7",
         "Moisture, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "8",
         "Free Fatty Acids, %",
-        "2.0 Max"
+        "Target value shared on request"
       ],
       [
         "9",
         "Ash, %",
-        "10.0 Max"
+        "Target value shared on request"
       ],
       [
         "10",
         "Water-Soluble Matter, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "11",
         "Free Alkali, %",
-        "0.5 Max"
+        "Target value shared on request"
       ],
       [
         "12",
         "Particle Size, Passing Through 100 Mesh, %",
-        "95 Min"
+        "Target value shared on request"
       ],
       [
         "13",
         "Grease Penetration (Formulated Grease), 0.1 mm",
-        "As per Grade / Customer Requirement"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVSOAP™ CA12",
@@ -2098,8 +2106,8 @@ const PRODUCTS_DATABASE = [
     "id": "zinc-ricinoleate",
     "number": "25",
     "name": "Zinc Ricinoleate",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "13040-19-2",
     "industries": [
       "cosmetics",
@@ -2109,74 +2117,76 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "White to Off-White",
     "rawMaterial": "Ricinoleic Acid derived from Castor Oil + Zinc Source",
     "image": "images/products/zinc-ricinoleate.webp",
-    "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months in sealed, dry packaging.",
     "application": "Zinc Ricinoleate (NDEVSOAP™ ZNR) is a odor-absorbing metallic soap under development. Derived from ricinoleic acid, it irreversibly binds volatile odor-causing sulfur and nitrogen compounds in cosmetics, home care, and industrial formulations from our plant at Deodar, Gujarat.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Fine, Free-Flowing White to Off-White Powder"
+        "Target value shared on request"
       ],
       [
         "2",
         "Zinc Content, %",
-        "9.0 – 11.0"
+        "Target value shared on request"
       ],
       [
         "3",
         "Zinc Ricinoleate Content, %",
-        "95.0 Min"
+        "Target value shared on request"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "5.0 Max"
+        "Target value shared on request"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "130 – 155"
+        "Target value shared on request"
       ],
       [
         "6",
         "Iodine Value, g I₂/100g",
-        "80 – 90"
+        "Target value shared on request"
       ],
       [
         "7",
         "Moisture, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "8",
         "Ash, %",
-        "10.0 – 12.0"
+        "Target value shared on request"
       ],
       [
         "9",
         "Free Fatty Acids, %",
-        "2.0 Max"
+        "Target value shared on request"
       ],
       [
         "10",
         "Melting Point, °C",
-        "70 – 82"
+        "Target value shared on request"
       ],
       [
         "11",
         "Heavy Metals, ppm",
-        "20 Max"
+        "Target value shared on request"
       ],
       [
         "12",
         "Particle Size, Passing Through 100 Mesh, %",
-        "95 Min"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVSOAP™ ZNR",
@@ -2188,8 +2198,8 @@ const PRODUCTS_DATABASE = [
     "id": "zinc-undecylenate",
     "number": "26",
     "name": "Zinc Undecylenate",
-    "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "557-08-4",
     "industries": [
       "cosmetics",
@@ -2199,74 +2209,76 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "White to Off-White",
     "rawMaterial": "Undecylenic Acid derived from Castor Oil + Zinc Source",
     "image": "images/products/zinc-undecylenate.webp",
-    "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months in sealed, dry packaging, protected from light.",
-    "application": "Zinc Undecylenate (NDEVSOAP™ ZNU) is a fine white antifungal and skin-protecting metallic soap under development. Derived from undecylenic acid, it is formulated into topical athlete's foot powders, anti-chafing dusting powders, and cosmetic preparations, produced from our plant at Deodar, Gujarat.",
+    "application": "Zinc Undecylenate (NDEVSOAP™ ZNU) is a fine white metallic soap under development. Derived from undecylenic acid, it is targeted for personal-care formulations and industrial uses upon commercial supply.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Fine white to almost white amorphous powder"
+        "Target value shared on request"
       ],
       [
         "2",
         "Zinc Content, %",
-        "14.5 – 15.5"
+        "Target value shared on request"
       ],
       [
         "3",
         "Assay (as Zinc Undecylenate), %",
-        "98.0 – 102.0 (dried basis)"
+        "Target value shared on request"
       ],
       [
         "4",
         "Identification (Zinc & Undecylenate)",
-        "Positive / Conforms"
+        "Target value shared on request"
       ],
       [
         "5",
         "Free Undecylenic Acid, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "6",
         "Degree of Unsaturation / Iodine Value, g I₂/100g",
-        "110 – 125"
+        "Target value shared on request"
       ],
       [
         "7",
         "Loss on Drying, %",
-        "1.5 Max"
+        "Target value shared on request"
       ],
       [
         "8",
         "Melting Range, °C",
-        "115 – 120"
+        "Target value shared on request"
       ],
       [
         "9",
         "Alkali & Alkaline Earth Metals, %",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "10",
         "Heavy Metals (as Pb), ppm",
-        "20 Max"
+        "Target value shared on request"
       ],
       [
         "11",
         "Arsenic (As), ppm",
-        "3 Max"
+        "Target value shared on request"
       ],
       [
         "12",
         "Particle Size, Passing Through 100 Mesh, %",
-        "95.0 Min"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVSOAP™ ZNU",
@@ -2278,8 +2290,8 @@ const PRODUCTS_DATABASE = [
     "id": "refined-glycerin",
     "number": "27",
     "name": "Refined Glycerin (Available to USP/IP Spec.)",
-    "category": "by-products",
-    "categoryLabel": "By-Products",
+    "category": "derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "56-81-5",
     "industries": [
       "cosmetics",
@@ -2289,84 +2301,86 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Colourless",
     "rawMaterial": "Castor Oil / Castor Oil Fat Splitting",
     "image": "images/products/refined-glycerin.webp",
-    "packing": "250 kg HM-HDPE Carboys / Drums    •    250 kg MS / HDPE Drums    •    1,000 kg IBC    •    Bulk Tanker / ISO Tank for large-volume supply    •    Or as recommended / specified by client",
+    "packing": [
+      "Packaging will be confirmed when commercial supply starts"
+    ],
     "shelfLife": "24 months in tightly closed original packaging; glycerin is hygroscopic and should be protected from moisture pick-up.",
     "application": "Used in pharmaceutical formulations, cosmetics and personal-care products, food applications, soaps, creams, lotions, specialty chemicals and industrial formulations. Available to USP/IP specification — supply is subject to batch COA testing to the current pharmacopeial monograph, including DEG/EG limit testing.",
     "headers": [
-      "SR. NO.",
+      "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION"
+      "TARGET VALUE"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear, Colourless, Syrupy Viscous Liquid, free from Foreign Matter"
+        "Target value shared on request"
       ],
       [
         "2",
         "Odour",
-        "Odourless"
+        "Target value shared on request"
       ],
       [
         "3",
         "Glycerol Content, % w/w",
-        "99.5 Min"
+        "Target value shared on request"
       ],
       [
         "4",
         "Specific Gravity at 25°C",
-        "1.249 Min"
+        "Target value shared on request"
       ],
       [
         "5",
         "Colour",
-        "Passes USP / IP Colour Test"
+        "Target value shared on request"
       ],
       [
         "6",
         "Fatty Acids & Esters",
-        "1.0 Max"
+        "Target value shared on request"
       ],
       [
         "7",
         "Chlorides, %",
-        "0.001 Max"
+        "Target value shared on request"
       ],
       [
         "8",
         "Sulphates, %",
-        "0.002 Max"
+        "Target value shared on request"
       ],
       [
         "9",
         "Chlorinated Compounds, %",
-        "0.003 Max"
+        "Target value shared on request"
       ],
       [
         "10",
         "Heavy Metals, ppm",
-        "5.0 Max"
+        "Target value shared on request"
       ],
       [
         "11",
         "Iron, ppm",
-        "4.0 Max"
+        "Target value shared on request"
       ],
       [
         "12",
         "Aldehydes, ppm",
-        "5.0 Max"
+        "Target value shared on request"
       ],
       [
         "13",
         "Sulphated Ash, %",
-        "0.01 Max"
+        "Target value shared on request"
       ],
       [
         "14",
         "Organic Volatile Impurities",
-        "Passes USP / IP Test"
+        "Target value shared on request"
       ]
     ],
     "brandName": "NDEVGLY™ REF",

@@ -41,12 +41,12 @@
 - [Sodium Sulphate Anhydrous](https://www.nagdevproducts.com/products/sodium-sulphate-anhydrous): Inorganic salt co-product (CAS 7757-82-6, under development) for detergent builders.
 - [Sebacic Acid](https://www.nagdevproducts.com/products/sebacic-acid): C10 dicarboxylic acid (CAS 111-20-6, under development) for bio-polyamides (Nylon 6.10, Nylon 10.10) and synthetic diesters.
 - [Bio-Polyurethane Polyols](https://www.nagdevproducts.com/products/bio-polyurethane-polyols): Tailored OH-value renewable polyols (CAS 68442-88-6, under development) for rigid/flexible PU foams and CASE.
-- [Dioctyl Sebacate (DOS)](https://www.nagdevproducts.com/products/dioctyl-sebacate): Low-temperature synthetic diester plasticizer (CAS 122-62-3, under development) for aerospace rubbers and PVC.
+- [Dioctyl Sebacate (DOS)](https://www.nagdevproducts.com/products/dioctyl-sebacate): Low-temperature synthetic diester plasticizer (CAS 122-62-3, under development) for synthetic rubbers and PVC.
 - [Dibutyl Sebacate (DBS)](https://www.nagdevproducts.com/products/dibutyl-sebacate): Specialty plasticizer ester (CAS 109-43-3, under development) for cellulose and flexible specialty polymers.
 - [Lithium 12-Hydroxystearate](https://www.nagdevproducts.com/products/lithium-12-hydroxystearate): Pre-reacted lithium soap powder (CAS 7620-77-1, under development) for grease compounding.
 - [Calcium 12-Hydroxystearate](https://www.nagdevproducts.com/products/calcium-12-hydroxystearate): Specialty pre-reacted soap (CAS 3159-62-4, under development) for water-resistant industrial greases.
 - [Zinc Ricinoleate](https://www.nagdevproducts.com/products/zinc-ricinoleate): Natural odor-trapping coordinated active salt (CAS 13040-19-2, under development) for deodorants.
-- [Zinc Undecylenate](https://www.nagdevproducts.com/products/zinc-undecylenate): Antifungal fatty acid zinc salt (CAS 557-08-4, under development) for footcare and topical powders.
+- [Zinc Undecylenate](https://www.nagdevproducts.com/products/zinc-undecylenate): Fatty acid zinc carboxylate (CAS 557-08-4, under development) for personal-care formulations.
 - [Methyl Ricinoleate](https://www.nagdevproducts.com/products/methyl-ricinoleate): Low-viscosity methyl ester (CAS 141-24-2, under development) for diesel lubricity and chemical synthesis.
 - [Methyl 12-Hydroxystearate](https://www.nagdevproducts.com/products/methyl-12-hydroxystearate): Hydroxy ester intermediate (CAS 141-23-1, under development) for synthetic waxes and lithium soaps.
 - [Blown Oxidized Castor Oil](https://www.nagdevproducts.com/products/blown-oxidized-castor-oil): High-viscosity polymerized fluid (CAS 68187-84-8, under development) for printing inks and hydraulic plasticizers.
