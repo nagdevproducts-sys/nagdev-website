@@ -18,7 +18,7 @@ faqs:
   - q: "Why is a low iodine value vital when evaluating castor wax?"
     a: "An iodine value below 5.0 g I2/100g proves near-total saturation of double bonds, preventing oxidative rancidity and resin yellowing."
   - q: "What test method is standard for determining HCO drop point?"
-    a: "Drop point is determined using an automated dropping point apparatus in accordance with ASTM D127, ASTM D3954, or IP 132."
+    a: "Drop point is determined using an automated dropping point apparatus in accordance with automated dropping point apparatus, ASTM D3954, or IP 132."
   - q: "How does acid value affect lubricating grease soap formation?"
     a: "Low acid value (under 3.0 to 5.0 mg KOH/g) ensures neutral triglyceride wax, enabling precise stoichiometric calculation of lithium hydroxide."
   - q: "What packaging ensures HCO flakes remain free-flowing during transport?"

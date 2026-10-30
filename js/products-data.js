@@ -483,45 +483,38 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "MONOGRAPH SPECIFICATION",
-      "TEST METHOD"
+      "MONOGRAPH SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Conforms to BP Monograph",
-        "Visual"
+        "Tested against the BP monograph edition requested by the buyer; results on COA"
       ],
       [
         "2",
         "Identification",
-        "Conforms to BP Monograph",
-        "BP Compendial Method"
+        "Tested against the BP monograph edition requested by the buyer; results on COA"
       ],
       [
         "3",
         "Relative Density",
-        "Conforms to BP Monograph",
-        "BP Appendix"
+        "Tested against the BP monograph edition requested by the buyer; results on COA"
       ],
       [
         "4",
         "Refractive Index",
-        "Conforms to BP Monograph",
-        "BP Appendix"
+        "Tested against the BP monograph edition requested by the buyer; results on COA"
       ],
       [
         "5",
         "Optical Rotation",
-        "Conforms to BP Monograph",
-        "BP Appendix"
+        "Tested against the BP monograph edition requested by the buyer; results on COA"
       ],
       [
         "6",
         "Acid Value",
-        "Conforms to BP Monograph",
-        "BP Compendial Titration"
+        "Tested against the BP monograph edition requested by the buyer; results on COA"
       ]
     ],
     "productGroup": "specialty",
@@ -551,51 +544,43 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATIONS",
-      "TEST METHOD"
+      "SPECIFICATIONS"
     ],
     "specs": [
       [
         "1",
-        "Residual Oil Content",
-        "8.0% to 10.0% (typical)",
-        "IS 3448"
+        "Residual Oil",
+        "8.0% to 10.0% (typical)"
       ],
       [
         "2",
         "Bulk Density",
-        "0.55 to 0.65 g/cc",
-        "IS 3448"
+        "0.55 to 0.65 g/cc"
       ],
       [
         "3",
         "Gross Calorific Value",
-        "4200 – 4400 Kcal/kg",
-        "Bomb Calorimeter"
+        "4200 – 4400 Kcal/kg"
       ],
       [
         "4",
         "Nitrogen (N)",
-        "4.0% to 4.5% (typical)",
-        "Kjeldahl Method"
+        "4.0% to 4.5% (typical)"
       ],
       [
         "5",
         "Phosphorous (P₂O₅)",
-        "1.0% to 1.5% (typical)",
-        "IS 3448"
+        "1.0% to 1.5% (typical)"
       ],
       [
         "6",
         "Potash (K₂O)",
-        "1.0% to 1.5% (typical)",
-        "Flame Photometer"
+        "1.0% to 1.5% (typical)"
       ],
       [
         "7",
         "Moisture and Volatile Matter",
-        "8.0% to 10.0% Max",
-        "Oven Drying Method"
+        "8.0% to 10.0% Max"
       ]
     ],
     "isSpecialtyRange": false,
@@ -749,7 +734,7 @@ const PRODUCTS_DATABASE = [
     "name": "Hydrogenated Castor Oil (H.C.O) Flakes / Powder",
     "brandName": "NDEVWAX™ HCO",
     "category": "derivatives",
-    "categoryLabel": "Derivatives",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "8001-78-3",
     "industries": [
       "lubricants",
@@ -765,7 +750,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/hydrogenated-castor-oil-flakes.webp",
     "packing": "25 kg Multiwall Paper Bags with inner poly liner • 500 kg / 1000 kg Jumbo Bags • Palletized and shrink-wrapped",
     "shelfLife": "24 months from date of manufacture, stored dry at ambient temperature",
-    "application": "Manufactured by high-pressure catalytic hydrogenation of refined castor oil. Functions as an efficient rheology modifier, thixotropic agent in epoxy/polyurethane coatings, internal lubricant in PVC, cosmetics stick binder, and raw material for 12-HSA synthesis.",
+    "application": "Hydrogenated Castor Oil (NDEVWAX™ HCO) is a hard, high-melting white vegetable wax in regular commercial supply. It is used as a thickener in lithium greases, a rheology modifier in coatings, and a lubricant in PVC extrusion, supplied from our plant at Deodar, Gujarat, with a COA per lot.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -781,39 +766,51 @@ const PRODUCTS_DATABASE = [
       ],
       [
         "2",
+        "Melting Point, °C",
+        "84.0 – 88.0°C",
+        "85.0 – 88.0°C"
+      ],
+      [
+        "3",
         "Iodine Value, g I₂/100g",
         "3.0 Max",
         "3.0 Max"
       ],
       [
-        "3",
+        "4",
         "Saponification Value, mg KOH/g",
-        "175 – 185",
-        "178 Min"
+        "176 – 185",
+        "176 – 185"
       ],
       [
-        "4",
+        "5",
         "Acid Value, mg KOH/g",
         "3.0 Max",
         "3.0 Max"
       ],
       [
-        "5",
-        "Hydroxyl Value, mg KOH/g",
-        "155 Min",
-        "155 Min"
-      ],
-      [
         "6",
-        "Melting Point, °C",
-        "84 – 88°C",
-        "85.0°C Min"
+        "Hydroxyl Value, mg KOH/g",
+        "155 – 165",
+        "155 – 165"
       ],
       [
         "7",
         "Colour Gardner",
-        "3 Max",
-        "3 Max"
+        "3.0 Max",
+        "3.0 Max"
+      ],
+      [
+        "8",
+        "Moisture & Volatile Matter, %",
+        "0.10 Max",
+        "0.10 Max"
+      ],
+      [
+        "9",
+        "Residual Nickel, ppm",
+        "10 Max",
+        "10 Max"
       ]
     ],
     "isSpecialtyRange": false,
@@ -1083,7 +1080,7 @@ const PRODUCTS_DATABASE = [
     "number": "14",
     "name": "Dehydrated Castor Oil (DCO)",
     "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "64147-40-6",
     "industries": [
       "coatings",
@@ -1095,85 +1092,72 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/dehydrated-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank    •    200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in Vessel for large-volume shipments (20-22 MT)    •    Or as recommended / specified by client",
     "shelfLife": "18-24 months",
-    "application": "Used as a semi-drying/drying oil in paints, varnishes, alkyd resins, printing inks, primers, caulks, sealants and protective coatings. Its increased unsaturation (largely conjugated diene) enables oxidative drying and film formation.",
+    "application": "Dehydrated Castor Oil (NDEVOLEO™ DCO) is a pale, transparent drying oil featuring conjugated double bonds in regular commercial supply. It is used as a binder in architectural enamels, quick-set printing inks, and clear varnishes, supplied from our plant at Deodar, Gujarat, with a COA per lot.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear to Slightly Hazy Viscous Liquid",
-        "Visual"
+        "Clear to Slightly Hazy Viscous Liquid"
       ],
       [
         "2",
         "Colour, Gardner",
-        "6.0 Max",
-        "ASTM D1544"
+        "6.0 Max"
       ],
       [
         "3",
         "Acid Value, mg KOH/g",
-        "5.0 Max",
-        "AOCS Cd 3d-63"
+        "5.0 Max"
       ],
       [
         "4",
         "Iodine Value, g I₂/100g",
-        "125 – 140",
-        "AOCS Cd 1d-92"
+        "125 – 140"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "25 Max",
-        "AOCS Cd 13-60"
+        "25 Max"
       ],
       [
         "6",
         "Saponification Value, mg KOH/g",
-        "185 – 195",
-        "AOCS Cd 3-25"
+        "185 – 195"
       ],
       [
         "7",
         "Specific Gravity at 30°C",
-        "0.930 – 0.940",
-        "ASTM D4052"
+        "0.930 – 0.940"
       ],
       [
         "8",
         "Refractive Index at 40°C",
-        "1.473 – 1.478",
-        "ASTM D1218"
+        "1.473 – 1.478"
       ],
       [
         "9",
         "Viscosity at 25°C",
-        "1.5 – 2.5 Poise",
-        "ASTM D445 / Brookfield"
+        "1.5 – 2.5 Poise"
       ],
       [
         "10",
         "Moisture & Volatile Matter, %",
-        "0.50 Max",
-        "AOCS Ca 2c-25"
+        "0.50 Max"
       ],
       [
         "11",
         "Unsaponifiable Matter, %",
-        "1.0 Max",
-        "AOCS Ca 6a-40"
+        "1.0 Max"
       ],
       [
         "12",
         "Conjugated Diene Content, %",
-        "As per Grade / Customer Requirement",
-        "UV Spectrophotometric / GC"
+        "26% Min (Typically 26% – 32% or per customer specification)"
       ]
     ],
     "brandName": "NDEVOLEO™ DCO",
@@ -1186,7 +1170,7 @@ const PRODUCTS_DATABASE = [
     "number": "15",
     "name": "Dehydrated Castor Oil Fatty Acid (DCO-FA)",
     "category": "specialty-range",
-    "categoryLabel": "Under development",
+    "categoryLabel": "Castor Oil Derivatives",
     "casNumber": "61789-45-5",
     "industries": [
       "coatings",
@@ -1198,91 +1182,77 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/dco-fatty-acid.webp",
     "packing": "Bulk in Tanker    •    Bulk in ISO Tank    •    Flexi Tank    •    190 kg Net Stainless Steel / MS Drums    •    200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Or as recommended / specified by client",
     "shelfLife": "12-18 months",
-    "application": "Used primarily in the manufacture of fast-drying alkyd resins, paints, surface coatings, printing inks, primers, varnishes and polyamide resins. Typical (informational) fatty-acid composition: saturated acids ≤4.5%, unsaturated acids ≥90%, of which conjugated (diene) fatty acids typically ≥60% by UV/GC — reported for information, not as a numeric release specification.",
+    "application": "DCO Fatty Acid (NDEVACID™ DCO-FA) is a distilled conjugated diene liquid fatty acid in regular commercial supply. It is used where low yellowing in baking finishes is required, including high-solids stoving enamels and epoxy ester resins, supplied from our plant at Deodar, Gujarat, with a COA per lot.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Water White to Pale Yellow Liquid, free from suspended matter",
-        "Visual"
+        "Water White to Pale Yellow Liquid, free from suspended matter"
       ],
       [
         "2",
         "Colour, Gardner",
-        "2.0 Max",
-        "AOCS Td 1a-64"
+        "2.0 Max"
       ],
       [
         "3",
         "Acid Value, mg KOH/g",
-        "195 – 205",
-        "AOCS Cd 3d-63"
+        "195 – 205"
       ],
       [
         "4",
         "Specific Gravity at 20°C",
-        "0.903 – 0.905",
-        "ASTM D4052"
+        "0.903 – 0.905"
       ],
       [
         "5",
         "Iodine Value, g I₂/100g",
-        "130 Min",
-        "AOCS Cd 1d-92"
+        "130 Min"
       ],
       [
         "6",
         "Hydroxyl Value, mg KOH/g",
-        "8 Max",
-        "AOCS Cd 13-60"
+        "8 Max"
       ],
       [
         "7",
         "Saponification Value, mg KOH/g",
-        "198 – 208",
-        "AOCS Cd 3-25"
+        "198 – 208"
       ],
       [
         "8",
         "Refractive Index at 25°C",
-        "1.473 – 1.477",
-        "ASTM D1218"
+        "1.473 – 1.477"
       ],
       [
         "9",
         "Moisture Content, %",
-        "0.20 Max",
-        "AOCS Ca 2c-25"
+        "0.20 Max"
       ],
       [
         "10",
         "Saturated Fatty Acids, %",
-        "4.5 Max",
-        "GC / GLC"
+        "4.5 Max"
       ],
       [
         "11",
         "Unsaturated Fatty Acids, %",
-        "90 Min",
-        "GC / GLC"
+        "90 Min"
       ],
       [
         "12",
         "Conjugated Fatty Acids, %",
-        "60 Min",
-        "UV Spectrophotometric / GC"
+        "60 Min"
       ],
       [
         "13",
         "Free Fatty Acid, %",
-        "98 Min",
-        "AOCS Ca 5a-40"
+        "98 Min"
       ]
     ],
     "brandName": "NDEVACID™ DCO-FA",
@@ -1307,85 +1277,72 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/blown-oxidized-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank    •    200 / 225 kg MS Drums / HDPE Drums    •    950 / 1,000 kg IBC    •    Bulk in Vessel for large-volume shipments    •    Or as recommended / specified by client",
     "shelfLife": "18-24 months",
-    "application": "Used in paints, varnishes, coatings, printing inks, lubricants, adhesives, sealants and specialty chemical formulations where increased viscosity ('body'), tack and film-forming properties are required. Grade is selected by target viscosity.",
+    "application": "Blown (Oxidized) Castor Oil (NDEVOX™ BLO) is an oxypolymerized high-viscosity bio-polymer under development. Produced by controlled aeration of refined castor oil, it provides excellent pigment wetting, non-migrating plasticization, and tack control for printing inks, lacquers, and industrial lubricants from our Deodar plant, Banaskantha district, Gujarat.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear to Slightly Hazy, Viscous Liquid, free from visible foreign matter",
-        "Visual"
+        "Clear to Slightly Hazy, Viscous Liquid, free from visible foreign matter"
       ],
       [
         "2",
         "Colour, Gardner",
-        "8.0 Max",
-        "ASTM D1544"
+        "8.0 Max"
       ],
       [
         "3",
         "Acid Value, mg KOH/g",
-        "5.0 Max",
-        "AOCS Cd 3d-63"
+        "5.0 – 20.0 (Grade Dependent)"
       ],
       [
         "4",
         "Iodine Value, g I₂/100g",
-        "65 – 80",
-        "AOCS Cd 1d-92"
+        "65 – 80"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "130 – 155",
-        "AOCS Cd 13-60"
+        "130 – 155"
       ],
       [
         "6",
         "Saponification Value, mg KOH/g",
-        "175 – 190",
-        "AOCS Cd 3-25"
+        "180 – 215"
       ],
       [
         "7",
         "Moisture & Volatile Matter, %",
-        "0.50 Max",
-        "AOCS Ca 2c-25"
+        "0.50 Max"
       ],
       [
         "8",
         "Specific Gravity at 30°C",
-        "0.950 – 0.970",
-        "ASTM D4052"
+        "0.965 – 0.995"
       ],
       [
         "9",
         "Refractive Index at 40°C",
-        "1.475 – 1.485",
-        "ASTM D1218"
+        "1.475 – 1.485"
       ],
       [
         "10",
         "Viscosity at 25°C",
-        "1,000 – 3,000 cP",
-        "ASTM D445 / Brookfield"
+        "1,000 – 20,000 cP (Custom grades: 10 – 200 Poise)"
       ],
       [
         "11",
         "Unsaponifiable Matter, %",
-        "1.0 Max",
-        "AOCS Ca 6a-40"
+        "1.0 Max"
       ],
       [
         "12",
         "Oxidation / Blowing Level",
-        "As per Grade / Customer Requirement",
-        "Standard Laboratory Method"
+        "As per Grade / Customer Requirement"
       ]
     ],
     "brandName": "NDEVOX™ BLO",
@@ -1399,7 +1356,7 @@ const PRODUCTS_DATABASE = [
     "name": "Bio-Polyurethane Polyols (Castor-Oil-Based Polyols)",
     "category": "specialty-range",
     "categoryLabel": "Under development",
-    "casNumber": "68441-60-1",
+    "casNumber": "8001-79-4 / 61789-44-4",
     "industries": [
       "polyurethane",
       "coatings"
@@ -1410,91 +1367,77 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/bio-polyurethane-polyols.webp",
     "packing": "200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in ISO Tank / Flexi Tank for large-volume supply    •    Or as recommended / specified by client",
     "shelfLife": "12-18 months",
-    "application": "Used as a renewable, bio-based polyol component in polyurethane coatings, adhesives, sealants and elastomers. A separate higher-hydroxyl-value grade should be quoted for flexible/rigid foam customers rather than using this coating-grade specification.",
+    "application": "Bio-Polyurethane Polyols (NDEVPOL™ BIO) is a renewable, castor-oil-based polyol under technical development. Designed primarily for 2K polyurethane coatings, adhesives, sealants, and elastomers (CASE), it delivers natural hydrophobicity and hydrolytic resistance from our facility at Deodar, Gujarat.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear to Slightly Hazy, Viscous Pale Yellow Liquid, free from suspended matter",
-        "Visual"
+        "Clear to Slightly Hazy, Viscous Pale Yellow Liquid, free from suspended matter"
       ],
       [
         "2",
         "Colour, Gardner",
-        "4.0 Max",
-        "ASTM D1544"
+        "4.0 Max"
       ],
       [
         "3",
         "Hydroxyl Value, mg KOH/g",
-        "160 – 180",
-        "ASTM D4274"
+        "150 – 170"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "2.0 Max",
-        "ASTM D4662"
+        "3.0 Max"
       ],
       [
         "5",
         "Moisture Content, %",
-        "0.20 Max",
-        "Karl Fischer / ASTM E203"
+        "0.10 Max"
       ],
       [
         "6",
         "Viscosity at 25°C, cP",
-        "650 – 900",
-        "ASTM D4878"
+        "650 – 900"
       ],
       [
         "7",
         "Specific Gravity at 25°C",
-        "0.950 – 0.970",
-        "ASTM D4052"
+        "0.950 – 0.970"
       ],
       [
         "8",
         "Average Hydroxyl Functionality",
-        "2.5 – 3.0",
-        "Calculated / Standard Method"
+        "2.7 – 3.0"
       ],
       [
         "9",
         "Iodine Value, g I₂/100g",
-        "80 – 90",
-        "AOCS Cd 1d-92"
+        "80 – 90"
       ],
       [
         "10",
         "Saponification Value, mg KOH/g",
-        "175 – 190",
-        "AOCS Cd 3-25"
+        "175 – 190"
       ],
       [
         "11",
         "Unsaponifiable Matter, %",
-        "1.0 Max",
-        "AOCS Ca 6a-40"
+        "1.0 Max"
       ],
       [
         "12",
         "Flash Point, °C",
-        "200 Min",
-        "ASTM D92"
+        "200 Min"
       ],
       [
         "13",
-        "Hydroxyl Content / OH Number Consistency",
-        "Within agreed batch specification",
-        "ASTM D4274"
+        "Hydroxyl Content Consistency",
+        "Within agreed batch specification"
       ]
     ],
     "brandName": "NDEVPOL™ BIO",
@@ -1524,87 +1467,73 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "White to Off-White Flakes / Powder / Granules",
-        "Visual"
+        "White to Off-White Flakes / Powder / Granules"
       ],
       [
         "2",
         "Sebacic Acid Content, %",
-        "99.0 Min",
-        "GC / HPLC"
+        "99.0 Min"
       ],
       [
         "3",
         "Acid Value, mg KOH/g",
-        "545 – 570",
-        "AOCS / Standard Laboratory Method"
+        "545 – 570"
       ],
       [
         "4",
         "Melting Point, °C",
-        "131 – 134",
-        "ASTM D87"
+        "131 – 134"
       ],
       [
         "5",
         "Iodine Value, g I₂/100g",
-        "0.5 Max",
-        "AOCS Cd 1d-92"
+        "0.5 Max"
       ],
       [
         "6",
         "Moisture, %",
-        "0.30 Max",
-        "AOCS Ca 2c-25"
+        "0.30 Max"
       ],
       [
         "7",
         "Ash, %",
-        "0.10 Max",
-        "Standard Laboratory Method"
+        "0.10 Max"
       ],
       [
         "8",
         "Colour, APHA",
-        "50 Max",
-        "ASTM D1209"
+        "50 Max"
       ],
       [
         "9",
         "Adipic Acid, %",
-        "0.50 Max",
-        "GC / HPLC"
+        "0.50 Max"
       ],
       [
         "10",
         "Caprylic Acid, %",
-        "0.20 Max",
-        "GC / HPLC"
+        "0.20 Max"
       ],
       [
         "11",
         "Capric Acid, %",
-        "0.20 Max",
-        "GC / HPLC"
+        "0.20 Max"
       ],
       [
         "12",
         "Solubility in Alcohol",
-        "Clear Solution",
-        "Visual / Standard Laboratory Method"
+        "Clear Solution"
       ],
       [
         "13",
         "Particle Size",
-        "As per Grade / Customer Requirement",
-        "Sieve Test"
+        "As per Grade / Customer Requirement"
       ]
     ],
     "brandName": "NDEVACID™ SEB",
@@ -1634,87 +1563,73 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear to Slightly Hazy Liquid, free from suspended matter",
-        "Visual"
+        "Clear to Slightly Hazy Liquid, free from suspended matter"
       ],
       [
         "2",
         "Colour",
-        "Colourless to Pale Yellow",
-        "Visual"
+        "Colourless to Pale Yellow"
       ],
       [
         "3",
         "Methyl Ricinoleate Content, %",
-        "95.0 Min",
-        "GC / GC-FID"
+        "95.0 Min"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "1.0 Max",
-        "AOCS Cd 3d-63"
+        "1.0 Max"
       ],
       [
         "5",
         "Iodine Value, g I₂/100g",
-        "80 – 90",
-        "AOCS Cd 1d-92"
+        "80 – 90"
       ],
       [
         "6",
         "Saponification Value, mg KOH/g",
-        "170 – 185",
-        "AOCS Cd 3-25"
+        "170 – 185"
       ],
       [
         "7",
         "Hydroxyl Value, mg KOH/g",
-        "145 – 160",
-        "AOCS Cd 13-60"
+        "145 – 160"
       ],
       [
         "8",
         "Moisture, %",
-        "0.20 Max",
-        "AOCS Ca 2c-25"
+        "0.20 Max"
       ],
       [
         "9",
         "Unsaponifiable Matter, %",
-        "1.0 Max",
-        "AOCS Ca 6a-40"
+        "1.0 Max"
       ],
       [
         "10",
         "Specific Gravity at 25°C",
-        "0.920 – 0.940",
-        "ASTM D4052"
+        "0.920 – 0.940"
       ],
       [
         "11",
         "Refractive Index at 40°C",
-        "1.460 – 1.470",
-        "ASTM D1218"
+        "1.460 – 1.470"
       ],
       [
         "12",
         "Free Fatty Acids, %",
-        "1.0 Max",
-        "AOCS Ca 5a-40"
+        "1.0 Max"
       ],
       [
         "13",
         "Methanol, %",
-        "0.10 Max",
-        "GC"
+        "0.10 Max"
       ]
     ],
     "brandName": "NDEVEST™ MR",
@@ -1743,87 +1658,73 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "White to Off-White Flakes / Powder",
-        "Visual"
+        "White to Off-White Flakes / Powder"
       ],
       [
         "2",
         "Clarity on Melting",
-        "Clear, free from suspended matter",
-        "Visual"
+        "Clear, free from suspended matter"
       ],
       [
         "3",
         "Colour, Gardner",
-        "5.0 Max",
-        "AOCS Td 1a-64"
+        "5.0 Max"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "2.0 Max",
-        "AOCS Cd 3d-63"
+        "2.0 Max"
       ],
       [
         "5",
         "Melting Point, °C",
-        "75 – 82",
-        "AOCS Cc 1-25"
+        "75 – 82"
       ],
       [
         "6",
         "Iodine Value, g I₂/100g",
-        "5.0 Max",
-        "AOCS Cd 1d-92"
+        "5.0 Max"
       ],
       [
         "7",
         "Saponification Value, mg KOH/g",
-        "175 – 185",
-        "AOCS Cd 3-25"
+        "175 – 185"
       ],
       [
         "8",
         "Hydroxyl Value, mg KOH/g",
-        "145 – 160",
-        "AOCS Cd 13-60"
+        "145 – 160"
       ],
       [
         "9",
         "Moisture, %",
-        "0.50 Max",
-        "AOCS Ca 2c-25"
+        "0.50 Max"
       ],
       [
         "10",
         "Unsaponifiable Matter, %",
-        "1.0 Max",
-        "AOCS Ca 6a-40"
+        "1.0 Max"
       ],
       [
         "11",
         "Methyl 12-Hydroxystearate Content, %",
-        "95.0 Min",
-        "GC / GC-FID"
+        "95.0 Min"
       ],
       [
         "12",
         "Free Fatty Acids, %",
-        "1.0 Max",
-        "AOCS Ca 5a-40"
+        "1.0 Max"
       ],
       [
         "13",
         "Particle Size, Passing Through 1 mm Sieve, %",
-        "98 Min",
-        "Sieve Test"
+        "98 Min"
       ]
     ],
     "brandName": "NDEVEST™ M12H",
@@ -1852,81 +1753,68 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear, Colourless to Pale Yellow Liquid, free from suspended matter",
-        "Visual"
+        "Clear, Colourless to Pale Yellow Liquid, free from suspended matter"
       ],
       [
         "2",
         "Colour, APHA",
-        "50 Max",
-        "ASTM D1209"
+        "50 Max"
       ],
       [
         "3",
         "Ester Content, %",
-        "99.0 Min",
-        "GC / Standard Laboratory Method"
+        "99.0 Min"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "0.15 Max",
-        "AOCS Cd 3d-63"
+        "0.15 Max"
       ],
       [
         "5",
         "Water Content, %",
-        "0.10 Max",
-        "Karl Fischer / ASTM E203"
+        "0.10 Max"
       ],
       [
         "6",
         "Specific Gravity at 25°C",
-        "0.910 – 0.916",
-        "ASTM D4052"
+        "0.910 – 0.916"
       ],
       [
         "7",
         "Refractive Index at 20°C",
-        "1.448 – 1.452",
-        "ASTM D1218"
+        "1.448 – 1.452"
       ],
       [
         "8",
         "Moisture & Volatile Matter, %",
-        "0.30 Max",
-        "Standard Laboratory Method"
+        "0.30 Max"
       ],
       [
         "9",
         "Flash Point, °C",
-        "210 Min",
-        "ASTM D92"
+        "210 Min"
       ],
       [
         "10",
         "Purity by GC, %",
-        "99.0 Min",
-        "GC-FID"
+        "99.0 Min"
       ],
       [
         "11",
         "Free 2-Ethylhexanol, %",
-        "0.50 Max",
-        "GC"
+        "0.50 Max"
       ],
       [
         "12",
         "Residual Acidity, %",
-        "0.02 Max",
-        "Standard Laboratory Method"
+        "0.02 Max"
       ]
     ],
     "brandName": "NDEVEST™ DOS",
@@ -1955,81 +1843,68 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear, Colourless to Pale Yellow Liquid, free from suspended matter",
-        "Visual"
+        "Clear, Colourless to Pale Yellow Liquid, free from suspended matter"
       ],
       [
         "2",
         "Colour, APHA",
-        "50 Max",
-        "ASTM D1209"
+        "50 Max"
       ],
       [
         "3",
         "Dibutyl Sebacate Content, %",
-        "98.0 Min",
-        "GC / GC-FID"
+        "98.0 Min"
       ],
       [
         "4",
         "Acid Value, mg KOH/g",
-        "0.20 Max",
-        "AOCS Cd 3d-63"
+        "0.20 Max"
       ],
       [
         "5",
         "Moisture, %",
-        "0.10 Max",
-        "Karl Fischer / ASTM E203"
+        "0.10 Max"
       ],
       [
         "6",
         "Specific Gravity at 20°C",
-        "0.934 – 0.940",
-        "ASTM D4052"
+        "0.934 – 0.940"
       ],
       [
         "7",
         "Refractive Index at 20°C",
-        "1.439 – 1.443",
-        "ASTM D1218"
+        "1.439 – 1.443"
       ],
       [
         "8",
         "Saponification Value, mg KOH/g",
-        "345 – 360",
-        "AOCS Cd 3-25"
+        "345 – 360"
       ],
       [
         "9",
         "Flash Point, °C",
-        "180 Min",
-        "ASTM D92"
+        "180 Min"
       ],
       [
         "10",
         "Free n-Butanol, %",
-        "0.50 Max",
-        "GC"
+        "0.50 Max"
       ],
       [
         "11",
         "Free Sebacic Acid / Acidity, %",
-        "0.10 Max",
-        "Standard Laboratory Method"
+        "0.10 Max"
       ],
       [
         "12",
         "Volatile Matter, %",
-        "0.50 Max",
-        "Standard Laboratory Method"
+        "0.50 Max"
       ]
     ],
     "brandName": "NDEVEST™ DBS",
@@ -2053,91 +1928,77 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/lithium-12-hydroxystearate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, moisture-protected packaging.",
-    "application": "Lithium 12-Hydroxystearate is primarily used as a thickener / lubricating soap for lithium-based greases. It provides good mechanical stability, water resistance and high-temperature performance and is used in automotive, industrial, bearing and general-purpose lubricating grease formulations.",
+    "application": "Lithium 12-Hydroxystearate (NDEVSOAP™ LI12) is a pre-formed metallic soap thickener under development. Derived from high-purity 12-HSA, it enables rapid grease compounding with reduced cycle times for high-temperature multi-purpose greases, prepared at Deodar, Gujarat.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "White to Off-White Fine Powder / Flakes",
-        "Visual"
+        "White to Off-White Fine Powder / Flakes"
       ],
       [
         "2",
         "Lithium Content, %",
-        "2.0 – 3.0",
-        "ICP-OES / AAS"
+        "2.1 – 2.5"
       ],
       [
         "3",
         "12-Hydroxystearic Acid Content, %",
-        "85.0 Min",
-        "GC / GLC"
+        "85.0 Min"
       ],
       [
         "4",
-        "Precursor Fatty Acid Value, mg KOH/g",
-        "175 – 190",
-        "AOCS Cd 3d-63"
+        "Acid Value (Finished Soap), mg KOH/g",
+        "3.0 Max"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "145 – 165",
-        "AOCS Cd 13-60"
+        "145 – 165"
       ],
       [
         "6",
         "Melting Point, °C",
-        "210 Min (Decomposition)",
-        "Standard Laboratory Method"
+        "205 – 215"
       ],
       [
         "7",
         "Moisture, %",
-        "1.0 Max",
-        "ASTM E203"
+        "1.0 Max"
       ],
       [
         "8",
         "Free Fatty Acids, %",
-        "2.0 Max",
-        "AOCS Ca 5a-40"
+        "1.5 Max"
       ],
       [
         "9",
         "Ash, %",
-        "10.0 Max",
-        "ASTM D482"
+        "10.0 Max"
       ],
       [
         "10",
-        "Water-Insoluble Matter, %",
-        "1.0 Max",
-        "Standard Laboratory Method"
+        "Water-Soluble Matter, %",
+        "1.0 Max"
       ],
       [
         "11",
         "Free Alkali, %",
-        "0.5 Max",
-        "Standard Laboratory Method"
+        "0.2 Max"
       ],
       [
         "12",
         "Particle Size, Passing Through 100 Mesh, %",
-        "95 Min",
-        "Sieve Test"
+        "95 Min"
       ],
       [
         "13",
-        "Penetration of Grease Prepared from Product, 0.1 mm",
-        "As per Grade / Customer Requirement",
-        "ASTM D217"
+        "Grease Penetration (Formulated Grease), 0.1 mm",
+        "As per Grade / Customer Requirement"
       ]
     ],
     "brandName": "NDEVSOAP™ LI12",
@@ -2162,91 +2023,77 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/calcium-12-hydroxystearate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, moisture-protected packaging.",
-    "application": "Primarily used as a calcium soap thickener for lubricating greases, including automotive and industrial grease formulations, and as a lubricant/stabilizer component in some PVC processing systems. Provides water resistance and good lubricating properties.",
+    "application": "Calcium 12-Hydroxystearate (NDEVSOAP™ CA12) is a specialty water-resistant metallic soap under technical development. Synthesized from 12-HSA, it provides exceptional water-washout resistance in marine and chassis greases and serves as a non-toxic lubricant for PVC processing, from our plant at Deodar, Gujarat.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "White to Off-White Fine Powder / Flakes",
-        "Visual"
+        "White to Off-White Fine Powder / Flakes"
       ],
       [
         "2",
         "Calcium Content, %",
-        "5.5 – 6.5",
-        "ICP-OES / AAS"
+        "6.0 – 6.8"
       ],
       [
         "3",
         "12-Hydroxystearic Acid Content, %",
-        "85.0 Min",
-        "GC / GLC"
+        "85.0 Min"
       ],
       [
         "4",
-        "Precursor Fatty Acid Value, mg KOH/g",
-        "175 – 190",
-        "AOCS Cd 3d-63"
+        "Acid Value (Finished Soap), mg KOH/g",
+        "3.0 Max"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "145 – 165",
-        "AOCS Cd 13-60"
+        "145 – 165"
       ],
       [
         "6",
         "Melting Point, °C",
-        "150 Min",
-        "Standard Laboratory Method"
+        "145 – 160"
       ],
       [
         "7",
         "Moisture, %",
-        "1.0 Max",
-        "ASTM E203"
+        "1.0 Max"
       ],
       [
         "8",
         "Free Fatty Acids, %",
-        "2.0 Max",
-        "AOCS Ca 5a-40"
+        "2.0 Max"
       ],
       [
         "9",
         "Ash, %",
-        "10.0 Max",
-        "ASTM D482"
+        "10.0 Max"
       ],
       [
         "10",
-        "Water-Insoluble Matter, %",
-        "1.0 Max",
-        "Standard Laboratory Method"
+        "Water-Soluble Matter, %",
+        "1.0 Max"
       ],
       [
         "11",
         "Free Alkali, %",
-        "0.5 Max",
-        "Standard Laboratory Method"
+        "0.5 Max"
       ],
       [
         "12",
         "Particle Size, Passing Through 100 Mesh, %",
-        "95 Min",
-        "Sieve Test"
+        "95 Min"
       ],
       [
         "13",
-        "Grease Penetration, 0.1 mm",
-        "As per Grade / Customer Requirement",
-        "ASTM D217"
+        "Grease Penetration (Formulated Grease), 0.1 mm",
+        "As per Grade / Customer Requirement"
       ]
     ],
     "brandName": "NDEVSOAP™ CA12",
@@ -2271,85 +2118,72 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/zinc-ricinoleate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, dry packaging.",
-    "application": "Primarily used as an odour-absorbing active in deodorants, antiperspirants, cosmetics, personal-care products and odour-control formulations. Valued for its ability to bind and neutralize unpleasant odour molecules.",
+    "application": "Zinc Ricinoleate (NDEVSOAP™ ZNR) is a high-performance odor-absorbing metallic soap under development. Derived from high-purity ricinoleic acid, it irreversibly binds volatile odor-causing sulfur and nitrogen compounds in cosmetics, home care, and industrial formulations from our plant at Deodar, Gujarat.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Fine, Free-Flowing White to Off-White Powder",
-        "Visual"
+        "Fine, Free-Flowing White to Off-White Powder"
       ],
       [
         "2",
         "Zinc Content, %",
-        "9.0 – 11.0",
-        "ICP-OES / AAS"
+        "9.0 – 11.0"
       ],
       [
         "3",
         "Zinc Ricinoleate Content, %",
-        "95.0 Min",
-        "HPLC / GC / Standard Laboratory Method"
+        "95.0 Min"
       ],
       [
         "4",
-        "Precursor Fatty Acid Value, mg KOH/g",
-        "175 – 190",
-        "AOCS Cd 3d-63"
+        "Acid Value, mg KOH/g",
+        "5.0 Max"
       ],
       [
         "5",
         "Hydroxyl Value, mg KOH/g",
-        "130 – 155",
-        "AOCS Cd 13-60"
+        "130 – 155"
       ],
       [
         "6",
         "Iodine Value, g I₂/100g",
-        "80 – 90",
-        "AOCS Cd 1d-92"
+        "80 – 90"
       ],
       [
         "7",
         "Moisture, %",
-        "1.0 Max",
-        "ASTM E203"
+        "1.0 Max"
       ],
       [
         "8",
         "Ash, %",
-        "10.0 – 12.0",
-        "ASTM D482"
+        "10.0 – 12.0"
       ],
       [
         "9",
         "Free Fatty Acids, %",
-        "2.0 Max",
-        "AOCS Ca 5a-40"
+        "2.0 Max"
       ],
       [
         "10",
-        "Melting / Softening Point, °C",
-        "80 – 90",
-        "Standard Laboratory Method"
+        "Melting Point, °C",
+        "70 – 82"
       ],
       [
         "11",
         "Heavy Metals, ppm",
-        "20 Max",
-        "ICP-OES / AAS"
+        "20 Max"
       ],
       [
         "12",
         "Particle Size, Passing Through 100 Mesh, %",
-        "95 Min",
-        "Sieve Test"
+        "95 Min"
       ]
     ],
     "brandName": "NDEVSOAP™ ZNR",
@@ -2374,85 +2208,72 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/zinc-undecylenate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, dry packaging, protected from light.",
-    "application": "Used in topical antifungal and pharmaceutical formulations (subject to applicable pharmacopeial/regulatory drug-product requirements), and as a cosmetic-grade ingredient in foot-care and personal-care products where those regulatory requirements do not apply.",
+    "application": "Zinc Undecylenate (NDEVSOAP™ ZNU) is a fine white antifungal and skin-protecting metallic soap under development. Derived from high-purity undecylenic acid, it is formulated into topical athlete's foot powders, anti-chafing dusting powders, and cosmetic preparations, produced from our plant at Deodar, Gujarat.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "White to Off-White Fine Powder, free from visible foreign matter",
-        "Visual"
+        "Fine white to almost white amorphous powder"
       ],
       [
         "2",
         "Zinc Content, %",
-        "13.0 – 15.0",
-        "ICP-OES / AAS"
+        "14.5 – 15.5"
       ],
       [
         "3",
-        "Zinc Undecylenate Content, %",
-        "95.0 Min",
-        "GC / Standard Laboratory Method"
+        "Assay (as Zinc Undecylenate), %",
+        "98.0 – 102.0 (dried basis)"
       ],
       [
         "4",
-        "Undecylenic Acid Content, %",
-        "90.0 Min",
-        "GC / GC-FID"
+        "Identification (Zinc & Undecylenate)",
+        "Positive / Conforms"
       ],
       [
         "5",
-        "Precursor Fatty Acid Value, mg KOH/g",
-        "170 – 185",
-        "AOCS Cd 3d-63"
+        "Free Undecylenic Acid, %",
+        "1.0 Max"
       ],
       [
         "6",
-        "Iodine Value, g I₂/100g",
-        "80 – 95",
-        "AOCS Cd 1d-92"
+        "Degree of Unsaturation / Iodine Value, g I₂/100g",
+        "110 – 125"
       ],
       [
         "7",
-        "Moisture, %",
-        "1.0 Max",
-        "ASTM E203"
+        "Loss on Drying, %",
+        "1.5 Max"
       ],
       [
         "8",
-        "Ash, %",
-        "14.0 – 17.0",
-        "ASTM D482"
+        "Melting Range, °C",
+        "115 – 120"
       ],
       [
         "9",
-        "Free Fatty Acids, %",
-        "2.0 Max",
-        "AOCS Ca 5a-40"
+        "Alkali & Alkaline Earth Metals, %",
+        "1.0 Max"
       ],
       [
         "10",
-        "Melting / Decomposition Point, °C",
-        "120 Min",
-        "Standard Laboratory Method"
+        "Heavy Metals (as Pb), ppm",
+        "20 Max"
       ],
       [
         "11",
-        "Heavy Metals, ppm",
-        "20 Max",
-        "ICP-OES / AAS"
+        "Arsenic (As), ppm",
+        "3 Max"
       ],
       [
         "12",
         "Particle Size, Passing Through 100 Mesh, %",
-        "95 Min",
-        "Sieve Test"
+        "95.0 Min"
       ]
     ],
     "brandName": "NDEVSOAP™ ZNU",
@@ -2481,93 +2302,78 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear, Colourless, Syrupy Viscous Liquid, free from Foreign Matter",
-        "Visual"
+        "Clear, Colourless, Syrupy Viscous Liquid, free from Foreign Matter"
       ],
       [
         "2",
         "Odour",
-        "Odourless",
-        "Organoleptic"
+        "Odourless"
       ],
       [
         "3",
         "Glycerol Content, % w/w",
-        "99.5 Min",
-        "USP / IP"
+        "99.5 Min"
       ],
       [
         "4",
         "Specific Gravity at 25°C",
-        "1.249 Min",
-        "USP / IP"
+        "1.249 Min"
       ],
       [
         "5",
         "Colour",
-        "Passes USP / IP Colour Test",
-        "USP / IP"
+        "Passes USP / IP Colour Test"
       ],
       [
         "6",
         "Fatty Acids & Esters",
-        "1.0 Max",
-        "USP / IP"
+        "1.0 Max"
       ],
       [
         "7",
         "Chlorides, %",
-        "0.001 Max",
-        "USP / IP"
+        "0.001 Max"
       ],
       [
         "8",
         "Sulphates, %",
-        "0.002 Max",
-        "USP / IP"
+        "0.002 Max"
       ],
       [
         "9",
         "Chlorinated Compounds, %",
-        "0.003 Max",
-        "USP / IP"
+        "0.003 Max"
       ],
       [
         "10",
         "Heavy Metals, ppm",
-        "5.0 Max",
-        "USP / IP"
+        "5.0 Max"
       ],
       [
         "11",
         "Iron, ppm",
-        "4.0 Max",
-        "USP / IP"
+        "4.0 Max"
       ],
       [
         "12",
         "Aldehydes, ppm",
-        "5.0 Max",
-        "USP / IP"
+        "5.0 Max"
       ],
       [
         "13",
         "Sulphated Ash, %",
-        "0.01 Max",
-        "USP / IP"
+        "0.01 Max"
       ],
       [
         "14",
         "Organic Volatile Impurities",
-        "Passes USP / IP Test",
-        "USP / IP"
+        "Passes USP / IP Test"
       ]
     ],
     "brandName": "NDEVGLY™ REF",
@@ -2599,45 +2405,38 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "MONOGRAPH SPECIFICATION",
-      "TEST METHOD"
+      "MONOGRAPH SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Conforms to USP–NF Monograph",
-        "Visual"
+        "Tested against the USP–NF monograph edition requested by the buyer; results on COA"
       ],
       [
         "2",
         "Identification",
-        "Conforms to USP–NF Monograph",
-        "USP <197>"
+        "Tested against the USP–NF monograph edition requested by the buyer; results on COA"
       ],
       [
         "3",
         "Specific Gravity",
-        "Conforms to USP–NF Monograph",
-        "USP <841>"
+        "Tested against the USP–NF monograph edition requested by the buyer; results on COA"
       ],
       [
         "4",
         "Refractive Index",
-        "Conforms to USP–NF Monograph",
-        "USP <831>"
+        "Tested against the USP–NF monograph edition requested by the buyer; results on COA"
       ],
       [
         "5",
         "Heavy Metals",
-        "Conforms to USP–NF Monograph",
-        "USP <231>"
+        "Tested against the USP–NF monograph edition requested by the buyer; results on COA"
       ],
       [
         "6",
         "Free Fatty Acids",
-        "Conforms to USP–NF Monograph",
-        "USP Compendial Method"
+        "Tested against the USP–NF monograph edition requested by the buyer; results on COA"
       ]
     ]
   },
@@ -2665,45 +2464,38 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "MONOGRAPH SPECIFICATION",
-      "TEST METHOD"
+      "MONOGRAPH SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Conforms to Ph. Eur. Monograph",
-        "Visual"
+        "Tested against the Ph. Eur. monograph edition requested by the buyer; results on COA"
       ],
       [
         "2",
         "Identification",
-        "Conforms to Ph. Eur. Monograph",
-        "Ph. Eur. 2.2.24"
+        "Tested against the Ph. Eur. monograph edition requested by the buyer; results on COA"
       ],
       [
         "3",
         "Relative Density",
-        "Conforms to Ph. Eur. Monograph",
-        "Ph. Eur. 2.2.5"
+        "Tested against the Ph. Eur. monograph edition requested by the buyer; results on COA"
       ],
       [
         "4",
         "Refractive Index",
-        "Conforms to Ph. Eur. Monograph",
-        "Ph. Eur. 2.2.6"
+        "Tested against the Ph. Eur. monograph edition requested by the buyer; results on COA"
       ],
       [
         "5",
         "Acid Value",
-        "Conforms to Ph. Eur. Monograph",
-        "Ph. Eur. 2.5.1"
+        "Tested against the Ph. Eur. monograph edition requested by the buyer; results on COA"
       ],
       [
         "6",
         "Peroxide Value",
-        "Conforms to Ph. Eur. Monograph",
-        "Ph. Eur. 2.5.5"
+        "Tested against the Ph. Eur. monograph edition requested by the buyer; results on COA"
       ]
     ]
   },
@@ -2731,39 +2523,33 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "MONOGRAPH SPECIFICATION",
-      "TEST METHOD"
+      "MONOGRAPH SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Conforms to IP Monograph",
-        "Visual"
+        "Tested against the IP monograph edition requested by the buyer; results on COA"
       ],
       [
         "2",
         "Identification",
-        "Conforms to IP Monograph",
-        "IP Compendial Method"
+        "Tested against the IP monograph edition requested by the buyer; results on COA"
       ],
       [
         "3",
         "Weight per ml",
-        "Conforms to IP Monograph",
-        "IP Appendix"
+        "Tested against the IP monograph edition requested by the buyer; results on COA"
       ],
       [
         "4",
         "Refractive Index",
-        "Conforms to IP Monograph",
-        "IP Appendix"
+        "Tested against the IP monograph edition requested by the buyer; results on COA"
       ],
       [
         "5",
         "Acid Value",
-        "Conforms to IP Monograph",
-        "IP Compendial Titration"
+        "Tested against the IP monograph edition requested by the buyer; results on COA"
       ]
     ]
   },
@@ -2791,39 +2577,33 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "MONOGRAPH SPECIFICATION",
-      "TEST METHOD"
+      "MONOGRAPH SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Conforms to JP Monograph",
-        "Visual"
+        "Tested against the JP monograph edition requested by the buyer; results on COA"
       ],
       [
         "2",
         "Identification",
-        "Conforms to JP Monograph",
-        "JP Compendial Method"
+        "Tested against the JP monograph edition requested by the buyer; results on COA"
       ],
       [
         "3",
         "Specific Gravity",
-        "Conforms to JP Monograph",
-        "JP Compendial Method"
+        "Tested against the JP monograph edition requested by the buyer; results on COA"
       ],
       [
         "4",
         "Refractive Index",
-        "Conforms to JP Monograph",
-        "JP Compendial Method"
+        "Tested against the JP monograph edition requested by the buyer; results on COA"
       ],
       [
         "5",
         "Acid Value",
-        "Conforms to JP Monograph",
-        "JP Compendial Titration"
+        "Tested against the JP monograph edition requested by the buyer; results on COA"
       ]
     ]
   },
@@ -2852,39 +2632,33 @@ const PRODUCTS_DATABASE = [
     "headers": [
       "SR NO",
       "TEST PARAMETER",
-      "SPECIFICATION",
-      "TEST METHOD"
+      "SPECIFICATION"
     ],
     "specs": [
       [
         "1",
         "Appearance",
-        "Clear, low-odour liquid free from sediment",
-        "Visual"
+        "Clear, low-odour liquid free from sediment"
       ],
       [
         "2",
         "Colour",
-        "Low colour agreed per order",
-        "Lovibond / AOCS"
+        "Low colour agreed per order"
       ],
       [
         "3",
         "Free Fatty Acids",
-        "Agreed per order; reported on COA",
-        "AOCS Ca 5a-40"
+        "Agreed per order; reported on COA"
       ],
       [
         "4",
         "Hydroxyl Value",
-        "Agreed per order; reported on COA",
-        "AOCS Cd 13-60"
+        "Agreed per order; reported on COA"
       ],
       [
         "5",
         "Peroxide Value",
-        "Agreed per order; reported on COA",
-        "AOCS Cd 8-53"
+        "Agreed per order; reported on COA"
       ]
     ]
   }

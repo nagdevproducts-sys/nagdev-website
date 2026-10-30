@@ -14,7 +14,7 @@ lang: en
 in_brief: "Review the analytical standards for measuring Lovibond colour in refined castor oil. Tested in our quality control laboratory in Deodar, Gujarat, this optical transmission test evaluates yellowness and redness in glass cells, ensuring pale color consistency across Pale Pressed Grade (PPG) and First Special Grade (FSG) shipments."
 faqs:
   - q: "What apparatus is used to measure Lovibond colour in castor oil?"
-    a: "Testing utilizes a standardized Lovibond Tintometer optical comparator or calibrated spectrophotometer matching ISO 15305 and AOCS Cc 13e-92."
+    a: "Testing utilizes a standardized Lovibond Tintometer optical comparator or calibrated spectrophotometer matching standard optical procedures and AOCS Cc 13e-92."
   - q: "What glass path length is specified for refined castor oil testing?"
     a: "Standard testing utilizes a 1-inch (25.4 mm) optical glass cell for refined grades, while ultra-pale grades may reference a 5.25-inch cell."
   - q: "How does the Lovibond formula (Y + 5R) calculate overall color index?"
@@ -37,7 +37,7 @@ Understanding Lovibond colour in refined castor oil enables quality control audi
 
 ## Testing Protocol: Measuring Lovibond Colour in Refined Castor Oil
 
-In our quality control laboratory in Deodar, technicians evaluate Lovibond color in strict accordance with standardized test protocols (ISO 15305, BS 684, or AOCS Cc 13e-92):
+In our quality control laboratory in Deodar, technicians evaluate Lovibond color in strict accordance with standardized test protocols (standard optical procedures, BS 684, or AOCS Cc 13e-92):
 
 1. **Sample Preparation**: The liquid castor oil sample is inspected to ensure it is completely moisture-free and clear. If any turbidity or moisture haze exists, the sample is gently warmed to 50°C and filtered through dry filter paper before testing.
 2. **Optical Cell Selection**: The clean oil is poured into a standard optical glass cell. For industrial refined grades such as First Special Grade (FSG) and Pale Pressed Grade (PPG), a 1-inch (25.4 mm) optical cell is standard. For specialty pale or cosmetic grades, larger 5.25-inch cells may be utilized for enhanced sensitivity.

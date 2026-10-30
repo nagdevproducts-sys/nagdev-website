@@ -41,8 +41,8 @@ Greases formulated with simple fatty acids such as stearic acid typically displa
 
 Furthermore, grease compounders benefit from remarkable mechanical shear stability:
 
-- **ASTM D217 Worked Penetration**: Under 100,000 double strokes in an ASTM grease worker, greases thickened with HCO-derived lithium soaps resist excessive softening, maintaining their consistency grade without channeling or leaking from bearing housings.
-- **Roll Stability**: In ASTM D1831 rolling shear tests, the grease demonstrates negligible penetration change, preventing grease slump in railway axle boxes, automotive wheel bearings, and industrial conveyor rollers.
+- **Worked Penetration**: Under 100,000 double strokes in an grease worker, greases thickened with HCO-derived lithium soaps resist excessive softening, maintaining their consistency grade without channeling or leaking from bearing housings.
+- **Roll Stability**: In standardized rolling shear tests, the grease demonstrates negligible penetration change, preventing grease slump in railway axle boxes, automotive wheel bearings, and industrial conveyor rollers.
 - **Water Resistance**: The entangled crystalline fiber network resists water washout, shielding metallic bearing surfaces from moisture contact during outdoor operations.
 
 {{mid_cta}}

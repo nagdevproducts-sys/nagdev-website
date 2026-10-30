@@ -65,7 +65,7 @@ Procurement teams reviewing lot documentation for Castor Oil JP can refer to the
 
 Key analytical parameters evaluated for Castor Oil JP include:
 
-- **Clarity and Color of Solution**: Testing ensures the oil forms a clear, unclouded liquid that conforms to defined optical transmission limits, verifying absence of suspended matter or moisture haze.
+- **Clarity and Color of Solution**: Testing ensures the oil forms a clear, unclouded liquid that meets defined optical transmission limits, verifying absence of suspended matter or moisture haze.
 - **Specific Optical Rotation**: Dextrorotatory optical activity within monograph positive limits confirms authentic botanical provenance and rules out foreign seed oil adulteration.
 - **Acid Value**: Confirms thorough alkali refining and low free acidity, ensuring chemical stability during formulation.
 - **Heavy Metals and Elemental Impurities**: Stringent testing verifies that lead, arsenic, and heavy metals remain below strict compendial thresholds.
