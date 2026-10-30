@@ -340,6 +340,20 @@ def get_banned_phrase_pattern(phrase: str) -> str:
         return r'(?<!\w)pharmacop[oe]+ia(?:\s+[\w\-]+){0,2}\s+compliant(?:s)?(?!\w)'
     elif phrase_lower in ("tinctures", "tincture"):
         return r'(?<!\w)tinctures?(?!\w)'
+    elif phrase_lower in ("food-packaging", "food packaging"):
+        return r'(?<!\w)food[\s\-]packagings?(?!\w)'
+    elif phrase_lower in ("foot balm", "foot balms"):
+        return r'(?<!\w)foot\s+balms?(?!\w)'
+    elif phrase_lower in ("transport fuel", "transport fuels"):
+        return r'(?<!\w)transport\s+fuels?(?!\w)'
+    elif phrase_lower == "antifungal":
+        return r'(?<!\w)anti[\s\-]?fungals?(?!\w)'
+    elif phrase_lower in ("animal feed", "animal feeds"):
+        return r'(?<!\w)animal\s+feeds?(?!\w)'
+    elif phrase_lower == "passes usp":
+        return r'(?<!\w)passes\s+USP(?!\w)'
+    elif phrase_lower == "passes ip":
+        return r'(?<!\w)passes\s+IP(?!\w)'
     elif phrase_lower == "complies to bp":
         return r'(?<!\w)complies\s+to\s+BP(?!\w)'
     else:
@@ -1494,7 +1508,15 @@ def lint_content(content: str, file_path_str: str, facts: dict):
         "Formulated for",
         "exceptionally",
         "rich in",
-        "tinctures"
+        "tinctures",
+        "antifungal",
+        "animal feed",
+        "foot balm",
+        "food-packaging",
+        "aerospace",
+        "transport fuel",
+        "passes USP",
+        "passes IP"
     ]
     banned_phrases = list(facts.get("banned_phrases", []))
     for bp in SECTION_D_BANNED_PHRASES:
@@ -1944,6 +1966,70 @@ def lint_content(content: str, file_path_str: str, facts: dict):
                     "severity": "FAIL",
                     "text": f"Cosmetic grade must not contain monograph or compendial claims: '{m.group(0)}' found on line {line_idx}"
                 })
+
+    # ----------------------------------------------------
+    # Phase 15e: Under-development page honesty checks
+    # ----------------------------------------------------
+    UNDER_DEV_SLUGS = {
+        "ricinoleic-acid", "12-hydroxystearic-acid", "sebacic-acid", "high-protein-castor-meal",
+        "crude-glycerin", "refined-glycerin", "bio-polyurethane-polyols", "sodium-sulphate-anhydrous",
+        "dioctyl-sebacate", "dibutyl-sebacate", "methyl-12-hydroxystearate", "methyl-ricinoleate",
+        "lithium-12-hydroxystearate", "calcium-12-hydroxystearate", "zinc-undecylenate",
+        "zinc-ricinoleate", "blown-oxidized-castor-oil"
+    }
+    is_under_dev = False
+    norm_p = norm_file_path.replace("\\", "/")
+    if ("products/" in norm_p or norm_p.startswith("products/")) and norm_p.endswith(".html"):
+        page_slug = norm_p.split("products/")[-1].replace(".html", "")
+        if page_slug in UNDER_DEV_SLUGS:
+            is_under_dev = True
+    elif norm_p in ("test.html", "under_dev_test.html") or norm_p.endswith("/test.html"):
+        # For unit test fixtures only
+        if any(slug in content.lower() for slug in UNDER_DEV_SLUGS) and "under development" in content.lower():
+            is_under_dev = True
+    if is_under_dev:
+        main_match = re.search(r'<main[^>]*>(.*?)</main>', content, re.DOTALL | re.IGNORECASE)
+        eval_content = main_match.group(1) if main_match else content
+
+        under_dev_forbidden = [
+            ("COA per lot", r"\bCOA\s+per\s+lot\b"),
+            ("Each lot is tested", r"\bEach\s+lot\s+is\s+tested\b"),
+            ("Dispatched directly", r"\bDispatched\s+directly\b"),
+            ("Request a Quote", r"\bRequest\s+a\s+Quote\b"),
+            ("Order commercial volumes", r"\bOrder\s+commercial\s+volumes\b"),
+            ("export orders", r"\bexport\s+orders?\b"),
+        ]
+        for term_name, pat in under_dev_forbidden:
+            for m in re.finditer(pat, eval_content, re.IGNORECASE):
+                offset = m.start()
+                line_num = content[:content.find(eval_content) + offset].count('\n') + 1 if main_match else content[:offset].count('\n') + 1
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_num,
+                    "rule": f"R3 Under-development forbidden active claim: '{term_name}'",
+                    "severity": "FAIL",
+                    "text": f"Under-development page contains forbidden active-product claim '{term_name}' on line {line_num}: '{m.group(0)}'"
+                })
+
+        spec_table_match = re.search(r'<table[^>]*class=["\'][^"\']*product-spec-table[^"\']*["\'][^>]*>(.*?)</table>', eval_content, re.DOTALL | re.IGNORECASE)
+        if spec_table_match:
+            table_html = spec_table_match.group(1)
+            tbody_match = re.search(r'<tbody[^>]*>(.*?)</tbody>', table_html, re.DOTALL | re.IGNORECASE)
+            tbody_html = tbody_match.group(1) if tbody_match else table_html
+            rows = re.findall(r'<tr[^>]*>(.*?)</tr>', tbody_html, re.DOTALL | re.IGNORECASE)
+            for r_idx, row in enumerate(rows, 1):
+                cols = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL | re.IGNORECASE)
+                if len(cols) >= 3:
+                    val_text = re.sub(r'<[^>]+>', ' ', cols[2]).strip()
+                    if re.search(r'\d', val_text):
+                        findings.append({
+                            "file": file_path_str,
+                            "line": 0,
+                            "rule": "R16 Numeric spec on under-development page",
+                            "severity": "FAIL",
+                            "text": f"Under-development page contains numeric spec value '{val_text}' in row {r_idx}"
+                        })
+
     findings.extend(check_r17_page_identity(content, file_path_str))
     findings.extend(check_r18_internal_links(content, file_path_str))
     findings.extend(check_r19_brand_codes(content, file_path_str))

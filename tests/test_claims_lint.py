@@ -911,5 +911,69 @@ class TestClaimsLint(unittest.TestCase):
             fails = [f for f in findings if f["rule"] == "R8: 'in commercial supply' forbidden on on-enquiry product pages"]
             self.assertTrue(len(fails) > 0, f"R8 must fail for 'in commercial supply' on on-enquiry slug {slug}")
 
+    # Phase 15e Global Banned Phrases
+    def test_phase15e_global_banned_phrases(self):
+        banned_phrases = [
+            "antifungal",
+            "animal feed",
+            "foot balm",
+            "food-packaging",
+            "aerospace",
+            "transport fuel",
+            "passes USP",
+            "passes IP"
+        ]
+        for phrase in banned_phrases:
+            html = f"<p>This formulation contains {phrase} components.</p>"
+            findings = lint_content(html, "test.html", self.facts)
+            fails = [f for f in findings if f["rule"].startswith("R1") and phrase.lower() in f["text"].lower()]
+            self.assertTrue(len(fails) > 0, f"R1 must fail for global banned phrase '{phrase}'")
+
+    # Phase 15e Under-Development Forbidden Active Claims
+    def test_phase15e_under_dev_forbidden_active_claims(self):
+        claims = [
+            ("COA per lot", "<main><p>Supplied with COA per lot for verification.</p></main>"),
+            ("Each lot is tested", "<main><p>Each lot is tested at our plant before release.</p></main>"),
+            ("Dispatched directly", "<main><p>Dispatched directly from our plant.</p></main>"),
+            ("Request a Quote", "<main><p>Click here to Request a Quote today.</p></main>"),
+            ("Order commercial volumes", "<main><p>Order commercial volumes with fast dispatch.</p></main>"),
+            ("export orders", "<main><p>Documentation for export orders includes phytosanitary certificate.</p></main>"),
+        ]
+        under_dev_slugs = ["ricinoleic-acid", "sebacic-acid", "zinc-undecylenate"]
+        for claim_name, html in claims:
+            for slug in under_dev_slugs:
+                findings = lint_content(html, f"products/{slug}.html", self.facts)
+                fails = [f for f in findings if f["rule"].startswith("R3 Under-development forbidden active claim") and claim_name.lower() in f["text"].lower()]
+                self.assertTrue(len(fails) > 0, f"Under-dev page '{slug}' must fail for active claim '{claim_name}'")
+
+    # Phase 15e Under-Development Numeric Spec in Spec Table
+    def test_phase15e_under_dev_numeric_spec_table_fails(self):
+        html = """
+        <main>
+          <table class="product-spec-table">
+            <tbody>
+              <tr><td>1</td><td>Acid Value</td><td>180 min</td></tr>
+            </tbody>
+          </table>
+        </main>
+        """
+        findings = lint_content(html, "products/ricinoleic-acid.html", self.facts)
+        fails = [f for f in findings if f["rule"] == "R16 Numeric spec on under-development page"]
+        self.assertTrue(len(fails) > 0, "Under-dev page must fail when numeric spec value is present in spec table")
+
+    def test_phase15e_under_dev_target_value_shared_on_request_passes(self):
+        html = """
+        <main>
+          <table class="product-spec-table">
+            <tbody>
+              <tr><td>1</td><td>Acid Value</td><td>Target value shared on request</td></tr>
+            </tbody>
+          </table>
+        </main>
+        """
+        findings = lint_content(html, "products/ricinoleic-acid.html", self.facts)
+        fails = [f for f in findings if f["rule"] == "R16 Numeric spec on under-development page"]
+        self.assertEqual(len(fails), 0, "Under-dev page must not fail when value is 'Target value shared on request'")
+
 if __name__ == "__main__":
     unittest.main()
