@@ -215,6 +215,19 @@ def run_health_check():
         out_data["status"] = "FAIL"
         out_data["failure_reasons"] = failures
 
+    # 4. Spec basis check
+    facts_p = Path("seo/facts-register.json")
+    if facts_p.exists():
+        try:
+            facts = json.loads(facts_p.read_text(encoding="utf-8"))
+            spec_basis = facts.get("spec_basis", "")
+            out_data["spec_basis"] = spec_basis
+            if spec_basis == "indicative trade values — no owner COA yet":
+                out_data["spec_review_needed"] = True
+                print("Notice: spec_basis indicates trade values pending owner COA.")
+        except Exception as e:
+            print(f"Error reading facts-register: {e}", file=sys.stderr)
+
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(out_data, f, indent=2)
 

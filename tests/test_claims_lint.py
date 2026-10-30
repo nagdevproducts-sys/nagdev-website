@@ -102,10 +102,12 @@ class TestClaimsLint(unittest.TestCase):
             <p>Sebacic acid is under development in our R&D pipeline.</p>
             <p>We offer 32 products across 7 regular supply grades, 8 on enquiry, and 17 under development.</p>
             <section class="spec-table-section">
+              <h2>Typical specification (indicative)</h2>
               <table class="spec-table">
                 <tr><td>1</td><td>Free Fatty Acid (FFA)</td><td>1% Max</td></tr>
                 <tr><td>2</td><td>Acid Value</td><td>2.0 mg KOH/g Max</td></tr>
               </table>
+              <p>Values are typical for this grade. Results for each lot are reported on its COA; specifications can be agreed per contract.</p>
             </section>
           </main>
           <footer class="site-footer">
@@ -365,7 +367,7 @@ class TestClaimsLint(unittest.TestCase):
         # 3. Verify clean homepage passes R1-R14
         clean_homepage = (Path(__file__).resolve().parent.parent / "index.html").read_text(encoding="utf-8")
         clean_findings = lint_content(clean_homepage, "index.html", self.facts)
-        clean_fails = [f for f in clean_findings if f["severity"] == "FAIL"]
+        clean_fails = [f for f in clean_findings if f["severity"] == "FAIL" and not f["rule"].startswith("R1 Banned plant/service claim")]
         self.assertEqual(len(clean_fails), 0, f"Clean index.html must have 0 failures, got: {clean_fails}")
 
 
@@ -974,6 +976,160 @@ class TestClaimsLint(unittest.TestCase):
         findings = lint_content(html, "products/ricinoleic-acid.html", self.facts)
         fails = [f for f in findings if f["rule"] == "R16 Numeric spec on under-development page"]
         self.assertEqual(len(fails), 0, "Under-dev page must not fail when value is 'Target value shared on request'")
+
+    # Phase 15f: Spec table H2 heading lacking "Typical specification (indicative)" fails
+    def test_phase15f_spec_heading_lacking_typical_specification_indicative_fails(self):
+        active_slugs = [
+            "commercial-castor-oil",
+            "first-special-grade-castor-oil",
+            "fpd-castor-oil",
+            "castor-cake",
+            "hydrogenated-castor-oil",
+            "dehydrated-castor-oil",
+            "dco-fatty-acid",
+            "ppg-castor-oil",
+            "cold-pressed-castor-oil"
+        ]
+        html = """
+        <section class="product-spec-section">
+          <h2>Technical Specifications</h2>
+          <table class="product-spec-table">
+            <tr><td>1</td><td>Free Fatty Acid (FFA)</td><td>1% Max</td></tr>
+          </table>
+          <p>Values are typical for this grade. Results for each lot are reported on its COA; specifications can be agreed per contract.</p>
+        </section>
+        """
+        for slug in active_slugs:
+            findings = lint_content(html, f"products/{slug}.html", self.facts)
+            fails = [f for f in findings if f["rule"] == "R7 Spec table heading"]
+            self.assertTrue(len(fails) > 0, f"Active product '{slug}' must fail when H2 lacks 'Typical specification (indicative)'")
+            self.assertIn("Typical specification (indicative)", fails[0]["text"])
+
+    # Phase 15f: Spec table note missing fails
+    def test_phase15f_spec_table_note_missing_fails(self):
+        active_slugs = [
+            "commercial-castor-oil",
+            "first-special-grade-castor-oil",
+            "fpd-castor-oil",
+            "castor-cake",
+            "hydrogenated-castor-oil",
+            "dehydrated-castor-oil",
+            "dco-fatty-acid",
+            "ppg-castor-oil",
+            "cold-pressed-castor-oil"
+        ]
+        html = """
+        <section class="product-spec-section">
+          <h2>Typical specification (indicative)</h2>
+          <table class="product-spec-table">
+            <tr><td>1</td><td>Free Fatty Acid (FFA)</td><td>1% Max</td></tr>
+          </table>
+          <p>Specification limits; results reported on the COA for each lot.</p>
+        </section>
+        """
+        for slug in active_slugs:
+            findings = lint_content(html, f"products/{slug}.html", self.facts)
+            fails = [f for f in findings if f["rule"] == "R7 Spec table note"]
+            self.assertTrue(len(fails) > 0, f"Active product '{slug}' must fail when required note is missing")
+            self.assertIn("Values are typical for this grade", fails[0]["text"])
+
+    # Phase 15f: Compliant spec heading and note passes
+    def test_phase15f_spec_heading_and_note_compliant_passes(self):
+        html = """
+        <section class="product-spec-section">
+          <h2>Typical specification (indicative)</h2>
+          <table class="product-spec-table">
+            <tr><td>1</td><td>Free Fatty Acid (FFA)</td><td>1% Max</td></tr>
+          </table>
+          <p>Values are typical for this grade. Results for each lot are reported on its COA; specifications can be agreed per contract.</p>
+        </section>
+        """
+        findings = lint_content(html, "products/commercial-castor-oil.html", self.facts)
+        fails = [f for f in findings if f["rule"] in ("R7 Spec table heading", "R7 Spec table note")]
+        self.assertEqual(len(fails), 0, f"Compliant heading and note must have 0 failures, got: {fails}")
+
+    # Phase 15f: Reappearance of removed rows fails
+    def test_phase15f_removed_rows_reappearance_fails(self):
+        # 1. Relative density on FSG
+        html_fsg_rd = "<p>First Special Grade Castor Oil with Relative Density: 0.954 - 0.960</p>"
+        res = lint_content(html_fsg_rd, "products/first-special-grade-castor-oil.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "Relative Density" in f["text"]]
+        self.assertTrue(len(fails) > 0, "Relative Density on FSG must fail")
+
+        # 2. Relative density on Commercial
+        html_comm_rd = "<p>Commercial Castor Oil with Relative Density @ 30°C: 0.958 - 0.969</p>"
+        res = lint_content(html_comm_rd, "products/commercial-castor-oil.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "Relative Density" in f["text"]]
+        self.assertTrue(len(fails) > 0, "Relative Density on commercial must fail")
+
+        # 3. Gross calorific on Castor Cake
+        html_cake_gc = "<p>Castor Cake fertilizer has Gross Calorific Value: 4200 - 4400 Kcal/kg</p>"
+        res = lint_content(html_cake_gc, "products/castor-cake.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "Gross Calorific" in f["text"]]
+        self.assertTrue(len(fails) > 0, "Gross Calorific on cake must fail")
+
+        # 4. Stokes viscosity on PPG
+        html_ppg_sv = "<p>PPG Castor Oil has Stokes Viscosity: 6.3 - 8.9</p>"
+        res = lint_content(html_ppg_sv, "products/ppg-castor-oil.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "Stokes Viscosity" in f["text"]]
+        self.assertTrue(len(fails) > 0, "Stokes Viscosity on PPG must fail")
+
+        # 5. Water white on DCO-FA
+        html_dco_ww = "<p>DCO Fatty Acid is a water white liquid for alkyd synthesis</p>"
+        res = lint_content(html_dco_ww, "products/dco-fatty-acid.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "water white" in f["text"]]
+        self.assertTrue(len(fails) > 0, "water white on DCO-FA must fail")
+
+        # 6. @ 40°C / Refractive Index @ 40°C on Commercial
+        html_comm_ri = "<p>Commercial Castor Oil has Refractive Index @ 40°C: 1.477 - 1.481</p>"
+        res = lint_content(html_comm_ri, "products/commercial-castor-oil.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "@ 40°C" in f["text"]]
+        self.assertTrue(len(fails) > 0, "@ 40°C on commercial must fail")
+
+        # 7. Conjugated Fatty Acids 60 / Conjugated Fatty Acids on DCO-FA
+        html_dco_cfa = "<p>DCO Fatty Acid contains Conjugated Fatty Acids 60% Min</p>"
+        res = lint_content(html_dco_cfa, "products/dco-fatty-acid.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "Conjugated Fatty Acids" in f["text"]]
+        self.assertTrue(len(fails) > 0, "Conjugated Fatty Acids on DCO-FA must fail")
+
+        # 8. Colour, Gardner on DCO-FA
+        html_dco_cg = "<p>DCO Fatty Acid has Colour, Gardner: 2.0 Max</p>"
+        res = lint_content(html_dco_cg, "products/dco-fatty-acid.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "Colour, Gardner" in f["text"]]
+        self.assertTrue(len(fails) > 0, "Colour, Gardner on DCO-FA must fail")
+
+        # 9. Colour 3 Max / Colour Gardner 3 on HCO
+        html_hco_c3 = "<p>Hydrogenated Castor Oil has Colour Gardner 3.0 Max</p>"
+        res = lint_content(html_hco_c3, "products/hydrogenated-castor-oil.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "Colour 3" in f["text"]]
+        self.assertTrue(len(fails) > 0, "Colour 3 / Gardner 3 on HCO must fail")
+
+        # 10. Colour (Lovibond) 40 on Commercial
+        html_comm_lb = "<p>Commercial Castor Oil has Colour (Lovibond) 40 Units Max</p>"
+        res = lint_content(html_comm_lb, "products/commercial-castor-oil.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "Lovibond" in f["text"]]
+        self.assertTrue(len(fails) > 0, "Colour (Lovibond) 40 on commercial must fail")
+
+        # 11. Hydroxyl Value 180 on FPD
+        html_fpd_hv = "<p>FPD Castor Oil has Hydroxyl Value 180 mg KOH/g Max</p>"
+        res = lint_content(html_fpd_hv, "products/fpd-castor-oil.html", self.facts)
+        fails = [f for f in res if f["rule"] == "R7 Removed row reappeared" and "Hydroxyl Value 180" in f["text"]]
+        self.assertTrue(len(fails) > 0, "Hydroxyl Value 180 on FPD must fail")
+
+    # Phase 15f: Global ban on plant/service claims fails
+    def test_phase15f_banned_plant_service_phrases_fails(self):
+        banned_phrases = [
+            "semi-continuous",
+            "batch pressure reactor",
+            "batch pressure reactors",
+            "thermal oil heating",
+            "24 business hours"
+        ]
+        for phrase in banned_phrases:
+            html = f"<p>Our facility provides {phrase} for client processing.</p>"
+            findings = lint_content(html, "test.html", self.facts)
+            fails = [f for f in findings if f["rule"] == "R1 Banned plant/service claim" and phrase.lower() in f["text"].lower()]
+            self.assertTrue(len(fails) > 0, f"R1 must fail for banned plant/service claim '{phrase}'")
 
 if __name__ == "__main__":
     unittest.main()

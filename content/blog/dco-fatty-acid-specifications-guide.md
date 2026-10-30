@@ -83,7 +83,7 @@ Industrial formulators evaluate DCO Fatty Acid against strict analytical paramet
 
 ## Primary Industrial Applications of DCO Fatty Acid
 
-The conjugated fatty acid architecture of DCO-FA supports heavy-duty coating and resin manufacturing:
+The conjugated double-bond architecture of DCO-FA supports heavy-duty coating and resin manufacturing:
 
 ### 1. High-Solids and Stoving Alkyd Enamels
 DCO-FA is the suitable fatty acid for producing short-oil and medium-oil baking alkyds cured with melamine-formaldehyde or urea resins. These stoving enamels provide enhanced hardness, chemical resistance, and color-stable performance on automotive components, home appliances, and metal furniture.

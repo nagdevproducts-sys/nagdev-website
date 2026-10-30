@@ -252,5 +252,8 @@
     "transport fuel",
     "passes USP",
     "passes IP"
-  ]
+  ],
+  "spec_basis": "indicative trade values — no owner COA yet",
+  "spec_review_due": "when first production COAs are available",
+  "response_time": "We usually respond within 1–2 working days."
 }

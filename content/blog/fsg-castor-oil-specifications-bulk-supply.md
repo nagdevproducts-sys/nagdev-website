@@ -49,7 +49,7 @@ While crude oil is suitable for general technical applications, chemical formula
 
 ## How Nagdev Produces Refined FSG Castor Oil in Deodar
 
-Nagdev Products operates an integrated manufacturing and refining complex at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330. With a 50 TPD seed crushing capacity, our expellers feed fresh, unadulterated oil directly into our semi-continuous refining line:
+Nagdev Products operates an integrated manufacturing and refining complex at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330. With a 50 TPD seed crushing capacity, our expellers feed fresh, unadulterated oil directly into our refining line:
 
 1. **Mechanical Expelling & Pre-Treatment**: Selected Gujarat castor seeds are mechanically crushed in heavy-duty expellers without chemical extraction. The expelled crude oil is filtered to remove suspended meal solids.
 2. **Alkaline alkali refining**: The crude oil is heated and treated with a calculated dosage of dilute sodium hydroxide solution. The alkali reacts selectively with free fatty acids to produce insoluble sodium soaps, which are separated through settling and decantation, reducing FFA below 1.0%.

@@ -1,0 +1,65 @@
+name: Monthly Spec Review Reminder
+
+on:
+  schedule:
+    # 1st of every month at 00:00 UTC
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  spec-review-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check Spec Basis and Open Reminder Issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - << 'EOF'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          facts_path = Path("seo/facts-register.json")
+          if not facts_path.exists():
+              print("seo/facts-register.json not found!")
+              exit(0)
+
+          facts = json.loads(facts_path.read_text(encoding="utf-8"))
+          spec_basis = facts.get("spec_basis", "")
+
+          if spec_basis == "indicative trade values — no owner COA yet":
+              print("spec_basis is indicative trade values. Creating reminder issue...")
+              title = "Reminder: replace indicative specs with lab COA values"
+              body = (
+                  "## 🔬 Monthly Technical Specification Review Reminder\n\n"
+                  "The current product specification parameters listed across technical data sheets (TDS), "
+                  "product pages, catalog, and compare matrices are based on:\n\n"
+                  f"> **`spec_basis`**: `{spec_basis}`\n\n"
+                  "### Action Required:\n"
+                  "1. Review recent in-house laboratory Certificates of Analysis (COA) for active commercial production lots.\n"
+                  "2. Obtain authorized signed COA analytical ranges from the plant laboratory manager.\n"
+                  "3. Update `seo/product-master.json`, TDS PDFs, and deployable product pages with certified owner lab COA values.\n"
+                  "4. Update `spec_basis` in `seo/facts-register.json` once owner COA values are finalized.\n\n"
+                  "*Automated monthly reminder triggered by `.github/workflows/spec_review_reminder.yml`.*"
+              )
+              subprocess.run([
+                  "gh", "issue", "create",
+                  "--title", title,
+                  "--body", body,
+                  "--label", "specs"
+              ], check=True)
+          else:
+              print(f"spec_basis is '{spec_basis}'. No reminder needed.")
+          EOF

@@ -55,7 +55,7 @@ RULES = {
     "R4": "product counts must match facts register (32 total, 7 regular, 8 enquiry, 17 under dev)",
     "R5": "plant address/district must match register; 'Banaskantha' next to Deodar, Sardarpura, 385330 or 'district' forbidden",
     "R6": "capacity: any TPD/TPA/MT per day value other than '50 TPD' seed crushing",
-    "R7": "SPEC CONSISTENCY: spec table limits must match across key-facts, intro, FAQ, meta, JSON-LD and TDS text",
+    "R7": "SPEC CONSISTENCY: spec table limits must match across key-facts, intro, FAQ, meta, JSON-LD and TDS text; Phase 15f active products must contain 'Typical specification (indicative)' heading and agreement note; removed parameter rows forbidden",
     "R8": "commercial terms: MOQ, lead time, delivery days, price, payment terms, monthly allocation unless in register; 'in commercial supply' forbidden on on-enquiry pages",
     "R9": "percentages/numbers in prose that are not spec values and have no reference link in paragraph (WARN)",
     "R10": "Any table citing a data source (Agmarknet, SEA, DGCIS, official) must have matching raw data file and generator script",
@@ -356,6 +356,18 @@ def get_banned_phrase_pattern(phrase: str) -> str:
         return r'(?<!\w)passes\s+IP(?!\w)'
     elif phrase_lower == "complies to bp":
         return r'(?<!\w)complies\s+to\s+BP(?!\w)'
+    elif phrase_lower in ("semi-continuous", "semi continuous"):
+        return r'(?<!\w)semi[\s\-]continuous(?:ly)?(?!\w)'
+    elif phrase_lower in ("batch pressure reactor", "batch pressure reactors"):
+        return r'(?<!\w)batch\s+pressure\s+reactors?(?!\w)'
+    elif phrase_lower == "thermal oil heating":
+        return r'(?<!\w)thermal\s+oil\s+heating(?!\w)'
+    elif phrase_lower == "24 business hours":
+        return r'(?<!\w)24\s+business\s+hours(?!\w)'
+    elif phrase_lower == "water white":
+        return r'(?<!\w)water\s+white(?!\w)'
+    elif phrase_lower in ("gross calorific", "gross calorific value"):
+        return r'(?<!\w)gross\s+calorific(?:\s+value)?(?!\w)'
     else:
         words = phrase.strip().split()
         if len(words) == 1:
@@ -799,6 +811,76 @@ def check_r15_cross_page_specs(content: str, file_path_str: str) -> list:
                 "rule": "R15 Cross-page spec consistency",
                 "severity": "FAIL",
                 "text": "HCO spec mismatch: found IV < 3.0; canonical spec is Iodine Value: ≤ 4.0"
+            })
+
+    # Phase 15f: Cross-page checks for removed specs in table rows or comparison context
+    # Check within table rows or proximity windows (to avoid cross-contamination from universal navigation menus)
+    rows = re.findall(r'<tr\b[^>]*>(.*?)</tr>', norm, re.DOTALL | re.IGNORECASE)
+    eval_blocks = rows if rows else [norm]
+
+    for block in eval_blocks:
+        # Commercial Lovibond 40
+        if re.search(r'commercial\s+castor', block, re.IGNORECASE) and re.search(r'Lovibond[^\w\r\n]{1,10}40\b', block, re.IGNORECASE):
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "Commercial Castor Oil spec mismatch: found Lovibond 40 (removed row in Phase 15f)"
+            })
+        # FSG / Commercial Relative Density
+        if re.search(r'first\s+special\s+grade|\bFSG\b|commercial\s+castor', block, re.IGNORECASE) and re.search(r'Relative\s+Density', block, re.IGNORECASE):
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "FSG/Commercial spec mismatch: found Relative Density (removed row in Phase 15f)"
+            })
+        # FPD Hydroxyl Value 180
+        if re.search(r'first\s+pressed\s+degummed|\bFPD\b', block, re.IGNORECASE) and re.search(r'Hydroxyl\s+Value[^\w\r\n]{1,10}180\b', block, re.IGNORECASE):
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "FPD spec mismatch: found Hydroxyl Value 180 (removed row in Phase 15f)"
+            })
+        # Castor Cake Gross Calorific
+        if re.search(r'castor\s+cake', block, re.IGNORECASE) and re.search(r'Gross\s+Calorific', block, re.IGNORECASE):
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "Castor Cake spec mismatch: found Gross Calorific (removed row in Phase 15f)"
+            })
+        # PPG Stokes Viscosity
+        if re.search(r'pale\s+pressed|\bPPG\b', block, re.IGNORECASE) and re.search(r'Stokes\s+Viscosity', block, re.IGNORECASE):
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "PPG spec mismatch: found Stokes Viscosity (removed row in Phase 15f)"
+            })
+        # HCO Colour 3 / Gardner 3
+        if re.search(r'hydrogenated\s+castor|\bHCO\b', block, re.IGNORECASE) and re.search(r'Colou?r\s*(?:Gardner\s*)?3(?:\.0)?\s*(?:Max)?\b|\bColou?r\s+Gardner\s+3(?:\.0)?\b', block, re.IGNORECASE):
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "HCO spec mismatch: found Colour 3 / Colour Gardner 3 (removed row in Phase 15f)"
+            })
+        # DCO-FA Conjugated Fatty Acids / Colour Gardner
+        if re.search(r'dco[\s\-]*fa|dco\s+fatty\s+acid', block, re.IGNORECASE) and re.search(r'Conjugated\s+(?:diene\s+)?Fatty\s+Acids|Colou?r\s*,?\s*Gardner', block, re.IGNORECASE):
+            findings.append({
+                "file": file_path_str,
+                "line": 0,
+                "rule": "R15 Cross-page spec consistency",
+                "severity": "FAIL",
+                "text": "DCO-FA spec mismatch: found Conjugated Fatty Acids / Colour Gardner (removed row in Phase 15f)"
             })
 
     return findings
@@ -2029,6 +2111,136 @@ def lint_content(content: str, file_path_str: str, facts: dict):
                             "severity": "FAIL",
                             "text": f"Under-development page contains numeric spec value '{val_text}' in row {r_idx}"
                         })
+
+    # ----------------------------------------------------
+    # Phase 15f: Global ban on plant/service claims
+    # ----------------------------------------------------
+    PHASE_15F_PLANT_SERVICE_BANNED = [
+        (r'\bsemi[\s\-]continuous(?:ly)?\b', "semi-continuous"),
+        (r'\bbatch\s+pressure\s+reactors?\b', "batch pressure reactors"),
+        (r'\bthermal\s+oil\s+heating\b', "thermal oil heating"),
+        (r'\b24\s+business\s+hours\b', "24 business hours"),
+    ]
+    for line_idx, line in enumerate(lines, 1):
+        for pat, term_name in PHASE_15F_PLANT_SERVICE_BANNED:
+            if re.search(pat, line, re.IGNORECASE):
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_idx,
+                    "rule": "R1 Banned plant/service claim",
+                    "severity": "FAIL",
+                    "text": f"Found banned plant/service claim '{term_name}' on line {line_idx}: '{line.strip()[:100]}'"
+                })
+
+    # ----------------------------------------------------
+    # Phase 15f: Global removed row / claim checks
+    # ----------------------------------------------------
+    PHASE_15F_GLOBAL_REMOVED = [
+        (r'\bwater\s+white\b', "water white"),
+        (r'\bGross\s+Calorific(?:\s+Value)?\b', "Gross Calorific"),
+    ]
+    for line_idx, line in enumerate(lines, 1):
+        for pat, term_name in PHASE_15F_GLOBAL_REMOVED:
+            if re.search(pat, line, re.IGNORECASE):
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_idx,
+                    "rule": "R7 Removed row reappeared",
+                    "severity": "FAIL",
+                    "text": f"Forbidden removed claim/row '{term_name}' found on line {line_idx}: '{line.strip()[:100]}'"
+                })
+
+    # ----------------------------------------------------
+    # Phase 15f: 9 Active Non-Pharma Product Honest Spec Rules
+    # ----------------------------------------------------
+    ACTIVE_NON_PHARMA_SLUGS = [
+        "commercial-castor-oil",
+        "first-special-grade-castor-oil",
+        "fpd-castor-oil",
+        "castor-cake",
+        "hydrogenated-castor-oil",
+        "dehydrated-castor-oil",
+        "dco-fatty-acid",
+        "ppg-castor-oil",
+        "cold-pressed-castor-oil"
+    ]
+    active_slug = None
+    for s in ACTIVE_NON_PHARMA_SLUGS:
+        if f"products/{s}.html" in norm_file_path or norm_file_path.endswith(f"/{s}.html") or norm_file_path == f"{s}.html" or norm_file_path == s:
+            active_slug = s
+            break
+    if not active_slug and (norm_file_path in ("test.html", "active_test.html") or norm_file_path.endswith("/test.html")):
+        for s in ACTIVE_NON_PHARMA_SLUGS:
+            s_human = s.replace("-", " ")
+            if s in content.lower() or s_human in content.lower():
+                active_slug = s
+                break
+
+    if active_slug:
+        # 1. Spec table H2 heading MUST contain 'Typical specification (indicative)'
+        h2_matches = re.finditer(r'<h2\b[^>]*>(.*?)</h2>', content, re.DOTALL | re.IGNORECASE)
+        has_typical_h2 = False
+        for h2_m in h2_matches:
+            h2_text = re.sub(r'<[^>]+>', ' ', h2_m.group(1))
+            if re.search(r'Typical\s+specifications?\s*\(indicative\)', h2_text, re.IGNORECASE):
+                has_typical_h2 = True
+                break
+        if not has_typical_h2:
+            findings.append({
+                "file": file_path_str,
+                "line": 1,
+                "rule": "R7 Spec table heading",
+                "severity": "FAIL",
+                "text": f"Active product '{active_slug}' spec table H2 heading must contain 'Typical specification (indicative)'"
+            })
+
+        # 2. Note under spec table MUST contain required note
+        required_note_pat = re.compile(
+            r'Values\s+are\s+typical\s+for\s+this\s+grade\.\s*Results\s+for\s+each\s+lot\s+are\s+reported\s+on\s+its\s+COA[;,]\s*specifications\s+can\s+be\s+agreed\s+per\s+contract\.?',
+            re.IGNORECASE
+        )
+        if not required_note_pat.search(content):
+            findings.append({
+                "file": file_path_str,
+                "line": 1,
+                "rule": "R7 Spec table note",
+                "severity": "FAIL",
+                "text": f"Active product '{active_slug}' missing required note under spec table: 'Values are typical for this grade. Results for each lot are reported on its COA; specifications can be agreed per contract.'"
+            })
+
+        # 3. Product-specific removed rows:
+        removed_row_checks = []
+        if active_slug == "commercial-castor-oil":
+            removed_row_checks.extend([
+                (r'(@\s*40\s*(?:°|deg|&deg;)?\s*C|Refractive\s+Index\s+@\s*40)', "@ 40°C / Refractive Index @ 40°C"),
+                (r'\bRelative\s+Density\b', "Relative Density"),
+                (r'(?:Colou?r\s*\()?Lovibond\)?(?:\s*Cell)?(?:\s*\(Y\+5R\))?[^\w\n]{1,10}40\b|\bLovibond\)?\s*40\b', "Colour (Lovibond) 40 / Lovibond) 40")
+            ])
+        elif active_slug == "first-special-grade-castor-oil":
+            removed_row_checks.append((r'\bRelative\s+Density\b', "Relative Density"))
+        elif active_slug == "dco-fatty-acid":
+            removed_row_checks.extend([
+                (r'\bConjugated\s+(?:diene\s+)?Fatty\s+Acids?(?:\s*,?\s*%\s*)?(?:\s*60)?\b', "Conjugated Fatty Acids 60 / Conjugated Fatty Acids"),
+                (r'\bColou?r\s*,?\s*Gardner\b', "Colour, Gardner")
+            ])
+        elif active_slug == "hydrogenated-castor-oil":
+            removed_row_checks.append((r'\bColou?r\s*(?:Gardner\s*)?3(?:\.0)?\s*(?:Max)?\b|\bColou?r\s+Gardner\s+3(?:\.0)?\b', "Colour 3 Max / Colour Gardner 3"))
+        elif active_slug == "ppg-castor-oil":
+            removed_row_checks.append((r'\bStokes\s+Viscosity\b', "Stokes Viscosity"))
+        elif active_slug == "fpd-castor-oil":
+            removed_row_checks.append((r'\bHydroxyl\s+Value\b[^\w\n]{1,10}180\b', "Hydroxyl Value 180"))
+        # castor-cake Gross Calorific is checked by global PHASE_15F_GLOBAL_REMOVED
+
+        for line_idx, line in enumerate(lines, 1):
+            for pat, desc in removed_row_checks:
+                if re.search(pat, line, re.IGNORECASE):
+                    findings.append({
+                        "file": file_path_str,
+                        "line": line_idx,
+                        "rule": "R7 Removed row reappeared",
+                        "severity": "FAIL",
+                        "text": f"Forbidden removed claim/row '{desc}' reappeared on '{active_slug}' line {line_idx}: '{line.strip()[:100]}'"
+                    })
 
     findings.extend(check_r17_page_identity(content, file_path_str))
     findings.extend(check_r18_internal_links(content, file_path_str))
