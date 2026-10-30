@@ -1795,13 +1795,14 @@
         if (!currentProductId) return;
         const staticPdfs = [
           '12-hydroxystearic-acid', 'bio-polyurethane-polyols', 'blown-oxidized-castor-oil',
-          'calcium-12-hydroxystearate', 'castor-cake', 'castor-oil-bp93', 'cold-pressed-castor-oil',
-          'commercial-castor-oil', 'crude-glycerin', 'dco-fatty-acid', 'de-oiled-cake-castor-meal',
-          'dehydrated-castor-oil', 'dibutyl-sebacate', 'dioctyl-sebacate', 'first-special-grade-castor-oil',
-          'fpd-castor-oil', 'high-protein-castor-meal', 'hydrogenated-castor-oil',
-          'lithium-12-hydroxystearate', 'methyl-12-hydroxystearate', 'methyl-ricinoleate',
-          'ppg-castor-oil', 'refined-glycerin', 'ricinoleic-acid', 'sebacic-acid',
-          'sodium-sulphate-anhydrous', 'zinc-ricinoleate', 'zinc-undecylenate'
+          'calcium-12-hydroxystearate', 'castor-cake', 'castor-oil-bp93', 'castor-oil-ip',
+          'castor-oil-jp', 'castor-oil-ph-eur', 'castor-oil-usp-nf', 'cold-pressed-castor-oil',
+          'commercial-castor-oil', 'cosmetic-grade-castor-oil', 'crude-glycerin', 'dco-fatty-acid',
+          'de-oiled-cake-castor-meal', 'dehydrated-castor-oil', 'dibutyl-sebacate', 'dioctyl-sebacate',
+          'first-special-grade-castor-oil', 'fpd-castor-oil', 'high-protein-castor-meal',
+          'hydrogenated-castor-oil', 'lithium-12-hydroxystearate', 'methyl-12-hydroxystearate',
+          'methyl-ricinoleate', 'ppg-castor-oil', 'refined-glycerin', 'ricinoleic-acid',
+          'sebacic-acid', 'sodium-sulphate-anhydrous', 'zinc-ricinoleate', 'zinc-undecylenate'
         ];
         if (staticPdfs.includes(currentProductId)) {
           window.open('/downloads/tds/' + currentProductId + '.pdf', '_blank', 'noopener,noreferrer');

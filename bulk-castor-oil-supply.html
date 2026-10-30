@@ -1168,7 +1168,8 @@
     const tdsBtn = document.getElementById('modal-tds-btn');
     if (tdsBtn) {
       tdsBtn.addEventListener('click', function () {
-        if (currentProductId) downloadProductTDS(currentProductId);
+        if (!currentProductId) return;
+        window.open('/downloads/tds/' + currentProductId + '.pdf', '_blank', 'noopener,noreferrer');
       });
     }
 
