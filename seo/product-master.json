@@ -595,7 +595,7 @@
     "applications": [
       {
         "title": "European Pharmacopoeia Compounding",
-        "desc": "Tested against European Pharmacopoeia (Ph. Eur.) monograph requirements for medicinal excipients and healthcare preparations.",
+        "desc": "Tested against European Pharmacopoeia (Ph. Eur.) monograph requirements for excipient use and healthcare preparations.",
         "link": "/process-flow"
       },
       {
