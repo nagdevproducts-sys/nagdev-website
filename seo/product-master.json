@@ -43,7 +43,7 @@
       },
       {
         "q": "Which raw FFA and Lovibond colour standards verify crude expeller castor oil?",
-        "a": "Meets industrial standards: free fatty acids below 2.0%, moisture under 0.50%, Lovibond color under 40 units (Y+5R in 1-inch cell), and minimum hydroxyl value of 160 mg KOH/g."
+        "a": "Meets industrial standards: free fatty acids below 2.0%, moisture under 0.50%, Lovibond colour as per contract, and minimum hydroxyl value of 160 mg KOH/g."
       },
       {
         "q": "Why is unrefined castor oil selected for alkyd paints and industrial lubricants?",
@@ -345,7 +345,7 @@
     "status": "regular_supply",
     "category": "Castor Oil Derivatives",
     "cas": "61789-45-5",
-    "physical_form": "Liquid",
+    "physical_form": "Pale Yellow Liquid",
     "packaging": [
       "200 kg tight-head steel and HDPE export drums",
       "1,000 L intermediate bulk containers (IBC totes)",
@@ -377,7 +377,7 @@
       },
       {
         "q": "What conjugated diene fraction and acid value are specified for DCO fatty acid?",
-        "a": "Target parameters include an acid value of 195 to 205 mg KOH/g and minimum 60% conjugated diene fatty acids for high-reactivity color-stable baking enamels."
+        "a": "Target parameters include an acid value of 195 to 205 mg KOH/g and conjugated diene fatty acids as per specification for high-reactivity color-stable baking enamels."
       },
       {
         "q": "In what coating systems is DCO fatty acid formulated?",

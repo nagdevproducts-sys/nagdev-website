@@ -125,7 +125,7 @@ class QuoteController {
 
       this.showToast(
         `Quotation Request Received!`,
-        `Thank you ${name}. Our export desk will dispatch technical specifications and FOB/CIF pricing for ${product} (${country}) within 24 business hours.`
+        `Thank you ${name}. Our export desk will dispatch technical specifications and FOB/CIF pricing for ${product} (${country}) We usually respond within 1–2 working days.`
       );
     }, 900);
   }

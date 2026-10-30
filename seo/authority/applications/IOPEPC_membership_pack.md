@@ -59,7 +59,7 @@ APPLICATION FOR MEMBERSHIP & REGISTRATION-CUM-MEMBERSHIP-CERTIFICATE (RCMC)
 11. Membership Category Applied: Manufacturer Exporter
 12. Operational Plant Status: Operational
 13. Installed Production Capacity: 50 TPD Seed Crushing Capacity
-14. Manufacturing Processes: Mechanical expeller seed crushing, oil refining, semi-continuous refining, filtration, hydrogenation, batch pressure reactors.
+14. Manufacturing Processes: Mechanical expeller seed crushing, oil refining, refining line, filtration, hydrogenation, dehydration.
 
 15. Product Details (ITC HS Chapters 15, 23, 29 & 38):
     - Commercial Castor Oil (HS 1515.30.90) - Regular Supply

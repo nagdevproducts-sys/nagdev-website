@@ -357,7 +357,7 @@
             </div>
             <div>
               <span style="color:var(--text-muted);display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;">Commercial Desk SLA</span>
-              <strong style="color:#27ae60;">Response within 24 business hours</strong>
+              <strong style="color:#27ae60;">We usually respond within 1–2 working days.</strong>
             </div>
           </div>
         </div>

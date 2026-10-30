@@ -33,57 +33,47 @@ const PRODUCTS_DATABASE = [
       ],
       [
         "2",
-        "Colour (Lovibond)",
-        "40 Units Max"
-      ],
-      [
-        "3",
         "Free Fatty Acid (FFA)",
         "2.0% Max"
       ],
       [
-        "4",
+        "3",
         "Unsaponifiable Matter",
         "1.0% Max"
       ],
       [
-        "5",
+        "4",
         "Iodine Value",
         "82 – 90 g I₂/100g"
       ],
       [
-        "6",
+        "5",
         "Acid Value",
         "4.00 mg KOH/g Max"
       ],
       [
-        "7",
+        "6",
         "Hydroxyl Value",
         "160 – 168 mg KOH/g"
       ],
       [
-        "8",
+        "7",
         "Saponification Value",
         "177 – 187 mg KOH/g"
       ],
       [
-        "9",
+        "8",
         "Acetyl Value",
         "140 Min"
       ],
       [
-        "10",
-        "Relative Density @ 30°C",
-        "0.958 – 0.969"
-      ],
-      [
-        "11",
+        "9",
         "Ricinoleic Acid Content",
         "85% Min"
       ],
       [
-        "12",
-        "Refractive Index @ 40°C",
+        "10",
+        "Refractive Index @ 20°C",
         "1.477 – 1.481"
       ]
     ],
@@ -129,21 +119,16 @@ const PRODUCTS_DATABASE = [
       ],
       [
         "3",
-        "Hydroxyl Value",
-        "180 mg KOH/g Max"
-      ],
-      [
-        "4",
         "Saponification Value",
         "177 – 185 mg KOH/g"
       ],
       [
-        "5",
+        "4",
         "Iodine Value",
         "82 – 90 g I₂/100g"
       ],
       [
-        "6",
+        "5",
         "Moisture and Volatiles",
         "0.5% Max"
       ]
@@ -212,36 +197,31 @@ const PRODUCTS_DATABASE = [
       ],
       [
         "7",
-        "Relative Density @ 20°C",
-        "0.954 – 0.960"
-      ],
-      [
-        "8",
         "Saponification Value",
         "177 – 185 mg KOH/g"
       ],
       [
-        "9",
+        "8",
         "Unsaponifiable Matter",
         "1.0% Max"
       ],
       [
-        "10",
+        "9",
         "Hydroxyl Number",
         "160 – 168 mg KOH/g"
       ],
       [
-        "11",
+        "10",
         "Iodine Number",
         "82 – 90 g I₂/100g"
       ],
       [
-        "12",
+        "11",
         "Ricinoleic Acid Content",
         "85% Min"
       ],
       [
-        "13",
+        "12",
         "Moisture",
         "0.25% Max"
       ]
@@ -264,7 +244,7 @@ const PRODUCTS_DATABASE = [
       "polyurethanes"
     ],
     "physicalForm": "Liquid",
-    "typicalColour": "Extra Pale / Nearly Water White",
+    "typicalColour": "Extra Pale / Pale Straw",
     "rawMaterial": "Premium Castor Seed (Ricinus communis)",
     "image": "images/products/ppg-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexitank • 200 / 225 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC",
@@ -343,21 +323,16 @@ const PRODUCTS_DATABASE = [
       ],
       [
         "14",
-        "Stokes Viscosity",
-        "6.3 – 8.9"
-      ],
-      [
-        "15",
         "Appearance @ 25°C",
         "Brilliantly clear and free of suspended matter"
       ],
       [
-        "16",
+        "15",
         "Odour",
         "Very slightly, characteristic"
       ],
       [
-        "17",
+        "16",
         "Ricinoleic Acid Content",
         "85% Min"
       ]
@@ -552,28 +527,23 @@ const PRODUCTS_DATABASE = [
       ],
       [
         "3",
-        "Gross Calorific Value",
-        "4200 – 4400 Kcal/kg"
-      ],
-      [
-        "4",
         "Nitrogen (N)",
         "4.0% to 4.5% (typical)"
       ],
       [
-        "5",
+        "4",
         "Phosphorous (P₂O₅)",
         "1.0% to 1.5% (typical)"
       ],
       [
-        "6",
+        "5",
         "Potash (K₂O)",
         "1.0% to 1.5% (typical)"
       ],
       [
-        "7",
+        "6",
         "Moisture and Volatile Matter",
-        "8.0% to 10.0% Max"
+        "10.0% Max"
       ]
     ],
     "isSpecialtyRange": false,
@@ -785,18 +755,12 @@ const PRODUCTS_DATABASE = [
       ],
       [
         "7",
-        "Colour Gardner",
-        "3.0 Max",
-        "3.0 Max"
-      ],
-      [
-        "8",
         "Moisture & Volatile Matter, %",
         "0.10 Max",
         "0.10 Max"
       ],
       [
-        "9",
+        "8",
         "Residual Nickel, ppm",
         "10 Max",
         "10 Max"
@@ -1160,7 +1124,7 @@ const PRODUCTS_DATABASE = [
       "lubricants"
     ],
     "physicalForm": "Liquid",
-    "typicalColour": "Water White to Pale Yellow",
+    "typicalColour": "Pale Yellow",
     "rawMaterial": "Dehydrated Castor Oil (DCO)",
     "image": "images/products/dco-fatty-acid.webp",
     "packing": "Bulk in Tanker    •    Bulk in ISO Tank    •    Flexi Tank    •    190 kg Net Stainless Steel / MS Drums    •    200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Or as recommended / specified by client",
@@ -1175,65 +1139,55 @@ const PRODUCTS_DATABASE = [
       [
         "1",
         "Appearance",
-        "Water White to Pale Yellow Liquid, free from suspended matter"
+        "Pale yellow liquid"
       ],
       [
         "2",
-        "Colour, Gardner",
-        "2.0 Max"
-      ],
-      [
-        "3",
         "Acid Value, mg KOH/g",
         "195 – 205"
       ],
       [
-        "4",
+        "3",
         "Specific Gravity at 20°C",
         "0.903 – 0.905"
       ],
       [
-        "5",
+        "4",
         "Iodine Value, g I₂/100g",
         "130 Min"
       ],
       [
-        "6",
+        "5",
         "Hydroxyl Value, mg KOH/g",
         "8 Max"
       ],
       [
-        "7",
+        "6",
         "Saponification Value, mg KOH/g",
         "198 – 208"
       ],
       [
-        "8",
+        "7",
         "Refractive Index at 25°C",
         "1.473 – 1.477"
       ],
       [
-        "9",
+        "8",
         "Moisture Content, %",
         "0.20 Max"
       ],
       [
-        "10",
+        "9",
         "Saturated Fatty Acids, %",
         "4.5 Max"
       ],
       [
-        "11",
+        "10",
         "Unsaturated Fatty Acids, %",
         "90 Min"
       ],
       [
-        "12",
-        "Conjugated Fatty Acids, %",
-        "60 Min"
-      ],
-      [
-        "13",
+        "11",
         "Free Fatty Acid, %",
         "98 Min"
       ]
@@ -2630,7 +2584,7 @@ const PRODUCTS_DATABASE = [
       "skincare"
     ],
     "physicalForm": "Liquid",
-    "typicalColour": "Water White to Very Pale Yellow",
+    "typicalColour": "Pale Straw to Very Pale Yellow",
     "rawMaterial": "Castor Seed (Ricinus communis)",
     "image": "images/products/first-special-grade-castor-oil.webp",
     "packing": "200 kg Epoxy-lined MS Drums • 1000 L IBC",
