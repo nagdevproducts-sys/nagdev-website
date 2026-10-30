@@ -1,0 +1,228 @@
+Product,Parameter,Removed Method
+Castor Oil BP (British Pharmacopoeia grade),Appearance,Visual
+Castor Oil BP (British Pharmacopoeia grade),Identification,BP Compendial Method
+Castor Oil BP (British Pharmacopoeia grade),Relative Density,BP Appendix
+Castor Oil BP (British Pharmacopoeia grade),Refractive Index,BP Appendix
+Castor Oil BP (British Pharmacopoeia grade),Optical Rotation,BP Appendix
+Castor Oil BP (British Pharmacopoeia grade),Acid Value,BP Compendial Titration
+Castor Cake (Expeller Cake) — Organic Manure,Residual Oil Content,IS 3448
+Castor Cake (Expeller Cake) — Organic Manure,Bulk Density,IS 3448
+Castor Cake (Expeller Cake) — Organic Manure,Gross Calorific Value,Bomb Calorimeter
+Castor Cake (Expeller Cake) — Organic Manure,Nitrogen (N),Kjeldahl Method
+Castor Cake (Expeller Cake) — Organic Manure,Phosphorous (P₂O₅),IS 3448
+Castor Cake (Expeller Cake) — Organic Manure,Potash (K₂O),Flame Photometer
+Castor Cake (Expeller Cake) — Organic Manure,Moisture and Volatile Matter,Oven Drying Method
+Hydrogenated Castor Oil (H.C.O) Flakes / Powder,Appearance,Visual
+Hydrogenated Castor Oil (H.C.O) Flakes / Powder,"Melting Point, °C",AOCS Cc 1-25
+Hydrogenated Castor Oil (H.C.O) Flakes / Powder,"Iodine Value, g I₂/100g",AOCS Cd 1d-92
+Hydrogenated Castor Oil (H.C.O) Flakes / Powder,"Saponification Value, mg KOH/g",AOCS Cd 3-25
+Hydrogenated Castor Oil (H.C.O) Flakes / Powder,"Acid Value, mg KOH/g",AOCS Cd 3d-63
+Hydrogenated Castor Oil (H.C.O) Flakes / Powder,"Hydroxyl Value, mg KOH/g",AOCS Cd 13-60
+Hydrogenated Castor Oil (H.C.O) Flakes / Powder,Colour Gardner,AOCS Td 1a-64
+Hydrogenated Castor Oil (H.C.O) Flakes / Powder,"Moisture & Volatile Matter, %",AOCS Ca 2c-25
+Hydrogenated Castor Oil (H.C.O) Flakes / Powder,"Residual Nickel, ppm",IS 10633 (AAS)
+Sodium Sulphate Anhydrous,Appearance,Visual
+Dehydrated Castor Oil (DCO),Appearance,Visual
+Dehydrated Castor Oil (DCO),"Colour, Gardner",ASTM D1544
+Dehydrated Castor Oil (DCO),"Acid Value, mg KOH/g",AOCS Cd 3d-63
+Dehydrated Castor Oil (DCO),"Iodine Value, g I₂/100g",AOCS Cd 1d-92
+Dehydrated Castor Oil (DCO),"Hydroxyl Value, mg KOH/g",AOCS Cd 13-60
+Dehydrated Castor Oil (DCO),"Saponification Value, mg KOH/g",AOCS Cd 3-25
+Dehydrated Castor Oil (DCO),Specific Gravity at 30°C,ASTM D4052
+Dehydrated Castor Oil (DCO),Refractive Index at 40°C,ASTM D1218
+Dehydrated Castor Oil (DCO),Viscosity at 25°C,ASTM D445 / Brookfield
+Dehydrated Castor Oil (DCO),"Moisture & Volatile Matter, %",AOCS Ca 2c-25
+Dehydrated Castor Oil (DCO),"Unsaponifiable Matter, %",AOCS Ca 6a-40
+Dehydrated Castor Oil (DCO),"Conjugated Diene Content, %",UV Spectrophotometric / GC
+Dehydrated Castor Oil Fatty Acid (DCO-FA),Appearance,Visual
+Dehydrated Castor Oil Fatty Acid (DCO-FA),"Colour, Gardner",AOCS Td 1a-64
+Dehydrated Castor Oil Fatty Acid (DCO-FA),"Acid Value, mg KOH/g",AOCS Cd 3d-63
+Dehydrated Castor Oil Fatty Acid (DCO-FA),Specific Gravity at 20°C,ASTM D4052
+Dehydrated Castor Oil Fatty Acid (DCO-FA),"Iodine Value, g I₂/100g",AOCS Cd 1d-92
+Dehydrated Castor Oil Fatty Acid (DCO-FA),"Hydroxyl Value, mg KOH/g",AOCS Cd 13-60
+Dehydrated Castor Oil Fatty Acid (DCO-FA),"Saponification Value, mg KOH/g",AOCS Cd 3-25
+Dehydrated Castor Oil Fatty Acid (DCO-FA),Refractive Index at 25°C,ASTM D1218
+Dehydrated Castor Oil Fatty Acid (DCO-FA),"Moisture Content, %",AOCS Ca 2c-25
+Dehydrated Castor Oil Fatty Acid (DCO-FA),"Saturated Fatty Acids, %",GC / GLC
+Dehydrated Castor Oil Fatty Acid (DCO-FA),"Unsaturated Fatty Acids, %",GC / GLC
+Dehydrated Castor Oil Fatty Acid (DCO-FA),"Conjugated Fatty Acids, %",UV Spectrophotometric / GC
+Dehydrated Castor Oil Fatty Acid (DCO-FA),"Free Fatty Acid, %",AOCS Ca 5a-40
+Blown / Oxidized Castor Oil,Appearance,Visual
+Blown / Oxidized Castor Oil,"Colour, Gardner",ASTM D1544
+Blown / Oxidized Castor Oil,"Acid Value, mg KOH/g",AOCS Cd 3d-63
+Blown / Oxidized Castor Oil,"Iodine Value, g I₂/100g",AOCS Cd 1d-92
+Blown / Oxidized Castor Oil,"Hydroxyl Value, mg KOH/g",AOCS Cd 13-60
+Blown / Oxidized Castor Oil,"Saponification Value, mg KOH/g",AOCS Cd 3-25
+Blown / Oxidized Castor Oil,"Moisture & Volatile Matter, %",AOCS Ca 2c-25
+Blown / Oxidized Castor Oil,Specific Gravity at 30°C,ASTM D4052
+Blown / Oxidized Castor Oil,Refractive Index at 40°C,ASTM D1218
+Blown / Oxidized Castor Oil,Viscosity at 25°C,ASTM D445 / Brookfield
+Blown / Oxidized Castor Oil,"Unsaponifiable Matter, %",AOCS Ca 6a-40
+Blown / Oxidized Castor Oil,Oxidation / Blowing Level,Standard Laboratory Method
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),Appearance,Visual
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),"Colour, Gardner",ASTM D1544
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),"Hydroxyl Value, mg KOH/g",ASTM D4274
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),"Acid Value, mg KOH/g",ASTM D4662
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),"Moisture Content, %",Karl Fischer / ASTM E203
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),"Viscosity at 25°C, cP",ASTM D4878
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),Specific Gravity at 25°C,ASTM D4052
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),Average Hydroxyl Functionality,Calculated / Standard Method
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),"Iodine Value, g I₂/100g",AOCS Cd 1d-92
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),"Saponification Value, mg KOH/g",AOCS Cd 3-25
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),"Unsaponifiable Matter, %",AOCS Ca 6a-40
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),"Flash Point, °C",ASTM D92
+Bio-Polyurethane Polyols (Castor-Oil-Based Polyols),Hydroxyl Content Consistency,ASTM D4274
+Sebacic Acid,Appearance,Visual
+Sebacic Acid,"Sebacic Acid Content, %",GC / HPLC
+Sebacic Acid,"Acid Value, mg KOH/g",AOCS / Standard Laboratory Method
+Sebacic Acid,"Melting Point, °C",ASTM D87
+Sebacic Acid,"Iodine Value, g I₂/100g",AOCS Cd 1d-92
+Sebacic Acid,"Moisture, %",AOCS Ca 2c-25
+Sebacic Acid,"Ash, %",Standard Laboratory Method
+Sebacic Acid,"Colour, APHA",ASTM D1209
+Sebacic Acid,"Adipic Acid, %",GC / HPLC
+Sebacic Acid,"Caprylic Acid, %",GC / HPLC
+Sebacic Acid,"Capric Acid, %",GC / HPLC
+Sebacic Acid,Solubility in Alcohol,Visual / Standard Laboratory Method
+Sebacic Acid,Particle Size,Sieve Test
+Methyl Ricinoleate,Appearance,Visual
+Methyl Ricinoleate,Colour,Visual
+Methyl Ricinoleate,"Methyl Ricinoleate Content, %",GC / GC-FID
+Methyl Ricinoleate,"Acid Value, mg KOH/g",AOCS Cd 3d-63
+Methyl Ricinoleate,"Iodine Value, g I₂/100g",AOCS Cd 1d-92
+Methyl Ricinoleate,"Saponification Value, mg KOH/g",AOCS Cd 3-25
+Methyl Ricinoleate,"Hydroxyl Value, mg KOH/g",AOCS Cd 13-60
+Methyl Ricinoleate,"Moisture, %",AOCS Ca 2c-25
+Methyl Ricinoleate,"Unsaponifiable Matter, %",AOCS Ca 6a-40
+Methyl Ricinoleate,Specific Gravity at 25°C,ASTM D4052
+Methyl Ricinoleate,Refractive Index at 40°C,ASTM D1218
+Methyl Ricinoleate,"Free Fatty Acids, %",AOCS Ca 5a-40
+Methyl Ricinoleate,"Methanol, %",GC
+Methyl 12-Hydroxystearate (Methyl 12-HSA),Appearance,Visual
+Methyl 12-Hydroxystearate (Methyl 12-HSA),Clarity on Melting,Visual
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Colour, Gardner",AOCS Td 1a-64
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Acid Value, mg KOH/g",AOCS Cd 3d-63
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Melting Point, °C",AOCS Cc 1-25
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Iodine Value, g I₂/100g",AOCS Cd 1d-92
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Saponification Value, mg KOH/g",AOCS Cd 3-25
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Hydroxyl Value, mg KOH/g",AOCS Cd 13-60
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Moisture, %",AOCS Ca 2c-25
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Unsaponifiable Matter, %",AOCS Ca 6a-40
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Methyl 12-Hydroxystearate Content, %",GC / GC-FID
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Free Fatty Acids, %",AOCS Ca 5a-40
+Methyl 12-Hydroxystearate (Methyl 12-HSA),"Particle Size, Passing Through 1 mm Sieve, %",Sieve Test
+Dioctyl Sebacate (DOS / DEHS),Appearance,Visual
+Dioctyl Sebacate (DOS / DEHS),"Colour, APHA",ASTM D1209
+Dioctyl Sebacate (DOS / DEHS),"Ester Content, %",GC / Standard Laboratory Method
+Dioctyl Sebacate (DOS / DEHS),"Acid Value, mg KOH/g",AOCS Cd 3d-63
+Dioctyl Sebacate (DOS / DEHS),"Water Content, %",Karl Fischer / ASTM E203
+Dioctyl Sebacate (DOS / DEHS),Specific Gravity at 25°C,ASTM D4052
+Dioctyl Sebacate (DOS / DEHS),Refractive Index at 20°C,ASTM D1218
+Dioctyl Sebacate (DOS / DEHS),"Moisture & Volatile Matter, %",Standard Laboratory Method
+Dioctyl Sebacate (DOS / DEHS),"Flash Point, °C",ASTM D92
+Dioctyl Sebacate (DOS / DEHS),"Purity by GC, %",GC-FID
+Dioctyl Sebacate (DOS / DEHS),"Free 2-Ethylhexanol, %",GC
+Dioctyl Sebacate (DOS / DEHS),"Residual Acidity, %",Standard Laboratory Method
+Dibutyl Sebacate (DBS),Appearance,Visual
+Dibutyl Sebacate (DBS),"Colour, APHA",ASTM D1209
+Dibutyl Sebacate (DBS),"Dibutyl Sebacate Content, %",GC / GC-FID
+Dibutyl Sebacate (DBS),"Acid Value, mg KOH/g",AOCS Cd 3d-63
+Dibutyl Sebacate (DBS),"Moisture, %",Karl Fischer / ASTM E203
+Dibutyl Sebacate (DBS),Specific Gravity at 20°C,ASTM D4052
+Dibutyl Sebacate (DBS),Refractive Index at 20°C,ASTM D1218
+Dibutyl Sebacate (DBS),"Saponification Value, mg KOH/g",AOCS Cd 3-25
+Dibutyl Sebacate (DBS),"Flash Point, °C",ASTM D92
+Dibutyl Sebacate (DBS),"Free n-Butanol, %",GC
+Dibutyl Sebacate (DBS),"Free Sebacic Acid / Acidity, %",Standard Laboratory Method
+Dibutyl Sebacate (DBS),"Volatile Matter, %",Standard Laboratory Method
+Lithium 12-Hydroxystearate (Lithium 12-HSA),Appearance,Visual
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Lithium Content, %",ICP-OES / AAS
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"12-Hydroxystearic Acid Content, %",GC / GLC
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Acid Value (Finished Soap), mg KOH/g",AOCS Cd 3d-63
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Hydroxyl Value, mg KOH/g",AOCS Cd 13-60
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Melting Point, °C",Standard Laboratory Method
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Moisture, %",ASTM E203
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Free Fatty Acids, %",AOCS Ca 5a-40
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Ash, %",ASTM D482
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Water-Soluble Matter, %",ASTM D2165 / ISO 6839
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Free Alkali, %",Standard Laboratory Method
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Particle Size, Passing Through 100 Mesh, %",Sieve Test
+Lithium 12-Hydroxystearate (Lithium 12-HSA),"Grease Penetration (Formulated Grease), 0.1 mm",ASTM D217
+Calcium 12-Hydroxystearate (Calcium 12-HSA),Appearance,Visual
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Calcium Content, %",ICP-OES / AAS
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"12-Hydroxystearic Acid Content, %",GC / GLC
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Acid Value (Finished Soap), mg KOH/g",AOCS Cd 3d-63
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Hydroxyl Value, mg KOH/g",AOCS Cd 13-60
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Melting Point, °C",Standard Laboratory Method
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Moisture, %",ASTM E203
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Free Fatty Acids, %",AOCS Ca 5a-40
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Ash, %",ASTM D482
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Water-Soluble Matter, %",Standard Laboratory Method
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Free Alkali, %",Standard Laboratory Method
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Particle Size, Passing Through 100 Mesh, %",Sieve Test
+Calcium 12-Hydroxystearate (Calcium 12-HSA),"Grease Penetration (Formulated Grease), 0.1 mm",ASTM D217
+Zinc Ricinoleate,Appearance,Visual
+Zinc Ricinoleate,"Zinc Content, %",ICP-OES / AAS
+Zinc Ricinoleate,"Zinc Ricinoleate Content, %",HPLC / GC / Standard Laboratory Method
+Zinc Ricinoleate,"Acid Value, mg KOH/g",AOCS Cd 3d-63
+Zinc Ricinoleate,"Hydroxyl Value, mg KOH/g",AOCS Cd 13-60
+Zinc Ricinoleate,"Iodine Value, g I₂/100g",AOCS Cd 1d-92
+Zinc Ricinoleate,"Moisture, %",ASTM E203
+Zinc Ricinoleate,"Ash, %",ASTM D482
+Zinc Ricinoleate,"Free Fatty Acids, %",AOCS Ca 5a-40
+Zinc Ricinoleate,"Melting Point, °C",Standard Laboratory Method
+Zinc Ricinoleate,"Heavy Metals, ppm",ICP-OES / AAS
+Zinc Ricinoleate,"Particle Size, Passing Through 100 Mesh, %",Sieve Test
+Zinc Undecylenate,Appearance,Visual
+Zinc Undecylenate,"Zinc Content, %",Complexometric Titration / ICP-OES
+Zinc Undecylenate,"Assay (as Zinc Undecylenate), %",USP <541> / Titration
+Zinc Undecylenate,Identification (Zinc & Undecylenate),USP / Ph. Eur. IR
+Zinc Undecylenate,"Free Undecylenic Acid, %",Acid-Base Titration
+Zinc Undecylenate,"Degree of Unsaturation / Iodine Value, g I₂/100g",AOCS Cd 1d-92 / Bromination
+Zinc Undecylenate,"Loss on Drying, %",Gravimetric / USP <731>
+Zinc Undecylenate,"Melting Range, °C",Capillary Melting / USP <741>
+Zinc Undecylenate,"Alkali & Alkaline Earth Metals, %",Gravimetric / Ph. Eur.
+Zinc Undecylenate,"Heavy Metals (as Pb), ppm",ICP-OES / AAS
+Zinc Undecylenate,"Arsenic (As), ppm",ICP-OES / Hydride AAS
+Zinc Undecylenate,"Particle Size, Passing Through 100 Mesh, %",Sieve Test / ASTM E11
+Refined Glycerin (Available to USP/IP Spec.),Appearance,Visual
+Refined Glycerin (Available to USP/IP Spec.),Odour,Organoleptic
+Refined Glycerin (Available to USP/IP Spec.),"Glycerol Content, % w/w",USP / IP
+Refined Glycerin (Available to USP/IP Spec.),Specific Gravity at 25°C,USP / IP
+Refined Glycerin (Available to USP/IP Spec.),Colour,USP / IP
+Refined Glycerin (Available to USP/IP Spec.),Fatty Acids & Esters,USP / IP
+Refined Glycerin (Available to USP/IP Spec.),"Chlorides, %",USP / IP
+Refined Glycerin (Available to USP/IP Spec.),"Sulphates, %",USP / IP
+Refined Glycerin (Available to USP/IP Spec.),"Chlorinated Compounds, %",USP / IP
+Refined Glycerin (Available to USP/IP Spec.),"Heavy Metals, ppm",USP / IP
+Refined Glycerin (Available to USP/IP Spec.),"Iron, ppm",USP / IP
+Refined Glycerin (Available to USP/IP Spec.),"Aldehydes, ppm",USP / IP
+Refined Glycerin (Available to USP/IP Spec.),"Sulphated Ash, %",USP / IP
+Refined Glycerin (Available to USP/IP Spec.),Organic Volatile Impurities,USP / IP
+Castor Oil USP–NF Grade,Appearance,Visual
+Castor Oil USP–NF Grade,Identification,USP <197>
+Castor Oil USP–NF Grade,Specific Gravity,USP <841>
+Castor Oil USP–NF Grade,Refractive Index,USP <831>
+Castor Oil USP–NF Grade,Heavy Metals,USP <231>
+Castor Oil USP–NF Grade,Free Fatty Acids,USP Compendial Method
+Castor Oil Ph. Eur. (European Pharmacopoeia),Appearance,Visual
+Castor Oil Ph. Eur. (European Pharmacopoeia),Identification,Ph. Eur. 2.2.24
+Castor Oil Ph. Eur. (European Pharmacopoeia),Relative Density,Ph. Eur. 2.2.5
+Castor Oil Ph. Eur. (European Pharmacopoeia),Refractive Index,Ph. Eur. 2.2.6
+Castor Oil Ph. Eur. (European Pharmacopoeia),Acid Value,Ph. Eur. 2.5.1
+Castor Oil Ph. Eur. (European Pharmacopoeia),Peroxide Value,Ph. Eur. 2.5.5
+Castor Oil IP (Indian Pharmacopoeia),Appearance,Visual
+Castor Oil IP (Indian Pharmacopoeia),Identification,IP Compendial Method
+Castor Oil IP (Indian Pharmacopoeia),Weight per ml,IP Appendix
+Castor Oil IP (Indian Pharmacopoeia),Refractive Index,IP Appendix
+Castor Oil IP (Indian Pharmacopoeia),Acid Value,IP Compendial Titration
+Castor Oil JP (Japanese Pharmacopoeia),Appearance,Visual
+Castor Oil JP (Japanese Pharmacopoeia),Identification,JP Compendial Method
+Castor Oil JP (Japanese Pharmacopoeia),Specific Gravity,JP Compendial Method
+Castor Oil JP (Japanese Pharmacopoeia),Refractive Index,JP Compendial Method
+Castor Oil JP (Japanese Pharmacopoeia),Acid Value,JP Compendial Titration
+Cosmetic Grade Castor Oil,Appearance,Visual
+Cosmetic Grade Castor Oil,Colour,Lovibond / AOCS
+Cosmetic Grade Castor Oil,Free Fatty Acids,AOCS Ca 5a-40
+Cosmetic Grade Castor Oil,Hydroxyl Value,AOCS Cd 13-60
+Cosmetic Grade Castor Oil,Peroxide Value,AOCS Cd 8-53

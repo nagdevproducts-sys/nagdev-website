@@ -11,7 +11,7 @@ secondary_keywords:
   - British Pharmacopoeia castor oil
   - pharma grade castor oil documentation
 lang: en
-in_brief: "Study this castor oil BP monograph buyer guide to understand British Pharmacopoeia testing protocols. Produced from virgin expeller oil at our Deodar plant in North Gujarat, our Castor Oil BP conforms to established British compendial criteria, supported by comprehensive batch analytical records and lot-specific Certificates of Analysis for commercial buyers."
+in_brief: "Study this castor oil BP monograph buyer guide to understand British Pharmacopoeia testing protocols. Produced from virgin expeller oil at our Deodar plant in North Gujarat, our Castor Oil BP is tested against established British compendial criteria, supported by comprehensive batch analytical records and lot-specific Certificates of Analysis for commercial buyers."
 faqs:
   - q: "What governs the botanical identity of Castor Oil BP?"
     a: "The British Pharmacopoeia compendial monograph specifies that the oil must be obtained by cold expression from the seeds of Ricinus communis, with optical rotation verifying authentic botanical origin."

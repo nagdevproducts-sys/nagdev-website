@@ -8,7 +8,7 @@ product_slug: commercial-castor-oil
 primary_keyword: understanding acid value in castor oil
 secondary_keywords:
   - castor oil free fatty acids
-  - acid value testing ASTM D974
+  - acid value testing
   - FFA to acid value conversion factor
 lang: en
 in_brief: "Master the technical criteria for understanding acid value in castor oil procurement. Tested in our quality laboratory in Deodar, Gujarat, this critical analytical parameter measures unesterified fatty acids, dictating chemical refining loss, polyurethane prepolymer catalysis, and industrial lubricant stability."
@@ -20,7 +20,7 @@ faqs:
   - q: "How does elevated acid value interfere with polyurethane prepolymers?"
     a: "Carboxylic acids react competitively with isocyanates to form amides, releasing carbon dioxide gas and deactivating basic amine catalysts."
   - q: "What ASTM or ISO test standard is used to measure acid value?"
-    a: "Acid value is determined by titrating an oil solution against standardized potassium hydroxide in accordance with ASTM D974 or ISO 660."
+    a: "Acid value is determined by titrating an oil solution against standardized potassium hydroxide in accordance with standardized titration or ISO 660."
   - q: "Can buyers specify custom acid value thresholds on commercial contracts?"
     a: "Yes. Technical buyers can negotiate tailored acid value limits based on specific industrial application requirements upon enquiry."
 ---
@@ -60,7 +60,7 @@ The concentration of free acidity directly determines processing performance acr
 
 ## Testing Standards and Laboratory Analysis at Deodar
 
-Nagdev Products evaluates acid value on every production batch in accordance with standardized test procedures (ASTM D974, ISO 660, or AOCS Cd 3d-63). A representative oil sample is dissolved in a refined solvent mixture (typically equal parts ethanol and toluene) and titrated against standardized 0.1 N potassium hydroxide solution using phenolphthalein indicator until a persistent faint pink endpoint appears.
+Nagdev Products evaluates acid value on every production batch in accordance with standardized test procedures (standardized titration, ISO 660, or standardized titration). A representative oil sample is dissolved in a refined solvent mixture (typically equal parts ethanol and toluene) and titrated against standardized 0.1 N potassium hydroxide solution using phenolphthalein indicator until a persistent faint pink endpoint appears.
 
 Our manufacturing facility situated at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330 operates under rigorous quality controls. Sourcing seed directly from North Gujarat's castor belt (Banaskantha and Vav-Tharad region) through our 50 TPD seed crushing capacity, our fresh seed intake prevents enzymatic hydrolysis, ensuring low baseline acidity across our entire product range.
 

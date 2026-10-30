@@ -762,5 +762,19 @@ class TestClaimsLint(unittest.TestCase):
         min_mtime = os.path.getmtime("css/main.min.css")
         self.assertGreaterEqual(min_mtime, css_mtime, "css/main.min.css is older than css/main.css! Rebuild with clean-css-cli.")
 
+    def test_r24_pdf_address_equals_register(self):
+        """Rule R24: Every TDS PDF, catalog.pdf, and spec-confirmation.pdf must contain the register plant address and 0 banned address strings."""
+        from scripts.claims_lint import check_pdf_consistency_r19_r24
+        findings = check_pdf_consistency_r19_r24(self.facts)
+        r24_fails = [f for f in findings if f["rule"].startswith("R24")]
+        self.assertEqual(r24_fails, [], f"R24 PDF address failures found: {r24_fails}")
+
+    def test_r19_pdf_brand_codes_and_statuses(self):
+        """Rule R19 PDF Scan: TDS PDFs and documents must not contain NDEVDRY, NDEVPHARMA, NDEVCARE, COSM, or Manufactured to Order."""
+        from scripts.claims_lint import check_pdf_consistency_r19_r24
+        findings = check_pdf_consistency_r19_r24(self.facts)
+        r19_fails = [f for f in findings if f["rule"].startswith("R19")]
+        self.assertEqual(r19_fails, [], f"R19 PDF brand code / status failures found: {r19_fails}")
+
 if __name__ == "__main__":
     unittest.main()

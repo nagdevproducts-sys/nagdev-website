@@ -71,7 +71,8 @@ RULES = {
     "R20": "EFFICACY & AGRONOMIC/HEALTH CLAIMS: no efficacy claims (pest/nematode/insect/fungus/weed/disease within 6 words of suppress/repel/control/kill/prevent/protect/resist), phytosanitary, cash crops benefit, yield increase, boosts yield, cures, heals",
     "R21": "CAS number integrity: no unauthorized CAS numbers on agricultural meals",
     "R22": "Colour scale mismatch: 'Gardner' on a page whose spec table uses Lovibond (and vice versa) -> FAIL",
-    "R23": "HS code mismatch: HS code must match product-master across page, chips, JSON-LD, TDS and catalog -> FAIL"
+    "R23": "HS code mismatch: HS code must match product-master across page, chips, JSON-LD, TDS and catalog -> FAIL",
+    "R24": "PDF consistency: all TDS, catalog, and spec-confirmation PDFs must contain the exact plant address from the facts register; '42/1' and old district references forbidden"
 }
 
 # Ignored paths
@@ -1331,7 +1332,7 @@ def check_r23_hs_code(content: str, file_path_str: str, repo_root: Path = REPO_R
     tds_pdf = repo_root / "downloads" / "tds" / f"{slug}.pdf"
     if tds_pdf.exists():
         try:
-            import fitz
+            import pymupdf as fitz
             doc = fitz.open(str(tds_pdf))
             tds_text = "".join([page.get_text() for page in doc])
             m_tds = re.search(r'HS\s*(?:Tariff)?\s*Code:?\s*(\d{4}\.\d{2})', tds_text, re.IGNORECASE)
@@ -1357,6 +1358,109 @@ def check_r23_hs_code(content: str, file_path_str: str, repo_root: Path = REPO_R
             pass
 
     return findings
+
+def check_pdf_consistency_r19_r24(facts: dict, repo_root: Path = REPO_ROOT) -> list:
+    """
+    R19 & R24: Scans all TDS PDFs, catalog.pdf, and spec-confirmation.pdf.
+    R24: Plant address must equal facts register plant address; '42/1' and old district references forbidden.
+    R19: Brand codes must match canonical codes; 'NDEVDRY', 'NDEVPHARMA', 'NDEVCARE', 'COSM', and 'Manufactured to Order' banned.
+    """
+    findings = []
+    plant_address = facts.get("company", {}).get("plant", "")
+    clean_expected_addr = " ".join(plant_address.split()).lower()
+
+    banned_brand_tokens = [
+        ("NDEVDRY", "banned legacy brand code"),
+        ("NDEVPHARMA", "banned legacy brand code"),
+        ("NDEVCARE", "banned legacy brand code"),
+        (r"\bCOSM\b", "banned brand code COSM (must be NDEVOLEO™ COS)"),
+        ("Manufactured to Order", "banned status label")
+    ]
+
+    banned_address_patterns = [
+        ("42/1", "old Survey 42/1 address"),
+        ("Banaskantha, Gujarat — 385330", "old district address format"),
+        ("Banaskantha, Gujarat - 385330", "old district address format")
+    ]
+
+    pdf_paths = []
+    tds_dir = repo_root / "downloads" / "tds"
+    if tds_dir.exists():
+        for f in tds_dir.glob("*.pdf"):
+            pdf_paths.append(f)
+    cat_path = repo_root / "downloads" / "catalog.pdf"
+    if cat_path.exists():
+        pdf_paths.append(cat_path)
+    spec_path = repo_root / "phase15" / "spec-confirmation.pdf"
+    if spec_path.exists():
+        pdf_paths.append(spec_path)
+
+    try:
+        import pymupdf
+    except ImportError:
+        import pymupdf
+
+    for p in sorted(pdf_paths):
+        rel = p.relative_to(repo_root).as_posix()
+        try:
+            doc = pymupdf.open(p)
+            full_text = ""
+            for page in doc:
+                full_text += page.get_text() + " "
+            clean_text = " ".join(full_text.split()).lower()
+
+            # R24: Check plant address
+            if clean_expected_addr and clean_expected_addr not in clean_text:
+                findings.append({
+                    "file": rel,
+                    "line": 1,
+                    "rule": "R24 PDF address mismatch",
+                    "severity": "FAIL",
+                    "text": f"PDF does not contain the register plant address: '{plant_address}'"
+                })
+
+            # R24: Check banned address strings
+            for b_pat, desc in banned_address_patterns:
+                if b_pat.lower() in full_text.lower():
+                    findings.append({
+                        "file": rel,
+                        "line": 1,
+                        "rule": "R24 Banned address reference in PDF",
+                        "severity": "FAIL",
+                        "text": f"PDF contains forbidden address string '{b_pat}' ({desc})"
+                    })
+
+            # R19: Check brand codes & statuses
+            for b_tok, desc in banned_brand_tokens:
+                if b_tok.startswith(r"\b"):
+                    if re.search(b_tok, full_text):
+                        findings.append({
+                            "file": rel,
+                            "line": 1,
+                            "rule": "R19 Banned brand code in PDF",
+                            "severity": "FAIL",
+                            "text": f"PDF contains {desc}: '{b_tok}'"
+                        })
+                else:
+                    if b_tok.lower() in full_text.lower():
+                        findings.append({
+                            "file": rel,
+                            "line": 1,
+                            "rule": "R19 Banned brand code in PDF",
+                            "severity": "FAIL",
+                            "text": f"PDF contains {desc}: '{b_tok}'"
+                        })
+        except Exception as e:
+            findings.append({
+                "file": rel,
+                "line": 1,
+                "rule": "R24 PDF read error",
+                "severity": "FAIL",
+                "text": f"Could not parse PDF {rel}: {e}"
+            })
+
+    return findings
+
 
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
@@ -1811,7 +1915,7 @@ def run_production_audit(facts: dict):
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 24)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 25)}
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
     cb_ts = int(time.time())
@@ -1898,7 +2002,7 @@ def main():
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 24)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 25)}
 
     for f in files:
         f_findings = lint_file(f, facts)
@@ -1911,6 +2015,18 @@ def main():
                         fails_by_rule[r_key] += 1
             else:
                 warn_count += 1
+
+    # Run PDF consistency audit (R19 and R24)
+    pdf_findings = check_pdf_consistency_r19_r24(facts, REPO_ROOT)
+    for item in pdf_findings:
+        all_findings.append(item)
+        if item["severity"] == "FAIL":
+            fail_count += 1
+            for r_key in fails_by_rule:
+                if re.match(rf'^{r_key}\b', item["rule"]):
+                    fails_by_rule[r_key] += 1
+        else:
+            warn_count += 1
 
     # Save Markdown and CSV reports
     report_md = REPO_ROOT / "seo" / "claims-lint-report.md"
