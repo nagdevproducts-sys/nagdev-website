@@ -134,19 +134,19 @@ window.NAGDEV_BLOG_POSTS = [
   {
     "id": "post-pale-pressed-grade-castor-oil-buyer-guide",
     "slug": "pale-pressed-grade-castor-oil-buyer-guide",
-    "title": "Pale Pressed Grade Castor Oil Buyer Guide: High Purity",
+    "title": "Pale Pressed Grade Castor Oil Buyer Guide: high quality",
     "category": "Technical Guide",
     "type": "T1",
     "product_slug": "ppg-castor-oil",
     "date": "2026-10-29",
     "author": "Nagdev Products technical team",
     "readTime": "15 min read",
-    "seoDescription": "Pale pressed grade castor oil buyer guide. High-purity, ultra-low color oil from Gujarat. Review specifications, packaging, and technical procurement.",
+    "seoDescription": "Pale pressed grade castor oil buyer guide. high-grade, ultra-low color oil from Gujarat. Review specifications, packaging, and technical procurement.",
     "coverImage": "images/blog-covers/pale-pressed-grade-castor-oil-buyer-guide-800w.webp",
     "tags": [
       "PPG castor oil supplier Gujarat",
       "pale pressed castor oil specifications",
-      "high purity castor oil bulk"
+      "high quality castor oil bulk"
     ]
   },
   {

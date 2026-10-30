@@ -94,7 +94,7 @@
       },
       {
         "title": "Specialty Chemical Intermediates",
-        "desc": "Serves as the high-purity starting triglyceride for hydrogenation to HCO, dehydration to DCO, and synthetic esterification.",
+        "desc": "Serves as the starting triglyceride for hydrogenation to HCO, dehydration to DCO, and synthetic esterification.",
         "link": "/process-flow"
       }
     ],
@@ -226,7 +226,7 @@
       }
     ],
     "hs_code": "2306.90",
-    "unique_intro": "Castor Cake (NDEVAGRO CAKE) is an organic expeller solid by-product in cake or meal form in regular commercial supply. Rich in organic nitrogen, phosphorus, and potassium, it is used as an agricultural organic fertilizer and soil amendment, supplied from our plant at Deodar, Gujarat, with a COA per lot."
+    "unique_intro": "Castor Cake (NDEVAGRO™ CAKE) is an organic expeller solid by-product in cake or meal form in regular commercial supply. Contains organic nitrogen, phosphorus and potassium (values as per specification), it is used as an agricultural organic fertilizer and soil amendment, supplied from our plant at Deodar, Gujarat, with a COA per lot."
   },
   {
     "slug": "hydrogenated-castor-oil",
@@ -336,7 +336,7 @@
       }
     ],
     "hs_code": "1518.00",
-    "unique_intro": "Dehydrated Castor Oil (NDEVOLEO™ DCO) is a pale, transparent drying oil featuring conjugated double bonds in regular commercial supply. It is used as a binder in architectural enamels, quick-set printing inks, and clear varnishes, supplied from our plant at Deodar, Gujarat, with a COA per lot."
+    "unique_intro": "Dehydrated Castor Oil (NDEVOLEO™ DCO) is a drying oil with conjugated double bonds (appearance: clear to slightly hazy, as per specification) in regular commercial supply. It is used as a binder in architectural enamels, quick-set printing inks, and clear varnishes, supplied from our plant at Deodar, Gujarat, with a COA per lot."
   },
   {
     "slug": "dco-fatty-acid",
@@ -385,7 +385,7 @@
       }
     ],
     "hs_code": "3823.19",
-    "unique_intro": "DCO Fatty Acid (NDEVACID™ DCO-FA) is a distilled conjugated diene liquid fatty acid in regular commercial supply. It is used where low yellowing in baking finishes is required, including high-solids stoving enamels and epoxy ester resins, supplied from our plant at Deodar, Gujarat, with a COA per lot."
+    "unique_intro": "DCO Fatty Acid (NDEVACID™ DCO-FA) is a conjugated diene liquid fatty acid in regular commercial supply. It is used where low yellowing in baking finishes is required, including high-solids stoving enamels and epoxy ester resins, supplied from our plant at Deodar, Gujarat, with a COA per lot."
   },
   {
     "slug": "ppg-castor-oil",
@@ -434,7 +434,7 @@
       }
     ],
     "hs_code": "1515.30",
-    "unique_intro": "Pale Pressed Grade (PPG) Castor Oil (NDEVOLEO PPG) is a pale, low-acidity refined liquid castor oil available on enquiry. It is used in urethane resins where low colour is required, lubricant blends, and chemical intermediates, supplied from our plant at Deodar, Gujarat, with a COA per lot."
+    "unique_intro": "Pale Pressed Grade (PPG) Castor Oil (NDEVOLEO™ PPG) is a pale, low-acidity pressed liquid castor oil available on enquiry. It is used in urethane resins where low colour is required, lubricant blends, and chemical intermediates, supplied from our plant at Deodar, Gujarat, with a COA per lot."
   },
   {
     "slug": "cold-pressed-castor-oil",
@@ -495,11 +495,9 @@
     "physical_form": "Viscous Liquid",
     "packaging": [
       "200 kg tight-head steel and HDPE export drums",
-      "1,000 L intermediate bulk containers (IBC totes)",
-      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
-      "20–24 MT bulk ISO tank containers"
+      "1,000 L intermediate bulk containers (IBC totes)"
     ],
-    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "packaging_tile_text": "Drums, IBCs · Dispatch: Deodar, Vav-Tharad district, Gujarat",
     "applications": [
       {
         "title": "Pharmaceutical Excipients",
@@ -544,11 +542,9 @@
     "physical_form": "Viscous Liquid",
     "packaging": [
       "200 kg tight-head steel and HDPE export drums",
-      "1,000 L intermediate bulk containers (IBC totes)",
-      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
-      "20–24 MT bulk ISO tank containers"
+      "1,000 L intermediate bulk containers (IBC totes)"
     ],
-    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "packaging_tile_text": "Drums, IBCs · Dispatch: Deodar, Vav-Tharad district, Gujarat",
     "applications": [
       {
         "title": "USP-NF Compendial Compounding",
@@ -557,12 +553,12 @@
       },
       {
         "title": "Lipid-Based Carrier Systems",
-        "desc": "High-purity botanical triglyceride vehicle for oral solutions, soft gelatin capsule fill matrices, and topical preparations.",
+        "desc": "Vegetable oil vehicle used in oral, capsule and topical formulations (as qualified by the buyer).",
         "link": "/process-flow"
       },
       {
         "title": "Dermatological Vehicles",
-        "desc": "Controlled acidity and iodine value provide consistent viscosity and emolliency in dermal vehicle ointments.",
+        "desc": "Used as an emollient vehicle in topical ointments.",
         "link": "/process-flow"
       }
     ],
@@ -577,7 +573,7 @@
       },
       {
         "q": "What standard bulk packaging formats are available?",
-        "a": "Castor Oil USP–NF is available in 200 kg steel or HDPE drums, 950 kg IBC totes, and bulk ISO tanks supplied from our Deodar plant."
+        "a": "Castor Oil USP–NF is available in 200 kg steel or HDPE drums, 950 kg IBC totes supplied from our Deodar plant."
       }
     ],
     "hs_code": "1515.30",
@@ -593,11 +589,9 @@
     "physical_form": "Viscous Liquid",
     "packaging": [
       "200 kg tight-head steel and HDPE export drums",
-      "1,000 L intermediate bulk containers (IBC totes)",
-      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
-      "20–24 MT bulk ISO tank containers"
+      "1,000 L intermediate bulk containers (IBC totes)"
     ],
-    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "packaging_tile_text": "Drums, IBCs · Dispatch: Deodar, Vav-Tharad district, Gujarat",
     "applications": [
       {
         "title": "European Pharmacopoeia Compounding",
@@ -618,7 +612,7 @@
     "faqs": [
       {
         "q": "Which edition of the European Pharmacopoeia is referenced for testing?",
-        "a": "State the required Ph. Eur. edition with your order; testing is conducted and reported against the specified monograph edition."
+        "a": "State the required Ph. Eur. edition with your order; testing is conducted and reported against the specified monograph edition. The Ph. Eur. has separate monographs for virgin and refined castor oil; specify which monograph you require."
       },
       {
         "q": "What documentation accompanies each Ph. Eur. consignment?",
@@ -626,11 +620,11 @@
       },
       {
         "q": "What packaging options are offered for European Pharmacopoeia grade?",
-        "a": "Supplied in 200 kg steel or HDPE drums, 950 kg IBC totes, and bulk ISO containers prepared under strict quality standards."
+        "a": "Supplied in 200 kg steel or HDPE drums, 950 kg IBC totes prepared under strict quality standards."
       }
     ],
     "hs_code": "1515.30",
-    "unique_intro": "Castor Oil Ph. Eur. (NDEVOLEO EP) is a compendial European Pharmacopoeia compliant liquid castor oil available on enquiry. It is tested for regulated pharmaceutical excipients, oral solutions, and regulated dermal formulations, supplied from our plant at Deodar, Gujarat, with a COA per lot."
+    "unique_intro": "Castor Oil Ph. Eur. (NDEVOLEO™ EP) is liquid castor oil tested against the requested Ph. Eur. monograph available on enquiry. The Ph. Eur. has separate monographs for virgin and refined castor oil; specify which monograph you require. It is tested for regulated pharmaceutical excipients, oral solutions, and regulated dermal formulations, supplied from our plant at Deodar, Gujarat, with a COA per lot."
   },
   {
     "slug": "castor-oil-ip",
@@ -642,25 +636,23 @@
     "physical_form": "Viscous Liquid",
     "packaging": [
       "200 kg tight-head steel and HDPE export drums",
-      "1,000 L intermediate bulk containers (IBC totes)",
-      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
-      "20–24 MT bulk ISO tank containers"
+      "1,000 L intermediate bulk containers (IBC totes)"
     ],
-    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "packaging_tile_text": "Drums, IBCs · Dispatch: Deodar, Vav-Tharad district, Gujarat",
     "applications": [
       {
         "title": "Indian Pharmacopoeia Compounding",
-        "desc": "Tested against Indian Pharmacopoeia (IP) monograph specifications for medicinal excipients, tinctures, and liquid compounding.",
+        "desc": "Tested against Indian Pharmacopoeia (IP) monograph specifications for excipient use and liquid compounding.",
         "link": "/process-flow"
       },
       {
         "title": "Topical & Medicinal Ointments",
-        "desc": "Consistent viscosity and high hydroxyl content for formulation in pharmaceutical salves.",
+        "desc": "Consistent viscosity and hydroxyl value as per monograph for formulation in pharmaceutical salves.",
         "link": "/process-flow"
       },
       {
         "title": "Healthcare Formulations",
-        "desc": "Pure expeller-pressed refined castor oil base for pharmaceutical and wellness manufacturing in commercial supply.",
+        "desc": "Refined castor oil for pharmaceutical formulations, available on enquiry.",
         "link": "/process-flow"
       }
     ],
@@ -675,11 +667,11 @@
       },
       {
         "q": "What container formats are available for domestic supply?",
-        "a": "Available in 200 kg HDPE or epoxy-lined steel drums, 950 kg IBC totes, and dedicated road tankers dispatched from our Deodar plant."
+        "a": "Available in 200 kg HDPE or epoxy-lined steel drums, 950 kg IBC totes dispatched from our Deodar plant."
       }
     ],
     "hs_code": "1515.30",
-    "unique_intro": "Castor Oil IP (NDEVOLEO IP) is a refined compendial liquid castor oil available on enquiry. Formulated for pharmaceutical manufacturers requiring Indian Pharmacopoeia compliance for medicinal excipients, liquid compounding, and topical ointment bases, it is supplied from our plant at Deodar, Gujarat, with a COA per lot."
+    "unique_intro": "Castor Oil IP (NDEVOLEO™ IP) is a refined compendial liquid castor oil available on enquiry. Supplied for pharmaceutical manufacturers requiring Indian Pharmacopoeia compliance for excipient use, liquid compounding, and topical ointment bases, it is supplied from our plant at Deodar, Gujarat, with a COA per lot."
   },
   {
     "slug": "castor-oil-jp",
@@ -691,11 +683,9 @@
     "physical_form": "Viscous Liquid",
     "packaging": [
       "200 kg tight-head steel and HDPE export drums",
-      "1,000 L intermediate bulk containers (IBC totes)",
-      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
-      "20–24 MT bulk ISO tank containers"
+      "1,000 L intermediate bulk containers (IBC totes)"
     ],
-    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "packaging_tile_text": "Drums, IBCs · Dispatch: Deodar, Vav-Tharad district, Gujarat",
     "applications": [
       {
         "title": "Japanese Pharmacopoeia Compounding",
@@ -703,8 +693,8 @@
         "link": "/process-flow"
       },
       {
-        "title": "Precision Liquid Formulations",
-        "desc": "Controlled optical clarity, low acid value, and minimal moisture content for high-specification pharmaceutical and healthcare products.",
+        "title": "Liquid Formulations",
+        "desc": "Supplied for liquid and topical formulations requiring JP monograph testing.",
         "link": "/process-flow"
       },
       {
@@ -724,11 +714,11 @@
       },
       {
         "q": "What packaging formats are used for overseas container shipping?",
-        "a": "Castor Oil JP is exported in 200 kg steel drums, 950 kg IBC totes, and bulk ISO tanks with full seal integrity."
+        "a": "Castor Oil JP is exported in 200 kg steel drums, 950 kg IBC totes with full seal integrity."
       }
     ],
     "hs_code": "1515.30",
-    "unique_intro": "Castor Oil JP (NDEVOLEO JP) is a high-purity compendial liquid castor oil available on enquiry. Sourced and tested against Japanese Pharmacopoeia specifications for pharmaceutical excipients, external emulsions, and precision healthcare compounding, it is supplied from our plant at Deodar, Gujarat, with a COA per lot."
+    "unique_intro": "Castor Oil JP (NDEVOLEO™ JP) is a compendial liquid castor oil available on enquiry. Tested against Japanese Pharmacopoeia specifications for pharmaceutical excipients, external emulsions, and healthcare compounding, it is supplied from our plant at Deodar, Gujarat, with a COA per lot."
   },
   {
     "slug": "cosmetic-grade-castor-oil",
@@ -740,25 +730,23 @@
     "physical_form": "Viscous Liquid",
     "packaging": [
       "200 kg tight-head steel and HDPE export drums",
-      "1,000 L intermediate bulk containers (IBC totes)",
-      "20–21.5 MT dedicated liquid flexitanks in 20ft containers",
-      "20–24 MT bulk ISO tank containers"
+      "1,000 L intermediate bulk containers (IBC totes)"
     ],
-    "packaging_tile_text": "Drums, IBCs, flexitanks, ISO tanks · Dispatch: Deodar, Vav-Tharad district, Gujarat",
+    "packaging_tile_text": "Drums, IBCs · Dispatch: Deodar, Vav-Tharad district, Gujarat",
     "applications": [
       {
         "title": "Lip Balms & Color Cosmetics",
-        "desc": "Natural gloss, rich pigment wetting, and high viscosity make it an ideal botanical binder for lipsticks, glosses, and mineral makeup.",
+        "desc": "Used for gloss and pigment wetting in lipsticks, lip glosses and colour cosmetics.",
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       },
       {
-        "title": "Hair Care & Scalp Treatments",
-        "desc": "Rich ricinoleic acid content coats hair shafts, delivering natural shine and moisture retention in pomades, conditioning oils, and serums.",
+        "title": "Hair Care Products",
+        "desc": "Used in hair oils, pomades and conditioning products.",
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       },
       {
         "title": "Cleansing Balms & Moisturizers",
-        "desc": "Acts as an effective makeup-dissolving base oil and emollient in facial balms and body creams.",
+        "desc": "Used as a base oil and emollient in cleansing balms and creams.",
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       }
     ],
@@ -769,7 +757,7 @@
       },
       {
         "q": "How is cosmetic grade castor oil packaged for personal care manufacturers?",
-        "a": "Supplied in 200 kg steel or HDPE drums, 950 kg IBC totes, and bulk flexitanks tailored for cosmetic and personal care manufacturing."
+        "a": "Supplied in 200 kg steel or HDPE drums, 950 kg IBC totes tailored for cosmetic and personal care manufacturing."
       },
       {
         "q": "What quality documents accompany each consignment?",
@@ -964,7 +952,7 @@
     "applications": [
       {
         "title": "High-Nitrogen Organic Farming",
-        "desc": "Target concentrated organic soil input with elevated nitrogen content for precision soil fertility management (under development).",
+        "desc": "Target concentrated organic soil input with elevated nitrogen content for soil fertility management (under development).",
         "link": "/applications/castor-cake-organic-fertilizer"
       },
       {
@@ -1436,7 +1424,7 @@
       }
     ],
     "hs_code": "2918.19",
-    "unique_intro": "Lithium 12-Hydroxystearate (NDEVSOAP™ LI12) is a pre-formed lithium carboxylate grease thickener under technical development. Derived from high-purity 12-HSA, it enables rapid grease compounding with reduced cycle times for high-temperature multi-purpose greases, prepared at Deodar, Gujarat."
+    "unique_intro": "Lithium 12-Hydroxystearate (NDEVSOAP™ LI12) is a pre-formed lithium carboxylate grease thickener under technical development. Derived from 12-HSA, it enables rapid grease compounding with reduced cycle times for high-temperature multi-purpose greases, prepared at Deodar, Gujarat."
   },
   {
     "slug": "calcium-12-hydroxystearate",
@@ -1521,7 +1509,7 @@
     "faqs": [
       {
         "q": "Why is zinc undecylenate formulated into topical antifungal powders?",
-        "a": "Zinc undecylenate combines the fungistatic activity of the undecylenate anion with the soothing, astringent, and moisture-absorbing properties of the zinc cation, making it an ideal active ingredient for OTC athlete's foot powders and personal care dusting formulations."
+        "a": "Zinc undecylenate combines the fungistatic activity of the undecylenate anion with the soothing, astringent, and moisture-absorbing properties of the zinc cation, making it an suitable active ingredient for OTC athlete's foot powders and personal care dusting formulations."
       },
       {
         "q": "Which analytical assay tests confirm compendial monograph compliance for zinc undecylenate powder?",
@@ -1529,7 +1517,7 @@
       },
       {
         "q": "How is zinc undecylenate synthesized from castor oil?",
-        "a": "In target development, undecylenic acid is reacted with high-purity zinc oxide or zinc hydroxide under technical evaluation, followed by crystallization, drying, and micronized pulverization (grade under development)."
+        "a": "In target development, undecylenic acid is reacted with zinc oxide or zinc hydroxide under technical evaluation, followed by crystallization, drying, and micronized pulverization (grade under development)."
       }
     ],
     "hs_code": "2918.19",
@@ -1552,7 +1540,7 @@
     "applications": [
       {
         "title": "Cosmetic Deodorants & Body Sprays",
-        "desc": "Target highly effective natural odor absorbent that traps malodor molecules in underarm sticks, roll-ons, and sprays (under development).",
+        "desc": "Target natural odor absorbent that traps malodor molecules in underarm sticks, roll-ons, and sprays (under development).",
         "link": "/applications/castor-oil-for-cosmetics-and-personal-care"
       },
       {
@@ -1581,7 +1569,7 @@
       }
     ],
     "hs_code": "2918.19",
-    "unique_intro": "Zinc Ricinoleate (NDEVSOAP™ ZNR) is an odor-absorbing zinc hydroxy-oleate compound under technical development. Derived from high-purity ricinoleic acid, it binds volatile odor-causing sulfur and nitrogen compounds in cosmetics, home care, and industrial formulations from our plant at Deodar, Gujarat."
+    "unique_intro": "Zinc Ricinoleate (NDEVSOAP™ ZNR) is an odor-absorbing zinc hydroxy-oleate compound under technical development. Derived from ricinoleic acid, it binds volatile odor-causing sulfur and nitrogen compounds in cosmetics, home care, and industrial formulations from our plant at Deodar, Gujarat."
   },
   {
     "slug": "blown-oxidized-castor-oil",

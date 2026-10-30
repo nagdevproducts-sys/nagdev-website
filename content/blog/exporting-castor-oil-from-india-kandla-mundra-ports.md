@@ -48,7 +48,7 @@ Selecting the appropriate export packaging protects refined castor oil and its d
 1. **Epoxy-Lined Steel Drums (200 kg net / 80 drums per 20ft FCL)**: Internal baked epoxy linings isolate refined oils from raw steel surfaces. Drums are secured onto fumigated wooden or plastic pallets and secured with heavy-duty lashing inside twenty-foot ocean containers.
 2. **Intermediate Bulk Containers (1,000 L IBC totes / 18 to 20 IBCs per 20ft FCL)**: High-density polyethylene composite bottles in tubular steel cages provide efficient mechanical handling and forklift maneuverability at destination warehouses.
 3. **Multi-Layer Flexitanks (20 to 21.5 MT in 20ft Dry Box)**: sanitary, high-barrier polyethylene flexitanks convert standard dry ocean containers into bulk liquid carriers, delivering the most economical freight rates for large-volume industrial consumers.
-4. **Dedicated Stainless Steel ISO Tanks (20 to 25 MT)**: Insulated, temperature-controllable ISO tanks equipped with top and bottom discharge valves for high-purity pharmaceutical and technical excipient buyers.
+4. **Dedicated Stainless Steel ISO Tanks (20 to 25 MT)**: Insulated, temperature-controllable ISO tanks equipped with top and bottom discharge valves for high-grade pharmaceutical and technical excipient buyers.
 
 ## Export Documentation Dossier and Regulatory Clearance
 

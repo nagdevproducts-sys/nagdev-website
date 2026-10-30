@@ -1,10 +1,3 @@
-/* ==========================================================================
-   NAGDEV PRODUCTS PRIVATE LIMITED — OFFICIAL PRODUCT DATABASE
-   Total Products: 32 (7 Regular Supply · 8 Available on Enquiry · 17 Under Development)
-   Active Categories: Castor Oil | De Oiled Cake (D.O.C) | Derivatives | By-Products
-   Plant: Survey No. 301 P-2, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330
-   ========================================================================== */
-
 const PRODUCTS_DATABASE = [
   {
     "id": "commercial-castor-oil",
@@ -117,7 +110,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/fpd-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank • 200 / 225 kg MS / HDPE Drums • 950 kg IBC • Custom packaging on request",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
-    "application": "Produced from the first hydraulic pressing of premium castor seeds followed by water degumming to remove phospholipids and colloidal gums. Ideal for high-end lubricant bases, hydraulic fluids, and chemical synthesis.",
+    "application": "Produced from the first hydraulic pressing of premium castor seeds followed by water degumming to remove phospholipids and colloidal gums. Used for high-end lubricant bases, hydraulic fluids, and chemical synthesis.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -180,7 +173,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/first-special-grade-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank / Vessel • 200 / 225 kg MS Drums / HDPE Drums • 950 kg IBC • Customized drum lines",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
-    "application": "High-purity refined, neutralized and bleached castor oil manufactured to British Standard Specifications (B.S.S). Grade for manufacturing HCO, 12-HSA, clear coatings, urethanes, cosmetic formulations, and premium specialty lubricants.",
+    "application": "Refined, neutralized and bleached castor oil manufactured to British Standard Specifications (B.S.S). Grade for manufacturing HCO, 12-HSA, clear coatings, urethanes, cosmetic formulations, and premium specialty lubricants.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -276,7 +269,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/ppg-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexitank • 200 / 225 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
-    "application": "Extra-refined, highly bleached, low-color grade obtained by precision hydraulic cold expelling followed by advanced carbon and bentonite adsorption. Used in personal care, lipsticks, specialty varnishes, inks, and clear polyurethanes.",
+    "application": "Pressed, highly bleached, low-color grade obtained by hydraulic cold expelling followed by advanced carbon and bentonite adsorption. Used in personal care, lipsticks, specialty varnishes, inks, and clear polyurethanes.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -477,7 +470,7 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Pale Yellow / Light Straw",
     "rawMaterial": "Pure Castor Seed (Ricinus communis)",
     "image": "images/products/castor-oil-bp93.webp",
-    "packing": "200 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC • Sealed containers",
+    "packing": "200 kg Epicoat-lined MS Drums / HDPE Drums • 950 kg IBC",
     "shelfLife": "24 months from date of manufacture, in original sealed containers",
     "application": "Supplied for buyers requiring compliance with the current British Pharmacopoeia (BP) monograph for Castor Oil. Serves pharmaceutical vehicles, excipients, and regulated applications.",
     "headers": [
@@ -540,7 +533,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/castor-cake.webp",
     "packing": "50 kg HDPE woven bags with inner poly liner • 1,000 kg PP jumbo bulk bags with bottom discharge spout",
     "shelfLife": "12 months from date of manufacture in dry, covered storage",
-    "application": "100% natural organic manure with slow-release Nitrogen, Phosphorus, and Potash (N-P-K ~ 4-1-1). Castor cake has traditionally been used by farmers as an organic soil amendment.",
+    "application": "Contains organic nitrogen, phosphorus and potassium (values as per specification). Castor cake has traditionally been used by farmers as an organic soil amendment.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -607,7 +600,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/high-protein-castor-meal.webp",
     "packing": "25 kg / 50 kg Laminated HDPE Bags • 1000 kg Jumbo Bags with moisture-barrier liner",
     "shelfLife": "12 months from date of manufacture in cool, dry warehouse",
-    "application": "Specialty high-nitrogen organic plant nutrient and soil conditioner offered under our Under development — Available on Enquiry for precision organic horticulture and customized fertilizer blending formulations.",
+    "application": "Specialty high-nitrogen organic plant nutrient and soil conditioner offered under our Under development — Available on Enquiry for organic horticulture and customized fertilizer blending formulations.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -997,7 +990,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/sodium-sulphate-anhydrous.webp",
     "packing": "50 kg HDPE / PP Bags with LDPE liner • 1000 kg Jumbo Bags • Moisture-proof palletized packaging",
     "shelfLife": "24 months in tightly sealed moisture-proof bags",
-    "application": "High-purity crystalline anhydrous sodium sulphate recovered during the acidulation of saponified castor oil. Widely used as a prime filler and builder in synthetic laundry detergents, fining agent in glass manufacturing, textile direct dyeing leveling agent, and paper pulp processing.",
+    "application": "Crystalline anhydrous sodium sulphate recovered during the acidulation of saponified castor oil. Widely used as a prime filler and builder in synthetic laundry detergents, fining agent in glass manufacturing, textile direct dyeing leveling agent, and paper pulp processing.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -1092,7 +1085,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/dehydrated-castor-oil.webp",
     "packing": "Bulk in ISO Tank / Flexi Tank    •    200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Bulk in Vessel for large-volume shipments (20-22 MT)    •    Or as recommended / specified by client",
     "shelfLife": "18-24 months",
-    "application": "Dehydrated Castor Oil (NDEVOLEO™ DCO) is a pale, transparent drying oil featuring conjugated double bonds in regular commercial supply. It is used as a binder in architectural enamels, quick-set printing inks, and clear varnishes, supplied from our plant at Deodar, Gujarat, with a COA per lot.",
+    "application": "Dehydrated Castor Oil (NDEVOLEO™ DCO) is a drying oil with conjugated double bonds (appearance: clear to slightly hazy, as per specification) in regular commercial supply. It is used as a binder in architectural enamels, quick-set printing inks, and clear varnishes, supplied from our plant at Deodar, Gujarat, with a COA per lot.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
@@ -1182,7 +1175,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/dco-fatty-acid.webp",
     "packing": "Bulk in Tanker    •    Bulk in ISO Tank    •    Flexi Tank    •    190 kg Net Stainless Steel / MS Drums    •    200 kg HDPE / MS Drums    •    1,000 kg IBC    •    Or as recommended / specified by client",
     "shelfLife": "12-18 months",
-    "application": "DCO Fatty Acid (NDEVACID™ DCO-FA) is a distilled conjugated diene liquid fatty acid in regular commercial supply. It is used where low yellowing in baking finishes is required, including high-solids stoving enamels and epoxy ester resins, supplied from our plant at Deodar, Gujarat, with a COA per lot.",
+    "application": "DCO Fatty Acid (NDEVACID™ DCO-FA) is a conjugated diene liquid fatty acid in regular commercial supply. It is used where low yellowing in baking finishes is required, including high-solids stoving enamels and epoxy ester resins, supplied from our plant at Deodar, Gujarat, with a COA per lot.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
@@ -1928,7 +1921,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/lithium-12-hydroxystearate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, moisture-protected packaging.",
-    "application": "Lithium 12-Hydroxystearate (NDEVSOAP™ LI12) is a pre-formed metallic soap thickener under development. Derived from high-purity 12-HSA, it enables rapid grease compounding with reduced cycle times for high-temperature multi-purpose greases, prepared at Deodar, Gujarat.",
+    "application": "Lithium 12-Hydroxystearate (NDEVSOAP™ LI12) is a pre-formed metallic soap thickener under development. Derived from 12-HSA, it enables rapid grease compounding with reduced cycle times for high-temperature multi-purpose greases, prepared at Deodar, Gujarat.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
@@ -2118,7 +2111,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/zinc-ricinoleate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, dry packaging.",
-    "application": "Zinc Ricinoleate (NDEVSOAP™ ZNR) is a high-performance odor-absorbing metallic soap under development. Derived from high-purity ricinoleic acid, it irreversibly binds volatile odor-causing sulfur and nitrogen compounds in cosmetics, home care, and industrial formulations from our plant at Deodar, Gujarat.",
+    "application": "Zinc Ricinoleate (NDEVSOAP™ ZNR) is a odor-absorbing metallic soap under development. Derived from ricinoleic acid, it irreversibly binds volatile odor-causing sulfur and nitrogen compounds in cosmetics, home care, and industrial formulations from our plant at Deodar, Gujarat.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
@@ -2208,7 +2201,7 @@ const PRODUCTS_DATABASE = [
     "image": "images/products/zinc-undecylenate.webp",
     "packing": "20 / 25 kg HDPE-Lined Paper / PP Bags    •    500 kg HDPE Jumbo Bags    •    1,000 kg HDPE Jumbo Bags    •    Or as recommended / specified by client",
     "shelfLife": "24 months in sealed, dry packaging, protected from light.",
-    "application": "Zinc Undecylenate (NDEVSOAP™ ZNU) is a fine white antifungal and skin-protecting metallic soap under development. Derived from high-purity undecylenic acid, it is formulated into topical athlete's foot powders, anti-chafing dusting powders, and cosmetic preparations, produced from our plant at Deodar, Gujarat.",
+    "application": "Zinc Undecylenate (NDEVSOAP™ ZNU) is a fine white antifungal and skin-protecting metallic soap under development. Derived from undecylenic acid, it is formulated into topical athlete's foot powders, anti-chafing dusting powders, and cosmetic preparations, produced from our plant at Deodar, Gujarat.",
     "headers": [
       "SR. NO.",
       "TEST PARAMETER",
@@ -2399,7 +2392,7 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Pale Yellow to Colourless",
     "rawMaterial": "Castor Seed (Ricinus communis)",
     "image": "images/products/first-special-grade-castor-oil.webp",
-    "packing": "Bulk in ISO Tank / Flexitank • 200 kg MS/HDPE Drums • 1000 L IBC",
+    "packing": "200 kg MS/HDPE Drums • 1000 L IBC",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
     "application": "Supplied for buyers requiring compliance with the current USP–NF monograph for Castor Oil. Serves pharmaceutical formulations, capsule excipients, and personal care.",
     "headers": [
@@ -2430,7 +2423,7 @@ const PRODUCTS_DATABASE = [
       ],
       [
         "5",
-        "Heavy Metals",
+        "Elemental impurities (as required by the current USP–NF)",
         "Tested against the USP–NF monograph edition requested by the buyer; results on COA"
       ],
       [
@@ -2458,9 +2451,9 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Almost Colourless to Slightly Yellow",
     "rawMaterial": "Castor Seed (Ricinus communis)",
     "image": "images/products/first-special-grade-castor-oil.webp",
-    "packing": "Bulk in ISO Tank / Flexitank • 200 kg MS/HDPE Drums • 1000 L IBC",
+    "packing": "200 kg MS/HDPE Drums • 1000 L IBC",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
-    "application": "Supplied for buyers requiring compliance with the current European Pharmacopoeia (Ph. Eur.) monograph for Castor Oil. Serves pharmaceutical and personal care applications.",
+    "application": "Supplied for buyers requiring compliance with the current European Pharmacopoeia (Ph. Eur.) monograph for Castor Oil. Serves pharmaceutical and personal care applications. The Ph. Eur. has separate monographs for virgin and refined castor oil; specify which monograph you require.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",
@@ -2517,7 +2510,7 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Pale Yellow to Almost Colourless",
     "rawMaterial": "Castor Seed (Ricinus communis)",
     "image": "images/products/first-special-grade-castor-oil.webp",
-    "packing": "Bulk in Tankers • 200 kg MS/HDPE Drums • 1000 L IBC",
+    "packing": "200 kg MS/HDPE Drums • 1000 L IBC",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
     "application": "Supplied for buyers requiring compliance with the current Indian Pharmacopoeia (IP) monograph for Castor Oil. Serves pharmaceutical, herbal, and Ayurvedic formulations.",
     "headers": [
@@ -2571,7 +2564,7 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Almost Colourless to Pale Yellow",
     "rawMaterial": "Castor Seed (Ricinus communis)",
     "image": "images/products/first-special-grade-castor-oil.webp",
-    "packing": "Bulk in ISO Tank / Flexitank • 200 kg MS/HDPE Drums • 1000 L IBC",
+    "packing": "200 kg MS/HDPE Drums • 1000 L IBC",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
     "application": "Supplied for buyers requiring compliance with the current Japanese Pharmacopoeia (JP) monograph for Castor Oil. Serves East Asian pharmaceutical and cosmetic formulations.",
     "headers": [
@@ -2626,7 +2619,7 @@ const PRODUCTS_DATABASE = [
     "typicalColour": "Water White to Very Pale Yellow",
     "rawMaterial": "Castor Seed (Ricinus communis)",
     "image": "images/products/first-special-grade-castor-oil.webp",
-    "packing": "200 kg Epoxy-lined MS Drums • 1000 L IBC • ISO Tank / Flexitank",
+    "packing": "200 kg Epoxy-lined MS Drums • 1000 L IBC",
     "shelfLife": "24 months from date of manufacture, in original unopened packaging",
     "application": "Refined castor oil selected for low colour and odour, providing high gloss, emollience, and pigment dispersion in lip care, colour cosmetics, and skincare.",
     "headers": [

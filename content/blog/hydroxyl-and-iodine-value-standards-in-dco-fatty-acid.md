@@ -15,8 +15,8 @@ in_brief: "Examine the chemical criteria of hydroxyl and iodine value in DCO fat
 faqs:
   - q: "What does the residual hydroxyl value indicate in DCO fatty acid?"
     a: "Residual hydroxyl value indicates the percentage of un-dehydrated ricinoleic acid remaining; lower values confirm efficient, complete catalytic dehydration."
-  - q: "What iodine value range is typical for high-purity DCO fatty acid?"
-    a: "High-purity DCO fatty acid specifies an iodine value between 130 and 145 g I2/100g, reflecting the formation of new conjugated and non-conjugated dienes."
+  - q: "What iodine value range is typical for high-grade DCO fatty acid?"
+    a: "high-grade DCO fatty acid specifies an iodine value between 130 and 145 g I2/100g, reflecting the formation of new conjugated and non-conjugated dienes."
   - q: "Why is high conjugated diene content vital for stoving enamels?"
     a: "Conjugated double bonds polymerize rapidly via Diels-Alder reactions during baking (120°C to 150°C), forming dense, chemical-resistant polymer matrixes."
   - q: "What acid value is standard on a DCO fatty acid analytical certificate?"
@@ -64,4 +64,4 @@ Our distribution infrastructure services domestic and international resin synthe
 - **National Paint and Resin Plants**: Regular road freight connects our Deodar complex to industrial coating plants across Maharashtra, Tamil Nadu, Haryana, and West Bengal.
 - **Export Seaports**: Export enquiries welcome. Strategic proximity to Mundra Port and Deendayal Port (Kandla) allows prompt container stuffing of drums, IBCs, and ISO tanks for global shipment.
 
-Adhering to strict analytical criteria for hydroxyl and iodine value in DCO fatty acid standards ensures resin chemists obtain high-purity, reproducible conjugated drying fatty acids for advanced industrial coatings.
+Adhering to strict analytical criteria for hydroxyl and iodine value in DCO fatty acid standards ensures resin chemists obtain high-grade, reproducible conjugated drying fatty acids for advanced industrial coatings.

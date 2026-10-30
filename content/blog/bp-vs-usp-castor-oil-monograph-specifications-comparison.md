@@ -19,15 +19,15 @@ faqs:
     a: "Yes. Both the British Pharmacopoeia and United States Pharmacopeia specify specific optical rotation within monograph positive limits to verify botanical identity."
   - q: "How do acid value limits compare between BP and USP monographs?"
     a: "Both compendia enforce low acid values (typically max 2.0 mg KOH/g) to verify minimal hydrolytic degradation of the triglyceride backbone."
-  - q: "Can a single high-purity castor oil lot comply with both BP and USP standards?"
-    a: "Yes. Multi-compendial castor oil refined to high purity thresholds can satisfy the analytical requirements of both BP and USP monographs simultaneously."
+  - q: "Can a single high-grade castor oil lot comply with both BP and USP standards?"
+    a: "Yes. Multi-compendial castor oil refined to high quality thresholds can satisfy the analytical requirements of both BP and USP monographs simultaneously."
   - q: "What documentation package accompanies pharmaceutical grade consignments?"
     a: "Each consignment includes a dual-compendial Certificate of Analysis, Technical Data Sheet, Safety Data Sheet, and manufacturing process flowcharts."
 ---
 
 ## Compendial Monograph Harmonization and Divergence
 
-In pharmaceutical formulation, clinical manufacturing, and high-purity chemical compounding, procurement specialists frequently source raw materials for products registered across multiple regulatory jurisdictions. For castor oil, the two most prominent international compendial benchmarks are the British Pharmacopoeia (BP) and the United States Pharmacopeia - National Formulary (USP-NF). In this technical analysis, we evaluate BP vs USP castor oil specifications, comparing testing methodologies, physical-chemical constants, and qualification criteria for commercial excipient buyers.
+In pharmaceutical formulation, clinical manufacturing, and high-grade chemical compounding, procurement specialists frequently source raw materials for products registered across multiple regulatory jurisdictions. For castor oil, the two most prominent international compendial benchmarks are the British Pharmacopoeia (BP) and the United States Pharmacopeia - National Formulary (USP-NF). In this technical analysis, we evaluate BP vs USP castor oil specifications, comparing testing methodologies, physical-chemical constants, and qualification criteria for commercial excipient buyers.
 
 Both pharmacopoeias define castor oil as the fatty oil obtained by expression from the seeds of *Ricinus communis*. Both recognize its utility as a functional excipient—serving as an oily vehicle, tablet film plasticizer, solubilizer, and emulsion base. However, subtle differences in testing emphasis, spectrophotometric absorbance, and chromatographic fatty acid determination require careful review by regulatory affairs and quality control managers.
 

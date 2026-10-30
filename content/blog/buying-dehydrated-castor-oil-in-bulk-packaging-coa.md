@@ -48,7 +48,7 @@ When buying dehydrated castor oil in bulk, quality assurance auditors should eva
 
 Depending on downstream application requirements, resin and ink manufacturers specify distinct viscosity profiles:
 
-1. **Unbodied Dehydrated Castor Oil**: Low viscosity (approximately 1.5 to 3.0 poises at 25°C). Ideal for direct esterification in alkyd kettles, low-VOC high-solids finishes, and fast-penetrating wood sealers.
+1. **Unbodied Dehydrated Castor Oil**: Low viscosity (approximately 1.5 to 3.0 poises at 25°C). well-suited for direct esterification in alkyd kettles, low-VOC high-solids finishes, and fast-penetrating wood sealers.
 2. **Thermally Bodied DCO (Stand Oils)**: Subjected to controlled thermal polymerization under vacuum to build viscosity (ranging from 10 to 45 poises). vital for lithographic printing inks, overprint varnishes, and high-gloss enamel topcoats.
 
 To protect DCO from atmospheric oxygen and pre-polymerization during warehouse storage, Nagdev Products provides secure packaging formats:

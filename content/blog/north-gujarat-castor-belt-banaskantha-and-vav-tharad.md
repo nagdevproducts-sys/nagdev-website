@@ -11,7 +11,7 @@ secondary_keywords:
   - Vav Tharad seed crushing plant
   - Gujarat castor oil mill Deodar
 lang: en
-in_brief: "Understand the strategic advantages of North Gujarat castor belt sourcing for industrial oleochemicals. Situated in Deodar within the Banaskantha and Vav-Tharad growing tract, Nagdev Products maintains direct agricultural connections, processing freshly harvested seeds into high-purity castor oil and derivatives."
+in_brief: "Understand the strategic advantages of North Gujarat castor belt sourcing for industrial oleochemicals. Situated in Deodar within the Banaskantha and Vav-Tharad growing tract, Nagdev Products maintains direct agricultural connections, processing freshly harvested seeds into high-grade castor oil and derivatives."
 faqs:
   - q: "Why is North Gujarat recognized as India's primary castor growing region?"
     a: "Well-drained sandy loam soils, semi-arid sunshine, and canal irrigation create optimal agronomic conditions for high-oil Ricinus communis cultivation."

@@ -51,7 +51,7 @@ In our quality control laboratory in Deodar, technicians evaluate Lovibond color
 Evaluating Lovibond colour in refined castor oil highlights distinct processing differences across our product lineup:
 
 - **Pale Pressed Grade (PPG)**: Represents our lightest refined grade, specifying a maximum Lovibond color below 1.5 units (1-inch cell, Y+5R). Sourced from the first, gentlest mechanical expression of selected seed and bleached with activated earth and carbon, PPG eliminates amber undertones in optical urethane potting compounds.
-- **First Special Grade (FSG)**: Standard industrial workhorse grade, maintaining a Lovibond color typically between 2.0 and 2.5 units (1-inch cell). Ideal for general polyurethane flooring, industrial lubricants, and pigmented finishes where minor baseline color is negligible.
+- **First Special Grade (FSG)**: Standard industrial workhorse grade, maintaining a Lovibond color typically between 2.0 and 2.5 units (1-inch cell). well-suited for general polyurethane flooring, industrial lubricants, and pigmented finishes where minor baseline color is negligible.
 - **Commercial Castor Oil**: Unrefined expeller oil displaying a deeper amber-golden color (typically between 15 and 25 units on the Lovibond scale). Perfectly suited for chemical transformations—such as sulfonation for Turkey Red Oil or grease soap formation—where color is secondary to ricinoleic hydroxyl reactivity.
 
 ## Sourcing and Refining Excellence in Deodar

@@ -21,7 +21,7 @@ faqs:
 - q: What distinguishes FPD castor oil from crude expeller oil?
   a: First Pressed Degummed (FPD) castor oil undergoes controlled water degumming
     to hydrate and extract hydratable phosphatides and phospholipids, leaving an oil
-    with exceptionally low phosphorus content.
+    with notably low phosphorus content.
 - q: Why is phosphatide removal critical for chemical synthesis?
   a: Phosphatides and gums cause thermal discoloration, foul catalysts, and generate
     sediment during storage or high-temperature processing. Removing them ensures
@@ -42,13 +42,13 @@ faqs:
 
 First Pressed Degummed (FPD) castor oil is an advanced technical vegetable oil intermediate positioned between crude commercial castor oil and fully refined FSG. Produced through the primary pressing of castor seeds, the crude oil undergoes a specialized water-degumming process designed specifically to remove naturally occurring phospholipids, gums, and mucilaginous compounds. This process leaves the natural ricinoleic acid triglyceride structure intact while eliminating the non-lipid impurities that interfere with downstream chemical synthesis.
 
-Industrial formulators consult this first pressed degummed castor oil guide because FPD offers a cost-effective, heavy-duty alternative to fully bleached oils. In applications where pale visual appearance is secondary but thermal stability, low phosphorus content, and catalyst protection are paramount—such as bio-polyol production and urethane synthesis—FPD delivers outstanding technical performance. Nagdev Products produces FPD castor oil at our Deodar processing plant in North Gujarat, providing dependable bulk supply for domestic chemical manufacturers and global export accounts.
+Industrial formulators consult this first pressed degummed castor oil guide because FPD offers a cost-efficient, heavy-duty alternative to fully bleached oils. In applications where pale visual appearance is secondary but thermal stability, low phosphorus content, and catalyst protection are paramount—such as bio-polyol production and urethane synthesis—FPD delivers outstanding technical performance. Nagdev Products produces FPD castor oil at our Deodar processing plant in North Gujarat, providing dependable bulk supply for domestic chemical manufacturers and global export accounts.
 
 {{key_facts}}
 
 ## How Nagdev Produces FPD Castor Oil in Deodar
 
-At Nagdev Products, manufacturing operations take place at our plant in Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330. With our 50 TPD seed crushing capacity, our processing line produces FPD castor oil through precision mechanical expelling and controlled water degumming:
+At Nagdev Products, manufacturing operations take place at our plant in Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat 385330. With our 50 TPD seed crushing capacity, our processing line produces FPD castor oil through accurate mechanical expelling and controlled water degumming:
 
 1. **Seed Cleaning and First Pressing**: High-quality castor seeds from North Gujarat's castor belt (Banaskantha and Vav-Tharad region) are cleaned and crushed in mechanical screw expellers under controlled operating temperatures. Only the initial expeller extraction is utilized for FPD production.
 2. **Hydration & Conditioning**: The clarified expeller oil is heated to 65°C–75°C and treated with a controlled dosage of soft, demineralized water. The water hydrates the polar headgroups of phosphatides and phospholipids, converting them from oil-soluble molecules into insoluble hydrated gums.
@@ -113,6 +113,6 @@ Shipments are accompanied by a lot-specific Certificate of Analysis (COA) confir
 Purchasing First Pressed Degummed castor oil follows a direct, structured process:
 
 1. **Submit Inquiry**: Contact our sales team with your annual or batch volume requirements, packaging preference, and delivery terms.
-2. **Technical Alignment**: Our laboratory team reviews your technical criteria to ensure FPD is the ideal intermediate for your specific process.
+2. **Technical Alignment**: Our laboratory team reviews your technical criteria to ensure FPD is the suitable intermediate for your specific process.
 3. **Sample Verification**: We dispatch 500 mL or 1 L laboratory trial samples drawn from active production batches for your analytical testing.
 4. **Order Execution & Logistics**: Production schedules, quality releases, and transport bookings are executed under agreed Incoterms (Ex-Works, FOB, CFR, or CIF).

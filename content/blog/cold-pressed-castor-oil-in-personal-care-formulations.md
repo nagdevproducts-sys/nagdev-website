@@ -39,7 +39,7 @@ Utilizing cold pressed castor oil in personal care allows formulators to capital
 
 Formulating with cold pressed castor oil in personal care provides functional benefits across skin care, hair care, and cleansing formulations:
 
-- **Protective Moisture Barrier (Occlusion)**: The high molecular weight and dense polar nature of ricinoleic triglycerides allow the oil to form a cohesive, breathable lipid film over the stratum corneum. This physical barrier significantly reduces transepidermal water loss (TEWL) without clogging pores, making it ideal for intensive barrier repair creams, hand salves, and dry-skin balms.
+- **Protective Moisture Barrier (Occlusion)**: The high molecular weight and dense polar nature of ricinoleic triglycerides allow the oil to form a cohesive, breathable lipid film over the stratum corneum. This physical barrier significantly reduces transepidermal water loss (TEWL) without clogging pores, making it well-suited for intensive barrier repair creams, hand salves, and dry-skin balms.
 - **Hair Shaft Lubrication and Scalp Conditioning**: When incorporated into hair serums, scalp oils, and deep conditioning masks, cold-pressed castor oil coats the outer cuticle scales of the hair shaft. Its high refractive index reflects ambient light, creating healthy visual shine while providing mechanical slip that minimizes breakage during brushing.
 - **Rich Lather in Saponified Soaps**: Cold-process artisanal soap makers regard virgin cold-pressed castor oil as an vital formulation ingredient. When saponified with sodium hydroxide, the ricinoleic acid content creates a remarkably dense, stable, and creamy lather that maintains skin moisture during cleansing.
 
