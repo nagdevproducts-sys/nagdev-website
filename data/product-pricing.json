@@ -1,0 +1,77 @@
+{
+  "commercial-castor-oil": {
+    "lowMT": 1650,
+    "highMT": 1800,
+    "availability": "https://schema.org/InStock"
+  },
+  "first-special-grade-castor-oil": {
+    "lowMT": 1700,
+    "highMT": 1850,
+    "availability": "https://schema.org/InStock"
+  },
+  "fpd-castor-oil": {
+    "lowMT": 1680,
+    "highMT": 1820,
+    "availability": "https://schema.org/InStock"
+  },
+  "castor-cake": {
+    "lowMT": 120,
+    "highMT": 170,
+    "availability": "https://schema.org/InStock"
+  },
+  "hydrogenated-castor-oil": {
+    "lowMT": 2000,
+    "highMT": 2250,
+    "availability": "https://schema.org/InStock"
+  },
+  "dehydrated-castor-oil": {
+    "lowMT": 2250,
+    "highMT": 2550,
+    "availability": "https://schema.org/InStock"
+  },
+  "dco-fatty-acid": {
+    "lowMT": 2550,
+    "highMT": 2900,
+    "availability": "https://schema.org/InStock"
+  },
+  "ppg-castor-oil": {
+    "lowMT": 1750,
+    "highMT": 1900,
+    "availability": "https://schema.org/InStock"
+  },
+  "cold-pressed-castor-oil": {
+    "lowMT": 2000,
+    "highMT": 2500,
+    "availability": "https://schema.org/InStock"
+  },
+  "castor-oil-bp93": {
+    "lowMT": 2200,
+    "highMT": 2800,
+    "availability": "https://schema.org/InStock"
+  },
+  "castor-oil-usp-nf": {
+    "lowMT": 2200,
+    "highMT": 2800,
+    "availability": "https://schema.org/InStock"
+  },
+  "castor-oil-ph-eur": {
+    "lowMT": 2200,
+    "highMT": 2800,
+    "availability": "https://schema.org/InStock"
+  },
+  "castor-oil-ip": {
+    "lowMT": 2200,
+    "highMT": 2800,
+    "availability": "https://schema.org/InStock"
+  },
+  "castor-oil-jp": {
+    "lowMT": 2200,
+    "highMT": 2800,
+    "availability": "https://schema.org/InStock"
+  },
+  "cosmetic-grade-castor-oil": {
+    "lowMT": 2100,
+    "highMT": 2600,
+    "availability": "https://schema.org/InStock"
+  }
+}

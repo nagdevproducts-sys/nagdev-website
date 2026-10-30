@@ -1,0 +1,9 @@
+{
+  "name": "nagdev-website",
+  "version": "1.0.0",
+  "description": "Nagdev Products Website",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "vercel-build": "node scripts/build.js"
+  }
+}

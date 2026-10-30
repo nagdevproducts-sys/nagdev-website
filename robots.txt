@@ -42,6 +42,6 @@ Allow: /
 # Internal folders
 Disallow: /scratch/
 Disallow: /scripts/
+Disallow: /blog-admin.html
 
 Sitemap: https://www.nagdevproducts.com/sitemap.xml
-Sitemap: https://nagdevproducts.com/sitemap.xml

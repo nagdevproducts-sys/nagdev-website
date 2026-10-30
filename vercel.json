@@ -4,6 +4,17 @@
   "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':!.github' ':!tests'",
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "nagdevproducts.com"
+        }
+      ],
+      "destination": "https://www.nagdevproducts.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/contact-us/",
       "destination": "/contact",
       "permanent": true

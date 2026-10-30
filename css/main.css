@@ -466,14 +466,14 @@ input, textarea, select { font-family: var(--font-body); }
   display: block;
 }
 
-/* Invisible symbol hotspot for secret trigger */
+/* Invisible symbol hotspot for secret trigger (Admin Studio 5-Click) */
 .logo-symbol-hotspot {
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 62px;
-  height: 58px;
+  top: 0;
+  width: 32%;
+  max-width: 54px;
+  height: 100%;
   cursor: pointer;
   z-index: 10;
   background: transparent;
@@ -5667,4 +5667,18 @@ details[open] .product-faq-chevron {
 .product-card-link-block:hover {
   text-decoration: none;
   color: inherit;
+}
+
+/* Product Indicative Price (A2) */
+.product-hero-price {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--forest, #0B3D1E);
+  margin: 0.5rem 0 1rem;
+}
+.product-card-price {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--forest, #0B3D1E);
+  margin: 0.4rem 0 0.6rem;
 }

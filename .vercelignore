@@ -10,6 +10,7 @@
 # Development & Test Suites
 scratch/
 scripts/
+!scripts/build.js
 seo/
 tests/
 monitoring_output/
@@ -17,14 +18,12 @@ monitoring_output/
 # Content Drafts & Admin CMS
 content/
 templates/
-blog-admin.html
 blog/_template.html
-css/blog-admin.css
-js/blog-admin.js
 
 # Dependencies & Package Managers
 node_modules/
-package.json
+# package.json (needed for build)
+!package.json
 package-lock.json
 requirements*.txt
 
@@ -46,6 +45,8 @@ PUBLIC_URL.txt
 # Non-runtime JSON (keep vercel.json)
 *.json
 !vercel.json
+!data/**
+!site.webmanifest
 
 # Image Originals, Archives, and Screenshot Folders
 images/**/originals/

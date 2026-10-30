@@ -26,7 +26,7 @@
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/images/products/ppg-castor-oil-480w.webp" imagesrcset="/images/products/ppg-castor-oil-480w.webp 480w, /images/products/ppg-castor-oil.webp 900w" imagesizes="(max-width: 480px) calc(100vw - 32px), (max-width: 992px) 480px, 440px" fetchpriority="high">
-  <link rel="stylesheet" href="/css/main.min.css?v=20261029">
+  <link rel="stylesheet" href="/css/main.min.css?v=34a6877">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -39,7 +39,7 @@
       "name": "Nagdev Products",
       "legalName": "Nagdev Products Private Limited",
       "url": "https://www.nagdevproducts.com",
-      "logo": "https://www.nagdevproducts.com/images/logo.png",
+      "logo": "https://www.nagdevproducts.com/images/logo-square.png",
       "image": "https://www.nagdevproducts.com/images/og-share.jpg",
       "email": "nagdevproducts@gmail.com",
       "telephone": "+916352098306",
@@ -69,7 +69,19 @@
         {
           "@id": "https://www.nagdevproducts.com/#plant"
         }
-      ]
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-6352098306",
+        "email": "nagdevproducts@gmail.com",
+        "contactType": "sales",
+        "areaServed": "Worldwide",
+        "availableLanguage": [
+          "en",
+          "gu",
+          "hi"
+        ]
+      }
     },
     {
       "@type": "WebSite",
@@ -136,43 +148,30 @@
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "USD",
+        "lowPrice": 1750,
+        "highPrice": 1900,
         "offerCount": 1,
-        "availability": "https://schema.org/PreOrder",
-        "price": "0",
-        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2027-10-30",
+        "url": "https://www.nagdevproducts.com/products/ppg-castor-oil",
         "seller": {
           "@id": "https://www.nagdevproducts.com/#organization"
         },
-        "hasMerchantReturnPolicy": {
-          "@type": "MerchantReturnPolicy",
-          "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-          "applicableCountry": "IN"
+        "eligibleQuantity": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "unitCode": "TNE"
         },
-        "shippingDetails": {
-          "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "USD"
-          },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "IN"
-          },
-          "deliveryTime": {
-            "@type": "ShippingDeliveryTime",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 1,
-              "maxValue": 3,
-              "unitCode": "DAY"
-            },
-            "transitTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 2,
-              "maxValue": 7,
-              "unitCode": "DAY"
-            }
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "priceCurrency": "USD",
+          "minPrice": 1750,
+          "maxPrice": 1900,
+          "referenceQuantity": {
+            "@type": "QuantitativeValue",
+            "value": 1,
+            "unitCode": "TNE",
+            "unitText": "metric tonne"
           }
         }
       },
@@ -307,9 +306,9 @@
     }
   ]
 }
-  </script>
+</script>
 
-  <script src="/js/site-config.min.js" defer></script>
+  <script src="/js/site-config.min.js?v=34a6877" defer></script>
   <!-- Google Analytics 4 & Consent Mode v2 -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -342,7 +341,7 @@
       }
     } catch(e){}
   </script>
-  <script defer src="/js/analytics.js"></script>
+  <script defer src="/js/analytics.js?v=34a6877"></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -618,6 +617,7 @@
             <div class="product-status-badge is-enquiry">Available on Enquiry</div>
             <div class="product-hero-eyebrow">Industrial & Technical Castor Oil Grades</div>
             <h1 class="product-hero-h1">Pale Pressed Grade (PPG) Castor Oil</h1>
+            <p class="product-hero-price">Indicative price: USD 1,750–1,900 per MT (USD 1.75–1.90 per kg), FOB Kandla/Mundra. Final price on quotation.</p>
             <div class="product-hero-grade">Grade Code: NDEVOLEO™ PPG · HS Code: 1515.30</div>
             <p class="product-hero-intro">Pale Pressed Grade (PPG) Castor Oil (NDEVOLEO™ PPG) is a pale, low-acidity pressed liquid castor oil available on enquiry. It is used in urethane resins where low colour is required, lubricant blends, and chemical intermediates, supplied from our plant at Deodar, Gujarat, with a COA per lot.</p>
             <div class="product-hero-ctas">
@@ -1112,6 +1112,6 @@
 </footer>
 
   <!-- Scripts -->
-  <script src="/js/site.min.js?v=20261028" defer></script>
+  <script src="/js/site.min.js?v=34a6877" defer></script>
 </body>
 </html>

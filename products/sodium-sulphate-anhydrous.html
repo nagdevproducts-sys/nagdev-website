@@ -26,7 +26,7 @@
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/images/products/sodium-sulphate-anhydrous-480w.webp" imagesrcset="/images/products/sodium-sulphate-anhydrous-480w.webp 480w, /images/products/sodium-sulphate-anhydrous.webp 900w" imagesizes="(max-width: 480px) calc(100vw - 32px), (max-width: 992px) 480px, 440px" fetchpriority="high">
-  <link rel="stylesheet" href="/css/main.min.css?v=20261029">
+  <link rel="stylesheet" href="/css/main.min.css?v=34a6877">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -39,7 +39,7 @@
       "name": "Nagdev Products",
       "legalName": "Nagdev Products Private Limited",
       "url": "https://www.nagdevproducts.com",
-      "logo": "https://www.nagdevproducts.com/images/logo.png",
+      "logo": "https://www.nagdevproducts.com/images/logo-square.png",
       "image": "https://www.nagdevproducts.com/images/og-share.jpg",
       "email": "nagdevproducts@gmail.com",
       "telephone": "+916352098306",
@@ -69,7 +69,19 @@
         {
           "@id": "https://www.nagdevproducts.com/#plant"
         }
-      ]
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-6352098306",
+        "email": "nagdevproducts@gmail.com",
+        "contactType": "sales",
+        "areaServed": "Worldwide",
+        "availableLanguage": [
+          "en",
+          "gu",
+          "hi"
+        ]
+      }
     },
     {
       "@type": "WebSite",
@@ -111,73 +123,6 @@
       ]
     },
     {
-      "@type": "Product",
-      "@id": "https://www.nagdevproducts.com/products/sodium-sulphate-anhydrous#product",
-      "name": "Sodium Sulphate Anhydrous",
-      "description": "Sodium Sulphate Anhydrous (NDEVCHEM™ NA2SO4) is currently under development at Nagdev Products. Target analytical specifications and development parameters are provided for pilot evaluation and technical planning. Commercial supply is not active while this grade remains under development.",
-      "url": "https://www.nagdevproducts.com/products/sodium-sulphate-anhydrous",
-      "image": "https://www.nagdevproducts.com/images/products/sodium-sulphate-anhydrous.webp",
-      "brand": {
-        "@type": "Brand",
-        "name": "Nagdev Products"
-      },
-      "manufacturer": {
-        "@id": "https://www.nagdevproducts.com/#organization"
-      },
-      "sku": "NDEVCHEM™ NA2SO4",
-      "mpn": "2833.11",
-      "identifier": [
-        {
-          "@type": "PropertyValue",
-          "propertyID": "HS Code",
-          "value": "2833.11"
-        }
-      ],
-      "offers": {
-        "@type": "AggregateOffer",
-        "priceCurrency": "USD",
-        "offerCount": 1,
-        "availability": "https://schema.org/PreOrder",
-        "price": "0",
-        "priceValidUntil": "2026-12-31",
-        "seller": {
-          "@id": "https://www.nagdevproducts.com/#organization"
-        },
-        "hasMerchantReturnPolicy": {
-          "@type": "MerchantReturnPolicy",
-          "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-          "applicableCountry": "IN"
-        },
-        "shippingDetails": {
-          "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "USD"
-          },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "IN"
-          },
-          "deliveryTime": {
-            "@type": "ShippingDeliveryTime",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 1,
-              "maxValue": 3,
-              "unitCode": "DAY"
-            },
-            "transitTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 2,
-              "maxValue": 7,
-              "unitCode": "DAY"
-            }
-          }
-        }
-      }
-    },
-    {
       "@type": "FAQPage",
       "@id": "https://www.nagdevproducts.com/products/sodium-sulphate-anhydrous#faq",
       "mainEntity": [
@@ -206,12 +151,25 @@
           }
         }
       ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.nagdevproducts.com/products/sodium-sulphate-anhydrous#webpage",
+      "url": "https://www.nagdevproducts.com/products/sodium-sulphate-anhydrous",
+      "name": "Sodium Sulphate Anhydrous Technical Specifications &amp; Development Pipeline",
+      "description": "Sodium Sulphate Anhydrous (NDEVCHEM™ NA2SO4) is currently under development at Nagdev Products in Deodar, Gujarat. Analytical technical specifications, target packaging, and development inquiries.",
+      "isPartOf": {
+        "@id": "https://www.nagdevproducts.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://www.nagdevproducts.com/products/sodium-sulphate-anhydrous#breadcrumb"
+      }
     }
   ]
 }
-  </script>
+</script>
 
-  <script src="/js/site-config.min.js" defer></script>
+  <script src="/js/site-config.min.js?v=34a6877" defer></script>
   <!-- Google Analytics 4 & Consent Mode v2 -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -244,7 +202,7 @@
       }
     } catch(e){}
   </script>
-  <script defer src="/js/analytics.js"></script>
+  <script defer src="/js/analytics.js?v=34a6877"></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -919,6 +877,6 @@
 </footer>
 
   <!-- Scripts -->
-  <script src="/js/site.min.js?v=20261028" defer></script>
+  <script src="/js/site.min.js?v=34a6877" defer></script>
 </body>
 </html>

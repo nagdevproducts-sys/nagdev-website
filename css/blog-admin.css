@@ -1,0 +1,578 @@
+/* ==========================================================================
+   NAGDEV PRODUCTS — BLOG ADMIN STUDIO STYLESHEET
+   Luxury editorial dashboard matching brand colors & typography
+   ========================================================================== */
+
+:root {
+  --admin-bg: #F8F6F0;
+  --admin-surface: #FFFFFF;
+  --admin-border: #E5E0D5;
+  --admin-text: #1C241D;
+  --admin-muted: #6B726C;
+  --admin-forest: #0B3D1E;
+  --admin-forest-dark: #072814;
+  --admin-forest-light: #15612E;
+  --admin-gold: #B8841A;
+  --admin-gold-light: #D4A537;
+  --admin-radius: 10px;
+}
+
+body.admin-body {
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* ── Top Bar ─────────────────────────────────────────────────────────────── */
+.admin-topbar {
+  background: var(--admin-forest-dark);
+  color: #ffffff;
+  padding: 0.9rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--admin-gold);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.admin-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.admin-logo {
+  height: 38px;
+  width: auto;
+}
+
+.admin-badge {
+  background: rgba(184, 132, 26, 0.25);
+  color: var(--admin-gold-light);
+  border: 1px solid var(--admin-gold);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-admin-nav {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s;
+}
+
+.btn-admin-nav.outline {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-admin-nav.outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+.btn-admin-nav.danger {
+  background: rgba(192, 57, 43, 0.2);
+  color: #ff7675;
+  border: 1px solid rgba(192, 57, 43, 0.4);
+}
+
+.btn-admin-nav.danger:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+/* ── Admin Container & Tabs ──────────────────────────────────────────────── */
+.admin-container {
+  max-width: 1280px;
+  margin: 2rem auto 4rem;
+  padding: 0 1.5rem;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--admin-border);
+}
+
+.admin-tab-btn {
+  padding: 0.85rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--admin-muted);
+  border: none;
+  background: transparent;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-tab-btn:hover {
+  color: var(--admin-forest);
+}
+
+.admin-tab-btn.active {
+  color: var(--admin-forest);
+  border-bottom-color: var(--admin-gold);
+  font-weight: 700;
+}
+
+.admin-tab-content {
+  display: none;
+}
+
+.admin-tab-content.active {
+  display: block;
+}
+
+/* ── Editor Grid Layout ──────────────────────────────────────────────────── */
+.editor-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.admin-card {
+  background: var(--admin-surface);
+  border-radius: var(--admin-radius);
+  border: 1px solid var(--admin-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.admin-card-title {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 1.5rem;
+  color: var(--admin-forest);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--admin-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Form Controls ───────────────────────────────────────────────────────── */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  margin-bottom: 0.4rem;
+}
+
+.form-label .required {
+  color: #c0392b;
+}
+
+.form-hint {
+  font-size: 0.775rem;
+  color: var(--admin-muted);
+  margin-top: 0.35rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-input, 
+.form-textarea, 
+.form-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--admin-border);
+  background: #ffffff;
+  font-size: 0.95rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  color: var(--admin-text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.form-input:focus, 
+.form-textarea:focus, 
+.form-select:focus {
+  border-color: var(--admin-forest);
+  box-shadow: 0 0 0 3px rgba(11, 61, 30, 0.12);
+}
+
+.form-textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* ── Image Upload & Fixed Dimension Cropper ───────────────────────────────── */
+.upload-drop-zone {
+  border: 2px dashed var(--admin-gold);
+  border-radius: 8px;
+  padding: 2rem 1rem;
+  text-align: center;
+  background: rgba(184, 132, 26, 0.04);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upload-drop-zone:hover {
+  background: rgba(184, 132, 26, 0.08);
+  border-color: var(--admin-gold-light);
+}
+
+.drop-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 0.75rem;
+  color: var(--admin-gold);
+}
+
+.crop-preview-box {
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--admin-border);
+  background: #000;
+  position: relative;
+  aspect-ratio: 1200 / 630;
+}
+
+.crop-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.crop-dim-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(11, 61, 30, 0.9);
+  color: #ffffff;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--admin-gold);
+}
+
+.crop-actions-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* ── Rich Text Editor & Toolbar ──────────────────────────────────────────── */
+.wysiwyg-wrapper {
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.wysiwyg-toolbar {
+  background: #f1ede4;
+  border-bottom: 1px solid var(--admin-border);
+  padding: 0.4rem 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.tb-btn {
+  padding: 0.4rem 0.65rem;
+  border-radius: 4px;
+  background: #ffffff;
+  border: 1px solid var(--admin-border);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  transition: all 0.15s;
+}
+
+.tb-btn:hover {
+  background: var(--admin-forest);
+  color: #ffffff;
+  border-color: var(--admin-forest);
+}
+
+.tb-sep {
+  width: 1px;
+  background: var(--admin-border);
+  margin: 0 0.25rem;
+}
+
+.wysiwyg-content {
+  min-height: 380px;
+  padding: 1.25rem;
+  outline: none;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--admin-text);
+  overflow-y: auto;
+}
+
+.wysiwyg-content p {
+  margin-bottom: 1.25rem;
+}
+
+.wysiwyg-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  color: var(--admin-forest);
+  margin: 1.75rem 0 0.75rem;
+}
+
+.wysiwyg-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.wysiwyg-content ul, .wysiwyg-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.wysiwyg-content blockquote {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1.25rem;
+  border-left: 4px solid var(--admin-gold);
+  background: var(--admin-bg);
+  font-style: italic;
+}
+
+/* ── Google Search SERP Preview ─────────────────────────────────────────── */
+.serp-preview-card {
+  background: #ffffff;
+  border: 1px solid #dfe1e5;
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: arial, sans-serif;
+}
+
+.serp-url-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #202124;
+  margin-bottom: 0.25rem;
+}
+
+.serp-site-name {
+  font-weight: 600;
+}
+
+.serp-path {
+  color: #5f6368;
+}
+
+.serp-title {
+  color: #1a0dab;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+  text-decoration: none;
+  font-weight: 400;
+  display: block;
+}
+
+.serp-title:hover {
+  text-decoration: underline;
+}
+
+.serp-snippet {
+  color: #4d5156;
+  font-size: 0.875rem;
+  line-height: 1.58;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Management Table ────────────────────────────────────────────────────── */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: var(--admin-radius);
+  overflow: hidden;
+  border: 1px solid var(--admin-border);
+}
+
+.admin-table th {
+  background: #f4efe4;
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--admin-forest);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--admin-border);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.table-thumb {
+  width: 80px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #eee;
+}
+
+.table-title {
+  font-weight: 600;
+  color: var(--admin-forest);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.table-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ── Modal Dialogs ───────────────────────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 40, 20, 0.75);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.modal-dialog {
+  background: #ffffff;
+  border-radius: 12px;
+  max-width: 850px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--admin-gold);
+}
+
+.modal-header {
+  padding: 1.25rem 1.5rem;
+  background: var(--admin-forest-dark);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--admin-gold-light);
+  margin: 0;
+}
+
+.modal-body {
+  padding: 1.5rem;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 1rem 1.5rem;
+  background: #f7f5f0;
+  border-top: 1px solid var(--admin-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* ── Login Gate Overlay ──────────────────────────────────────────────────── */
+.login-gate-card {
+  max-width: 440px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  border: 2px solid var(--admin-gold);
+  text-align: center;
+}
+
+.login-gate-card h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--admin-forest);
+  margin: 1rem 0 0.5rem;
+}
+
+.login-gate-card p {
+  color: var(--admin-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.shake-animation {
+  animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Responsive */
+@media (max-width: 950px) {
+  .editor-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
