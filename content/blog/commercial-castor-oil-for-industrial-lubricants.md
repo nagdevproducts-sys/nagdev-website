@@ -37,7 +37,7 @@ Industrial lubricant blenders utilize this vegetable base stock either as a stan
 
 ## Commercial Castor Oil for Industrial Lubricants: Greases & Fluids
 
-In grease manufacturing, commercial castor oil for industrial lubricants serves both as a fluid base component and as a fatty feedstock for soap formation. Lubricant compounders heat fatty feeds in soap formation kettles alongside hydrated lime, lithium hydroxide, or aluminum alcoholates. The presence of unesterified fatty acids alongside ricinoleic triglycerides accelerates soap formation kinetics, creating a stable, fibrous metallic soap thickener matrix that traps fluid lubricant within its crystalline lattice.
+In grease manufacturing, commercial castor oil for industrial lubricants serves both as a fluid base component and as a fatty feedstock for soap formation. Lubricant compounders heat fatty feeds in soap formation kettles alongside hydrated lime, lithium hydroxide, or aluminum alcoholates. The presence of unesterified fatty acids alongside ricinoleic triglycerides accelerates soap formation kinetics, creating a stable, fibrous thickener matrix that traps fluid lubricant within its crystalline lattice.
 
 Greases formulated with castor oil derivatives demonstrate pronounced mechanical shear stability. Under prolonged cyclic shearing in roller bearings, the polar thickener network resists collapse, preventing grease softening and structural breakdown. Furthermore, the inherent thermal stability of the ricinoleic structure allows grease compositions to operate across wide operational spans, from cold industrial machinery starts to elevated frictional heat generated in kiln car wheel bearings, continuous casting lines, and heavy mining conveyors.
 
@@ -56,7 +56,9 @@ Nagdev Products provides commercial castor oil crushed directly from North Gujar
 
 ## Sourcing and Industrial Distribution from Deodar
 
-Nagdev Products manufactures commercial castor oil at our production installation located at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330. Sourcing whole seeds from North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our 50 TPD seed crushing capacity operates under direct process controls to maintain physical and chemical consistency.
+Nagdev Products manufactures commercial castor oil at our production installation located at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330.
+
+Sourcing whole seeds from North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our 50 TPD seed crushing capacity operates under direct process controls to maintain physical and chemical consistency.
 
 Our distribution infrastructure services industrial grease and lubricant manufacturers across multiple geographic zones:
 

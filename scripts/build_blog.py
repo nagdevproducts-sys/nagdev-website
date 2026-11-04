@@ -1081,7 +1081,7 @@ def update_homepage(published_posts):
         Latest Technical Publications
       </h2>
       <p class="section-sub" style="color:var(--charcoal-soft);font-size:1.05rem;line-height:1.6;">
-        Peer-reviewed specifications, processing chemistry, and regional market intelligence from North Gujarat's castor belt.
+        Technical specifications, processing chemistry and market insights from North Gujarat's castor belt.
       </p>
     </div>
 
