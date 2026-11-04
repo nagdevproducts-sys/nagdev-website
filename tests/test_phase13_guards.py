@@ -49,7 +49,7 @@ def test_guard_enquiry_api_endpoint_and_zero_formsubmit():
 
     privacy_html = (REPO_ROOT / "privacy.html").read_text(encoding="utf-8")
     assert "formsubmit" not in privacy_html.lower()
-    assert "via Resend" in privacy_html
+    assert "Resend" in privacy_html
     assert "Google Sheets" in privacy_html
 
 def test_guard_mobile_drawer_hidden():

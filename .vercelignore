@@ -19,6 +19,9 @@ monitoring_output/
 content/
 templates/
 blog/_template.html
+blog-admin.html
+css/blog-admin.css
+js/blog-admin.js
 
 # Dependencies & Package Managers
 node_modules/

@@ -89,9 +89,52 @@ async function getGoogleAccessToken(saJsonString) {
   return tokenData.access_token;
 }
 
+// Ensure Sheet Column Headers include Consent Columns
+async function ensureSheetHeaders(sheetId, accessToken) {
+  try {
+    const getUrl = `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(sheetId)}/values/A1:Q1`;
+    const resp = await fetch(getUrl, {
+      headers: { 'Authorization': `Bearer ${accessToken}` }
+    });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    const headers = (data.values && data.values[0]) || [];
+
+    const standardHeaders = [
+      'Received (IST)', 'Reference', 'Enquiry Type', 'Product', 'Name',
+      'Company', 'Email', 'Phone', 'Country', 'Quantity',
+      'Packing', 'Message', 'Page URL', 'UTM Source', 'Status',
+      'Updates Opt-In', 'Consent Timestamp'
+    ];
+
+    let needsUpdate = false;
+    for (let i = 0; i < standardHeaders.length; i++) {
+      if (!headers[i]) {
+        headers[i] = standardHeaders[i];
+        needsUpdate = true;
+      }
+    }
+
+    if (needsUpdate) {
+      const putUrl = `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(sheetId)}/values/A1:Q1?valueInputOption=USER_ENTERED`;
+      await fetch(putUrl, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ values: [headers] })
+      });
+    }
+  } catch (err) {
+    console.warn('ensureSheetHeaders warning:', err.message);
+  }
+}
+
 // Append row to Google Sheet
 async function appendToGoogleSheet(sheetId, saJsonString, rowValues) {
   const accessToken = await getGoogleAccessToken(saJsonString);
+  await ensureSheetHeaders(sheetId, accessToken);
   const range = 'A1';
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(sheetId)}/values/${encodeURIComponent(range)}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
 
@@ -223,6 +266,17 @@ module.exports = async function handler(req, res) {
   const ref = generateRef();
   const receivedAtIST = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
+  // Product and Price Updates consent checkbox tracking
+  const updatesOptIn = (
+    body.updates_opt_in === true ||
+    body.updates_opt_in === 'true' ||
+    body.updates_opt_in === 'on' ||
+    body.updates_opt_in === '1' ||
+    body.updates_opt_in === 1
+  );
+  const consentValue = updatesOptIn ? 'TRUE' : 'FALSE';
+  const consentTimestamp = new Date().toISOString();
+
   // Prepare dual delivery tasks
   const tasks = [];
 
@@ -245,7 +299,9 @@ module.exports = async function handler(req, res) {
       message || 'N/A',
       pageUrl || 'N/A',
       utmSource || 'N/A',
-      'New'
+      'New',
+      consentValue,
+      consentTimestamp
     ];
     tasks.push(
       appendToGoogleSheet(sheetId, saJson, rowValues)
@@ -277,6 +333,8 @@ module.exports = async function handler(req, res) {
         <tr><td style="background:#f4f6f2;"><strong>Packing Preference</strong></td><td>${packing || 'N/A'}</td></tr>
         <tr><td style="background:#f4f6f2;"><strong>Message / Notes</strong></td><td>${message.replace(/\n/g, '<br>') || 'N/A'}</td></tr>
         <tr><td style="background:#f4f6f2;"><strong>Page URL</strong></td><td>${pageUrl || 'N/A'}</td></tr>
+        <tr><td style="background:#f4f6f2;"><strong>Updates Opt-In</strong></td><td>${consentValue}</td></tr>
+        <tr><td style="background:#f4f6f2;"><strong>Consent Timestamp</strong></td><td>${consentTimestamp}</td></tr>
       </table>
     `;
 
@@ -325,7 +383,14 @@ module.exports = async function handler(req, res) {
   }));
 
   if (atLeastOneSuccess) {
-    return res.status(200).json({ ok: true, ref });
+    return res.status(200).json({
+      ok: true,
+      ref,
+      consent: {
+        updates_opt_in: updatesOptIn,
+        timestamp: consentTimestamp
+      }
+    });
   }
 
   // Step 5: Log error class and ref explicitly for Vercel logs monitoring

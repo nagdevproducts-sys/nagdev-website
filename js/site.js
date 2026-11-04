@@ -1005,6 +1005,9 @@
   }
 
   function setupLogoTriggers() {
+    const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+    if (!isLocal) return; // Keep admin triggers local-only; disabled on public production
+
     // 1. Desktop / Header logo
     const headerLogos = document.querySelectorAll('.header-logo');
     headerLogos.forEach(logo => {
