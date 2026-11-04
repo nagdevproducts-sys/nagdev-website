@@ -1131,5 +1131,30 @@ class TestClaimsLint(unittest.TestCase):
             fails = [f for f in findings if f["rule"] == "R1 Banned plant/service claim" and phrase.lower() in f["text"].lower()]
             self.assertTrue(len(fails) > 0, f"R1 must fail for banned plant/service claim '{phrase}'")
 
+    # Operational Status Gate (R25): Ban on 2027, commissioning, upcoming plant, etc.
+    def test_r25_operational_status_gate(self):
+        banned = [
+            "commercial production targeted for 2027",
+            "machinery under installation",
+            "commissioning in 2027",
+            "upcoming plant in Gujarat",
+            "will commence production",
+            "planned production",
+            "pre-production facility",
+            "coming soon to Deodar",
+            "proposed plant layout"
+        ]
+        for phrase in banned:
+            html = f"<p>Plant update: {phrase}.</p>"
+            findings = lint_content(html, "about.html", self.facts)
+            fails = [f for f in findings if "R25" in f.get("rule", "")]
+            self.assertTrue(len(fails) > 0, f"R25 must fail for '{phrase}'")
+
+        # Operational status must pass cleanly
+        valid_html = "<p>Our plant is operational and supplying now with 50 TPD crushing capacity.</p>"
+        findings = lint_content(valid_html, "plant-progress.html", self.facts)
+        fails = [f for f in findings if "R25" in f.get("rule", "")]
+        self.assertEqual(len(fails), 0, "Valid operational statement must pass R25 with 0 failures")
+
 if __name__ == "__main__":
     unittest.main()
