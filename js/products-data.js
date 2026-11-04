@@ -2167,7 +2167,7 @@ const PRODUCTS_DATABASE = [
       "Packaging will be confirmed when commercial supply starts"
     ],
     "shelfLife": "24 months in sealed, dry packaging, protected from light.",
-    "application": "Zinc Undecylenate (NDEVSOAP™ ZNU) is a fine white metallic soap under development. Derived from undecylenic acid, it is targeted for personal-care formulations and industrial uses upon commercial supply.",
+    "application": "Zinc Undecylenate (NDEVSOAP™ ZNU) is a fine white metallic soap under development. Derived from undecylenic acid, it is developed for personal-care formulations and industrial uses upon commercial supply.",
     "headers": [
       "SR NO",
       "TEST PARAMETER",

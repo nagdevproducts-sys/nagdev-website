@@ -450,14 +450,13 @@
   </div>
 </div>
 
-<!-- PROJECT STATUS NOTICE -->
+<!-- OPERATIONAL STATUS NOTICE -->
 <div style="background: var(--warm-white); border-bottom: 1px solid var(--border-light); padding: 0.75rem 0;">
   <div class="container">
-    <div style="background: rgba(212,165,55,0.1); border: 1px solid rgba(212,165,55,0.35); border-radius: 6px; padding: 10px 18px; display: flex; align-items: center; gap: 12px;">
-      <span style="font-size: 1.3rem;">🏗️</span>
+    <div style="background: rgba(11,61,30,0.06); border: 1px solid rgba(11,61,30,0.2); border-radius: 6px; padding: 10px 18px; display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 1.3rem;">🏭</span>
       <div style="font-size: 0.85rem; color: var(--charcoal); line-height: 1.45;">
-        <strong>Plant Status:</strong> Integrated facility operational in Banaskantha — mechanical seed pressing, refining line, and hydrogenation and dehydration active. Regional seed sourcing and commercial dispatches active.
-        <span style="display:block;font-size:0.75rem;color:var(--text-muted);margin-top:2px;font-style:italic;">Note: Facility visuals displayed include architectural and operational representations.</span>
+        <strong>Operational Plant:</strong> Integrated facility operational at Deodar, District Vav-Tharad in North Gujarat's castor belt — 50 TPD mechanical seed crushing, refining line producing FSG, and hydrogenation and dehydration running. In-house QC lab active; dispatching commercial volumes now.
       </div>
     </div>
   </div>
@@ -733,6 +732,24 @@
   </div>
 </section>
 
+<!-- ══════════════════════════════════════ REAL PLANT PROOF GALLERY ══════ -->
+<section id="plant-real-gallery" class="plant-real-gallery-section" style="display:none; padding:4.5rem 0; background:var(--bg-surface); border-top:1px solid var(--border-light);" aria-label="Plant in Operation Gallery">
+  <div class="container">
+    <div style="text-align:center; max-width:760px; margin:0 auto 2.5rem;">
+      <span style="font-size:0.8rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:0.35rem;">Operational Facility Proof</span>
+      <h2 style="font-size:2rem; font-family:var(--font-heading); color:var(--forest); margin-bottom:0.5rem;">
+        Plant in Operation
+      </h2>
+      <p style="font-size:0.95rem; color:var(--charcoal-soft); line-height:1.6; margin:0 auto;">
+        Real photographic and video documentation from our active manufacturing runs and processing lines in Sardarpura (Deodar), North Gujarat.
+      </p>
+    </div>
+    <div id="plant-real-grid" class="plant-real-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.75rem;">
+      <!-- Dynamically populated from /images/plant-real/captions.json; remains hidden if empty -->
+    </div>
+  </div>
+</section>
+
 <!-- FINAL CTA -->
 <section class="final-cta-section">
   <div class="container">
@@ -891,5 +908,95 @@
 <div id="toast-container" class="toast-container"></div>
 <script>document.getElementById('footer-year').textContent=new Date().getFullYear();</script>
 <script src="/js/site.min.js?v=fc3cdaf" defer></script>
+
+<!-- Real Plant Proof Gallery Loader -->
+<script>
+(function() {
+  var gallerySection = document.getElementById('plant-real-gallery');
+  var galleryGrid = document.getElementById('plant-real-grid');
+  if (!gallerySection || !galleryGrid) return;
+
+  fetch('/images/plant-real/captions.json')
+    .then(function(res) {
+      if (!res.ok) throw new Error('Captions not found');
+      return res.json();
+    })
+    .then(function(data) {
+      var items = Array.isArray(data) ? data : (data && Array.isArray(data.items) ? data.items : []);
+      if (!items || items.length === 0) {
+        gallerySection.style.display = 'none';
+        return;
+      }
+
+      galleryGrid.innerHTML = '';
+      items.forEach(function(item) {
+        if (!item.file) return;
+
+        var card = document.createElement('div');
+        card.className = 'plant-real-card';
+        card.style.cssText = 'background:#ffffff; border:1px solid var(--border-light, #e2e8f0); border-radius:var(--radius-md, 8px); overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.05); display:flex; flex-direction:column;';
+
+        var mediaWrap = document.createElement('div');
+        mediaWrap.style.cssText = 'position:relative; width:100%; aspect-ratio:16/10; background:var(--ivory, #fdfbf7); overflow:hidden;';
+
+        var isVideo = item.type === 'video' || (item.file && item.file.match(/\.(mp4|webm|mov)$/i));
+        if (isVideo) {
+          var video = document.createElement('video');
+          video.src = item.file.indexOf('/') === 0 ? item.file : ('/images/plant-real/' + item.file);
+          if (item.poster) {
+            video.poster = item.poster.indexOf('/') === 0 ? item.poster : ('/images/plant-real/' + item.poster);
+          }
+          video.preload = 'none';
+          video.controls = true;
+          video.playsInline = true;
+          video.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block;';
+          mediaWrap.appendChild(video);
+        } else {
+          var picture = document.createElement('picture');
+          var sourceWebp = document.createElement('source');
+          var webpPath = item.file.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+          sourceWebp.srcset = webpPath.indexOf('/') === 0 ? webpPath : ('/images/plant-real/' + webpPath);
+          sourceWebp.type = 'image/webp';
+          picture.appendChild(sourceWebp);
+
+          var img = document.createElement('img');
+          img.src = item.file.indexOf('/') === 0 ? item.file : ('/images/plant-real/' + item.file);
+          img.alt = item.caption || 'Nagdev Products plant in operation';
+          img.loading = 'lazy';
+          img.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block;';
+          picture.appendChild(img);
+          mediaWrap.appendChild(picture);
+        }
+
+        var info = document.createElement('div');
+        info.style.cssText = 'padding:1.25rem; display:flex; flex-direction:column; gap:0.35rem; flex-grow:1;';
+
+        if (item.date) {
+          var time = document.createElement('time');
+          time.style.cssText = 'font-size:0.775rem; font-weight:700; color:var(--gold, #b48232); text-transform:uppercase; letter-spacing:0.04em;';
+          time.textContent = item.date;
+          info.appendChild(time);
+        }
+
+        if (item.caption) {
+          var caption = document.createElement('p');
+          caption.style.cssText = 'margin:0; font-size:0.925rem; color:var(--charcoal, #282828); line-height:1.55; font-weight:500;';
+          caption.textContent = item.caption;
+          info.appendChild(caption);
+        }
+
+        card.appendChild(mediaWrap);
+        card.appendChild(info);
+        galleryGrid.appendChild(card);
+      });
+
+      gallerySection.style.display = 'block';
+    })
+    .catch(function() {
+      gallerySection.style.display = 'none';
+    });
+})();
+</script>
+
 </body>
 </html>

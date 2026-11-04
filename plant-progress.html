@@ -347,127 +347,7 @@
       </button>
     </div>
   </div>
-</header>
-
-<!-- Mobile Navigation Drawer -->
-<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
-<div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Navigation menu">
-  <div class="mobile-drawer-header">
-    <img src="/images/logo.webp" alt="Nagdev Products" width="124" height="36" style="width:auto;height:36px;">
-    <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">✕</button>
-  </div>
-  <ul class="mobile-nav-list" role="list">
-    <li><a href="/" class="mobile-nav-link ">Home</a></li>
-    <li class="mobile-nav-item">
-      <details class="mobile-products-accordion">
-        <summary class="mobile-nav-link">
-          <span>Products (All 32)</span>
-          <svg class="mobile-accordion-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </summary>
-        <div class="mobile-products-body" id="mobile-products-body">
-          <div class="mobile-prod-group">
-            <div class="mobile-prod-group-title">Regular Supply (7)</div>
-            <ul class="mobile-prod-sublist">
-              <li><a href="/products/commercial-castor-oil" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ COMM</span> Commercial Castor Oil</a></li>
-              <li><a href="/products/first-special-grade-castor-oil" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ FSG</span> First Special Grade (FSG)</a></li>
-              <li><a href="/products/fpd-castor-oil" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ FPD</span> First Pressed Degummed (FPD)</a></li>
-              <li><a href="/products/castor-cake" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVAGRO™ CAKE</span> Castor Cake (Organic Fertilizer)</a></li>
-              <li><a href="/products/hydrogenated-castor-oil" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVWAX™ HCO</span> Hydrogenated Castor Oil (HCO)</a></li>
-              <li><a href="/products/dehydrated-castor-oil" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ DCO</span> Dehydrated Castor Oil (DCO)</a></li>
-              <li><a href="/products/dco-fatty-acid" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVACID™ DCO-FA</span> DCO Fatty Acid</a></li>
-            </ul>
-          </div>
-          <div class="mobile-prod-group">
-            <div class="mobile-prod-group-title">Available on Enquiry (8)</div>
-            <ul class="mobile-prod-sublist">
-              <li><a href="/products/ppg-castor-oil" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ PPG</span> PPG Castor Oil</a></li>
-              <li><a href="/products/cold-pressed-castor-oil" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ CP</span> Cold Pressed Castor Oil</a></li>
-              <li><a href="/products/castor-oil-bp93" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ BP</span> Castor Oil BP (Pharma)</a></li>
-              <li><a href="/products/castor-oil-usp-nf" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ USP</span> Castor Oil USP–NF</a></li>
-              <li><a href="/products/castor-oil-ph-eur" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ EP</span> Castor Oil Ph. Eur.</a></li>
-              <li><a href="/products/castor-oil-ip" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ IP</span> Castor Oil IP</a></li>
-              <li><a href="/products/castor-oil-jp" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ JP</span> Castor Oil JP</a></li>
-              <li><a href="/products/cosmetic-grade-castor-oil" class="mobile-prod-sublink"><span class="mobile-prod-brand">NDEVOLEO™ COS</span> Cosmetic Grade Castor Oil</a></li>
-            </ul>
-          </div>
-          <div class="mobile-prod-group">
-            <div class="mobile-prod-group-title">Under Development (17)</div>
-            <ul class="mobile-prod-sublist">
-              <li><a href="/products/ricinoleic-acid" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVACID™ RIC</span> Ricinoleic Acid</a></li>
-              <li><a href="/products/12-hydroxystearic-acid" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVACID™ 12-HSA</span> 12-Hydroxystearic Acid (12-HSA)</a></li>
-              <li><a href="/products/sebacic-acid" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVACID™ SEB</span> Sebacic Acid</a></li>
-              <li><a href="/products/high-protein-castor-meal" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVAGRO™ HPRO</span> High Protein Castor Meal</a></li>
-              <li><a href="/products/crude-glycerin" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVGLY™ CRUDE</span> Crude Glycerin</a></li>
-              <li><a href="/products/refined-glycerin" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVGLY™ REF</span> Refined Glycerin</a></li>
-              <li><a href="/products/bio-polyurethane-polyols" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVPOL™ BIO</span> Bio-PU Polyols</a></li>
-              <li><a href="/products/sodium-sulphate-anhydrous" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVCHEM™ NA2SO4</span> Sodium Sulphate Anhydrous</a></li>
-              <li><a href="/products/dioctyl-sebacate" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVEST™ DOS</span> Dioctyl Sebacate (DOS)</a></li>
-              <li><a href="/products/dibutyl-sebacate" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVEST™ DBS</span> Dibutyl Sebacate (DBS)</a></li>
-              <li><a href="/products/methyl-12-hydroxystearate" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVEST™ M12H</span> Methyl 12-HSA</a></li>
-              <li><a href="/products/methyl-ricinoleate" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVEST™ MR</span> Methyl Ricinoleate</a></li>
-              <li><a href="/products/lithium-12-hydroxystearate" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVSOAP™ LI12</span> Lithium 12-HSA</a></li>
-              <li><a href="/products/calcium-12-hydroxystearate" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVSOAP™ CA12</span> Calcium 12-HSA</a></li>
-              <li><a href="/products/zinc-undecylenate" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVSOAP™ ZNU</span> Zinc Undecylenate</a></li>
-              <li><a href="/products/zinc-ricinoleate" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVSOAP™ ZNR</span> Zinc Ricinoleate</a></li>
-              <li><a href="/products/blown-oxidized-castor-oil" class="mobile-prod-sublink is-dev"><span class="mobile-prod-brand">NDEVOX™ BLO</span> Blown / Oxidised Castor Oil</a></li>
-            </ul>
-          </div>
-          <div style="padding: 0.5rem 0 0.25rem 0;">
-            <a href="/products" class="mobile-view-all-link" style="font-size:0.8rem; font-weight:700; color:var(--forest, #0b3d1e); text-decoration:none;">View All 32 Products &amp; TDS →</a>
-          </div>
-        </div>
-      </details>
-    </li>
-    <li><a href="/process-flow" class="mobile-nav-link " style="font-weight:600;">⚙️ Process Flow</a></li>
-    <li><a href="/about" class="mobile-nav-link ">About</a></li>
-    <li><a href="/plant" class="mobile-nav-link active">Our Plant</a></li>
-    <li><a href="/quality" class="mobile-nav-link ">Quality</a></li>
-    <li><a href="/castor-oil-exporter-india" class="mobile-nav-link ">Export</a></li>
-    <li><a href="/resources" class="mobile-nav-link ">Resources</a></li>
-    <li><a href="/blog" class="mobile-nav-link ">Blog</a></li>
-    <li><a href="/contact" class="mobile-nav-link ">Contact</a></li>
-  </ul>
-  <div style="margin-top:auto;padding-top:1.5rem;">
-    <a href="/contact" class="btn btn-primary" style="width:100%;justify-content:center;">Request a Quote →</a>
-  </div>
-</div>
-
-
-<main id="main-content">
-  <header style="background:var(--bg-surface); padding:4rem 0 3.5rem; border-bottom:1px solid var(--border-light);">
-    <div class="container">
-      <nav class="breadcrumb-nav" aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">
-        <a href="/" style="color:var(--forest); text-decoration:none;">Home</a> &gt; 
-        <a href="/plant" style="color:var(--forest); text-decoration:none;">Our Plant</a> &gt; 
-        <span aria-current="page" style="color:var(--charcoal);">Our Plant in Operation</span>
-      </nav>
-
-      <div style="display:inline-flex; align-items:center; gap:0.5rem; background:#EBF2ED; border:1px solid #C4D9CA; padding:0.45rem 1rem; border-radius:9999px; font-size:0.825rem; font-weight:700; color:#0B3D1E; margin-bottom:1rem;">
-        ✦ Operational Plant — Actively Manufacturing &amp; Supplying Commercial Volumes.
-      </div>
-
-      <h1 style="font-size:clamp(2.25rem, 4.2vw, 3.25rem); font-family:var(--font-heading); color:var(--forest); line-height:1.2; margin-bottom:1rem;">
-        Our Plant in Operation
-      </h1>
-
-      <div style="background:var(--ivory); border:1px solid var(--border-light); border-radius:var(--radius-sm); padding:1rem 1.25rem; margin-bottom:1.5rem; max-width:860px;">
-        <span style="font-size:0.75rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:0.25rem;">Capacity Summary</span>
-        <strong style="font-size:1.05rem; color:var(--forest); display:block; line-height:1.5;">Mechanical seed pressing · refining line · hydrogenation and dehydration for derivatives</strong>
-      </div>
-
-      <p style="font-size:1.15rem; color:var(--charcoal-soft); max-width:860px; line-height:1.75; margin-bottom:2rem;">
-        Operations overview for Nagdev Products Private Limited's integrated castor facility at Survey No. 301 P-2, Sardarpura, Taluka Deodar, District Vav-Tharad, Gujarat. Well connected to Kandla and Mundra ports for global export dispatches.
-      </p>
-
-      <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center;">
-        <a href="/contact" class="btn btn-primary">Request a Quote →</a>
-        <a href="/plant" class="btn btn-outline">Explore Facility Footprint</a>
-        <a href="https://maps.app.goo.gl/4eETjMFpRmRxWcf6A" target="_blank" rel="noopener" class="btn btn-outline">📍 View Google Maps Location</a>
-      </div>
-    </div>
-  </header>
-
-  <div style="padding:3.5rem 0 4.5rem;">
+</header><div style="padding:3.5rem 0 4.5rem;">
     <div class="container" style="max-width:1040px;">
 
       <!-- OPERATIONAL CAPABILITY OVERVIEW CARDS -->
@@ -477,7 +357,7 @@
           Integrated Operations &amp; Processing Units
         </h2>
         <p style="font-size:1.05rem; color:var(--charcoal-soft); line-height:1.75; margin-bottom:2.5rem; max-width:860px;">
-          Our Deodar manufacturing complex is fully operational, taking locally sourced North Gujarat castor seeds through precision mechanical expelling, chemical refining, catalytic hydrogenation, thermal dehydration, and lot-by-lot analytical certification:
+          Our Deodar manufacturing complex is fully operational, taking locally sourced North Gujarat castor seeds through mechanical expelling, chemical refining, catalytic hydrogenation, thermal dehydration, and lot-by-lot analytical certification:
         </p>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(310px, 1fr)); gap:1.75rem;">
@@ -491,7 +371,7 @@
               Mechanical Seed Crushing (50 TPD)
             </strong>
             <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.65; margin:0 0 1rem;">
-              Operating high-pressure continuous mechanical expellers with 50 metric tonnes per day (TPD) crushing throughput. Raw seeds sourced directly from APMC mandis across North Gujarat's castor belt (Deodar, Bhabhar, Tharad, Patan, Banaskantha region).
+              Operating high-pressure continuous mechanical expellers with 50 metric tonnes per day (TPD) crushing throughput. Raw seeds sourced directly from APMC mandis across North Gujarat's castor belt (Deodar, Bhabhar, Tharad, Patan, District Vav-Tharad region).
             </p>
             <div style="font-size:0.8rem; color:var(--gold); font-weight:700; text-transform:uppercase; letter-spacing:0.04em;">
               Output: Commercial Castor Oil &amp; Castor Cake
@@ -571,7 +451,7 @@
               Farm-Gate &amp; Mandi Sourcing
             </strong>
             <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.65; margin:0 0 1rem;">
-              Direct procurement ties with local agrarian cooperatives and daily APMC trading desks in Deodar and neighbouring talukas guarantee unbroken raw material availability, low seed transit degradation, and complete agricultural traceability.
+              Direct procurement ties with local agrarian cooperatives and daily APMC trading desks in Deodar and neighbouring talukas support reliable raw material availability, low seed transit degradation, and complete agricultural traceability.
             </p>
             <div style="font-size:0.8rem; color:var(--gold); font-weight:700; text-transform:uppercase; letter-spacing:0.04em;">
               Traceability: Farm Gate to Final Dispatch

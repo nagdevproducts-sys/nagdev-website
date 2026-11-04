@@ -26,7 +26,10 @@
       "dehydration (DCO)",
       "DCO fatty acid production",
       "lot testing with COA per lot",
-      "in-house QC testing"
+      "in-house QC testing",
+      "dispatching commercial volumes",
+      "packing and dispatch to Kandla and Mundra ports",
+      "bulk and drum packaging"
     ]
   },
   "products": {
@@ -251,9 +254,21 @@
     "aerospace",
     "transport fuel",
     "passes USP",
-    "passes IP"
+    "passes IP",
+    "2027",
+    "commissioning",
+    "under installation",
+    "under construction",
+    "upcoming plant",
+    "will commence",
+    "production from",
+    "planned production",
+    "pre-production",
+    "coming soon",
+    "proposed plant",
+    "plant progress"
   ],
-  "spec_basis": "indicative trade values — no owner COA yet",
-  "spec_review_due": "when first production COAs are available",
+  "spec_basis": "active commercial production — COA per lot issued by in-house QC lab",
+  "spec_review_due": "routine lot-by-lot COA release",
   "response_time": "We usually respond within 1–2 working days."
 }

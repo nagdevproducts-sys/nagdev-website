@@ -72,7 +72,8 @@ RULES = {
     "R21": "CAS number integrity: no unauthorized CAS numbers on agricultural meals",
     "R22": "Colour scale mismatch: 'Gardner' on a page whose spec table uses Lovibond (and vice versa) -> FAIL",
     "R23": "HS code mismatch: HS code must match product-master across page, chips, JSON-LD, TDS and catalog -> FAIL",
-    "R24": "PDF consistency: all TDS, catalog, and spec-confirmation PDFs must contain the exact plant address from the facts register; '42/1' and old district references forbidden"
+    "R24": "PDF consistency: all TDS, catalog, and spec-confirmation PDFs must contain the exact plant address from the facts register; '42/1' and old district references forbidden",
+    "R25": "OPERATIONAL STATUS GATE: fail build if '2027', commissioning, under installation/construction, upcoming/proposed plant, will commence, production from, planned/pre-production, coming soon, targeted (except under development), or plant progress appears anywhere"
 }
 
 # Ignored paths
@@ -1577,6 +1578,57 @@ def check_pdf_consistency_r19_r24(facts: dict, repo_root: Path = REPO_ROOT) -> l
     return findings
 
 
+
+R25_BANNED_PATTERNS = [
+    (r'\b2027\b', "2027"),
+    (r'\bcommissioning\b', "commissioning"),
+    (r'\bcommissioned\s+in\s+202[0-9]\b', "commissioned in 202x"),
+    (r'under\s+installation', "under installation"),
+    (r'under\s+construction', "under construction"),
+    (r'upcoming\s+plant', "upcoming plant"),
+    (r'will\s+commence', "will commence"),
+    (r'production\s+from', "production from"),
+    (r'planned\s+production', "planned production"),
+    (r'pre-production', "pre-production"),
+    (r'coming\s+soon', "coming soon"),
+    (r'proposed\s+plant', "proposed plant"),
+    (r'\btargeted\b', "targeted"),
+    (r'plant\s+progress', "plant progress"),
+    (r'નિર્માણાધીન', "નિર્માણાધીન (under construction)"),
+    (r'શરૂ\s*થશે', "શરૂ થશે (will commence)"),
+    (r'આગામી\s*પ્લાન્ટ', "આગામી પ્લાન્ટ (upcoming plant)"),
+    (r'પ્લાન્ટ\s*પ્રગતિ', "પ્લાન્ટ પ્રગતિ (plant progress)")
+]
+
+def check_r25_operational_status(lines: list, content: str, file_path_str: str) -> list:
+    findings = []
+    for line_idx, line in enumerate(lines, 1):
+        line_clean = line.strip()
+
+        # Allowlist 1: URL /plant-progress in hrefs, link canonical, or schema ids
+        line_scrubbed = re.sub(r'''https?://[^\s"'<>]+''', '', line_clean)
+        line_scrubbed = re.sub(r'/plant-progress[a-zA-Z0-9_\-#?&=]*', '', line_scrubbed)
+
+        # Allowlist 2: Official Pharmacopoeia Commission bodies
+        line_scrubbed = re.sub(r'(?:British|Indian|European|United\s+States)\s+Pharmacop[oœ]eia\s+Commission', '', line_scrubbed, flags=re.IGNORECASE)
+
+        # Allowlist 3: Biological/chemical progression
+        line_scrubbed = re.sub(r'(?:dehydration|reaction|process|crop|botanical)\s+progress(?:es|ion)?', '', line_scrubbed, flags=re.IGNORECASE)
+
+        # Allowlist 4: "under development" label for the 17 developmental products
+        # Handled naturally as "under development" is not banned
+
+        for pat, desc in R25_BANNED_PATTERNS:
+            if re.search(pat, line_scrubbed, re.IGNORECASE):
+                findings.append({
+                    "file": file_path_str,
+                    "line": line_idx,
+                    "rule": "R25 Operational status gate violation",
+                    "severity": "FAIL",
+                    "text": f"Found banned operational/future status phrase '{desc}' on line {line_idx}: '{line_clean[:100]}'"
+                })
+    return findings
+
 def lint_content(content: str, file_path_str: str, facts: dict):
     findings = []
     lines = content.splitlines()
@@ -2260,6 +2312,7 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     findings.extend(check_r21_cas_integrity(content, file_path_str))
     findings.extend(check_r22_color_scale(content, file_path_str))
     findings.extend(check_r23_hs_code(content, file_path_str))
+    findings.extend(check_r25_operational_status(lines, content, file_path_str))
 
     return findings
 
@@ -2303,7 +2356,7 @@ def run_production_audit(facts: dict):
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 25)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 26)}
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
     cb_ts = int(time.time())
@@ -2390,7 +2443,7 @@ def main():
     all_findings = []
     fail_count = 0
     warn_count = 0
-    fails_by_rule = {f"R{i}": 0 for i in range(1, 25)}
+    fails_by_rule = {f"R{i}": 0 for i in range(1, 26)}
 
     # Check shared organization schema include once (Fix 2)
     org_schema_p = REPO_ROOT / "templates" / "organization_schema.json"
@@ -2462,10 +2515,10 @@ def main():
     print(f"  - {report_csv}")
 
     if fail_count > 0:
-        print("\n[FAILED] One or more hard claims gate rules (R1-R23) failed.")
+        print("\n[FAILED] One or more hard claims gate rules (R1-R25) failed.")
         return 1
     else:
-        print("\n[PASSED] All hard claims gate rules (R1-R23) passed with 0 failures!")
+        print("\n[PASSED] All hard claims gate rules (R1-R25) passed with 0 failures!")
         return 0
 
 if __name__ == "__main__":
