@@ -507,107 +507,177 @@
         </div>
 
         <div class="flow-svg-viewport">
-          <svg class="flow-svg" viewBox="0 0 980 680" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;">
+          <svg class="flow-svg" viewBox="0 0 980 660" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter',system-ui,-apple-system,sans-serif;">
   <defs>
-    <marker id="arr-green-1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <!-- Background Dot Grid -->
+    <pattern id="grid-s1" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#E2E8F0" opacity="0.6"/>
+    </pattern>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow-s1" x="-6%" y="-6%" width="115%" height="120%" filterUnits="objectBoundingBox">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.07"/>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="grad-node-1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F4323"/>
+      <stop offset="100%" stop-color="#082A16"/>
+    </linearGradient>
+    <linearGradient id="grad-core-1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0B3D1E"/>
+      <stop offset="100%" stop-color="#062211"/>
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arr-green-s1" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0B3D1E"/>
     </marker>
-    <marker id="arr-amber-1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <marker id="arr-amber-s1" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#D97706"/>
+    </marker>
+    <marker id="arr-emerald-s1" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arr-slate-s1" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#64748B"/>
     </marker>
   </defs>
 
-  <!-- Flow 1: CASTOR OIL MECHANICAL SEED PRESSING -->
-  
-  <!-- Step 0: Header -->
-  <rect x="370" y="20" width="240" height="42" rx="8" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5"/>
-  <text x="490" y="46" text-anchor="middle" font-weight="800" font-size="14" fill="#0F172A">OIL MILL &amp; SEED RECEIVING</text>
+  <!-- Background -->
+  <rect x="0" y="0" width="980" height="660" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="980" height="660" fill="url(#grid-s1)"/>
 
-  <!-- Path 0 -> 1 -->
-  <path d="M 490 62 L 490 88" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-1)"/>
+  <!-- Technical Schematic Border -->
+  <rect x="15" y="15" width="950" height="630" rx="12" fill="none" stroke="#E2E8F0" stroke-width="1.5"/>
 
-  <!-- Step 1: Receiving & QC Sampling -->
-  <rect x="360" y="88" width="260" height="48" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="490" y="112" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">Seed receiving &amp; QC sampling</text>
-  <text x="490" y="127" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Gross/Tare Verification &amp; QC Sampling</text>
+  <!-- ==================== FLOW CONNECTIONS ==================== -->
+  <!-- Step 1 to Step 2 -->
+  <path d="M 490 76 L 490 106" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s1)"/>
 
-  <!-- Path 1 -> 2 -->
-  <path d="M 490 136 L 490 162" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-1)"/>
+  <!-- Step 2 to Step 3 -->
+  <path d="M 490 162 L 490 192" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s1)"/>
 
-  <!-- Step 2: Seed Storage -->
-  <rect x="350" y="162" width="280" height="52" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="490" y="186" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">Seed storage</text>
-  <text x="490" y="203" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Covered Storage &amp; Bulk Feeding</text>
+  <!-- Step 3 to Step 4 -->
+  <path d="M 490 246 L 490 274" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s1)"/>
 
-  <!-- Path 2 -> 3 -->
-  <path d="M 490 214 L 490 240" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-1)"/>
+  <!-- Side Rejects from Step 2 -->
+  <path d="M 330 134 L 270 134" stroke="#64748B" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-slate-s1)"/>
+  <path d="M 650 134 L 710 134" stroke="#D97706" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-amber-s1)"/>
 
-  <!-- Step 3: Multi-Stage Screen Cleaning -->
-  <rect x="350" y="240" width="280" height="52" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="490" y="264" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">Seed cleaning</text>
-  <text x="490" y="281" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">De-stoner, Magnet &amp; Air Aspiration</text>
+  <!-- Step 4 to Stream Split -->
+  <path d="M 490 338 L 490 365" stroke="#0B3D1E" stroke-width="2.5"/>
+  <path d="M 490 365 L 240 365 L 240 388" stroke="#059669" stroke-width="2.5" fill="none" marker-end="url(#arr-emerald-s1)"/>
+  <path d="M 490 365 L 740 365 L 740 388" stroke="#D97706" stroke-width="2.5" fill="none" marker-end="url(#arr-amber-s1)"/>
 
-  <!-- Side Branch: Covered Storage / Biomass Coproduct -->
-  <path d="M 630 266 L 730 266 L 730 290" stroke="#D97706" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-amber-1)"/>
-  <rect x="670" y="290" width="230" height="46" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
-  <text x="785" y="310" text-anchor="middle" font-weight="700" font-size="11" fill="#92400E">Husks &amp; foreign matter removed</text>
-  <text x="785" y="325" text-anchor="middle" font-weight="600" font-size="10" fill="#B45309">Separated &amp; Transferred to Storage</text>
+  <!-- Left: Oil Stream to Decantation -->
+  <path d="M 240 442 L 240 468" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-emerald-s1)"/>
+  <!-- Left: Decantation to Commercial Product -->
+  <path d="M 240 522 L 240 546" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-emerald-s1)"/>
 
-  <!-- Side Branch: Stems & Stones -->
-  <path d="M 350 266 L 240 266 L 240 290" stroke="#64748B" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-green-1)"/>
-  <rect x="130" y="290" width="220" height="46" rx="6" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
-  <text x="240" y="310" text-anchor="middle" font-weight="700" font-size="11" fill="#334155">FOREIGN PARTICLES / STONES</text>
-  <text x="240" y="325" text-anchor="middle" font-weight="600" font-size="10" fill="#64748B">Safe Industrial Solid Disposal</text>
+  <!-- Right: Cake Stream to Conditioning -->
+  <path d="M 740 442 L 740 468" stroke="#D97706" stroke-width="2.5" marker-end="url(#arr-amber-s1)"/>
+  <!-- Right: Conditioning to Cake Product -->
+  <path d="M 740 522 L 740 546" stroke="#D97706" stroke-width="2.5" marker-end="url(#arr-amber-s1)"/>
 
-  <!-- Path 3 -> 4 -->
-  <path d="M 490 292 L 490 350" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-1)"/>
+  <!-- Closed-Loop Foots Recycle (from Decanter back to Expellers) -->
+  <path d="M 380 495 L 420 495 L 420 305 L 310 305" stroke="#D97706" stroke-width="1.8" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-amber-s1)"/>
+  <rect x="390" y="380" width="60" height="22" rx="3" fill="#FEF3C7" stroke="#D97706" stroke-width="1"/>
+  <text x="420" y="394" text-anchor="middle" font-weight="700" font-size="8" fill="#92400E">RECYCLE</text>
 
-  <!-- Step 4: High-Pressure Screw Expellers -->
-  <rect x="340" y="350" width="300" height="58" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="490" y="375" text-anchor="middle" font-weight="800" font-size="14" fill="#FFFFFF">HIGH-PRESSURE SCREW EXPELLERS</text>
-  <text x="490" y="393" text-anchor="middle" font-weight="600" font-size="11" fill="#A7F3D0">Mechanical Pressing (Expellers)</text>
+  <!-- ==================== PROCESS NODES ==================== -->
+  <!-- Step 1: Intake & Storage -->
+  <g filter="url(#shadow-s1)">
+    <rect x="330" y="22" width="320" height="58" rx="8" fill="url(#grad-node-1)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="490" y="46" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">SEED INTAKE &amp; QUALITY VERIFICATION</text>
+    <text x="490" y="64" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Gross/Tare Weighment · Core QC Sampling · Covered Silo Storage</text>
+  </g>
 
-  <!-- Two-Way Stream Split: Oil vs Cake -->
-  <path d="M 490 408 L 490 430 M 490 430 L 260 430 L 260 455 M 490 430 L 720 430 L 720 455" stroke="#0B3D1E" stroke-width="2.5" fill="none"/>
-  
-  <!-- Arrow to Crude Oil -->
-  <path d="M 260 455 L 260 465" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-1)"/>
-  <!-- Arrow to Cake -->
-  <path d="M 720 455 L 720 465" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-1)"/>
+  <!-- Step 2: Seed Cleaning -->
+  <g filter="url(#shadow-s1)">
+    <rect x="330" y="106" width="320" height="56" rx="8" fill="url(#grad-node-1)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="490" y="129" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">MULTI-STAGE SEED CLEANING</text>
+    <text x="490" y="146" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Vibratory Screeners · Magnetic Separation · Air Aspiration</text>
+  </g>
 
-  <!-- Stream A: Crude Oil Node -->
-  <rect x="120" y="465" width="280" height="60" rx="8" fill="#ECFDF5" stroke="#059669" stroke-width="2"/>
-  <text x="260" y="490" text-anchor="middle" font-weight="800" font-size="13" fill="#065F46">APPROX. 40% CRUDE CASTOR OIL</text>
-  <text x="260" y="508" text-anchor="middle" font-weight="600" font-size="11" fill="#047857">Primary Unrefined Mechanical Extract</text>
+  <!-- Side Rejects: Stones & Metal (Left) -->
+  <g filter="url(#shadow-s1)">
+    <rect x="70" y="112" width="200" height="44" rx="6" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5"/>
+    <text x="170" y="130" text-anchor="middle" font-weight="700" font-size="11" fill="#334155">Stones &amp; Foreign Matter</text>
+    <text x="170" y="144" text-anchor="middle" font-weight="500" font-size="9" fill="#64748B">Mechanical Separation &amp; Removal</text>
+  </g>
 
-  <!-- Crude Oil Next Step -->
-  <path d="M 260 525 L 260 555" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-1)"/>
-  <rect x="130" y="555" width="260" height="50" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="260" y="577" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">DECANTATION &amp; SETTLING</text>
-  <text x="260" y="594" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Removal of Foots &amp; Suspended Solids</text>
+  <!-- Side Rejects: Husks & Pods (Right) -->
+  <g filter="url(#shadow-s1)">
+    <rect x="710" y="112" width="200" height="44" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+    <text x="810" y="130" text-anchor="middle" font-weight="700" font-size="11" fill="#92400E">Husks &amp; Light Pods</text>
+    <text x="810" y="144" text-anchor="middle" font-weight="500" font-size="9" fill="#B45309">Aspirated to Covered Storage</text>
+  </g>
 
-  <!-- Finished Product: Commercial Oil -->
-  <path d="M 260 605 L 260 620" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-1)"/>
-  <rect x="110" y="620" width="300" height="52" rx="8" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
-  <text x="260" y="642" text-anchor="middle" font-weight="800" font-size="13.5" fill="#065F46">★ COMMERCIAL CASTOR OIL</text>
-  <text x="260" y="658" text-anchor="middle" font-weight="600" font-size="10.5" fill="#047857">FFA &lt;2.0% · Raw Material for Refining</text>
+  <!-- Step 3: Seed Conditioning -->
+  <g filter="url(#shadow-s1)">
+    <rect x="340" y="192" width="300" height="54" rx="8" fill="url(#grad-node-1)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="490" y="215" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">THERMAL SEED CONDITIONING</text>
+    <text x="490" y="232" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Indirect Steam Conditioning for Optimal Pressing Plasticity</text>
+  </g>
 
-  <!-- Stream B: Expeller Castor Cake Node -->
-  <rect x="580" y="465" width="280" height="60" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-  <text x="720" y="490" text-anchor="middle" font-weight="800" font-size="13" fill="#92400E">APPROX. 60% EXPELLER CAKE</text>
-  <text x="720" y="508" text-anchor="middle" font-weight="600" font-size="11" fill="#B45309">Typically 8–10% Residual Oil</text>
+  <!-- Step 4: High-Pressure Expellers (Core Process) -->
+  <g filter="url(#shadow-s1)">
+    <rect x="310" y="274" width="360" height="64" rx="10" fill="url(#grad-core-1)" stroke="#D97706" stroke-width="2"/>
+    <text x="490" y="299" text-anchor="middle" font-weight="800" font-size="14" fill="#FFFFFF">MECHANICAL SCREW EXPELLING</text>
+    <text x="490" y="316" text-anchor="middle" font-weight="500" font-size="10.5" fill="#E2E8F0">Continuous Solvent-Free Pressing · High-Torque Worm Shafts</text>
+    <text x="490" y="329" text-anchor="middle" font-weight="700" font-size="9" fill="#FDE68A">100% Pure Mechanical Expression · Zero Chemical Solvents</text>
+  </g>
 
-  <!-- Cake Conditioning Step -->
-  <path d="M 720 525 L 720 555" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-1)"/>
-  <rect x="590" y="555" width="260" height="50" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="720" y="577" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">COOLING &amp; CONDITIONING</text>
-  <text x="720" y="594" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Natural Aeration &amp; Flake Sizing</text>
+  <!-- ==================== STREAM A (OIL STREAM, LEFT) ==================== -->
+  <!-- Stream A Header -->
+  <g filter="url(#shadow-s1)">
+    <rect x="100" y="388" width="280" height="54" rx="8" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+    <text x="240" y="411" text-anchor="middle" font-weight="800" font-size="12.5" fill="#065F46">CRUDE CASTOR OIL STREAM</text>
+    <text x="240" y="428" text-anchor="middle" font-weight="500" font-size="10" fill="#047857">Primary Unrefined Extract (Approx. 40% of Seed Mass)</text>
+  </g>
 
-  <!-- Finished Product: Castor Cake (Expeller Cake) -->
-  <path d="M 720 605 L 720 620" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-1)"/>
-  <rect x="570" y="620" width="300" height="52" rx="8" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
-  <text x="720" y="642" text-anchor="middle" font-weight="800" font-size="13.5" fill="#065F46">★ CASTOR CAKE (EXPELLER CAKE)</text>
-  <text x="720" y="658" text-anchor="middle" font-weight="600" font-size="10.5" fill="#047857">Oil ~8–10% · Typical Nitrogen 4.0%–4.5%</text>
+  <!-- Decantation & Clarification -->
+  <g filter="url(#shadow-s1)">
+    <rect x="100" y="468" width="280" height="54" rx="8" fill="url(#grad-node-1)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="240" y="491" text-anchor="middle" font-weight="800" font-size="12.5" fill="#FFFFFF">DECANTATION &amp; CLARIFICATION</text>
+    <text x="240" y="508" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Removal of Suspended Meal Foots &amp; Particulates</text>
+  </g>
+
+  <!-- Commercial Castor Oil Output -->
+  <g filter="url(#shadow-s1)">
+    <rect x="70" y="548" width="340" height="84" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
+    <rect x="85" y="558" width="160" height="18" rx="4" fill="#047857"/>
+    <text x="165" y="571" text-anchor="middle" font-weight="800" font-size="8.5" fill="#FFFFFF">★ COMMERCIAL OUTPUT</text>
+    <text x="85" y="595" font-weight="800" font-size="14" fill="#065F46">COMMERCIAL CASTOR OIL</text>
+    <text x="85" y="611" font-weight="600" font-size="10" fill="#047857">Raw Material for Refining &amp; Industrial Applications</text>
+    <text x="85" y="623" font-weight="500" font-size="9" fill="#64748B">Free Fatty Acids &lt; 2.0% · Unrefined Solvent-Free Primary Extract</text>
+  </g>
+
+  <!-- ==================== STREAM B (CAKE STREAM, RIGHT) ==================== -->
+  <!-- Stream B Header -->
+  <g filter="url(#shadow-s1)">
+    <rect x="600" y="388" width="280" height="54" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+    <text x="740" y="411" text-anchor="middle" font-weight="800" font-size="12.5" fill="#92400E">EXPELLER CASTOR CAKE STREAM</text>
+    <text x="740" y="428" text-anchor="middle" font-weight="500" font-size="10" fill="#B45309">Expeller Meal Flakes (Approx. 60% of Seed Mass)</text>
+  </g>
+
+  <!-- Cooling & Conditioning -->
+  <g filter="url(#shadow-s1)">
+    <rect x="600" y="468" width="280" height="54" rx="8" fill="url(#grad-node-1)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="740" y="491" text-anchor="middle" font-weight="800" font-size="12.5" fill="#FFFFFF">COOLING &amp; FLAKE SIZING</text>
+    <text x="740" y="508" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Aeration Cooling to Ambient &amp; Flake Cracking</text>
+  </g>
+
+  <!-- Castor Cake Output -->
+  <g filter="url(#shadow-s1)">
+    <rect x="570" y="548" width="340" height="84" rx="10" fill="#FFFBEB" stroke="#D97706" stroke-width="2.5"/>
+    <rect x="585" y="558" width="160" height="18" rx="4" fill="#B45309"/>
+    <text x="665" y="571" text-anchor="middle" font-weight="800" font-size="8.5" fill="#FFFFFF">★ ORGANIC CO-PRODUCT</text>
+    <text x="585" y="595" font-weight="800" font-size="14" fill="#78350F">CASTOR CAKE (EXPELLER MEAL)</text>
+    <text x="585" y="611" font-weight="600" font-size="10" fill="#92400E">Organic Soil Conditioner &amp; Nutrient Fertilizer</text>
+    <text x="585" y="623" font-weight="500" font-size="9" fill="#78350F">Residual Oil: 8–10% · Natural Nitrogen, Phosphorus &amp; Potash Fertilizer</text>
+  </g>
 </svg>
         </div>
       </div>
@@ -774,122 +844,200 @@
         </div>
 
         <div class="flow-svg-viewport">
-          <svg class="flow-svg" viewBox="0 0 980 780" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;">
+          <svg class="flow-svg" viewBox="0 0 980 720" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter',system-ui,-apple-system,sans-serif;">
   <defs>
-    <marker id="arr-green-2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <!-- Background Dot Grid -->
+    <pattern id="grid-s2" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#E2E8F0" opacity="0.6"/>
+    </pattern>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow-s2" x="-6%" y="-6%" width="115%" height="120%" filterUnits="objectBoundingBox">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.07"/>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="grad-node-2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F4323"/>
+      <stop offset="100%" stop-color="#082A16"/>
+    </linearGradient>
+    <linearGradient id="grad-bleach-2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0B3D1E"/>
+      <stop offset="100%" stop-color="#062211"/>
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arr-green-s2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0B3D1E"/>
     </marker>
-    <marker id="arr-amber-2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <marker id="arr-blue-s2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284C7"/>
+    </marker>
+    <marker id="arr-amber-s2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#D97706"/>
     </marker>
-    <marker id="arr-blue-2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284C7"/>
+    <marker id="arr-slate-s2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arr-emerald-s2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
     </marker>
   </defs>
 
-  <!-- Flow 2: CASTOR OIL MULTI-STAGE REFINING -->
-  
-  <!-- Step 0: Header -->
-  <rect x="370" y="20" width="240" height="42" rx="8" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5"/>
-  <text x="490" y="46" text-anchor="middle" font-weight="800" font-size="14" fill="#0F172A">REFINING LINE</text>
+  <!-- Background -->
+  <rect x="0" y="0" width="980" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="980" height="720" fill="url(#grid-s2)"/>
 
-  <!-- Path 0 -> 1 -->
-  <path d="M 490 62 L 490 88" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-2)"/>
+  <!-- Border -->
+  <rect x="15" y="15" width="950" height="690" rx="12" fill="none" stroke="#E2E8F0" stroke-width="1.5"/>
 
-  <!-- Step 1: Crude Oil Inflow -->
-  <rect x="350" y="88" width="280" height="50" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="490" y="112" text-anchor="middle" font-weight="800" font-size="13.5" fill="#FFFFFF">CRUDE CASTOR OIL INFLOW</text>
-  <text x="490" y="129" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Feedstock from Oil Mill · FFA 1.5% - 2.0%</text>
+  <!-- ==================== FLOW CONNECTIONS ==================== -->
+  <!-- Step 1 to Step 2 -->
+  <path d="M 490 76 L 490 106" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s2)"/>
 
-  <!-- Path 1 -> 2 -->
-  <path d="M 490 138 L 490 166" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-2)"/>
+  <!-- Step 2 to Step 3 -->
+  <path d="M 490 162 L 490 192" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s2)"/>
 
-  <!-- Step 2: Continuous Decantation -->
-  <rect x="350" y="166" width="280" height="50" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="490" y="190" text-anchor="middle" font-weight="800" font-size="13.5" fill="#FFFFFF">GRAVIMETRIC DECANTATION</text>
-  <text x="490" y="207" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Foots &amp; Suspended Meal Separation</text>
+  <!-- Step 3 to Step 4 (Bleacher) -->
+  <path d="M 490 244 L 490 274" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s2)"/>
 
-  <!-- Recycle Foots back up -->
-  <path d="M 630 191 L 780 191 L 780 115 L 635 115" stroke="#D97706" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-amber-2)"/>
-  <rect x="690" y="135" width="180" height="38" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
-  <text x="780" y="152" text-anchor="middle" font-weight="700" font-size="11" fill="#92400E">FOOTS RECYCLED</text>
-  <text x="780" y="166" text-anchor="middle" font-weight="600" font-size="10" fill="#B45309">Into Expellers (Zero Waste)</text>
+  <!-- Side Reagents into Bleacher -->
+  <path d="M 280 295 L 320 295" stroke="#0284C7" stroke-width="2" marker-end="url(#arr-blue-s2)"/>
+  <path d="M 280 350 L 320 350" stroke="#D97706" stroke-width="2" marker-end="url(#arr-amber-s2)"/>
+  <path d="M 700 322 L 660 322" stroke="#475569" stroke-width="2" marker-end="url(#arr-slate-s2)"/>
 
-  <!-- Path 2 -> 3 -->
-  <path d="M 490 216 L 490 248" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-2)"/>
+  <!-- Foots Recycle Line (from Step 2 out to right) -->
+  <path d="M 640 134 L 700 134" stroke="#D97706" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-amber-s2)"/>
 
-  <!-- Step 3: Commercial Clarified Oil -->
-  <rect x="350" y="248" width="280" height="48" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="490" y="271" text-anchor="middle" font-weight="800" font-size="13.5" fill="#FFFFFF">COMMERCIAL OIL BUFFER TANK</text>
-  <text x="490" y="287" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Moisture &lt;0.50% · Feed for Bleaching</text>
+  <!-- Step 4 to Step 5 (VPLF) -->
+  <path d="M 490 370 L 490 398" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s2)"/>
 
-  <!-- Triple Chemical Dosing Connectors into Bleacher -->
-  <!-- Dosing 1: Hyflow (from Left Top) -->
-  <rect x="50" y="325" width="230" height="44" rx="8" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5"/>
-  <text x="165" y="344" text-anchor="middle" font-weight="800" font-size="12" fill="#0369A1">💧 HYFLOW FILTER AID (0.1%–0.3%)</text>
-  <text x="165" y="359" text-anchor="middle" font-weight="600" font-size="10" fill="#0284C7">Diatomaceous Pre-coat Filter Matrix</text>
-  <path d="M 280 347 L 345 347" stroke="#0284C7" stroke-width="2" marker-end="url(#arr-blue-2)"/>
+  <!-- Spent Earth Cake from VPLF -->
+  <path d="M 660 425 L 710 425" stroke="#64748B" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-slate-s2)"/>
 
-  <!-- Dosing 2: Tonsil Earth (from Left Bottom) -->
-  <rect x="50" y="385" width="230" height="44" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
-  <text x="165" y="404" text-anchor="middle" font-weight="800" font-size="12" fill="#92400E">🌿 TONSIL / GALLEON (1.0%–1.5%)</text>
-  <text x="165" y="419" text-anchor="middle" font-weight="600" font-size="10" fill="#B45309">Activated Bleaching Earth (Adsorption)</text>
-  <path d="M 280 407 L 345 407" stroke="#D97706" stroke-width="2" marker-end="url(#arr-amber-2)"/>
+  <!-- Step 5 to Step 6 (Polish Filter) -->
+  <path d="M 490 454 L 490 480" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s2)"/>
 
-  <!-- Dosing 3: Activated Carbon (from Right) -->
-  <rect x="700" y="355" width="230" height="44" rx="8" fill="#F1F5F9" stroke="#475569" stroke-width="1.5"/>
-  <text x="815" y="374" text-anchor="middle" font-weight="800" font-size="12" fill="#1E293B">🖤 ACTIVATED CARBON (0.75%–1.0%)</text>
-  <text x="815" y="389" text-anchor="middle" font-weight="600" font-size="10" fill="#475569">Polyaromatic Color &amp; Odor Stripping</text>
-  <path d="M 700 377 L 635 377" stroke="#475569" stroke-width="2" marker-end="url(#arr-green-2)"/>
+  <!-- 3-Way Distribution Split to Products -->
+  <path d="M 490 532 L 490 554" stroke="#059669" stroke-width="2.5"/>
+  <path d="M 490 554 L 180 554 L 180 576" stroke="#059669" stroke-width="2.5" fill="none" marker-end="url(#arr-emerald-s2)"/>
+  <path d="M 490 554 L 490 576" stroke="#059669" stroke-width="2.5" fill="none" marker-end="url(#arr-emerald-s2)"/>
+  <path d="M 490 554 L 800 554 L 800 576" stroke="#059669" stroke-width="2.5" fill="none" marker-end="url(#arr-emerald-s2)"/>
 
-  <!-- Central Reaction Node: Vacuum Bleaching -->
-  <path d="M 490 296 L 490 335" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-2)"/>
-  <rect x="350" y="335" width="280" height="85" rx="10" fill="#0B3D1E" stroke="#B8841A" stroke-width="2.5"/>
-  <text x="490" y="365" text-anchor="middle" font-weight="800" font-size="14.5" fill="#FFFFFF">HIGH-VACUUM BLEACHER</text>
-  <text x="490" y="385" text-anchor="middle" font-weight="600" font-size="11.5" fill="#FDE68A">95°C – 110°C · Vacuum Bleaching</text>
-  <text x="490" y="403" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Degumming &amp; Decolorization</text>
+  <!-- ==================== PROCESS NODES ==================== -->
+  <!-- Step 1: Inflow -->
+  <g filter="url(#shadow-s2)">
+    <rect x="340" y="24" width="300" height="52" rx="8" fill="url(#grad-node-2)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="490" y="46" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">CRUDE CASTOR OIL INFLOW</text>
+    <text x="490" y="62" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Primary Feedstock from Oil Mill Crushing Line</text>
+  </g>
 
-  <!-- Down to Filtration -->
-  <path d="M 490 420 L 490 455" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-2)"/>
-  <rect x="340" y="455" width="300" height="54" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="490" y="478" text-anchor="middle" font-weight="800" font-size="13.5" fill="#FFFFFF">PRESSURE LEAF FILTRATION (VPLF)</text>
-  <text x="490" y="496" text-anchor="middle" font-weight="600" font-size="11" fill="#A7F3D0">Hermetic Closed Vertical Filtration</text>
+  <!-- Step 2: Decantation -->
+  <g filter="url(#shadow-s2)">
+    <rect x="330" y="106" width="320" height="56" rx="8" fill="url(#grad-node-2)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="490" y="129" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">GRAVIMETRIC DECANTATION</text>
+    <text x="490" y="146" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Gravimetric Settling of Mucilaginous Gums &amp; Meal Foots</text>
+  </g>
 
-  <!-- Side Discharge: Spent Earth -->
-  <path d="M 640 482 L 740 482" stroke="#64748B" stroke-width="2" marker-end="url(#arr-green-2)"/>
-  <rect x="740" y="460" width="200" height="44" rx="6" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
-  <text x="840" y="480" text-anchor="middle" font-weight="700" font-size="11" fill="#334155">SPENT EARTH CAKE</text>
-  <text x="840" y="494" text-anchor="middle" font-weight="600" font-size="10" fill="#64748B">Automated Dry Discharge</text>
+  <!-- Foots Recycle Callout (Right) -->
+  <g filter="url(#shadow-s2)">
+    <rect x="700" y="112" width="210" height="44" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+    <text x="805" y="130" text-anchor="middle" font-weight="700" font-size="11" fill="#92400E">Foots Recycled</text>
+    <text x="805" y="144" text-anchor="middle" font-weight="500" font-size="9" fill="#B45309">Returned to Expeller Mill (Zero Loss)</text>
+  </g>
 
-  <!-- Down to Polish Filter -->
-  <path d="M 490 509 L 490 540" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-2)"/>
-  <rect x="360" y="540" width="260" height="46" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="490" y="561" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">SECURITY POLISH FILTRATION</text>
-  <text x="490" y="576" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">5-Micron Guard Cartridges (Optical Clarity)</text>
+  <!-- Step 3: Clarified Oil Buffer -->
+  <g filter="url(#shadow-s2)">
+    <rect x="340" y="192" width="300" height="52" rx="8" fill="url(#grad-node-2)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="490" y="215" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">CLARIFIED OIL BUFFER TANK</text>
+    <text x="490" y="231" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Pre-Conditioned Buffer Feed for Adsorption Bleaching</text>
+  </g>
 
-  <!-- 3-Way Product Distribution Split -->
-  <path d="M 490 586 L 490 615 M 490 615 L 180 615 L 180 645 M 490 615 L 490 645 M 490 615 L 800 615 L 800 645" stroke="#0B3D1E" stroke-width="2.5" fill="none"/>
-  <path d="M 180 645 L 180 655" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-2)"/>
-  <path d="M 490 645 L 490 655" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-2)"/>
-  <path d="M 800 645 L 800 655" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-2)"/>
+  <!-- Reagent Inlets (Left) -->
+  <g filter="url(#shadow-s2)">
+    <rect x="70" y="272" width="210" height="46" rx="6" fill="#F0F9FF" stroke="#0284C7" stroke-width="1.5"/>
+    <text x="175" y="291" text-anchor="middle" font-weight="700" font-size="11" fill="#0369A1">Filter Aid (Hyflow)</text>
+    <text x="175" y="305" text-anchor="middle" font-weight="500" font-size="9" fill="#0284C7">Diatomaceous Pre-Coat Matrix</text>
+  </g>
+  <g filter="url(#shadow-s2)">
+    <rect x="70" y="327" width="210" height="46" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+    <text x="175" y="346" text-anchor="middle" font-weight="700" font-size="11" fill="#92400E">Bleaching Earth (Tonsil)</text>
+    <text x="175" y="360" text-anchor="middle" font-weight="500" font-size="9" fill="#B45309">Natural Adsorbent Clay</text>
+  </g>
 
-  <!-- Product 1: FSG -->
-  <rect x="50" y="655" width="260" height="75" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
-  <text x="180" y="680" text-anchor="middle" font-weight="800" font-size="13.5" fill="#065F46">★ REFINED FSG / BSS</text>
-  <text x="180" y="698" text-anchor="middle" font-weight="600" font-size="11" fill="#047857">Lovibond 20Y+2R Max · FFA &lt;1.0%</text>
-  <text x="180" y="714" text-anchor="middle" font-weight="700" font-size="10" fill="#B8841A">NDEVOLEO™ FSG · Global Standard</text>
+  <!-- Reagent Inlet (Right) -->
+  <g filter="url(#shadow-s2)">
+    <rect x="700" y="300" width="210" height="46" rx="6" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+    <text x="805" y="319" text-anchor="middle" font-weight="700" font-size="11" fill="#1E293B">Activated Carbon</text>
+    <text x="805" y="333" text-anchor="middle" font-weight="500" font-size="9" fill="#64748B">Decolorization &amp; Odor Stripping</text>
+  </g>
 
-  <!-- Product 2: PPG -->
-  <rect x="360" y="655" width="260" height="75" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
-  <text x="490" y="680" text-anchor="middle" font-weight="800" font-size="13.5" fill="#065F46">★ PALE PRESSED GRADE (PPG)</text>
-  <text x="490" y="698" text-anchor="middle" font-weight="600" font-size="11" fill="#047857">Ultra-Pale · Gardner U-V Viscosity</text>
-  <text x="490" y="714" text-anchor="middle" font-weight="700" font-size="10" fill="#B8841A">NDEVOLEO™ PPG · High Lubricity</text>
+  <!-- Step 4: High-Vacuum Bleacher (Core Refining Unit) -->
+  <g filter="url(#shadow-s2)">
+    <rect x="320" y="274" width="340" height="96" rx="10" fill="url(#grad-bleach-2)" stroke="#D97706" stroke-width="2"/>
+    <text x="490" y="302" text-anchor="middle" font-weight="800" font-size="14" fill="#FFFFFF">HIGH-VACUUM BLEACHER</text>
+    <text x="490" y="321" text-anchor="middle" font-weight="500" font-size="10.5" fill="#E2E8F0">Thermal Adsorption Vessel · Closed Vacuum System</text>
+    <rect x="340" y="331" width="300" height="24" rx="4" fill="#0E4824" stroke="#165B30" stroke-width="1"/>
+    <text x="490" y="347" text-anchor="middle" font-weight="700" font-size="9.5" fill="#FDE68A">Thermal Adsorption of Pigments &amp; Oxidation Compounds</text>
+  </g>
 
-  <!-- Product 3: Castor Oil BP -->
-  <rect x="670" y="655" width="260" height="75" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
-  <text x="800" y="680" text-anchor="middle" font-weight="800" font-size="13.5" fill="#065F46">★ Castor Oil BP (PHARMA)</text>
-  <text x="800" y="698" text-anchor="middle" font-weight="600" font-size="11" fill="#047857">Heavy Metals &lt;10 ppm · Optical +3.5°/6°</text>
-  <text x="800" y="714" text-anchor="middle" font-weight="700" font-size="10" fill="#B8841A">NDEVOLEO™ BP · Compendial Pure</text>
+  <!-- Step 5: VPLF Filtration -->
+  <g filter="url(#shadow-s2)">
+    <rect x="320" y="398" width="340" height="56" rx="8" fill="url(#grad-node-2)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="490" y="421" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">PRESSURE LEAF FILTRATION (VPLF)</text>
+    <text x="490" y="438" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Hermetic Closed Vertical Filtration · Stainless Wire Mesh Leaves</text>
+  </g>
+
+  <!-- Side Discharge: Spent Earth (Right) -->
+  <g filter="url(#shadow-s2)">
+    <rect x="710" y="404" width="200" height="44" rx="6" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5"/>
+    <text x="810" y="422" text-anchor="middle" font-weight="700" font-size="11" fill="#334155">Spent Earth Cake</text>
+    <text x="810" y="436" text-anchor="middle" font-weight="500" font-size="9" fill="#64748B">Automated Dry Discharge</text>
+  </g>
+
+  <!-- Step 6: Polish Filtration -->
+  <g filter="url(#shadow-s2)">
+    <rect x="340" y="480" width="300" height="52" rx="8" fill="url(#grad-node-2)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="490" y="503" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">SECURITY POLISH FILTRATION</text>
+    <text x="490" y="519" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">High-Retention Guard Filtration Imparting Optical Clarity</text>
+  </g>
+
+  <!-- ==================== THREE CERTIFIED OUTPUT GRADES ==================== -->
+  <!-- Product 1: Refined FSG -->
+  <g filter="url(#shadow-s2)">
+    <rect x="40" y="578" width="280" height="114" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
+    <rect x="55" y="588" width="140" height="18" rx="4" fill="#047857"/>
+    <text x="125" y="601" text-anchor="middle" font-weight="800" font-size="8.5" fill="#FFFFFF">★ INDUSTRIAL STANDARD</text>
+    <text x="55" y="625" font-weight="800" font-size="13.5" fill="#065F46">REFINED FSG / BSS</text>
+    <text x="55" y="641" font-weight="600" font-size="10" fill="#047857">First Special Grade (British Standard)</text>
+    <line x1="55" y1="647" x2="305" y2="647" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="55" y="663" font-weight="500" font-size="9" fill="#0F172A">Low Color · Low Free Fatty Acids</text>
+    <text x="55" y="677" font-weight="500" font-size="9" fill="#64748B">Polyurethanes · Resins · Coatings · Lubricants</text>
+  </g>
+
+  <!-- Product 2: Pale Pressed Grade (PPG) -->
+  <g filter="url(#shadow-s2)">
+    <rect x="350" y="578" width="280" height="114" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
+    <rect x="365" y="588" width="140" height="18" rx="4" fill="#0284C7"/>
+    <text x="435" y="601" text-anchor="middle" font-weight="800" font-size="8.5" fill="#FFFFFF">★ ULTRA-PALE SPECIALTY</text>
+    <text x="365" y="625" font-weight="800" font-size="13.5" fill="#065F46">PALE PRESSED GRADE (PPG)</text>
+    <text x="365" y="641" font-weight="600" font-size="10" fill="#047857">High Dielectric Stability &amp; Purity</text>
+    <line x1="365" y1="647" x2="615" y2="647" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="365" y="663" font-weight="500" font-size="9" fill="#0F172A">Ultra-Low Acidity · High Lubricity</text>
+    <text x="365" y="677" font-weight="500" font-size="9" fill="#64748B">Dielectric Transformer Fluids · Specialized Greases</text>
+  </g>
+
+  <!-- Product 3: Castor Oil BP (Pharma) -->
+  <g filter="url(#shadow-s2)">
+    <rect x="660" y="578" width="280" height="114" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
+    <rect x="675" y="588" width="140" height="18" rx="4" fill="#065F46"/>
+    <text x="745" y="601" text-anchor="middle" font-weight="800" font-size="8.5" fill="#FFFFFF">★ COMPENDIAL GRADE</text>
+    <text x="675" y="625" font-weight="800" font-size="13.5" fill="#065F46">CASTOR OIL BP / PH. EUR.</text>
+    <text x="675" y="641" font-weight="600" font-size="10" fill="#047857">Conforms to BP &amp; Ph. Eur. Monograph</text>
+    <line x1="675" y1="647" x2="925" y2="647" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="675" y="663" font-weight="500" font-size="9" fill="#0F172A">Tested Purity · Heavy Metals &lt; 10 ppm</text>
+    <text x="675" y="677" font-weight="500" font-size="9" fill="#64748B">Pharma Excipients · Formulations · Cosmetics</text>
+  </g>
 </svg>
         </div>
       </div>
@@ -1051,143 +1199,224 @@
         </div>
 
         <div class="flow-svg-viewport">
-          <svg class="flow-svg" viewBox="0 0 1020 920" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;">
+          <svg class="flow-svg" viewBox="0 0 1000 760" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter',system-ui,-apple-system,sans-serif;">
   <defs>
-    <marker id="arr-green-3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <!-- Background Dot Grid -->
+    <pattern id="grid-s3" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#E2E8F0" opacity="0.6"/>
+    </pattern>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow-s3" x="-6%" y="-6%" width="115%" height="120%" filterUnits="objectBoundingBox">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.07"/>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="grad-node-3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F4323"/>
+      <stop offset="100%" stop-color="#082A16"/>
+    </linearGradient>
+    <linearGradient id="grad-reactor-3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0B3D1E"/>
+      <stop offset="100%" stop-color="#062211"/>
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arr-green-s3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0B3D1E"/>
     </marker>
-    <marker id="arr-amber-3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <marker id="arr-blue-s3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284C7"/>
+    </marker>
+    <marker id="arr-amber-s3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#D97706"/>
     </marker>
-    <marker id="arr-blue-3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284C7"/>
+    <marker id="arr-red-s3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arr-emerald-s3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
     </marker>
   </defs>
 
-  <!-- Flow 3: CASTOR OIL DERIVATIVES & CO-PRODUCTS MANUFACTURING -->
+  <!-- Background -->
+  <rect x="0" y="0" width="1000" height="760" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1000" height="760" fill="url(#grid-s3)"/>
 
-  <!-- Top Feedstock Node (1000 kg Basis) -->
-  <rect x="350" y="20" width="320" height="56" rx="8" fill="#0B3D1E" stroke="#B8841A" stroke-width="2"/>
-  <text x="510" y="44" text-anchor="middle" font-weight="800" font-size="14" fill="#FFFFFF">REFINED FSG CASTOR OIL FEED</text>
-  <text x="510" y="62" text-anchor="middle" font-weight="700" font-size="11.5" fill="#FDE68A">BASIS: 1,000 KG · IODINE VALUE: 82 – 90 UNITS</text>
+  <!-- Border -->
+  <rect x="15" y="15" width="970" height="730" rx="12" fill="none" stroke="#E2E8F0" stroke-width="1.5"/>
 
-  <!-- Dosing 1: H2 & Nickel Catalyst (from Left) -->
-  <rect x="50" y="105" width="240" height="52" rx="8" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
-  <text x="170" y="127" text-anchor="middle" font-weight="800" font-size="12" fill="#0369A1">⚡ + H₂ GAS: 92 Nm³</text>
-  <text x="170" y="145" text-anchor="middle" font-weight="700" font-size="11" fill="#0284C7">+ NICKEL CATALYST: 1.2 kg / MT</text>
-  <path d="M 290 131 L 345 131" stroke="#0284C7" stroke-width="2.5" marker-end="url(#arr-blue-3)"/>
+  <!-- ==================== FLOW CONNECTIONS ==================== -->
+  <!-- Feedstock to Hydrogenation -->
+  <path d="M 500 76 L 500 102" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s3)"/>
 
-  <!-- Path 0 -> Reaction 1 -->
-  <path d="M 510 76 L 510 105" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
+  <!-- H2 Gas into Hydrogenation -->
+  <path d="M 270 131 L 310 131" stroke="#0284C7" stroke-width="2" marker-end="url(#arr-blue-s3)"/>
 
-  <!-- Step 1: Catalytic Hydrogenation Reactor -->
-  <rect x="350" y="105" width="320" height="56" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="510" y="129" text-anchor="middle" font-weight="800" font-size="13.5" fill="#FFFFFF">CATALYTIC HYDROGENATION REACTOR</text>
-  <text x="510" y="147" text-anchor="middle" font-weight="600" font-size="11" fill="#A7F3D0">140°C – 180°C · Catalytic Hydrogenation</text>
+  <!-- Hydrogenation to HCO Wax -->
+  <path d="M 500 162 L 500 188" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-emerald-s3)"/>
 
-  <!-- Path Reaction 1 -> HCO Product -->
-  <path d="M 510 161 L 510 195" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
+  <!-- HCO Wax to Hydrolysis -->
+  <path d="M 500 256 L 500 280" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s3)"/>
 
-  <!-- Intermediate 1: HCO (Castor Wax) -->
-  <rect x="320" y="195" width="380" height="60" rx="8" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
-  <text x="510" y="220" text-anchor="middle" font-weight="800" font-size="14.5" fill="#065F46">★ HYDROGENATED CASTOR OIL (HCO)</text>
-  <text x="510" y="238" text-anchor="middle" font-weight="700" font-size="11.5" fill="#047857">YIELD: 1,000 KG · IODINE VALUE &lt; 4.0 · M.P. 84°C–88°C</text>
-  <text x="510" y="249" text-anchor="middle" font-weight="600" font-size="9.5" fill="#B8841A">NDEVWAX™ HCO · Flakes &amp; Micronized Powder</text>
+  <!-- NaOH into Hydrolysis -->
+  <path d="M 270 307 L 310 307" stroke="#D97706" stroke-width="2" marker-end="url(#arr-amber-s3)"/>
 
-  <!-- Path HCO -> Hydrolysis -->
-  <path d="M 510 255 L 510 290" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
+  <!-- Hydrolysis to Acid Splitting -->
+  <path d="M 500 334 L 500 360" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-s3)"/>
 
-  <!-- Dosing 2: NaOH (from Left) -->
-  <rect x="50" y="290" width="240" height="50" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-  <text x="170" y="312" text-anchor="middle" font-weight="800" font-size="12.5" fill="#92400E">⚗️ + NaOH SOLUTION: 150 KG</text>
-  <text x="170" y="329" text-anchor="middle" font-weight="700" font-size="10.5" fill="#B45309">Concentration: 30% Aqueous Lye</text>
-  <path d="M 290 315 L 345 315" stroke="#D97706" stroke-width="2.5" marker-end="url(#arr-amber-3)"/>
+  <!-- Acid into Splitting -->
+  <path d="M 270 388 L 310 388" stroke="#DC2626" stroke-width="2" marker-end="url(#arr-red-s3)"/>
 
-  <!-- Step 2: Hydrolysis Reactor -->
-  <rect x="350" y="290" width="320" height="54" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="510" y="313" text-anchor="middle" font-weight="800" font-size="13.5" fill="#FFFFFF">CONTINUOUS HYDROLYSIS</text>
-  <text x="510" y="331" text-anchor="middle" font-weight="600" font-size="11" fill="#A7F3D0">Alkaline Hydrolysis into Sodium Soap + Glycerine</text>
+  <!-- Acid Splitting to Phase Separation -->
+  <path d="M 500 416 L 500 442" stroke="#0B3D1E" stroke-width="2.5"/>
+  <path d="M 500 442 L 230 442 L 230 466" stroke="#059669" stroke-width="2.5" fill="none" marker-end="url(#arr-emerald-s3)"/>
+  <path d="M 500 442 L 730 442 L 730 466" stroke="#D97706" stroke-width="2.5" fill="none" marker-end="url(#arr-amber-s3)"/>
 
-  <!-- Path Hydrolysis -> Acidulation -->
-  <path d="M 510 344 L 510 380" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
+  <!-- Left: 12-HSA Line (Wash to Flaking to Product) -->
+  <path d="M 230 518 L 230 540" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-emerald-s3)"/>
+  <path d="M 230 592 L 230 616" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-emerald-s3)"/>
 
-  <!-- Dosing 3: H2SO4 + Water Wash (from Left) -->
-  <rect x="50" y="378" width="240" height="52" rx="8" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
-  <text x="170" y="400" text-anchor="middle" font-weight="800" font-size="12" fill="#991B1B">🧪 + H₂SO₄ (60%): 190 KG</text>
-  <text x="170" y="417" text-anchor="middle" font-weight="700" font-size="10.5" fill="#B91C1C">+ DEMINERALIZED WATER: 400 KG</text>
-  <path d="M 290 404 L 345 404" stroke="#DC2626" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
+  <!-- Right: Spent Lye to Evaporation & Parallel Splitting -->
+  <path d="M 730 516 L 730 530" stroke="#D97706" stroke-width="2"/>
+  <path d="M 730 530 L 600 530 L 600 550" stroke="#D97706" stroke-width="2" fill="none" marker-end="url(#arr-amber-s3)"/>
+  <path d="M 730 530 L 860 530 L 860 550" stroke="#0B3D1E" stroke-width="2" fill="none" marker-end="url(#arr-green-s3)"/>
 
-  <!-- Step 3: Acidulation & Phase Separation -->
-  <rect x="350" y="380" width="320" height="54" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="510" y="403" text-anchor="middle" font-weight="800" font-size="13.5" fill="#FFFFFF">ACIDULATION &amp; PHASE SPLITTING</text>
-  <text x="510" y="421" text-anchor="middle" font-weight="600" font-size="11" fill="#A7F3D0">Conversion to Free Fatty Acid &amp; Spent Lye</text>
+  <!-- Evaporation to Refined Glycerin -->
+  <path d="M 600 598 L 600 622" stroke="#059669" stroke-width="2" marker-end="url(#arr-emerald-s3)"/>
 
-  <!-- Handling Losses Callout (Right) -->
-  <path d="M 670 407 L 760 407" stroke="#94A3B8" stroke-width="2" marker-end="url(#arr-green-3)"/>
-  <rect x="760" y="390" width="180" height="38" rx="6" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
-  <text x="850" y="408" text-anchor="middle" font-weight="700" font-size="11" fill="#475569">HANDLING LOSSES</text>
-  <text x="850" y="421" text-anchor="middle" font-weight="600" font-size="10" fill="#64748B">19 kg Moisture/Filter Wash</text>
+  <!-- Splitting to Ricinoleic Acid -->
+  <path d="M 860 598 L 860 622" stroke="#059669" stroke-width="2" marker-end="url(#arr-emerald-s3)"/>
 
-  <!-- Major Split: Organic 12-HSA Phase (Left) vs Aqueous Spent Lye (Right) -->
-  <path d="M 510 434 L 510 460 M 510 460 L 250 460 L 250 485 M 510 460 L 770 460 L 770 485" stroke="#0B3D1E" stroke-width="2.5" fill="none"/>
-  <path d="M 250 485 L 250 495" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
-  <path d="M 770 485 L 770 495" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
+  <!-- ==================== PROCESS NODES ==================== -->
+  <!-- Step 1: Refined Feedstock -->
+  <g filter="url(#shadow-s3)">
+    <rect x="330" y="24" width="340" height="52" rx="8" fill="url(#grad-node-3)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="500" y="46" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">REFINED CASTOR OIL FEEDSTOCK</text>
+    <text x="500" y="62" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Refined Bleached Castor Oil for Value-Added Derivatives</text>
+  </g>
 
-  <!-- ================= LEFT STREAM: 12-HSA ================= -->
-  <rect x="90" y="495" width="320" height="50" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="250" y="518" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">FATTY ACID WATER WASH &amp; DRYING</text>
-  <text x="250" y="534" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Demineralized Water Washing to Neutrality</text>
+  <!-- Step 2: Hydrogenation Reactor -->
+  <!-- H2 Gas Reagent -->
+  <g filter="url(#shadow-s3)">
+    <rect x="60" y="108" width="210" height="46" rx="6" fill="#F0F9FF" stroke="#0284C7" stroke-width="1.5"/>
+    <text x="165" y="127" text-anchor="middle" font-weight="700" font-size="11" fill="#0369A1">+ Hydrogen (H₂) Gas</text>
+    <text x="165" y="141" text-anchor="middle" font-weight="500" font-size="9" fill="#0284C7">Catalytic Hydrogenation Reagent</text>
+  </g>
 
-  <!-- Flaking & Powder -->
-  <path d="M 250 545 L 250 575" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
-  <rect x="90" y="575" width="320" height="50" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="250" y="598" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">ROTARY CHILLER &amp; FLAKING MILL</text>
-  <text x="250" y="614" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Continuous Flaker &amp; Cryogenic Milling</text>
+  <g filter="url(#shadow-s3)">
+    <rect x="310" y="102" width="380" height="60" rx="10" fill="url(#grad-reactor-3)" stroke="#D97706" stroke-width="2"/>
+    <text x="500" y="127" text-anchor="middle" font-weight="800" font-size="13.5" fill="#FFFFFF">CATALYTIC HYDROGENATION</text>
+    <text x="500" y="145" text-anchor="middle" font-weight="500" font-size="10.5" fill="#E2E8F0">Selective Double-Bond Saturation · Pressure Autoclave System</text>
+  </g>
 
-  <!-- Final 12-HSA Product Box -->
-  <path d="M 250 625 L 250 660" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
-  <rect x="70" y="660" width="360" height="80" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
-  <text x="250" y="688" text-anchor="middle" font-weight="800" font-size="15" fill="#065F46">★ 12-HYDROXY STEARIC ACID (12-HSA)</text>
-  <text x="250" y="708" text-anchor="middle" font-weight="700" font-size="12" fill="#047857">YIELD: 940 KG · MELTING POINT MIN. 74°C</text>
-  <text x="250" y="726" text-anchor="middle" font-weight="700" font-size="11" fill="#B8841A">NDEVACID™ 12-HSA · Flakes &amp; Powder (Lithium Grease Grade)</text>
+  <!-- Output 1: HCO Wax (Commercial & Intermediate) -->
+  <g filter="url(#shadow-s3)">
+    <rect x="280" y="188" width="440" height="68" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
+    <rect x="295" y="198" width="210" height="18" rx="4" fill="#047857"/>
+    <text x="400" y="211" text-anchor="middle" font-weight="800" font-size="8.5" fill="#FFFFFF">★ COMMERCIAL PRODUCT &amp; INTERMEDIATE</text>
+    <text x="295" y="233" font-weight="800" font-size="14" fill="#065F46">HYDROGENATED CASTOR OIL (HCO / WAX)</text>
+    <text x="295" y="247" font-weight="500" font-size="9.5" fill="#047857">High-Melting Castor Wax (Flakes &amp; Powder) for Greases &amp; Polymers</text>
+  </g>
 
-  <!-- ================= RIGHT STREAM: SPENT LYE ================= -->
-  <rect x="600" y="495" width="340" height="54" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-  <text x="770" y="518" text-anchor="middle" font-weight="800" font-size="13.5" fill="#92400E">SPENT LYE AQUEOUS PHASE</text>
-  <text x="770" y="536" text-anchor="middle" font-weight="700" font-size="11" fill="#B45309">92 kg Glycerine + 250 kg Na₂SO₄ + 850 kg H₂O</text>
+  <!-- Step 3: Alkaline Hydrolysis -->
+  <!-- Caustic Reagent -->
+  <g filter="url(#shadow-s3)">
+    <rect x="60" y="284" width="210" height="46" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+    <text x="165" y="303" text-anchor="middle" font-weight="700" font-size="11" fill="#92400E">+ Caustic Soda Solution</text>
+    <text x="165" y="317" text-anchor="middle" font-weight="500" font-size="9" fill="#B45309">Continuous Alkaline Hydrolysis Agent</text>
+  </g>
 
-  <!-- Treatment & MEE -->
-  <path d="M 770 549 L 770 575" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
-  <rect x="600" y="575" width="340" height="52" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="770" y="597" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">TREATMENT &amp; MULTI-EFFECT EVAPORATOR</text>
-  <text x="770" y="614" text-anchor="middle" font-weight="600" font-size="10.5" fill="#A7F3D0">Filtration &amp; Falling Film Concentration</text>
+  <g filter="url(#shadow-s3)">
+    <rect x="310" y="280" width="380" height="54" rx="8" fill="url(#grad-node-3)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="500" y="303" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">CONTINUOUS ALKALINE HYDROLYSIS</text>
+    <text x="500" y="320" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Cleavage into Soap Phase &amp; Free Glycerol</text>
+  </g>
 
-  <!-- Split into Glycerin vs Sodium Sulphate -->
-  <path d="M 770 627 L 770 645 M 770 645 L 650 645 L 650 670 M 770 645 L 890 645 L 890 670" stroke="#0B3D1E" stroke-width="2.5" fill="none"/>
-  <path d="M 650 670 L 650 680" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
-  <path d="M 890 670 L 890 680" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
+  <!-- Step 4: Acidulation & Splitting -->
+  <!-- Acid Reagent -->
+  <g filter="url(#shadow-s3)">
+    <rect x="60" y="365" width="210" height="46" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+    <text x="165" y="384" text-anchor="middle" font-weight="700" font-size="11" fill="#991B1B">+ Acid &amp; Water Wash</text>
+    <text x="165" y="398" text-anchor="middle" font-weight="500" font-size="9" fill="#B91C1C">Acidulation Phase Splitting Agent</text>
+  </g>
 
-  <!-- Sub-branch 1: Refined Glycerin -->
-  <rect x="540" y="680" width="220" height="48" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="650" y="702" text-anchor="middle" font-weight="800" font-size="12" fill="#FFFFFF">VACUUM DISTILLATION</text>
-  <text x="650" y="718" text-anchor="middle" font-weight="600" font-size="10" fill="#A7F3D0">Thin-Film High Vacuum Stripping</text>
+  <g filter="url(#shadow-s3)">
+    <rect x="310" y="360" width="380" height="56" rx="8" fill="url(#grad-node-3)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="500" y="383" text-anchor="middle" font-weight="800" font-size="13" fill="#FFFFFF">ACIDULATION &amp; PHASE SPLITTING</text>
+    <text x="500" y="400" text-anchor="middle" font-weight="500" font-size="10" fill="#A7F3D0">Separation into Organic Fatty Acid Layer &amp; Aqueous Spent Lye</text>
+  </g>
 
-  <path d="M 650 728 L 650 755" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
-  <rect x="520" y="755" width="260" height="75" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
-  <text x="650" y="780" text-anchor="middle" font-weight="800" font-size="13.5" fill="#065F46">★ REFINED GLYCERIN</text>
-  <text x="650" y="798" text-anchor="middle" font-weight="700" font-size="11" fill="#047857">YIELD: 69 KG · MIN. 99.5% PURITY</text>
-  <text x="650" y="814" text-anchor="middle" font-weight="700" font-size="10" fill="#B8841A">NDEVGLY™ REF · USP / Tech Grade</text>
+  <!-- ==================== LEFT STREAM: 12-HSA LINE ==================== -->
+  <g filter="url(#shadow-s3)">
+    <rect x="50" y="466" width="360" height="52" rx="8" fill="url(#grad-node-3)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="230" y="489" text-anchor="middle" font-weight="800" font-size="12" fill="#FFFFFF">WATER WASHING &amp; DRYING</text>
+    <text x="230" y="505" text-anchor="middle" font-weight="500" font-size="9.5" fill="#A7F3D0">Multi-Stage Washing to Neutral pH &amp; Moisture Removal</text>
+  </g>
 
-  <!-- Sub-branch 2: Ricinoleic Acid Output -->
-  <rect x="780" y="680" width="220" height="48" rx="8" fill="#0B3D1E" stroke="#165B30" stroke-width="2"/>
-  <text x="890" y="702" text-anchor="middle" font-weight="800" font-size="12" fill="#FFFFFF">FATTY ACID SPLITTING</text>
-  <text x="890" y="718" text-anchor="middle" font-weight="600" font-size="10" fill="#A7F3D0">Selective Hydrolysis &amp; Distillation</text>
+  <g filter="url(#shadow-s3)">
+    <rect x="50" y="540" width="360" height="52" rx="8" fill="url(#grad-node-3)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="230" y="563" text-anchor="middle" font-weight="800" font-size="12" fill="#FFFFFF">CHILLING, FLAKING &amp; PULVERIZING</text>
+    <text x="230" y="579" text-anchor="middle" font-weight="500" font-size="9.5" fill="#A7F3D0">Rotary Drum Solidification &amp; Controlled Particle Sizing</text>
+  </g>
 
-  <path d="M 890 728 L 890 755" stroke="#0B3D1E" stroke-width="2.5" marker-end="url(#arr-green-3)"/>
-  <rect x="760" y="755" width="250" height="75" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
-  <text x="885" y="780" text-anchor="middle" font-weight="800" font-size="13" fill="#065F46">★ RICINOLEIC ACID</text>
-  <text x="885" y="798" text-anchor="middle" font-weight="700" font-size="11" fill="#047857">MIN. 85% RICINOLEIC ACID</text>
-  <text x="885" y="814" text-anchor="middle" font-weight="700" font-size="10" fill="#B8841A">NDEVACID™ RIC · Technical Grade</text>
+  <!-- Output 2: 12-HSA Product Box -->
+  <g filter="url(#shadow-s3)">
+    <rect x="40" y="616" width="380" height="114" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
+    <rect x="55" y="626" width="160" height="18" rx="4" fill="#047857"/>
+    <text x="135" y="639" text-anchor="middle" font-weight="800" font-size="8.5" fill="#FFFFFF">★ DERIVATIVE OUTPUT</text>
+    <text x="55" y="663" font-weight="800" font-size="14" fill="#065F46">12-HYDROXYSTEARIC ACID (12-HSA)</text>
+    <text x="55" y="679" font-weight="600" font-size="10" fill="#047857">Free-Flowing Flakes &amp; Micronized Powder</text>
+    <line x1="55" y1="685" x2="405" y2="685" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="55" y="702" font-weight="500" font-size="9" fill="#0F172A">Primary Thickener for Automotive &amp; Industrial Lithium Greases</text>
+    <text x="55" y="716" font-weight="500" font-size="9" fill="#64748B">Specialty Polymers · Resins · Cosmetic Wax Formulations</text>
+  </g>
+
+  <!-- ==================== RIGHT STREAM: SPENT LYE & RICINOLEIC ==================== -->
+  <!-- Spent Lye Header -->
+  <g filter="url(#shadow-s3)">
+    <rect x="520" y="466" width="420" height="50" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+    <text x="730" y="489" text-anchor="middle" font-weight="800" font-size="12" fill="#92400E">SPENT LYE CO-PRODUCT RECOVERY STREAM</text>
+    <text x="730" y="504" text-anchor="middle" font-weight="500" font-size="9.5" fill="#B45309">Aqueous Solution of Glycerin &amp; Salt Co-Products</text>
+  </g>
+
+  <!-- Sub-Branch A: Glycerin Recovery -->
+  <g filter="url(#shadow-s3)">
+    <rect x="480" y="550" width="235" height="48" rx="6" fill="url(#grad-node-3)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="597" y="571" text-anchor="middle" font-weight="700" font-size="11" fill="#FFFFFF">Evaporation &amp; Desalting</text>
+    <text x="597" y="585" text-anchor="middle" font-weight="500" font-size="9" fill="#A7F3D0">Concentration &amp; Vacuum Distillation</text>
+  </g>
+
+  <!-- Output 3: Refined Glycerin Product Box -->
+  <g filter="url(#shadow-s3)">
+    <rect x="480" y="622" width="235" height="108" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
+    <rect x="495" y="632" width="140" height="18" rx="4" fill="#047857"/>
+    <text x="565" y="645" text-anchor="middle" font-weight="800" font-size="8.5" fill="#FFFFFF">★ CO-PRODUCT OUTPUT</text>
+    <text x="495" y="668" font-weight="800" font-size="13" fill="#065F46">REFINED GLYCERIN</text>
+    <text x="495" y="684" font-weight="600" font-size="10" fill="#047857">Refined 99.5% Glycerol Grade</text>
+    <line x1="495" y1="690" x2="700" y2="690" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="495" y="706" font-weight="500" font-size="8.5" fill="#0F172A">Technical &amp; Formulation Quality</text>
+    <text x="495" y="718" font-weight="500" font-size="8.5" fill="#64748B">Personal Care · Resins · Polyols</text>
+  </g>
+
+  <!-- Sub-Branch B: Parallel Splitting for Ricinoleic Acid -->
+  <g filter="url(#shadow-s3)">
+    <rect x="745" y="550" width="200" height="48" rx="6" fill="url(#grad-node-3)" stroke="#165B30" stroke-width="1.5"/>
+    <text x="845" y="571" text-anchor="middle" font-weight="700" font-size="11" fill="#FFFFFF">Direct Fat Splitting</text>
+    <text x="845" y="585" text-anchor="middle" font-weight="500" font-size="9" fill="#A7F3D0">Hydrolysis &amp; Vacuum Distillation</text>
+  </g>
+
+  <!-- Output 4: Ricinoleic Acid Product Box -->
+  <g filter="url(#shadow-s3)">
+    <rect x="745" y="622" width="200" height="108" rx="10" fill="#F0FDF4" stroke="#10B981" stroke-width="2.5"/>
+    <rect x="760" y="632" width="130" height="18" rx="4" fill="#047857"/>
+    <text x="825" y="645" text-anchor="middle" font-weight="800" font-size="8.5" fill="#FFFFFF">★ SPECIALTY ACID</text>
+    <text x="760" y="668" font-weight="800" font-size="13" fill="#065F46">RICINOLEIC ACID</text>
+    <text x="760" y="684" font-weight="600" font-size="10" fill="#047857">Pure Hydroxy Fatty Acid</text>
+    <line x1="760" y1="690" x2="930" y2="690" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="760" y="706" font-weight="500" font-size="8.5" fill="#0F172A">Polyamide-11 Monomer Feedstock</text>
+    <text x="760" y="718" font-weight="500" font-size="8.5" fill="#64748B">Bio-Surfactants · Esters · Fluids</text>
+  </g>
 </svg>
         </div>
       </div>
