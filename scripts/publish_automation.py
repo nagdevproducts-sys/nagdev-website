@@ -263,15 +263,70 @@ def open_social_pack_issue(post_dict: dict, dry_run=False):
         except Exception as e:
             print(f"[ERROR] Failed opening GitHub Issue via gh CLI: {e}")
 
+
+def check_today_post(dry_run=False, do_ping=True):
+    """
+    Finds the scheduled/published post for today (or the newest post whose date has passed),
+    awaits Vercel HTTP 200 on production, and on success pings IndexNow.
+    """
+    cal_path = REPO_ROOT / "seo" / "blog" / "calendar.csv"
+    if not cal_path.exists():
+        print("[ERROR] calendar.csv not found.")
+        return False
+
+    now_ist = datetime.now(IST)
+    today_str = now_ist.strftime("%Y-%m-%d")
+
+    matching_post = None
+    latest_eligible_post = None
+
+    with open(cal_path, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            pub_dt = parse_ist(row["publish_date"])
+            if pub_dt.strftime("%Y-%m-%d") == today_str and row.get("written") == "Y":
+                matching_post = row
+            if pub_dt <= now_ist and row.get("written") == "Y":
+                latest_eligible_post = row
+
+    target_post = matching_post or latest_eligible_post
+    if not target_post:
+        print(f"[CHECK TODAY] No eligible written blog post found for today or past dates.")
+        return True
+
+    slug = target_post["slug"]
+    url = f"https://www.nagdevproducts.com/blog/{slug}"
+    print(f"[CHECK TODAY] Target post: '{target_post.get('title')}' ({slug})")
+    print(f"[CHECK TODAY] Verifying production URL: {url}")
+
+    if dry_run:
+        print(f"[DRY RUN] Would await HTTP 200 on {url} and ping IndexNow.")
+        return True
+
+    success = await_vercel(url, max_timeout=180, interval=10)
+    if not success:
+        print(f"[FAILED] Blog health check failed: {url} did not return HTTP 200.")
+        sys.exit(1)
+
+    print(f"[PASSED] Blog health check passed! Verified HTTP 200 on {url}.")
+    if do_ping:
+        ping_search_engines([url])
+    return True
+
 def main():
     parser = argparse.ArgumentParser(description="Nagdev Blog Publishing Automation")
     parser.add_argument("--post-slug", type=str, help="Specific post slug to process")
+    parser.add_argument("--check-today", action="store_true", help="Find today's published post, verify HTTP 200, and ping IndexNow")
     parser.add_argument("--verify-url", action="store_true", help="Await Vercel HTTP 200")
     parser.add_argument("--social-pack", action="store_true", help="Generate and open Social Pack issue")
     parser.add_argument("--check-queue", action="store_true", help="Check buffer and open Queue Alert if < 8")
     parser.add_argument("--ping", action="store_true", help="Ping search engines and IndexNow")
     parser.add_argument("--dry-run", action="store_true", help="Simulate actions without opening issues or network pings")
     args = parser.parse_args()
+
+    if args.check_today:
+        check_today_post(dry_run=args.dry_run, do_ping=args.ping)
+        return
     
     post_meta = None
     if args.post_slug:

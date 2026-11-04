@@ -576,7 +576,7 @@
   btn.href = waUrl;
   btn.target = '_blank';
   btn.rel = 'noopener noreferrer';
-  btn.setAttribute('aria-label', 'Chat on WhatsApp');
+  btn.setAttribute('aria-label', 'Chat with Nagdev Products on WhatsApp');
   btn.setAttribute('title', 'WhatsApp Commercial Enquiry');
   btn.id = 'whatsapp-fab';
   btn.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26" aria-hidden="true">

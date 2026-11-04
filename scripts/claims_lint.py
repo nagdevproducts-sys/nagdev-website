@@ -177,6 +177,13 @@ COMMERCIAL_TERMS_RE = re.compile(
     re.IGNORECASE
 )
 
+# Approved Indicative Price line pattern and Schema InStock allowlists (Fix 2)
+APPROVED_INDICATIVE_PRICE_RE = re.compile(
+    r'Indicative price:\s*USD\s*[\d,]+[–-][\d,]+\s*per MT\s*\(USD\s*[\d.]+[–-][\d.]+\s*per kg\),\s*FOB Kandla/Mundra\.\s*Final price on quotation\.',
+    re.IGNORECASE
+)
+APPROVED_SCHEMA_INSTOCK_RE = re.compile(r'https://schema\.org/InStock|"InStock"', re.IGNORECASE)
+
 def parse_spec_table(html_content: str):
     """
     Parses analytical parameters from spec-table-section or table with TEST PARAMETER / SR NO.
@@ -1702,6 +1709,8 @@ def lint_content(content: str, file_path_str: str, facts: dict):
             sentences.append(val)
 
     for sent in sentences:
+        if APPROVED_INDICATIVE_PRICE_RE.search(sent) or APPROVED_SCHEMA_INSTOCK_RE.search(sent):
+            continue
         if DEV_PROD_RE.search(sent) and R3_TRIGGER_RE.search(sent):
             if "under development" not in sent.lower():
                 findings.append({
@@ -1948,6 +1957,8 @@ def lint_content(content: str, file_path_str: str, facts: dict):
     # R8: Commercial terms (MOQ, lead time, delivery days, price, etc.)
     # ----------------------------------------------------
     for line_idx, line in enumerate(lines, 1):
+        if APPROVED_INDICATIVE_PRICE_RE.search(line) or APPROVED_SCHEMA_INSTOCK_RE.search(line):
+            continue
         ct_match = COMMERCIAL_TERMS_RE.search(line)
         if ct_match:
             findings.append({
@@ -2380,6 +2391,20 @@ def main():
     fail_count = 0
     warn_count = 0
     fails_by_rule = {f"R{i}": 0 for i in range(1, 25)}
+
+    # Check shared organization schema include once (Fix 2)
+    org_schema_p = REPO_ROOT / "templates" / "organization_schema.json"
+    if org_schema_p.exists():
+        org_findings = lint_content(org_schema_p.read_text(encoding="utf-8"), "templates/organization_schema.json", facts)
+        for item in org_findings:
+            all_findings.append(item)
+            if item["severity"] == "FAIL":
+                fail_count += 1
+                for r_key in fails_by_rule:
+                    if re.match(rf'^{r_key}\\b', item["rule"]):
+                        fails_by_rule[r_key] += 1
+            else:
+                warn_count += 1
 
     for f in files:
         f_findings = lint_file(f, facts)

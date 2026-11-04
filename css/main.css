@@ -5675,10 +5675,16 @@ details[open] .product-faq-chevron {
   font-weight: 600;
   color: var(--forest, #0B3D1E);
   margin: 0.5rem 0 1rem;
+  min-height: 1.5rem;
+  line-height: 1.4;
+  display: block;
 }
 .product-card-price {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--forest, #0B3D1E);
   margin: 0.4rem 0 0.6rem;
+  min-height: 2.4rem;
+  line-height: 1.35;
+  display: block;
 }

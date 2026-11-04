@@ -295,7 +295,7 @@
   // 4. Initialize Consent & GA4 Config
   initConsent();
 
-  // Load gtag.js after window 'load' event to preserve Core Web Vitals & Lighthouse scores
+  // Load gtag.js after window load + requestIdleCallback (or on first user interaction, whichever first, max 4s)
   function loadGtagScript() {
     if (document.getElementById('nagdev-gtag-script')) return;
     const s = document.createElement('script');
@@ -303,6 +303,30 @@
     s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
     document.head.appendChild(s);
+  }
+
+  let gtagLoaded = false;
+  function triggerGtagLoad() {
+    if (gtagLoaded) return;
+    gtagLoaded = true;
+    ['scroll', 'keydown', 'pointerdown', 'touchstart'].forEach(function (evt) {
+      window.removeEventListener(evt, triggerGtagLoad, { passive: true });
+    });
+    loadGtagScript();
+  }
+
+  function scheduleGtagLoad() {
+    ['scroll', 'keydown', 'pointerdown', 'touchstart'].forEach(function (evt) {
+      window.addEventListener(evt, triggerGtagLoad, { once: true, passive: true });
+    });
+
+    const fallbackTimer = setTimeout(triggerGtagLoad, 4000);
+
+    const runIdle = window.requestIdleCallback || function (cb) { return setTimeout(cb, 200); };
+    runIdle(function () {
+      clearTimeout(fallbackTimer);
+      triggerGtagLoad();
+    });
   }
 
   if (shouldTrack()) {
@@ -324,9 +348,9 @@
     gtagCall('config', GA_MEASUREMENT_ID, configOptions);
 
     if (document.readyState === 'complete') {
-      loadGtagScript();
+      scheduleGtagLoad();
     } else {
-      window.addEventListener('load', loadGtagScript);
+      window.addEventListener('load', scheduleGtagLoad);
     }
   }
 
