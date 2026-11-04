@@ -1199,7 +1199,7 @@ input, textarea, select { font-family: var(--font-body); }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #8a6a12;
+  color: #6b520c;
   margin-bottom: 0.5rem;
 }
 .product-hero-h1 {
@@ -1238,7 +1238,7 @@ input, textarea, select { font-family: var(--font-body); }
 .blog-card-category {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #8a6a12;
+  color: #6b520c;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 0.5rem;
