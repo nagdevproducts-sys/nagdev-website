@@ -5698,3 +5698,102 @@ details[open] .product-faq-chevron {
   letter-spacing: 0.06em;
   margin-bottom: 0.5rem;
 }
+
+/* ==========================================================================
+   UI / PRICE BOX / JUSTIFIED TEXT ENHANCEMENTS
+   ========================================================================== */
+
+/* -- Product Summary Grid 5-Tile Layout & Price Tile (Task 1) -- */
+.product-summary-grid.has-5-tiles {
+  grid-template-columns: repeat(5, 1fr);
+}
+@media (max-width: 1100px) {
+  .product-summary-grid.has-5-tiles {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .product-summary-grid.has-5-tiles {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+}
+.product-summary-tile-price .product-summary-val {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.product-summary-tile-price .price-line-mt {
+  font-weight: 700;
+  color: var(--forest, #0B3D1E);
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+.product-summary-tile-price .price-line-kg {
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--charcoal-soft, #3A3A3A);
+  line-height: 1.25;
+}
+.product-summary-tile-price .price-note {
+  font-size: 0.725rem;
+  color: var(--text-muted, #666666);
+  line-height: 1.25;
+  margin-top: 0.2rem;
+}
+
+/* -- Product Card Applications (Task 2) -- */
+.product-card-apps {
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--text-mid, #555555);
+  margin: 0.4rem 0 0.6rem;
+  min-height: 2.4rem;
+  max-height: 2.7rem;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* -- Site-wide Body Paragraphs Justification (Task 3) -- */
+p,
+.t-body,
+.t-body-lg,
+.t-body-sm,
+.product-hero-intro,
+.product-about p,
+.product-overview p,
+.product-app-desc,
+.faq-item p,
+.faq-answer,
+.blog-article-col p,
+.typography p,
+.about-snippet p,
+.about-intro-section p,
+.guide-content p,
+.guide-body p,
+.product-card-apps {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Explicit non-justified elements */
+h1, h2, h3, h4, h5, h6,
+.t-display, .t-display-xl, .t-display-lg, .t-display-md, .t-display-sm,
+.t-heading, .t-heading-lg, .t-heading-md, .t-heading-sm,
+.btn, button, .t-label, .section-eyebrow, .hero-eyebrow,
+.nav-link, .nav-list, .mega-menu, .mega-col, .mega-prod-list, .mobile-drawer,
+table, th, td, table p,
+.product-summary-tile, .product-summary-label, .product-summary-val,
+.product-hero-price, .product-card-price,
+.product-card-num, .product-card-name, .product-card-cat,
+.breadcrumb-nav, .meta-item, .blog-category-badge,
+.top-bar, .site-header, .site-footer {
+  text-align: left;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}

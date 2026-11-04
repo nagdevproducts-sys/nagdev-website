@@ -72,6 +72,9 @@ def main():
         'blog/*.html',
         'compare/*.html',
         'markets/*.html',
+        'guides/*.html',
+        'insights/*.html',
+        'glossary/*.html',
         'grades/*.html'
     ]
 

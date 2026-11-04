@@ -850,7 +850,7 @@ def build_post_html(post_meta, body_markdown, product_master, facts_register, al
           <!-- Request a Quote card (product pre-filled) -->
           <div class="blog-sidebar-card sidebar-quote-card">
             <span class="sidebar-quote-badge">Direct Crushing Plant Supply</span>
-            <h4 class="sidebar-quote-title">Source {prod_name} in Bulk</h4>
+            <h3 class="sidebar-quote-title">Source {prod_name} in Bulk</h3>
             <p class="sidebar-quote-text">Request mill-gate commercial pricing, batch COA, or laboratory trial samples from our Deodar plant.</p>
             <a href="/contact?type=quote{slug_param}" class="btn btn-gold btn-sm btn-block">Request a Quote &rarr;</a>
           </div>
