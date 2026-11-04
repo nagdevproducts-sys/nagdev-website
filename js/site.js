@@ -533,6 +533,12 @@
       const sampleHidden = document.getElementById('sample-products-hidden');
       const sampleSlugsVal = (sampleList.length > 0 ? sampleList.join(', ') : (sampleHidden ? sampleHidden.value : '')) || '';
 
+      const updatesChecked = !!document.getElementById('contact-updates')?.checked;
+      let finalMessage = messageVal;
+      if (updatesChecked) {
+        finalMessage = (finalMessage ? finalMessage + '\n' : '') + '[User opted in to occasional product and price updates]';
+      }
+
       const payload = {
         name: nameVal,
         company: companyVal,
@@ -543,7 +549,8 @@
         product: productVal,
         quantity: quantityVal,
         packing: packingVal,
-        message: messageVal,
+        message: finalMessage,
+        updates_opt_in: updatesChecked,
         sample_products: sampleSlugsVal,
         _honey: (this.querySelector('input[name="_honey"]')?.value || '').trim(),
         _timestamp: (document.getElementById('form-timestamp')?.value || Date.now().toString()).trim(),

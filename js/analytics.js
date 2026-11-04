@@ -98,8 +98,13 @@
     }
   }
 
+  function isPreview() {
+    const host = window.location.hostname;
+    return host.endsWith('.vercel.app') || host === 'localhost' || host === '127.0.0.1';
+  }
+
   function shouldTrack() {
-    return isProduction() || isDebug();
+    return isProduction() || isDebug() || isPreview();
   }
 
   // Helper for gtag calls
@@ -135,13 +140,27 @@
     } catch (e) {}
   }
 
-  function isEEATimezone() {
+  function clearGaCookies() {
     try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      return tz.startsWith('Europe/') || tz === 'Atlantic/Reykjavik';
-    } catch (e) {
-      return false;
-    }
+      const host = window.location.hostname;
+      const parts = host.split('.');
+      const domains = [host, '.' + host];
+      if (parts.length >= 2) {
+        domains.push('.' + parts.slice(-2).join('.'));
+      }
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const c = cookies[i].trim();
+        const eq = c.indexOf('=');
+        const name = eq > -1 ? c.substr(0, eq) : c;
+        if (name.startsWith('_ga')) {
+          for (let d = 0; d < domains.length; d++) {
+            document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + domains[d];
+          }
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;';
+        }
+      }
+    } catch (e) {}
   }
 
   // 3. Consent Banner Creation & Control
@@ -159,16 +178,12 @@
         background: #0B3D1E;
         color: #FFFFFF;
         border-top: 1.5px solid #C5A059;
-        padding: 1rem 1.5rem;
+        padding: 0.85rem 1.25rem;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: 0.875rem;
         line-height: 1.5;
-        animation: slideUpConsent 0.3s ease-out;
-      }
-      @keyframes slideUpConsent {
-        from { transform: translateY(100%); }
-        to { transform: translateY(0); }
+        box-sizing: border-box;
       }
       .nagdev-consent-inner {
         max-width: 1200px;
@@ -176,37 +191,33 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1.5rem;
+        gap: 1.25rem;
         flex-wrap: wrap;
       }
       .nagdev-consent-text {
-        flex: 1 1 500px;
+        flex: 1 1 480px;
         margin: 0;
         color: #F1F5F9;
-      }
-      .nagdev-consent-link {
-        color: #E2B96E;
-        text-decoration: underline;
-        font-weight: 600;
-        margin-left: 0.35rem;
-      }
-      .nagdev-consent-link:hover {
-        color: #FFFFFF;
+        font-size: 0.875rem;
       }
       .nagdev-consent-actions {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.65rem;
         flex-shrink: 0;
       }
       .nagdev-consent-btn {
-        padding: 0.55rem 1.25rem;
+        min-width: 84px;
+        padding: 0.45rem 1.15rem;
         font-size: 0.84rem;
-        font-weight: 700;
+        font-weight: 600;
         border-radius: 6px;
         cursor: pointer;
-        border: none;
+        text-align: center;
+        box-sizing: border-box;
+        border: 1.5px solid #C5A059;
         transition: all 0.2s ease;
+        line-height: 1.3;
       }
       .nagdev-consent-btn-accept {
         background: #C5A059;
@@ -214,20 +225,38 @@
       }
       .nagdev-consent-btn-accept:hover, .nagdev-consent-btn-accept:focus {
         background: #D4AF37;
+        border-color: #D4AF37;
         outline: 2px solid #FFFFFF;
       }
-      .nagdev-consent-btn-reject {
-        background: #FFFFFF;
-        color: #0B3D1E;
+      .nagdev-consent-btn-decline {
+        background: transparent;
+        color: #FFFFFF;
+        border-color: #C5A059;
       }
-      .nagdev-consent-btn-reject:hover, .nagdev-consent-btn-reject:focus {
-        background: #F1F5F9;
-        outline: 2px solid #C5A059;
+      .nagdev-consent-btn-decline:hover, .nagdev-consent-btn-decline:focus {
+        background: rgba(197, 160, 89, 0.2);
+        color: #FFFFFF;
+        outline: 2px solid #FFFFFF;
+      }
+      .nagdev-consent-divider {
+        color: #C5A059;
+        margin: 0 0.15rem;
+        user-select: none;
+      }
+      .nagdev-consent-link {
+        color: #E2B96E;
+        text-decoration: underline;
+        font-weight: 500;
+        font-size: 0.875rem;
+      }
+      .nagdev-consent-link:hover, .nagdev-consent-link:focus {
+        color: #FFFFFF;
+        outline: 1px dotted #FFFFFF;
       }
       @media (max-width: 768px) {
-        .nagdev-consent-banner { padding: 0.85rem 1rem; }
+        .nagdev-consent-banner { padding: 0.75rem 1rem; }
         .nagdev-consent-inner { gap: 0.75rem; }
-        .nagdev-consent-actions { width: 100%; justify-content: flex-end; }
+        .nagdev-consent-actions { width: 100%; justify-content: flex-start; }
       }
     `;
     document.head.appendChild(style);
@@ -245,12 +274,13 @@
       banner.innerHTML = `
         <div class="nagdev-consent-inner">
           <p class="nagdev-consent-text">
-            We use analytics cookies to understand how buyers use this site. No advertising cookies.
-            <a href="/privacy" class="nagdev-consent-link">Privacy policy</a>
+            We use analytics cookies to understand how our site is used.
           </p>
           <div class="nagdev-consent-actions">
-            <button type="button" id="nagdev-consent-reject" class="nagdev-consent-btn nagdev-consent-btn-reject">Reject</button>
-            <button type="button" id="nagdev-consent-accept" class="nagdev-consent-btn nagdev-consent-btn-accept">Accept analytics</button>
+            <button type="button" id="nagdev-consent-accept" class="nagdev-consent-btn nagdev-consent-btn-accept">Accept</button>
+            <button type="button" id="nagdev-consent-decline" class="nagdev-consent-btn nagdev-consent-btn-decline">Decline</button>
+            <span class="nagdev-consent-divider" aria-hidden="true">·</span>
+            <a href="/privacy" class="nagdev-consent-link">Privacy Policy</a>
           </div>
         </div>
       `;
@@ -260,11 +290,15 @@
         saveStoredConsent('granted');
         gtagCall('consent', 'update', { analytics_storage: 'granted' });
         banner.style.display = 'none';
+        if (shouldTrack()) {
+          loadGtagScript();
+        }
       });
 
-      document.getElementById('nagdev-consent-reject').addEventListener('click', function () {
+      document.getElementById('nagdev-consent-decline').addEventListener('click', function () {
         saveStoredConsent('denied');
         gtagCall('consent', 'update', { analytics_storage: 'denied' });
+        clearGaCookies();
         banner.style.display = 'none';
       });
     } else {
@@ -277,18 +311,20 @@
 
   function initConsent() {
     const stored = getStoredConsent();
-    if (stored) {
-      gtagCall('consent', 'update', { analytics_storage: stored });
+    if (stored === 'granted') {
+      gtagCall('consent', 'update', { analytics_storage: 'granted' });
       return;
     }
-    // Show banner and default to denied if visitor is in EEA/UK/CH timezone
-    if (isEEATimezone()) {
+    if (stored === 'denied') {
       gtagCall('consent', 'update', { analytics_storage: 'denied' });
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', showConsentBanner);
-      } else {
-        showConsentBanner();
-      }
+      return;
+    }
+    // First visit: default to denied and show banner
+    gtagCall('consent', 'update', { analytics_storage: 'denied' });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', showConsentBanner);
+    } else {
+      showConsentBanner();
     }
   }
 
@@ -337,9 +373,7 @@
       allow_ad_personalization_signals: false
     };
 
-    // CRITICAL REQUIREMENT: Production must never send debug_mode.
-    // Make sure debug_mode is set ONLY on non-production hosts with ?ga_debug=1.
-    if (!isProduction() && isDebug()) {
+    if (!isProduction()) {
       configOptions.debug_mode = true;
     } else {
       delete configOptions.debug_mode;
@@ -347,10 +381,13 @@
 
     gtagCall('config', GA_MEASUREMENT_ID, configOptions);
 
-    if (document.readyState === 'complete') {
-      scheduleGtagLoad();
-    } else {
-      window.addEventListener('load', scheduleGtagLoad);
+    // Only load GA script if consent was already granted!
+    if (getStoredConsent() === 'granted') {
+      if (document.readyState === 'complete') {
+        scheduleGtagLoad();
+      } else {
+        window.addEventListener('load', scheduleGtagLoad);
+      }
     }
   }
 
