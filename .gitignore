@@ -1,35 +1,38 @@
-# Backups & Large Archives
-*.zip
-*.tar.gz
-*.bak
-*.tmp
-
-# Scratch & Internal Dev Scripts
-scratch/
-scripts/*
-!scripts/claims_lint.py
-!scripts/build_blog.py
-!scripts/cache_bust.py
-!scripts/publish_automation.py
-!scripts/workflows/
-!scripts/monitoring/
-!scripts/outreach/
-!scripts/fonts/
-monitoring_output/
-PUBLIC_URL.txt
-before_after_report.md
-
-# OS & Editor
-.DS_Store
-Thumbs.db
-desktop.ini
-.vscode/
-.idea/
-# AI Visibility & Authority Evidence (not deployed)
-seo/ai-visibility/evidence/
-seo/authority/evidence/
-__pycache__/
-*.pyc
-node_modules/
-.vercel
-.env*
+# Backups & Large Archives
+*.zip
+*.tar.gz
+*.bak
+*.tmp
+
+# Scratch & Internal Dev Scripts
+scratch/
+scripts/*
+!scripts/claims_lint.py
+!scripts/build.js
+!scripts/update_product_price_valid.py
+!scripts/verify_production.py
+!scripts/build_blog.py
+!scripts/cache_bust.py
+!scripts/publish_automation.py
+!scripts/workflows/
+!scripts/monitoring/
+!scripts/outreach/
+!scripts/fonts/
+monitoring_output/
+PUBLIC_URL.txt
+before_after_report.md
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+# AI Visibility & Authority Evidence (not deployed)
+seo/ai-visibility/evidence/
+seo/authority/evidence/
+__pycache__/
+*.pyc
+node_modules/
+.vercel
+.env*

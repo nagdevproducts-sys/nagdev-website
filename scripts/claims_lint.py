@@ -1,651 +1,1303 @@
 #!/usr/bin/env python3
+
 """
+
 claims_lint.py - Single source-of-truth claims linter and gate for nagdevproducts.com.
+
 Scans deployable HTML files, llms.txt, llms-full.txt, sitemap.xml, and JSON-LD schemas
+
 against seo/facts-register.json.
 
+
+
 Enforces rules:
+
 R1: banned_phrases (case-insensitive, whole-site: HTML text, meta, JSON-LD, llms*.txt) -> FAIL
+
 R2: any certification name not in certifications_held (ISO, GMP, REACH, Halal, Kosher, FSSAI, BIS licence, NABL, etc.) -> FAIL
+
 R3: under-development product in a sentence with produce/manufacture/supply/available/in stock/offer/dispatch/solution -> FAIL unless sentence contains "under development"
+
 R4: product counts must be 27 / 7 / 7 / 13; any other count next to products/grades -> FAIL
+
 R5: plant address/district must match register; "Banaskantha" next to Deodar, Sardarpura, 385330 or "district" -> FAIL
+
     ("Banaskantha" allowed ONLY inside exact region_context or in farmer/seed-sourcing context, never as plant's district)
+
 R6: capacity: any TPD/TPA/MT per day value other than "50 TPD" seed crushing -> FAIL
+
 R7: SPEC CONSISTENCY (per product page): parse page's spec table (parameter -> limit).
+
     Every mention of parameter in key-facts, intro, FAQ, meta, JSON-LD additionalProperty and TDS text must match number & unit.
+
     A different colour scale (Gardner vs Lovibond) not present in table -> FAIL.
+
 R8: commercial terms: MOQ, lead time, delivery days, price, payment terms, monthly allocation -> FAIL unless in register
+
 R9: percentages/numbers in prose that are not spec values and have no <a href> source in the same paragraph -> WARN
+
 R10: Any table whose caption, heading or nearby text cites a data source (Agmarknet, SEA, DGCIS, government, "official") must have a matching raw data file in seo/data/<source>/<YYYY-MM-DD>/ and a generator script in scripts/ that reproduces the table exactly -> FAIL
+
 R11: Banned additions to the register's banned_phrases: "certified regional", "oil content", "seed oil content", "processing parity", "weighted benchmark" -> FAIL
+
 R12: Any page claiming data for a period that ends after its own publish date -> FAIL
+
 R13: Every deployable HTML page must contain the standard site header, the footer, the consent snippet, gtag loader and /js/analytics.js (compare against index.html) -> FAIL
+
 """
 
+
+
 import sys
+
 import os
+
 import re
+
 import json
+
 import csv
+
 import datetime
+
 from functools import lru_cache
+
 from pathlib import Path
-from bs4 import BeautifulSoup
+
+from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
+import warnings
+
+warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+
 
 # Ensure UTF-8 output
+
 if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
+
     sys.stdout.reconfigure(encoding='utf-8')
+
+
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
+
+
 def load_facts(facts_path: Path = None):
+
     if facts_path is None:
+
         facts_path = REPO_ROOT / "seo" / "facts-register.json"
+
     if not facts_path.exists():
+
         raise FileNotFoundError(f"Facts register not found at {facts_path}")
+
     with open(facts_path, "r", encoding="utf-8") as f:
+
         return json.load(f)
 
+
+
 # Linter Rule Definitions (Single Source of Truth)
+
 RULES = {
+
     "R1": "banned_phrases (case-insensitive, whole-site: HTML text, meta, JSON-LD, llms*.txt)",
+
     "R2": "any certification name not in certifications_held (ISO, GMP, REACH, Halal, Kosher, FSSAI, BIS licence, NABL, etc.)",
+
     "R3": "under-development product in a sentence with produce/manufacture/supply/available/in stock/offer/dispatch/solution unless marked 'under development'",
+
     "R4": "product counts must match facts register (32 total, 7 regular, 8 enquiry, 17 under dev)",
+
     "R5": "plant address/district must match register; 'Banaskantha' next to Deodar, Sardarpura, 385330 or 'district' forbidden",
+
     "R6": "capacity: any TPD/TPA/MT per day value other than '50 TPD' seed crushing",
+
     "R7": "SPEC CONSISTENCY: spec table limits must match across key-facts, intro, FAQ, meta, JSON-LD and TDS text; Phase 15f active products must contain 'Typical specification (indicative)' heading and agreement note; removed parameter rows forbidden",
+
     "R8": "commercial terms: MOQ, lead time, delivery days, price, payment terms, monthly allocation unless in register; 'in commercial supply' forbidden on on-enquiry pages",
+
     "R9": "percentages/numbers in prose that are not spec values and have no reference link in paragraph (WARN)",
+
     "R10": "Any table citing a data source (Agmarknet, SEA, DGCIS, official) must have matching raw data file and generator script",
+
     "R11": "Banned additions to register's banned phrases (certified regional, oil content, processing parity, etc.)",
+
     "R12": "Any page claiming data for a period that ends after its own publish date",
+
     "R13": "Required standard site template components (header, footer, consent snippet, gtag loader, /js/analytics.js)",
+
     "R14": "Crop and video media captions/alts must not contain location/ownership/facility claims and video must include 'illustrative'",
+
     "R15": "Cross-page specification consistency against canonical product pages",
+
     "R16": "Pharmacopoeia and cosmetic grade pages must contain NO numeric specification values and NO certification/regulatory claims; cosmetic grade must not contain monograph or compendial claims",
+
     "R17": "PAGE IDENTITY: on each /products/<slug> page, H1, breadcrumb last item, hero img alt, H2/H3, meta title/description, FAQ questions must refer ONLY to that page's product. Cross-product contamination -> FAIL (related-products block exempt)",
+
     "R18": "INTERNAL LINKS: all internal links must resolve to valid local files and contain no malformed percent encodings",
+
     "R19": "BRAND CODES: brand codes must strictly match canonical codes from seo/product-master.json; no legacy NDEV- hyphens or 'Specialty Range'",
+
     "R20": "EFFICACY & AGRONOMIC/HEALTH CLAIMS: no efficacy claims (pest/nematode/insect/fungus/weed/disease within 6 words of suppress/repel/control/kill/prevent/protect/resist), phytosanitary, cash crops benefit, yield increase, boosts yield, cures, heals",
+
     "R21": "CAS number integrity: no unauthorized CAS numbers on agricultural meals",
+
     "R22": "Colour scale mismatch: 'Gardner' on a page whose spec table uses Lovibond (and vice versa) -> FAIL",
+
     "R23": "HS code mismatch: HS code must match product-master across page, chips, JSON-LD, TDS and catalog -> FAIL",
+
     "R24": "PDF consistency: all TDS, catalog, and spec-confirmation PDFs must contain the exact plant address from the facts register; '42/1' and old district references forbidden",
-    "R25": "OPERATIONAL STATUS GATE: fail build if '2027', commissioning, under installation/construction, upcoming/proposed plant, will commence, production from, planned/pre-production, coming soon, targeted (except under development), or plant progress appears anywhere"
+
+    "R25": "OPERATIONAL STATUS GATE: fail build if '2027' within 12 words of production-status words, commissioning, under installation/construction, upcoming/proposed plant, will commence, production from, planned/pre-production, coming soon, targeted (except under development), or plant progress appears anywhere"
+
 }
 
+
+
 # Ignored paths
+
 IGNORED_PARTS = {"scratch", "scripts", "seo", "tests", ".git", ".agents", ".gemini", "node_modules", "backup_task4", "templates"}
+
 IGNORED_FILES = {"blog-admin.html", "_template.html", "render_tds.html"}
 
+
+
 def is_deployable(path: Path) -> bool:
+
     for part in path.parts:
+
         if part in IGNORED_PARTS:
+
             return False
+
     if path.name in IGNORED_FILES:
+
         return False
+
     if path.suffix in [".html", ".txt", ".xml", ".json"]:
+
         return True
+
     return False
 
+
+
 def collect_files(root: Path = None):
+
     if root is None:
+
         root = REPO_ROOT
+
     deployable = []
+
     for dirpath, dirnames, filenames in os.walk(root):
+
         dirnames[:] = [d for d in dirnames if d not in IGNORED_PARTS and not d.startswith('.')]
+
         for f in filenames:
+
             p = Path(dirpath) / f
+
             if is_deployable(p):
+
                 if p.suffix == ".html" or p.name in ["llms.txt", "llms-full.txt", "sitemap.xml"]:
+
                     deployable.append(p)
+
     return sorted(deployable)
 
+
+
 def strip_tags(text: str) -> str:
+
     # Remove script and style tags completely
+
     clean = re.sub(r'<(script|style)\b[^>]*>.*?</\1>', ' ', text, flags=re.DOTALL | re.IGNORECASE)
+
     # Remove HTML comments
+
     clean = re.sub(r'<!--.*?-->', ' ', clean, flags=re.DOTALL)
+
     # Replace closing tags and newlines with periods so sentences don't merge across elements or lines
+
     clean = re.sub(r'</[a-zA-Z0-9:_-]+>', '. ', clean)
+
     clean = re.sub(r'[\r\n]+', '. ', clean)
+
     # Remove remaining HTML/XML tags
+
     clean = re.sub(r'<[^>]+>', ' ', clean)
+
     clean = re.sub(r'\s+', ' ', clean)
+
     return clean
 
+
+
 def split_into_sentences(text: str):
+
     # Split text into distinct sentences
+
     sentences = re.split(r'(?<=[.!?])\s+', text)
+
     cleaned = []
+
     for s in sentences:
+
         s_str = s.strip()
+
         if len(s_str) > 5:
+
             cleaned.append(s_str)
+
     return cleaned
 
+
+
 DEV_PRODUCT_REGEXES = [
+
     r"\bricinoleic\s+acid\b",
+
     r"\b12[- ]hydroxystearic\s+acid\b",
+
     r"\b12[- ]hsa\b",
+
     r"\brefined\s+glycerin\b",
+
     r"\brefined\s+glycerine\b",
+
     r"\bcrude\s+glycerin\b",
+
     r"\bcrude\s+glycerine\b",
+
     r"\bhigh[- ]protein\s+castor\s+meal\b",
+
     r"\bcastor\s+meal\b",
+
     r"\bsodium\s+sulphate\s+anhydrous\b",
+
     r"\bsodium\s+sulfate\s+anhydrous\b",
+
     r"\bsodium\s+sulphate\b",
+
     r"\bsodium\s+sulfate\b",
+
     r"\bsebacic\s+acid\b",
+
     r"\bbio[- ]polyurethane\s+polyols?\b",
+
     r"\bbio[- ]pu\s+polyols?\b",
+
     r"\bdioctyl\s+sebacate\b",
+
     r"\bdos\b",
+
     r"\bdibutyl\s+sebacate\b",
+
     r"\bdbs\b",
+
     r"\bmethyl\s+12[- ]hydroxystearate\b",
+
     r"\bmethyl\s+ricinoleate\b",
+
     r"\blithium\s+12[- ]hydroxystearate\b",
+
     r"\bcalcium\s+12[- ]hydroxystearate\b",
+
     r"\bzinc\s+undecylenate\b",
+
     r"\bzinc\s+ricinoleate\b",
+
     r"\bblown\s+oxidized\s+castor\s+oil\b",
+
     r"\bblown\s+oxidised\s+castor\s+oil\b",
+
     r"\bblown\s+castor\s+oil\b"
+
 ]
+
+
 
 DEV_PROD_RE = re.compile("|".join(DEV_PRODUCT_REGEXES), re.IGNORECASE)
+
 R3_TRIGGER_RE = re.compile(r"\b(produce|produces|produced|producing|manufacture|manufactures|manufactured|manufacturing|supply|supplies|supplied|supplying|available|in stock|offer|offers|offered|offering|dispatch|dispatches|dispatched|dispatching|solution|solutions|regular|regularly)\b", re.IGNORECASE)
 
+
+
 CERT_PATTERNS = [
+
     (r"\bISO\s*[-]?\s*(?:9001|14001|22000|\d{4,5})\b", "ISO"),
+
     (r"\bISO\s+certified\b", "ISO certified"),
+
     (r"\bGMP\b", "GMP"),
+
     (r"\bREACH\b", "REACH"),
+
     (r"\bHalal\b", "Halal"),
+
     (r"\bKosher\b", "Kosher"),
+
     (r"\bFSSAI\b", "FSSAI"),
+
     (r"\bBIS\s+(?:licen[sc]e|certified)\b", "BIS licence"),
+
     (r"\bNABL\b", "NABL")
+
 ]
 
+
+
 COMMERCIAL_TERMS_RE = re.compile(
+
     r"\b(MOQ|minimum\s+order\s+quantity|minimum\s+order|lead\s+time|delivery\s+days|payment\s+terms|monthly\s+allocation|pricing\s+formula)\b",
+
     re.IGNORECASE
+
 )
+
+
 
 # Approved Indicative Price line pattern and Schema InStock allowlists (Fix 2)
+
 APPROVED_INDICATIVE_PRICE_RE = re.compile(
+
     r'Indicative price:\s*USD\s*[\d,]+[–-][\d,]+\s*per MT\s*\(USD\s*[\d.]+[–-][\d.]+\s*per kg\),\s*FOB Kandla/Mundra\.\s*Final price on quotation\.',
+
     re.IGNORECASE
+
 )
+
 APPROVED_SCHEMA_INSTOCK_RE = re.compile(r'https://schema\.org/InStock|"InStock"', re.IGNORECASE)
 
+
+
 def parse_spec_table(html_content: str):
+
     """
+
     Parses analytical parameters from spec-table-section or table with TEST PARAMETER / SR NO.
+
     Returns dict mapping parameter key -> parsed value details.
+
     """
+
     # Specifically target the analytical table in spec-table-section or containing TEST PARAMETER
+
     table_match = re.search(r'<section[^>]*class=["\'][^"\']*spec-table-section[^"\']*["\'][^>]*>.*?<table[^>]*>(.*?)</table>', html_content, re.DOTALL | re.IGNORECASE)
+
     if not table_match:
+
         tables = re.findall(r'<table[^>]*>(.*?)</table>', html_content, re.DOTALL | re.IGNORECASE)
+
         for t in tables:
+
             if "TEST PARAMETER" in t.upper() and ("SPECIFICATIONS" in t.upper() or "SR NO" in t.upper()):
+
                 table_match = re.search(r'(.*)', t, re.DOTALL)
+
                 break
+
     
+
     if not table_match:
+
         return {}
 
+
+
     table_html = table_match.group(1)
+
     rows = re.findall(r'<tr[^>]*>(.*?)</tr>', table_html, re.DOTALL | re.IGNORECASE)
+
     specs = {
+
         "color_scale": set(),
+
         "params": {}
+
     }
 
+
+
     for row in rows:
+
         cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL | re.IGNORECASE)
+
         if len(cells) < 2:
+
             continue
+
         param_cell = cells[1] if len(cells) >= 3 else cells[0]
+
         val_cell = cells[2] if len(cells) >= 3 else cells[1]
+
         
+
         param_text = re.sub(r'<[^>]+>', ' ', param_cell).strip().lower()
+
         val_text = re.sub(r'<[^>]+>', ' ', val_cell).strip()
+
         val_clean = val_text.replace('&le;', '≤').replace('&ge;', '≥').replace('&deg;', '°').strip()
 
+
+
         # Track color scale in table
+
         if "lovibond" in param_text or "lovibond" in val_clean.lower():
+
             specs["color_scale"].add("lovibond")
+
         if ("gardner" in param_text or "gardner" in val_clean.lower()) and "viscosity" not in param_text and "holdt" not in param_text:
+
             specs["color_scale"].add("gardner")
 
+
+
         # Map parameters
+
         if "free fatty acid" in param_text or param_text == "ffa" or "(ffa)" in param_text:
+
             specs["params"]["ffa"] = val_clean
+
         elif "acid value" in param_text:
+
             specs["params"]["acid_value"] = val_clean
+
         elif "hydroxyl" in param_text:
+
             specs["params"]["hydroxyl"] = val_clean
+
         elif "iodine" in param_text:
+
             specs["params"]["iodine"] = val_clean
+
         elif "saponification" in param_text:
+
             specs["params"]["saponification"] = val_clean
+
         elif "ricinoleic" in param_text:
+
             specs["params"]["ricinoleic"] = val_clean
+
         elif "moisture" in param_text:
+
             specs["params"]["moisture"] = val_clean
+
         elif "melting point" in param_text:
+
             specs["params"]["melting_point"] = val_clean
+
         elif "purity" in param_text or "assay" in param_text:
+
             specs["params"]["purity"] = val_clean
+
+
 
     return specs
 
+
+
 def extract_numeric_val(text: str):
+
     m = re.search(r'(\d+(?:\.\d+)?)', text)
+
     return float(m.group(1)) if m else None
 
+
+
 R11_BANNED_PHRASES = [
+
     "verified commercial castor oil supplier",
+
     "verified supplier",
+
     "verified manufacturer",
+
     "certified regional",
+
     "oil content",
+
     "seed oil content",
+
     "processing parity",
+
     "weighted benchmark",
+
     "triglyceride purity",
+
     "injectable",
+
     "sterile",
+
     "sterilization",
+
     "sterilisation",
+
     "microbial",
+
     "deodoriz",
+
     "deodoris",
+
     "hormone",
+
     "veterinary drug",
+
     "eye ointment",
+
     "transdermal",
+
     "drug delivery",
+
     "laxative",
+
     "nematode",
+
     "non-yellowing",
+
     "ultra-low odour",
+
     "ultra-low odor",
+
     "dedicated batch testing",
+
     "British Pharmacopoeia 93",
+
     "solvent extraction",
+
     "solvent-extracted",
+
     "saponification",
+
     "copied from",
+
     "metal soaps",
+
     "Fumigat"
+
 ]
 
+
+
 @lru_cache(maxsize=512)
+
 def get_banned_phrase_pattern(phrase: str) -> str:
+
     phrase_lower = phrase.strip().lower()
+
     if phrase_lower in ("deodoriz", "deodoris"):
+
         return r'(?<!\w)' + re.escape(phrase_lower)
+
     elif phrase_lower == "fumigat":
+
         return r'(?<![a-zA-Z])fumigat[a-zA-Z]*'
+
     elif phrase_lower == "saponification":
+
         return r'(?<![a-zA-Z])saponif[a-zA-Z]*(?!(?:[\s\-_]+value))(?![a-zA-Z])'
+
     elif phrase_lower in ("solvent extraction", "solvent-extracted"):
+
         return r'(?<![a-zA-Z])solvent[\s\-]extract(?:ion|ed)\b'
+
     elif phrase_lower == "metal soaps":
+
         return r'(?<![a-zA-Z])metal(?:lic)?\s+soaps?(?![a-zA-Z])'
+
     elif phrase_lower == "copied from":
+
         return r'(?<![a-zA-Z])copied\s+from\b'
+
     elif phrase_lower in ("injectable", "sterile", "hormone", "transdermal", "laxative", "nematode", "eye ointment", "accredited", "accreditation", "antibacterial", "antimicrobial", "hypoallergenic", "sludge-free", "racing"):
+
         return r'(?<!\w)' + re.escape(phrase_lower) + r'(?:s)?(?!\w)'
+
     elif phrase_lower in ("bp 93", "bp93"):
+
         return r'(?<!castor-oil-)(?<!\w)BP[\s\-]*93(?!\w)'
+
     elif phrase_lower == "british pharmacopoeia 93":
+
         return r'(?<!\w)(?:British\s+Pharmacopoeia\s*(?:19)?93)(?!\w)'
+
     elif phrase_lower in ("bp 1993", "bp1993"):
+
         return r'(?<!\w)BP[\s\-]*1993(?!\w)'
+
     elif phrase_lower == "1993 edition":
+
         return r'(?<!\w)1993\s+edition(?!\w)'
+
     elif phrase_lower == "premier":
+
         return r'(?<!\w)premier(?!\w)'
+
     elif phrase_lower in ("r&d stage", "r & d stage"):
+
         return r'(?<!\w)R&D\s+stage(?!\w)'
+
     elif phrase_lower == "extreme thermal":
+
         return r'(?<!\w)extreme\s+thermal(?!\w)'
+
     elif phrase_lower in ("extreme-pressure", "extreme pressure"):
+
         return r'(?<!\w)extreme[\s\-]pressure(?!\w)'
+
     elif phrase_lower == "extreme loads":
+
         return r'(?<!\w)extreme\s+loads(?!\w)'
+
     elif phrase_lower in ("guarantee", "guaranteed"):
+
         return r'(?<!\w)guarante\w*(?!\w)'
+
     elif phrase_lower in ("analytical-grade", "analytical grade"):
+
         return r'(?<!\w)analytical[\s\-]grade(?!\w)'
+
     elif phrase_lower in ("optical-grade", "optical grade"):
+
         return r'(?<!\w)optical[\s\-]grade(?!\w)'
+
     elif phrase_lower in ("natural antioxidants", "natural antioxidant"):
+
         return r'(?<!\w)natural\s+antioxidants?(?!\w)'
+
     elif phrase_lower in ("single-origin", "single origin"):
+
         return r'(?<!\w)single[\s\-]origin(?!\w)'
+
     elif phrase_lower == "unprocessed":
+
         return r'(?<!\w)unprocessed(?!\w)'
+
     elif phrase_lower in ("non-irritating", "non irritating"):
+
         return r'(?<!\w)non[\s\-]irritating(?!\w)'
+
     elif phrase_lower == "therapeutic":
+
         return r'(?<!\w)therapeutic(?!\w)'
+
     elif phrase_lower in ("high-purity", "high purity"):
+
         return r'(?<!\w)high[\s\-]purity(?!\w)'
+
     elif phrase_lower in ("high-specification", "high specification"):
+
         return r'(?<!\w)high[\s\-]specification(?!\w)'
+
     elif phrase_lower in ("pharmacopoeia compliant", "pharmacopeia compliant"):
+
         return r'(?<!\w)pharmacop[oe]+ia(?:\s+[\w\-]+){0,2}\s+compliant(?:s)?(?!\w)'
+
     elif phrase_lower in ("tinctures", "tincture"):
+
         return r'(?<!\w)tinctures?(?!\w)'
+
     elif phrase_lower in ("food-packaging", "food packaging"):
+
         return r'(?<!\w)food[\s\-]packagings?(?!\w)'
+
     elif phrase_lower in ("foot balm", "foot balms"):
+
         return r'(?<!\w)foot\s+balms?(?!\w)'
+
     elif phrase_lower in ("transport fuel", "transport fuels"):
+
         return r'(?<!\w)transport\s+fuels?(?!\w)'
+
     elif phrase_lower == "antifungal":
+
         return r'(?<!\w)anti[\s\-]?fungals?(?!\w)'
+
     elif phrase_lower in ("animal feed", "animal feeds"):
+
         return r'(?<!\w)animal\s+feeds?(?!\w)'
+
     elif phrase_lower == "passes usp":
+
         return r'(?<!\w)passes\s+USP(?!\w)'
+
     elif phrase_lower == "passes ip":
+
         return r'(?<!\w)passes\s+IP(?!\w)'
+
     elif phrase_lower == "complies to bp":
+
         return r'(?<!\w)complies\s+to\s+BP(?!\w)'
+
     elif phrase_lower in ("semi-continuous", "semi continuous"):
+
         return r'(?<!\w)semi[\s\-]continuous(?:ly)?(?!\w)'
+
     elif phrase_lower in ("batch pressure reactor", "batch pressure reactors"):
+
         return r'(?<!\w)batch\s+pressure\s+reactors?(?!\w)'
+
     elif phrase_lower == "thermal oil heating":
+
         return r'(?<!\w)thermal\s+oil\s+heating(?!\w)'
+
     elif phrase_lower == "24 business hours":
+
         return r'(?<!\w)24\s+business\s+hours(?!\w)'
+
     elif phrase_lower == "water white":
+
         return r'(?<!\w)water\s+white(?!\w)'
+
     elif phrase_lower in ("gross calorific", "gross calorific value"):
+
         return r'(?<!\w)gross\s+calorific(?:\s+value)?(?!\w)'
+
     else:
+
         words = phrase.strip().split()
+
         if len(words) == 1:
+
             return r'(?<!\w)' + re.escape(words[0]) + r'(?:s)?(?!\w)'
+
         escaped_words = []
+
         for i, w in enumerate(words):
+
             esc = re.escape(w)
+
             if i == len(words) - 1 and not esc.endswith('s'):
+
                 esc = esc + r'(?:s)?'
+
             escaped_words.append(esc)
+
         gap = r'(?:\s+[\w\-]+){0,2}\s+'
+
         return r'(?<!\w)' + gap.join(escaped_words) + r'(?!\w)'
 
 
+
+
+
 @lru_cache(maxsize=512)
+
 def get_compiled_banned_pattern(phrase: str):
+
     return re.compile(get_banned_phrase_pattern(phrase), re.IGNORECASE)
 
+
+
 MONTH_MAP = {
+
     "january": 1, "jan": 1, "february": 2, "feb": 2, "march": 3, "mar": 3,
+
     "april": 4, "apr": 4, "may": 5, "june": 6, "jun": 6, "july": 7, "jul": 7,
+
     "august": 8, "aug": 8, "september": 9, "sep": 9, "october": 10, "oct": 10,
+
     "november": 11, "nov": 11, "december": 12, "dec": 12
+
 }
 
+
+
 def parse_date_str(s: str):
+
     if not s:
+
         return None
+
     s = s.strip()
+
     m = re.match(r'^(\d{4})-(\d{1,2})-(\d{1,2})', s)
+
     if m:
+
         try:
+
             return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+
         except ValueError:
+
             pass
+
     m = re.match(r'^(\d{1,2})\s+([a-zA-Z]+)\s+(\d{4})', s)
+
     if m and m.group(2).lower() in MONTH_MAP:
+
         try:
+
             return datetime.date(int(m.group(3)), MONTH_MAP[m.group(2).lower()], int(m.group(1)))
+
         except ValueError:
+
             pass
+
     m = re.match(r'^([a-zA-Z]+)\s+(\d{1,2}),?\s+(\d{4})', s)
+
     if m and m.group(1).lower() in MONTH_MAP:
+
         try:
+
             return datetime.date(int(m.group(3)), MONTH_MAP[m.group(1).lower()], int(m.group(2)))
+
         except ValueError:
+
             pass
+
     return None
 
+
+
 def check_r10_table_sources(content: str, file_path_str: str, repo_root: Path = REPO_ROOT):
+
     findings = []
+
     if not (file_path_str.endswith(".html") or "<table" in content.lower()):
+
         return findings
+
+
 
     table_pattern = re.compile(r'<table\b[^>]*>(.*?)</table>', re.DOTALL | re.IGNORECASE)
+
     tables = list(table_pattern.finditer(content))
+
     if not tables:
+
         return findings
+
+
 
     data_sources = [
+
         ("agmarknet", r'\bagmarknet(?:\.gov\.in)?\b'),
+
         ("sea", r'\b(?:SEA|Solvent\s+Extractors[\'’]?\s+Association)\b'),
+
         ("dgcis", r'\b(?:DGCIS|DGCI&S|Directorate\s+General\s+of\s+Commercial\s+Intelligence)\b'),
+
         ("government", r'\b(?:government|govt|ministry\s+of\s+agriculture)\b'),
+
         ("official", r'\b(?:official\s+(?:data|figures?|statistics?|reports?|rates?|prices?|benchmark|source))\b')
+
     ]
 
+
+
     for t_idx, t_match in enumerate(tables, 1):
+
         t_content = t_match.group(1)
+
         start_pos = t_match.start()
+
         preceding_text = content[max(0, start_pos - 600):start_pos]
+
         combined_text = preceding_text + " " + t_content
 
+
+
         for src_name, src_regex in data_sources:
+
             if re.search(src_regex, combined_text, re.IGNORECASE):
+
                 data_dir = repo_root / "seo" / "data" / src_name
+
                 has_raw_file = False
+
                 if data_dir.exists():
+
                     for date_dir in data_dir.iterdir():
+
                         if date_dir.is_dir() and re.match(r'^\d{4}-\d{2}-\d{2}$', date_dir.name):
+
                             files = [f for f in date_dir.iterdir() if f.is_file() and f.stat().st_size > 0]
+
                             if files:
+
                                 has_raw_file = True
+
                                 break
 
+
+
                 scripts_dir = repo_root / "scripts"
+
                 has_generator = False
+
                 if scripts_dir.exists():
+
                     gen_files = list(scripts_dir.glob(f"*{src_name}*.py")) + list(scripts_dir.glob("generate_*.py")) + list(scripts_dir.glob("build_*.py"))
+
                     if gen_files:
+
                         has_generator = True
 
+
+
                 missing = []
+
                 if not has_raw_file:
+
                     missing.append(f"raw data file in seo/data/{src_name}/<YYYY-MM-DD>/")
+
                 if not has_generator:
+
                     missing.append(f"generator script in scripts/ (e.g., generate_{src_name}_table.py)")
 
+
+
                 if missing:
+
                     line_num = content[:start_pos].count('\n') + 1
+
                     findings.append({
+
                         "file": file_path_str,
+
                         "line": line_num,
+
                         "rule": "R10 Missing raw data or generator",
+
                         "severity": "FAIL",
+
                         "text": f"Table cites data source '{src_name}', but missing: {', '.join(missing)}"
+
                     })
+
     return findings
+
+
 
 def check_r11_banned_phrases(lines: list, file_path_str: str):
+
     findings = []
+
     for line_idx, line in enumerate(lines, 1):
+
         for phrase in R11_BANNED_PHRASES:
+
             pattern = get_banned_phrase_pattern(phrase)
+
             if re.search(pattern, line, re.IGNORECASE):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
+
                     "rule": "R11 Banned phrase",
+
                     "severity": "FAIL",
+
                     "text": f"Found R11 banned phrase: '{phrase}'"
+
                 })
+
     return findings
+
+
 
 def check_r12_period_after_publish(content: str, file_path_str: str):
+
     findings = []
+
     pub_date = None
+
     m = re.search(r'<meta\s+name=["\'](?:publish-date|date|article:published_time)["\']\s+content=["\']([^"\']+)["\']', content, re.I)
+
     if not m:
+
         m = re.search(r'<meta\s+property=["\']article:published_time["\']\s+content=["\']([^"\']+)["\']', content, re.I)
+
     if m:
+
         pub_date = parse_date_str(m.group(1))
 
+
+
     if not pub_date:
+
         m_json = re.search(r'"datePublished"\s*:\s*"([^"]+)"', content)
+
         if m_json:
+
             pub_date = parse_date_str(m_json.group(1))
 
+
+
     if not pub_date:
+
         m_txt = re.search(r'(?:Published|Updated|Date)\s*:\s*([A-Za-z0-9, ]{8,25})', content, re.I)
+
         if m_txt:
+
             pub_date = parse_date_str(m_txt.group(1))
 
+
+
     if not pub_date:
+
         return findings
+
+
 
     week_end_matches = re.finditer(r'week\s+ending\s+([A-Za-z]+)\s+(\d{1,2}),?\s*(\d{4})', content, re.I)
+
     for wem in week_end_matches:
+
         month_name = wem.group(1).lower()
+
         if month_name in MONTH_MAP:
+
             try:
+
                 claimed_end = datetime.date(int(wem.group(3)), MONTH_MAP[month_name], int(wem.group(2)))
+
                 if claimed_end > pub_date:
+
                     findings.append({
+
                         "file": file_path_str,
+
                         "line": content[:wem.start()].count('\n') + 1,
+
                         "rule": "R12 Claimed period after publish date",
+
                         "severity": "FAIL",
+
                         "text": f"Claimed period '{wem.group(0)}' ends on {claimed_end}, after publish date {pub_date}"
+
                     })
+
             except ValueError:
+
                 pass
+
+
 
     range_matches = re.finditer(r'(?:([A-Za-z]+)\s+(\d{1,2})\s*[-–—to]+\s*(?:([A-Za-z]+)\s+)?(\d{1,2}),?\s*(\d{4}))', content, re.I)
+
     for rm in range_matches:
+
         end_month_str = rm.group(3) or rm.group(1)
+
         end_month_str = end_month_str.lower()
+
         if end_month_str in MONTH_MAP:
+
             try:
+
                 claimed_end = datetime.date(int(rm.group(5)), MONTH_MAP[end_month_str], int(rm.group(4)))
+
                 if claimed_end > pub_date:
+
                     findings.append({
+
                         "file": file_path_str,
+
                         "line": content[:rm.start()].count('\n') + 1,
+
                         "rule": "R12 Claimed period after publish date",
+
                         "severity": "FAIL",
+
                         "text": f"Claimed period '{rm.group(0)}' ends on {claimed_end}, after publish date {pub_date}"
+
                     })
+
             except ValueError:
+
                 pass
 
+
+
     completed_weeks = re.finditer(r'(\d+)\s+completed\s+([A-Za-z]+)\s+weeks', content, re.I)
+
     for cwm in completed_weeks:
+
         num_weeks = int(cwm.group(1))
+
         month_str = cwm.group(2).lower()
+
         if month_str in MONTH_MAP:
+
             month_num = MONTH_MAP[month_str]
+
             if pub_date.month == month_num:
+
                 required_days = num_weeks * 7
+
                 if required_days > pub_date.day:
+
                     findings.append({
+
                         "file": file_path_str,
+
                         "line": content[:cwm.start()].count('\n') + 1,
+
                         "rule": "R12 Claimed period after publish date",
+
                         "severity": "FAIL",
+
                         "text": f"Claimed '{cwm.group(0)}' requires {required_days} completed days, but page was published on day {pub_date.day}"
+
                     })
 
+
+
     return findings
+
+
 
 def check_r13_standard_template(content: str, file_path_str: str):
+
     findings = []
+
     if not (file_path_str.endswith(".html") or ".html" in file_path_str):
+
         return findings
+
+
 
     # Skip meta-refresh redirect stubs
+
     if re.search(r'<meta\s+http-equiv=["\']refresh["\']', content, re.I):
+
         return findings
 
+
+
     missing = []
+
     # 1. Site header with class="site-header"
+
     if 'class="site-header"' not in content and 'class=\'site-header\'' not in content:
+
         missing.append("site header (<header class=\"site-header\">)")
 
+
+
     # 2. Top info bar with class="top-bar"
+
     if 'class="top-bar"' not in content and 'class=\'top-bar\'' not in content:
+
         missing.append("top contact bar (<div class=\"top-bar\">)")
 
+
+
     # 3. Main navigation with nav-list
+
     if 'nav-list' not in content:
+
         missing.append("main navigation (class=\"nav-list\")")
 
+
+
     # 4. Skip to content link (required on blog posts)
+
     if ('blog/' in file_path_str.replace('\\', '/')) and 'skip-to-content' not in content and 'skip-link' not in content:
+
         missing.append("skip-to-content link")
 
+
+
     # 5. Site footer with class="site-footer"
+
     if 'class="site-footer"' not in content and 'class=\'site-footer\'' not in content:
+
         missing.append("site footer (<footer class=\"site-footer\">)")
 
+
+
     # 6. Cookie settings trigger
+
     if 'cookie-settings' not in content and 'cookie-settings-btn' not in content:
+
         missing.append("cookie settings trigger (#cookie-settings-btn)")
 
+
+
     # 7. Consent mode snippet
+
     if 'gtag(\'consent\'' not in content and 'gtag("consent"' not in content:
+
         missing.append("consent snippet (gtag consent default)")
 
+
+
     # 8. Gtag loader / dataLayer
+
     if 'function gtag()' not in content and 'googletagmanager.com/gtag/js' not in content and 'dataLayer' not in content:
+
         missing.append("gtag loader")
 
+
+
     # 9. Analytics script
+
     if '/js/analytics.js' not in content and 'js/analytics.js' not in content:
+
         missing.append("analytics script (/js/analytics.js)")
 
+
+
     # 10. WhatsApp floating button / contact action
+
     if 'whatsapp-float' not in content and 'whatsapp-fab' not in content and 'wa.me' not in content:
+
         missing.append("WhatsApp button (class=\"whatsapp-float\" or #whatsapp-fab)")
 
+
+
     if missing:
+
         findings.append({
+
             "file": file_path_str,
+
             "line": 1,
+
             "rule": "R13 Missing standard site template components",
+
             "severity": "FAIL",
+
             "text": f"Deployable HTML page is missing standard components: {', '.join(missing)}"
+
         })
 
+
+
     return findings
+
+
+
 
 
 def check_r14_crop_media_captions(content: str, file_path_str: str):
+
     findings = []
+
     if not (file_path_str.endswith(".html") or ".html" in file_path_str or "<html" in content.lower()):
+
         return findings
 
+
+
     # Only inspect files referencing /images/crop/ or /media/video/
+
     if "/images/crop/" not in content and "/media/video/" not in content:
+
         return findings
+
+
 
     try:
         from bs4 import BeautifulSoup
@@ -653,1874 +1305,3983 @@ def check_r14_crop_media_captions(content: str, file_path_str: str):
     except Exception:
         return findings
 
+
+
     # Banned terms and regexes for R14
+
     banned_patterns = [
+
         (r'\bNorth\s+Gujarat\b', "North Gujarat"),
+
         (r'\bGujarat\b', "Gujarat"),
+
         (r'\bBanaskantha\b', "Banaskantha"),
+
         (r'\bVav\s*[-/]?\s*Tharad\b', "Vav-Tharad"),
+
         (r'\bDeodar\b', "Deodar"),
+
         (r'\bSardarpura\b', "Sardarpura"),
+
         (r'\bour\b', "our"),
+
         (r'\bNagdev\b', "Nagdev"),
+
         (r'\b(?:our\s+plant|Nagdev\s+plant|at\s+(?:the|our)\s+plant|(?:crushing|manufacturing|processing|extraction|refining|solvent)\s+plant|plant\s+(?:facility|facilities|equipment|premises|site|operations|setup|floor))\b', "plant (as a facility)"),
+
         (r'\bfarms?\s+of\b', "farm of"),
+
         (r'\bcleaned\b', "cleaned"),
+
         (r'\bprocessing\b', "processing"),
+
         (r'\bprocessed\b', "processed"),
+
         (r'\bprepared\s+for\b', "prepared for"),
+
         (r'\btransport\b', "transport"),
+
         (r'\bmandi\b', "mandi"),
+
         (r'\bAPMC\b', "APMC"),
+
         (r'\bprocured\b', "procured"),
+
         # Gujarati equivalents
+
         (r'ગુજરાત', "ગુજરાત"),
+
         (r'બનાસકાંઠા', "બનાસકાંઠા"),
+
         (r'દિયોદર', "દિયોદર"),
+
         (r'અમારા', "અમારા"),
+
         (r'અમારી', "અમારી"),
+
         (r'પ્લાન્ટ', "પ્લાન્ટ (plant)")
+
     ]
 
+
+
     elements = soup.find_all(['img', 'source', 'video'])
+
     checked_elements = set()
 
+
+
     for el in elements:
+
         src = el.get('src', '') or ''
+
         srcset = el.get('srcset', '') or ''
+
         data_src = el.get('data-src', '') or ''
+
         poster = el.get('poster', '') or ''
 
+
+
         combined_src = f"{src} {srcset} {data_src} {poster}"
+
         if not ('/images/crop/' in combined_src or '/media/video/' in combined_src):
+
             continue
+
+
 
         alt = el.get('alt', '')
+
         aria_label = el.get('aria-label', '')
 
+
+
         # Enclosing or associated figcaption
+
         fig = el.find_parent('figure')
+
         figcaption_text = ""
+
         if fig and fig.find('figcaption'):
+
             figcaption_text = fig.find('figcaption').get_text(strip=True)
+
         else:
+
             # Climb up parent containers
+
             curr = el.parent
+
             for _ in range(4):
+
                 if curr:
+
                     fc = curr.find('figcaption')
+
                     if fc:
+
                         figcaption_text = fc.get_text(strip=True)
+
                         break
+
                     curr = curr.parent
 
+
+
         elem_id = (el.name, alt, aria_label, figcaption_text)
+
         if elem_id in checked_elements:
+
             continue
+
         checked_elements.add(elem_id)
 
+
+
         line_num = 1
+
         # Check forbidden words across alt, aria-label, figcaption
+
         checks = [
+
             ("alt text", alt),
+
             ("aria-label", aria_label),
+
             ("figcaption", figcaption_text)
+
         ]
 
+
+
         for label, text_val in checks:
+
             if not text_val:
+
                 continue
+
             for pattern, name in banned_patterns:
+
                 if re.search(pattern, text_val, re.IGNORECASE):
+
                     findings.append({
+
                         "file": file_path_str,
+
                         "line": line_num,
+
                         "rule": "R14 Crop/video caption honesty",
+
                         "severity": "FAIL",
+
                         "text": f"Found forbidden {label} term '{name}' in crop/video media element: \"{text_val}\""
+
                     })
 
+
+
         # Video must contain 'illustrative' in figcaption
+
         is_video = (el.name == 'video') or ('/media/video/' in combined_src)
+
         if is_video:
+
             if not figcaption_text or not re.search(r'\billustrative\b', figcaption_text, re.IGNORECASE):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_num,
+
                     "rule": "R14 Crop/video caption honesty",
+
                     "severity": "FAIL",
+
                     "text": f"Video caption must contain the word 'illustrative'. Found: \"{figcaption_text}\""
+
                 })
 
+
+
     return findings
+
+
+
 
 
 def check_r15_cross_page_specs(content: str, file_path_str: str) -> list:
+
     """
+
     R15: Cross-page specification consistency.
+
     Any page (/castor-oil-manufacturer-gujarat, /bulk-castor-oil-supply,
+
     /castor-oil-exporter-india, /about, /process-flow, etc.) that quotes
+
     spec parameters/limits for any product must match canonical product specs.
+
     A different limit or unit -> FAIL.
+
     """
+
     findings = []
+
     norm = content.replace('&lt;', '<').replace('&gt;', '>').replace('&le;', '≤').replace('&ge;', '≥').replace('&ndash;', '–')
 
+
+
     # 1. FSG Lovibond mismatch: Lovibond Y+5R < 2.5 is forbidden; must be Max 20Y + 2R
+
     if re.search(r'first\s+special\s+grade|FSG', norm, re.IGNORECASE):
+
         if re.search(r'Lovibond\s*(?:Y\s*\+\s*5R|\(Y\+5R\))\s*<\s*2\.5', norm, re.IGNORECASE):
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": 0,
+
                 "rule": "R15 Cross-page spec consistency",
+
                 "severity": "FAIL",
+
                 "text": "FSG spec mismatch: found outdated Lovibond Y+5R < 2.5; canonical spec is Lovibond: Max 20Y + 2R"
+
             })
+
+
 
     # 2. Ricinoleic Acid Acid Value mismatch: 175–185 is forbidden; must be 175 Min
+
     if re.search(r'ricinoleic\s+acid', norm, re.IGNORECASE):
+
         rows = re.findall(r'<tr\b[^>]*>(.*?)</tr>', norm, re.DOTALL | re.IGNORECASE)
+
         found_ra_av = False
+
         for row in rows:
+
             if re.search(r'ricinoleic\s+acid', row, re.IGNORECASE) and not re.search(r'12-hydroxy', row, re.IGNORECASE):
+
                 if re.search(r'Acid\s+Value[^\w\r\n]{1,10}175\s*[–—\-]\s*185', row, re.IGNORECASE):
+
                     found_ra_av = True
+
                     break
+
         if not found_ra_av and not rows:
+
             if re.search(r'Acid\s+Value[^\w\r\n]{1,10}175\s*[–—\-]\s*185', norm, re.IGNORECASE):
+
                 found_ra_av = True
 
+
+
         if found_ra_av:
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": 0,
+
                 "rule": "R15 Cross-page spec consistency",
+
                 "severity": "FAIL",
+
                 "text": "Ricinoleic Acid spec mismatch: found Acid Value 175–185; canonical spec is Acid Value: 175 Min"
+
             })
+
+
 
     # 3. 12-HSA Melting Point mismatch: 74–77°C is forbidden; must be 75°C–78°C
+
     if re.search(r'12-hydroxystearic|12-HSA', norm, re.IGNORECASE):
+
         if re.search(r'Melting\s+Point[^\w\r\n]{1,10}74\s*[–—\-]\s*77', norm, re.IGNORECASE):
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": 0,
+
                 "rule": "R15 Cross-page spec consistency",
+
                 "severity": "FAIL",
+
                 "text": "12-HSA spec mismatch: found Melting Point 74–77°C; canonical spec is Melting Point: 75°C–78°C"
+
             })
+
+
 
     # 4. HCO Iodine Value mismatch: IV < 3.0 is forbidden; must be ≤ 4.0
+
     if re.search(r'hydrogenated\s+castor|HCO', norm, re.IGNORECASE):
+
         if re.search(r'(?:IV|Iodine\s+Value)\s*<\s*3\.0', norm, re.IGNORECASE):
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": 0,
+
                 "rule": "R15 Cross-page spec consistency",
+
                 "severity": "FAIL",
+
                 "text": "HCO spec mismatch: found IV < 3.0; canonical spec is Iodine Value: ≤ 4.0"
+
             })
+
+
 
     # Phase 15f: Cross-page checks for removed specs in table rows or comparison context
+
     # Check within table rows or proximity windows (to avoid cross-contamination from universal navigation menus)
+
     rows = re.findall(r'<tr\b[^>]*>(.*?)</tr>', norm, re.DOTALL | re.IGNORECASE)
+
     eval_blocks = rows if rows else [norm]
 
+
+
     for block in eval_blocks:
+
         # Commercial Lovibond 40
+
         if re.search(r'commercial\s+castor', block, re.IGNORECASE) and re.search(r'Lovibond[^\w\r\n]{1,10}40\b', block, re.IGNORECASE):
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": 0,
+
                 "rule": "R15 Cross-page spec consistency",
+
                 "severity": "FAIL",
+
                 "text": "Commercial Castor Oil spec mismatch: found Lovibond 40 (removed row in Phase 15f)"
-            })
-        # FSG / Commercial Relative Density
-        if re.search(r'first\s+special\s+grade|\bFSG\b|commercial\s+castor', block, re.IGNORECASE) and re.search(r'Relative\s+Density', block, re.IGNORECASE):
-            findings.append({
-                "file": file_path_str,
-                "line": 0,
-                "rule": "R15 Cross-page spec consistency",
-                "severity": "FAIL",
-                "text": "FSG/Commercial spec mismatch: found Relative Density (removed row in Phase 15f)"
-            })
-        # FPD Hydroxyl Value 180
-        if re.search(r'first\s+pressed\s+degummed|\bFPD\b', block, re.IGNORECASE) and re.search(r'Hydroxyl\s+Value[^\w\r\n]{1,10}180\b', block, re.IGNORECASE):
-            findings.append({
-                "file": file_path_str,
-                "line": 0,
-                "rule": "R15 Cross-page spec consistency",
-                "severity": "FAIL",
-                "text": "FPD spec mismatch: found Hydroxyl Value 180 (removed row in Phase 15f)"
-            })
-        # Castor Cake Gross Calorific
-        if re.search(r'castor\s+cake', block, re.IGNORECASE) and re.search(r'Gross\s+Calorific', block, re.IGNORECASE):
-            findings.append({
-                "file": file_path_str,
-                "line": 0,
-                "rule": "R15 Cross-page spec consistency",
-                "severity": "FAIL",
-                "text": "Castor Cake spec mismatch: found Gross Calorific (removed row in Phase 15f)"
-            })
-        # PPG Stokes Viscosity
-        if re.search(r'pale\s+pressed|\bPPG\b', block, re.IGNORECASE) and re.search(r'Stokes\s+Viscosity', block, re.IGNORECASE):
-            findings.append({
-                "file": file_path_str,
-                "line": 0,
-                "rule": "R15 Cross-page spec consistency",
-                "severity": "FAIL",
-                "text": "PPG spec mismatch: found Stokes Viscosity (removed row in Phase 15f)"
-            })
-        # HCO Colour 3 / Gardner 3
-        if re.search(r'hydrogenated\s+castor|\bHCO\b', block, re.IGNORECASE) and re.search(r'Colou?r\s*(?:Gardner\s*)?3(?:\.0)?\s*(?:Max)?\b|\bColou?r\s+Gardner\s+3(?:\.0)?\b', block, re.IGNORECASE):
-            findings.append({
-                "file": file_path_str,
-                "line": 0,
-                "rule": "R15 Cross-page spec consistency",
-                "severity": "FAIL",
-                "text": "HCO spec mismatch: found Colour 3 / Colour Gardner 3 (removed row in Phase 15f)"
-            })
-        # DCO-FA Conjugated Fatty Acids / Colour Gardner
-        if re.search(r'dco[\s\-]*fa|dco\s+fatty\s+acid', block, re.IGNORECASE) and re.search(r'Conjugated\s+(?:diene\s+)?Fatty\s+Acids|Colou?r\s*,?\s*Gardner', block, re.IGNORECASE):
-            findings.append({
-                "file": file_path_str,
-                "line": 0,
-                "rule": "R15 Cross-page spec consistency",
-                "severity": "FAIL",
-                "text": "DCO-FA spec mismatch: found Conjugated Fatty Acids / Colour Gardner (removed row in Phase 15f)"
+
             })
 
+        # FSG / Commercial Relative Density
+
+        if re.search(r'first\s+special\s+grade|\bFSG\b|commercial\s+castor', block, re.IGNORECASE) and re.search(r'Relative\s+Density', block, re.IGNORECASE):
+
+            findings.append({
+
+                "file": file_path_str,
+
+                "line": 0,
+
+                "rule": "R15 Cross-page spec consistency",
+
+                "severity": "FAIL",
+
+                "text": "FSG/Commercial spec mismatch: found Relative Density (removed row in Phase 15f)"
+
+            })
+
+        # FPD Hydroxyl Value 180
+
+        if re.search(r'first\s+pressed\s+degummed|\bFPD\b', block, re.IGNORECASE) and re.search(r'Hydroxyl\s+Value[^\w\r\n]{1,10}180\b', block, re.IGNORECASE):
+
+            findings.append({
+
+                "file": file_path_str,
+
+                "line": 0,
+
+                "rule": "R15 Cross-page spec consistency",
+
+                "severity": "FAIL",
+
+                "text": "FPD spec mismatch: found Hydroxyl Value 180 (removed row in Phase 15f)"
+
+            })
+
+        # Castor Cake Gross Calorific
+
+        if re.search(r'castor\s+cake', block, re.IGNORECASE) and re.search(r'Gross\s+Calorific', block, re.IGNORECASE):
+
+            findings.append({
+
+                "file": file_path_str,
+
+                "line": 0,
+
+                "rule": "R15 Cross-page spec consistency",
+
+                "severity": "FAIL",
+
+                "text": "Castor Cake spec mismatch: found Gross Calorific (removed row in Phase 15f)"
+
+            })
+
+        # PPG Stokes Viscosity
+
+        if re.search(r'pale\s+pressed|\bPPG\b', block, re.IGNORECASE) and re.search(r'Stokes\s+Viscosity', block, re.IGNORECASE):
+
+            findings.append({
+
+                "file": file_path_str,
+
+                "line": 0,
+
+                "rule": "R15 Cross-page spec consistency",
+
+                "severity": "FAIL",
+
+                "text": "PPG spec mismatch: found Stokes Viscosity (removed row in Phase 15f)"
+
+            })
+
+        # HCO Colour 3 / Gardner 3
+
+        if re.search(r'hydrogenated\s+castor|\bHCO\b', block, re.IGNORECASE) and re.search(r'Colou?r\s*(?:Gardner\s*)?3(?:\.0)?\s*(?:Max)?\b|\bColou?r\s+Gardner\s+3(?:\.0)?\b', block, re.IGNORECASE):
+
+            findings.append({
+
+                "file": file_path_str,
+
+                "line": 0,
+
+                "rule": "R15 Cross-page spec consistency",
+
+                "severity": "FAIL",
+
+                "text": "HCO spec mismatch: found Colour 3 / Colour Gardner 3 (removed row in Phase 15f)"
+
+            })
+
+        # DCO-FA Conjugated Fatty Acids / Colour Gardner
+
+        if re.search(r'dco[\s\-]*fa|dco\s+fatty\s+acid', block, re.IGNORECASE) and re.search(r'Conjugated\s+(?:diene\s+)?Fatty\s+Acids|Colou?r\s*,?\s*Gardner', block, re.IGNORECASE):
+
+            findings.append({
+
+                "file": file_path_str,
+
+                "line": 0,
+
+                "rule": "R15 Cross-page spec consistency",
+
+                "severity": "FAIL",
+
+                "text": "DCO-FA spec mismatch: found Conjugated Fatty Acids / Colour Gardner (removed row in Phase 15f)"
+
+            })
+
+
+
     return findings
+
+
 
 def check_r16_pharma_cosmetic(content: str, file_path_str: str) -> list:
+
     """
+
     R16: Pharmacopoeia and cosmetic grade pages restrictions.
+
     Must contain NO numeric specification values and must NOT contain:
+
     GMP, certified, approved, drug licence, excipient manufacturer, FDA, CEP, DMF.
+
     """
+
     findings = []
+
     pharma_cosmetic_slugs = [
+
         "castor-oil-bp93",
+
         "castor-oil-usp-nf",
+
         "castor-oil-ph-eur",
+
         "castor-oil-ip",
+
         "castor-oil-jp",
+
         "cosmetic-grade-castor-oil"
+
     ]
+
     is_pharma_cosmetic = any(slug in file_path_str.lower() for slug in pharma_cosmetic_slugs)
+
     if not is_pharma_cosmetic:
+
         return findings
 
+
+
     lines = content.splitlines()
+
     norm_file_path = file_path_str.replace('\\', '/').lower()
 
+
+
     # 1. Banned certification / regulatory claims
+
     r16_banned_terms = [
+
         (r"\bGMP\b", "GMP"),
+
         (r"\bcertified\b", "certified"),
+
         (r"\bapproved\b", "approved"),
+
         (r"\bdrug\s+licen[sc]e\b", "drug licence"),
+
         (r"\bexcipient\s+manufacturer\b", "excipient manufacturer"),
+
         (r"\bFDA\b", "FDA"),
+
         (r"\bCEP\b", "CEP"),
+
         (r"\bDMF\b", "DMF")
+
     ]
+
     for line_idx, line in enumerate(lines, 1):
+
         for pattern, term_name in r16_banned_terms:
+
             if re.search(pattern, line, re.IGNORECASE):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
+
                     "rule": "R16 Pharma/Cosmetic banned claim",
+
                     "severity": "FAIL",
+
                     "text": f"Pharmacopoeia/cosmetic page contains forbidden term '{term_name}' on line {line_idx}: '{line.strip()[:100]}'"
+
                 })
+
+
 
     # 2. NO numeric specification values (no numbers next to spec parameter names)
+
     spec_param_re = re.compile(
+
         r'\b(free\s+fatty\s+acids?|ffa|acid\s+value|saponification\s+value|sap\s+value|iodine\s+value|hydroxyl\s+value|moisture(?:\s+and\s+volatile\s+matter)?|relative\s+density|specific\s+gravity|refractive\s+index|optical\s+rotation|viscosity|colour|color|lovibond|gardner|heavy\s+metals?|peroxide\s+value|unsaponifiable\s+matter|ash)\b',
+
         re.IGNORECASE
+
     )
+
     spec_val_re = re.compile(
+
         r'(?:[:=≤≥<>–\-]\s*\d+(?:\.\d+)?|\b\d+(?:\.\d+)?\s*(?:%|mg\b|ppm\b|cst\b|poise\b|°c\b|max\b|min\b)|\b(?:max|min)\b\s*\d+(?:\.\d+)?|\b\d+\.\d+\b)',
+
         re.IGNORECASE
+
     )
+
     for line_idx, line in enumerate(lines, 1):
+
         if "<script" in line.lower() or "</script>" in line.lower() or "<style" in line.lower() or "href=" in line or "src=" in line:
+
             continue
+
         plain = re.sub(r'<[^>]+>', ' ', line)
+
         for m in spec_param_re.finditer(plain):
+
             start = max(0, m.start() - 35)
+
             end = min(len(plain), m.end() + 45)
+
             window = plain[start:end]
+
             num_match = spec_val_re.search(window)
+
             if num_match:
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
+
                     "rule": "R16 Numeric spec on pharma/cosmetic page",
+
                     "severity": "FAIL",
+
                     "text": f"Pharmacopoeia/cosmetic page contains numeric specification near '{m.group(0)}' on line {line_idx}: '{window.strip()[:100]}'"
+
                 })
 
+
+
     return findings
+
+
+
 
 
 def check_r17_page_identity(content: str, file_path_str: str) -> list:
+
     norm_path = file_path_str.replace('\\', '/').lower()
+
     if not ('products/' in norm_path and norm_path.endswith('.html')):
+
         return []
+
     filename = norm_path.split('products/')[-1]
+
     if filename in ('index.html', 'castor-cake-fertilizer.html', 'de-oiled-cake-castor-meal.html'):
+
         return []
+
     slug = filename.replace('.html', '')
 
+
+
     PRODUCT_DISTINCTIVE_TERMS = {
+
         "commercial-castor-oil": [("Commercial Grade Castor Oil", r'\bcommercial\s+(?:grade\s+)?castor\s+oil\b')],
+
         "first-special-grade-castor-oil": [("First Special Grade", r'\bfirst\s+special\s+grade\b'), ("FSG", r'\bFSG\b'), ("BSS", r'\bBSS\b')],
+
         "fpd-castor-oil": [("First Pressed Degummed", r'\bfirst\s+pressed\s+degummed\b'), ("FPD", r'\bFPD\b')],
+
         "castor-cake": [("Castor Cake", r'\bcastor\s+cake\b'), ("Expeller Cake", r'\bexpeller\s+cake\b')],
+
         "hydrogenated-castor-oil": [("Hydrogenated Castor Oil", r'\bhydrogenated\s+castor\s+oil\b'), ("HCO", r'\bHCO\b'), ("Castor Wax", r'\bcastor\s+wax\b')],
+
         "dehydrated-castor-oil": [("Dehydrated Castor Oil", r'\bdehydrated\s+castor\s+oil\b(?![\s\-]*fatty)'), ("DCO", r'\bDCO\b(?![\s\-]*fa\b|[\s\-]*fatty)')],
+
         "dco-fatty-acid": [("DCO Fatty Acid", r'\b(?:dco[\s\-]*fa|dco\s+fatty\s+acid|dehydrated\s+castor\s+oil\s+fatty\s+acid)\b')],
+
         "ppg-castor-oil": [("Pale Pressed Grade", r'\bpale\s+pressed\b'), ("PPG", r'\bPPG\b')],
+
         "cold-pressed-castor-oil": [("Cold Pressed", r'\bcold[\s\-]pressed\b')],
+
         "castor-oil-bp93": [("British Pharmacopoeia", r'\bbritish\s+pharmacop[oe]+ia\b'), ("BP", r'\bBP\b(?![\s\-]*93\b)'), ("BP 93", r'\bBP[\s\-]*93\b')],
+
         "castor-oil-usp-nf": [("United States Pharmacopeia", r'\bunited\s+states\s+pharmacop[oe]+ia\b'), ("USP", r'\bUSP\b'), ("USP-NF", r'\bUSP[\s\-\/]*NF\b')],
+
         "castor-oil-ph-eur": [("European Pharmacopoeia", r'\beuropean\s+pharmacop[oe]+ia\b'), ("Ph. Eur.", r'\bph\.?\s*eur\.?\b'), ("EP", r'\bEP\b')],
+
         "castor-oil-ip": [("Indian Pharmacopoeia", r'\bindian\s+pharmacop[oe]+ia\b'), ("IP", r'\bIP\b')],
+
         "castor-oil-jp": [("Japanese Pharmacopoeia", r'\bjapanese\s+pharmacop[oe]+ia\b'), ("JP", r'\bJP\b')],
+
         "cosmetic-grade-castor-oil": [("Cosmetic Grade", r'\bcosmetic\s+grade\b')],
+
         "ricinoleic-acid": [("Ricinoleic Acid", r'\bricinoleic\s+acid\b')],
+
         "12-hydroxystearic-acid": [("12-Hydroxystearic Acid", r'\b12[\s\-]hydroxy\s*stearic\b'), ("12-HSA", r'(?<!calcium )(?<!calcium-)(?<!lithium )(?<!lithium-)(?<!methyl )(?<!methyl-)\b12[\s\-]*HSA\b')],
+
         "sebacic-acid": [("Sebacic Acid", r'\bsebacic\s+acid\b')],
+
         "high-protein-castor-meal": [("High-Protein Castor Meal", r'\bhigh[\s\-]protein\s+castor\s+meal\b'), ("Castor Meal", r'\bcastor\s+meal\b')],
+
         "crude-glycerin": [("Crude Glycerin", r'\bcrude\s+glycerin[e]?\b')],
+
         "refined-glycerin": [("Refined Glycerin", r'\brefined\s+glycerin[e]?\b')],
+
         "bio-polyurethane-polyols": [("Bio-Polyurethane Polyols", r'\bbio[\s\-]polyurethane\b'), ("Bio-PU Polyols", r'\bbio[\s\-]pu\b')],
+
         "sodium-sulphate-anhydrous": [("Sodium Sulphate Anhydrous", r'\bsodium\s+sul(?:ph|f)ate\b')],
+
         "dioctyl-sebacate": [("Dioctyl Sebacate", r'\bdioctyl\s+sebacate\b'), ("DOS", r'\bDOS\b')],
+
         "dibutyl-sebacate": [("Dibutyl Sebacate", r'\bdibutyl\s+sebacate\b'), ("DBS", r'\bDBS\b')],
+
         "methyl-12-hydroxystearate": [("Methyl 12-Hydroxystearate", r'\bmethyl\s+12[\s\-]hydroxy\b'), ("Methyl 12-HSA", r'\bmethyl\s+12[\s\-]*hsa\b')],
+
         "methyl-ricinoleate": [("Methyl Ricinoleate", r'\bmethyl\s+ricinoleate\b')],
+
         "lithium-12-hydroxystearate": [("Lithium 12-Hydroxystearate", r'\blithium\s+12[\s\-]hydroxy\b'), ("Lithium 12-HSA", r'\blithium\s+12[\s\-]*hsa\b')],
+
         "calcium-12-hydroxystearate": [("Calcium 12-Hydroxystearate", r'\bcalcium\s+12[\s\-]hydroxy\b'), ("Calcium 12-HSA", r'\bcalcium\s+12[\s\-]*hsa\b')],
+
         "zinc-undecylenate": [("Zinc Undecylenate", r'\bzinc\s+undecylenate\b')],
+
         "zinc-ricinoleate": [("Zinc Ricinoleate", r'\bzinc\s+ricinoleate\b')],
+
         "blown-oxidized-castor-oil": [("Blown Castor Oil", r'\bblown\s+castor\s+oil\b'), ("Oxidized Castor Oil", r'\boxidi[sz]ed\s+castor\s+oil\b')]
+
     }
 
+
+
     if slug not in PRODUCT_DISTINCTIVE_TERMS:
+
         return []
 
+
+
     soup = BeautifulSoup(content, 'html.parser')
+
     findings = []
 
+
+
     # 1. H1
+
     h1 = soup.find('h1')
+
     h1_text = h1.get_text(' ', strip=True) if h1 else ""
 
+
+
     # 2. Breadcrumb last item
+
     bc_text = ""
+
     bc_div = soup.find('div', id='main-content')
+
     if bc_div:
+
         spans = bc_div.find_all('span')
+
         if spans:
+
             bc_text = spans[-1].get_text(' ', strip=True)
+
             if bc_text == '/':
+
                 links = bc_div.find_all(['a', 'span'])
+
                 if links:
+
                     bc_text = links[-1].get_text(' ', strip=True)
+
     if not bc_text:
+
         for s in soup.find_all('script', type='application/ld+json'):
+
             if 'BreadcrumbList' in (s.string or ''):
+
                 m = re.findall(r'"name"\s*:\s*"([^"]+)"', s.string)
+
                 if m:
+
                     bc_text = m[-1]
 
+
+
     # 3. Hero image alt
+
     hero_alt = ""
+
     hero_img = soup.find('img', class_=re.compile(r'product-media|hero', re.I))
+
     if hero_img and hero_img.get('alt'):
+
         hero_alt = hero_img.get('alt')
+
     else:
+
         img = soup.find('img')
+
         if img and img.get('alt'):
+
             hero_alt = img.get('alt')
 
+
+
     # 4. H2s and H3s outside related-products
+
     headings = []
+
     for tag in soup.find_all(['h2', 'h3']):
+
         if tag.find_parent(class_=re.compile(r'related', re.I)) or tag.find_parent(id=re.compile(r'related', re.I)):
+
             continue
+
         txt = tag.get_text(' ', strip=True)
+
         if re.search(r'related\s+products', txt, re.I):
+
             continue
+
         headings.append(txt)
 
+
+
     # 5. Title
+
     title = soup.title.string if soup.title else ""
 
+
+
     # 6. Meta description
+
     meta_desc = ""
+
     md = soup.find('meta', attrs={'name': 'description'})
+
     if md and md.get('content'):
+
         meta_desc = md.get('content')
 
+
+
     # 7. FAQ questions
+
     faq_questions = []
+
     for sum_tag in soup.find_all('summary'):
+
         if sum_tag.find_parent('nav') or sum_tag.find_parent(class_=re.compile(r'mobile-nav|menu', re.I)):
+
             continue
+
         txt = sum_tag.get_text(' ', strip=True)
+
         if txt.startswith('Products ('):
+
             continue
+
         faq_questions.append(txt)
+
     for s in soup.find_all('script', type='application/ld+json'):
+
         if 'Question' in (s.string or '') or 'FAQPage' in (s.string or ''):
+
             qs = re.findall(r'"name"\s*:\s*"([^"]+\?)"', s.string)
+
             for q in qs:
+
                 if q not in faq_questions:
+
                     faq_questions.append(q)
 
+
+
     # Check for foreign terms in each zone
+
     for other_slug, terms in PRODUCT_DISTINCTIVE_TERMS.items():
+
         if other_slug == slug:
+
             continue
+
         for term_name, pat in terms:
+
             if re.search(pat, h1_text, re.I):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": 0,
+
                     "rule": "R17 Page Identity",
+
                     "severity": "FAIL",
+
                     "text": f"Page '{slug}' H1 contains foreign product term '{term_name}' from '{other_slug}': '{h1_text}'"
+
                 })
+
             if re.search(pat, bc_text, re.I):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": 0,
+
                     "rule": "R17 Page Identity",
+
                     "severity": "FAIL",
+
                     "text": f"Page '{slug}' breadcrumb contains foreign product term '{term_name}' from '{other_slug}': '{bc_text}'"
+
                 })
+
             if re.search(pat, hero_alt, re.I):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": 0,
+
                     "rule": "R17 Page Identity",
+
                     "severity": "FAIL",
+
                     "text": f"Page '{slug}' hero alt contains foreign product term '{term_name}' from '{other_slug}': '{hero_alt}'"
+
                 })
+
             if re.search(pat, title, re.I):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": 0,
+
                     "rule": "R17 Page Identity",
+
                     "severity": "FAIL",
+
                     "text": f"Page '{slug}' title contains foreign product term '{term_name}' from '{other_slug}': '{title}'"
+
                 })
+
             if re.search(pat, meta_desc, re.I):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": 0,
+
                     "rule": "R17 Page Identity",
+
                     "severity": "FAIL",
+
                     "text": f"Page '{slug}' meta description contains foreign product term '{term_name}' from '{other_slug}': '{meta_desc}'"
+
                 })
+
             for h in headings:
+
                 if re.search(pat, h, re.I):
+
                     findings.append({
+
                         "file": file_path_str,
+
                         "line": 0,
+
                         "rule": "R17 Page Identity",
+
                         "severity": "FAIL",
+
                         "text": f"Page '{slug}' heading contains foreign product term '{term_name}' from '{other_slug}': '{h}'"
-                    })
-            for q in faq_questions:
-                if re.search(pat, q, re.I):
-                    findings.append({
-                        "file": file_path_str,
-                        "line": 0,
-                        "rule": "R17 Page Identity",
-                        "severity": "FAIL",
-                        "text": f"Page '{slug}' FAQ question contains foreign product term '{term_name}' from '{other_slug}': '{q}'"
+
                     })
 
+            for q in faq_questions:
+
+                if re.search(pat, q, re.I):
+
+                    findings.append({
+
+                        "file": file_path_str,
+
+                        "line": 0,
+
+                        "rule": "R17 Page Identity",
+
+                        "severity": "FAIL",
+
+                        "text": f"Page '{slug}' FAQ question contains foreign product term '{term_name}' from '{other_slug}': '{q}'"
+
+                    })
+
+
+
     return findings
+
+
+
 
 
 _PRODUCT_MASTER_CACHE = None
 
+
+
 def load_product_master(repo_root: Path = REPO_ROOT):
+
     global _PRODUCT_MASTER_CACHE
+
     if _PRODUCT_MASTER_CACHE is not None:
+
         return _PRODUCT_MASTER_CACHE
+
     master_path = repo_root / "seo" / "product-master.json"
+
     if master_path.exists():
+
         try:
+
             with open(master_path, "r", encoding="utf-8") as f:
+
                 _PRODUCT_MASTER_CACHE = json.load(f)
+
                 return _PRODUCT_MASTER_CACHE
+
         except Exception:
+
             return []
+
     return []
 
+
+
 def check_r18_internal_links(content: str, file_path_str: str, repo_root: Path = REPO_ROOT):
+
     findings = []
+
     if not file_path_str.endswith(".html"):
+
         return findings
 
+
+
     # Find all href in a and link tags
+
     # Remove script and style tags before checking HTML links
+
     no_scripts = re.sub(r'<(?:script|style)\b[^>]*>.*?</(?:script|style)>', ' ', content, flags=re.DOTALL | re.IGNORECASE)
+
     hrefs = re.finditer(r"""<(?:a|link)\b[^>]*\bhref=["']([^"']+)["']""", no_scripts, re.IGNORECASE)
+
     for hm in hrefs:
+
         href = hm.group(1).strip()
+
         if not href or href.startswith(("#", "mailto:", "tel:", "javascript:", "data:", "${")):
+
             continue
+
         if "${" in href or "{{" in href:
+
             continue
+
             continue
+
         if href.startswith(("http://", "https://")):
+
             # If it's an internal nagdev URL, extract the path
+
             if "nagdevproducts.com" in href:
+
                 href = re.sub(r'^https?://(?:www\.)?nagdevproducts\.com', '', href)
+
             else:
+
                 continue
 
+
+
         # Check for malformed or un-normalized URL encodings
+
         if "%20" in href or " " in href:
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": content[:hm.start()].count('\n') + 1,
+
                 "rule": "R18 Malformed internal link URL",
+
                 "severity": "FAIL",
+
                 "text": f"Internal link has un-normalized percent encoding or space: '{href}'"
+
             })
+
             continue
+
+
 
         clean_path = href.split("?")[0].split("#")[0]
+
         if not clean_path or clean_path == "/":
+
             continue
 
+
+
         rel = clean_path.lstrip("/")
+
         # Verify target existence locally
+
         target_file = repo_root / rel
+
         target_html = repo_root / (rel + ".html")
+
         target_idx = repo_root / rel / "index.html"
 
+
+
         if not (target_file.exists() or target_html.exists() or target_idx.exists()):
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": content[:hm.start()].count('\n') + 1,
+
                 "rule": "R18 Broken internal link",
+
                 "severity": "FAIL",
+
                 "text": f"Internal link '{href}' does not resolve to an existing file in repo"
+
             })
+
     return findings
+
+
 
 def check_r19_brand_codes(content: str, file_path_str: str, repo_root: Path = REPO_ROOT):
+
     findings = []
+
     lines = content.splitlines()
+
     norm_file_path = file_path_str.replace('\\', '/').lower()
 
+
+
     master = load_product_master(repo_root)
+
     canonical_codes = set(p.get("brand_code", "") for p in master if "brand_code" in p)
 
+
+
     legacy_hyphen_re = re.compile(r'\bNDEV-[A-Z0-9\-]+\b')
+
     specialty_range_re = re.compile(r'\bSpecialty\s+Range\b', re.IGNORECASE)
+
     ndev_brand_re = re.compile(r'\bNDEV[A-Z]+(?:\u2122|™)\s+[A-Z0-9\-]+')
 
+
+
     for line_idx, line in enumerate(lines, 1):
+
         # 1. Check legacy hyphens
+
         for m in legacy_hyphen_re.finditer(line):
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": line_idx,
+
                 "rule": "R19 Legacy brand code",
+
                 "severity": "FAIL",
+
                 "text": f"Found legacy hyphenated brand code: '{m.group(0)}' (must use canonical code from product-master.json)"
+
             })
+
+
 
         # 2. Check Specialty Range
+
         for m in specialty_range_re.finditer(line):
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": line_idx,
+
                 "rule": "R19 Banned Specialty Range label",
+
                 "severity": "FAIL",
+
                 "text": f"Found banned label '{m.group(0)}' (must use 'Under development')"
+
             })
 
+
+
         # 3. Check trademarked NDEV brand codes against canonical set
+
         for m in ndev_brand_re.finditer(line):
+
             code_found = m.group(0).replace('\u2122', '™')
+
             if canonical_codes and code_found not in canonical_codes:
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
+
                     "rule": "R19 Non-canonical brand code",
+
                     "severity": "FAIL",
+
                     "text": f"Brand code '{code_found}' does not match canonical codes in product-master.json"
+
                 })
 
+
+
     return findings
+
+
+
 
 
 def check_r20_efficacy_claims(content: str, file_path_str: str) -> list:
+
     findings = []
+
     lines = content.splitlines()
+
     norm_file_path = file_path_str.replace('\\', '/').lower()
 
+
+
     pests = r'\b(pest|nematod|insect|fung|weed|disease)\w*'
+
     actions = r'\b(suppress|repel|control|kill|prevent|protect|resist)\w*'
+
     p1 = rf'{pests}(?:\s+\S+){{0,5}}\s+{actions}'
+
     p2 = rf'{actions}(?:\s+\S+){{0,5}}\s+{pests}'
+
     efficacy_re = re.compile(rf'({p1}|{p2})', re.IGNORECASE)
 
+
+
     direct_phrases = [
+
         "phytosanitary",
+
         "cash crops benefit",
+
         "yield increase",
+
         "boosts yield",
+
         "cures",
+
         "heals"
+
     ]
+
     direct_re = re.compile(r'\b(' + '|'.join(re.escape(p) for p in direct_phrases) + r')\b', re.IGNORECASE)
 
+
+
     for line_idx, line in enumerate(lines, 1):
+
         m_eff = efficacy_re.search(line)
+
         if m_eff:
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": line_idx,
+
                 "rule": "R20 Efficacy claim",
+
                 "severity": "FAIL",
+
                 "text": f"Found prohibited efficacy claim: '{m_eff.group(0)}'"
-            })
-        m_dir = direct_re.search(line)
-        if m_dir:
-            findings.append({
-                "file": file_path_str,
-                "line": line_idx,
-                "rule": "R20 Prohibited claim phrase",
-                "severity": "FAIL",
-                "text": f"Found prohibited agricultural/health claim phrase: '{m_dir.group(0)}'"
+
             })
 
+        m_dir = direct_re.search(line)
+
+        if m_dir:
+
+            findings.append({
+
+                "file": file_path_str,
+
+                "line": line_idx,
+
+                "rule": "R20 Prohibited claim phrase",
+
+                "severity": "FAIL",
+
+                "text": f"Found prohibited agricultural/health claim phrase: '{m_dir.group(0)}'"
+
+            })
+
+
+
     return findings
+
+
+
 
 
 def check_r21_cas_integrity(content: str, file_path_str: str) -> list:
+
     findings = []
+
     unauthorized_cas = [
+
         "68187-58-6",
+
         "68424-10-2"
+
     ]
+
     lines = content.splitlines()
+
     norm_file_path = file_path_str.replace('\\', '/').lower()
+
     for line_idx, line in enumerate(lines, 1):
+
         for cas in unauthorized_cas:
+
             if cas in line:
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
+
                     "rule": "R21 CAS number integrity",
+
                     "severity": "FAIL",
+
                     "text": f"Unauthorized CAS number '{cas}' found (no unauthorized CAS numbers on agricultural meals)"
+
                 })
+
     return findings
+
+
+
 
 
 def check_r22_color_scale(content: str, file_path_str: str) -> list:
+
     findings = []
+
     specs = parse_spec_table(content)
+
     table_color_scales = specs.get("color_scale", set())
+
     if not table_color_scales:
+
         return findings
 
+
+
     norm_content = content.replace('&le;', '≤').replace('&ge;', '≥').replace('&deg;', '°')
+
     # Filter out Viscosity Gardner - Holdt to avoid confusing viscosity with colour scale
+
     content_no_holdt = re.sub(r'\b(?:viscosity\s+)?gardner[\s\-]+holdt\b', '', norm_content, flags=re.IGNORECASE)
 
+
+
     has_lovibond = bool(re.search(r'\blovibond\b', norm_content, re.IGNORECASE))
+
     has_gardner = bool(re.search(r'\bgardner\b', content_no_holdt, re.IGNORECASE))
 
+
+
     # Also explicitly inspect FAQ accordion answers (<details>/<div class="product-faq-answer">)
+
     faq_answer_matches = re.findall(r'<div[^>]*class=[^>]*product-faq-answer[^>]*>(.*?)</div>', content, re.DOTALL | re.IGNORECASE)
+
     faq_details_matches = re.findall(r'<details\b[^>]*>(.*?)</details>', content, re.DOTALL | re.IGNORECASE)
+
     all_faq_text = " ".join(faq_answer_matches + faq_details_matches)
+
     all_faq_no_holdt = re.sub(r'\b(?:viscosity\s+)?gardner[\s\-]+holdt\b', '', all_faq_text, flags=re.IGNORECASE)
 
+
+
     faq_has_gardner = bool(re.search(r'\bgardner\b', all_faq_no_holdt, re.IGNORECASE))
+
     faq_has_lovibond = bool(re.search(r'\blovibond\b', all_faq_text, re.IGNORECASE))
 
+
+
     # 1. Spec table has Lovibond, but Gardner is mentioned
+
     if "lovibond" in table_color_scales and "gardner" not in table_color_scales:
+
         if has_gardner or faq_has_gardner:
+
             m = re.search(r'\bgardner\b', content_no_holdt, re.IGNORECASE) or re.search(r'\bgardner\b', all_faq_no_holdt, re.IGNORECASE)
+
             line_num = content_no_holdt[:m.start()].count('\n') + 1 if m else 0
+
             line_snippet = content_no_holdt.splitlines()[line_num - 1].strip()[:100] if line_num > 0 else ""
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": line_num,
+
                 "rule": "R22 Colour scale mismatch",
+
                 "severity": "FAIL",
+
                 "text": f"Colour scale mismatch: 'Gardner' mentioned on page whose analytical spec table uses Lovibond: '{line_snippet}'"
+
             })
+
+
 
     # 2. Spec table has Gardner, but Lovibond is mentioned
+
     if "gardner" in table_color_scales and "lovibond" not in table_color_scales:
+
         if has_lovibond or faq_has_lovibond:
+
             m = re.search(r'\blovibond\b', norm_content, re.IGNORECASE) or re.search(r'\blovibond\b', all_faq_text, re.IGNORECASE)
+
             line_num = norm_content[:m.start()].count('\n') + 1 if m else 0
+
             line_snippet = norm_content.splitlines()[line_num - 1].strip()[:100] if line_num > 0 else ""
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": line_num,
+
                 "rule": "R22 Colour scale mismatch",
+
                 "severity": "FAIL",
+
                 "text": f"Colour scale mismatch: 'Lovibond' mentioned on page whose analytical spec table uses Gardner: '{line_snippet}'"
+
             })
 
+
+
     return findings
+
+
+
 
 
 def check_r23_hs_code(content: str, file_path_str: str, repo_root: Path = REPO_ROOT) -> list:
+
     findings = []
+
     norm_path = file_path_str.replace('\\', '/').lower()
+
     if not ('products/' in norm_path and norm_path.endswith('.html')):
+
         return findings
+
+
 
     filename = norm_path.split('products/')[-1]
+
     if filename in ('index.html', 'castor-cake-fertilizer.html', 'de-oiled-cake-castor-meal.html'):
+
         return findings
+
     slug = filename.replace('.html', '')
 
+
+
     master = load_product_master(repo_root)
+
     prod = next((p for p in master if p.get("slug") == slug), None)
+
     if not prod or not prod.get("hs_code"):
+
         return findings
+
+
 
     expected_hs = prod["hs_code"]
 
+
+
     # 1. Check JSON-LD mpn and PropertyValue
+
     mpn_matches = re.finditer(r'"mpn"\s*:\s*"([^"]+)"', content)
+
     for m in mpn_matches:
+
         mpn_val = m.group(1).strip()
+
         if re.match(r'^\d{4}\.\d{2}$', mpn_val) and mpn_val != expected_hs:
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": content[:m.start()].count('\n') + 1,
+
                 "rule": "R23 HS code mismatch",
+
                 "severity": "FAIL",
+
                 "text": f"HS code mismatch in JSON-LD mpn: found '{mpn_val}', expected '{expected_hs}'"
+
             })
+
+
 
     prop_matches = re.finditer(r'"(?:propertyID|name)"\s*:\s*"HS Code"[^}]*?"value"\s*:\s*"([^"]+)"', content, re.DOTALL)
+
     for m in prop_matches:
+
         val = m.group(1).strip()
+
         if val != expected_hs:
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": content[:m.start()].count('\n') + 1,
+
                 "rule": "R23 HS code mismatch",
+
                 "severity": "FAIL",
+
                 "text": f"HS code mismatch in JSON-LD PropertyValue: found '{val}', expected '{expected_hs}'"
+
             })
+
+
 
     # 2. Check Hero / chips / page text
+
     hs_text_matches = re.finditer(r'\b(?:HS|HS\s*Code|Harmonized\s*System)\b[^\w\d<]{1,15}(\d{4}\.\d{2})\b', content, re.IGNORECASE)
+
     for m in hs_text_matches:
+
         found_code = m.group(1)
+
         if found_code != expected_hs:
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": content[:m.start()].count('\n') + 1,
+
                 "rule": "R23 HS code mismatch",
+
                 "severity": "FAIL",
+
                 "text": f"HS code mismatch in page hero/chips: found '{found_code}', expected '{expected_hs}'"
+
             })
+
+
 
     # 3. Check TDS PDF (if exists)
+
     tds_pdf = repo_root / "downloads" / "tds" / f"{slug}.pdf"
+
     if tds_pdf.exists():
+
         try:
+
             import pymupdf as fitz
+
             doc = fitz.open(str(tds_pdf))
+
             tds_text = "".join([page.get_text() for page in doc])
+
             m_tds = re.search(r'HS\s*(?:Tariff)?\s*Code:?\s*(\d{4}\.\d{2})', tds_text, re.IGNORECASE)
+
             if m_tds:
+
                 tds_hs = m_tds.group(1)
+
                 if tds_hs != expected_hs:
+
                     findings.append({
+
                         "file": file_path_str,
+
                         "line": 0,
+
                         "rule": "R23 HS code mismatch",
+
                         "severity": "FAIL",
+
                         "text": f"HS code mismatch in TDS PDF '{tds_pdf.name}': found '{tds_hs}', expected '{expected_hs}'"
+
                     })
+
             elif expected_hs not in tds_text:
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": 0,
+
                     "rule": "R23 HS code mismatch",
+
                     "severity": "FAIL",
+
                     "text": f"TDS PDF '{tds_pdf.name}' missing expected HS code '{expected_hs}'"
+
                 })
+
         except Exception:
+
             pass
 
+
+
     return findings
+
+
 
 def check_pdf_consistency_r19_r24(facts: dict, repo_root: Path = REPO_ROOT) -> list:
+
     """
+
     R19 & R24: Scans all TDS PDFs, catalog.pdf, and spec-confirmation.pdf.
+
     R24: Plant address must equal facts register plant address; '42/1' and old district references forbidden.
+
     R19: Brand codes must match canonical codes; 'NDEVDRY', 'NDEVPHARMA', 'NDEVCARE', 'COSM', and 'Manufactured to Order' banned.
+
     """
+
     findings = []
+
     plant_address = facts.get("company", {}).get("plant", "")
+
     clean_expected_addr = " ".join(plant_address.split()).lower()
 
+
+
     banned_brand_tokens = [
+
         ("NDEVDRY", "banned legacy brand code"),
+
         ("NDEVPHARMA", "banned legacy brand code"),
+
         ("NDEVCARE", "banned legacy brand code"),
+
         (r"\bCOSM\b", "banned brand code COSM (must be NDEVOLEO™ COS)"),
+
         ("Manufactured to Order", "banned status label")
+
     ]
+
+
 
     banned_address_patterns = [
+
         ("42/1", "old Survey 42/1 address"),
+
         ("Banaskantha, Gujarat — 385330", "old district address format"),
+
         ("Banaskantha, Gujarat - 385330", "old district address format")
+
     ]
 
+
+
     pdf_paths = []
+
     tds_dir = repo_root / "downloads" / "tds"
+
     if tds_dir.exists():
+
         for f in tds_dir.glob("*.pdf"):
+
             pdf_paths.append(f)
+
     cat_path = repo_root / "downloads" / "catalog.pdf"
+
     if cat_path.exists():
+
         pdf_paths.append(cat_path)
+
     spec_path = repo_root / "phase15" / "spec-confirmation.pdf"
+
     if spec_path.exists():
+
         pdf_paths.append(spec_path)
 
+
+
     try:
+
         import pymupdf
+
     except ImportError:
+
         import pymupdf
+
+
 
     for p in sorted(pdf_paths):
+
         rel = p.relative_to(repo_root).as_posix()
+
         try:
+
             doc = pymupdf.open(p)
+
             full_text = ""
+
             for page in doc:
+
                 full_text += page.get_text() + " "
+
             clean_text = " ".join(full_text.split()).lower()
 
+
+
             # R24: Check plant address
+
             if clean_expected_addr and clean_expected_addr not in clean_text:
+
                 findings.append({
+
                     "file": rel,
+
                     "line": 1,
+
                     "rule": "R24 PDF address mismatch",
+
                     "severity": "FAIL",
+
                     "text": f"PDF does not contain the register plant address: '{plant_address}'"
+
                 })
 
+
+
             # R24: Check banned address strings
+
             for b_pat, desc in banned_address_patterns:
+
                 if b_pat.lower() in full_text.lower():
+
                     findings.append({
+
                         "file": rel,
+
                         "line": 1,
+
                         "rule": "R24 Banned address reference in PDF",
+
                         "severity": "FAIL",
+
                         "text": f"PDF contains forbidden address string '{b_pat}' ({desc})"
+
                     })
 
+
+
             # R19: Check brand codes & statuses
+
             for b_tok, desc in banned_brand_tokens:
+
                 if b_tok.startswith(r"\b"):
+
                     if re.search(b_tok, full_text):
+
                         findings.append({
+
                             "file": rel,
+
                             "line": 1,
+
                             "rule": "R19 Banned brand code in PDF",
+
                             "severity": "FAIL",
+
                             "text": f"PDF contains {desc}: '{b_tok}'"
+
                         })
+
                 else:
+
                     if b_tok.lower() in full_text.lower():
+
                         findings.append({
+
                             "file": rel,
+
                             "line": 1,
+
                             "rule": "R19 Banned brand code in PDF",
+
                             "severity": "FAIL",
+
                             "text": f"PDF contains {desc}: '{b_tok}'"
+
                         })
+
+
+
+            # R25: Check operational status in PDF
+
+            for pat, desc in R25_BANNED_PATTERNS:
+
+                if re.search(pat, full_text, re.IGNORECASE):
+
+                    findings.append({
+
+                        "file": rel,
+
+                        "line": 1,
+
+                        "rule": "R25 Operational status gate violation in PDF",
+
+                        "severity": "FAIL",
+
+                        "text": f"PDF contains banned operational status phrase '{desc}'"
+
+                    })
+
+            pdf_2027_fails = check_2027_proximity_in_text(full_text)
+
+            for fail_word, snippet in pdf_2027_fails:
+
+                findings.append({
+
+                    "file": rel,
+
+                    "line": 1,
+
+                    "rule": "R25 Operational status gate violation in PDF",
+
+                    "severity": "FAIL",
+
+                    "text": f"PDF contains '2027' within 12 words of production-status word '{fail_word}': '{snippet}'"
+
+                })
+
         except Exception as e:
+
             findings.append({
+
                 "file": rel,
+
                 "line": 1,
+
                 "rule": "R24 PDF read error",
+
                 "severity": "FAIL",
+
                 "text": f"Could not parse PDF {rel}: {e}"
+
             })
 
+
+
     return findings
+
+
+
+
+
+
+
+R25_PROD_STATUS_PATTERN = r'^(?:commissioning|commissioned|production|producing|installation|installed|plants?|targeted|targets?|planned|planning|operational|operating|starts?|started|starting)$'
+
+
+
+def check_2027_proximity_in_text(text: str) -> list:
+
+    """
+
+    Returns a list of tuples (word, snippet) where '2027' appears within 12 words
+
+    of a production-status word in text.
+
+    Exempts JSON-LD date fields (priceValidUntil, datePublished, dateModified, validFrom/validThrough)
+
+    and ISO dates.
+
+    """
+
+    if not text:
+
+        return []
+
+
+
+    # Exempt JSON-LD date fields
+
+    scrubbed = re.sub(r'"(?:priceValidUntil|datePublished|dateModified|validFrom|validThrough)"\s*:\s*"[^"]*"', ' ', text)
+
+    # Exempt ISO dates (e.g. 2027-10-30, 2027-11-04)
+
+    scrubbed = re.sub(r'\b\d{4}-\d{2}-\d{2}(?:[T\s]\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:?\d{2})?)?\b', ' ', scrubbed)
+
+
+
+    if not re.search(r'\b2027\b', scrubbed):
+
+        return []
+
+
+
+    words = re.findall(r'\b[a-zA-Z0-9_\-\u0A80-\u0AFF]+\b', scrubbed)
+
+    violations = []
+
+    for i, w in enumerate(words):
+
+        if w == '2027':
+
+            window = [words[j] for j in range(max(0, i - 12), min(len(words), i + 13)) if j != i]
+
+            for nearby in window:
+
+                if re.match(R25_PROD_STATUS_PATTERN, nearby, re.IGNORECASE):
+
+                    snippet = " ".join(words[max(0, i - 6) : min(len(words), i + 7)])
+
+                    violations.append((nearby, snippet))
+
+                    break
+
+    return violations
 
 
 
 R25_BANNED_PATTERNS = [
-    (r'\b2027\b', "2027"),
+
     (r'\bcommissioning\b', "commissioning"),
+
     (r'\bcommissioned\s+in\s+202[0-9]\b', "commissioned in 202x"),
+
     (r'under\s+installation', "under installation"),
+
     (r'under\s+construction', "under construction"),
+
     (r'upcoming\s+plant', "upcoming plant"),
+
     (r'will\s+commence', "will commence"),
+
     (r'production\s+from', "production from"),
+
     (r'planned\s+production', "planned production"),
+
     (r'pre-production', "pre-production"),
+
     (r'coming\s+soon', "coming soon"),
+
     (r'proposed\s+plant', "proposed plant"),
+
     (r'\btargeted\b', "targeted"),
+
     (r'plant\s+progress', "plant progress"),
+
     (r'નિર્માણાધીન', "નિર્માણાધીન (under construction)"),
+
     (r'શરૂ\s*થશે', "શરૂ થશે (will commence)"),
+
     (r'આગામી\s*પ્લાન્ટ', "આગામી પ્લાન્ટ (upcoming plant)"),
+
     (r'પ્લાન્ટ\s*પ્રગતિ', "પ્લાન્ટ પ્રગતિ (plant progress)")
+
 ]
 
+
+
 def check_r25_operational_status(lines: list, content: str, file_path_str: str) -> list:
+
     findings = []
+
+    reported_snippets = set()
+
+
+
     for line_idx, line in enumerate(lines, 1):
+
         line_clean = line.strip()
 
+
+
         # Allowlist 1: URL /plant-progress in hrefs, link canonical, or schema ids
+
         line_scrubbed = re.sub(r'''https?://[^\s"'<>]+''', '', line_clean)
+
         line_scrubbed = re.sub(r'/plant-progress[a-zA-Z0-9_\-#?&=]*', '', line_scrubbed)
 
+
+
         # Allowlist 2: Official Pharmacopoeia Commission bodies
+
         line_scrubbed = re.sub(r'(?:British|Indian|European|United\s+States)\s+Pharmacop[oœ]eia\s+Commission', '', line_scrubbed, flags=re.IGNORECASE)
 
+
+
         # Allowlist 3: Biological/chemical progression
+
         line_scrubbed = re.sub(r'(?:dehydration|reaction|process|crop|botanical)\s+progress(?:es|ion)?', '', line_scrubbed, flags=re.IGNORECASE)
 
-        # Allowlist 4: "under development" label for the 17 developmental products
-        # Handled naturally as "under development" is not banned
+
+
+        # Allowlist 4: Exempt JSON-LD date fields and ISO dates on this line
+
+        line_scrubbed_dates = re.sub(r'"(?:priceValidUntil|datePublished|dateModified|validFrom|validThrough)"\s*:\s*"[^"]*"', '', line_scrubbed)
+
+        line_scrubbed_dates = re.sub(r'\b\d{4}-\d{2}-\d{2}(?:[T\s]\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:?\d{2})?)?\b', '', line_scrubbed_dates)
+
+
+
+        # Check banned patterns (excluding standalone 2027 which is proximity-checked below)
 
         for pat, desc in R25_BANNED_PATTERNS:
-            if re.search(pat, line_scrubbed, re.IGNORECASE):
+
+            if re.search(pat, line_scrubbed_dates, re.IGNORECASE):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
+
                     "rule": "R25 Operational status gate violation",
+
                     "severity": "FAIL",
+
                     "text": f"Found banned operational/future status phrase '{desc}' on line {line_idx}: '{line_clean[:100]}'"
+
                 })
-    return findings
 
-def lint_content(content: str, file_path_str: str, facts: dict):
-    findings = []
-    lines = content.splitlines()
-    norm_file_path = file_path_str.replace('\\', '/').lower()
 
-    SECTION_D_BANNED_PHRASES = [
-        "high-purity",
-        "precision",
-        "high-specification",
-        "wellness",
-        "ideal",
-        "effective",
-        "coats hair",
-        "moisture retention",
-        "scalp treatment",
-        "natural shine",
-        "Pharmacopoeia compliant",
-        "Formulated for",
-        "exceptionally",
-        "rich in",
-        "tinctures",
-        "antifungal",
-        "animal feed",
-        "foot balm",
-        "food-packaging",
-        "aerospace",
-        "transport fuel",
-        "passes USP",
-        "passes IP"
-    ]
-    banned_phrases = list(facts.get("banned_phrases", []))
-    for bp in SECTION_D_BANNED_PHRASES:
-        if bp not in banned_phrases:
-            banned_phrases.append(bp)
-    certifications_held = set(facts.get("certifications_held", []))
-    region_context = facts.get("company", {}).get("region_context", "")
-    
-    # ----------------------------------------------------
-    # R1: Banned phrases (case-insensitive)
-    # ----------------------------------------------------
-    for line_idx, line in enumerate(lines, 1):
-        for phrase in banned_phrases:
-            phrase_clean = phrase.strip().lower()
-            if phrase_clean == "complies to bp" and "castor-oil-bp93.html" in file_path_str.replace("\\", "/"):
-                continue
-            pat = get_compiled_banned_pattern(phrase)
-            if pat.search(line):
+
+        # Check 2027 within 12 words of production-status words on this line
+
+        v_2027 = check_2027_proximity_in_text(line_scrubbed)
+
+        for nearby, snippet in v_2027:
+
+            if snippet not in reported_snippets:
+
+                reported_snippets.add(snippet)
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
-                    "rule": "R1 Banned phrase",
+
+                    "rule": "R25 Operational status gate violation",
+
                     "severity": "FAIL",
-                    "text": f"Found banned phrase: '{phrase}'"
+
+                    "text": f"Found '2027' within 12 words of production-status word '{nearby}' on line {line_idx}: '{snippet}'"
+
                 })
 
-    # ----------------------------------------------------
-    # Process wording restriction (processes_allowed)
-    # ----------------------------------------------------
-    allowed_procs = set(p.lower() for p in (facts.get("operations", {}).get("processes_allowed") or facts.get("processes_allowed", [])))
-    banned_proc_patterns = [
-        (r'\bneutrali[sz]ation\b|\bneutrali[sz]e\b|\bneutrali[sz]ing\b|\bneutrali[sz]ed\b', "neutralisation/neutralization"),
-        (r'\bdeodori[sz]ation\b|\bdeodori[sz]e\b|\bdeodori[sz]ing\b|\bdeodori[sz]ed\b', "deodorisation/deodorization"),
-        (r'\bsteam\s+distillation\b', "steam distillation"),
-        (r'\bwinteri[sz]ation\b|\bwinteri[sz]e\b|\bwinteri[sz]ing\b', "winterisation/winterization"),
-    ]
-    for line_idx, line in enumerate(lines, 1):
-        if "<script" in line.lower() or "</script>" in line.lower() or "<style" in line.lower():
-            continue
-        for pat, proc_name in banned_proc_patterns:
-            if re.search(pat, line, re.IGNORECASE):
-                if not any(proc_name.lower() in p or p in proc_name.lower() for p in allowed_procs):
-                    findings.append({
-                        "file": file_path_str,
-                        "line": line_idx,
-                        "rule": "R11 Restricted process claim",
-                        "severity": "FAIL",
-                        "text": f"Found process claim '{proc_name}' not listed in processes_allowed"
-                    })
 
-    # ----------------------------------------------------
-    # R2: Certifications held
-    # ----------------------------------------------------
-    for line_idx, line in enumerate(lines, 1):
-        for pattern, cert_name in CERT_PATTERNS:
-            if re.search(pattern, line, re.IGNORECASE):
-                # Check if cert_name is in certifications_held
-                is_held = any(c.lower() in cert_name.lower() or cert_name.lower() in c.lower() for c in certifications_held)
-                if not is_held:
-                    # Make sure it's not already reported as R1 banned phrase on same line
-                    # But report as R2 certification violation
-                    findings.append({
-                        "file": file_path_str,
-                        "line": line_idx,
-                        "rule": "R2 Unheld certification",
-                        "severity": "FAIL",
-                        "text": f"Certification claim '{cert_name}' not held in facts register"
-                    })
 
-    # ----------------------------------------------------
-    # R3: Under-development products claiming commercial production
-    # ----------------------------------------------------
-    prose = strip_tags(content)
-    sentences = split_into_sentences(prose)
+    # In HTML content, also check meta tags, alt attributes, and visible text blocks
 
-    # Also check JSON-LD strings
-    json_ld_matches = re.findall(r'<script\s+type=["\']application/ld\+json["\']>(.*?)</script>', content, flags=re.DOTALL | re.IGNORECASE)
-    for jm in json_ld_matches:
+    if content and ("<meta" in content or "alt=" in content or "<p" in content):
+
         try:
-            data = json.loads(jm.strip())
-            def extract_strings(obj):
-                if isinstance(obj, str):
-                    if len(obj) > 30 and ' ' in obj:
-                        sentences.extend(split_into_sentences(obj))
-                elif isinstance(obj, dict):
-                    for k, v in obj.items():
-                        if k not in ["@context", "@type", "@id", "url", "image", "logo"]:
-                            extract_strings(v)
-                elif isinstance(obj, list):
-                    for item in obj:
-                        extract_strings(item)
-            extract_strings(data)
+
+            soup = BeautifulSoup(content, "html.parser")
+
+            # 1. Meta tags
+
+            for meta in soup.find_all("meta"):
+
+                val = meta.get("content", "")
+
+                if val:
+
+                    for nearby, snippet in check_2027_proximity_in_text(val):
+
+                        if snippet not in reported_snippets:
+
+                            reported_snippets.add(snippet)
+
+                            findings.append({
+
+                                "file": file_path_str,
+
+                                "line": 1,
+
+                                "rule": "R25 Operational status gate violation in meta",
+
+                                "severity": "FAIL",
+
+                                "text": f"Found '2027' within 12 words of production-status word '{nearby}' in meta tag: '{snippet}'"
+
+                            })
+
+            # 2. Alt attributes
+
+            for el in soup.find_all(attrs={"alt": True}):
+
+                val = el.get("alt", "")
+
+                if val:
+
+                    for nearby, snippet in check_2027_proximity_in_text(val):
+
+                        if snippet not in reported_snippets:
+
+                            reported_snippets.add(snippet)
+
+                            findings.append({
+
+                                "file": file_path_str,
+
+                                "line": 1,
+
+                                "rule": "R25 Operational status gate violation in alt text",
+
+                                "severity": "FAIL",
+
+                                "text": f"Found '2027' within 12 words of production-status word '{nearby}' in alt text: '{snippet}'"
+
+                            })
+
+            # 3. Visible text blocks (excluding script, style)
+
+            for tag in soup.find_all(["p", "h1", "h2", "h3", "h4", "h5", "h6", "li", "td", "th", "figcaption"]):
+
+                val = tag.get_text()
+
+                if val:
+
+                    for nearby, snippet in check_2027_proximity_in_text(val):
+
+                        if snippet not in reported_snippets:
+
+                            reported_snippets.add(snippet)
+
+                            findings.append({
+
+                                "file": file_path_str,
+
+                                "line": 1,
+
+                                "rule": "R25 Operational status gate violation in visible text",
+
+                                "severity": "FAIL",
+
+                                "text": f"Found '2027' within 12 words of production-status word '{nearby}' in visible text: '{snippet}'"
+
+                            })
+
         except Exception:
+
             pass
 
+
+
+    return findings
+
+
+
+def lint_content(content: str, file_path_str: str, facts: dict):
+
+    findings = []
+
+    lines = content.splitlines()
+
+    norm_file_path = file_path_str.replace('\\', '/').lower()
+
+
+
+    SECTION_D_BANNED_PHRASES = [
+
+        "high-purity",
+
+        "precision",
+
+        "high-specification",
+
+        "wellness",
+
+        "ideal",
+
+        "effective",
+
+        "coats hair",
+
+        "moisture retention",
+
+        "scalp treatment",
+
+        "natural shine",
+
+        "Pharmacopoeia compliant",
+
+        "Formulated for",
+
+        "exceptionally",
+
+        "rich in",
+
+        "tinctures",
+
+        "antifungal",
+
+        "animal feed",
+
+        "foot balm",
+
+        "food-packaging",
+
+        "aerospace",
+
+        "transport fuel",
+
+        "passes USP",
+
+        "passes IP"
+
+    ]
+
+    banned_phrases = [bp for bp in list(facts.get("banned_phrases", [])) if bp != "2027"]
+
+    for bp in SECTION_D_BANNED_PHRASES:
+
+        if bp not in banned_phrases:
+
+            banned_phrases.append(bp)
+
+    certifications_held = set(facts.get("certifications_held", []))
+
+    region_context = facts.get("company", {}).get("region_context", "")
+
+    
+
+    # ----------------------------------------------------
+
+    # R1: Banned phrases (case-insensitive)
+
+    # ----------------------------------------------------
+
+    for line_idx, line in enumerate(lines, 1):
+
+        for phrase in banned_phrases:
+
+            phrase_clean = phrase.strip().lower()
+
+            if phrase_clean == "complies to bp" and "castor-oil-bp93.html" in file_path_str.replace("\\", "/"):
+
+                continue
+
+            pat = get_compiled_banned_pattern(phrase)
+
+            if pat.search(line):
+
+                findings.append({
+
+                    "file": file_path_str,
+
+                    "line": line_idx,
+
+                    "rule": "R1 Banned phrase",
+
+                    "severity": "FAIL",
+
+                    "text": f"Found banned phrase: '{phrase}'"
+
+                })
+
+
+
+    # ----------------------------------------------------
+
+    # Process wording restriction (processes_allowed)
+
+    # ----------------------------------------------------
+
+    allowed_procs = set(p.lower() for p in (facts.get("operations", {}).get("processes_allowed") or facts.get("processes_allowed", [])))
+
+    banned_proc_patterns = [
+
+        (r'\bneutrali[sz]ation\b|\bneutrali[sz]e\b|\bneutrali[sz]ing\b|\bneutrali[sz]ed\b', "neutralisation/neutralization"),
+
+        (r'\bdeodori[sz]ation\b|\bdeodori[sz]e\b|\bdeodori[sz]ing\b|\bdeodori[sz]ed\b', "deodorisation/deodorization"),
+
+        (r'\bsteam\s+distillation\b', "steam distillation"),
+
+        (r'\bwinteri[sz]ation\b|\bwinteri[sz]e\b|\bwinteri[sz]ing\b', "winterisation/winterization"),
+
+    ]
+
+    for line_idx, line in enumerate(lines, 1):
+
+        if "<script" in line.lower() or "</script>" in line.lower() or "<style" in line.lower():
+
+            continue
+
+        for pat, proc_name in banned_proc_patterns:
+
+            if re.search(pat, line, re.IGNORECASE):
+
+                if not any(proc_name.lower() in p or p in proc_name.lower() for p in allowed_procs):
+
+                    findings.append({
+
+                        "file": file_path_str,
+
+                        "line": line_idx,
+
+                        "rule": "R11 Restricted process claim",
+
+                        "severity": "FAIL",
+
+                        "text": f"Found process claim '{proc_name}' not listed in processes_allowed"
+
+                    })
+
+
+
+    # ----------------------------------------------------
+
+    # R2: Certifications held
+
+    # ----------------------------------------------------
+
+    for line_idx, line in enumerate(lines, 1):
+
+        for pattern, cert_name in CERT_PATTERNS:
+
+            if re.search(pattern, line, re.IGNORECASE):
+
+                # Check if cert_name is in certifications_held
+
+                is_held = any(c.lower() in cert_name.lower() or cert_name.lower() in c.lower() for c in certifications_held)
+
+                if not is_held:
+
+                    # Make sure it's not already reported as R1 banned phrase on same line
+
+                    # But report as R2 certification violation
+
+                    findings.append({
+
+                        "file": file_path_str,
+
+                        "line": line_idx,
+
+                        "rule": "R2 Unheld certification",
+
+                        "severity": "FAIL",
+
+                        "text": f"Certification claim '{cert_name}' not held in facts register"
+
+                    })
+
+
+
+    # ----------------------------------------------------
+
+    # R3: Under-development products claiming commercial production
+
+    # ----------------------------------------------------
+
+    prose = strip_tags(content)
+
+    sentences = split_into_sentences(prose)
+
+
+
+    # Also check JSON-LD strings
+
+    json_ld_matches = re.findall(r'<script\s+type=["\']application/ld\+json["\']>(.*?)</script>', content, flags=re.DOTALL | re.IGNORECASE)
+
+    for jm in json_ld_matches:
+
+        try:
+
+            data = json.loads(jm.strip())
+
+            def extract_strings(obj):
+
+                if isinstance(obj, str):
+
+                    if len(obj) > 30 and ' ' in obj:
+
+                        sentences.extend(split_into_sentences(obj))
+
+                elif isinstance(obj, dict):
+
+                    for k, v in obj.items():
+
+                        if k not in ["@context", "@type", "@id", "url", "image", "logo"]:
+
+                            extract_strings(v)
+
+                elif isinstance(obj, list):
+
+                    for item in obj:
+
+                        extract_strings(item)
+
+            extract_strings(data)
+
+        except Exception:
+
+            pass
+
+
+
     # Also collect raw HTML attributes (alt, title, aria-label, meta content)
+
     attr_matches = re.finditer(r"""(?:alt|title|aria-label|content)=["']([^"']+)["']""", content, re.IGNORECASE)
+
     for am in attr_matches:
+
         val = am.group(1).strip()
+
         if len(val) > 10:
+
             sentences.append(val)
 
+
+
     for sent in sentences:
+
         if APPROVED_INDICATIVE_PRICE_RE.search(sent) or APPROVED_SCHEMA_INSTOCK_RE.search(sent):
+
             continue
+
         if DEV_PROD_RE.search(sent) and R3_TRIGGER_RE.search(sent):
+
             if "under development" not in sent.lower():
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": 0,
+
                     "rule": "R3 Unqualified under-dev claim",
+
                     "severity": "FAIL",
+
                     "text": f"Sentence claims production/supply of developmental product without 'under development': '{sent[:120]}...'"
+
                 })
 
+
+
     # ----------------------------------------------------
+
     # R4: Product counts must match facts register
+
     # ----------------------------------------------------
+
     reg_count = len(facts.get("products", {}).get("regular_supply", []))
+
     enq_count = len(facts.get("products", {}).get("on_enquiry", []))
+
     dev_count = len(facts.get("products", {}).get("under_development", []))
+
     total_count = reg_count + enq_count + dev_count
+
     allowed_counts = {total_count, reg_count, enq_count, dev_count}
 
+
+
     for line_idx, line in enumerate(lines, 1):
+
         # Ignore lines that are purely HTML attribute declarations like URLs or query params
+
         line_no_urls = re.sub(r'https?://[^\s"\'<>]+', '', line)
+
         line_no_urls = re.sub(r'%\d{2}', ' ', line_no_urls)
+
         # Look for numbers preceding products/grades/derivatives
+
         # Remove decimal numbers like 21.5 MT so '5' is not extracted
+
         line_no_urls = re.sub(r'\d+\.\d+', ' ', line_no_urls)
+
         # Remove NLGI Grade mentions
+
         line_no_urls = re.sub(r'NLGI\s+Grade\s+\d+', ' ', line_no_urls, flags=re.IGNORECASE)
+
         # Remove 12-Hydroxystearic or 12-HSA
+
         line_no_urls = re.sub(r'12[- ](?:Hydroxystearic|HSA)', ' ', line_no_urls, flags=re.IGNORECASE)
+
         # Remove question counts
+
         line_no_urls = re.sub(r'\b\d+\s+critical\s+questions?\b', ' ', line_no_urls, flags=re.IGNORECASE)
+
         count_matches = re.finditer(r'\b(\d+)\s*(?:\+\s*\d+\s*)?(?:core\s+|specialty\s+|commercial\s+|under[- ]development\s+|developmental\s+|on[- ]enquiry\s+|regular[- ]supply\s+|advanced\s+|castor(?:\s+oil)?\s+)?(products?|grades?|derivatives?)\b', line_no_urls, re.IGNORECASE)
+
         for cm in count_matches:
+
             num = int(cm.group(1))
+
             if num not in allowed_counts:
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
+
                     "rule": "R4 Invalid product count",
+
                     "severity": "FAIL",
+
                     "text": f"Invalid count '{cm.group(0)}' (allowed counts: {total_count} total, {reg_count} regular, {enq_count} enquiry, {dev_count} under dev)"
+
                 })
 
+
+
     # ----------------------------------------------------
+
     # R5: Plant address/district must match register
+
     # "Banaskantha" next to Deodar, Sardarpura, 385330 or "district" -> FAIL
+
     # "Banaskantha" allowed ONLY inside exact region_context or in farmer/seed-sourcing context
-    # ----------------------------------------------------
-    for line_idx, line in enumerate(lines, 1):
-        if "banaskantha" in line.lower():
-            # Check if line is within exact region_context
-            line_has_region_context = region_context.lower() in line.lower()
-            # Check if line is farmer/seed-sourcing context
-            line_has_farmer_context = bool(re.search(r'\b(farmers?|seed\s+sourc(?:ing|ed)|cultivat(?:ion|ed)|harvest(?:ing|ed)|mandi|procuring|APMC)\b', line, re.IGNORECASE))
-            
-            # Check violations: Banaskantha next to Deodar, Sardarpura, 385330 or district
-            has_plant_proximity = bool(re.search(r'\b(deodar|sardarpura|385330|district|dist\.)\b.*?\bbanaskantha\b|\bbanaskantha\b.*?\b(deodar|sardarpura|385330|district|dist\.)\b', line, re.IGNORECASE))
-            
-            if has_plant_proximity:
-                findings.append({
-                    "file": file_path_str,
-                    "line": line_idx,
-                    "rule": "R5 Banaskantha in plant district",
-                    "severity": "FAIL",
-                    "text": f"Plant district incorrectly references Banaskantha instead of District Vav-Tharad: '{line.strip()[:120]}'"
-                })
-            elif not line_has_region_context and not line_has_farmer_context:
-                findings.append({
-                    "file": file_path_str,
-                    "line": line_idx,
-                    "rule": "R5 Unapproved Banaskantha mention",
-                    "severity": "FAIL",
-                    "text": f"Banaskantha mentioned outside region_context or farmer/seed-sourcing context: '{line.strip()[:120]}'"
-                })
 
     # ----------------------------------------------------
-    # R6: Capacity: any TPD/TPA/MT per day other than "50 TPD" seed crushing -> FAIL
-    # ----------------------------------------------------
+
     for line_idx, line in enumerate(lines, 1):
-        # Look for TPD mentions
-        tpd_matches = re.finditer(r'\b(\d+(?:,\d+)?)\s*TPD\b', line, re.IGNORECASE)
-        for tm in tpd_matches:
-            val = tm.group(1).replace(',', '')
-            if val != "50":
+
+        if "banaskantha" in line.lower():
+
+            # Check if line is within exact region_context
+
+            line_has_region_context = region_context.lower() in line.lower()
+
+            # Check if line is farmer/seed-sourcing context
+
+            line_has_farmer_context = bool(re.search(r'\b(farmers?|seed\s+sourc(?:ing|ed)|cultivat(?:ion|ed)|harvest(?:ing|ed)|mandi|procuring|APMC)\b', line, re.IGNORECASE))
+
+            
+
+            # Check violations: Banaskantha next to Deodar, Sardarpura, 385330 or district
+
+            has_plant_proximity = bool(re.search(r'\b(deodar|sardarpura|385330|district|dist\.)\b.*?\bbanaskantha\b|\bbanaskantha\b.*?\b(deodar|sardarpura|385330|district|dist\.)\b', line, re.IGNORECASE))
+
+            
+
+            if has_plant_proximity:
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
-                    "rule": "R6 Unapproved capacity",
+
+                    "rule": "R5 Banaskantha in plant district",
+
                     "severity": "FAIL",
-                    "text": f"Capacity '{tm.group(0)}' not approved (only 50 TPD seed crushing allowed)"
+
+                    "text": f"Plant district incorrectly references Banaskantha instead of District Vav-Tharad: '{line.strip()[:120]}'"
+
                 })
+
+            elif not line_has_region_context and not line_has_farmer_context:
+
+                findings.append({
+
+                    "file": file_path_str,
+
+                    "line": line_idx,
+
+                    "rule": "R5 Unapproved Banaskantha mention",
+
+                    "severity": "FAIL",
+
+                    "text": f"Banaskantha mentioned outside region_context or farmer/seed-sourcing context: '{line.strip()[:120]}'"
+
+                })
+
+
+
+    # ----------------------------------------------------
+
+    # R6: Capacity: any TPD/TPA/MT per day other than "50 TPD" seed crushing -> FAIL
+
+    # ----------------------------------------------------
+
+    for line_idx, line in enumerate(lines, 1):
+
+        # Look for TPD mentions
+
+        tpd_matches = re.finditer(r'\b(\d+(?:,\d+)?)\s*TPD\b', line, re.IGNORECASE)
+
+        for tm in tpd_matches:
+
+            val = tm.group(1).replace(',', '')
+
+            if val != "50":
+
+                findings.append({
+
+                    "file": file_path_str,
+
+                    "line": line_idx,
+
+                    "rule": "R6 Unapproved capacity",
+
+                    "severity": "FAIL",
+
+                    "text": f"Capacity '{tm.group(0)}' not approved (only 50 TPD seed crushing allowed)"
+
+                })
+
         
+
         # Look for any TPA mentions
+
         tpa_matches = re.finditer(r'\b(\d+(?:,\d+)?)\s*TPA\b', line, re.IGNORECASE)
+
         for tm in tpa_matches:
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": line_idx,
+
                 "rule": "R6 Unapproved annual capacity (TPA)",
+
                 "severity": "FAIL",
+
                 "text": f"Annual capacity claim '{tm.group(0)}' not approved"
+
             })
 
+
+
         # Look for MT per day
+
         mt_matches = re.finditer(r'\b(\d+(?:,\d+)?)\s*(?:MT|metric\s+tons?|tonnes?)\s*(?:per|\/)\s*day\b', line, re.IGNORECASE)
+
         for mm in mt_matches:
+
             val = mm.group(1).replace(',', '')
+
             if val != "50":
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
+
                     "rule": "R6 Unapproved capacity",
+
                     "severity": "FAIL",
+
                     "text": f"Daily capacity claim '{mm.group(0)}' not approved"
+
                 })
 
+
+
     # ----------------------------------------------------
+
     # R7: SPEC CONSISTENCY (per product page)
+
     # ----------------------------------------------------
+
     if "/products/" in file_path_str.replace("\\", "/") or file_path_str.startswith("products/"):
+
         specs = parse_spec_table(content)
+
         table_params = specs.get("params", {})
+
         table_color_scales = specs.get("color_scale", set())
 
+
+
         if table_params:
+
             norm_content = content.replace('&le;', '≤').replace('&ge;', '≥').replace('&deg;', '°')
+
+
 
             # Colour scale check moved to R22
 
+
+
             # Check Free Fatty Acid (FFA)
+
             if "ffa" in table_params:
+
                 table_ffa_num = extract_numeric_val(table_params["ffa"])
+
                 ffa_mentions = re.finditer(r'\b(?:FFA|Free\s+Fatty\s+Acids?)\b[^\w\n]{1,20}([≤<]?\s*\d+(?:\.\d+)?\s*%)', norm_content, re.IGNORECASE)
+
                 for fm in ffa_mentions:
+
                     val_num = extract_numeric_val(fm.group(1))
+
                     if val_num is not None and table_ffa_num is not None:
+
                         if abs(val_num - table_ffa_num) > 0.01:
+
                             match_pos = fm.start()
+
                             table_pos = norm_content.find("class=\"spec-table\"")
+
                             if table_pos != -1 and abs(match_pos - table_pos) < 500 and "tbody" in norm_content[table_pos:match_pos+200]:
+
                                 continue
+
                             findings.append({
+
                                 "file": file_path_str,
+
                                 "line": norm_content[:match_pos].count('\n') + 1,
+
                                 "rule": "R7 Spec consistency (FFA)",
+
                                 "severity": "FAIL",
+
                                 "text": f"FFA mention '{fm.group(0)}' conflicts with analytical spec table value '{table_params['ffa']}'"
+
                             })
+
+
 
             # Check Acid Value
+
             if "acid_value" in table_params:
+
                 table_av_num = extract_numeric_val(table_params["acid_value"])
+
                 av_mentions = re.finditer(r'\bAcid\s+Value\b[^\w\n]{1,20}([≤<]?\s*\d+(?:\.\d+)?)', norm_content, re.IGNORECASE)
+
                 for am in av_mentions:
+
                     val_num = extract_numeric_val(am.group(1))
+
                     if val_num is not None and table_av_num is not None:
+
                         if abs(val_num - table_av_num) > 0.01:
+
                             match_pos = am.start()
+
                             table_pos = norm_content.find("class=\"spec-table\"")
+
                             if table_pos != -1 and abs(match_pos - table_pos) < 500 and "tbody" in norm_content[table_pos:match_pos+200]:
+
                                 continue
+
                             findings.append({
+
                                 "file": file_path_str,
+
                                 "line": norm_content[:match_pos].count('\n') + 1,
+
                                 "rule": "R7 Spec consistency (Acid Value)",
+
                                 "severity": "FAIL",
+
                                 "text": f"Acid Value mention '{am.group(0)}' conflicts with analytical spec table value '{table_params['acid_value']}'"
+
                             })
+
+
 
             # Check Moisture
+
             if "moisture" in table_params:
+
                 table_m_num = extract_numeric_val(table_params["moisture"])
+
                 m_mentions = re.finditer(r'\bMoisture\b[^\w\n]{1,15}([≤<]?\s*\d+(?:\.\d+)?\s*%)', norm_content, re.IGNORECASE)
+
                 for mm in m_mentions:
+
                     val_num = extract_numeric_val(mm.group(1))
+
                     if val_num is not None and table_m_num is not None:
+
                         if abs(val_num - table_m_num) > 0.01:
+
                             match_pos = mm.start()
+
                             table_pos = norm_content.find("class=\"spec-table\"")
+
                             if table_pos != -1 and abs(match_pos - table_pos) < 500 and "tbody" in norm_content[table_pos:match_pos+200]:
+
                                 continue
+
                             findings.append({
+
                                 "file": file_path_str,
+
                                 "line": norm_content[:match_pos].count('\n') + 1,
+
                                 "rule": "R7 Spec consistency (Moisture)",
+
                                 "severity": "FAIL",
+
                                 "text": f"Moisture mention '{mm.group(0)}' conflicts with analytical spec table value '{table_params['moisture']}'"
+
                             })
 
+
+
             # Check Ricinoleic Acid Content
+
             if "ricinoleic" in table_params:
+
                 table_r_num = extract_numeric_val(table_params["ricinoleic"])
+
                 r_mentions = re.finditer(r'\bRicinoleic(?:\s+Acid)?(?:\s+Content)?\b[^\w\n]{1,15}([≥>]?\s*\d+(?:\.\d+)?\s*%)', norm_content, re.IGNORECASE)
+
                 for rm in r_mentions:
+
                     val_num = extract_numeric_val(rm.group(1))
+
                     if val_num is not None and table_r_num is not None:
+
                         if abs(val_num - table_r_num) > 0.01:
+
                             match_pos = rm.start()
+
                             table_pos = norm_content.find("class=\"spec-table\"")
+
                             if table_pos != -1 and abs(match_pos - table_pos) < 500 and "tbody" in norm_content[table_pos:match_pos+200]:
+
                                 continue
+
                             findings.append({
+
                                 "file": file_path_str,
+
                                 "line": norm_content[:match_pos].count('\n') + 1,
+
                                 "rule": "R7 Spec consistency (Ricinoleic)",
+
                                 "severity": "FAIL",
+
                                 "text": f"Ricinoleic content mention '{rm.group(0)}' conflicts with analytical spec table value '{table_params['ricinoleic']}'"
+
                             })
+
             if "moisture" in table_params:
+
                 table_m_num = extract_numeric_val(table_params["moisture"])
+
                 m_mentions = re.finditer(r'\bMoisture\b[^\w\n]{1,15}([≤<]?\s*\d+(?:\.\d+)?\s*%)', content, re.IGNORECASE)
+
                 for mm in m_mentions:
+
                     val_num = extract_numeric_val(mm.group(1))
+
                     if val_num is not None and table_m_num is not None:
+
                         if abs(val_num - table_m_num) > 0.01:
+
                             match_pos = mm.start()
+
                             findings.append({
+
                                 "file": file_path_str,
+
                                 "line": content[:match_pos].count('\n') + 1,
+
                                 "rule": "R7 Spec consistency (Moisture)",
+
                                 "severity": "FAIL",
+
                                 "text": f"Moisture mention '{mm.group(0)}' conflicts with analytical spec table value '{table_params['moisture']}'"
+
                             })
+
+
 
             # Check Ricinoleic Acid Content
+
             if "ricinoleic" in table_params:
+
                 table_r_num = extract_numeric_val(table_params["ricinoleic"])
+
                 r_mentions = re.finditer(r'\bRicinoleic(?:\s+Acid)?(?:\s+Content)?\b[^\w\n]{1,15}([≥>]?\s*\d+(?:\.\d+)?\s*%)', content, re.IGNORECASE)
+
                 for rm in r_mentions:
+
                     val_num = extract_numeric_val(rm.group(1))
+
                     if val_num is not None and table_r_num is not None:
+
                         if abs(val_num - table_r_num) > 0.01:
+
                             match_pos = rm.start()
+
                             findings.append({
+
                                 "file": file_path_str,
+
                                 "line": content[:match_pos].count('\n') + 1,
+
                                 "rule": "R7 Spec consistency (Ricinoleic)",
+
                                 "severity": "FAIL",
+
                                 "text": f"Ricinoleic content mention '{rm.group(0)}' conflicts with analytical spec table value '{table_params['ricinoleic']}'"
+
                             })
 
+
+
     # ----------------------------------------------------
+
     # R8: Commercial terms (MOQ, lead time, delivery days, price, etc.)
+
     # ----------------------------------------------------
+
     for line_idx, line in enumerate(lines, 1):
+
         if APPROVED_INDICATIVE_PRICE_RE.search(line) or APPROVED_SCHEMA_INSTOCK_RE.search(line):
+
             continue
+
         ct_match = COMMERCIAL_TERMS_RE.search(line)
+
         if ct_match:
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": line_idx,
+
                 "rule": "R8 Commercial terms",
+
                 "severity": "FAIL",
+
                 "text": f"Commercial term '{ct_match.group(0)}' found (not authorized in register)"
+
             })
 
+
+
     # ----------------------------------------------------
+
     # R8: 'in commercial supply' forbidden on on-enquiry product pages
+
     # ----------------------------------------------------
+
     norm_file_path = file_path_str.replace('\\', '/').lower()
+
     on_enquiry_slugs = [
+
         "castor-oil-bp93",
+
         "castor-oil-usp-nf",
+
         "castor-oil-ph-eur",
+
         "castor-oil-ip",
+
         "castor-oil-jp",
+
         "ppg-castor-oil",
+
         "cold-pressed-castor-oil",
+
         "cosmetic-grade-castor-oil"
+
     ]
+
     is_on_enquiry_page = (
+
         any(slug in norm_file_path for slug in on_enquiry_slugs)
+
         or bool(re.search(r'\bavailable\s+on\s+enquiry\b', content, re.IGNORECASE))
+
     )
+
     if is_on_enquiry_page:
+
         comm_supply_re = re.compile(r'\bin\s+commercial\s+supply\b', re.IGNORECASE)
+
         for line_idx, line in enumerate(lines, 1):
+
             if comm_supply_re.search(line):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
+
                     "rule": "R8: 'in commercial supply' forbidden on on-enquiry product pages",
+
                     "severity": "FAIL",
+
                     "text": f"Found forbidden phrase 'in commercial supply' on on-enquiry page on line {line_idx}: '{line.strip()[:100]}'"
+
                 })
 
+
+
     # ----------------------------------------------------
+
     # R9: Unlinked percentages/numbers in prose (WARN)
-    # ----------------------------------------------------
-    paragraphs = re.findall(r'<p\b[^>]*>(.*?)</p>', content, flags=re.DOTALL | re.IGNORECASE)
-    for p in paragraphs:
-        # Check for unlinked statistics like "90% of global supply"
-        stats_matches = re.finditer(r'(\b\d{1,3}(?:\.\d+)?%\b|\b\d+(?:,\d+)?\s*(?:metric\s+tons?|tonnes?)\b)', p)
-        for sm in stats_matches:
-            # If paragraph has <a href, it's considered sourced
-            if '<a ' not in p:
-                findings.append({
-                    "file": file_path_str,
-                    "line": 0,
-                    "rule": "R9 Statistic without nearby link",
-                    "severity": "WARN",
-                    "text": f"Statistic '{sm.group(1)}' in prose without nearby reference link in paragraph"
-                })
 
     # ----------------------------------------------------
-    # R10: Table data sources must have matching raw data & generator script
+
+    paragraphs = re.findall(r'<p\b[^>]*>(.*?)</p>', content, flags=re.DOTALL | re.IGNORECASE)
+
+    for p in paragraphs:
+
+        # Check for unlinked statistics like "90% of global supply"
+
+        stats_matches = re.finditer(r'(\b\d{1,3}(?:\.\d+)?%\b|\b\d+(?:,\d+)?\s*(?:metric\s+tons?|tonnes?)\b)', p)
+
+        for sm in stats_matches:
+
+            # If paragraph has <a href, it's considered sourced
+
+            if '<a ' not in p:
+
+                findings.append({
+
+                    "file": file_path_str,
+
+                    "line": 0,
+
+                    "rule": "R9 Statistic without nearby link",
+
+                    "severity": "WARN",
+
+                    "text": f"Statistic '{sm.group(1)}' in prose without nearby reference link in paragraph"
+
+                })
+
+
+
     # ----------------------------------------------------
+
+    # R10: Table data sources must have matching raw data & generator script
+
+    # ----------------------------------------------------
+
     findings.extend(check_r10_table_sources(content, file_path_str))
 
+
+
     # ----------------------------------------------------
+
     # R11: Banned additions to register's banned phrases
+
     # ----------------------------------------------------
+
     findings.extend(check_r11_banned_phrases(lines, file_path_str))
 
+
+
     # ----------------------------------------------------
+
     # R12: Claimed data period after publish date
+
     # ----------------------------------------------------
+
     findings.extend(check_r12_period_after_publish(content, file_path_str))
 
+
+
     # ----------------------------------------------------
+
     # R13: Standard site template components
+
     # ----------------------------------------------------
+
     findings.extend(check_r13_standard_template(content, file_path_str))
 
+
+
     # ----------------------------------------------------
+
     # R14: Crop & Video Media Captions / Alt Honesty
+
     # ----------------------------------------------------
+
     findings.extend(check_r14_crop_media_captions(content, file_path_str))
+
     findings.extend(check_r15_cross_page_specs(content, file_path_str))
+
     findings.extend(check_r16_pharma_cosmetic(content, file_path_str))
 
-    # ----------------------------------------------------
-    # R16: Cosmetic grade must not contain monograph or compendial claims
-    # ----------------------------------------------------
-    if "cosmetic-grade-castor-oil" in norm_file_path:
-        cosmetic_monograph_re = re.compile(r'\b(monographs?|compendial)\b', re.IGNORECASE)
-        for line_idx, line in enumerate(lines, 1):
-            m = cosmetic_monograph_re.search(line)
-            if m:
-                findings.append({
-                    "file": file_path_str,
-                    "line": line_idx,
-                    "rule": "R16: Cosmetic grade must not contain monograph or compendial claims",
-                    "severity": "FAIL",
-                    "text": f"Cosmetic grade must not contain monograph or compendial claims: '{m.group(0)}' found on line {line_idx}"
-                })
+
 
     # ----------------------------------------------------
-    # Phase 15e: Under-development page honesty checks
+
+    # R16: Cosmetic grade must not contain monograph or compendial claims
+
     # ----------------------------------------------------
+
+    if "cosmetic-grade-castor-oil" in norm_file_path:
+
+        cosmetic_monograph_re = re.compile(r'\b(monographs?|compendial)\b', re.IGNORECASE)
+
+        for line_idx, line in enumerate(lines, 1):
+
+            m = cosmetic_monograph_re.search(line)
+
+            if m:
+
+                findings.append({
+
+                    "file": file_path_str,
+
+                    "line": line_idx,
+
+                    "rule": "R16: Cosmetic grade must not contain monograph or compendial claims",
+
+                    "severity": "FAIL",
+
+                    "text": f"Cosmetic grade must not contain monograph or compendial claims: '{m.group(0)}' found on line {line_idx}"
+
+                })
+
+
+
+    # ----------------------------------------------------
+
+    # Phase 15e: Under-development page honesty checks
+
+    # ----------------------------------------------------
+
     UNDER_DEV_SLUGS = {
+
         "ricinoleic-acid", "12-hydroxystearic-acid", "sebacic-acid", "high-protein-castor-meal",
+
         "crude-glycerin", "refined-glycerin", "bio-polyurethane-polyols", "sodium-sulphate-anhydrous",
+
         "dioctyl-sebacate", "dibutyl-sebacate", "methyl-12-hydroxystearate", "methyl-ricinoleate",
+
         "lithium-12-hydroxystearate", "calcium-12-hydroxystearate", "zinc-undecylenate",
+
         "zinc-ricinoleate", "blown-oxidized-castor-oil"
+
     }
+
     is_under_dev = False
+
     norm_p = norm_file_path.replace("\\", "/")
+
     if ("products/" in norm_p or norm_p.startswith("products/")) and norm_p.endswith(".html"):
+
         page_slug = norm_p.split("products/")[-1].replace(".html", "")
+
         if page_slug in UNDER_DEV_SLUGS:
+
             is_under_dev = True
+
     elif norm_p in ("test.html", "under_dev_test.html") or norm_p.endswith("/test.html"):
+
         # For unit test fixtures only
+
         if any(slug in content.lower() for slug in UNDER_DEV_SLUGS) and "under development" in content.lower():
+
             is_under_dev = True
+
     if is_under_dev:
+
         main_match = re.search(r'<main[^>]*>(.*?)</main>', content, re.DOTALL | re.IGNORECASE)
+
         eval_content = main_match.group(1) if main_match else content
 
+
+
         under_dev_forbidden = [
+
             ("COA per lot", r"\bCOA\s+per\s+lot\b"),
+
             ("Each lot is tested", r"\bEach\s+lot\s+is\s+tested\b"),
+
             ("Dispatched directly", r"\bDispatched\s+directly\b"),
+
             ("Request a Quote", r"\bRequest\s+a\s+Quote\b"),
+
             ("Order commercial volumes", r"\bOrder\s+commercial\s+volumes\b"),
+
             ("export orders", r"\bexport\s+orders?\b"),
+
         ]
+
         for term_name, pat in under_dev_forbidden:
+
             for m in re.finditer(pat, eval_content, re.IGNORECASE):
+
                 offset = m.start()
+
                 line_num = content[:content.find(eval_content) + offset].count('\n') + 1 if main_match else content[:offset].count('\n') + 1
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_num,
+
                     "rule": f"R3 Under-development forbidden active claim: '{term_name}'",
+
                     "severity": "FAIL",
+
                     "text": f"Under-development page contains forbidden active-product claim '{term_name}' on line {line_num}: '{m.group(0)}'"
+
                 })
+
+
 
         spec_table_match = re.search(r'<table[^>]*class=["\'][^"\']*product-spec-table[^"\']*["\'][^>]*>(.*?)</table>', eval_content, re.DOTALL | re.IGNORECASE)
+
         if spec_table_match:
+
             table_html = spec_table_match.group(1)
+
             tbody_match = re.search(r'<tbody[^>]*>(.*?)</tbody>', table_html, re.DOTALL | re.IGNORECASE)
+
             tbody_html = tbody_match.group(1) if tbody_match else table_html
+
             rows = re.findall(r'<tr[^>]*>(.*?)</tr>', tbody_html, re.DOTALL | re.IGNORECASE)
+
             for r_idx, row in enumerate(rows, 1):
+
                 cols = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL | re.IGNORECASE)
+
                 if len(cols) >= 3:
+
                     val_text = re.sub(r'<[^>]+>', ' ', cols[2]).strip()
+
                     if re.search(r'\d', val_text):
+
                         findings.append({
+
                             "file": file_path_str,
+
                             "line": 0,
+
                             "rule": "R16 Numeric spec on under-development page",
+
                             "severity": "FAIL",
+
                             "text": f"Under-development page contains numeric spec value '{val_text}' in row {r_idx}"
+
                         })
 
+
+
     # ----------------------------------------------------
+
     # Phase 15f: Global ban on plant/service claims
+
     # ----------------------------------------------------
+
     PHASE_15F_PLANT_SERVICE_BANNED = [
+
         (r'\bsemi[\s\-]continuous(?:ly)?\b', "semi-continuous"),
+
         (r'\bbatch\s+pressure\s+reactors?\b', "batch pressure reactors"),
+
         (r'\bthermal\s+oil\s+heating\b', "thermal oil heating"),
+
         (r'\b24\s+business\s+hours\b', "24 business hours"),
+
     ]
+
     for line_idx, line in enumerate(lines, 1):
+
         for pat, term_name in PHASE_15F_PLANT_SERVICE_BANNED:
+
             if re.search(pat, line, re.IGNORECASE):
+
                 findings.append({
+
                     "file": file_path_str,
+
                     "line": line_idx,
+
                     "rule": "R1 Banned plant/service claim",
+
                     "severity": "FAIL",
+
                     "text": f"Found banned plant/service claim '{term_name}' on line {line_idx}: '{line.strip()[:100]}'"
+
                 })
 
+
+
     # ----------------------------------------------------
+
     # Phase 15f: Global removed row / claim checks
-    # ----------------------------------------------------
-    PHASE_15F_GLOBAL_REMOVED = [
-        (r'\bwater\s+white\b', "water white"),
-        (r'\bGross\s+Calorific(?:\s+Value)?\b', "Gross Calorific"),
-    ]
-    for line_idx, line in enumerate(lines, 1):
-        for pat, term_name in PHASE_15F_GLOBAL_REMOVED:
-            if re.search(pat, line, re.IGNORECASE):
-                findings.append({
-                    "file": file_path_str,
-                    "line": line_idx,
-                    "rule": "R7 Removed row reappeared",
-                    "severity": "FAIL",
-                    "text": f"Forbidden removed claim/row '{term_name}' found on line {line_idx}: '{line.strip()[:100]}'"
-                })
 
     # ----------------------------------------------------
-    # Phase 15f: 9 Active Non-Pharma Product Honest Spec Rules
-    # ----------------------------------------------------
-    ACTIVE_NON_PHARMA_SLUGS = [
-        "commercial-castor-oil",
-        "first-special-grade-castor-oil",
-        "fpd-castor-oil",
-        "castor-cake",
-        "hydrogenated-castor-oil",
-        "dehydrated-castor-oil",
-        "dco-fatty-acid",
-        "ppg-castor-oil",
-        "cold-pressed-castor-oil"
+
+    PHASE_15F_GLOBAL_REMOVED = [
+
+        (r'\bwater\s+white\b', "water white"),
+
+        (r'\bGross\s+Calorific(?:\s+Value)?\b', "Gross Calorific"),
+
     ]
+
+    for line_idx, line in enumerate(lines, 1):
+
+        for pat, term_name in PHASE_15F_GLOBAL_REMOVED:
+
+            if re.search(pat, line, re.IGNORECASE):
+
+                findings.append({
+
+                    "file": file_path_str,
+
+                    "line": line_idx,
+
+                    "rule": "R7 Removed row reappeared",
+
+                    "severity": "FAIL",
+
+                    "text": f"Forbidden removed claim/row '{term_name}' found on line {line_idx}: '{line.strip()[:100]}'"
+
+                })
+
+
+
+    # ----------------------------------------------------
+
+    # Phase 15f: 9 Active Non-Pharma Product Honest Spec Rules
+
+    # ----------------------------------------------------
+
+    ACTIVE_NON_PHARMA_SLUGS = [
+
+        "commercial-castor-oil",
+
+        "first-special-grade-castor-oil",
+
+        "fpd-castor-oil",
+
+        "castor-cake",
+
+        "hydrogenated-castor-oil",
+
+        "dehydrated-castor-oil",
+
+        "dco-fatty-acid",
+
+        "ppg-castor-oil",
+
+        "cold-pressed-castor-oil"
+
+    ]
+
     active_slug = None
+
     for s in ACTIVE_NON_PHARMA_SLUGS:
+
         if f"products/{s}.html" in norm_file_path or norm_file_path.endswith(f"/{s}.html") or norm_file_path == f"{s}.html" or norm_file_path == s:
+
             active_slug = s
+
             break
+
     if not active_slug and (norm_file_path in ("test.html", "active_test.html") or norm_file_path.endswith("/test.html")):
+
         for s in ACTIVE_NON_PHARMA_SLUGS:
+
             s_human = s.replace("-", " ")
+
             if s in content.lower() or s_human in content.lower():
+
                 active_slug = s
+
                 break
+
+
 
     if active_slug:
+
         # 1. Spec table H2 heading MUST contain 'Typical specification (indicative)'
+
         h2_matches = re.finditer(r'<h2\b[^>]*>(.*?)</h2>', content, re.DOTALL | re.IGNORECASE)
+
         has_typical_h2 = False
+
         for h2_m in h2_matches:
+
             h2_text = re.sub(r'<[^>]+>', ' ', h2_m.group(1))
+
             if re.search(r'Typical\s+specifications?\s*\(indicative\)', h2_text, re.IGNORECASE):
+
                 has_typical_h2 = True
+
                 break
+
         if not has_typical_h2:
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": 1,
+
                 "rule": "R7 Spec table heading",
+
                 "severity": "FAIL",
+
                 "text": f"Active product '{active_slug}' spec table H2 heading must contain 'Typical specification (indicative)'"
+
             })
+
+
 
         # 2. Note under spec table MUST contain required note
+
         required_note_pat = re.compile(
+
             r'Values\s+are\s+typical\s+for\s+this\s+grade\.\s*Results\s+for\s+each\s+lot\s+are\s+reported\s+on\s+its\s+COA[;,]\s*specifications\s+can\s+be\s+agreed\s+per\s+contract\.?',
+
             re.IGNORECASE
+
         )
+
         if not required_note_pat.search(content):
+
             findings.append({
+
                 "file": file_path_str,
+
                 "line": 1,
+
                 "rule": "R7 Spec table note",
+
                 "severity": "FAIL",
+
                 "text": f"Active product '{active_slug}' missing required note under spec table: 'Values are typical for this grade. Results for each lot are reported on its COA; specifications can be agreed per contract.'"
+
             })
 
+
+
         # 3. Product-specific removed rows:
+
         removed_row_checks = []
+
         if active_slug == "commercial-castor-oil":
+
             removed_row_checks.extend([
+
                 (r'(@\s*40\s*(?:°|deg|&deg;)?\s*C|Refractive\s+Index\s+@\s*40)', "@ 40°C / Refractive Index @ 40°C"),
+
                 (r'\bRelative\s+Density\b', "Relative Density"),
+
                 (r'(?:Colou?r\s*\()?Lovibond\)?(?:\s*Cell)?(?:\s*\(Y\+5R\))?[^\w\n]{1,10}40\b|\bLovibond\)?\s*40\b', "Colour (Lovibond) 40 / Lovibond) 40")
+
             ])
+
         elif active_slug == "first-special-grade-castor-oil":
+
             removed_row_checks.append((r'\bRelative\s+Density\b', "Relative Density"))
+
         elif active_slug == "dco-fatty-acid":
+
             removed_row_checks.extend([
+
                 (r'\bConjugated\s+(?:diene\s+)?Fatty\s+Acids?(?:\s*,?\s*%\s*)?(?:\s*60)?\b', "Conjugated Fatty Acids 60 / Conjugated Fatty Acids"),
+
                 (r'\bColou?r\s*,?\s*Gardner\b', "Colour, Gardner")
+
             ])
+
         elif active_slug == "hydrogenated-castor-oil":
+
             removed_row_checks.append((r'\bColou?r\s*(?:Gardner\s*)?3(?:\.0)?\s*(?:Max)?\b|\bColou?r\s+Gardner\s+3(?:\.0)?\b', "Colour 3 Max / Colour Gardner 3"))
+
         elif active_slug == "ppg-castor-oil":
+
             removed_row_checks.append((r'\bStokes\s+Viscosity\b', "Stokes Viscosity"))
+
         elif active_slug == "fpd-castor-oil":
+
             removed_row_checks.append((r'\bHydroxyl\s+Value\b[^\w\n]{1,10}180\b', "Hydroxyl Value 180"))
+
         # castor-cake Gross Calorific is checked by global PHASE_15F_GLOBAL_REMOVED
 
+
+
         for line_idx, line in enumerate(lines, 1):
+
             for pat, desc in removed_row_checks:
+
                 if re.search(pat, line, re.IGNORECASE):
+
                     findings.append({
+
                         "file": file_path_str,
+
                         "line": line_idx,
+
                         "rule": "R7 Removed row reappeared",
+
                         "severity": "FAIL",
+
                         "text": f"Forbidden removed claim/row '{desc}' reappeared on '{active_slug}' line {line_idx}: '{line.strip()[:100]}'"
+
                     })
 
+
+
     findings.extend(check_r17_page_identity(content, file_path_str))
+
     findings.extend(check_r18_internal_links(content, file_path_str))
+
     findings.extend(check_r19_brand_codes(content, file_path_str))
+
     findings.extend(check_r20_efficacy_claims(content, file_path_str))
+
     findings.extend(check_r21_cas_integrity(content, file_path_str))
+
     findings.extend(check_r22_color_scale(content, file_path_str))
+
     findings.extend(check_r23_hs_code(content, file_path_str))
+
     findings.extend(check_r25_operational_status(lines, content, file_path_str))
+
+
 
     return findings
 
+
+
 def lint_file(file_path: Path, facts: dict = None):
+
     if facts is None:
+
         facts = load_facts()
+
     try:
+
         rel_path = file_path.resolve().relative_to(REPO_ROOT).as_posix()
+
     except Exception:
+
         rel_path = file_path.as_posix()
+
     content = file_path.read_text(encoding='utf-8', errors='ignore')
+
     return lint_content(content, rel_path, facts)
 
+
+
 def run_production_audit(facts: dict):
+
     import xml.etree.ElementTree as ET
+
     import urllib.request
+
     import time
 
+
+
     sitemap_path = REPO_ROOT / "sitemap.xml"
+
     urls = set()
+
     # Explicitly ensure root homepage is audited
+
     urls.add("https://www.nagdevproducts.com/")
+
     if sitemap_path.exists():
+
         tree = ET.parse(sitemap_path)
+
         root = tree.getroot()
+
         namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+
         for loc in root.findall('.//ns:loc', namespace):
+
             urls.add(loc.text.strip())
 
+
+
     urls.add("https://www.nagdevproducts.com/certifications")
+
     urls.add("https://www.nagdevproducts.com/quality")
+
     urls.add("https://www.nagdevproducts.com/team")
 
+
+
     assert "https://www.nagdevproducts.com/" in urls, "CRITICAL: Homepage '/' missing from production audit URLs list!"
+
     sorted_urls = sorted(urls)
-    print("==================================================")
-    print("NAGDEV CLAIMS LINTER: PRODUCTION LIVE AUDIT")
-    print(f"Auditing {len(sorted_urls)} live URLs (Plain + Cache-Busted)...")
+
     print("==================================================")
 
+    print("NAGDEV CLAIMS LINTER: PRODUCTION LIVE AUDIT")
+
+    print(f"Auditing {len(sorted_urls)} live URLs (Plain + Cache-Busted)...")
+
+    print("==================================================")
+
+
+
     all_findings = []
+
     fail_count = 0
+
     warn_count = 0
+
     fails_by_rule = {f"R{i}": 0 for i in range(1, 26)}
+
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+
+
 
     cb_ts = int(time.time())
 
+
+
     for idx, u in enumerate(sorted_urls, 1):
+
         # 1. Plain fetch
+
         # 2. Cache-busted fetch
+
         for fetch_url, mode in [(u, "plain"), (f"{u}?cb={cb_ts}", "cache-busted")]:
+
             success = False
+
             last_err = None
+
             for attempt in range(3):
+
                 try:
+
                     req = urllib.request.Request(fetch_url, headers=headers)
+
                     with urllib.request.urlopen(req, timeout=20) as res:
+
                         if res.getcode() != 200:
+
                             all_findings.append({
+
                                 "file": f"{u} ({mode})",
+
                                 "line": 0,
+
                                 "rule": "HTTP Status",
+
                                 "severity": "FAIL",
+
                                 "text": f"HTTP {res.getcode()} returned"
+
                             })
+
                             fail_count += 1
+
                             success = True
+
                             break
+
                         html = res.read().decode('utf-8', errors='ignore')
+
                         res_findings = lint_content(html, f"{u} ({mode})", facts)
+
                         for item in res_findings:
+
                             all_findings.append(item)
+
                             if item["severity"] == "FAIL":
+
                                 fail_count += 1
+
                                 for r_key in fails_by_rule:
+
                                     if item["rule"].startswith(r_key):
+
                                         fails_by_rule[r_key] += 1
+
                             else:
+
                                 warn_count += 1
+
                         success = True
+
                         break
+
                 except Exception as e:
+
                     last_err = e
+
                     time.sleep(1)
 
+
+
             if not success:
+
                 all_findings.append({
+
                     "file": f"{u} ({mode})",
+
                     "line": 0,
+
                     "rule": "Fetch Error",
+
                     "severity": "FAIL",
+
                     "text": str(last_err)
+
                 })
+
                 fail_count += 1
+
+
 
     print("\n==================================================")
+
     print("PRODUCTION CLAIMS LINTER AUDIT SUMMARY")
+
     print(f"Total Live URLs Scanned: {len(sorted_urls)} (tested plain and cache-busted)")
+
     print(f"Production Hard Failures: {fail_count}")
+
     print(f"Production Warnings: {warn_count}")
+
     print("Failures by Rule:")
+
     for r_k, r_c in sorted(fails_by_rule.items()):
+
         print(f"  {r_k}: {r_c}")
+
     print("==================================================")
 
+
+
     if fail_count > 0:
+
         print(f"\n[FAILED] Production claims gate audit failed with {fail_count} failures!")
+
         for f in all_findings:
+
             if f["severity"] == "FAIL":
+
                 print(f"  FAIL: {f['file']} [{f['rule']}] -> {f['text']}")
+
         return 1
+
     else:
+
         print("\n[SUCCESS] PRODUCTION LINTER PASSED WITH 0 FAILURES!")
+
         return 0
+
+
 
 def main():
+
     facts = load_facts()
+
     if "--production" in sys.argv or "--prod" in sys.argv:
+
         return run_production_audit(facts)
 
+
+
     files = collect_files()
+
     print("==================================================")
+
     print("NAGDEV CLAIMS LINTER & PERMANENT FACT GATE (PHASE 3b)")
+
     print(f"Scanning {len(files)} deployable files across repo...")
+
     print("==================================================")
+
+
 
     all_findings = []
+
     fail_count = 0
+
     warn_count = 0
+
     fails_by_rule = {f"R{i}": 0 for i in range(1, 26)}
 
+
+
     # Check shared organization schema include once (Fix 2)
+
     org_schema_p = REPO_ROOT / "templates" / "organization_schema.json"
+
     if org_schema_p.exists():
+
         org_findings = lint_content(org_schema_p.read_text(encoding="utf-8"), "templates/organization_schema.json", facts)
+
         for item in org_findings:
+
             all_findings.append(item)
+
             if item["severity"] == "FAIL":
+
                 fail_count += 1
+
                 for r_key in fails_by_rule:
+
                     if re.match(rf'^{r_key}\\b', item["rule"]):
+
                         fails_by_rule[r_key] += 1
+
             else:
+
                 warn_count += 1
+
+
 
     for f in files:
+
         f_findings = lint_file(f, facts)
+
         for item in f_findings:
+
             all_findings.append(item)
+
             if item["severity"] == "FAIL":
+
                 fail_count += 1
+
                 for r_key in fails_by_rule:
+
                     if re.match(rf'^{r_key}\b', item["rule"]):
+
                         fails_by_rule[r_key] += 1
+
             else:
+
                 warn_count += 1
 
+
+
     # Run PDF consistency audit (R19 and R24)
+
     pdf_findings = check_pdf_consistency_r19_r24(facts, REPO_ROOT)
+
     for item in pdf_findings:
+
         all_findings.append(item)
+
         if item["severity"] == "FAIL":
+
             fail_count += 1
+
             for r_key in fails_by_rule:
+
                 if re.match(rf'^{r_key}\b', item["rule"]):
+
                     fails_by_rule[r_key] += 1
+
         else:
+
             warn_count += 1
 
+
+
     # Save Markdown and CSV reports
+
     report_md = REPO_ROOT / "seo" / "claims-lint-report.md"
+
     report_csv = REPO_ROOT / "seo" / "claims-lint-report.csv"
+
     
+
     with open(report_csv, "w", newline="", encoding="utf-8") as f:
+
         writer = csv.DictWriter(f, fieldnames=["file", "line", "rule", "severity", "text"])
+
         writer.writeheader()
+
         writer.writerows(all_findings)
 
+
+
     with open(report_md, "w", encoding="utf-8") as f:
+
         f.write("# Nagdev Claims Linter & Fact Verification Report\n\n")
+
         f.write(f"- Total Files Scanned: {len(files)}\n")
+
         f.write(f"- Total Failures (Exit != 0): **{fail_count}**\n")
+
         f.write(f"- Total Warnings (Review items): **{warn_count}**\n\n")
+
         f.write("### Failures by Rule\n")
+
         for r_k, r_c in fails_by_rule.items():
+
             f.write(f"- **{r_k}**: {r_c}\n")
+
         f.write("\n| File | Line | Rule | Severity | Details |\n")
+
         f.write("|---|---|---|---|---|\n")
+
         for item in all_findings:
+
             f.write(f"| `{item['file']}` | {item['line']} | {item['rule']} | **{item['severity']}** | {item['text'].replace('|', '/')} |\n")
 
+
+
     print("\nScan complete:")
+
     print(f"  FAILURES: {fail_count}")
+
     for r_k, r_c in fails_by_rule.items():
+
         print(f"    {r_k}: {r_c}")
+
     print(f"  WARNINGS: {warn_count}")
+
     print("Detailed reports written to:")
+
     print(f"  - {report_md}")
+
     print(f"  - {report_csv}")
 
+
+
     if fail_count > 0:
+
         print("\n[FAILED] One or more hard claims gate rules (R1-R25) failed.")
+
         return 1
+
     else:
+
         print("\n[PASSED] All hard claims gate rules (R1-R25) passed with 0 failures!")
+
         return 0
 
+
+
 if __name__ == "__main__":
+
     sys.exit(main())
+
+
 

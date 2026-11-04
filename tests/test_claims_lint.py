@@ -1156,5 +1156,33 @@ class TestClaimsLint(unittest.TestCase):
         fails = [f for f in findings if "R25" in f.get("rule", "")]
         self.assertEqual(len(fails), 0, "Valid operational statement must pass R25 with 0 failures")
 
+    def test_r25_2027_narrowed_and_exemptions(self):
+        # 1. '2027' fails in visible text, meta, or alt when within 12 words of production-status words
+        failing_cases = [
+            "<p>Commercial production is targeted for 2027 at the facility.</p>",
+            "<meta name='description' content='Our plant start is planned for 2027.'>",
+            "<img src='plant.webp' alt='Plant commissioning in 2027'>",
+            "<p>Machinery installation will begin before 2027.</p>",
+            "<p>The operational start in 2027 will deliver high capacity.</p>"
+        ]
+        for html in failing_cases:
+            findings = lint_content(html, "test.html", self.facts)
+            fails = [f for f in findings if "R25" in f.get("rule", "")]
+            self.assertTrue(len(fails) > 0, f"R25 must fail for: '{html}'")
+
+        # 2. Exemptions: JSON-LD date fields and ISO dates must pass cleanly
+        passing_cases = [
+            '<script type="application/ld+json">{"@type": "Product", "offers": {"priceValidUntil": "2027-11-04"}}</script>',
+            '<script type="application/ld+json">{"@type": "Article", "datePublished": "2027-01-15"}</script>',
+            '<script type="application/ld+json">{"@type": "WebPage", "dateModified": "2027-04-20"}</script>',
+            '<script type="application/ld+json">{"validFrom": "2027-01-01", "validThrough": "2027-12-31"}</script>',
+            '<p>Pricing valid through 2027-11-04 under contracted supply agreements.</p>',
+            '<p>In 2027, global demand for castor derivatives across North America and Europe is expected to grow steadily.</p>'
+        ]
+        for html in passing_cases:
+            findings = lint_content(html, "test.html", self.facts)
+            fails = [f for f in findings if "R25" in f.get("rule", "")]
+            self.assertEqual(len(fails), 0, f"R25 should not fail for exempt case: '{html}' (found {fails})")
+
 if __name__ == "__main__":
     unittest.main()
