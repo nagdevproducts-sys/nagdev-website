@@ -965,7 +965,7 @@ window.NAGDEV_BLOG_POSTS = {json.dumps(posts_data, indent=2)};
         cards_html.append(f"""
         <article class="blog-card" data-category="{cat}" data-type="{p.get('type', 'T1')}" data-product="{p.get('product_slug', '')}" data-lang="{lang}">
           <a href="/blog/{p['slug']}" class="blog-card-media" aria-label="{p['title']}">
-            <img src="{cover_src}" alt="{p['title']}" width="800" height="420" loading="lazy" decoding="async">
+            <img src="{cover_src}" srcset="/images/blog-covers/{p['slug']}-400w.webp 400w, /images/blog-covers/{p['slug']}-800w.webp 800w" sizes="(max-width:768px) 100vw, 404px" alt="{p['title']}" width="800" height="420" loading="lazy" decoding="async">
           </a>
           <div class="blog-card-body">
             <div class="blog-card-category">{cat}</div>
@@ -1056,10 +1056,10 @@ def update_homepage(published_posts):
         cards_html.append(f"""
         <article class="blog-card" style="background:#ffffff;border:1px solid var(--border-light);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;overflow:hidden;">
           <a href="/blog/{p['slug']}" class="blog-card-media" aria-label="{p['title']}" style="position:relative;width:100%;aspect-ratio:800/420;overflow:hidden;background:#0b2e1f;display:block;">
-            <img src="{cover_src}" alt="{p['title']}" width="800" height="420" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="{cover_src}" srcset="/images/blog-covers/{p['slug']}-400w.webp 400w, /images/blog-covers/{p['slug']}-800w.webp 800w" sizes="(max-width:768px) 100vw, 404px" alt="{p['title']}" width="800" height="420" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
           </a>
           <div class="blog-card-body" style="padding:1.25rem 1.5rem 1.5rem;display:flex;flex-direction:column;flex-grow:1;">
-            <div style="font-size:0.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;">{cat}</div>
+            <div class="blog-card-category">{cat}</div>
             <h3 style="font-size:1.15rem;font-family:var(--font-heading);color:var(--forest);margin-bottom:0.65rem;line-height:1.35;">
               <a href="/blog/{p['slug']}" style="color:inherit;text-decoration:none;">{p['title']}</a>
             </h3>
