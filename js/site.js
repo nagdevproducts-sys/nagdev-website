@@ -29,6 +29,25 @@
     }
   }
 
+  // ── Template Hydration for Mega-Menu & Mobile Navigation (Performance) ──
+  function hydrateMobileProducts() {
+    const container = document.getElementById('mobile-products-body');
+    const tpl = document.getElementById('mobile-products-template');
+    if (container && tpl) {
+      container.appendChild(tpl.content.cloneNode(true));
+      tpl.remove();
+    }
+  }
+
+  function hydrateDesktopMega() {
+    const container = document.getElementById('desktop-mega-container');
+    const tpl = document.getElementById('desktop-mega-template');
+    if (container && tpl) {
+      container.appendChild(tpl.content.cloneNode(true));
+      tpl.remove();
+    }
+  }
+
   // ── Mobile drawer ────────────────────────────────────────────────────────
   const mobileToggle   = document.getElementById('mobile-toggle');
   const mobileDrawer   = document.getElementById('mobile-drawer');
@@ -36,6 +55,7 @@
   const mobileClose    = document.getElementById('mobile-drawer-close');
 
   function openDrawer() {
+    hydrateMobileProducts();
     if (!mobileDrawer) return;
     mobileDrawer.classList.add('open');
     mobileBackdrop.classList.add('open');
@@ -52,9 +72,19 @@
     if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
   }
 
-  if (mobileToggle)   mobileToggle.addEventListener('click', openDrawer);
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', openDrawer);
+    mobileToggle.addEventListener('pointerenter', hydrateMobileProducts, { once: true });
+    mobileToggle.addEventListener('touchstart', hydrateMobileProducts, { once: true, passive: true });
+  }
   if (mobileClose)    mobileClose.addEventListener('click', closeDrawer);
   if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeDrawer);
+
+  const mobileAccordion = document.querySelector('.mobile-products-accordion');
+  if (mobileAccordion) {
+    mobileAccordion.addEventListener('toggle', hydrateMobileProducts, { once: true });
+    mobileAccordion.addEventListener('click', hydrateMobileProducts, { once: true });
+  }
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeDrawer();
@@ -86,6 +116,7 @@
     let closeTimer = null;
 
     function openMenu() {
+      hydrateDesktopMega();
       if (closeTimer) {
         clearTimeout(closeTimer);
         closeTimer = null;
@@ -117,6 +148,7 @@
 
     // HOVER (fine pointer): opens the mega-menu; stays open while pointer is on trigger or panel, closes 300ms after leaving
     dropdownItem.addEventListener('mouseenter', () => {
+      hydrateDesktopMega();
       if (window.matchMedia('(pointer: fine)').matches) {
         openMenu();
       }
@@ -129,6 +161,9 @@
     });
 
     if (dropdownToggle) {
+      dropdownToggle.addEventListener('focus', hydrateDesktopMega, { once: true });
+      dropdownToggle.addEventListener('pointerenter', hydrateDesktopMega, { once: true });
+
       // CLICK on "Products":
       // Fine pointer (mouse) -> navigates to /products directly (default anchor navigation)
       // Touch (coarse pointer): the FIRST tap opens the menu; a tap outside closes it.

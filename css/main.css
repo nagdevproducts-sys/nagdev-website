@@ -3184,7 +3184,7 @@ input, textarea, select { font-family: var(--font-body); }
 @media (max-width: 768px) {
   /* Prevent iOS Safari automatic zoom on inputs */
   input, select, textarea, .form-input, .form-select, .form-textarea, .catalog-search {
-    font-size: var(--text-base); !important;
+    font-size: var(--text-base) !important;
   }
 
   /* Enhanced touch targets */
@@ -4395,7 +4395,7 @@ h3[id] {
   .nav-link,
   .nav-link-dropdown {
     padding: 0.35rem 0.45rem !important;
-    font-size: var(--text-sm); !important;
+    font-size: var(--text-sm) !important;
   }
 }
 
@@ -4403,7 +4403,7 @@ h3[id] {
   .nav-link,
   .nav-link-dropdown {
     padding: 0.4rem 0.55rem !important;
-    font-size: var(--text-sm); !important;
+    font-size: var(--text-sm) !important;
   }
 }
 
@@ -4425,7 +4425,7 @@ h3[id] {
   }
   .header-cta .btn {
     padding: 0.35rem 0.65rem !important;
-    font-size: var(--text-sm); !important;
+    font-size: var(--text-sm) !important;
     white-space: nowrap !important;
   }
 }
@@ -5245,7 +5245,7 @@ details[open] .product-faq-chevron {
   .nav-link,
   .nav-link-dropdown {
     padding: 0.35rem 0.5rem !important;
-    font-size: var(--text-sm); !important;
+    font-size: var(--text-sm) !important;
     margin: 0 !important;
   }
   .header-logo img {
@@ -5263,7 +5263,7 @@ details[open] .product-faq-chevron {
   }
   .header-cta .btn {
     padding: 0.35rem 0.65rem !important;
-    font-size: var(--text-sm); !important;
+    font-size: var(--text-sm) !important;
   }
   .mobile-toggle {
     display: none !important;
@@ -5687,4 +5687,14 @@ details[open] .product-faq-chevron {
   min-height: 2.4rem;
   line-height: 1.35;
   display: block;
+}
+
+/* Contrast-compliant blog card category label */
+.blog-card-category {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8a6a12;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
 }
