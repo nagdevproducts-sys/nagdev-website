@@ -43,7 +43,7 @@ jobs:
         run: |
           python scripts/monitoring/site_health.py
 
-      - name: Run PageSpeed Insights Pull (Fixed Sample: Mobile + Desktop)
+      - name: "Run PageSpeed Insights Pull (Fixed Sample: Mobile + Desktop)"
         continue-on-error: true
         env:
           PSI_API_KEY: ${{ secrets.PSI_API_KEY }}
