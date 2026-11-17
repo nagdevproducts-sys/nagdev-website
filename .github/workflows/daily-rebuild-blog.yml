@@ -13,6 +13,7 @@ permissions:
 jobs:
   rebuild-and-verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,80 +30,38 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install beautifulsoup4 pyyaml pytest requests pillow markdown-it-py pynacl
+          pip install beautifulsoup4 pyyaml pytest requests pillow markdown-it-py
 
-      - name: Call Vercel Deploy Hook
+      - name: Run Blog Engine (Compile Due Posts)
+        run: |
+          python scripts/build_blog.py
+
+      - name: Commit and Push Newly Due Blog Posts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "New blog posts or generated assets detected. Committing and pushing to main..."
+            git add blog/ sitemap.xml index.html blog.html js/blog-data.js llms.txt seo/ images/blog-covers/
+            git commit -m "Auto-publish scheduled blog post(s) [skip ci]"
+            git push origin main
+            echo "Successfully pushed to main! Vercel production build triggered."
+          else
+            echo "All due posts are already committed and built on disk."
+          fi
+
+      - name: Trigger Optional Vercel Deploy Hook Fallback
         env:
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -n "$VERCEL_DEPLOY_HOOK" ]; then
+            echo "Triggering VERCEL_DEPLOY_HOOK..."
+            curl -s -X POST "$VERCEL_DEPLOY_HOOK" || true
+          fi
+
+      - name: Await Vercel Production Deployment & Verify Due Posts
+        env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python - << 'EOF'
-          import os
-          import urllib.request
-          import json
-          import subprocess
-
-          hook_url = os.environ.get("VERCEL_DEPLOY_HOOK", "").strip()
-          token = os.environ.get("VERCEL_TOKEN", "").strip()
-          project_id = "nagdev-website"
-
-          if not hook_url and token:
-              print("VERCEL_DEPLOY_HOOK not configured directly; querying Vercel API with VERCEL_TOKEN...")
-              try:
-                  url = f"https://api.vercel.com/v9/projects/{project_id}/deploy-hooks"
-                  req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}"})
-                  with urllib.request.urlopen(req) as resp:
-                      hooks = json.loads(resp.read().decode())
-                      for h in hooks:
-                          if h.get("ref") == "main":
-                              hook_url = h.get("url")
-                              print(f"Found existing deploy hook: {h.get('name')}")
-                              break
-                      
-                      if not hook_url:
-                          print("Creating new Vercel deploy hook for main...")
-                          create_req = urllib.request.Request(
-                              url,
-                              data=json.dumps({"name": "daily-blog-rebuild", "ref": "main"}).encode(),
-                              headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-                              method="POST"
-                          )
-                          with urllib.request.urlopen(create_req) as cresp:
-                              new_h = json.loads(cresp.read().decode())
-                              hook_url = new_h.get("url")
-                              print(f"Created deploy hook: {new_h.get('name')}")
-
-              except Exception as e:
-                  print(f"Error accessing Vercel deploy-hooks API: {e}")
-
-          if hook_url:
-              print("Triggering Vercel deploy hook...")
-              req = urllib.request.Request(hook_url, data=b"", method="POST")
-              try:
-                  with urllib.request.urlopen(req) as resp:
-                      print(f"Deploy hook triggered successfully! Status: {resp.status}")
-              except Exception as e:
-                  print(f"Deploy hook trigger failed: {e}")
-          elif token:
-              print("Triggering deployment via Vercel Deployments API fallback...")
-              try:
-                  dep_req = urllib.request.Request(
-                      f"https://api.vercel.com/v13/deployments?projectId={project_id}",
-                      data=json.dumps({"name": project_id, "target": "production"}).encode(),
-                      headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-                      method="POST"
-                  )
-                  with urllib.request.urlopen(dep_req) as dresp:
-                      print(f"Deployment triggered via API! Status: {dresp.status}")
-              except Exception as e:
-                  print(f"Deployments API fallback failed: {e}")
-          else:
-              print("Notice: No Vercel deployment credentials available in environment.")
-          EOF
-
-      - name: Await Vercel Production Deployment & Run Blog Health Check
-        run: |
-          echo "Waiting 35 seconds for Vercel deployment to build and deploy..."
-          sleep 35
-          python scripts/publish_automation.py --check-today --ping
+          echo "Verifying production deployment of all due posts (up to 15 min)..."
+          python scripts/publish_automation.py --verify-due --ping
