@@ -17,7 +17,7 @@ faqs:
     a: "Catalytic hydrogenation converts ricinoleic acid into 12-hydroxystearic acid, creating a hard vegetable wax whose hydroxylated soap fibers build dense grease networks."
   - q: "What dropping point advantage does HCO provide over non-hydroxylated fats?"
     a: "Lithium soaps derived from HCO produce dropping points exceeding 190°C, significantly higher than simple lithium stearate soaps derived from tallow or stearic acid."
-  - q: "Why is melting point consistency critical when saponifying HCO?"
+  - q: "Why is melting point consistency critical when reacting HCO in grease kettles?"
     a: "A uniform melting point between 85°C and 88°C ensures complete, predictable melting and soap formation inside the grease kettle without unreacted wax nodules."
   - q: "What packaging form is most convenient for automated kettle loading?"
     a: "We supply HCO in free-flowing white flakes packed in 25 kg multi-wall paper bags and 500 kg woven polypropylene bulk bags for easy kettle charging."
@@ -31,7 +31,7 @@ Modern heavy-duty multi-purpose greases rely heavily on lithium soap thickeners 
 
 The functional superiority of HCO stems from complete catalytic hydrogenation of the carbon-carbon double bond at C-9 in ricinoleic acid. This hydrogenation reaction transforms unsaturated ricinoleic acid into 12-hydroxystearic acid, converting a liquid vegetable oil into a hard, brittle, high-melting vegetable wax. When grease compounders react hydrogenated castor oil in lithium greases with aqueous lithium hydroxide monohydrate at elevated temperatures, the resulting soap is lithium 12-hydroxystearate.
 
-The presence of the secondary hydroxyl group at the twelfth carbon atom fundamentally alters the crystallization and fiber-growth behavior of the soap thickener. As the saponified mass cools within the base oil, lithium 12-hydroxystearate molecules self-assemble into intricate, entangled helical ribbon fibers. These microscopic polar fibers form a three-dimensional matrix that traps base oils through capillary forces, providing grease with enhanced structural stability, resistance to mechanical oil separation, and high shear endurance under cyclic loading.
+The presence of the secondary hydroxyl group at the twelfth carbon atom fundamentally alters the crystallization and fiber-growth behavior of the soap thickener. As the reacting thickener mass cools within the base oil, lithium 12-hydroxystearate molecules self-assemble into intricate, entangled helical ribbon fibers. These microscopic polar fibers form a three-dimensional matrix that traps base oils through capillary forces, providing grease with enhanced structural stability, resistance to mechanical oil separation, and high shear endurance under cyclic loading.
 
 {{key_facts}}
 
@@ -60,7 +60,7 @@ Nagdev Products manufactures hydrogenated castor oil flakes from selected expell
 
 ## Sourcing and Regional Supply from Deodar
 
-Nagdev Products produces hydrogenated castor oil at our manufacturing facility situated at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330. Crushing locally harvested castor seeds with our 50 TPD seed crushing capacity in North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our operations provide complete raw material integration from farm seed to finished vegetable wax flakes.
+Nagdev Products produces hydrogenated castor oil at our manufacturing facility situated at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330. Crushing locally harvested castor seeds with our 50 TPD seed crushing capacity in North Gujarat's castor belt, our operations provide complete raw material integration from farm seed to finished vegetable wax flakes.
 
 Our logistics network coordinates continuous bulk deliveries:
 

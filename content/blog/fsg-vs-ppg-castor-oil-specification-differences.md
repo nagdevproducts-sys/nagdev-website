@@ -58,7 +58,7 @@ Review the comprehensive analytical comparisons in our product documentation to 
 
 ## Sourcing and Regional Infrastructure in Deodar
 
-Nagdev Products manufactures both First Special Grade and Pale Pressed Grade castor oil at our production installation located at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330. Sourcing whole seeds directly from North Gujarat's castor belt (Banaskantha and Vav-Tharad region), our 50 TPD seed crushing capacity operates integrated expelling and refining operations under comprehensive laboratory oversight.
+Nagdev Products manufactures both First Special Grade and Pale Pressed Grade castor oil at our production installation located at Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Post Ravel, Taluka Deodar, District Vav-Tharad, Gujarat 385330. Sourcing whole seeds directly from North Gujarat's castor belt, our 50 TPD seed crushing capacity operates integrated expelling and refining operations under comprehensive laboratory oversight.
 
 Our distribution infrastructure services domestic and international chemical formulators:
 

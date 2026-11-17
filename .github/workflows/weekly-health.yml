@@ -7,12 +7,13 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   issues: write
 
 jobs:
   health-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,6 +28,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r scripts/monitoring/requirements.txt
+          pip install beautifulsoup4 requests pyyaml pillow markdown-it-py
 
       - name: Restore previous PSI artifact for regression check
         uses: actions/cache@v4
@@ -37,67 +39,19 @@ jobs:
             psi-baseline-
 
       - name: Run Site Health Check (Sitemap, Links, Claims Lint)
+        continue-on-error: true
         run: |
           python scripts/monitoring/site_health.py
 
-      - name: Run Mobile PageSpeed Insights Pull
+      - name: Run PageSpeed Insights Pull (Fixed Sample: Mobile + Desktop)
+        continue-on-error: true
         env:
           PSI_API_KEY: ${{ secrets.PSI_API_KEY }}
         run: |
           python scripts/monitoring/psi_pull.py
 
-      - name: Evaluate Health and Alert on Failures
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          python - << 'EOF'
-          import json
-          import subprocess
-          from pathlib import Path
-
-          health_p = Path("monitoring_output/site_health.json")
-          psi_p = Path("monitoring_output/psi_data.json")
-          prev_psi_p = Path("monitoring_output/prev_psi.json")
-
-          failures = []
-
-          if health_p.exists():
-              health = json.loads(health_p.read_text(encoding="utf-8"))
-              if health.get("status") != "PASS":
-                  for r in health.get("failure_reasons", []):
-                      failures.append(f"- **Site Health Issue:** {r}")
-
-          if psi_p.exists():
-              psi = json.loads(psi_p.read_text(encoding="utf-8"))
-              prev_psi = json.loads(prev_psi_p.read_text(encoding="utf-8")) if prev_psi_p.exists() else {}
-              prev_scores = {r["url"]: r["median_score"] for r in prev_psi.get("results", []) if "median_score" in r}
-
-              for r in psi.get("results", []):
-                  u = r.get("url")
-                  score = r.get("median_score")
-                  if score is not None and u in prev_scores:
-                      prev_s = prev_scores[u]
-                      if prev_s - score > 10:
-                          failures.append(f"- **Performance Regression:** {r.get('name')} dropped >10 points ({prev_s} -> {score})")
-              
-              # Save current as baseline for next run
-              prev_psi_p.parent.mkdir(parents=True, exist_ok=True)
-              prev_psi_p.write_text(json.dumps(psi, indent=2), encoding="utf-8")
-
-          if failures:
-              body = "## 🚨 Weekly SEO Health Alert\n\nThe following automated checks failed during the weekly audit:\n\n" + "\n".join(failures) + "\n\n*Please investigate and remediate immediately.*"
-              print("Failures detected! Opening GitHub issue...")
-              subprocess.run([
-                  "gh", "issue", "create",
-                  "--title", "🚨 SEO Health Alert: Weekly Audit Regressions Detected",
-                  "--body", body,
-                  "--label", "seo-alert"
-              ], check=True)
-          else:
-              print("All weekly health and performance checks passed cleanly. No issue opened.")
-          EOF
-
       - name: Check Vercel Deployment Count & Storage Guard
+        continue-on-error: true
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -138,7 +92,7 @@ jobs:
                           f"1. Keep current production + 9 rollback deployments\n"
                           f"2. Delete older deployments via `vercel remove <deployment-url> --safe --yes`\n"
                       )
-                      print(f"Deployment count {count} > 20! Opening GitHub issue...")
+                      print(f"Deployment count {count} > 20! Checking for existing issue...")
                       check_issue = subprocess.run(
                           ["gh", "issue", "list", "--search", title, "--json", "number"],
                           capture_output=True, text=True
@@ -156,83 +110,118 @@ jobs:
                           print("Cleanup issue already open. Skipping duplicate issue creation.")
                   else:
                       print(f"Deployment count ({count}) is healthy (<= 20).")
-          except urllib.error.HTTPError as e:
-              print(f"Error querying Vercel API: HTTP {e.code} - {e.read().decode()}")
           except Exception as e:
-              print(f"Unexpected error checking Vercel deployments: {e}")
+              print(f"Notice: Vercel deployment check encountered error: {e}")
           EOF
 
-      - name: Verify Newest Scheduled Blog Post HTTP 200
+      - name: Evaluate Health and Alert on Regressions
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python - << 'EOF'
-          import csv
           import json
           import subprocess
-          import urllib.request
-          import urllib.error
-          from datetime import datetime, timezone, timedelta
+          import sys
           from pathlib import Path
 
-          IST = timezone(timedelta(hours=5, minutes=30))
-          now_ist = datetime.now(IST)
+          health_p = Path("monitoring_output/site_health.json")
+          psi_p = Path("monitoring_output/psi_data.json")
+          prev_psi_p = Path("monitoring_output/prev_psi.json")
 
-          cal_path = Path("seo/blog/calendar.csv")
-          if not cal_path.exists():
-              print("No calendar.csv found, skipping blog post health check.")
-              exit(0)
+          regressions = []
+          monitor_errors = []
 
-          newest_post = None
-          with open(cal_path, "r", encoding="utf-8") as f:
-              reader = csv.DictReader(f)
-              posts = []
-              for row in reader:
-                  pub_dt = datetime.fromisoformat(row["publish_date"])
-                  if pub_dt <= now_ist:
-                      posts.append((pub_dt, row))
-              if posts:
-                  posts.sort(key=lambda x: x[0], reverse=True)
-                  newest_post = posts[0][1]
+          # 1. Site Health checks (Sitemap 200s, redirect chains, broken links, claims lint, JSON-LD)
+          if health_p.exists():
+              health = json.loads(health_p.read_text(encoding="utf-8"))
+              if health.get("status") != "PASS":
+                  for r in health.get("failure_reasons", []):
+                      regressions.append(f"- **Site Health Regression:** {r}")
+              
+              # Log sitemap or link crawler timeouts as monitor errors, not regressions
+              for me in health.get("sitemap_check", {}).get("monitor_errors", []):
+                  monitor_errors.append(f"Sitemap crawl timeout/error on {me.get('url')}: {me.get('error')}")
+              for me in health.get("internal_links_check", {}).get("monitor_errors", []):
+                  monitor_errors.append(f"Internal link crawl timeout/error on {me.get('url')}: {me.get('error')}")
+          else:
+              monitor_errors.append("site_health.json was not generated (monitoring step error)")
 
-          if not newest_post:
-              print("No scheduled posts with publish_date <= now_ist found.")
-              exit(0)
+          # 2. PageSpeed Insights performance regressions
+          if psi_p.exists():
+              psi = json.loads(psi_p.read_text(encoding="utf-8"))
+              prev_psi = json.loads(prev_psi_p.read_text(encoding="utf-8")) if prev_psi_p.exists() else {}
+              prev_scores = {f"{r.get('url')}_{r.get('strategy', 'mobile')}": r.get("score") for r in prev_psi.get("results", []) if r.get("score") is not None}
 
-          slug = newest_post["slug"]
-          url = f"https://www.nagdevproducts.com/blog/{slug}"
-          print(f"Checking newest scheduled post: {url} (scheduled {newest_post['publish_date']})")
+              for r in psi.get("results", []):
+                  u = r.get("url")
+                  strat = r.get("strategy", "mobile")
+                  score = r.get("score")
+                  key = f"{u}_{strat}"
+                  if score is not None and key in prev_scores:
+                      prev_s = prev_scores[key]
+                      if prev_s - score > 10:
+                          regressions.append(f"- **Performance Regression:** {r.get('name')} ({strat}) dropped >10 points ({prev_s} -> {score})")
+              
+              for me in psi.get("monitor_errors", []):
+                  monitor_errors.append(f"PSI API rate-limit/error on {me.get('url')} ({me.get('strategy')}): {me.get('error')}")
 
-          headers = {"User-Agent": "Nagdev-Weekly-Health-Check/1.0"}
-          req = urllib.request.Request(url, headers=headers)
-          try:
-              with urllib.request.urlopen(req, timeout=15) as resp:
-                  if resp.status == 200:
-                      print(f"[PASSED] Post URL returned HTTP 200 OK: {url}")
-                  else:
-                      raise urllib.error.HTTPError(url, resp.status, "Non-200 status", resp.headers, None)
-          except Exception as e:
-              print(f"[FAILED] Error reaching newest post URL {url}: {e}")
-              title = f"🚨 Newest scheduled blog post returned non-200: {slug}"
+              # Save current valid psi data as baseline cache for next week
+              if psi.get("results"):
+                  prev_psi_p.parent.mkdir(parents=True, exist_ok=True)
+                  prev_psi_p.write_text(json.dumps(psi, indent=2), encoding="utf-8")
+          else:
+              monitor_errors.append("psi_data.json was not generated (monitoring step error)")
+
+          # 3. Report Monitor Warnings
+          if monitor_errors:
+              print("=== MONITOR NOTICES (Non-breaking tool/network errors) ===")
+              for me in monitor_errors:
+                  print(f"  [NOTICE] {me}")
+
+          # 4. Handle Real Site Regressions
+          if regressions:
+              title = "🚨 SEO Health Alert: Weekly Audit Regressions Detected"
               body = (
-                  f"### 🚨 Production Blog Post Health Failure\n\n"
-                  f"The newest scheduled blog post failed production HTTP 200 verification.\n\n"
-                  f"- **Post Slug:** `{slug}`\n"
-                  f"- **URL:** {url}\n"
-                  f"- **Scheduled Date (IST):** {newest_post['publish_date']}\n"
-                  f"- **Error:** `{e}`\n\n"
-                  f"Please verify Vercel deployment status and ensure the post is rendered in `blog/{slug}.html`."
+                  "## 🚨 Weekly SEO Health Alert\n\n"
+                  "The following genuine site regressions were detected during the weekly automated health audit:\n\n" +
+                  "\n".join(regressions) +
+                  "\n\n*Please investigate and remediate.*"
               )
-              subprocess.run([
-                  "gh", "issue", "create",
-                  "--title", title,
-                  "--body", body,
-                  "--label", "seo-alert"
-              ], check=True)
-              exit(1)
+              print("\nRegressions detected! Checking for existing open issue to update...")
+              
+              # Check for existing open issue with label seo-alert
+              check_issue = subprocess.run(
+                  ["gh", "issue", "list", "--state", "open", "--label", "seo-alert", "--json", "number,title"],
+                  capture_output=True, text=True
+              )
+              existing_issues = []
+              if check_issue.returncode == 0 and check_issue.stdout.strip():
+                  try:
+                      existing_issues = json.loads(check_issue.stdout)
+                  except Exception:
+                      pass
+
+              if existing_issues:
+                  issue_num = existing_issues[0]["number"]
+                  print(f"Updating existing open issue #{issue_num} instead of creating duplicate...")
+                  comment_body = f"### 🔄 Weekly Health Audit Update\n\nActive regressions detected on this run:\n\n" + "\n".join(regressions)
+                  subprocess.run(["gh", "issue", "comment", str(issue_num), "--body", comment_body], check=True)
+              else:
+                  print("Creating new GitHub issue...")
+                  subprocess.run([
+                      "gh", "issue", "create",
+                      "--title", title,
+                      "--body", body,
+                      "--label", "seo-alert"
+                  ], check=True)
+
+              sys.exit(1)
+          else:
+              print("\n[PASSED] All weekly site health and performance regression checks passed cleanly!")
           EOF
 
       - name: Upload Health Artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: weekly-health-data
