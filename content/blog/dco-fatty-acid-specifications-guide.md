@@ -3,7 +3,7 @@ title: DCO Fatty Acid Specifications Guide for Industrial Resins
 slug: dco-fatty-acid-specifications-guide
 description: DCO fatty acid specifications guide. Discover distilled dehydrated castor
   oil fatty acid specs, conjugated dienes, and bulk supply from Gujarat.
-publish_date: '2026-10-29T12:06:00+05:30'
+publish_date: '2026-10-13T15:10:00+05:30'
 type: T1
 product_slug: dco-fatty-acid
 primary_keyword: DCO fatty acid specifications guide

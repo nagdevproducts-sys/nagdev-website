@@ -2,7 +2,7 @@
 title: "Cosmetic Grade Castor Oil Bulk Supply Guide: Formulation"
 slug: cosmetic-grade-castor-oil-bulk-supply-guide
 description: "Cosmetic grade castor oil bulk supply guide. Low-odor, clarified vegetable oil for lipsticks, color cosmetics, and lotions. Sourced from Deodar, Gujarat."
-publish_date: "2026-10-29T12:14:00+05:30"
+publish_date: '2026-10-29T09:00:00+05:30'
 type: T1
 product_slug: cosmetic-grade-castor-oil
 primary_keyword: cosmetic grade castor oil bulk supply guide

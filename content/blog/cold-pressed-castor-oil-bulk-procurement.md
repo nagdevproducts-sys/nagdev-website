@@ -3,7 +3,7 @@ title: Cold Pressed Castor Oil Bulk Procurement & Technical Specs
 slug: cold-pressed-castor-oil-bulk-procurement
 description: Cold pressed castor oil bulk procurement from Gujarat. Virgin single-press
   mechanical extraction, low peroxide value, produced at our Deodar plant.
-publish_date: '2026-10-29T12:08:00+05:30'
+publish_date: '2026-10-17T13:00:00+05:30'
 type: T1
 product_slug: cold-pressed-castor-oil
 primary_keyword: cold pressed castor oil bulk procurement

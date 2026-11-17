@@ -2,7 +2,7 @@
 title: "Castor Oil BP Monograph Buyer Guide: Quality Standards"
 slug: castor-oil-bp-monograph-buyer-guide
 description: "Castor oil BP monograph buyer guide. British Pharmacopoeia criteria, optical rotation, analytical testing, and qualification from our plant in Deodar, Gujarat."
-publish_date: "2026-10-29T12:09:00+05:30"
+publish_date: '2026-10-19T10:30:00+05:30'
 type: T1
 product_slug: castor-oil-bp93
 primary_keyword: castor oil BP monograph buyer guide

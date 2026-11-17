@@ -3,7 +3,7 @@ title: FSG Castor Oil Specifications and Bulk Supply from Gujarat
 slug: fsg-castor-oil-specifications-bulk-supply
 description: FSG castor oil specifications and bulk supply from Gujarat. Refined,
   bleached first special grade oil produced at our Deodar plant for commercial buyers.
-publish_date: '2026-10-29T12:01:00+05:30'
+publish_date: '2026-10-03T14:15:00+05:30'
 type: T1
 product_slug: first-special-grade-castor-oil
 primary_keyword: FSG castor oil specifications and bulk supply

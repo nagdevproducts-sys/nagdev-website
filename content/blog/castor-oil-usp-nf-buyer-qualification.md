@@ -2,7 +2,7 @@
 title: "Castor Oil USP-NF Buyer Qualification: Technical Guide"
 slug: castor-oil-usp-nf-buyer-qualification
 description: "Castor oil USP-NF buyer qualification guide. United States Pharmacopeia monograph criteria, chromatographic testing, and supplier qualification from Gujarat."
-publish_date: "2026-10-29T12:10:00+05:30"
+publish_date: '2026-10-21T17:15:00+05:30'
 type: T1
 product_slug: castor-oil-usp-nf
 primary_keyword: castor oil USP-NF buyer qualification

@@ -3,7 +3,7 @@ title: 'Hydrogenated Castor Oil Bulk Supply Gujarat: Wax & Specs'
 slug: hydrogenated-castor-oil-bulk-supply-gujarat
 description: Hydrogenated castor oil bulk supply Gujarat. High-melting castor wax
   flakes (drop point 85-88°C) produced at our Deodar plant for greases and coatings.
-publish_date: '2026-10-29T12:04:00+05:30'
+publish_date: '2026-10-09T11:20:00+05:30'
 type: T1
 product_slug: hydrogenated-castor-oil
 primary_keyword: hydrogenated castor oil bulk supply Gujarat

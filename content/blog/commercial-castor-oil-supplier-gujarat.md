@@ -3,7 +3,7 @@ title: 'Commercial Castor Oil Supplier in Gujarat: Specs & Supply'
 slug: commercial-castor-oil-supplier-gujarat
 description: Commercial castor oil supplier in Gujarat. Nagdev Products operates a
   50 TPD crushing plant in Deodar, supplying unrefined oil for industrial applications.
-publish_date: '2026-10-29T12:00:00+05:30'
+publish_date: '2026-10-01T09:30:00+05:30'
 type: T1
 product_slug: commercial-castor-oil
 primary_keyword: commercial castor oil supplier in Gujarat

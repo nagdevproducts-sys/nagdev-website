@@ -42,10 +42,8 @@ def test_future_posts_not_published():
     blog_data_path = REPO_ROOT / "js" / "blog-data.js"
     blog_data_text = blog_data_path.read_text(encoding="utf-8")
     
-    # Check all future written posts
+    # Check truly future written posts (scheduled after 2026-11-17)
     future_sample_slugs = [
-                "fsg-vs-ppg-castor-oil-specification-differences",
-        "hydrogenated-castor-oil-in-lithium-grease-formulation",
         "north-gujarat-castor-belt-banaskantha-and-vav-tharad",
         "buying-dehydrated-castor-oil-in-bulk-packaging-coa",
         "castor-seed-harvest-drying-storage-gujarat",

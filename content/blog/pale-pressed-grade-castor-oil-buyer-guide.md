@@ -3,7 +3,7 @@ title: 'Pale Pressed Grade Castor Oil Buyer Guide: high quality'
 slug: pale-pressed-grade-castor-oil-buyer-guide
 description: Pale pressed grade castor oil buyer guide. high-grade, ultra-low color
   oil from Gujarat. Review specifications, packaging, and technical procurement.
-publish_date: '2026-10-29T12:07:00+05:30'
+publish_date: '2026-10-15T09:45:00+05:30'
 type: T1
 product_slug: ppg-castor-oil
 primary_keyword: pale pressed grade castor oil buyer guide

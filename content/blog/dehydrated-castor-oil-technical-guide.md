@@ -3,7 +3,7 @@ title: 'Dehydrated Castor Oil Technical Guide: DCO Specs & Supply'
 slug: dehydrated-castor-oil-technical-guide
 description: Dehydrated castor oil technical guide. Explore DCO manufacturing, conjugated
   double bond drying chemistry, viscosity grades, and bulk supply from Gujarat.
-publish_date: '2026-10-29T12:05:00+05:30'
+publish_date: '2026-10-11T08:30:00+05:30'
 type: T1
 product_slug: dehydrated-castor-oil
 primary_keyword: dehydrated castor oil technical guide

@@ -2,7 +2,7 @@
 title: "Castor Oil Ph. Eur. Compliance Guide: Monograph Specs"
 slug: castor-oil-ph-eur-compliance-guide
 description: "Castor oil Ph. Eur. compliance guide. European Pharmacopoeia Monograph 0051 criteria, GC-FID fatty acid composition, and qualification from Deodar, Gujarat."
-publish_date: "2026-10-29T12:11:00+05:30"
+publish_date: '2026-10-23T08:45:00+05:30'
 type: T1
 product_slug: castor-oil-ph-eur
 primary_keyword: castor oil Ph. Eur. compliance guide

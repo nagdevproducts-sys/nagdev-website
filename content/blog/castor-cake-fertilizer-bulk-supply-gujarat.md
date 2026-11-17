@@ -3,7 +3,7 @@ title: 'Castor Cake Fertilizer Bulk Supply Gujarat: Specs'
 slug: castor-cake-fertilizer-bulk-supply-gujarat
 description: Castor cake fertilizer bulk supply Gujarat. High-nitrogen organic expeller
   meal produced at our Deodar plant for commercial farm soil fertility.
-publish_date: '2026-10-29T12:03:00+05:30'
+publish_date: '2026-10-07T16:45:00+05:30'
 type: T1
 product_slug: castor-cake
 primary_keyword: castor cake fertilizer bulk supply Gujarat

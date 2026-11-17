@@ -2,7 +2,7 @@
 title: "Castor Oil IP Buyer Qualification Guide: Monograph Specs"
 slug: castor-oil-ip-buyer-qualification-guide
 description: "Castor oil IP buyer qualification guide. Indian Pharmacopoeia compendial testing, domestic pharma supply, and quality documentation from Deodar, Gujarat."
-publish_date: "2026-10-29T12:12:00+05:30"
+publish_date: '2026-10-25T14:00:00+05:30'
 type: T1
 product_slug: castor-oil-ip
 primary_keyword: castor oil IP buyer qualification guide

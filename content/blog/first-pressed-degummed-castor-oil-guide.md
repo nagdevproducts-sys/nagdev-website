@@ -3,7 +3,7 @@ title: 'First Pressed Degummed Castor Oil Guide: Specs & Sourcing'
 slug: first-pressed-degummed-castor-oil-guide
 description: First pressed degummed castor oil guide. Learn about FPD specs, water
   degumming, and bulk procurement from Nagdev Products crushing plant in Gujarat.
-publish_date: '2026-10-29T12:02:00+05:30'
+publish_date: '2026-10-05T10:00:00+05:30'
 type: T1
 product_slug: fpd-castor-oil
 primary_keyword: first pressed degummed castor oil guide

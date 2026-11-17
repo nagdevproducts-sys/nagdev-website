@@ -2,7 +2,7 @@
 title: "Castor Oil JP Import Specifications: Compendial Supply"
 slug: castor-oil-jp-import-specifications
 description: "Castor oil JP import specifications. Japanese Pharmacopoeia standards, analytical testing criteria, export packing, and documentation from Deodar, Gujarat."
-publish_date: "2026-10-29T12:13:00+05:30"
+publish_date: '2026-10-27T11:30:00+05:30'
 type: T1
 product_slug: castor-oil-jp
 primary_keyword: castor oil JP import specifications

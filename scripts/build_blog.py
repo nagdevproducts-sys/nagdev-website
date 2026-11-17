@@ -59,8 +59,8 @@ def parse_ist(dt_str):
     return datetime.fromisoformat(dt_str).astimezone(IST)
 
 def format_date_display(dt):
-    """Format datetime for display e.g. Oct 29, 2026."""
-    return dt.strftime('%b %d, %Y')
+    """Format datetime for display e.g. Oct 1, 2026."""
+    return f"{dt.strftime('%b')} {dt.day}, {dt.year}"
 
 def format_date_iso(dt):
     """Format datetime as YYYY-MM-DD."""
