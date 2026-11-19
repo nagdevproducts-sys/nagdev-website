@@ -1,13 +1,21 @@
+#!/usr/bin/env python3
 """
+fix_org_schema_16_1.py
 Phase 16.1 — Fix Organization/LocalBusiness JSON-LD schema.
 
-Pages index.html, contact.html, about.html: Full Organization+LocalBusiness block.
-All other .html pages: Replace Org/LocalBusiness @graph node with reference-only.
+1. Pages index.html, contact.html, about.html: Full Organization+LocalBusiness block,
+   preserving existing geo if present.
+2. All other .html pages: Replace Org/LocalBusiness @graph node with reference-only:
+   {"@type": "Organization", "@id": "https://www.nagdevproducts.com/#organization"}
 """
-import re, json
+
+import os
+import re
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
+EXCLUDE_DIRS = {'.git', '.vercel', 'node_modules', 'dist', 'build', '.vscode', 'scratch'}
 
 FULL_PAGES = {"index.html", "contact.html", "about.html"}
 
@@ -17,61 +25,65 @@ VERIFIED_SAMEAS = [
     "https://www.linkedin.com/company/nagdevproducts/"
 ]
 
-FULL_ORG_BLOCK = {
-    "@type": ["Organization", "LocalBusiness"],
-    "@id": "https://www.nagdevproducts.com/#organization",
-    "name": "Nagdev Products",
-    "legalName": "Nagdev Products Private Limited",
-    "url": "https://www.nagdevproducts.com/",
-    "telephone": "+91-6352098306",
-    "email": "nagdevproducts@gmail.com",
-    "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Survey No. 301 P-2, Jada-Kotarwada Rd, Village Sardarpura, Post Ravel, Taluka Deodar, Dist. Vav-Tharad",
-        "addressLocality": "Deodar",
-        "addressRegion": "Gujarat",
-        "postalCode": "385330",
-        "addressCountry": "IN"
-    },
-    "department": {
-        "@type": "Place",
-        "name": "Nagdev Products \u2014 Head Office",
+def make_full_org_block(existing_geo=None):
+    block = {
+        "@type": ["Organization", "LocalBusiness"],
+        "@id": "https://www.nagdevproducts.com/#organization",
+        "name": "Nagdev Products",
+        "legalName": "Nagdev Products Private Limited",
+        "url": "https://www.nagdevproducts.com/",
+        "telephone": "+91-6352098306",
+        "email": "nagdevproducts@gmail.com",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal",
-            "addressLocality": "Gandhinagar",
+            "streetAddress": "Survey No. 301 P-2, Jada-Kotarwada Rd, Village Sardarpura, Post Ravel, Taluka Deodar, Dist. Vav-Tharad",
+            "addressLocality": "Deodar",
             "addressRegion": "Gujarat",
-            "postalCode": "382421",
+            "postalCode": "385330",
             "addressCountry": "IN"
+        },
+        "department": {
+            "@type": "Place",
+            "name": "Nagdev Products — Head Office",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal",
+                "addressLocality": "Gandhinagar",
+                "addressRegion": "Gujarat",
+                "postalCode": "382421",
+                "addressCountry": "IN"
+            }
         }
-    },
-    "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 24.1817,
-        "longitude": 71.8311
-    },
-    "sameAs": VERIFIED_SAMEAS,
-    "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.nagdevproducts.com/images/logo-dark.webp",
-        "width": 165,
-        "height": 48
-    },
-    "image": "https://www.nagdevproducts.com/images/og-share.jpg",
-    "foundingDate": "2019",
-    "numberOfEmployees": {"@type": "QuantitativeValue", "minValue": 20, "maxValue": 50},
-    "identifier": {"@type": "PropertyValue", "propertyID": "CIN", "value": "U15400GJ2019PTC110518"},
-    "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+91-6352098306",
-        "contactType": "sales",
-        "email": "nagdevproducts@gmail.com",
-        "availableLanguage": ["English", "Hindi", "Gujarati"]
-    },
-    "openingHours": "Mo-Sa 09:00-18:00",
-    "currenciesAccepted": "USD, INR",
-    "priceRange": "$$"
-}
+    }
+    if existing_geo:
+        block["geo"] = existing_geo
+
+    block.update({
+        "sameAs": VERIFIED_SAMEAS,
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.nagdevproducts.com/images/logo-dark.webp",
+            "width": 165,
+            "height": 48
+        },
+        "image": "https://www.nagdevproducts.com/images/og-share.jpg",
+        "foundingDate": "2019",
+        "identifier": {
+            "@type": "PropertyValue",
+            "propertyID": "CIN",
+            "value": "U15400GJ2019PTC110518"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-6352098306",
+            "contactType": "sales",
+            "email": "nagdevproducts@gmail.com",
+            "availableLanguage": ["English", "Hindi", "Gujarati"]
+        },
+        "openingHours": "Mo-Sa 09:00-18:00",
+        "currenciesAccepted": "USD, INR"
+    })
+    return block
 
 ORG_REF = {
     "@type": "Organization",
@@ -84,134 +96,156 @@ SCRIPT_RE = re.compile(
 )
 
 def is_org_node(node):
-    """Return True if node is an Organization or LocalBusiness node."""
     if not isinstance(node, dict):
         return False
     t = node.get("@type", "")
     if isinstance(t, list):
-        return "Organization" in t or "LocalBusiness" in t
-    return t in ("Organization", "LocalBusiness")
+        return any(x in ("Organization", "LocalBusiness") for x in t)
+    return "Organization" in str(t) or "LocalBusiness" in str(t)
 
 def process_html(fpath, want_full):
-    html = fpath.read_text(encoding="utf-8", errors="replace")
+    try:
+        html = fpath.read_text(encoding="utf-8", errors="replace")
+    except Exception as e:
+        return f"READ_ERROR: {e}", None
+
     matches = list(SCRIPT_RE.finditer(html))
     if not matches:
         return "NO_SCRIPT", html
 
-    # Find block with @graph containing an Org node
-    target_match = None
+    file_changed = False
+    new_html = html
+    offset = 0
+    org_found = False
+
     for m in matches:
+        raw_json = m.group(2).strip()
         try:
-            obj = json.loads(m.group(2).strip())
-            if "@graph" in obj and any(is_org_node(n) for n in obj["@graph"]):
-                target_match = m
-                break
-        except:
+            obj = json.loads(raw_json)
+        except json.JSONDecodeError as e:
+            return f"PARSE_ERROR: {e}", html
+
+        if not isinstance(obj, dict):
             continue
 
-    if not target_match:
+        script_changed = False
+        graph = obj.get("@graph")
+
+        if graph is not None and isinstance(graph, list):
+            new_graph = []
+            for node in graph:
+                if is_org_node(node):
+                    org_found = True
+                    if want_full:
+                        existing_geo = node.get("geo")
+                        full_block = make_full_org_block(existing_geo)
+                        new_graph.append(full_block)
+                    else:
+                        new_graph.append(dict(ORG_REF))
+                    script_changed = True
+                else:
+                    new_graph.append(node)
+            if script_changed:
+                obj["@graph"] = new_graph
+        else:
+            if is_org_node(obj):
+                org_found = True
+                if want_full:
+                    existing_geo = obj.get("geo")
+                    obj = make_full_org_block(existing_geo)
+                else:
+                    obj = dict(ORG_REF)
+                script_changed = True
+
+        if script_changed:
+            new_json = json.dumps(obj, indent=2, ensure_ascii=False)
+            start = m.start(2) + offset
+            end = m.end(2) + offset
+            new_html = new_html[:start] + new_json + new_html[end:]
+            offset += len(new_json) - len(m.group(2))
+            file_changed = True
+
+    if not org_found:
         return "NO_ORG_NODE", html
 
-    obj = json.loads(target_match.group(2).strip())
-    graph = obj["@graph"]
+    if file_changed:
+        fpath.write_text(new_html, encoding="utf-8", newline="")
 
-    # Replace the org node
-    new_graph = []
-    replaced = False
-    for node in graph:
-        if isinstance(node, dict) and is_org_node(node) and not replaced:
-            if want_full:
-                new_graph.append(FULL_ORG_BLOCK)
-            else:
-                new_graph.append(ORG_REF)
-            replaced = True
-        else:
-            new_graph.append(node)
-
-    if not replaced:
-        return "NO_ORG_REPLACED", html
-
-    obj["@graph"] = new_graph
-    new_json = json.dumps(obj, indent=2, ensure_ascii=False)
-    new_html = (html[:target_match.start()] +
-                target_match.group(1) + "\n" + new_json + "\n" + target_match.group(3) +
-                html[target_match.end():])
     return "OK_FULL" if want_full else "OK_REF", new_html
 
-# Collect all HTML files
-html_files = []
-for f in ROOT.glob("*.html"):
-    html_files.append(f)
-for f in ROOT.glob("**/*.html"):
-    if f not in html_files:
-        html_files.append(f)
+def main():
+    html_files = []
+    for root, dirs, files in os.walk(ROOT):
+        dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
+        for f in files:
+            if f.endswith(".html"):
+                html_files.append(Path(root) / f)
 
-# Deduplicate
-html_files = list(set(html_files))
+    full_count = 0
+    ref_count = 0
+    no_org_count = 0
+    errors = []
 
-results = []
-full_count = 0
-ref_count = 0
-errors = []
+    for fpath in sorted(html_files):
+        rel = fpath.relative_to(ROOT).as_posix()
+        want_full = rel in FULL_PAGES
 
-for fpath in sorted(html_files):
-    fname = fpath.name
-    # Relative path for display
-    try:
-        rel = fpath.relative_to(ROOT)
-    except:
-        rel = fpath
+        action, _ = process_html(fpath, want_full)
 
-    want_full = fname in FULL_PAGES
-    action, new_html = process_html(fpath, want_full)
-
-    if action.startswith("OK"):
-        fpath.write_text(new_html, encoding="utf-8")
-        if want_full:
+        if action == "OK_FULL":
             full_count += 1
-        else:
+            print(f"  OK_FULL: {rel}")
+        elif action == "OK_REF":
             ref_count += 1
-        results.append((str(rel), action))
-    else:
-        errors.append((str(rel), action))
+        elif action in ("NO_SCRIPT", "NO_ORG_NODE"):
+            no_org_count += 1
+        else:
+            errors.append((rel, action))
 
-print(f"\nFull Org block applied to {full_count} pages")
-print(f"Org reference applied to {ref_count} pages")
-print(f"Errors/skipped: {len(errors)}")
+    print(f"\n=== SUMMARY ===")
+    print(f"Full Org block applied to: {full_count} pages (expected 3)")
+    print(f"Org reference applied to: {ref_count} pages (expected ~100+)")
+    print(f"Pages with no Org node: {no_org_count}")
+    print(f"Errors: {len(errors)}")
+    for rel, err in errors:
+        print(f"  {rel}: {err}")
 
-if errors:
-    print("\nErrors/skipped:")
-    for rel, action in errors:
-        print(f"  {rel}: {action}")
+    # Spot checks
+    print("\n--- Spot-check index.html ---")
+    html = (ROOT / "index.html").read_text(encoding="utf-8")
+    for m in SCRIPT_RE.finditer(html):
+        try:
+            obj = json.loads(m.group(2).strip())
+            for node in obj.get("@graph", []):
+                if isinstance(node, dict) and is_org_node(node):
+                    print(f"  legalName: {node.get('legalName')}")
+                    print(f"  geo: {node.get('geo')}")
+                    print(f"  sameAs: {node.get('sameAs')}")
+                    print(f"  keys: {list(node.keys())}")
+                    break
+        except: pass
 
-print("\nFull-block pages:")
-for rel, action in results:
-    if action == "OK_FULL":
-        print(f"  {rel}: {action}")
+    print("\n--- Spot-check products/ricinoleic-acid.html ---")
+    html = (ROOT / "products" / "ricinoleic-acid.html").read_text(encoding="utf-8")
+    for m in SCRIPT_RE.finditer(html):
+        try:
+            obj = json.loads(m.group(2).strip())
+            for node in obj.get("@graph", []):
+                if isinstance(node, dict) and is_org_node(node):
+                    print(f"  Org node: {json.dumps(node)}")
+                    break
+        except: pass
 
-# Spot-check: verify index.html has full block
-print("\n--- Spot-check index.html ---")
-html = (ROOT / "index.html").read_text(encoding="utf-8")
-for m in SCRIPT_RE.finditer(html):
-    try:
-        obj = json.loads(m.group(2).strip())
-        for node in obj.get("@graph", []):
-            if isinstance(node, dict) and is_org_node(node):
-                print(f"  legalName: {node.get('legalName')}")
-                print(f"  department: {node.get('department', {}).get('name')}")
-                print(f"  sameAs: {node.get('sameAs')}")
-                break
-    except: pass
+    print("\n--- Spot-check castor-oil-manufacturer-gujarat.html ---")
+    html = (ROOT / "castor-oil-manufacturer-gujarat.html").read_text(encoding="utf-8")
+    for m in SCRIPT_RE.finditer(html):
+        try:
+            obj = json.loads(m.group(2).strip())
+            for node in obj.get("@graph", []):
+                if isinstance(node, dict) and is_org_node(node):
+                    print(f"  Org node: {json.dumps(node)}")
+                    break
+        except: pass
 
-# Spot-check: verify a product page has only reference
-print("\n--- Spot-check products/ricinoleic-acid.html ---")
-html = (ROOT / "products" / "ricinoleic-acid.html").read_text(encoding="utf-8")
-for m in SCRIPT_RE.finditer(html):
-    try:
-        obj = json.loads(m.group(2).strip())
-        for node in obj.get("@graph", []):
-            if isinstance(node, dict) and is_org_node(node):
-                keys = list(node.keys())
-                print(f"  Org node keys: {keys}")
-                break
-    except: pass
+if __name__ == "__main__":
+    main()
