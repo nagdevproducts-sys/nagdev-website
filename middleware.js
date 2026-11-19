@@ -1,8 +1,7 @@
 /**
  * Vercel Edge Middleware — fires before static files are served.
- * Returns HTTP 410 Gone for any request with a wc-ajax query parameter.
- * 
- * This handles legacy WordPress AJAX URLs: /?wc-ajax=get_refreshed_fragments etc.
+ * Returns HTTP 410 Gone ONLY for requests to "/" with a wc-ajax query parameter.
+ * All other requests pass through untouched.
  */
 export const config = {
   matcher: ['/'],
@@ -10,9 +9,9 @@ export const config = {
 
 export default function middleware(request) {
   const url = new URL(request.url);
-  
-  // Return 410 Gone for any /?wc-ajax=... request
-  if (url.searchParams.has('wc-ajax')) {
+
+  // Return 410 Gone only when wc-ajax query key is present (WordPress legacy AJAX)
+  if (url.pathname === '/' && url.searchParams.has('wc-ajax')) {
     return new Response('Gone', {
       status: 410,
       headers: {
@@ -21,7 +20,7 @@ export default function middleware(request) {
       },
     });
   }
-  
-  // All other requests pass through
+
+  // All other requests: pass through (return undefined = no-op)
   return undefined;
 }
