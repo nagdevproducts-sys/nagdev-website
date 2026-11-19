@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | Nagdev Products</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/main.min.css?v=9256f71">
+  <style>
+    .error-page {
+      min-height: calc(100vh - 72px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--ivory, #F4EFE4);
+      padding: 4rem 2rem;
+    }
+    .error-inner {
+      max-width: 760px;
+      width: 100%;
+      text-align: center;
+    }
+    .error-code {
+      font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+      font-size: clamp(5rem, 15vw, 9rem);
+      font-weight: 600;
+      color: var(--forest, #0B3D1E);
+      line-height: 1;
+      opacity: 0.12;
+      letter-spacing: -0.04em;
+      margin-bottom: -1.5rem;
+      display: block;
+    }
+    .error-heading {
+      font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 600;
+      color: var(--forest, #0B3D1E);
+      margin-bottom: 1rem;
+    }
+    .error-sub {
+      font-size: 1.0625rem;
+      color: var(--text-mid, #555555);
+      line-height: 1.65;
+      max-width: 52ch;
+      margin: 0 auto 2rem;
+    }
+    .error-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.875rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .error-divider {
+      width: 48px;
+      height: 1px;
+      background: var(--gold, #B8841A);
+      margin: 2.5rem auto;
+      opacity: 0.5;
+    }
+    .error-products-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold, #B8841A);
+      margin-bottom: 1.25rem;
+    }
+    .error-products-label::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--gold, #B8841A);
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+    .error-products-label::after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--gold, #B8841A);
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+    .error-product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 0.75rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+    .error-product-link {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: #fff;
+      border: 1px solid var(--border, #E0D9CE);
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--charcoal, #1A1A1A);
+      text-decoration: none;
+      transition: border-color 0.18s, box-shadow 0.18s, color 0.18s;
+    }
+    .error-product-link:hover {
+      border-color: var(--forest, #0B3D1E);
+      box-shadow: 0 2px 10px rgba(11,61,30,0.08);
+      color: var(--forest, #0B3D1E);
+    }
+    .error-product-link small {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted, #595959);
+      font-weight: 400;
+      margin-top: 0.1rem;
+    }
+    .error-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted, #595959);
+    }
+    .error-wa a {
+      color: var(--forest, #0B3D1E);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="top-bar" role="banner">
+    <div class="container-wide">
+      <div class="top-bar-inner">
+        <div class="top-bar-left">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.08 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.21 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+          <span>+91 63520 98306</span>
+        </div>
+        <div class="top-bar-right top-bar-ho">
+          <a href="/contact" class="top-bar-link">Request a Quote</a>
+          <a href="https://wa.me/916352098306" class="top-bar-link" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Header -->
+  <header class="site-header" role="banner">
+    <div class="container-wide">
+      <div class="header-inner">
+        <a href="/" class="header-logo" aria-label="Nagdev Products Home">
+          <img src="/images/logo.webp" alt="Nagdev Products Private Limited" width="165" height="48" style="width:auto;">
+        </a>
+        <nav class="header-nav" aria-label="Main navigation">
+          <ul class="nav-list">
+            <li><a href="/products" class="nav-link">Products</a></li>
+            <li><a href="/castor-oil-derivatives" class="nav-link">Derivatives</a></li>
+            <li><a href="/about" class="nav-link">About</a></li>
+            <li><a href="/blog" class="nav-link">Blog</a></li>
+            <li><a href="/contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="header-cta">
+          <a href="/contact" class="btn btn-primary btn-sm">Get Quote</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Error Content -->
+  <main class="error-page" id="main-content">
+    <div class="error-inner">
+      <span class="error-code" aria-hidden="true">404</span>
+      <h1 class="error-heading">Page Not Found</h1>
+      <p class="error-sub">
+        This page doesn't exist or may have moved. If you were looking for a product, specification, or export enquiry — we have it all, just one click away.
+      </p>
+
+      <div class="error-actions">
+        <a href="/products" class="btn btn-primary">Browse All Products</a>
+        <a href="/contact" class="btn btn-outline">Contact Us</a>
+        <a href="https://wa.me/916352098306?text=Hello%20Nagdev%20Products%2C%20I%20need%20help%20finding%20a%20product." class="btn btn-outline" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.845L0 24l6.335-1.502A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.794 9.794 0 01-5.003-1.373l-.36-.214-3.724.883.936-3.617-.235-.373A9.79 9.79 0 012.182 12C2.182 6.575 6.575 2.182 12 2.182S21.818 6.575 21.818 12 17.425 21.818 12 21.818z"/></svg>
+          WhatsApp +91 63520 98306
+        </a>
+      </div>
+
+      <div class="error-divider" aria-hidden="true"></div>
+
+      <p class="error-products-label">Our Core Products</p>
+      <div class="error-product-grid">
+        <a href="/products/first-special-grade-castor-oil" class="error-product-link">
+          First Special Grade (FSG)
+          <small>Pale pressed · low acid value</small>
+        </a>
+        <a href="/products/ppg-castor-oil" class="error-product-link">
+          PPG Castor Oil
+          <small>Pale pressed grade</small>
+        </a>
+        <a href="/products/commercial-castor-oil" class="error-product-link">
+          Commercial Castor Oil
+          <small>Industrial grade · bulk supply</small>
+        </a>
+        <a href="/products/dehydrated-castor-oil" class="error-product-link">
+          Dehydrated DCO
+          <small>Alkyd resins · coatings</small>
+        </a>
+        <a href="/products/hydrogenated-castor-oil" class="error-product-link">
+          Hydrogenated HCO
+          <small>Castor wax · lithium grease</small>
+        </a>
+        <a href="/products/castor-cake" class="error-product-link">
+          Castor Cake
+          <small>Organic fertilizer · meal</small>
+        </a>
+        <a href="/products/dco-fatty-acid" class="error-product-link">
+          DCO Fatty Acid
+          <small>Dehydrated castor oil FA</small>
+        </a>
+      </div>
+
+      <p style="margin-bottom: 0.75rem;">
+        <a href="/products" style="font-size:0.9rem; color:var(--forest,#0B3D1E); font-weight:600; text-decoration:underline;">
+          Browse all products →
+        </a>
+      </p>
+
+      <p class="error-wa">
+        Can't find what you need?
+        <a href="https://wa.me/916352098306?text=Hello%20Nagdev%20Products%2C%20I%20need%20help%20finding%20a%20product." target="_blank" rel="noopener">&nbsp;WhatsApp us at +91 63520 98306</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container-wide">
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; <span id="footer-year">2026</span> Nagdev Products Private Limited. All rights reserved.
+          <span style="display:inline-block;margin-left:0.5rem;color:rgba(255,255,255,0.55);font-size:0.775rem;">CIN: U15400GJ2019PTC110518</span>
+        </p>
+        <div class="footer-bottom-links">
+          <a href="/products" class="footer-bottom-link">Products (32)</a>
+          <a href="/contact" class="footer-bottom-link">Enquiries</a>
+          <a href="/privacy" class="footer-bottom-link">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var y = document.getElementById('footer-year');
+    if (y) y.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

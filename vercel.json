@@ -2,6 +2,23 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':!.github' ':!tests'",
+  "rewrites": [
+    { "source": "/", "has": [{"type": "query", "key": "wc-ajax"}], "destination": "/api/gone" },
+    { "source": "/product/rye", "destination": "/api/gone" },
+    { "source": "/product/rye/", "destination": "/api/gone" },
+    { "source": "/product/coriander-seeds", "destination": "/api/gone" },
+    { "source": "/product/coriander-seeds/", "destination": "/api/gone" },
+    { "source": "/product/dried-peas", "destination": "/api/gone" },
+    { "source": "/product/dried-peas/", "destination": "/api/gone" },
+    { "source": "/product/rice", "destination": "/api/gone" },
+    { "source": "/product/rice/", "destination": "/api/gone" },
+    { "source": "/product/millet-bajra", "destination": "/api/gone" },
+    { "source": "/product/millet-bajra/", "destination": "/api/gone" },
+    { "source": "/product/nuts", "destination": "/api/gone" },
+    { "source": "/product/nuts/", "destination": "/api/gone" },
+    { "source": "/product-category/:slug*", "destination": "/api/gone" },
+    { "source": "/product/:slug*", "destination": "/api/gone" }
+  ],
   "redirects": [
     {
       "source": "/:path*",
@@ -26,12 +43,42 @@
     },
     {
       "source": "/our-farms/",
-      "destination": "/farmers-en",
+      "destination": "/plant",
       "permanent": true
     },
     {
       "source": "/our-farms",
-      "destination": "/farmers-en",
+      "destination": "/plant",
+      "permanent": true
+    },
+    {
+      "source": "/exhibitions/",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/exhibitions",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/awards/",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/awards",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/photo-gallery/",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/photo-gallery",
+      "destination": "/about",
       "permanent": true
     },
     {

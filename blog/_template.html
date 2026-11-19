@@ -42,99 +42,67 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": [
+        "Organization",
+        "LocalBusiness"
+      ],
       "@id": "https://www.nagdevproducts.com/#organization",
-      "name": "Nagdev Products",
+      "name": "Nagdev Products Private Limited",
       "legalName": "Nagdev Products Private Limited",
-      "description": "Operational manufacturer of refined castor oils; export enquiries welcome, hydrogenated castor wax (HCO), 12-hydroxystearic acid (12-HSA), and high-nitrogen castor cake from Gujarat's castor belt.",
-      "url": "https://www.nagdevproducts.com",
-      "logo": "https://www.nagdevproducts.com/images/logo-square.png",
+      "url": "https://www.nagdevproducts.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.nagdevproducts.com/images/logo-dark.webp",
+        "width": 165,
+        "height": 48
+      },
       "image": "https://www.nagdevproducts.com/images/og-share.jpg",
-      "telephone": "+916352098306",
+      "description": "Castor oil manufacturer and exporter in North Gujarat, India. 50 TPD expeller plant in Deodar, Vav-Tharad supplying FSG, PPG, HCO, DCO and derivatives worldwide.",
+      "telephone": "+91-6352098306",
       "email": "nagdevproducts@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Survey No. 301 P-2, Sardarpura",
+        "addressLocality": "Deodar",
+        "addressRegion": "Gujarat",
+        "postalCode": "385330",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 24.1817,
+        "longitude": 71.8311
+      },
+      "sameAs": [
+        "https://www.facebook.com/nagdevproducts",
+        "https://www.instagram.com/nagdev.products",
+        "https://www.linkedin.com/company/nagdevproducts"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-6352098306",
+        "contactType": "sales",
+        "email": "nagdevproducts@gmail.com",
+        "availableLanguage": [
+          "English",
+          "Hindi",
+          "Gujarati"
+        ]
+      },
       "foundingDate": "2019",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "minValue": 20,
+        "maxValue": 50
+      },
+      "currenciesAccepted": "USD, INR",
+      "openingHours": "Mo-Sa 09:00-18:00",
+      "priceRange": "$$",
       "identifier": {
         "@type": "PropertyValue",
         "propertyID": "CIN",
         "value": "U15400GJ2019PTC110518"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal",
-        "addressLocality": "Gandhinagar",
-        "addressRegion": "Gujarat",
-        "postalCode": "382421",
-        "addressCountry": "IN"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+91-6352098306",
-        "email": "nagdevproducts@gmail.com",
-        "contactType": "sales",
-        "availableLanguage": [
-          "en",
-          "gu",
-          "hi"
-        ]
-      },
-      "sameAs": [
-        "https://www.linkedin.com/company/nagdevproducts",
-        "https://www.instagram.com/nagdev.products",
-        "https://share.google/IvP1DfrOoygwPKLI6"
-      ],
-      "knowsAbout": [
-        "Castor Oil Manufacturing",
-        "Castor Oil Derivatives",
-        "Commercial Castor Oil",
-        "First Special Grade Castor Oil (FSG)",
-        "Castor Cake Organic Fertilizer",
-        "Hydrogenated Castor Oil (HCO)",
-        "12-Hydroxystearic Acid (12-HSA)",
-        "Ricinoleic Acid",
-        "Refined Glycerin 99.5%",
-        "Oleochemical Engineering",
-        "North Gujarat Castor Agronomy"
-      ],
-      "location": [
-        {
-          "@type": "LocalBusiness",
-          "@id": "https://www.nagdevproducts.com/#head-office",
-          "name": "Nagdev Products Private Limited — Head Office",
-          "url": "https://www.nagdevproducts.com",
-          "telephone": "+916352098306",
-          "email": "nagdevproducts@gmail.com",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "612, 6th Floor, Sharan Circle Hub, SP Ring Road, Zundal Circle, Zundal",
-            "addressLocality": "Gandhinagar",
-            "addressRegion": "Gujarat",
-            "postalCode": "382421",
-            "addressCountry": "IN"
-          }
-        },
-        {
-          "@type": "Place",
-          "@id": "https://www.nagdevproducts.com/#plant",
-          "name": "Nagdev Products Castor Processing Plant",
-          "url": "https://www.nagdevproducts.com/plant",
-          "telephone": "+916352098306",
-          "email": "nagdevproducts@gmail.com",
-          "hasMap": "https://maps.google.com/?q=24.183804795616343,71.73651029111288",
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "24.183805",
-            "longitude": "71.736510"
-          },
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Survey No. 301 P-2, Jada-Kotarwada Road, Village Sardarpura, Taluka Deodar",
-            "addressLocality": "Deodar",
-            "addressRegion": "District Vav-Tharad, Gujarat",
-            "postalCode": "385330",
-            "addressCountry": "IN"
-          }
-        }
-      ]
+      }
     },
     {
       "@type": "WebSite",
@@ -563,13 +531,13 @@
       <div>
         <div class="footer-col-title">Company</div>
         <ul class="footer-links">
-          <li><a href="/castor-oil-manufacturer-gujarat" class="footer-link" style="color:var(--gold);">Gujarat Crushing Plant</a></li>
+          <li><a href="/castor-oil-manufacturer-gujarat" class="footer-link" style="color:var(--gold);">Castor Oil Manufacturer in Gujarat</a></li>
           <li><a href="/" class="footer-link">Home</a></li>
           <li><a href="/about" class="footer-link">About Us</a></li>
           <li><a href="/plant" class="footer-link">Our Plant</a></li>
           <li><a href="/infrastructure" class="footer-link">Infrastructure</a></li>
           <li><a href="/quality" class="footer-link">Quality Assurance</a></li>
-          <li><a href="/castor-oil-exporter-india" class="footer-link">Global Export Hub</a></li>
+          <li><a href="/castor-oil-exporter-india" class="footer-link">Castor Oil Exporter from India</a></li>
           <li><a href="/markets/usa" class="footer-link">USA Market Guide</a></li>
           <li><a href="/markets/europe" class="footer-link">Europe Market Guide</a></li>
           <li><a href="/markets/china" class="footer-link">China Market Guide</a></li>
