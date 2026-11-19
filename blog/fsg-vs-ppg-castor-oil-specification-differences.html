@@ -69,14 +69,62 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": [
+        "Organization",
+        "LocalBusiness"
+      ],
       "@id": "https://www.nagdevproducts.com/#organization",
-      "name": "Nagdev Products",
+      "name": "Nagdev Products Private Limited",
       "legalName": "Nagdev Products Private Limited",
-      "url": "https://www.nagdevproducts.com",
-      "logo": "https://www.nagdevproducts.com/images/logo.png",
-      "telephone": "+916352098306",
-      "email": "nagdevproducts@gmail.com"
+      "url": "https://www.nagdevproducts.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.nagdevproducts.com/images/logo-dark.webp",
+        "width": 165,
+        "height": 48
+      },
+      "image": "https://www.nagdevproducts.com/images/og-share.jpg",
+      "description": "Castor oil manufacturer and exporter in North Gujarat, India. 50 TPD expeller plant in Deodar, Vav-Tharad supplying FSG, PPG, HCO, DCO and derivatives worldwide.",
+      "telephone": "+91-6352098306",
+      "email": "nagdevproducts@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Survey No. 301 P-2, Sardarpura",
+        "addressLocality": "Deodar",
+        "addressRegion": "Gujarat",
+        "postalCode": "385330",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 24.1817,
+        "longitude": 71.8311
+      },
+      "sameAs": [
+        "https://www.facebook.com/nagdevproducts",
+        "https://www.instagram.com/nagdev.products",
+        "https://www.linkedin.com/company/nagdevproducts"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-6352098306",
+        "contactType": "sales",
+        "email": "nagdevproducts@gmail.com",
+        "availableLanguage": [
+          "English",
+          "Hindi",
+          "Gujarati"
+        ]
+      },
+      "foundingDate": "2019",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "minValue": 20,
+        "maxValue": 50
+      },
+      "currenciesAccepted": "USD, INR",
+      "openingHours": "Mo-Sa 09:00-18:00",
+      "priceRange": "$$"
     },
     {
       "@type": "WebSite",
@@ -136,49 +184,49 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is the primary visual distinction between FSG and PPG castor oil?",
+          "name": "What is the main difference between FSG and PPG castor oil?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "PPG features a significantly lighter Lovibond color (under 1.5 units Y+5R in a 1-inch cell) compared to FSG, which allows up to 2.5 units."
+            "text": "FSG undergoes comprehensive alkali refining and bleaching to achieve low free fatty acids (≤1.0%) and pale color (≤2Y/≤0.3R), whereas PPG is lightly filtered cold-pressed oil with slightly higher color allowance (≤5Y/≤0.5R) and FFA (≤1.5%)."
           }
         },
         {
           "@type": "Question",
-          "name": "How do extraction methods differ between FSG and PPG grades?",
+          "name": "Can FSG castor oil replace PPG in polyurethane applications?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "PPG is derived exclusively from the initial, gentlest mechanical pressing of selected seed, while FSG utilizes standard expeller pressing before alkali refining."
+            "text": "Yes, FSG is often preferred or directly substituted in polyurethanes because of its tighter moisture control (≤0.25%) and lower free fatty acid content, preventing unwanted isocyanate side reactions."
           }
         },
         {
           "@type": "Question",
-          "name": "When should an industrial buyer choose PPG over standard FSG?",
+          "name": "Which grade has a lower Lovibond color score?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "PPG is specified when formulating water-clear polyurethane coatings, optical sealants, pale alkyds, and dielectric potting compounds sensitive to yellow tint."
+            "text": "FSG has a lower Lovibond color score (≤2Y / ≤0.3R) compared to PPG (≤5Y / ≤0.5R), providing higher optical clarity in sensitive formulations."
           }
         },
         {
           "@type": "Question",
-          "name": "Are free fatty acid thresholds identical between FSG and PPG?",
+          "name": "Is PPG cheaper than FSG castor oil?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. PPG specifies free fatty acids under 0.8% (acid value max 1.6), whereas FSG allows free fatty acids up to 1.0% (acid value max 2.0)."
+            "text": "Typically PPG has simpler refining requirements than fully bleached FSG, which can offer economical advantages for general industrial and lubricant applications where ultra-low color is not required."
           }
         },
         {
           "@type": "Question",
-          "name": "What bulk packaging is standard for PPG and FSG deliveries?",
+          "name": "Where is Nagdev Products located and do they export FSG and PPG?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Both grades are supplied in 200 kg epoxy-lined steel drums, 1,000 L composite IBC totes, and dedicated bulk road tankers."
+            "text": "Nagdev Products operates a 50 TPD crushing and refining plant in Sardarpura, Taluka Deodar, North Gujarat – 385330, and exports both FSG and PPG castor oils globally via Mundra and Nhava Sheva ports."
           }
         }
       ]
     }
   ]
 }
-  </script>
+</script>
 </head>
 <body>
 <a href="#main-content" class="skip-to-content">Skip to main content</a>
@@ -462,12 +510,81 @@
         
 <div class="blog-in-brief-box" style="background:#f4f7f4;border:1px solid #d2ded2;border-left:4px solid var(--forest);border-radius:var(--radius-sm);padding:1.5rem;margin:1.75rem 0 2rem;box-shadow:var(--shadow-sm);">
   <strong style="color:var(--forest);font-size:1rem;display:block;margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.05em;font-weight:700;">In Brief</strong>
-  <p style="color:var(--charcoal);font-size:1.025rem;line-height:1.65;margin:0;">Understand the key FSG vs PPG castor oil differences in industrial procurement. Refined at our Deodar processing plant in North Gujarat, First Special Grade (FSG) and Pale Pressed Grade (PPG) serve distinct technical needs based on Lovibond optical clarity, free acidity thresholds, and urethane resin color tolerances.</p>
+  <p style="color:var(--charcoal);font-size:1.025rem;line-height:1.65;margin:0;">Understand the key FSG vs PPG castor oil differences in industrial procurement. Refined at our Deodar processing plant by an established <a href="/castor-oil-manufacturer-gujarat" style="color:var(--forest);font-weight:600;text-decoration:underline;">castor oil manufacturer in Gujarat</a>, First Special Grade (FSG) and Pale Pressed Grade (PPG) serve distinct technical needs based on Lovibond optical clarity, free acidity thresholds, and urethane resin color tolerances.</p>
 </div>
 
         <h2 id="section-1">Evaluating Refined Castor Oil Grades for Industrial Procurement</h2>
-<p>Industrial procurement managers and formulation chemists frequently evaluate refined vegetable oil grades to balance optical performance and raw material economics. Within industrial castor oil refining, First Special Grade (FSG) and Pale Pressed Grade (PPG) represent the two foremost refined liquid grades. In this technical comparative guide, we analyze the vital FSG vs PPG castor oil differences to help technical buyers select the appropriate grade for their chemical synthesis, coatings, or urethane operations.</p>
-<p>Both grades originate from the seeds of <em>Ricinus communis</em> harvested across North Gujarat's agricultural belt. Both undergo chemical refining consisting of alkali alkali refining, warm water washing, vacuum drying, and adsorbent bleaching to yield stable, low-moisture triglycerides. However, critical differences in seed lot screening, mechanical expeller pressure, bleaching intensity, and analytical specifications set these two refined products apart.</p>
+<p>Industrial procurement managers and formulation chemists frequently evaluate refined vegetable oil grades to balance optical performance and raw material economics. Within industrial castor oil refining, <a href="/products/first-special-grade-castor-oil" style="color:var(--forest);font-weight:600;text-decoration:underline;">First Special Grade (FSG)</a> and <a href="/products/ppg-castor-oil" style="color:var(--forest);font-weight:600;text-decoration:underline;">Pale Pressed Grade (PPG)</a> represent the two foremost refined liquid grades. In this technical comparative guide, we analyze the vital FSG vs PPG castor oil differences to help technical buyers select the appropriate grade for their chemical synthesis, coatings, or urethane operations.</p>
+<div class="blog-table-wrap" role="region" tabindex="0" aria-label="FSG vs PPG Castor Oil Parameter Comparison" style="margin:2rem 0;">
+<table class="blog-data-table" style="width:100%; border-collapse:collapse; margin:1rem 0;">
+<thead>
+<tr style="background:var(--forest); color:#ffffff;">
+<th style="padding:0.75rem 1rem; text-align:left;">Parameter</th>
+<th style="padding:0.75rem 1rem; text-align:left;">FSG (First Special Grade)</th>
+<th style="padding:0.75rem 1rem; text-align:left;">PPG (Pale Pressed Grade)</th>
+<th style="padding:0.75rem 1rem; text-align:left;">Method</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid var(--border-light);">
+<td style="padding:0.75rem 1rem; font-weight:600;">Color (Lovibond)</td>
+<td style="padding:0.75rem 1rem;">&le;2Y / &le;0.3R</td>
+<td style="padding:0.75rem 1rem;">&le;5Y / &le;0.5R</td>
+<td style="padding:0.75rem 1rem;">AOCS Cc 13b-45</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border-light); background:#fcfcfc;">
+<td style="padding:0.75rem 1rem; font-weight:600;">Free Fatty Acid</td>
+<td style="padding:0.75rem 1rem;">&le;1.0% (as oleic)</td>
+<td style="padding:0.75rem 1rem;">&le;1.5% (as oleic)</td>
+<td style="padding:0.75rem 1rem;">AOCS Cd 3d-63</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border-light);">
+<td style="padding:0.75rem 1rem; font-weight:600;">Moisture &amp; Volatiles</td>
+<td style="padding:0.75rem 1rem;">&le;0.25%</td>
+<td style="padding:0.75rem 1rem;">&le;0.30%</td>
+<td style="padding:0.75rem 1rem;">AOCS Ca 2b-38</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border-light); background:#fcfcfc;">
+<td style="padding:0.75rem 1rem; font-weight:600;"><a href="/glossary/saponification-value" style="color:var(--forest); text-decoration:underline;">Saponification Value</a></td>
+<td style="padding:0.75rem 1rem;">176&ndash;187 mg KOH/g</td>
+<td style="padding:0.75rem 1rem;">176&ndash;187 mg KOH/g</td>
+<td style="padding:0.75rem 1rem;">AOCS Cd 3-25</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border-light);">
+<td style="padding:0.75rem 1rem; font-weight:600;"><a href="/glossary/iodine-value" style="color:var(--forest); text-decoration:underline;">Iodine Value</a></td>
+<td style="padding:0.75rem 1rem;">82&ndash;90 g I&sub2;/100g</td>
+<td style="padding:0.75rem 1rem;">82&ndash;90 g I&sub2;/100g</td>
+<td style="padding:0.75rem 1rem;">AOCS Cd 1-25</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border-light); background:#fcfcfc;">
+<td style="padding:0.75rem 1rem; font-weight:600;"><a href="/glossary/acid-value" style="color:var(--forest); text-decoration:underline;">Acid Value</a></td>
+<td style="padding:0.75rem 1rem;">&le;1.0 mg KOH/g</td>
+<td style="padding:0.75rem 1rem;">&le;1.5 mg KOH/g</td>
+<td style="padding:0.75rem 1rem;">AOCS Cd 3d-63</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border-light);">
+<td style="padding:0.75rem 1rem; font-weight:600;">Viscosity (25&deg;C)</td>
+<td style="padding:0.75rem 1rem;">950&ndash;1050 cSt</td>
+<td style="padding:0.75rem 1rem;">950&ndash;1050 cSt</td>
+<td style="padding:0.75rem 1rem;">ASTM D445</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border-light); background:#fcfcfc;">
+<td style="padding:0.75rem 1rem; font-weight:600;">Pressing method</td>
+<td style="padding:0.75rem 1rem;">Cold/warm press, filtered</td>
+<td style="padding:0.75rem 1rem;">Cold press, lightly filtered</td>
+<td style="padding:0.75rem 1rem;">&mdash;</td>
+</tr>
+<tr>
+<td style="padding:0.75rem 1rem; font-weight:600;">Typical use</td>
+<td style="padding:0.75rem 1rem;">Polyols, cosmetics, pharma</td>
+<td style="padding:0.75rem 1rem;">Industrial, lubricants, plastics</td>
+<td style="padding:0.75rem 1rem;">&mdash;</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Both grades originate from the seeds of <em>Ricinus communis</em> harvested across North Gujarat's agricultural belt. Both grades adhere to standardized triglyceride indices including <a href="/glossary/saponification-value" style="color:var(--forest);font-weight:600;text-decoration:underline;">saponification value</a> (176–187 mg KOH/g), and undergo chemical refining consisting of alkali refining, warm water washing, vacuum drying, and adsorbent bleaching to yield stable, low-moisture triglycerides. However, critical differences in seed lot screening, mechanical expeller pressure, bleaching intensity, and analytical specifications set these two refined products apart.</p>
 <p>Understanding these distinctions prevents over-engineering raw material costs on applications where standard industrial color is acceptable, while safeguarding clear coatings against unwanted amber undertones that could compromise optical transparency.</p>
 <div aria-label="First Special Grade (FSG) Castor Oil Key Facts and Product Overview" class="blog-table-wrap" role="region" tabindex="0">
 <table class="blog-data-table">
@@ -554,47 +671,41 @@
   <span style="font-size:0.8rem; font-weight:700; color:var(--gold-dark, #7a5200); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:0.35rem;">Technical FAQ</span>
   <h2 style="font-size:1.75rem; font-family:var(--font-heading); color:var(--forest); margin-bottom:1.25rem;">Frequently Asked Questions</h2>
   <div style="display:flex; flex-direction:column; gap:0.25rem;">
-    
     <details style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-sm); padding:1.25rem 1.5rem; box-shadow:var(--shadow-sm); margin-bottom:0.85rem;">
       <summary style="font-size:1rem; font-weight:600; color:var(--forest); cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-        <span>What is the primary visual distinction between FSG and PPG castor oil?</span>
+        <span>What is the main difference between FSG and PPG castor oil?</span>
         <span style="color:var(--gold); font-size:1.2rem; font-weight:bold;">+</span>
       </summary>
-      <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin-top:0.75rem; margin-bottom:0;">PPG features a significantly lighter Lovibond color (under 1.5 units Y+5R in a 1-inch cell) compared to FSG, which allows up to 2.5 units.</p>
+      <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin-top:0.75rem; margin-bottom:0;">FSG undergoes comprehensive alkali refining and bleaching to achieve low free fatty acids (≤1.0%) and pale color (≤2Y/≤0.3R), whereas PPG is lightly filtered cold-pressed oil with slightly higher color allowance (≤5Y/≤0.5R) and FFA (≤1.5%).</p>
     </details>
-
     <details style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-sm); padding:1.25rem 1.5rem; box-shadow:var(--shadow-sm); margin-bottom:0.85rem;">
       <summary style="font-size:1rem; font-weight:600; color:var(--forest); cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-        <span>How do extraction methods differ between FSG and PPG grades?</span>
+        <span>Can FSG castor oil replace PPG in polyurethane applications?</span>
         <span style="color:var(--gold); font-size:1.2rem; font-weight:bold;">+</span>
       </summary>
-      <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin-top:0.75rem; margin-bottom:0;">PPG is derived exclusively from the initial, gentlest mechanical pressing of selected seed, while FSG utilizes standard expeller pressing before alkali refining.</p>
+      <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin-top:0.75rem; margin-bottom:0;">Yes, FSG is often preferred or directly substituted in polyurethanes because of its tighter moisture control (≤0.25%) and lower free fatty acid content, preventing unwanted isocyanate side reactions.</p>
     </details>
-
     <details style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-sm); padding:1.25rem 1.5rem; box-shadow:var(--shadow-sm); margin-bottom:0.85rem;">
       <summary style="font-size:1rem; font-weight:600; color:var(--forest); cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-        <span>When should an industrial buyer choose PPG over standard FSG?</span>
+        <span>Which grade has a lower Lovibond color score?</span>
         <span style="color:var(--gold); font-size:1.2rem; font-weight:bold;">+</span>
       </summary>
-      <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin-top:0.75rem; margin-bottom:0;">PPG is specified when formulating water-clear polyurethane coatings, optical sealants, pale alkyds, and dielectric potting compounds sensitive to yellow tint.</p>
+      <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin-top:0.75rem; margin-bottom:0;">FSG has a lower Lovibond color score (≤2Y / ≤0.3R) compared to PPG (≤5Y / ≤0.5R), providing higher optical clarity in sensitive formulations.</p>
     </details>
-
     <details style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-sm); padding:1.25rem 1.5rem; box-shadow:var(--shadow-sm); margin-bottom:0.85rem;">
       <summary style="font-size:1rem; font-weight:600; color:var(--forest); cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-        <span>Are free fatty acid thresholds identical between FSG and PPG?</span>
+        <span>Is PPG cheaper than FSG castor oil?</span>
         <span style="color:var(--gold); font-size:1.2rem; font-weight:bold;">+</span>
       </summary>
-      <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin-top:0.75rem; margin-bottom:0;">No. PPG specifies free fatty acids under 0.8% (acid value max 1.6), whereas FSG allows free fatty acids up to 1.0% (acid value max 2.0).</p>
+      <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin-top:0.75rem; margin-bottom:0;">Typically PPG has simpler refining requirements than fully bleached FSG, which can offer economical advantages for general industrial and lubricant applications where ultra-low color is not required.</p>
     </details>
-
     <details style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-sm); padding:1.25rem 1.5rem; box-shadow:var(--shadow-sm); margin-bottom:0.85rem;">
       <summary style="font-size:1rem; font-weight:600; color:var(--forest); cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
-        <span>What bulk packaging is standard for PPG and FSG deliveries?</span>
+        <span>Where is Nagdev Products located and do they export FSG and PPG?</span>
         <span style="color:var(--gold); font-size:1.2rem; font-weight:bold;">+</span>
       </summary>
-      <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin-top:0.75rem; margin-bottom:0;">Both grades are supplied in 200 kg epoxy-lined steel drums, 1,000 L composite IBC totes, and dedicated bulk road tankers.</p>
+      <p style="font-size:0.925rem; color:var(--charcoal-soft); line-height:1.7; margin-top:0.75rem; margin-bottom:0;">Nagdev Products operates a 50 TPD crushing and refining plant in Sardarpura, Taluka Deodar, North Gujarat – 385330, and exports both FSG and PPG castor oils globally via Mundra and Nhava Sheva ports.</p>
     </details>
-
   </div>
 </section>
 
@@ -714,13 +825,13 @@
       <div>
         <div class="footer-col-title">Company</div>
         <ul class="footer-links">
-          <li><a href="/castor-oil-manufacturer-gujarat" class="footer-link" style="color:var(--gold);">Gujarat Crushing Plant</a></li>
+          <li><a href="/castor-oil-manufacturer-gujarat" class="footer-link" style="color:var(--gold);">Castor Oil Manufacturer in Gujarat</a></li>
           <li><a href="/" class="footer-link">Home</a></li>
           <li><a href="/about" class="footer-link">About Us</a></li>
           <li><a href="/plant" class="footer-link">Our Plant</a></li>
           <li><a href="/infrastructure" class="footer-link">Infrastructure</a></li>
           <li><a href="/quality" class="footer-link">Quality Assurance</a></li>
-          <li><a href="/castor-oil-exporter-india" class="footer-link">Global Export Hub</a></li>
+          <li><a href="/castor-oil-exporter-india" class="footer-link">Castor Oil Exporter from India</a></li>
           <li><a href="/markets/usa" class="footer-link">USA Market Guide</a></li>
           <li><a href="/markets/europe" class="footer-link">Europe Market Guide</a></li>
           <li><a href="/markets/china" class="footer-link">China Market Guide</a></li>
