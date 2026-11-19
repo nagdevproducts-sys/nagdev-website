@@ -48,6 +48,26 @@
   ],
   "redirects": [
     {
+      "source": "/our-farms/",
+      "destination": "/plant",
+      "statusCode": 301
+    },
+    {
+      "source": "/exhibitions/",
+      "destination": "/about",
+      "statusCode": 301
+    },
+    {
+      "source": "/awards/",
+      "destination": "/about",
+      "statusCode": 301
+    },
+    {
+      "source": "/photo-gallery/",
+      "destination": "/about",
+      "statusCode": 301
+    },
+    {
       "source": "/:path*",
       "has": [
         {
@@ -69,18 +89,8 @@
       "statusCode": 301
     },
     {
-      "source": "/our-farms/",
-      "destination": "/plant",
-      "statusCode": 301
-    },
-    {
       "source": "/our-farms",
       "destination": "/plant",
-      "statusCode": 301
-    },
-    {
-      "source": "/exhibitions/",
-      "destination": "/about",
       "statusCode": 301
     },
     {
@@ -89,17 +99,7 @@
       "statusCode": 301
     },
     {
-      "source": "/awards/",
-      "destination": "/about",
-      "statusCode": 301
-    },
-    {
       "source": "/awards",
-      "destination": "/about",
-      "statusCode": 301
-    },
-    {
-      "source": "/photo-gallery/",
       "destination": "/about",
       "statusCode": 301
     },

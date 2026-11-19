@@ -1,36 +1,26 @@
 import json
 
-with open('vercel.json') as f:
-    v = json.load(f)
+with open("vercel.json", "r", encoding="utf-8") as f:
+    vj = json.load(f)
 
-# Fix 1: Replace permanent:true with statusCode:301 on all redirects
-for r in v['redirects']:
-    if r.get('permanent') is True:
-        del r['permanent']
-        r['statusCode'] = 301
+redirects = vj["redirects"]
 
-# Fix 2: Remove trailing-slash duplicates from rewrites
-# (Vercel's trailingSlash:false normalises before rewrites run, so /product/rye/ → 308 then rewrite)
-rewrites = v.get('rewrites', [])
-cleaned = []
-for r in rewrites:
-    src = r.get('source', '')
-    # Remove specific trailing-slash entries (not wildcards)
-    # Wildcards like /product/:slug* are fine
-    if src.endswith('/') and '/:slug*' not in src and ':slug*' not in src and src != '/':
-        pass  # skip trailing-slash specific entries
-    else:
-        cleaned.append(r)
+priority = [
+    {"source": "/our-farms/", "destination": "/plant", "statusCode": 301},
+    {"source": "/exhibitions/", "destination": "/about", "statusCode": 301},
+    {"source": "/awards/", "destination": "/about", "statusCode": 301},
+    {"source": "/photo-gallery/", "destination": "/about", "statusCode": 301},
+]
 
-v['rewrites'] = cleaned
+priority_sources = {r["source"] for r in priority}
+redirects = [r for r in redirects if r.get("source") not in priority_sources]
+redirects = priority + redirects
+vj["redirects"] = redirects
 
-with open('vercel.json', 'w') as f:
-    json.dump(v, f, indent=2)
+with open("vercel.json", "w", encoding="utf-8", newline="\n") as f:
+    json.dump(vj, f, indent=2)
 
-print("Redirects:", len(v['redirects']))
-print("Rewrites:", len(cleaned))
-# Check sample
-for r in v['redirects']:
-    if 'our-farms' in r.get('source', ''):
-        print("our-farms redirect:", r)
-        break
+print(f"Done. Total redirects: {len(redirects)}")
+print("First 6 redirects:")
+for r in redirects[:6]:
+    print(f"  {r.get('source')} -> {r.get('destination')} [{r.get('statusCode')}]")
