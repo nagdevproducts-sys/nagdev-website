@@ -1,8 +1,8 @@
 # Nagdev Claims Linter & Fact Verification Report
 
-- Total Files Scanned: 111
+- Total Files Scanned: 112
 - Total Failures (Exit != 0): **0**
-- Total Warnings (Review items): **0**
+- Total Warnings (Review items): **1**
 
 ### Failures by Rule
 - **R1**: 0
@@ -33,3 +33,4 @@
 
 | File | Line | Rule | Severity | Details |
 |---|---|---|---|---|
+| `castor-oil-manufacturer-gujarat.html` | 0 | R9 Statistic without nearby link | **WARN** | Statistic '50 tonnes' in prose without nearby reference link in paragraph |
