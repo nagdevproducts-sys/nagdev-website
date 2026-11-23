@@ -286,5 +286,11 @@
       "blog/hydrogenated-castor-oil-in-lithium-grease-formulation.html",
       "glossary/acid-value.html"
     ]
-  }
+  },
+  "r5_banaskantha_file_exemptions": [
+    "blog/north-gujarat-castor-belt-banaskantha-and-vav-tharad.html",
+    "blog.html",
+    "llms.txt",
+    "sitemap.xml"
+  ]
 }

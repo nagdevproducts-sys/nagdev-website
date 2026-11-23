@@ -3883,11 +3883,27 @@ def lint_content(content: str, file_path_str: str, facts: dict):
 
     # "Banaskantha" allowed ONLY inside exact region_context or in farmer/seed-sourcing context
 
+    # File-level exemptions: pages whose TOPIC is Banaskantha sourcing are exempt from R5.
+    # These are added in seo/facts-register.json under "r5_banaskantha_file_exemptions".
+    _r5_file_exempts = facts.get("r5_banaskantha_file_exemptions", [])
+    _r5_skip_file = any(
+        file_path_str == ex or file_path_str.endswith("/" + ex) or file_path_str.endswith("\\" + ex)
+        for ex in _r5_file_exempts
+    )
+
     # ----------------------------------------------------
 
-    for line_idx, line in enumerate(lines, 1):
+    if not _r5_skip_file:
+     for line_idx, line in enumerate(lines, 1):
 
         if "banaskantha" in line.lower():
+
+            # Skip lines where banaskantha only appears inside a URL/href/src attribute
+            # (structural refs to a page whose topic IS Banaskantha sourcing)
+            _line_no_urls = re.sub(r'https?://[^\s\'"<>]+', '', line)
+            _line_no_urls = re.sub(r'(?:href|src|srcset|content)=[\'"][/][^\s\'"<>]+', '', _line_no_urls)
+            if "banaskantha" not in _line_no_urls.lower():
+                continue  # banaskantha only in URL path - not a content claim
 
             # Check if line is within exact region_context
 
