@@ -7,9 +7,7 @@
 (function () {
   'use strict';
 
-  const AUTH_KEY = 'nagdev_admin_auth';
-  const VALID_ID = 'admin';
-  const VALID_PIN = '230893';
+  // Client-side auth removed; HTTP Basic Auth is enforced server-side
 
   // Elements
   const loginGate = document.getElementById('login-gate');
@@ -79,36 +77,13 @@
 
   // ── Authentication Check ────────────────────────────────────────────────
   function checkAuth() {
-    const isAuth = sessionStorage.getItem(AUTH_KEY) === 'true';
-    if (isAuth) {
-      loginGate.style.display = 'none';
-      adminApp.style.display = 'block';
-      initAdminDashboard();
-    } else {
-      loginGate.style.display = 'flex';
-      adminApp.style.display = 'none';
-      if (loginIdInput) loginIdInput.focus();
-    }
+    // Server-side HTTP Basic Auth ensures only authenticated users reach this page
+    if (loginGate) loginGate.style.display = 'none';
+    if (adminApp) adminApp.style.display = 'block';
+    initAdminDashboard();
   }
 
-  if (loginForm) {
-    loginForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const enteredId = (loginIdInput.value || '').trim().toLowerCase();
-      const enteredPin = (loginPinInput.value || '').trim();
-
-      if (enteredId === VALID_ID && enteredPin === VALID_PIN) {
-        sessionStorage.setItem(AUTH_KEY, 'true');
-        loginError.style.display = 'none';
-        window.showToast('Welcome, Administrator. Editorial Studio Unlocked.');
-        checkAuth();
-      } else {
-        loginError.style.display = 'block';
-        loginCard.classList.add('shake-animation');
-        setTimeout(() => loginCard.classList.remove('shake-animation'), 500);
-      }
-    });
-  }
+  // Login form removed — authentication is handled server-side
 
   if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {

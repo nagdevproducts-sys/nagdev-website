@@ -5,7 +5,7 @@ import time
 import urllib.request
 import urllib.parse
 
-API_KEY = os.environ.get("PSI_API_KEY", "AIzaSyBirne_HTYNjeUjV69T1rvMzl8fijzyvcY")
+API_KEY = os.environ.get("PSI_API_KEY", "").strip()
 
 PAGES = [
     {"name": "Homepage", "url": "https://www.nagdevproducts.com/"},

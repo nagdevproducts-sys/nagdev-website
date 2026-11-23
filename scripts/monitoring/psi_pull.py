@@ -92,7 +92,10 @@ def fetch_single_psi(url, strategy="mobile", api_key=None, max_retries=2):
 
 def run_pull():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    api_key = os.environ.get("PSI_API_KEY", "").strip() or "AIzaSyBirne_HTYNjeUjV69T1rvMzl8fijzyvcY"
+    api_key = os.environ.get("PSI_API_KEY", "").strip()
+if not api_key:
+    print("[NOTICE] PSI_API_KEY environment variable is not set. Skipping PageSpeed pull.")
+    import sys; sys.exit(0)
     target_pages = get_target_pages()
     
     out_data = {

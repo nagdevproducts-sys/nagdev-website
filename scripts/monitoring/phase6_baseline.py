@@ -14,7 +14,7 @@ import requests
 from datetime import datetime, timezone
 from pathlib import Path
 
-API_KEY = os.environ.get("PSI_API_KEY", "").strip() or "AIzaSyBirne_HTYNjeUjV69T1rvMzl8fijzyvcY"
+API_KEY = os.environ.get("PSI_API_KEY", "").strip()
 API_ENDPOINT = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
 OUTPUT_FILE = Path("monitoring_output/phase6_task2_baseline.json")
 

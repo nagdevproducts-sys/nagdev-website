@@ -903,9 +903,7 @@
   let resetTimer = null;
   const RESET_TIMEOUT_MS = 3500;
   const REQUIRED_CLICKS = 5;
-  const AUTH_KEY = 'nagdev_admin_auth';
-  const VALID_ID = 'admin';
-  const VALID_PIN = '230893';
+  // Authentication is handled server-side via HTTP Basic Auth on /blog-admin
 
   function getAdminUrl() {
     return '/blog-admin.html';
@@ -949,20 +947,9 @@
       const form = modal.querySelector('#admin-trigger-form');
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const idVal = (modal.querySelector('#trigger-login-id').value || '').trim().toLowerCase();
-        const pinVal = (modal.querySelector('#trigger-login-pin').value || '').trim();
-        const errEl = modal.querySelector('#trigger-error');
-
-        if (idVal === VALID_ID && pinVal === VALID_PIN) {
-          sessionStorage.setItem(AUTH_KEY, 'true');
-          errEl.style.display = 'none';
-          if (window.showToast) window.showToast('Credentials verified. Redirecting to Blog Studio…');
-          setTimeout(() => {
-            window.location.href = getAdminUrl();
-          }, 350);
-        } else {
-          errEl.style.display = 'block';
-        }
+        // Redirect to /blog-admin — HTTP Basic Auth handled server-side
+        if (window.showToast) window.showToast('Redirecting to Blog Studio…');
+        setTimeout(() => { window.location.href = getAdminUrl(); }, 200);
       });
     }
 
@@ -989,14 +976,9 @@
       logoClickCount = 0;
 
       // Check if already authenticated
-      if (sessionStorage.getItem(AUTH_KEY) === 'true') {
-        if (window.showToast) window.showToast('Opening Admin Studio…');
-        setTimeout(() => {
-          window.location.href = getAdminUrl();
-        }, 200);
-      } else {
-        showAdminModal();
-      }
+      // Server-side auth — just navigate
+      if (window.showToast) window.showToast('Opening Admin Studio…');
+      setTimeout(() => { window.location.href = getAdminUrl(); }, 200);
     } else {
       resetTimer = setTimeout(() => {
         logoClickCount = 0;
