@@ -49,6 +49,41 @@ EXPECTED_CANONICAL_HS = {
     'blown-oxidized-castor-oil': '1518.00',
 }
 
+EXPECTED_BRAND_CODES = {
+    'commercial-castor-oil': 'NDEVOLEO™ COMM',
+    'first-special-grade-castor-oil': 'NDEVOLEO™ FSG',
+    'fpd-castor-oil': 'NDEVOLEO™ FPD',
+    'castor-cake': 'NDEVAGRO™ CAKE',
+    'hydrogenated-castor-oil': 'NDEVWAX™ HCO',
+    'dehydrated-castor-oil': 'NDEVOLEO™ DCO',
+    'dco-fatty-acid': 'NDEVACID™ DCO-FA',
+    'ppg-castor-oil': 'NDEVOLEO™ PPG',
+    'cold-pressed-castor-oil': 'NDEVOLEO™ CP',
+    'castor-oil-bp93': 'NDEVOLEO™ BP',
+    'castor-oil-usp-nf': 'NDEVOLEO™ USP',
+    'castor-oil-ph-eur': 'NDEVOLEO™ EP',
+    'castor-oil-ip': 'NDEVOLEO™ IP',
+    'castor-oil-jp': 'NDEVOLEO™ JP',
+    'cosmetic-grade-castor-oil': 'NDEVOLEO™ COS',
+    'ricinoleic-acid': 'NDEVACID™ RIC',
+    '12-hydroxystearic-acid': 'NDEVACID™ 12-HSA',
+    'sebacic-acid': 'NDEVACID™ SEB',
+    'high-protein-castor-meal': 'NDEVAGRO™ HPRO',
+    'crude-glycerin': 'NDEVGLY™ CRUDE',
+    'refined-glycerin': 'NDEVGLY™ REF',
+    'bio-polyurethane-polyols': 'NDEVPOL™ BIO',
+    'sodium-sulphate-anhydrous': 'NDEVCHEM™ NA2SO4',
+    'dioctyl-sebacate': 'NDEVEST™ DOS',
+    'dibutyl-sebacate': 'NDEVEST™ DBS',
+    'methyl-12-hydroxystearate': 'NDEVEST™ M12H',
+    'methyl-ricinoleate': 'NDEVEST™ MR',
+    'lithium-12-hydroxystearate': 'NDEVSOAP™ LI12',
+    'calcium-12-hydroxystearate': 'NDEVSOAP™ CA12',
+    'zinc-undecylenate': 'NDEVSOAP™ ZNU',
+    'zinc-ricinoleate': 'NDEVSOAP™ ZNR',
+    'blown-oxidized-castor-oil': 'NDEVOX™ BLO',
+}
+
 @pytest.fixture(scope="module")
 def master_data():
     with open(MASTER_PATH, "r", encoding="utf-8") as f:
@@ -89,7 +124,8 @@ def test_active_15_products_hs_code_consistency(master_data, catalog_text):
 
         m_mpn = re.search(r'"mpn"\s*:\s*"([^"]+)"', html_text)
         assert m_mpn is not None, f"Missing JSON-LD mpn in {slug}.html"
-        assert m_mpn.group(1) == expected_hs, f"JSON-LD mpn mismatch in {slug}.html: {m_mpn.group(1)} != {expected_hs}"
+        expected_mpn = EXPECTED_BRAND_CODES.get(slug, "")
+        assert m_mpn.group(1) == expected_mpn, f"JSON-LD mpn mismatch in {slug}.html: {m_mpn.group(1)!r} != {expected_mpn!r} (mpn must be brand_code, not HS code)"
 
         m_ident = re.search(r'"propertyID"\s*:\s*"HS Code"\s*,\s*"value"\s*:\s*"([^"]+)"', html_text)
         assert m_ident is not None, f"Missing JSON-LD HS Code identifier in {slug}.html"
@@ -125,7 +161,10 @@ def test_planned_17_products_hs_code_consistency(master_data, catalog_text):
         assert m_chip is not None and m_chip.group(1) == expected_hs
 
         m_mpn = re.search(r'"mpn"\s*:\s*"([^"]+)"', html_text)
-        assert m_mpn is not None and m_mpn.group(1) == expected_hs
+        expected_brand = EXPECTED_BRAND_CODES.get(slug, "")
+        assert m_mpn is not None and m_mpn.group(1) == expected_brand, (
+            f"mpn for {slug} should be brand_code {expected_brand!r}, got {m_mpn.group(1) if m_mpn else None!r}"
+        )
 
         tds_path = TDS_DIR / f"{slug}.pdf"
         assert tds_path.exists(), f"Missing TDS PDF for {slug}"

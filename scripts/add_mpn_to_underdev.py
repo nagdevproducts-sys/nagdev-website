@@ -1,68 +1,31 @@
-#!/usr/bin/env python3
-"""Add 'mpn' field to under-development product JSON-LD schemas."""
-import re
+"""
+Phase 18 revised: Set mpn = brand_code (manufacturer part number) for all product pages.
+HS codes stay in additionalProperty only.
+Run: python scripts/add_mpn_to_underdev.py
+"""
+import json, re
 from pathlib import Path
 
-HS_MAP = {
-    'ricinoleic-acid': '2918.19',
-    '12-hydroxystearic-acid': '2918.19',
-    'sebacic-acid': '2917.13',
-    'high-protein-castor-meal': '2306.90',
-    'crude-glycerin': '1520.00',
-    'refined-glycerin': '2905.45',
-    'bio-polyurethane-polyols': '3907.29',
-    'sodium-sulphate-anhydrous': '2833.11',
-    'dioctyl-sebacate': '2917.13',
-    'dibutyl-sebacate': '2917.13',
-    'methyl-12-hydroxystearate': '2918.19',
-    'methyl-ricinoleate': '2918.19',
-    'lithium-12-hydroxystearate': '2918.19',
-    'calcium-12-hydroxystearate': '2918.19',
-    'zinc-undecylenate': '2918.19',
-    'zinc-ricinoleate': '2918.19',
-    'blown-oxidized-castor-oil': '1518.00',
-}
+REPO = Path(__file__).resolve().parent.parent
+master = json.loads((REPO / "seo" / "product-master.json").read_text(encoding="utf-8"))
+brand_codes = {p["slug"]: p["brand_code"] for p in master if p.get("brand_code")}
 
-prod_dir = Path(__file__).resolve().parent.parent / 'products'
-fixed = []
-failed = []
-
-for slug, hs in HS_MAP.items():
-    p = prod_dir / f'{slug}.html'
-    if not p.exists():
-        failed.append(f'{slug}: FILE NOT FOUND')
+products_dir = REPO / "products"
+updated = 0
+for slug, brand_code in brand_codes.items():
+    html_path = products_dir / f"{slug}.html"
+    if not html_path.exists():
         continue
-    text = p.read_text(encoding='utf-8')
-
-    # Check if mpn already exists
-    if '"mpn"' in text:
-        print(f'{slug}: mpn already present')
-        continue
-
-    # Insert after "sku": "..." in JSON-LD
-    new_text = re.sub(
-        r'("sku"\s*:\s*"[^"]+")(\s*[,\n])',
-        lambda m: m.group(1) + ',\n        "mpn": "' + hs + '"' + m.group(2),
-        text,
-        count=1
-    )
-    if new_text == text:
-        # Fallback: insert before "name" in Product block
-        new_text = re.sub(
-            r'("@type"\s*:\s*"Product"\s*,\s*)',
-            r'\1"mpn": "' + hs + '",\n        ',
-            text,
-            count=1
-        )
-
-    if new_text != text:
-        p.write_text(new_text, encoding='utf-8')
-        fixed.append(slug)
-        print(f'{slug}: FIXED (HS {hs})')
+    t = html_path.read_text(encoding="utf-8")
+    new_mpn = f'"mpn": "{brand_code}"\'
+    pat = re.compile(r'"mpn"\s*:\s*"[^"]+"\')
+    if pat.search(t):
+        new_t = pat.sub(new_mpn, t, count=1)
+        if new_t != t:
+            html_path.write_text(new_t, encoding="utf-8", newline="\r\n")
+            updated += 1
+            print(f"[OK] {slug}: mpn = {brand_code}")
     else:
-        failed.append(f'{slug}: could not find insertion point')
-        print(f'{slug}: FAILED to insert')
+        print(f"[WARN] {slug}: no mpn field found")
 
-print(f'\nFixed {len(fixed)} pages')
-if failed:
-    print(f'Failed: {failed}')
+print(f"Done. Updated {updated} pages.")
