@@ -269,5 +269,22 @@
   ],
   "spec_basis": "active commercial production — COA per lot issued by in-house QC lab",
   "spec_review_due": "routine lot-by-lot COA release",
-  "response_time": "We usually respond within 1–2 working days."
+  "response_time": "We usually respond within 1–2 working days.",
+  "phrase_path_exemptions": {
+    "saponification": [
+      "glossary/saponification-value.html",
+      "blog/hydrogenated-castor-oil-in-lithium-grease-formulation.html"
+    ],
+    "neutralise": [
+      "glossary/acid-value.html"
+    ],
+    "neutralization": [
+      "blog/hydrogenated-castor-oil-in-lithium-grease-formulation.html",
+      "glossary/acid-value.html"
+    ],
+    "neutralisation": [
+      "blog/hydrogenated-castor-oil-in-lithium-grease-formulation.html",
+      "glossary/acid-value.html"
+    ]
+  }
 }

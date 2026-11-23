@@ -975,9 +975,12 @@ def check_r10_table_sources(content: str, file_path_str: str, repo_root: Path = 
 
 
 
-def check_r11_banned_phrases(lines: list, file_path_str: str):
+def check_r11_banned_phrases(lines: list, file_path_str: str, exemptions: dict = None):
 
     findings = []
+
+    _r11b_exemptions = (exemptions or {})
+    _r11b_norm = file_path_str.replace("\\", "/").lower()
 
     for line_idx, line in enumerate(lines, 1):
 
@@ -986,6 +989,10 @@ def check_r11_banned_phrases(lines: list, file_path_str: str):
             pattern = get_banned_phrase_pattern(phrase)
 
             if re.search(pattern, line, re.IGNORECASE):
+
+                _ex_paths = _r11b_exemptions.get(phrase.lower(), [])
+                if any(_r11b_norm.endswith(ep.lower().replace("\\", "/")) for ep in _ex_paths):
+                    continue
 
                 findings.append({
 
@@ -3575,14 +3582,22 @@ def lint_content(content: str, file_path_str: str, facts: dict):
 
     # ----------------------------------------------------
 
+    _phrase_exemptions = facts.get("phrase_path_exemptions", {})
+    _norm_path = file_path_str.replace("\\", "/").lower()
+
     for line_idx, line in enumerate(lines, 1):
 
         for phrase in banned_phrases:
 
             phrase_clean = phrase.strip().lower()
 
-            if phrase_clean == "complies to bp" and "castor-oil-bp93.html" in file_path_str.replace("\\", "/"):
+            if phrase_clean == "complies to bp" and "castor-oil-bp93.html" in _norm_path:
 
+                continue
+
+            # Check path-based exemptions from facts-register.json
+            _exempt_paths = _phrase_exemptions.get(phrase_clean, [])
+            if any(_norm_path.endswith(ep.lower().replace("\\", "/")) for ep in _exempt_paths):
                 continue
 
             pat = get_compiled_banned_pattern(phrase)
@@ -3625,6 +3640,9 @@ def lint_content(content: str, file_path_str: str, facts: dict):
 
     ]
 
+    _r11_phrase_exemptions = facts.get("phrase_path_exemptions", {})
+    _r11_norm_path = file_path_str.replace("\\", "/").lower()
+
     for line_idx, line in enumerate(lines, 1):
 
         if "<script" in line.lower() or "</script>" in line.lower() or "<style" in line.lower():
@@ -3636,6 +3654,12 @@ def lint_content(content: str, file_path_str: str, facts: dict):
             if re.search(pat, line, re.IGNORECASE):
 
                 if not any(proc_name.lower() in p or p in proc_name.lower() for p in allowed_procs):
+
+                    # Check path-based exemptions
+                    _proc_key = proc_name.split("/")[0].strip().lower()
+                    _r11_exempt = _r11_phrase_exemptions.get(_proc_key, [])
+                    if any(_r11_norm_path.endswith(ep.lower().replace("\\", "/")) for ep in _r11_exempt):
+                        continue
 
                     findings.append({
 
@@ -4391,7 +4415,7 @@ def lint_content(content: str, file_path_str: str, facts: dict):
 
     # ----------------------------------------------------
 
-    findings.extend(check_r11_banned_phrases(lines, file_path_str))
+    findings.extend(check_r11_banned_phrases(lines, file_path_str, exemptions=facts.get("phrase_path_exemptions", {})))
 
 
 
